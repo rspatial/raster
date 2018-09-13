@@ -80,7 +80,7 @@ function(x, width=1, dissolve=TRUE, ...) {
 		if (dissolve) {
 			pb <- aggregate(pb)
 		} else if (.hasSlot(x, 'data')) {
-			pb <- SpatialPointsDataFrame(pb, x@data, match.ID=FALSE)
+			pb <- SpatialPolygonsDataFrame(pb, x@data, match.ID=FALSE)
 		}
 		return(pb)		
 	}

@@ -21,11 +21,11 @@ function(x, mask, ...) {
 setMethod('mask', signature(x='Raster', mask='Spatial'), 
 function(x, mask, filename="", inverse=FALSE, updatevalue=NA, updateNA=FALSE, ...){ 
 	if (inherits(mask, 'SpatialPolygons')) {
-		mask <- .fasterize(mask, x, values=rep(1,length(mask)))
+		m <- .fasterize(mask, x, values=rep(1,length(mask)))
 	} else {
-		mask <- rasterize(mask, x, 1, silent=TRUE)
+		m <- rasterize(mask, x, 1, silent=TRUE)
 	}
-	mask(x, mask, filename=filename, inverse=inverse, maskvalue=NA, updatevalue=updatevalue, ...)
+	mask(x, m, filename=filename, inverse=inverse, maskvalue=NA, updatevalue=updatevalue, ...)
 } )
 
 

@@ -47,35 +47,37 @@ std::vector<double> rasterize_polygon(std::vector<double> r, double value, std::
 
 
 
-std::vector<double> SpatPolygons::rasterize(double resx, double resy, unsigned nrow, unsigned ncol, std::vector<double> extent, std::vector<double> values, double background) {
+std::vector<double> SpatPolygons::rasterize(unsigned nrow, unsigned ncol, std::vector<double> extent, std::vector<double> values, double background) {
 
 	unsigned n = size();
 	
-	std::vector<double> v(nrow *ncol, background);
+	std::vector<double> v(nrow*ncol, background);
+	
+	double resx = (extent[1] - extent[0]) / ncol;
+	double resy = (extent[3] - extent[2]) / nrow;
 	
 	for (size_t j = 0; j < n; j++) {
 			
-			SpatPoly poly = getPoly(j);
-			double value = values[j];
+		SpatPoly poly = getPoly(j);
+		double value = values[j];		
+		unsigned np = poly.size();
+		for (size_t k = 0; k < np; k++) {
+			SpatPolyPart part = poly.getPart(k);
 			
-			unsigned np = poly.size();
-			for (size_t k = 0; k < np; k++) {
-				SpatPolyPart part = poly.getPart(k);
-				
-				if (part.hasHoles()) {
-					std::vector<double> vv = rasterize_polygon(v, value, part.x, part.y, nrow, ncol, extent[0], extent[3], resx, resy);
-					for (size_t h=0; h < part.nHoles(); h++) {
-						vv = rasterize_polygon(vv, background, part.xHole[h], part.yHole[h], nrow, ncol, extent[0], extent[3], resx, resy);
-					}
-					for (size_t q=0; q < vv.size(); q++) {
-						if (vv[q] != background) {
-							v[q] = vv[q];
-						}
-					}
-				} else {
-					v = rasterize_polygon(v, value, part.x, part.y, nrow, ncol, extent[0], extent[3], resx, resy);
+			if (part.hasHoles()) {
+				std::vector<double> vv = rasterize_polygon(v, value, part.x, part.y, nrow, ncol, extent[0], extent[3], resx, resy);
+				for (size_t h=0; h < part.nHoles(); h++) {
+					vv = rasterize_polygon(vv, background, part.xHole[h], part.yHole[h], nrow, ncol, extent[0], extent[3], resx, resy);
 				}
+				for (size_t q=0; q < vv.size(); q++) {
+					if (vv[q] != background) {
+						v[q] = vv[q];
+					}
+				}
+			} else {
+				v = rasterize_polygon(v, value, part.x, part.y, nrow, ncol, extent[0], extent[3], resx, resy);
 			}
+		}
 	}
 	
 	return(v);
