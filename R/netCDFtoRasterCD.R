@@ -290,9 +290,10 @@
 	r@data@fromdisk <- TRUE
 	
 	if (ndims == 2) {
-		nbands = 1
+		nbands <- 1
 	} else {
-		r@file@nbands <- nc$var[[zvar]]$dim[[dim3]]$len
+		nbands <- nc$var[[zvar]]$dim[[dim3]]$len
+		r@file@nbands <- nbands
 		r@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals )
 		if ( nc$var[[zvar]]$dim[[dim3]]$name == 'time' ) {
 			try( r <- .doTime(r, nc, zvar, dim3) )
@@ -320,7 +321,7 @@
 			} else {
 				band <- as.integer(band)
 				if ( band > nbands(r) ) {
-					stop(paste("band too high. Should be between 1 and", nbands))
+					stop(paste("The band number is too high. It should be between 1 and", nbands))
 				} 
 				if ( band < 1) { 
 					stop(paste("band should be 1 or higher"))		
