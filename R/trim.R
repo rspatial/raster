@@ -78,9 +78,10 @@ setMethod('trim', signature(x='Raster'),
 function(x, padding=0, values=NA, filename='', ...) {
 
 	filename <- trim(filename)
-
-	if (canProcessInMemory(x)) {
-		x <- .memtrimlayer(r, padding=padding, ...) 
+	if (!.hasValues(x)) { stop('The Raster object has no values') } 
+	
+	if (nlayers(x) == 1 && canProcessInMemory(x)) {
+		x <- .memtrimlayer(x, padding=padding, ...) 
 		if (filename != '') {
 			return(writeRaster(x, filename=filename, ...))
 		} else {
