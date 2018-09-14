@@ -49,7 +49,7 @@
 	if (class(p) != "Rcpp_SpatPolygons") p <- .makeSpatPolygons(p)
 	if (missing(values)) values <- 1:p$size()
 	if (canProcessInMemory(r, 4)) { 
-		out <- setValues(r, p$rasterize(xres(r), yres(r), nrow(r), ncol(r), as.vector(extent(r)), values, background))
+		out <- setValues(r, p$rasterize(nrow(r), ncol(r), as.vector(extent(r)), values, background))
 		if (filename != "") { 
 			out <- writeRaster(out, filename=filename, ...)			
 		}

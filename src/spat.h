@@ -109,7 +109,7 @@ class SpatPolygons {
 		double getAtt(unsigned i) {	return attr[i]; };
 		bool setAtt(unsigned i, double a) { attr[i] = a; return true; };
 		
-		std::vector<double> rasterize(double resx, double resy, unsigned nrow, unsigned ncol, std::vector<double> extent, std::vector<double> values, double background);
+		std::vector<double> rasterize(unsigned nrow, unsigned ncol, std::vector<double> extent, std::vector<double> values, double background);
 		
 		SpatPolygons subset(std::vector<unsigned> range) { 
 			SpatPolygons out;
