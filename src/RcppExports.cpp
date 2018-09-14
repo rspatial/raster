@@ -295,7 +295,7 @@ RcppExport SEXP _focal_fun(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _focal_get(SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _focal_sum(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _reclass(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP _rcpp_module_boot_spat();
+RcppExport SEXP _rcpp_module_boot_spmod();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_raster_doBilinear", (DL_FUNC) &_raster_doBilinear, 4},
@@ -318,7 +318,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raster_doCellFromXY", (DL_FUNC) &_raster_doCellFromXY, 8},
     {"_raster_doXYFromCell", (DL_FUNC) &_raster_doXYFromCell, 7},
     {"_raster_doFourCellsFromXY", (DL_FUNC) &_raster_doFourCellsFromXY, 9},
-    {"_rcpp_module_boot_spat", (DL_FUNC) &_rcpp_module_boot_spat, 0},
+    {"_rcpp_module_boot_spmod", (DL_FUNC) &_rcpp_module_boot_spmod, 0},
     {"_broom",                          (DL_FUNC) &_broom,                          6},
     {"_do_clamp",                       (DL_FUNC) &_do_clamp,                       4},
     {"_do_layerize",                    (DL_FUNC) &_do_layerize,                    3},

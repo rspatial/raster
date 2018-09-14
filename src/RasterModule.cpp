@@ -3,66 +3,66 @@
 
 using namespace Rcpp;
 
-RCPP_EXPOSED_CLASS(SpatExtent)
+RCPP_EXPOSED_CLASS(SpExtent)
 
 //RCPP_EXPOSED_CLASS(RasterSource)
-//RCPP_EXPOSED_CLASS(SpatRaster)
+//RCPP_EXPOSED_CLASS(SpRaster)
 
-RCPP_EXPOSED_CLASS(SpatPolyPart)
-RCPP_EXPOSED_CLASS(SpatPoly)
-RCPP_EXPOSED_CLASS(SpatPolygons)
+RCPP_EXPOSED_CLASS(SpPolyPart)
+RCPP_EXPOSED_CLASS(SpPoly)
+RCPP_EXPOSED_CLASS(SpPolygons)
 
 
 	
-RCPP_MODULE(spat){
+RCPP_MODULE(spmod){
 
     using namespace Rcpp;
 
 
-    class_<SpatPolyPart>("SpatPolyPart")
+    class_<SpPolyPart>("SpPolyPart")
 		.constructor()
-		.field_readonly("x", &SpatPolyPart::x )
-		.field_readonly("y", &SpatPolyPart::y )
-		.field_readonly("extent", &SpatPolyPart::extent )
-		.method("set", &SpatPolyPart::set, "set")
-		.method("setHole", &SpatPolyPart::setHole, "setHole")
-		.method("getHoleX", &SpatPolyPart::getHoleX, "getHoleX")
-		.method("getHoleY", &SpatPolyPart::getHoleY, "getHoleY")
-		.method("nHoles", &SpatPolyPart::nHoles, "nHoles")
-		.method("hasHoles", &SpatPolyPart::hasHoles, "hasHoles")
+		.field_readonly("x", &SpPolyPart::x )
+		.field_readonly("y", &SpPolyPart::y )
+		.field_readonly("extent", &SpPolyPart::extent )
+		.method("set", &SpPolyPart::set, "set")
+		.method("setHole", &SpPolyPart::setHole, "setHole")
+		.method("getHoleX", &SpPolyPart::getHoleX, "getHoleX")
+		.method("getHoleY", &SpPolyPart::getHoleY, "getHoleY")
+		.method("nHoles", &SpPolyPart::nHoles, "nHoles")
+		.method("hasHoles", &SpPolyPart::hasHoles, "hasHoles")
 		
 	;	
-    class_<SpatPoly>("SpatPoly")
+    class_<SpPoly>("SpPoly")
 		.constructor()
-		.field_readonly("extent", &SpatPoly::extent )
-		.method("getPart", &SpatPoly::getPart, "getPart")
-		.method("addPart", &SpatPoly::addPart, "addPart")
-		.method("size", &SpatPoly::size, "size")
+		.field_readonly("extent", &SpPoly::extent )
+		.method("getPart", &SpPoly::getPart, "getPart")
+		.method("addPart", &SpPoly::addPart, "addPart")
+		.method("size", &SpPoly::size, "size")
 		
 	;	
-    class_<SpatPolygons>("SpatPolygons")
-//		.field("polygons", &SpatPolygons::polys )
-		.field_readonly("extent", &SpatPolygons::extent )
-		.field("attr", &SpatPolygons::attr )
-		.field("crs", &SpatPolygons::crs )
+    class_<SpPolygons>("SpPolygons")
+//		.field("polygons", &SpPolygons::polys )
+		.field_readonly("extent", &SpPolygons::extent )
+		.field("attr", &SpPolygons::attr )
+		.field("crs", &SpPolygons::crs )
 		.constructor()
-		.method("getPoly", &SpatPolygons::getPoly, "getPoly")
-		.method("addPoly", &SpatPolygons::addPoly, "addPoly")
-		.method("size", &SpatPolygons::size, "size")
+		.method("getPoly", &SpPolygons::getPoly, "getPoly")
+		.method("addPoly", &SpPolygons::addPoly, "addPoly")
+		.method("size", &SpPolygons::size, "size")
 
-		.method("getAtt", &SpatPolygons::getAtt, "getAtt")
-		.method("setAtt", &SpatPolygons::setAtt, "setAtt")
+		.method("getAtt", &SpPolygons::getAtt, "getAtt")
+		.method("setAtt", &SpPolygons::setAtt, "setAtt")
 		
-		.method("rasterize", &SpatPolygons::rasterize, "rasterize")	
-		.method("subset", &SpatPolygons::subset, "subset")	
+		.method("rasterize", &SpPolygons::rasterize, "rasterize")	
+		.method("subset", &SpPolygons::subset, "subset")	
 	;	
 
 	
-    class_<SpatExtent>("SpatExtent")
+    class_<SpExtent>("SpExtent")
 		.constructor()
 		.constructor<double, double, double, double>()
-		.property("vector", &SpatExtent::asVector)		
-		.property("valid", &SpatExtent::valid)		
+		.property("vector", &SpExtent::asVector)		
+		.property("valid", &SpExtent::valid)		
 	;	
 
 }

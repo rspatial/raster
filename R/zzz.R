@@ -1,5 +1,5 @@
 
-loadModule("spat", TRUE)
+loadModule("spmod", TRUE)
 
 #.onLoad <- function(lib, pkg)  {
 #	pkg.info <- utils::packageDescription('raster') 

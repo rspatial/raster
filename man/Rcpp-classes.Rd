@@ -3,18 +3,18 @@
 \docType{class}
 
 
-\alias{SpatExtent}
-\alias{SpatPoly}
-\alias{SpatPolyPart}
-\alias{SpatPolygons}
-\alias{SpatExtent}
-\alias{SpatPoly-class}
-\alias{SpatPolyPart-class}
-\alias{SpatPolygons-class}
-\alias{Rcpp_SpatExtent-class}
-\alias{Rcpp_SpatPolygons-class}
-\alias{Rcpp_SpatPoly-class}
-\alias{Rcpp_SpatPolyPart-class}
+\alias{SpExtent}
+\alias{SpPoly}
+\alias{SpPolyPart}
+\alias{SpPolygons}
+\alias{SpExtent}
+\alias{SpPoly-class}
+\alias{SpPolyPart-class}
+\alias{SpPolygons-class}
+\alias{Rcpp_SpExtent-class}
+\alias{Rcpp_SpPolygons-class}
+\alias{Rcpp_SpPoly-class}
+\alias{Rcpp_SpPolyPart-class}
 
 \title{ Rcpp classes}
 

@@ -21,7 +21,10 @@ std::vector<double> rasterize_polygon(std::vector<double> r, double value, std::
 		size_t j = n-1;
 		for (size_t i=0; i<n; i++) {
 			if (((pY[i] < y) && (pY[j] >= y)) || ((pY[j] < y) && (pY[i] >= y))) {
-				nCol[nodes++]=(int)  (((pX[i] - xmin + (y-pY[i])/(pY[j]-pY[i]) * (pX[j]-pX[i])) + 0.5 * rx ) / rx); 
+				double nds = (((pX[i] - xmin + (y-pY[i])/(pY[j]-pY[i]) * (pX[j]-pX[i])) + 0.5 * rx ) / rx); 
+				nds = nds < 0 ? 0 : nds;
+				nCol[nodes] = (unsigned) nds;
+				nodes++;
 			}
 			j = i; 
 		}
@@ -35,7 +38,7 @@ std::vector<double> rasterize_polygon(std::vector<double> r, double value, std::
 				if (nCol[i] < 0) nCol[i]=0 ;
 				if (nCol[i+1] >= ncols) nCol[i+1] = ncols-1;
 				int ncell = ncols * row;
-				for (size_t col = nCol[i]; col < nCol[i+1]; col++) {
+				for (size_t col = nCol[i]; col <= nCol[i+1]; col++) {
 					r[col + ncell] = value;
 				}
 			}
@@ -47,7 +50,7 @@ std::vector<double> rasterize_polygon(std::vector<double> r, double value, std::
 
 
 
-std::vector<double> SpatPolygons::rasterize(unsigned nrow, unsigned ncol, std::vector<double> extent, std::vector<double> values, double background) {
+std::vector<double> SpPolygons::rasterize(unsigned nrow, unsigned ncol, std::vector<double> extent, std::vector<double> values, double background) {
 
 	unsigned n = size();
 	
@@ -58,11 +61,11 @@ std::vector<double> SpatPolygons::rasterize(unsigned nrow, unsigned ncol, std::v
 	
 	for (size_t j = 0; j < n; j++) {
 			
-		SpatPoly poly = getPoly(j);
+		SpPoly poly = getPoly(j);
 		double value = values[j];		
 		unsigned np = poly.size();
 		for (size_t k = 0; k < np; k++) {
-			SpatPolyPart part = poly.getPart(k);
+			SpPolyPart part = poly.getPart(k);
 			
 			if (part.hasHoles()) {
 				std::vector<double> vv = rasterize_polygon(v, value, part.x, part.y, nrow, ncol, extent[0], extent[3], resx, resy);

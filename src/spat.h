@@ -6,13 +6,13 @@ using namespace std;
 #include <fstream>
 
 
-class SpatExtent {
+class SpExtent {
 	public:
 		double xmin, xmax, ymin, ymax;
-		SpatExtent() {xmin = -180; xmax = 180; ymin = -90; ymax = 90;}
-		SpatExtent(double _xmin, double _xmax, double _ymin, double _ymax) {xmin = _xmin; xmax = _xmax; ymin = _ymin; ymax = _ymax;}
+		SpExtent() {xmin = -180; xmax = 180; ymin = -90; ymax = 90;}
+		SpExtent(double _xmin, double _xmax, double _ymin, double _ymax) {xmin = _xmin; xmax = _xmax; ymin = _ymin; ymax = _ymax;}
 		
-		void intersect(SpatExtent e) { 
+		void intersect(SpExtent e) { 
 			xmin = std::max(xmin, e.xmin);
 			xmax = std::min(xmax, e.xmax);
 			ymin = std::max(ymin, e.ymin);
@@ -33,12 +33,12 @@ class SpatExtent {
 
 
 
-class SpatPolyPart {
+class SpPolyPart {
 	public:
 		std::vector<double> x, y; 
 		std::vector< std::vector<double>> xHole, yHole; 
 
-		SpatExtent extent;
+		SpExtent extent;
 		bool hasHoles() { return xHole.size() > 0;}
 		unsigned nHoles() { return xHole.size();}
 		bool set(std::vector<double> X, std::vector<double> Y) { 
@@ -59,14 +59,14 @@ class SpatPolyPart {
 		
 };
 
-class SpatPoly {
+class SpPoly {
 	public:
-		std::vector<SpatPolyPart> parts; 
-		SpatExtent extent;
+		std::vector<SpPolyPart> parts; 
+		SpExtent extent;
 
 		unsigned size() { return parts.size(); };
-		SpatPolyPart getPart(unsigned i) { return parts[i]; }
-		bool addPart(SpatPolyPart p) { 
+		SpPolyPart getPart(unsigned i) { return parts[i]; }
+		bool addPart(SpPolyPart p) { 
 			parts.push_back(p); 
 			if (parts.size() > 1) {
 				extent.xmin = std::min(extent.xmin, p.extent.xmin);
@@ -82,17 +82,17 @@ class SpatPoly {
 };
 
 
-class SpatPolygons {
+class SpPolygons {
 	public:
-		std::vector<SpatPoly> polys; 
-		SpatExtent extent;		
+		std::vector<SpPoly> polys; 
+		SpExtent extent;		
 		std::string crs;
 		std::vector<double> attr;
 
 		unsigned size() { return polys.size(); };
-		SpatPoly getPoly(unsigned i) { return polys[i]; };
+		SpPoly getPoly(unsigned i) { return polys[i]; };
 		
-		bool addPoly(SpatPoly p) { 
+		bool addPoly(SpPoly p) { 
 			polys.push_back(p); 
 			if (polys.size() > 1) {
 				extent.xmin = std::min(extent.xmin, p.extent.xmin);
@@ -111,8 +111,8 @@ class SpatPolygons {
 		
 		std::vector<double> rasterize(unsigned nrow, unsigned ncol, std::vector<double> extent, std::vector<double> values, double background);
 		
-		SpatPolygons subset(std::vector<unsigned> range) { 
-			SpatPolygons out;
+		SpPolygons subset(std::vector<unsigned> range) { 
+			SpPolygons out;
 			for (size_t i=0; i < range.size(); i++) {
 				out.addPoly( polys[range[i]] ); 
 				out.attr.push_back(attr[i]);
@@ -147,14 +147,14 @@ class BlockSize {
 
 
 
-class SpatRaster {
+class SpRaster {
 	
 	private:
 		std::string msg;
 		fstream* fs;
 		
 	protected:
-		SpatExtent extent;
+		SpExtent extent;
 		std::string crs ="+proj=longlat +datum=WGS84";
 		void setnlyr() { 
 			nlyr = std::accumulate(source.nlayers.begin(), source.nlayers.end(), 0); 
@@ -183,18 +183,18 @@ class SpatRaster {
 		std::vector<bool> inMemory() { return source.memory; }
 
 		// constructors
-		SpatRaster(std::string fname);
-		SpatRaster();
-		SpatRaster(std::vector<unsigned> rcl, std::vector<double> ext, std::string _crs);
-		SpatRaster(unsigned _nrow, unsigned _ncol, unsigned _nlyr, SpatExtent ext, std::string _crs);
+		SpRaster(std::string fname);
+		SpRaster();
+		SpRaster(std::vector<unsigned> rcl, std::vector<double> ext, std::string _crs);
+		SpRaster(unsigned _nrow, unsigned _ncol, unsigned _nlyr, SpExtent ext, std::string _crs);
 		
 		double ncell() { return nrow * ncol; }
 
 //	void setExtent(std::vector<double> e) {	extent.xmin = e[0]; extent.xmax = e[1]; extent.ymin = e[2]; extent.ymax = e[3]; }
-		SpatExtent getExtent() { return extent; }
-		void setExtent(SpatExtent e) { extent = e ; }
+		SpExtent getExtent() { return extent; }
+		void setExtent(SpExtent e) { extent = e ; }
 
-		void setExtent(SpatExtent ext, bool keepRes=false, std::string snap="");
+		void setExtent(SpExtent ext, bool keepRes=false, std::string snap="");
 
 		
 		std::string getCRS()	{ return(crs); }
@@ -216,7 +216,7 @@ class SpatRaster {
 		//std::vector<string> filenames() { return source.filename; }
 
 		
-		bool compare(unsigned nrows, unsigned ncols, SpatExtent e );
+		bool compare(unsigned nrows, unsigned ncols, SpExtent e );
 	
 		std::vector<double> getValues();
 		void setValues(std::vector<double> _values);
@@ -264,19 +264,19 @@ class SpatRaster {
 		void openFS(string const &filename);
 
 		
-		SpatRaster writeRaster(std::string filename, bool overwrite);
-		SpatExtent align(SpatExtent e, string snap="near");
+		SpRaster writeRaster(std::string filename, bool overwrite);
+		SpExtent align(SpExtent e, string snap="near");
 		
-		SpatRaster test(string filename);
-		SpatRaster crop(SpatExtent e, string filename="", string snap="near", bool overwrite=false);
-		SpatRaster trim(unsigned padding=0, std::string filename="", bool overwrite=false);
-		SpatRaster mask(SpatRaster mask, string filename="", bool overwrite=false);
-		SpatRaster focal(std::vector<unsigned> w, double fillvalue, bool narm, unsigned fun, std::string filename, bool overwrite);
-		SpatRaster rasterizePolygons(SpatPolygons p, double background, string filename, bool overwrite);
+		SpRaster test(string filename);
+		SpRaster crop(SpExtent e, string filename="", string snap="near", bool overwrite=false);
+		SpRaster trim(unsigned padding=0, std::string filename="", bool overwrite=false);
+		SpRaster mask(SpRaster mask, string filename="", bool overwrite=false);
+		SpRaster focal(std::vector<unsigned> w, double fillvalue, bool narm, unsigned fun, std::string filename, bool overwrite);
+		SpRaster rasterizePolygons(SpPolygons p, double background, string filename, bool overwrite);
 		
 		std::vector<double> focal_values(std::vector<unsigned> w, double fillvalue, unsigned row, unsigned nrows);
 
-		SpatRaster aggregate(std::vector<unsigned> fact, string fun, bool narm, string filename="", bool overwrite=false);
+		SpRaster aggregate(std::vector<unsigned> fact, string fun, bool narm, string filename="", bool overwrite=false);
 		//std::vector<double> aggregate(std::vector<unsigned> fact, bool narm, string fun, string filename="");
 
 		std::vector<unsigned> get_aggregate_dims( std::vector<unsigned> fact );
@@ -287,14 +287,14 @@ class SpatRaster {
 
 
 /*
-SpatRaster SQRT() {
-	SpatRaster r = *this;
+SpRaster SQRT() {
+	SpRaster r = *this;
 	std::transform(r.values.begin(), r.values.end(), r.values.begin(), (double(*)(double)) sqrt);
 	return r;
 }
 		
-SpatRaster SQRTfree(SpatRaster* g) {
-	SpatRaster r = *g;
+SpRaster SQRTfree(SpRaster* g) {
+	SpRaster r = *g;
 	std::transform(r.values.begin(), r.values.end(), r.values.begin(), (double(*)(double)) sqrt);
 	return r;
 }
