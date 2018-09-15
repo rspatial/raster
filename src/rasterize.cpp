@@ -1,4 +1,6 @@
 /* Robert Hijmans, June 2011, July 2016
+// Based on  public-domain code by Darel Rex Finley, 2007
+// http://alienryderflex.com/polygon_fill/
 
 */
 #include <Rcpp.h>
@@ -36,9 +38,9 @@ std::vector<double> rasterize_polygon(std::vector<double> r, double value, std::
 			if (nCol[i] >= ncols) break;
 			if (nCol[i+1] > 0) {
 				if (nCol[i] < 0) nCol[i]=0 ;
-				if (nCol[i+1] >= ncols) nCol[i+1] = ncols-1;
+				if (nCol[i+1] >= ncols) nCol[i+1] = ncols;
 				int ncell = ncols * row;
-				for (size_t col = nCol[i]; col <= nCol[i+1]; col++) {
+				for (size_t col = nCol[i]; col < nCol[i+1]; col++) {
 					r[col + ncell] = value;
 				}
 			}

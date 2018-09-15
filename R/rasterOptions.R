@@ -416,8 +416,12 @@ tmpDir <- function(create=TRUE) {
 }
 
 
-.datatype <- function(..., datatype) {
-	if (missing(datatype)) { 
+.datatype <- function(..., datatype, dataType) {
+
+	if (missing(datatype) && !missing(dataType)) { 
+		warning('argument "datatype" misspelled as "dataType"')
+		datatype <- dataType
+	} else if (missing(datatype)) { 
 		datatype <- getOption('rasterDatatype')
 		if (is.null(datatype)) {
 			return('FLT4S') 

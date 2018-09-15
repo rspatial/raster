@@ -351,3 +351,13 @@ setMethod('bind', signature(x='SpatialPoints', y='SpatialPoints'),
 )
 
 
+
+setMethod('bind', signature(x='list', y='missing'),
+	function(x, y, ..., keepnames=FALSE) {
+		if (length(x) < 2) { return(unlist(x)) }
+		names(x)[1:2] <- c('x', 'y')
+		x$keepnames <- keepnames
+		do.call(bind, x)
+	}
+)
+

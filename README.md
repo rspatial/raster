@@ -14,7 +14,7 @@ If you are windows, you need to first install [Rtools](https://cran.r-project.or
 
 On [rspatial.org](http://rspatial.org/) you can learn about spatial data analysis with R.
 
-[stackoverflow](https://stackoverflow.com/) is the best place to ask questions of you get stuck. Make sure to include a simple reproducible example. 
+[stackoverflow](https://stackoverflow.com/) is the best place to ask questions of you get stuck. Make sure to include a [https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example](simple reproducible example). 
 
 Please send me an email if you have a bug report. See `maintainer("raster")` for the email address.
 
