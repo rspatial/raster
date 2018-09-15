@@ -212,7 +212,10 @@
 			cv <- unlist(lapply(cv, fun2), use.names = FALSE)
 		} else {
 			np <- length(cv)
-			cv <- lapply(cv, function(x) {apply(x,2,fun2)})
+			cv <- lapply(cv, function(x) {
+				if (!is.matrix(x)) { x <- t(matrix(x)) }
+				apply(x, 2, fun2)}
+			)
 			cv <- matrix(unlist(cv, use.names = FALSE), nrow=np, byrow=TRUE)
 			colnames(cv) <- nms
 		}

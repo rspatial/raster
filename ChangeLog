@@ -12,9 +12,14 @@ allow setting a 'spatial window'
 Better handling of NA values in 1 byte raster files
 
 --- current version
-buffer did not work with values in memory. Bug reported and solution proposed by Carlos Alberto Arnillas
 faster extraction for points via GDAL
 faster rasterization of polygons
+
+Bug fixes:
+buffer did not work with values in memory. Bug reported and solution proposed by Carlos Alberto Arnillas
+extract with point and smaller single cell buffer failed when an aggregation function was provided. Reported by Lucas
+https://stackoverflow.com/questions/52335522/r-why-does-raster-extract-give-dim-error/52338639#52338639
+ 
 
 --- 11-Nov-2017, version: 2.6-6
 New:
