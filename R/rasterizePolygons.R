@@ -142,8 +142,17 @@
 				if (mask && update) stop("either use 'mask' OR 'update'")	
 				background = NA
 				r <- .fasterize(p, rstr, pvals[,1], background) 
-				if (mask) r <- mask(rstr, r)
-				if (update) {
+				if (! hasValues(r)) {
+					if (mask) { 
+						warning('there are no values to mask')
+					} else {
+						warning('there are no values to update')
+					}
+					return(r)
+				}
+				if (mask) {
+					r <- mask(rstr, r)
+				} else {
 					if (updateValue[1]=="all") {
 						r <- cover(r, rstr)
 					} else if (updateValue[1]=="NA") {

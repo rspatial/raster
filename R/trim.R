@@ -70,7 +70,8 @@ setMethod('trim', signature(x='matrix'),
 	rows <- pmin(pmax(1, c(min(rows) - padding, max(rows + padding))), nrow(r))
 	cols <- pmin(pmax(1, c(min(cols) - padding, max(cols + padding))), ncol(r))
 
-	r[rows[1]:rows[2], cols[1]:cols[2], drop=FALSE]
+	e <- extent(r, rows[1], rows[2], cols[1], cols[2])
+	crop(r, e, filename=filename, ...)
 }
 
 
@@ -82,11 +83,7 @@ function(x, padding=0, values=NA, filename='', ...) {
 	
 	if (nlayers(x) == 1 && canProcessInMemory(x)) {
 		x <- .memtrimlayer(x, padding=padding, ...) 
-		if (filename != '') {
-			return(writeRaster(x, filename=filename, ...))
-		} else {
-			return(x)
-		}
+		return(x)
 	}
 	
 	nr <- nrow(x)

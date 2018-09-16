@@ -13,6 +13,9 @@ setMethod('cover', signature(x='RasterLayer', y='RasterLayer'),
 	function(x, y, ..., filename=''){ 
 	
 	rasters <- .makeRasterList(x, y, ...)
+	if (length(rasters) == 1) {
+		return(rasters[[1]])
+	}
 	compareRaster(rasters)
 	
 	nl <- sapply(rasters, nlayers)

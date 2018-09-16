@@ -49,8 +49,8 @@
 	if (sum(fdim) > 0) {
 		x[fdim] <- sapply(x[fdim], clearValues)
 	}
-	hv <- sum(sapply(x, hasValues))
-	if (hv < length(x)) {
+	hv <- sapply(x, hasValues)
+	if (sum(hv) < length(x)) {
 		if (sum(hv) == 0) {
 			x <- x[1]
 		} else {

@@ -1,4 +1,4 @@
 .gitignore
 LICENSE
 README.md
-revdep
+^revdep$

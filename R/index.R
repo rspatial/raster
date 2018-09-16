@@ -134,7 +134,7 @@ function(x, i, j, ... , drop=TRUE) {
 		r <- rasterFromCells(x, i, values=FALSE)
 		if (nlayers(x) > 1) {
 			r <- brick(r)
-			if (hasValues(r)) {
+			if (hasValues(x)) {
 				newi <- cellFromXY(r, xyFromCell(x, i))
 				v <- matrix(NA, nrow=ncell(r), ncol=nlayers(x))			
 				v[newi,] <- .cellValues(x, i)
@@ -142,7 +142,7 @@ function(x, i, j, ... , drop=TRUE) {
 			} 
 			return(r)
 		} else {
-			if (hasValues(r)) {
+			if (hasValues(x)) {
 				newi <- cellFromXY(r, xyFromCell(x, i))
 				r[newi] <- .cellValues(x, i)
 			}
