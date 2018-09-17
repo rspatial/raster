@@ -86,6 +86,8 @@ function(x) {
 		}
 		x@data@min <- minmax[1,]
 		x@data@max <- minmax[2,]
+		x <- readStop(x)
+
 	}
 #	if (datatype == 'logical') {
 #		x@data@min <- as.logical(x@data@min)
