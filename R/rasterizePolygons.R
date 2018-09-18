@@ -123,21 +123,25 @@
 		rstr@data@isfactor <- TRUE
 		rstr@data@attributes <- list(pvals)
 		if (!is.character(fun)) {
-			stop('when rasterizing multiple values you must use "fun=first" or "fun=last"')
+			stop('when rasterizing multiple fields you must use "fun=first" or "fun=last"')
 		} else if (!(fun %in% c('first', 'last'))) {
-			stop('when rasterizing multiple values you must use "fun=first" or "fun=last"')
+			stop('when rasterizing multiple fields you must use "fun=first" or "fun=last"')
 		}
 	}
 
 
+	if (getCover) {
+		rstr <- disaggregate(raster(rstr), 10)
+		r <- .fasterize(p, rstr, rep(1, npol), background=0) 
+		return( aggregate(r, 10, mean, na.rm=TRUE, filename=filename, ...) )
+	} 
+	
+
+	
 	### new code
 	if (is.character(fun) && (ncol(pvals) == 1) && faster) {
+
 		if (fun == "last") {
-			if (getCover) {
-				rstr <- disaggregate(raster(rstr), 10)
-				r <- .fasterize(p, rstr, rep(1, npol), background=NA, filename, ...) 
-				r <- aggregate(r, 10, mean, na.rm=TRUE)
-			} 
 			if (mask || update) {
 				if (mask && update) stop("either use 'mask' OR 'update'")	
 				background = NA
@@ -200,13 +204,7 @@
 		filename <- rasterTmpFile()
 	}
 	
-	if (getCover) {
-#		fun <- 'first'
-#		mask <- FALSE
-#		update <- FALSE
-#		field <- -1
-		return (.polygoncover(p, rstr, filename, ...)) 		
-	}
+
 
 	if (mask & update) { 
 		stop('use either "mask" OR "update"')
@@ -472,12 +470,14 @@
 #plot( .polygonsToRaster(p, rstr) )
 
 
-.polygoncover <- function(p, x, filename, ...) {
+...polygoncover <- function(p, x, filename, ...) {
 	d <- disaggregate(raster(x), 10)
 	r <- .polygonsToRaster(p, d, filename=filename, field=1, fun='first', background=0, mask=FALSE, update=FALSE, getCover=FALSE, silent=TRUE, ...)
 	aggregate(r, 10, sum)
+	
+	
+	
 } 
-
 
 .Old_polygoncover <- function(rstr, filename, polinfo, lxmin, lxmax, pollist, ...) {
 # percentage cover per grid cell
