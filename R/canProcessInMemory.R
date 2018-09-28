@@ -16,55 +16,37 @@ canProcessInMemory <- function(x, n=4) {
 #	rasterOptions(overwrite=TRUE)
 #  rasterOptions(todisk=TRUE)
 #  return(FALSE)
-	
 	if (.toDisk()) { 
 		return(FALSE) 
 	} 
 	
 	n <- n + nlayers(x) - 1
-	cells <- round( 1.1 * ncell(x) ) * n
-
-	if ( cells > .maxmemory() ) {
-		return(FALSE) 
+	cells <- ncell(x) * n
+	
+	if (.estimateMem()) {
+	
+		if ( .Platform$OS.type == "windows" ) {
+			memavail <- 0.5 * (utils::memory.size(NA) - utils::memory.size(FALSE))
+		} else { #if ( .Platform$OS.type == "unix" ) {
+			memavail <- as.numeric(system("awk '/MemFree/ {print $2}' /proc/meminfo", intern=TRUE)) / 524288 #1024^2 / 2
+		} #else {
+			# mac? or is that also "unix"
+		#}
+			
+		memneed <- cells / 131072 # = (cells * 8) / 1024^2
+		if (memneed > memavail) {
+			return(FALSE)
+		} else {
+			return(TRUE)
+		}
+	
 	} else {
-		return(TRUE)
+		
+		if ( cells > .maxmemory() ) {
+			return(FALSE) 
+		} else {
+			return(TRUE)
+		}
 	}
 }
 
-#	if (cells > .maxmemory()) {
-#		return(FALSE) 
-#	} else if ( cells < 1000000 ) {
-#		return(TRUE)
-#	} else {
-#		return(TRUE)
-#	}
-	
-	
-#	if (substr( R.Version()$platform, 1, 7) == "i386-pc" ) {
-#	# windows, function memory.size  available
-#	memneed <- cells * 8 * n / (1024 * 1024)
-#	memavail <- 0.5 * (memory.size(NA)-memory.size(FALSE))
-#	if (memneed > memavail) {
-#		return(FALSE)
-#	} else {
-#		return(TRUE)
-#	}
-#   } else {
-
-#	g <- gc()
-
-
-#  if (.Platform$OS.type == "unix"){
-## Memory in KB, from: http://stackoverflow.com/questions/2441046/how-to-get-physical-memory-in-bash
-#	mem <- as.numeric(system("grep MemTotal /proc/meminfo | awk '{print $2}'",intern=TRUE))
-
-#	w <- getOption('warn')
-#	on.exit(options('warn'= w))
-#	options('warn'=-1) 
-#	r <- try( matrix(0.1, ncol=n, nrow=cells), silent=TRUE )
-
-#	if (class(r) == "try-error") {
-#		return( FALSE )
-#		g <- gc()
-#		return( TRUE ) 
-#	}

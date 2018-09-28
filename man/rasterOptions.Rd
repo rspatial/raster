@@ -21,7 +21,7 @@ Function \code{tmpDir} returns the location of the temporary files
 \usage{
 rasterOptions(format, overwrite, datatype, tmpdir, tmptime, progress, 
      timer, chunksize, maxmemory, todisk, setfileext, tolerance, 
-     standardnames, depracatedwarnings, addheader, default=FALSE)	
+     standardnames, depracatedwarnings, addheader, estimatemem, default=FALSE)	
 
 
 tmpDir(create=TRUE)	 
@@ -46,6 +46,7 @@ tmpDir(create=TRUE)
 \item{addheader}{character. If not equal to \code{''} (the default) an additional header file is written when a raster format file (grd/gri) is written. Supported formats are as in \code{\link{hdr}}}
 \item{default}{logical. If \code{TRUE}, all options are set to their default values}
 \item{create}{logical. If \code{TRUE}, the temporary files directory is created if it does not exist}
+\item{estimatemem}{logical. If \code{TRUE}, the amount of RAM available is estimated, and the value of maxmemory is ignored}
 }
 
 \value{
