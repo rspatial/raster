@@ -167,7 +167,7 @@ ccodes <- function() {
 	filename <- paste(path, 'countries.RData', sep="")
 	if (!file.exists(filename)) {
 		if (download) {
-			theurl <- paste("https://biogeo.ucdavis.edu/data/gadm2.6/countries_gadm26.rds", sep="")
+			theurl <- paste("https://biogeo.ucdavis.edu/data/gadm2.8/countries_gadm28.rds", sep="")
 			.download(theurl, filename)
 			if (!file.exists(filename)) {
 				message("\nCould not download file -- perhaps it does not exist") 
