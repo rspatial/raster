@@ -11,7 +11,7 @@ setMethod ('print', 'Raster',
 			show(x)
 		} else {
 			if (x@file@driver == 'netcdf') {
-				nc <- ncdf4::nc_open(x@file@name)
+				nc <- ncdf4::nc_open(x@file@name, suppress_dimvals = TRUE)
 				print(nc)
 				ncdf4::nc_close(nc)
 			} else if (any(is.factor(x))) {

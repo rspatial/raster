@@ -8,7 +8,7 @@
 
 	stopifnot(requireNamespace("ncdf4"))
 
-	nc <- ncdf4::nc_open(filename)
+	nc <- ncdf4::nc_open(filename, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
 
 	zvar <- .varName(nc, varname)

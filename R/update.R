@@ -271,7 +271,7 @@ function(object, v, cell, band, ...) {
 
 .updateNCDF <- function(object, v, cell, band) {
 		
-		nc <- ncdf4::nc_open(object@file@name, write=TRUE)
+		nc <- ncdf4::nc_open(object@file@name, write=TRUE, suppress_dimvals = TRUE)
 		on.exit( ncdf4::nc_close(nc) )		
 
 		zvar <- object@data@zvar
