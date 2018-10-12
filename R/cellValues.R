@@ -5,11 +5,18 @@
 
 	
 .cellValues <- function(x, cells, layer, nl, df=FALSE, factors=FALSE) { 
+
 	
 	if (inherits(x, 'RasterLayer')) {
-		result <- .readCells(x, cells, 1)
-		lyrs <- layer <- 1
-		
+		if (inMemory(x)) {
+			cells[cells < 1 | cells > ncell(x)] <- NA
+			if (length(stats::na.omit(cells)) == 0) {
+				return(cells)
+			}
+			result <- x@data@values[cells] 
+		} else {
+			result <- .readCells(x, cells, 1)
+		}
 	} else {
 	
 		nlyrs <- nlayers(x)
@@ -18,22 +25,30 @@
 		if (missing(nl)) { nl <- nlyrs }
 		nl <-  min( max( round(nl), 1), nlyrs-layer+1 )
 		lyrs <- layer:(layer+nl-1)
-	
+
+		cells[cells < 1 | cells > ncell(x)] <- NA
+		if (length(stats::na.omit(cells)) == 0) {
+			return(cells)
+		}
+
+		
 		if (inherits(x, 'RasterStack')) {
 	
 			result <- matrix(ncol=nl, nrow=length(cells))
 			colnames(result) <- names(x)[lyrs]
-			for (i in 1:length(lyrs)) {
-				result[,i] <- .readCells( x@layers[[lyrs[i]]], cells, 1)
+
+			if (inMemory(x)) {
+				for (i in 1:length(lyrs)) {
+					result[,i] <- x@layers[[lyrs[i]]]@data@values[cells] 
+				}
+			} else {
+				for (i in 1:length(lyrs)) {
+					result[,i] <- .readCells( x@layers[[lyrs[i]]], cells, 1)
+				}
 			}
-			
 		} else if (inherits(x, 'RasterBrick')) {
 		
 			if (inMemory(x)) {
-				cells[cells < 1 | cells > ncell(x)] <- NA
-				if (length(stats::na.omit(cells)) == 0) {
-					return(cells)
-				}
 				result <- x@data@values[cells, lyrs, drop=FALSE] 
 				
 			} else if (x@file@driver == 'netcdf') {
