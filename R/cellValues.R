@@ -12,8 +12,8 @@
 			cells[cells < 1 | cells > ncell(x)] <- NA
 			if (length(stats::na.omit(cells)) == 0) {
 				return(cells)
-			}
-			result <- x@data@values[cells] 
+			}  # as.numeric to avoid logical values for backwards compatibility
+			result <- as.numeric(x@data@values[cells] )
 		} else {
 			result <- .readCells(x, cells, 1)
 		}
@@ -39,7 +39,7 @@
 
 			if (inMemory(x)) {
 				for (i in 1:length(lyrs)) {
-					result[,i] <- x@layers[[lyrs[i]]]@data@values[cells] 
+					result[,i] <- as.numeric(x@layers[[lyrs[i]]]@data@values[cells] )
 				}
 			} else {
 				for (i in 1:length(lyrs)) {
