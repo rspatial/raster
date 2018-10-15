@@ -168,7 +168,11 @@
 
 	## to allow suppress_dimvals
 	## xx <- nc$var[[zvar]]$dim[[dims[1]]]$vals
-	xx <- ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dims[1]]]$name)
+	xx <- try(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dims[1]]]$name), silent = TRUE)
+	if (inherits(xx, "try-error")) {
+	  xx <- seq_len(nc$var[[zvar]]$dim[[dims[1]]]$len)
+	}
+	
 	rs <- xx[-length(xx)] - xx[-1]
 	if (! isTRUE ( all.equal( min(rs), max(rs), tolerance=0.025, scale= abs(min(rs))) ) ) {
 		if (is.na(stopIfNotEqualSpaced)) {
@@ -185,7 +189,10 @@
 
 	## to allow suppress_dimvals
   ##	yy <- nc$var[[zvar]]$dim[[dims[2]]]$vals
-	yy <- ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dims[2]]]$name)
+	yy <- try(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dims[2]]]$name), silent = TRUE)
+	if (inherits(yy, "try-error")) {
+	  yy <- seq_len(nc$var[[zvar]]$dim[[dims[2]]]$len)
+	}
 	
 	rs <- yy[-length(yy)] - yy[-1]
 	if (! isTRUE ( all.equal( min(rs), max(rs), tolerance=0.025, scale= abs(min(rs))) ) ) {
@@ -300,7 +307,11 @@
 		r@file@nbands <- nbands
 		## to allow suppress_dimvals
   	#	r@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals )
-		r@z <- list(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dim3]]$name))
+		dim3_vals <- try(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dim3]]$name), silent = TRUE)
+		if (inherits(dim3_vals, "try-error")) {
+		  dim3_vals <- seq_len(nc$var[[zvar]]$dim[[dim3]]$len)
+		}
+		r@z <- list(dim3_vals)
 		if ( nc$var[[zvar]]$dim[[dim3]]$name == 'time' ) {
 			try( r <- .doTime(r, nc, zvar, dim3) )
 		} else {

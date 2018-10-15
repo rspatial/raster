@@ -35,7 +35,11 @@
 	if (length(bands) > 1) {
 	  ## to enable suppress_dimvals
 	  ##st@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals[bands] )
-	  st@z <- list(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dim3]]$name)[bands])
+	  dim3_vals <- try(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dim3]]$name), silent = TRUE)
+	  if (inherits(dim3_vals, "try-error")) {
+	    dim3_vals <- seq_len(nc$var[[zvar]]$dim[[dim3]]$len)
+	  }
+	  st@z <- list(dim3_vals[bands])
 		names(st@z) <- nc$var[[zvar]]$dim[[dim3]]$units
 		if ( nc$var[[zvar]]$dim[[dim3]]$name == 'time' ) {	
 			try( st <- .doTime(st, nc, zvar, dim3)  )
