@@ -33,7 +33,9 @@
 	st@title <- names(r)
 
 	if (length(bands) > 1) {
-		st@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals[bands] )
+	  ## to enable suppress_dimvals
+	  ##st@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals[bands] )
+	  st@z <- list(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dim3]]$name)[bands])
 		names(st@z) <- nc$var[[zvar]]$dim[[dim3]]$units
 		if ( nc$var[[zvar]]$dim[[dim3]]$name == 'time' ) {	
 			try( st <- .doTime(st, nc, zvar, dim3)  )

@@ -8,7 +8,7 @@
 .doTime <- function(x, nc, zvar, dim3) {
 	dodays <- TRUE
 	dohours <- FALSE
-	
+
 	un <- nc$var[[zvar]]$dim[[dim3]]$units	
 	if (substr(un, 1, 10) == "days since") { 
 		startDate = as.Date(substr(un, 12, 22))
@@ -166,7 +166,9 @@
 	ncols <- nc$var[[zvar]]$dim[[dims[1]]]$len
 	nrows <- nc$var[[zvar]]$dim[[dims[2]]]$len
 
-	xx <- nc$var[[zvar]]$dim[[dims[1]]]$vals
+	## to allow suppress_dimvals
+	## xx <- nc$var[[zvar]]$dim[[dims[1]]]$vals
+	xx <- ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dims[1]]]$name)
 	rs <- xx[-length(xx)] - xx[-1]
 	if (! isTRUE ( all.equal( min(rs), max(rs), tolerance=0.025, scale= abs(min(rs))) ) ) {
 		if (is.na(stopIfNotEqualSpaced)) {
@@ -181,8 +183,10 @@
 	resx <- (xrange[2] - xrange[1]) / (ncols-1)
 	rm(xx)
 
+	## to allow suppress_dimvals
+  ##	yy <- nc$var[[zvar]]$dim[[dims[2]]]$vals
+	yy <- ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dims[2]]]$name)
 	
-	yy <- nc$var[[zvar]]$dim[[dims[2]]]$vals
 	rs <- yy[-length(yy)] - yy[-1]
 	if (! isTRUE ( all.equal( min(rs), max(rs), tolerance=0.025, scale= abs(min(rs))) ) ) {
 		if (is.na(stopIfNotEqualSpaced)) {
@@ -294,7 +298,9 @@
 	} else {
 		nbands <- nc$var[[zvar]]$dim[[dim3]]$len
 		r@file@nbands <- nbands
-		r@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals )
+		## to allow suppress_dimvals
+  	#	r@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals )
+		r@z <- list(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dim3]]$name))
 		if ( nc$var[[zvar]]$dim[[dim3]]$name == 'time' ) {
 			try( r <- .doTime(r, nc, zvar, dim3) )
 		} else {
