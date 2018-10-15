@@ -98,7 +98,7 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
  
 	setChunksize <- function(chunksize) {
 		chunksize <- max(1, round(chunksize[1]))
-		chunksize <- min(chunksize, 10^9)
+		#chunksize <- min(chunksize, 10^8)
 		options(rasterChunkSize = chunksize )
 	}
 
@@ -168,8 +168,8 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
 		options(rasterTmpTime = 24*7)
 		options(rasterToDisk = FALSE)
 		options(rasterSetFileExt = TRUE)
-		options(rasterChunkSize = 10000000)
-		options(rasterMaxMemory = 100000000)
+		options(rasterChunkSize = 10^8)
+		options(rasterMaxMemory = 10^9)
 		options(rasterEstimateMem = FALSE)
 		options(rasterTolerance = 0.1)
 		options(rasterStandardNames = TRUE)
@@ -393,7 +393,7 @@ tmpDir <- function(create=TRUE) {
 
 
 .maxmemory <- function() {
-	default <- 1e+10
+	default <- 1e+9
 	d <- getOption('rasterMaxMemory')
 	if (is.null(d)) {
 		return( default )
