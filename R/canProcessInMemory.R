@@ -20,20 +20,32 @@ canProcessInMemory <- function(x, n=4) {
 		return(FALSE) 
 	} 
 	
-	n <- n + nlayers(x) - 1
-	cells <- ncell(x) * n
+	n <- n + nlayers(x)
+	memneed <- ncell(x) * n * 8
 	
 	if (.estimateMem()) {
 	
 		if ( .Platform$OS.type == "windows" ) {
-			memavail <- 0.5 * (utils::memory.size(NA) - utils::memory.size(FALSE))
+		
+			mem <- system2("wmic", args = "OS get FreePhysicalMemory /Value", stdout = TRUE)
+			mem3 <- gsub("\r", "", mem[3])
+			mem3 <- gsub("FreePhysicalMemory=", "", mem3)
+			memavail <- as.numeric(mem3)
+
+			#memavail <- 0.5 * (utils::memory.size(NA) - utils::memory.size(FALSE))
 		} else { #if ( .Platform$OS.type == "unix" ) {
-			memavail <- as.numeric(system("awk '/MemFree/ {print $2}' /proc/meminfo", intern=TRUE)) / 524288 #1024^2 / 2
+			memavail <- as.numeric(system("awk '/MemFree/ {print $2}' /proc/meminfo", intern=TRUE))
 		} #else {
 			# mac? or is that also "unix"
 		#}
-			
-		memneed <- cells / 131072 # = (cells * 8) / 1024^2
+
+		# can't use all of it
+		memavail <- 0.75 * memavail
+		
+		#print(paste("mem available:", memavail))
+		#print(paste("mem needed:", memneed))
+
+	
 		if (memneed > memavail) {
 			return(FALSE)
 		} else {
@@ -42,7 +54,7 @@ canProcessInMemory <- function(x, n=4) {
 	
 	} else {
 		
-		if ( cells > .maxmemory() ) {
+		if ( memneed > .maxmemory() ) {
 			return(FALSE) 
 		} else {
 			return(TRUE)
