@@ -2,16 +2,17 @@
 focal for multi-layer objects
 step-size option for focal
 add equivalent to "subsWithNA" to reclassify
-move rasterize/(lines, polygons) to C
-function for affine transformation
 add AMSR-E ice products and other raw binary products
 add orientation fixes for AVISO currents and similar NetCDFs lacking metadata on the internal CRS
 add VRT output to saveStack
 Fix lines falling between the cracks in extract (calling rasterzeLines): https://stat.ethz.ch/pipermail/r-sig-geo/2014-May/020973.html
-allow setting a 'spatial window'
 Better handling of NA values in 1 byte raster files
 
+
 --- current version
+fixed the link for GADM countries download. Bug reported by Loic Dutrieux
+
+--- 16-Oct-2018, version: 2.7-15
 faster extraction for points via GDAL
 faster rasterization of polygons
 

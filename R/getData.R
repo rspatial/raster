@@ -163,9 +163,14 @@ ccodes <- function() {
 
 
 .countries <- function(download, path, type='sp', ...) {
-#	if (!file.exists(path)) {  dir.create(path, recursive=T)  }
-	f <- paste0("countries_gadm36_", type, ".rds")
+
+	if (type == 'sf') {
+		f <- "countries_gadm36_sf.rds"
+	} else {
+		f <- "countries_gadm36_sp.rds"	
+	}
 	filename <- file.path(path, f, sep="")
+	
 	if (!file.exists(filename)) {
 		if (download) {
 			theurl <- paste0("https://biogeo.ucdavis.edu/data/gadm3.6/", f)
