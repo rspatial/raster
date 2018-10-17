@@ -47,6 +47,7 @@ canProcessInMemory <- function(x, n=4) {
 
 	
 		if (memneed > memavail) {
+			# options(rasterChunkSize = memavail * 0.5 )
 			return(FALSE)
 		} else {
 			return(TRUE)
