@@ -6,11 +6,14 @@
 	
 .cellValues <- function(x, cells, layer, nl, df=FALSE, factors=FALSE) { 
 
+	cells[cells < 1 | cells > ncell(x)] <- NA
 	
 	if (inherits(x, 'RasterLayer')) {
 		if (inMemory(x)) {
-			cells[cells < 1 | cells > ncell(x)] <- NA
 			if (length(stats::na.omit(cells)) == 0) {
+				if (length(cells) == 0) {
+					return(NULL)
+				}
 				return(cells)
 			}  # as.numeric to avoid logical values for backwards compatibility
 			result <- as.numeric(x@data@values[cells] )
@@ -26,17 +29,16 @@
 		nl <-  min( max( round(nl), 1), nlyrs-layer+1 )
 		lyrs <- layer:(layer+nl-1)
 
-		cells[cells < 1 | cells > ncell(x)] <- NA
-		if (length(stats::na.omit(cells)) == 0) {
-			return(cells)
-		}
-
-		
+	
 		if (inherits(x, 'RasterStack')) {
 	
 			result <- matrix(ncol=nl, nrow=length(cells))
 			colnames(result) <- names(x)[lyrs]
 
+			if (length(stats::na.omit(cells)) == 0) {
+				return(result)
+			}			
+			
 			if (inMemory(x)) {
 				for (i in 1:length(lyrs)) {
 					result[,i] <- as.numeric(x@layers[[lyrs[i]]]@data@values[cells] )
