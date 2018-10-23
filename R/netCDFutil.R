@@ -5,13 +5,22 @@
 
 
 .getCRSfromGridMap4 <- function(g) {
+
+	vars <- names(g)
+	vals <- as.vector(unlist(g))
+	if (any(vars == "proj4")) {
+		crs=vals[vars=="proj4"] 
+		return(crs)
+	}
+	
 # based on info at 
 # http://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus
 # accessed 7 October 2012
 	prj <- matrix(c("albers_conical_equal_area", "aea", "azimuthal_equidistant", "aeqd", "lambert_cylindrical_equal_area", "cea", "lambert_azimuthal_equal_area", "laea", "lambert_conformal_conic", "lcc", "latitude_longitude", "longlat", "mercator", "merc", "orthographic", "ortho", "polar_stereographic", "stere", "stereographic", "stere", "transverse_mercator", "tmerc"), ncol=2, byrow=TRUE)
 	
 	m <- matrix(c("grid_mapping_name", "+proj", "false_easting", "+x_0","false_northing", "+y_0", "scale_factor_at_projection_origin", "+k_0", "scale_factor_at_central_meridian", "+k_0", "standard_parallel", "+lat_1", "standard_parallel1", "+lat_1", "standard_parallel2", "+lat_2", "longitude_of_central_meridian", "+lon_0", "longitude_of_projection_origin", "+lon_0", "latitude_of_projection_origin", "+lat_0", "straight_vertical_longitude_from_pole", "+lon_0",
-	"longitude_of_prime_meridian", "+lon_0", "semi_major_axis", "+a", "inverse_flattening", "+rf"), ncol=2, byrow=TRUE)
+	"longitude_of_prime_meridian", "+lon_0", "semi_major_axis", "+a", "inverse_flattening", "+rf", 
+	"earth_radius", "+a"), ncol=2, byrow=TRUE)
 
 	
 	sp <- g$standard_parallel
@@ -22,8 +31,6 @@
 			g$standard_parallel <- NULL
 		}
 	}
-	vars <- names(g)
-	vals <- as.vector(unlist(g))
 	i <- match(vars, m[,1])
 	if (all(is.na(i))) {
 		gg <- cbind(vars, vals)
@@ -34,13 +41,22 @@
 		vr <- vars[is.na(i)]
 		vl <- vals[is.na(i)]
 		gg <- cbind(vr, vl)
-		mtxt <- paste(apply(gg, 1, function(x) paste(x, collapse='=')), collapse='; ')
-		warning("cannot process these parts of the CRS:\n", mtxt)
+		gg <- gg[!(gg[,1] %in% c("crs_wkt", "esri_pe_string")), ]
+		if (NROW(gg) > 0) {
+			mtxt <- paste(apply(gg, 1, function(x) paste(x, collapse='=')), collapse='\n')
+			warning("cannot process these parts of the CRS:\n", mtxt)
+		}	
 		vars <- vars[!is.na(i)]
 		vals <- vals[!is.na(i)]
 		i <- stats::na.omit(i)
 	}
 	tab <- cbind(m[i,], vals)
+	rr <- which(tab[,1] == "earth_radius")
+	if (length(rr) > 0) {
+		bb <- tab[rr,]
+		bb[2] <- "+b"
+		tab <- rbind(tab, bb)
+	}
 	p <- which(tab[,2] == '+proj')
 	if (length(p) == 0) {
 		warning("cannot create a valid CRS\n", mtxt)

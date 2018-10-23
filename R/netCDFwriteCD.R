@@ -118,8 +118,9 @@
 
 	proj <- projection(x) 
 	if (! is.na(proj)) { 
-		ncdf4::ncatt_put(nc, 0, 'crs', proj, prec='text')
-		ncdf4::ncatt_put(nc, 0, 'crs_format', 'PROJ.4', prec='text')
+		ncdf4::ncatt_put(nc, 0, 'proj4', proj, prec='text')
+		#ncdf4::ncatt_put(nc, 0, 'crs', proj, prec='text')
+		#ncdf4::ncatt_put(nc, 0, 'crs_format', 'PROJ.4', prec='text')
 	}
 
 	if (! missing(varatt)){
