@@ -218,6 +218,7 @@
 		try(atts <- ncdf4::ncatt_get(nc, gridmap), silent=TRUE)
 		try(prj <- .getCRSfromGridMap4(atts), silent=TRUE)
 	} else {
+		# deprecated
 		a <- ncdf4::ncatt_get(nc, zvar, "projection_format")
 		if ( a$hasatt ) { 
 			projection_format  <- a$value 

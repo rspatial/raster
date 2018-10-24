@@ -1,11 +1,11 @@
 # Author: Robert J. Hijmans
-# Date : September 2012
+# Date : September 2017
 # Version 1.0
 # Licence GPL v3
 
 .sf2sp <- function(from) {
 	if (!requireNamespace("sf")) {
-		warning('Cannot do this because sf is not available')
+		stop('package sf is not available')
 	}
 	# to do
 	#if (from == 'GEOMETRYCOLLECTION') {
