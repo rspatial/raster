@@ -13,6 +13,7 @@ Better handling of NA values in 1 byte raster files
 fixed the link for GADM countries download. Bug reported by Loic Dutrieux
 fixed corner-case bug in alignExtent (for a small extent, touching a grid cell), affecting crop; reported by 
 Judith Mourant and Paul Fenimore
+fixed problem with subs reported by Andy Craig https://github.com/rspatial/raster/issues/17
 
 --- 16-Oct-2018, version: 2.7-15
 faster extraction for points via GDAL

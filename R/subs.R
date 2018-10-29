@@ -70,14 +70,12 @@ setMethod('subs', signature(x='Raster', y='data.frame'),
 		
 		byc <- length(by)
 		
-		y <- y[ , c(by, which)]
-
 		tt <- table(y[,by])
 		tt <- tt[ which(tt > 1) ]
 		if (length(tt) > 0) {
 			stop('duplicate "by" values not allowed')
 		}
-
+	
 		out <- raster(x)
 		nlx <- nlayers(x)
 		
@@ -130,6 +128,7 @@ setMethod('subs', signature(x='Raster', y='data.frame'),
 			} 
 		} 
 		names(out) <- ln
+		y <- y[ , c(by, which)]
 
 		filename <- trim(filename)
 		
