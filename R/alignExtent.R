@@ -34,20 +34,21 @@ alignExtent <- function(extent, object, snap='near') {
 	}
 	
 	if (xmn == xmx) {
-		if (xmn < extent@xmin) {
+		if (xmn <= extent@xmin) {
 			xmx <- xmx + res[1]
 		} else {
 			xmn <- xmn - res[1]		
 		}
 	}
 	if (ymn == ymx) {
-		if (ymn < extent@ymin) {
+		if (ymn <= extent@ymin) {
 			ymx <- ymx + res[2]
 		} else {
 			ymn <- ymn - res[2]		
 		}
 	}
-	extent(xmn, xmx, ymn, ymx)
+	e <- extent(xmn, xmx, ymn, ymx)
+	intersect(e, extent(object))
 }
 
 

@@ -11,6 +11,8 @@ Better handling of NA values in 1 byte raster files
 
 --- current version
 fixed the link for GADM countries download. Bug reported by Loic Dutrieux
+fixed corner-case bug in alignExtent (for a small extent, touching a grid cell), affecting crop; reported by 
+Judith Mourant and Paul Fenimore
 
 --- 16-Oct-2018, version: 2.7-15
 faster extraction for points via GDAL
