@@ -13,5 +13,9 @@
 	#	for (i in 1:3 ) { 		}
 	#	return(x)
 	#}
-	as(from, 'Spatial')	
+	p <- as(from, 'Spatial')	
+	if (ncol(p) == 0) {
+		p <- as(p, 'SpatialPolygons')	
+	}
+	p
 }
