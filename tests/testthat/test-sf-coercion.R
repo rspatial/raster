@@ -23,8 +23,7 @@ p3 <- rbind(c(-125, 0), c(0, 60), c(40, 5), c(15, -45), c(-125, 0))
 
 pols <- spPolygons(p1, p2, p3)
 sf_pols <- st_as_sf(pols)
-r <- raster(ncol = 90, nrow = 45)
-r[] <- 1
+r <- raster(ncol = 90, nrow = 45, vals=1)
 
 test_that("crop using sfc works",
           { expect_equal(crop(r, pols), crop(r, sf_pols)) } 

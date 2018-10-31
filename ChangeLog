@@ -8,8 +8,11 @@ add VRT output to saveStack
 Fix lines falling between the cracks in extract (calling rasterzeLines): https://stat.ethz.ch/pipermail/r-sig-geo/2014-May/020973.html
 Better handling of NA values in 1 byte raster files
 
-
 --- current version
+testthat unit tests introduced by Mike Sumner and Jakub Nowosad
+as.character() for Raster objects to create the R code to re-create the Raster skeleton in examples.
+
+Bug fixes:
 fixed the link for GADM countries download. Bug reported by Loic Dutrieux
 fixed corner-case bug in alignExtent (for a small extent, touching a grid cell), affecting crop; reported by 
 Judith Mourant and Paul Fenimore
