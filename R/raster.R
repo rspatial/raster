@@ -5,6 +5,7 @@
 
 
 
+
 if ( !isGeneric("raster") ) {
 	setGeneric("raster", function(x, ...)
 		standardGeneric("raster"))
@@ -488,3 +489,33 @@ setMethod('raster', signature(x='GridTopology'),
 	}
 )
 
+
+
+setMethod('as.character', signature(x='Raster'), 
+	function(x, ...) {
+		e <- extent(x)
+		if (nlayers(x) < 2) {
+			paste0("raster(", 
+				"ncol=",ncol(x),
+				", nrow=",nrow(x),
+				", xmn=",e[1],
+				", xmx=",e[2],
+				", ymn=",e[3],
+				", ymx=",e[4],
+				", crs='", crs(x), "')" 
+			)
+		
+		} else {
+			paste0("brick(", 
+				"ncol=", ncol(x),
+				", nrow=", nrow(x),
+				", nl=", nlayers(x),
+				", xmn=",e[1],
+				", xmx=",e[2],
+				", ymn=",e[3],
+				", ymx=",e[4],
+				", crs='", crs(x), "')" 
+			)
+		}
+	}
+)
