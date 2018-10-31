@@ -23,14 +23,15 @@ p3 <- rbind(c(-125, 0), c(0, 60), c(40, 5), c(15, -45), c(-125, 0))
 
 pols <- spPolygons(p1, p2, p3)
 sf_pols <- st_as_sf(pols)
-r <- raster(ncol=90, nrow=45)
+r <- raster(ncol = 90, nrow = 45)
+r[] <- 1
 
 test_that("crop using sfc works",
           { expect_equal(crop(r, pols), crop(r, sf_pols)) } 
 )
 
 test_that("mask using sfc works",
-          { expect_equal(mask(r, pols), crop(r, sf_pols)) } 
+          { expect_equal(mask(r, pols), mask(r, sf_pols)) } 
 )
 
 test_that("rasterize based on sfc works",
@@ -40,3 +41,4 @@ test_that("rasterize based on sfc works",
 test_that("extract based on sfc works",
           { expect_equal(extract(r, pols), extract(r, sf_pols)) } 
 )
+
