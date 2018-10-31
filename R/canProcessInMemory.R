@@ -5,10 +5,11 @@
 
 
 .RAMavailable <- function(defmem, useC=TRUE) {
-		
 	if (useC) {
 		memavail <- .availableRAM(defmem)
 	} else {
+		# essentially the same results as above, but slower
+		
 		if ( .Platform$OS.type == "windows" ) {
 			mem <- system2("wmic", args = "OS get FreePhysicalMemory /Value", stdout = TRUE)
 			mem3 <- gsub("\r", "", mem[3])
@@ -51,13 +52,16 @@ canProcessInMemory <- function(x, n=4, verbose=FALSE) {
 		print(paste("mem available:", memavail))
 		print(paste("mem needed:", memneed))
 	}
+	# the below should not be needed, but
+	# this allows you to safely set a high maxmem
+	# but still limit total mem use
 	memavail <- min(memavail, maxmem)
 
 	# can't use all of it
 	memavail <- 0.75 * memavail
 
 	if (memneed > memavail) {
-		# options(rasterChunkSize = memavail * 0.5 )
+		# options(rasterChunkSize = memavail * 0.25 )
 		return(FALSE)
 	} else {
 		return(TRUE)
