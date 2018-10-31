@@ -5,9 +5,6 @@ using namespace Rcpp;
 
 RCPP_EXPOSED_CLASS(SpExtent)
 
-//RCPP_EXPOSED_CLASS(RasterSource)
-//RCPP_EXPOSED_CLASS(SpRaster)
-
 RCPP_EXPOSED_CLASS(SpPolyPart)
 RCPP_EXPOSED_CLASS(SpPoly)
 RCPP_EXPOSED_CLASS(SpPolygons)

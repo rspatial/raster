@@ -4,8 +4,30 @@
 # Licence GPL v3
 
 
-canProcessInMemory <- function(x, n=4) {
+.RAMavailable <- function(defmem, useC=TRUE) {
+		
+	if (useC) {
+		memavail <- .availableRAM(defmem)
+	} else {
+		if ( .Platform$OS.type == "windows" ) {
+			mem <- system2("wmic", args = "OS get FreePhysicalMemory /Value", stdout = TRUE)
+			mem3 <- gsub("\r", "", mem[3])
+			mem3 <- gsub("FreePhysicalMemory=", "", mem3)
+			memavail <- as.numeric(mem3) * 1024
+			#memavail <- 0.5 * (utils::memory.size(NA) - utils::memory.size(FALSE))
+		} else if ( .Platform$OS.type == "unix" ) {
+			memavail <- as.numeric(system("awk '/MemFree/ {print $2}' /proc/meminfo", intern=TRUE))
+		} else {
+			#don't know how to do it for mac
+			memavail <- defmem
+		}
+	}
+	memavail
 
+}
+
+
+canProcessInMemory <- function(x, n=4, verbose=FALSE) {
 
 # for testing purposes
 #	rasterOptions(format='GTiff')
@@ -23,43 +45,23 @@ canProcessInMemory <- function(x, n=4) {
 	n <- n * nlayers(x)
 	memneed <- ncell(x) * n * 8
 
-	if (.estimateMem()) {
-
-		if ( .Platform$OS.type == "windows" ) {
-
-			mem <- system2("wmic", args = "OS get FreePhysicalMemory /Value", stdout = TRUE)
-			mem3 <- gsub("\r", "", mem[3])
-			mem3 <- gsub("FreePhysicalMemory=", "", mem3)
-			memavail <- as.numeric(mem3) * 1024
-
-			#memavail <- 0.5 * (utils::memory.size(NA) - utils::memory.size(FALSE))
-		} else { #if ( .Platform$OS.type == "unix" ) {
-			memavail <- as.numeric(system("awk '/MemFree/ {print $2}' /proc/meminfo", intern=TRUE))
-		} #else {
-			# mac? or is that also "unix"
-		#}
-
-		# can't use all of it
-		memavail <- 0.75 * memavail
-
-		#print(paste("mem available:", memavail))
-		#print(paste("mem needed:", memneed))
-
-
-		if (memneed > memavail) {
-			# options(rasterChunkSize = memavail * 0.5 )
-			return(FALSE)
-		} else {
-			return(TRUE)
-		}
-
-	} else {
-
-		if ( memneed > .maxmemory() ) {
-			return(FALSE)
-		} else {
-			return(TRUE)
-		}
+	maxmem <- .maxmemory()
+	memavail <- .RAMavailable(maxmem, TRUE)
+	if (verbose) {
+		print(paste("mem available:", memavail))
+		print(paste("mem needed:", memneed))
 	}
+	memavail <- min(memavail, maxmem)
+
+	# can't use all of it
+	memavail <- 0.75 * memavail
+
+	if (memneed > memavail) {
+		# options(rasterChunkSize = memavail * 0.5 )
+		return(FALSE)
+	} else {
+		return(TRUE)
+	}
+
 }
 

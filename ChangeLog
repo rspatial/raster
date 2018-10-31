@@ -11,6 +11,7 @@ Better handling of NA values in 1 byte raster files
 --- current version
 testthat unit tests introduced by Mike Sumner and Jakub Nowosad
 as.character() for Raster objects to create the R code to re-create the Raster skeleton in examples.
+improved estimation of available RAM with contributions by Lorenzo Busetto 
 
 Bug fixes:
 fixed the link for GADM countries download. Bug reported by Loic Dutrieux
@@ -609,7 +610,7 @@ predict automatic removal (to NA) of factor levels not used to build the model
 --- 29-Nov-2010,  version 1.7-6
 New function as.array
 improved sampleRegular for multi-layer objects
-Code simplications for 'raster', 'stack', and 'brick' functions
+Code simplifications for 'raster', 'stack', and 'brick' functions
 raster no longer has the "values" argument (use setValues)
 When adding layers to a RasterBrick, a RasterStack will be returned.
 Fixed calc for regression functions

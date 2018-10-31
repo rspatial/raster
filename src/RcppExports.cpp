@@ -46,6 +46,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// availableRAM
+double availableRAM(double defmem);
+RcppExport SEXP _raster_availableRAM(SEXP defmemSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type defmem(defmemSEXP);
+    rcpp_result_gen = Rcpp::wrap(availableRAM(defmem));
+    return rcpp_result_gen;
+END_RCPP
+}
 // getMode
 double getMode(NumericVector values, int ties);
 RcppExport SEXP _raster_getMode(SEXP valuesSEXP, SEXP tiesSEXP) {
@@ -301,6 +312,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raster_doBilinear", (DL_FUNC) &_raster_doBilinear, 4},
     {"_raster_doCellFromRowCol", (DL_FUNC) &_raster_doCellFromRowCol, 4},
     {"_raster_getPolygons", (DL_FUNC) &_raster_getPolygons, 3},
+    {"_raster_availableRAM", (DL_FUNC) &_raster_availableRAM, 1},
     {"_raster_getMode", (DL_FUNC) &_raster_getMode, 2},
     {"_raster_doSpmin", (DL_FUNC) &_raster_doSpmin, 2},
     {"_raster_doSpmax", (DL_FUNC) &_raster_doSpmax, 2},

@@ -13,6 +13,10 @@
     .Call(`_raster_getPolygons`, xyv, res, nodes)
 }
 
+.availableRAM <- function(defmem) {
+    .Call(`_raster_availableRAM`, defmem)
+}
+
 .getMode <- function(values, ties) {
     .Call(`_raster_getMode`, values, ties)
 }

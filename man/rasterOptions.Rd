@@ -21,7 +21,7 @@ Function \code{tmpDir} returns the location of the temporary files
 \usage{
 rasterOptions(format, overwrite, datatype, tmpdir, tmptime, progress,
      timer, chunksize, maxmemory, todisk, setfileext, tolerance,
-     standardnames, depracatedwarnings, addheader, estimatemem, default=FALSE)
+     standardnames, depracatedwarnings, addheader, default=FALSE)
 
 
 tmpDir(create=TRUE)
@@ -37,7 +37,7 @@ tmpDir(create=TRUE)
 \item{progress}{character. Valid values are "text",  "window" and "" (the default in most functions, no progress bar)}
 \item{timer}{Logical. If \code{TRUE}, the time it took to complete the function is printed}
 \item{chunksize}{integer. Maximum number of bytes to read/write in a single chunk while processing (chunk by chunk) disk based Raster* objects}
-\item{maxmemory}{integer. Maximum bytes to read into memory. I.e., if a Raster* function is expected to require more than this value, \code{\link[raster]{canProcessInMemory}} will return \code{FALSE} }
+\item{maxmemory}{integer. Maximum number of bytes to read into memory. I.e., if a Raster* function is expected to require more than this value, \code{\link[raster]{canProcessInMemory}} will return \code{FALSE} }
 \item{todisk}{logical. For debugging only. Default is \code{FALSE} and should normally not be changed. If \code{TRUE}, results are always written to disk, even if no filename is supplied (a temporary filename is used)}
 \item{setfileext}{logical. Default is \code{TRUE}. If \code{TRUE}, the file extension will be changed when writing (if known for the file type). E.g. GTiff files will be saved with the .tif extension }
 \item{tolerance}{numeric. The tolerance used when comparing the origin and resolution of Raster* objects. Expressed as the fraction of a single cell. This should be a number between 0 and 0.5 }
@@ -46,7 +46,6 @@ tmpDir(create=TRUE)
 \item{addheader}{character. If not equal to \code{''} (the default) an additional header file is written when a raster format file (grd/gri) is written. Supported formats are as in \code{\link{hdr}}}
 \item{default}{logical. If \code{TRUE}, all options are set to their default values}
 \item{create}{logical. If \code{TRUE}, the temporary files directory is created if it does not exist}
-\item{estimatemem}{logical. If \code{TRUE}, the amount of RAM available is estimated, and the value of maxmemory is ignored}
 }
 
 \value{

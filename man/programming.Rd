@@ -27,7 +27,7 @@ pbCreate creates a progress bar, pbStep sets the progress, and pbClose closes it
 }
 
 \usage{
-canProcessInMemory(x, n=4)
+canProcessInMemory(x, n=4, verbose=FALSE)
 pbCreate(nsteps, progress, style=3, label='Progress', ...)
 pbStep(pb, step=NULL, label='')
 pbClose(pb, timer)
@@ -40,6 +40,7 @@ returnCluster()
 \arguments{
   \item{x}{RasterLayer or RasterBrick object (for connections) or RasterStack object (canProcessInMemory)}
   \item{n}{integer. The number of copies of the Raster* object cell values that a function needs to be able to have in memory}  
+  \item{verbose}{logical. If \code{TRUE} the amount of memory needed and available is printed}
   \item{nsteps}{integer. Number of steps the progress bar will make from start to end (e.g. nrow(raster)) }
   \item{progress}{character. 'text', 'window', or ''}
   \item{style}{style for text progress bar. See \code{\link[utils]{txtProgressBar}} }
