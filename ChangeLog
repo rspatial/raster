@@ -9,15 +9,17 @@ Fix lines falling between the cracks in extract (calling rasterzeLines): https:/
 Better handling of NA values in 1 byte raster files
 
 --- current version
+Improved estimation of available RAM with contributions by Lorenzo Busetto 
+The current situation is that RAM available is computed on windows and linux; but not on mac. Not more that 60% of available RAM is used (if the estimated RAM needed is not too low). Not more than raster:::.maxmemory() is used; but it should now be safe to set this to Inf. If canProcessInMemory returns FALSE, chunksize is set 25% of available RAM, or raster:::.chunksize(), whichever is lower. (set options via rasterOptions())
 testthat unit tests introduced by Mike Sumner and Jakub Nowosad
 as.character() for Raster objects to create the R code to re-create the Raster skeleton in examples.
-improved estimation of available RAM with contributions by Lorenzo Busetto 
 
 Bug fixes:
 fixed the link for GADM countries download. Bug reported by Loic Dutrieux
 fixed corner-case bug in alignExtent (for a small extent, touching a grid cell), affecting crop; reported by 
 Judith Mourant and Paul Fenimore
 fixed problem with subs reported by Andy Craig https://github.com/rspatial/raster/issues/17
+Previous version had a maxmemory value that was too high (reported by Lorenzo Busetto)
 
 --- 16-Oct-2018, version: 2.7-15
 faster extraction for points via GDAL
