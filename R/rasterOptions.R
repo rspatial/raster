@@ -5,9 +5,7 @@
 
 
 rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress, timer, chunksize, maxmemory, todisk, setfileext, tolerance, standardnames, depracatedwarnings, addheader, default=FALSE) {
-	
-	
-	
+		
 	setFiletype <- function(format) {
 		if (.isSupportedFormat(format)) {	
 			options(rasterFiletype = format)	
@@ -169,6 +167,7 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
 		options(rasterToDisk = FALSE)
 		options(rasterSetFileExt = TRUE)
 		options(rasterChunkSize = 10^8)
+		options(rasterChunk = 10^8)
 		options(rasterMaxMemory = 10^9)
 #		options(rasterEstimateMem = TRUE)
 		options(rasterTolerance = 0.1)
@@ -403,6 +402,18 @@ tmpDir <- function(create=TRUE) {
 	} 
 	return(d)
 }	
+
+
+.chunk <- function(){
+	d <- getOption('rasterChunk')
+	if (is.null(d)) {
+		return( .chunksize() )
+	} 
+	if (is.na(d) | d < 10000) {
+		return( .chunksize() )
+	} 
+	return(d)
+}
 
 
 

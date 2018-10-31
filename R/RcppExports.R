@@ -13,8 +13,8 @@
     .Call(`_raster_getPolygons`, xyv, res, nodes)
 }
 
-.availableRAM <- function(defmem) {
-    .Call(`_raster_availableRAM`, defmem)
+.availableRAM <- function(ram) {
+    .Call(`_raster_availableRAM`, ram)
 }
 
 .getMode <- function(values, ties) {

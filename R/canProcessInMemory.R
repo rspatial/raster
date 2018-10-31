@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 
-.RAMavailable <- function(defmem, useC=TRUE) {
+.RAMavailable <- function(defmem=.maxmemory(), useC=TRUE) {
 	if (useC) {
 		memavail <- .availableRAM(defmem)
 	} else {
@@ -57,11 +57,12 @@ canProcessInMemory <- function(x, n=4, verbose=FALSE) {
 	# but still limit total mem use
 	memavail <- min(memavail, maxmem)
 
-	# can't use all of it
-	memavail <- 0.75 * memavail
+	# can't use all of it; the 0.6 could be an option
+	memavail <- 0.6 * memavail
 
 	if (memneed > memavail) {
-		# options(rasterChunkSize = memavail * 0.25 )
+		# new (hidden) option; the 0.25 could be another option
+		options(rasterChunk = min(.chunksize(), memavail * 0.25))
 		return(FALSE)
 	} else {
 		return(TRUE)

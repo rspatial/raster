@@ -47,13 +47,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // availableRAM
-double availableRAM(double defmem);
-RcppExport SEXP _raster_availableRAM(SEXP defmemSEXP) {
+double availableRAM(double ram);
+RcppExport SEXP _raster_availableRAM(SEXP ramSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type defmem(defmemSEXP);
-    rcpp_result_gen = Rcpp::wrap(availableRAM(defmem));
+    Rcpp::traits::input_parameter< double >::type ram(ramSEXP);
+    rcpp_result_gen = Rcpp::wrap(availableRAM(ram));
     return rcpp_result_gen;
 END_RCPP
 }

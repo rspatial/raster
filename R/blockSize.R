@@ -8,7 +8,7 @@ blockSize <- function(x, chunksize, n=nlayers(x), minblocks=4, minrows=1) {
 
 	n <- max(n, 1)
 	if (missing(chunksize)) {
-		bs <- .chunksize()
+		bs <- .chunk()
 	} else {
 		bs <- chunksize
 	}

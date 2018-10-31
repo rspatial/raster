@@ -9,9 +9,8 @@
 #endif
 
 // [[Rcpp::export(name = ".availableRAM")]]
-double availableRAM(double defmem) {
+double availableRAM(double ram) {
 	// return available RAM
-	double ram;
 	#ifdef _WIN32
 		MEMORYSTATUSEX statex;
 		statex.dwLength = sizeof(statex);
@@ -25,7 +24,6 @@ double availableRAM(double defmem) {
 		// mac
 	    // perhaps use this
 		// https://stackoverflow.com/questions/38490320/how-to-query-amount-of-allocated-memory-on-linux-and-osx
-		ram = defmem;		
 	#endif
 	
 	return ram;

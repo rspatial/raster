@@ -329,7 +329,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		
 	} else {
 		# this seems to need smaller chunks
-		#cz <- max(5, 0.1 * .chunksize() / nlayers(to))
+		#cz <- max(5, 0.1 * .chunk() / nlayers(to))
 		
 		
 		if (inMemory) {
