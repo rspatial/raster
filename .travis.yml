@@ -2,6 +2,7 @@
 
 language: r
 sudo: false
+latex: false
 cache: packages
 
 sudo: required
