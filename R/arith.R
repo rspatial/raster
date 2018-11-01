@@ -3,6 +3,18 @@
 # Version 1.0
 # Licence GPL v3
 
+
+setMethod("Arith", signature(e1='Raster', e2='missing'),
+    function(e1, e2){ 
+		oper <- as.vector(.Generic)[1]
+		if (oper == "-") {
+			e1 <- -1 * e1
+		}
+		e1
+	}
+)
+
+
 setMethod("Arith", signature(e1='Raster', e2='Raster'),
     function(e1, e2){ 
 
