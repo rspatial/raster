@@ -3,16 +3,29 @@
 # Version 1.0
 # Licence GPL v3
 
-setMethod("yFromRow", signature(object="Raster", row="numeric"), 
-	function(object, row=1:nrow(object)) {
+setMethod("yFromRow", signature(object="Raster", row="missing"), 
+	function(object, row) {
 		if (rotated(object)) {
 			stop('this function is not supported for rotated rasters')
 		}
-		row <- round(row)
+		row=1:nrow(object)
+		ymax(object) - ((row-0.5) * yres(object))
+	}	
+)
+
+
+setMethod("yFromRow", signature(object="Raster", row="numeric"), 
+	function(object, row) {
+		if (rotated(object)) {
+			stop('this function is not supported for rotated rasters')
+		}
+		row <- round(as.vector(row))
 		row[row < 1 | row > object@nrows] <- NA
 		ymax(object) - ((row-0.5) * yres(object))
 	}	
 )
+
+
 
 .yFromRow <- function(object, rownr) {
 	if (rotated(object)) {
@@ -23,12 +36,22 @@ setMethod("yFromRow", signature(object="Raster", row="numeric"),
 	
 
 setMethod("xFromCol", signature(object="Raster", col="numeric"), 
-	xFromCol <- function(object, col=1:ncol(object)) {
+	function(object, col=1:ncol(object)) {
 		if (rotated(object)) {
 			stop('this function is not supported for rotated rasters')
 		}
-		col <- round(col)
+		col <- round(as.vector(col))
 		col[col < 1 | col > object@ncols] <- NA
+		xmin(object) + (col - 0.5) * xres(object) 
+	}  
+)
+
+setMethod("xFromCol", signature(object="Raster", col="missing"), 
+	function(object, col=1:ncol(object)) {
+		if (rotated(object)) {
+			stop('this function is not supported for rotated rasters')
+		}
+		col=1:ncol(object)
 		xmin(object) + (col - 0.5) * xres(object) 
 	}  
 )
@@ -84,7 +107,7 @@ setMethod("colFromX", signature(object="Raster", x="numeric"),
 	}
 )
 
-	
+
 setMethod("rowFromY", signature(object="Raster", y="numeric"), 
 	function(object, y)	{
 		if (inherits(y, 'Spatial')) {

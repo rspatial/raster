@@ -3,8 +3,10 @@
 
 \alias{xFromCol}
 \alias{xFromCol,Raster,numeric-method}
+\alias{xFromCol,Raster,missing-method}
 \alias{yFromRow}
 \alias{yFromRow,Raster,numeric-method}
+\alias{yFromRow,Raster,missing-method}
 \alias{xFromCell}
 \alias{xFromCell,Raster,numeric-method}
 \alias{yFromCell}
@@ -32,9 +34,9 @@ These functions get coordinates of the center of raster cells for a row, column,
 
 \arguments{
   \item{object}{Raster* object (or a SpatialPixels* or SpatialGrid* object)}
+  \item{col}{column number; or vector of column numbers. If missing, the x coordinates for all columns are returned}
+  \item{row}{row number; or vector of row numbers. If missing, the y coordinates for all rows are returned}
   \item{cell}{cell number(s)}
-  \item{col}{column number; or vector of column numbers}
-  \item{row}{row number; or vector of row numbers}
   \item{spatial}{If \code{spatial=TRUE}, \code{xyFromCell} returns a SpatialPoints object instead of a matrix}
   \item{...}{additional arguments. None implemented}
 }
