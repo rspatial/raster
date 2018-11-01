@@ -6,11 +6,7 @@
 
 setMethod("Arith", signature(e1='Raster', e2='missing'),
     function(e1, e2){ 
-		oper <- as.vector(.Generic)[1]
-		if (oper == "-") {
-			e1 <- -1 * e1
-		}
-		e1
+		methods::callGeneric(0, e1)
 	}
 )
 
