@@ -48,7 +48,8 @@ alignExtent <- function(extent, object, snap='near') {
 		}
 	}
 	e <- extent(xmn, xmx, ymn, ymx)
-	intersect(e, extent(object))
+	#intersect(e, extent(object))
+	return(e)
 }
 
 
