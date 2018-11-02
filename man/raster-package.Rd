@@ -11,8 +11,7 @@ Overview of the functions in the raster package
 \description{
 The raster package provides classes and functions to manipulate geographic (spatial) data in 'raster' format. Raster data divides space into cells (rectangles; pixels) of equal size (in units of the coordinate reference system). Such continuous spatial data are also referred to as 'grid' data, and be contrasted with discrete (object based) spatial data (points, lines, polygons).
 
-The package should be particularly useful when using very large datasets that can not be loaded into the computer's memory. Functions will
-work correctly, because they they process large files in chunks, i.e., they read, compute, and write blocks of data, without loading all values into memory at once.
+The package should be particularly useful when using very large datasets that can not be loaded into the computer's memory. Functions will work correctly, because they they process large files in chunks, i.e., they read, compute, and write blocks of data, without loading all values into memory at once.
 
 Below is a list of some of the most important functions grouped by theme. See the vignette for more information and some examples (you can open it by running this command: \code{vignette('Raster')})
 }
@@ -243,8 +242,8 @@ Basic parameters of existing Raster* objects can be obtained, and in most cases 
     \code{\link{projection}} \tab The coordinate reference system (map projection) \cr	
     \code{\link{isLonLat}} \tab Test if an object has a longitude/latitude coordinate reference system \cr
     \code{\link{filename}} \tab Filename to which a RasterLayer or RasterBrick is linked \cr	
-    \code{\link{band}} \tab layer (=band) of a multi-band file that this RasterLayer is linked to \cr	
-    \code{\link{nbands}} \tab How many bands (layers) does the file have? \cr	
+    \code{\link{bandnr}} \tab layer (=band) of a multi-band file that this RasterLayer is linked to \cr	
+    \code{\link{nbands}} \tab How many bands (layers) does the file associated with a RasterLayer object have? \cr	
     \code{\link{compareRaster}} \tab Compare the geometry of Raster* objects \cr		
     \code{\link{NAvalue}} \tab Get or set the \code{NA} value (for reading from a file) \cr
   --------------------------- \tab ------------------------------------------------------------------------------------------ \cr

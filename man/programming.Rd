@@ -63,8 +63,10 @@ getCluster: snow cluster object
 \examples{
 r <- raster(nrow=100, ncol=100)
 canProcessInMemory(r, 4)
-r <- raster(nrow=100000, ncol=100000)
-canProcessInMemory(r, 2)
+r <- raster(nrow=50000, ncol=50000)
+canProcessInMemory(r, 2, verbose=TRUE)
+rasterOptions(maxmem=Inf, memfrac=.8)
+rasterOptions(default=TRUE)
 }
 
 \keyword{ spatial }
