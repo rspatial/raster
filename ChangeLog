@@ -9,7 +9,7 @@ Fix lines falling between the cracks in extract (calling rasterzeLines): https:/
 Better handling of NA values in 1 byte raster files
 
 --- current version
-Improved estimation of available RAM with contributions by Lorenzo Busetto. The current situation is that RAM available is computed on windows and linux; but not yet on mac. Not more that 60% of available RAM is used (if the estimated RAM needed is not too low). Not more than raster:::.maxmemory() is used; but it should now be safe to set this to Inf (windows and linux only). If canProcessInMemory returns FALSE, chunksize is set 25% of available RAM, or raster:::.chunksize(), whichever is lower. (set options via rasterOptions())
+Improved estimation of available RAM with contributions by Lorenzo Busetto. RAM available is now computed on windows, linux and mac. No more that 60% of available RAM is used (if the estimated RAM needed is not too low). Not more than raster:::.maxmemory() is used; but it should now be safe to set this to Inf. If canProcessInMemory() returns FALSE, chunksize is set 25% of available RAM, or raster:::.chunksize(), whichever is lower. (set options via rasterOptions())
 
 testthat unit tests introduced by Mike Sumner and Jakub Nowosad
 as.character() for Raster objects to create the R code to re-create the Raster skeleton in examples.

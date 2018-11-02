@@ -23,7 +23,7 @@ double availableRAM(double ram) {
 		struct sysinfo memInfo;
 		sysinfo (&memInfo);
 		ram = memInfo.freeram;
-	#else
+	#elif __APPLE__
 		vm_size_t page_size;
 		mach_port_t mach_port;
 		mach_msg_type_number_t count;
@@ -40,9 +40,8 @@ double availableRAM(double ram) {
 //									 (int64_t)vm_stats.inactive_count +
 //									 (int64_t)vm_stats.wire_count) *  (int64_t)page_size;
 			ram = free_memory;
-		}
-		// mac
 		//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+		}
 	#endif
 	
 	return ram;

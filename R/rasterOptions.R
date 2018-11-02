@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 
-rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress, timer, chunksize, maxmemory, todisk, setfileext, tolerance, standardnames, depracatedwarnings, addheader, default=FALSE) {
+rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress, timer, chunksize, maxmemory, memfrac, todisk, setfileext, tolerance, standardnames, depracatedwarnings, addheader, default=FALSE) {
 		
 	setFiletype <- function(format) {
 		if (.isSupportedFormat(format)) {	
@@ -109,13 +109,13 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
 		options(rasterMaxMemory = maxmemory )
 	}
 	
-#	setEstimateMem <- function(estimatemem) {
-#		if (is.logical(estimatemem)) { 
-#			options(rasterEstimateMem = estimatemem )
-#		} else {
-#			warning(paste('estimateMem argument must be a logical value'))	
-#		}
-#	}
+	setMemfrac <- function(memfrac) {
+		if (memfrac >= 0.1 & memfrac <= 0.9) {
+			options(rasterMemfrac = memfrac )
+		} else {
+			warning(paste('memfrac argument must be a value between 0.1 and 0.9'))	
+		}
+	}
 	
 	
 	setTolerance <- function(x) {
@@ -169,7 +169,7 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
 		options(rasterChunkSize = 10^8)
 		options(rasterChunk = 10^8)
 		options(rasterMaxMemory = 10^9)
-#		options(rasterEstimateMem = TRUE)
+		options(rasterMemfrac = 0.6)
 		options(rasterTolerance = 0.1)
 		options(rasterStandardNames = TRUE)
 		options(rasterDepracatedWarnings = TRUE)
@@ -190,7 +190,7 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
 	if (!missing(todisk)) { setToDisk(todisk); cnt <- cnt+1 }
 	if (!missing(setfileext)) { setFileExt(setfileext); cnt <- cnt+1 }
 	if (!missing(maxmemory)) { setMaxMemorySize(maxmemory); cnt <- cnt+1 }
-#	if (!missing(estimatemem)) { setEstimateMem(estimatemem); cnt <- cnt+1 }
+	if (!missing(memfrac)) { setMemfrac(memfrac); cnt <- cnt+1 }
 	if (!missing(chunksize)) { setChunksize(chunksize); cnt <- cnt+1 }
 	if (!missing(tolerance)) { setTolerance(tolerance); cnt <- cnt+1 }
 	if (!missing(standardnames)) { setStandardNames(standardnames); cnt <- cnt+1 }
@@ -208,13 +208,13 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
 		timer=.timer(),
 		chunksize=.chunksize(),
 		maxmemory=.maxmemory(),
+		memfrac = .memfrac(),
 		todisk=.toDisk(),
 		setfileext=.setfileext(),
 		tolerance=.tolerance(),
 		standardnames=.standardnames(),
 		depwarning=.depracatedwarnings(),
 		addheader=.addHeader()
-#		estimatemem = .estimateMem()
 	)
 	
 	save <- FALSE
@@ -232,7 +232,7 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
 		oplst <- c(oplst, paste("rasterTimer=", lst$timer, sep=''))
 		oplst <- c(oplst, paste("rasterChunkSize=", lst$chunksize, sep=''))
 		oplst <- c(oplst, paste("rasterMaxMemory=", lst$maxmemory, sep=''))
-#		oplst <- c(oplst, paste("rasterEstimateMem=", lst$estimatemem, sep=''))
+		oplst <- c(oplst, paste("rasterMemfrac=", lst$memfrac, sep=''))
 		oplst <- c(oplst, paste("rasterSetFileExt=", lst$setfileext, sep=''))
 		oplst <- c(oplst, paste("rasterTolerance=", lst$tolerance, sep=''))
 		oplst <- c(oplst, paste("rasterStandardNames=", lst$standardnames, sep=''))
@@ -253,7 +253,7 @@ rasterOptions <- function(format, overwrite, datatype, tmpdir, tmptime, progress
 		cat('timer         :', lst$timer, '\n')
 		cat('chunksize     :', lst$chunksize, '\n')
 		cat('maxmemory     :', lst$maxmemory, '\n')
-#		cat('estimatemem   :', lst$estimatemem, '\n')
+		cat('memfrac       :', lst$memfrac, '\n')
 		cat('tmpdir        :', lst$tmpdir, '\n')
 		cat('tmptime       :', lst$tmptime, '\n')
 		cat('setfileext    :', lst$setfileext, '\n')
@@ -365,15 +365,15 @@ tmpDir <- function(create=TRUE) {
 }	
 
 
-#.estimateMem <- function() {
-#	default <- FALSE
-#	d <- getOption('rasterEstimateMem')
-#	if (is.null(d)) {
-#		return( default )
-#	} else {
-#		return(isTRUE(d))
-#	}
-#}
+.memfrac <- function() {
+	default <- 0.6
+	d <- getOption('rasterMemfrac')
+	if (is.null(d)) {
+		return( default )
+	} else {
+		return(d)
+	}
+}
 
 
 .maxmemory <- function() {
