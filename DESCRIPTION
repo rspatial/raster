@@ -1,7 +1,7 @@
 Package: raster
 Type: Package
 Title: Geographic Data Analysis and Modeling
-Version: 2.8-4
+Version: 2.8-5
 Date: 2018-11-02
 Depends: methods, sp (>= 1.2-0), R (>= 3.0.0)
 Suggests: rgdal (>= 0.9-1), rgeos (>= 0.3-8), ncdf4, igraph, tcltk, parallel, rasterVis, MASS, sf, testthat
@@ -9,7 +9,9 @@ LinkingTo: Rcpp
 Imports: Rcpp
 SystemRequirements: C++11
 Authors@R: c(
-	person("Robert J.", "Hijmans", role = c("cre", "aut"),  email = "r.hijmans@gmail.com"),
+	person("Robert J.", "Hijmans", role = c("cre", "aut"),  
+			email = "r.hijmans@gmail.com", 
+			comment = c(ORCID = "0000-0001-5872-2872")),
 	person("Jacob", "van Etten", role = "ctb"),
 	person("Joe", "Cheng", role = "ctb"),
 	person("Michael", "Sumner", role = "ctb"),

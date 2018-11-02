@@ -33,17 +33,15 @@ Matrix with 6, (5 SpatialLines), or 3 (SpatialPoints) columns. object (sequentia
 
 
 \examples{
-if (require(rgdal) & require(rgeos)) {
-	p <- shapefile(system.file("external/lux.shp", package="raster"))
-	x <- geom(p)
-	head(x)
+p <- readRDS(system.file("external/lux.rds", package="raster"))
+x <- geom(p)
+head(x)
 	
 # and back to a SpatialPolygonsDataFrame	
-	x <- data.frame(x)
-	sp <- as(x, "SpatialPolygons")
-	crs(sp) <- crs(p)
-	spdf <- SpatialPolygonsDataFrame(sp, data.frame(p), match.ID=FALSE)
-}
+x <- data.frame(x)
+sp <- as(x, "SpatialPolygons")
+crs(sp) <- crs(p)
+spdf <- SpatialPolygonsDataFrame(sp, data.frame(p), match.ID=FALSE)
 }
 
 \keyword{methods}

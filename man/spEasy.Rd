@@ -35,7 +35,7 @@ a <- spLines(x1, x2, x3)
 b <- spLines(x1, list(x2, x3), attr=data.frame(id=1:2), crs='+proj=longlat +datum=WGS84')
 b
 
-hole <- rbind(c(-150,-20), c(-100,-10), c(-110,20))
+hole <- rbind(c(-150,-20), c(-100,-10), c(-110,20), c(-130,10))
 d <- spPolygons(list(x1,hole), x2, list(x3, x4))
 
 att <- data.frame(ID=1:3, name=c('a', 'b', 'c'))

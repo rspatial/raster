@@ -16,7 +16,7 @@ Improved estimation of available RAM with contributions by Lorenzo Busetto. RAM 
 testthat unit tests introduced by Mike Sumner and Jakub Nowosad
 as.character() for Raster objects to create the R code to re-create the Raster skeleton in examples.
 
-reading point values via GDAL has become slower in 2.7-15, reverted to previous function
+Reading point values via GDAL has become slower in 2.7-15, reverted to previous function. 
 
 Bug fixes:
 fixed the link for GADM countries download. Bug reported by Loic Dutrieux

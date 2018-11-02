@@ -52,16 +52,14 @@ Spatial* object
 
 
 \examples{
-if (require(rgdal) & require(rgeos)) {
-	p <- shapefile(system.file("external/lux.shp", package="raster"))
-	mersch <- p[p$NAME_2=='Mersch', ]
-	diekirch <- p[p$NAME_2=='Diekirch', ]
-	remich <- p[p$NAME_2=='Remich', ]
-	remich$NAME_1 <- NULL
-	x <- bind(mersch, diekirch, remich)
-	plot(x)
-	data.frame(x)
-}
+p <- readRDS(system.file("external/lux.rds", package="raster"))
+mersch <- p[p$NAME_2=='Mersch', ]
+diekirch <- p[p$NAME_2=='Diekirch', ]
+remich <- p[p$NAME_2=='Remich', ]
+remich$NAME_1 <- NULL
+x <- bind(mersch, diekirch, remich)
+plot(x)
+data.frame(x)
 }
 
 \keyword{methods}
