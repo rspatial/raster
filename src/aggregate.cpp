@@ -1,6 +1,5 @@
 /* Robert Hijmans, October 2014 */
 
-using namespace std;
 #include <vector>
 #include <limits>
 #include <cmath>

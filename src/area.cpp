@@ -1,6 +1,5 @@
 /* Robert Hijmans, May 2015 */
 #include "geodesic.h"
-using namespace std;
 #include <vector>
 #include <math.h>
 
