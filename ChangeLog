@@ -9,10 +9,14 @@ Fix lines falling between the cracks in extract (calling rasterzeLines): https:/
 Better handling of NA values in 1 byte raster files
 
 --- current version
+
+--- 2-Nov-2018, version: 2.8-4
 Improved estimation of available RAM with contributions by Lorenzo Busetto. RAM available is now computed on windows, linux and mac. No more that 60% of available RAM is used (if the estimated RAM needed is not too low). Not more than raster:::.maxmemory() is used; but it should now be safe to set this to Inf. If canProcessInMemory() returns FALSE, chunksize is set 25% of available RAM, or raster:::.chunksize(), whichever is lower. (set options via rasterOptions())
 
 testthat unit tests introduced by Mike Sumner and Jakub Nowosad
 as.character() for Raster objects to create the R code to re-create the Raster skeleton in examples.
+
+reading point values via GDAL has become slower in 2.7-15, reverted to previous function
 
 Bug fixes:
 fixed the link for GADM countries download. Bug reported by Loic Dutrieux
