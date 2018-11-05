@@ -92,11 +92,12 @@ setMethod("cellFromXY", signature(object="BasicRaster", xy="ANY"),
 	}
 )
 
-setMethod("colFromX", signature(object="Raster", x="numeric"), 
+setMethod("colFromX", signature(object="BasicRaster", x="numeric"), 
 	function ( object, x )	{
-		if (inherits(x, 'Spatial')) { 
-			x <- x@coords[,1] 
-		}
+# from pre-generic
+#		if (inherits(x, 'Spatial')) { 
+#			x <- x@coords[,1] 
+#		}
 		if (rotated(object)) {
 			stop('this function is not supported for rotated rasters')
 		}
@@ -108,11 +109,12 @@ setMethod("colFromX", signature(object="Raster", x="numeric"),
 )
 
 
-setMethod("rowFromY", signature(object="Raster", y="numeric"), 
+setMethod("rowFromY", signature(object="BasicRaster", y="numeric"), 
 	function(object, y)	{
-		if (inherits(y, 'Spatial')) {
-			y <- y@coords[,2] 
-		}
+# from pre-generic
+#		if (inherits(y, 'Spatial')) {
+#			y <- y@coords[,2] 
+#		}
 		if (rotated(object)) {
 			stop('this function is not supported for rotated rasters')
 		}

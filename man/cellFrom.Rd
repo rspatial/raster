@@ -1,11 +1,11 @@
 \name{cellFrom}
 
 \alias{cellFromRowCol}
-\alias{cellFromRowCol,Raster,numeric,numeric-method}
+\alias{cellFromRowCol,BasicRaster,numeric,numeric-method}
 \alias{colFromX}
-\alias{colFromX,Raster,numeric-method}
+\alias{colFromX,BasicRaster,numeric-method}
 \alias{rowFromY}
-\alias{rowFromY,Raster,numeric-method}
+\alias{rowFromY,BasicRaster,numeric-method}
 \alias{cellFromXY}
 \alias{cellFromXY,BasicRaster-method}
 
@@ -27,7 +27,7 @@ The last cell number equals the number of cells of the Raster* object.
 }
 
 \usage{
-cellFromRowCol(object, rownr, colnr)
+cellFromRowCol(object, row, col)
 cellFromRowColCombine(object, rownr, colnr)
 cellFromRow(object, rownr)
 cellFromCol(object, colnr)
@@ -43,6 +43,8 @@ fourCellsFromXY(object, xy, duplicates=TRUE)
   \item{object}{Raster* object (or a SpatialPixels* or SpatialGrid* object)}
   \item{colnr}{column number; or vector of column numbers}
   \item{rownr}{row number; or vector of row numbers}
+  \item{col}{column number; or vector of column numbers}
+  \item{row}{row number; or vector of row numbers}
   \item{x}{x coordinate(s)}
   \item{y}{y coordinate(s)}
   \item{xy}{matrix of x and y coordinates, or a SpatialPoints or SpatialPointsDataFrame object}

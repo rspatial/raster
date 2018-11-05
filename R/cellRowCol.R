@@ -4,13 +4,23 @@
 # Licence GPL v3
 
 
-	
-rowFromCell <- function(object, cell) {
-	object <- raster(object)
-	cell <- round(cell)
-	cell[cell < 1 | cell > ncell(object)] <- NA
-	trunc((cell-1)/ncol(object)) + 1
-}
+setMethod(rowFromCell, signature(object="BasicRaster", cell="numeric"), 	
+	function(object, cell) {
+		object <- raster(object)
+		cell <- round(cell)
+		cell[cell < 1 | cell > ncell(object)] <- NA
+		trunc((cell-1)/ncol(object)) + 1
+	}
+)
+
+#rowFromCell <- function(object, cell) {
+#	object <- raster(object)
+#	cell <- round(cell)
+#	cell[cell < 1 | cell > ncell(object)] <- NA
+#	trunc((cell-1)/ncol(object)) + 1
+#}
+
+
 
 .rowFromCell <- function(object, cell) {
 	trunc((cell-1)/ncol(object)) + 1
@@ -57,14 +67,23 @@ cellFromRowColCombine <- function(object, rownr, colnr) {
 	as.vector(t(cols))
 }
 
+setMethod(colFromCell, signature(object="BasicRaster", cell="numeric"), 	
+	function(object, cell) {
+		object <- raster(object)
+		cell <- round(cell)
+		cell[cell < 1 | cell > ncell(object)] <- NA	
+		rownr <- trunc((cell-1)/object@ncols) + 1
+		as.integer(cell - ((rownr-1) * object@ncols))
+	}
+)
 
-colFromCell <- function(object, cell) {
-	object <- raster(object)
-	cell <- round(cell)
-	cell[cell < 1 | cell > ncell(object)] <- NA	
-	rownr <- trunc((cell-1)/object@ncols) + 1
-	as.integer(cell - ((rownr-1) * object@ncols))
-}
+#colFromCell <- function(object, cell) {
+#	object <- raster(object)
+#	cell <- round(cell)
+#	cell[cell < 1 | cell > ncell(object)] <- NA	
+#	rownr <- trunc((cell-1)/object@ncols) + 1
+#	as.integer(cell - ((rownr-1) * object@ncols))
+#}
 
 .colFromCell <- function(object, cell) {
 	nc <- object@ncols
@@ -72,20 +91,41 @@ colFromCell <- function(object, cell) {
 	cell - ((rownr-1) * nc)
 }
 
-rowColFromCell <- function(object, cell) {
-	object <- raster(object)
-	cell <- round(cell)
-	cell[cell < 1 | cell > ncell(object)] <- NA
-	row <- as.integer(trunc((cell-1)/object@ncols) + 1)
-	col <- as.integer(cell - ((row-1) * object@ncols))
-	return(cbind(row, col))
-}
 
-cellFromRowCol <- function(object, rownr, colnr) {
-	rows <- object@nrows
-	cols <- object@ncols
-	.doCellFromRowCol(rows, cols, rownr, colnr)
-}
+setMethod(rowColFromCell, signature(object="BasicRaster", cell="numeric"), 
+	function(object, cell) {
+		object <- raster(object)
+		cell <- round(cell)
+		cell[cell < 1 | cell > ncell(object)] <- NA
+		row <- as.integer(trunc((cell-1)/object@ncols) + 1)
+		col <- as.integer(cell - ((row-1) * object@ncols))
+		return(cbind(row, col))
+	}	
+)
+
+#rowColFromCell <- function(object, cell) {
+#	object <- raster(object)
+#	cell <- round(cell)
+#	cell[cell < 1 | cell > ncell(object)] <- NA
+#	row <- as.integer(trunc((cell-1)/object@ncols) + 1)
+#	col <- as.integer(cell - ((row-1) * object@ncols))
+#	return(cbind(row, col))
+#}
+
+
+setMethod(cellFromRowCol, signature(object="BasicRaster", row="numeric", col="numeric"), 
+	function(object, row, col) {
+		rows <- object@nrows
+		cols <- object@ncols
+		.doCellFromRowCol(rows, cols, row, col)
+	}
+)
+
+#cellFromRowCol <- function(object, rownr, colnr) {
+#	rows <- object@nrows
+#	cols <- object@ncols
+#	.doCellFromRowCol(rows, cols, rownr, colnr)
+#}
 
 
 

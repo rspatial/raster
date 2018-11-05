@@ -13,11 +13,24 @@ setMethod("crs", signature('ANY'),
 )
 
 
-'crs<-' <- function(x, value) {
-	projection(x) <- value
-	x
-}
+#'crs<-' <- function(x, value) {
+#	projection(x) <- value
+#	x
+#}
 
+setMethod("crs<-", signature('BasicRaster', 'ANY'), 
+	function(x, ..., value) {
+		projection(x) <- value
+		x
+	}
+)
+
+setMethod("crs<-", signature('Spatial', 'ANY'), 
+	function(x, ..., value) {
+		projection(x) <- value
+		x
+	}
+)
 
 setMethod('is.na', signature(x='CRS'), 
 	function(x) {

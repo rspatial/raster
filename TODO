@@ -1,0 +1,9 @@
+--- to do
+focal for multi-layer objects
+step-size option for focal
+add equivalent to "subsWithNA" to reclassify
+add AMSR-E ice products and other raw binary products
+add orientation fixes for AVISO currents and similar NetCDFs lacking metadata on the internal CRS
+add VRT output to saveStack
+Fix lines falling between the cracks in extract (calling rasterzeLines): https://stat.ethz.ch/pipermail/r-sig-geo/2014-May/020973.html
+Better handling of NA values in 1 byte raster files

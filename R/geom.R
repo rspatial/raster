@@ -1,8 +1,4 @@
 
-if (!isGeneric("geom")) {
-	setGeneric("geom", function(x, ...)
-		standardGeneric("geom"))
-}	
 
 setMethod('geom', signature(x='SpatialPolygons'), 
 	function(x, sepNA=FALSE, ...) {

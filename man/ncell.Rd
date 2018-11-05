@@ -10,6 +10,8 @@
 \alias{length,BasicRaster-method}
 \alias{nrow<-}
 \alias{ncol<-}
+\alias{nrow<-,BasicRaster,numeric-method}
+\alias{ncol<-,BasicRaster,numeric-method}
 
 
 \title{Number or rows, columns, and cells of a Raster* object}
@@ -22,14 +24,15 @@ Get the number of rows, columns, or cells of a Raster* object.
 ncol(x)
 nrow(x)
 ncell(x)
-ncol(x) <- value
-nrow(x) <- value
+ncol(x, ...) <- value
+nrow(x, ...) <- value
 }
 
 
 \arguments{
 \item{x}{a Raster object}
 \item{value}{row or column number (integer > 0)}  
+\item{...}{additional arguments. None implemented}  
 }
 
 \value{

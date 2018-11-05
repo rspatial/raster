@@ -3,10 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-if (!isGeneric("as.data.frame")) {
-	setGeneric("as.data.frame", function(x, row.names = NULL, optional = FALSE, ...)
-		standardGeneric("as.data.frame"))
-}	
 
 
 .insertColsInDF <- function(x, y, col, combinenames=TRUE) {

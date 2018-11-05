@@ -4,16 +4,29 @@
 # Licence GPL v3
 
 
+setMethod("ncol<-", signature('BasicRaster', 'numeric'), 
+	function(x, ..., value) {
+		dim(x) <- c(nrow(x), value)
+		return(x)
+	}
+)
 
-'ncol<-' <- function(x, value) {
-	dim(x) <- c(nrow(x), value)
-	return(x)
-}	
+setMethod("nrow<-", signature('BasicRaster', 'numeric'), 
+	function(x, ..., value) {
+		dim(x) <- c(value, ncol(x))
+		return(x)
+	}
+)
 
-'nrow<-' <- function(x, value) {
-	dim(x) <- c(value, ncol(x))
-	return(x)
-}	
+#'ncol<-' <- function(x, value) {
+#	dim(x) <- c(nrow(x), value)
+#	return(x)
+#}	
+
+#'nrow<-' <- function(x, value) {
+#	dim(x) <- c(value, ncol(x))
+#	return(x)
+#}	
 
 
 'xmin<-' <- function(x, value) {
