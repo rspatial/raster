@@ -9,19 +9,21 @@
 \title{Unique values}
 
 \description{
-This function returns the unique values in a RasterLayer, or the unique combinations of values in a multi-layer raster object.
+This function returns the unique values of the layers in a Raster* object.
 }
 
 \usage{
-\S4method{unique}{RasterLayer,missing}(x, incomparables=FALSE, ...) 
+\S4method{unique}{RasterLayer,missing}(x, incomparables=FALSE, na.rm=TRUE, progress="", ...) 
 
-\S4method{unique}{RasterStackBrick,missing}(x, incomparables=FALSE, ...) 
+\S4method{unique}{RasterStackBrick,missing}(x, incomparables=FALSE, na.rm=TRUE, progress="", ...) 
 }
 
 \arguments{
   \item{x}{Raster object}
-  \item{incomparables}{ignored. Must be missing}
-  \item{...}{additional arguments. One implemented: \code{progress}, as in \code{\link{writeRaster}}}  
+  \item{incomparables}{must be missing. The default value \code{FALSE} is used. See \code{\link[base]{unique}}}
+  \item{na.rm}{logical. If \code{TRUE}, \code{NA} is removed from the results}
+  \item{progress}{character. Use "text" or "window" for a progress indicator}
+  \item{...}{additional arguments. as in \code{\link[base]{unique}}}  
 }
 
 \seealso{ \code{\link[base]{unique}} }
