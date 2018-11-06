@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("extract")) {
-	setGeneric("extract", function(x, y, ...)
-		standardGeneric("extract"))
-}	
-
-
 
 setMethod('extract', signature(x='Raster', y='vector'), 
 function(x, y, ...){ 

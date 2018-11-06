@@ -1,5 +1,6 @@
 
 --- current version
+faster rasterization of polygons
 
 
 --- 2-Nov-2018, version: 2.8-4
@@ -19,7 +20,6 @@ Previous version had a maxmemory value that was too high (reported by Lorenzo Bu
 
 --- 16-Oct-2018, version: 2.7-15
 faster extraction for points via GDAL (reverted to previous code in version 2.8-4)
-faster rasterization of polygons
 
 Bug fixes:
 buffer did not work with values in memory. Bug reported and solution proposed by Carlos Alberto Arnillas
