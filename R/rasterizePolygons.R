@@ -170,7 +170,7 @@
 				}
 				return(r)
 			} else {
-				r <- .fasterize(p, rstr, pvals[,1], background, filename, ...) 
+				return( .fasterize(p, rstr, pvals[,1], background, filename, ...) )
 			}
 		}
 		
