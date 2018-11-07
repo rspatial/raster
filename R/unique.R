@@ -11,9 +11,7 @@ if (!isGeneric("unique")) {
 
 
 setMethod('unique', signature(x='RasterLayer', incomparables='missing'), 
-function(x, incomparables=FALSE, na.rm=TRUE, progress="", ...) {
-	
-	nalast <- ifelse(na.rm, NA, TRUE)
+function(x, incomparables=FALSE, na.last=NA, progress="", ...) {
 	
 	if (! inMemory(x) ) {
 		if ( fromDisk(x) ) {
@@ -27,7 +25,7 @@ function(x, incomparables=FALSE, na.rm=TRUE, progress="", ...) {
 
 	if ( inMemory(x) ) {
 		x <- unique(x@data@values, incomparables=incomparables, progress="", ...)
-		return(sort(x, na.last=nalast))
+		return(sort(x, na.last=na.last))
 	} else {
 		u1 <- vector()
 		u2 <- vector()
@@ -43,16 +41,15 @@ function(x, incomparables=FALSE, na.rm=TRUE, progress="", ...) {
 			pbStep(pb, i)			
 		}
 		pbClose(pb)
-		return(sort(unique(c(u1, u2), incomparables=incomparables, ...), na.last=nalast))	
+		return(sort(unique(c(u1, u2), incomparables=incomparables, ...), na.last=na.last))	
 	}
 }
 )
 
 
 setMethod('unique', signature(x='RasterStackBrick', incomparables='missing'), 
-function(x, incomparables=FALSE, na.rm=TRUE, progress="", ...) {
+function(x, incomparables=FALSE, na.last=NA, progress="", ...) {
 	
-	nalast <- ifelse(na.rm, NA, TRUE)
 	
 	if (! inMemory(x) ) {
 		if (canProcessInMemory(x, 2)) {
@@ -65,12 +62,12 @@ function(x, incomparables=FALSE, na.rm=TRUE, progress="", ...) {
 		x <- unique(getValues(x), incomparables=incomparables, ...)
 		if (is.list(x)) {
 			for (i in 1:length(x)) {
-				x[[i]] <- sort(x[[i]], na.last=nalast)
+				x[[i]] <- sort(x[[i]], na.last=na.last)
 			}
 		} else {
 			xx <- vector(length=ncol(x), mode='list')
 			for (i in 1:ncol(x)) {
-				xx[[i]] <- sort(x[,i], na.last=nalast)
+				xx[[i]] <- sort(x[,i], na.last=na.last)
 			}
 			x <- xx
 		}
