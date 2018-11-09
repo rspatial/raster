@@ -8,7 +8,7 @@
 .doTime <- function(x, nc, zvar, dim3) {
 	dodays <- TRUE
 	dohours <- FALSE
-	
+
 	un <- nc$var[[zvar]]$dim[[dim3]]$units	
 	if (substr(un, 1, 10) == "days since") { 
 		startDate = as.Date(substr(un, 12, 22))
@@ -123,7 +123,7 @@
 
 	stopifnot(requireNamespace("ncdf4"))
 
-	nc <- ncdf4::nc_open(filename)
+	nc <- ncdf4::nc_open(filename, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
 	conv <- ncdf4::ncatt_get(nc, 0, "Conventions")
 		
@@ -166,7 +166,13 @@
 	ncols <- nc$var[[zvar]]$dim[[dims[1]]]$len
 	nrows <- nc$var[[zvar]]$dim[[dims[2]]]$len
 
-	xx <- nc$var[[zvar]]$dim[[dims[1]]]$vals
+	## to allow suppress_dimvals
+	## xx <- nc$var[[zvar]]$dim[[dims[1]]]$vals
+	xx <- try(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dims[1]]]$name), silent = TRUE)
+	if (inherits(xx, "try-error")) {
+	  xx <- seq_len(nc$var[[zvar]]$dim[[dims[1]]]$len)
+	}
+	
 	rs <- xx[-length(xx)] - xx[-1]
 	if (! isTRUE ( all.equal( min(rs), max(rs), tolerance=0.025, scale= abs(min(rs))) ) ) {
 		if (is.na(stopIfNotEqualSpaced)) {
@@ -181,8 +187,13 @@
 	resx <- (xrange[2] - xrange[1]) / (ncols-1)
 	rm(xx)
 
+	## to allow suppress_dimvals
+  ##	yy <- nc$var[[zvar]]$dim[[dims[2]]]$vals
+	yy <- try(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dims[2]]]$name), silent = TRUE)
+	if (inherits(yy, "try-error")) {
+	  yy <- seq_len(nc$var[[zvar]]$dim[[dims[2]]]$len)
+	}
 	
-	yy <- nc$var[[zvar]]$dim[[dims[2]]]$vals
 	rs <- yy[-length(yy)] - yy[-1]
 	if (! isTRUE ( all.equal( min(rs), max(rs), tolerance=0.025, scale= abs(min(rs))) ) ) {
 		if (is.na(stopIfNotEqualSpaced)) {
@@ -295,7 +306,13 @@
 	} else {
 		nbands <- nc$var[[zvar]]$dim[[dim3]]$len
 		r@file@nbands <- nbands
-		r@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals )
+		## to allow suppress_dimvals
+  	#	r@z <- list( nc$var[[zvar]]$dim[[dim3]]$vals )
+		dim3_vals <- try(ncdf4::ncvar_get(nc, nc$var[[zvar]]$dim[[dim3]]$name), silent = TRUE)
+		if (inherits(dim3_vals, "try-error")) {
+		  dim3_vals <- seq_len(nc$var[[zvar]]$dim[[dim3]]$len)
+		}
+		r@z <- list(dim3_vals)
 		if ( nc$var[[zvar]]$dim[[dim3]]$name == 'time' ) {
 			try( r <- .doTime(r, nc, zvar, dim3) )
 		} else {

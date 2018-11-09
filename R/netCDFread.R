@@ -13,7 +13,7 @@
 	if (is.open) {
 		nc <- x@file@con
 	} else {
-		nc <- ncdf4::nc_open(x@file@name)
+		nc <- ncdf4::nc_open(x@file@name, suppress_dimvals = TRUE)
 		on.exit( ncdf4::nc_close(nc) )		
 	}
 	
@@ -112,7 +112,7 @@
 	if (is.open) {
 		nc <- x@file@con
 	} else {
-		nc <- ncdf4::nc_open(x@file@name)
+		nc <- ncdf4::nc_open(x@file@name, suppress_dimvals = TRUE)
 		on.exit( ncdf4::nc_close(nc) )		
 	}
 	zvar <- x@data@zvar

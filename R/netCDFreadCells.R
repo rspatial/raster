@@ -39,7 +39,7 @@
 	zvar = x@data@zvar
 	time = x@data@band
 	
-	nc <- ncdf4::nc_open(x@file@name)
+	nc <- ncdf4::nc_open(x@file@name, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
 	getfun <- ncdf4::ncvar_get
 
@@ -124,7 +124,7 @@
 	}
 		
 
-	nc <- ncdf4::nc_open(x@file@name)
+	nc <- ncdf4::nc_open(x@file@name, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
 	getfun <- ncdf4::ncvar_get
 	
