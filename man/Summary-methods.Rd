@@ -4,6 +4,7 @@
 
 \alias{Summary-methods}
 \alias{mean,Raster-method}
+\alias{Summary,Raster-method}
 
 \title{ Summary methods }
 

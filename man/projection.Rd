@@ -30,7 +30,7 @@ projection(x) <- value
 
 \arguments{
   \item{x}{Raster* or Spatial object }
-  \item{asText}{logical. If \code{TRUE}, the projection is returned as text. Otherwise a \code{\link[sp]{CRS}} object is returned}
+  \item{asText}{logical. If \code{TRUE}, the projection is returned as text. Otherwise a \code{\link[sp]{CRS-class}} object is returned}
   \item{...}{additional arguments. None implemented}
   \item{value}{\code{CRS} object or a character string describing a projection and datum in the PROJ.4 format }
 }
@@ -45,7 +45,7 @@ Raster*, Spatial*, CRS, or character object
 For compatibility with \code{sp} you can use \code{proj4string} instead of \code{crs}.
 }
 
-\seealso{ \code{\link[raster]{projectRaster}, \link[rgdal]{CRS-class}, \link[rgdal]{spTransform-methods}, \link[rgdal]{projInfo}}}
+\seealso{ \code{\link[raster]{projectRaster}, \link[rgdal]{CRS-class}, \link[sp]{spTransform}, \link[rgdal]{projInfo}}}
 
 \details{ projections are done by with the PROJ.4 library exposed by rgdal }
 

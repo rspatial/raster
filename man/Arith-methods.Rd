@@ -3,6 +3,21 @@
 \docType{methods}
 
 \alias{Arith-methods}
+\alias{Arith,Extent,numeric-method}
+\alias{Arith,Raster,Raster-method}
+\alias{Arith,Raster,missing-method}
+\alias{Arith,RasterLayer,logical-method}
+\alias{Arith,RasterLayer,numeric-method}
+\alias{Arith,RasterLayerSparse,numeric-method}
+\alias{Arith,RasterStackBrick,logical-method}
+\alias{Arith,RasterStackBrick,numeric-method}
+\alias{Arith,logical,RasterLayer-method}
+\alias{Arith,logical,RasterStackBrick-method}
+\alias{Arith,numeric,Extent-method}
+\alias{Arith,numeric,RasterLayer-method}
+\alias{Arith,numeric,RasterLayerSparse-method}
+\alias{Arith,numeric,RasterStackBrick-method}
+
 \alias{+,SpatialPolygons,SpatialPolygons-method}
 \alias{+,SpatialLines,SpatialLines-method}
 \alias{+,SpatialPoints,SpatialPoints-method}

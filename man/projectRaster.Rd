@@ -53,7 +53,7 @@ Also see \code{projInfo('proj')}, \code{projInfo('ellps')}, and \code{projInfo('
 }
 
 \note{
-Vector (points, lines, polygons) can be transformed with \code{\link[rgdal]{spTransform}}.
+Vector (points, lines, polygons) can be transformed with \code{\link[sp]{spTransform}}.
 
 \code{projectExtent} does not work very well when transforming projected circumpolar data to (e.g.) longitude/latitude. 
 With such data you may need to adjust the returned object. E.g. do \code{ymax(object) <- 90}
@@ -67,7 +67,7 @@ RasterLayer or RasterBrick object.
 
 
 \seealso{
-\code{\link{resample}}, \code{\link[rgdal]{CRS-class}}, \code{\link[rgdal]{projInfo}}, \code{\link[rgdal]{spTransform}}
+\code{\link{resample}}, \code{\link[rgdal]{CRS-class}}, \code{\link[rgdal]{projInfo}}, \code{\link[sp]{spTransform}}
 }
 
 \examples{

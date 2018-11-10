@@ -3,16 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-	
-if (!isGeneric("head")) {
-	setGeneric("head", function(x, ...)
-		standardGeneric("head"))
-}	
-
-if (!isGeneric("tail")) {
-	setGeneric("tail", function(x, ...)
-		standardGeneric("tail"))
-}	
 
 setMethod('head', signature(x='RasterLayer'), 
 	function(x, cols=20, rows=10, ...) {

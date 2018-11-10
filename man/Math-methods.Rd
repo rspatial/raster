@@ -3,6 +3,12 @@
 \docType{methods}
 
 \alias{Math-methods}
+\alias{Math2,Extent-method}
+\alias{Math2,Raster-method}
+\alias{Math,Raster-method}
+\alias{Math,RasterLayerSparse-method}
+
+
 \alias{log,Raster-method}
 
 \title{Mathematical functions}

@@ -3,6 +3,14 @@
 \docType{methods}
 
 \alias{Compare-methods}
+
+\alias{Compare,Extent,Extent-method}
+\alias{Compare,Raster,Raster-method}
+\alias{Compare,Raster,logical-method}
+\alias{Compare,Raster,numeric-method}
+\alias{Compare,logical,Raster-method}
+\alias{Compare,numeric,Raster-method}
+
 \alias{==,BasicRaster,BasicRaster-method}
 \alias{!=,BasicRaster,BasicRaster-method}
 
