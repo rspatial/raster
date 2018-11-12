@@ -15,7 +15,7 @@ You should supply a function \code{fun} to set the way that the RasterLayers are
 
 Note that the function must work for vectors (not only for single numbers). That is, it must return the same number of elements as its input vectors. Alternatively, you can also supply a function such as \code{sum}, that takes \code{n} arguments (as \code{'...'}), and perhaps also has a \code{na.rm} argument, like in \code{sum(..., na.rm)}.
 
-If a single mutli-layer object is provided, its layers are treated as individual RasterLayer objects if the argument "unstack=TRUE" is used. If multiple objects are provided, they should have the same number of layers, or it should be possible to recycle them (e.g., 1, 3, and 9 layers, which would return a RasterBrick with 9 layers).
+If a single mutli-layer object is provided, its layers are treated as individual RasterLayer objects if the argument \code{unstack=TRUE} is used. If multiple objects are provided, they should have the same number of layers, or it should be possible to recycle them (e.g., 1, 3, and 9 layers, which would return a RasterBrick with 9 layers).
 }
 
 \usage{
@@ -31,13 +31,13 @@ If a single mutli-layer object is provided, its layers are treated as individual
   \item{fun}{Function to be applied. When using RasterLayer objects, the number of arguments of the function should match the number of Raster objects, or it should take any number of arguments. When using multi-layer objects the function should match the number of layers of the RasterStack/Brick object (unless unstack=FALSE) }
   \item{filename}{Character. Output filename (optional) }
   \item{recycle}{Logical. Should layers from Raster objects with fewer layers be recycled?}  
-  \item{unstack}{Logical. Should layers be ustacked before computation (i.e. does the \code{fun} refer to individual layers in a multilayer object)?}  
+  \item{unstack}{Logical. Should layers be unstacked before computation (i.e. does the \code{fun} refer to individual layers in a multilayer object)?}  
   \item{forcefun}{Boolean. If \code{TRUE}, overlay will not attempt to internally use apply (it is rarely necessary to use this argument)}
 }
 
 
 \details{
-Instead of the overlay function you can also use aritmetic functions such as \code{*, /, +, -} with Raster objects (see examples). In that case you cannot specifiy an output filename. Moreover, the overlay function should be more efficient when using large data files that cannot be loaded into memory, as the use of the complex arithmetic functions might lead to the creation of many temporary files.
+Instead of the overlay function you can also use arithmetic functions such as \code{*, /, +, -} with Raster objects (see examples). In that case you cannot specify an output filename. Moreover, the overlay function should be more efficient when using large data files that cannot be loaded into memory, as the use of the complex arithmetic functions might lead to the creation of many temporary files.
 
 While you can supply functions such as \code{sum} or \code{mean}, it would be more direct to use the Raster* objects as arguments to those functions (e.g. \code{sum(r1,r2,r3)})  
 

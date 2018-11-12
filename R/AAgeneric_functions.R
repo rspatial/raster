@@ -1,5 +1,5 @@
 if (!isGeneric("as.data.frame")) { setGeneric("as.data.frame", function(x, row.names = NULL, optional = FALSE, ...) standardGeneric("as.data.frame")) }	
-
+if (!isGeneric("calc")) {setGeneric("calc", function(x, fun, ...) standardGeneric("calc")) }	
 if (!isGeneric("crop")) { setGeneric("crop", function(x, y, ...) standardGeneric("crop"))}	
 if (!isGeneric("crs")) { setGeneric("crs", function(x, ...) standardGeneric("crs")) }	
 if (!isGeneric("crs<-")) { setGeneric("crs<-", function(x, ..., value) standardGeneric("crs<-")) }	
@@ -18,7 +18,10 @@ if (!isGeneric("ncol<-")) { setGeneric("ncol<-", function(x, ..., value) standar
 if (!isGeneric("nrow")) { setGeneric("nrow", function(x) standardGeneric("nrow")) }	
 if (!isGeneric("nrow<-")) { setGeneric("nrow<-", function(x, ..., value) standardGeneric("nrow<-")) }	
 
+if (!isGeneric('overlay')) { setGeneric('overlay', function(x, y, ...) standardGeneric('overlay'))}
+
 if (!isGeneric("rasterize")) {setGeneric("rasterize", function(x, y, ...) standardGeneric("rasterize"))}	
+if (!isGeneric("reclassify")) { setGeneric("reclassify", function(x, rcl, ...) standardGeneric("reclassify"))}	
 if (!isGeneric("res")) { setGeneric("res", function(x) standardGeneric("res")) }
 if (!isGeneric("sampleRegular")) { setGeneric("sampleRegular", function(x, size, ...) standardGeneric("sampleRegular"))}
 
@@ -28,6 +31,8 @@ if (!isGeneric("yres")) { setGeneric("yres", function(x) standardGeneric("yres")
 if (!isGeneric("values")) { setGeneric("values", function(x, ...) standardGeneric("values")) }	
 if (!isGeneric("values<-")) { setGeneric("values<-", function(x, value) standardGeneric("values<-"))}	
 if (!isGeneric('writeRaster')) {setGeneric('writeRaster', function(x, filename, ...) standardGeneric('writeRaster'))}
+
+if (!isGeneric('writeValues')) { setGeneric('writeValues', function(x, v, start) standardGeneric('writeValues')) }
 
 
 if (!isGeneric("yFromRow")) { setGeneric("yFromRow", function(object, row) standardGeneric("yFromRow")) }

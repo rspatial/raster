@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("reclassify")) {
-	setGeneric("reclassify", function(x, rcl, ...)
-		standardGeneric("reclassify"))
-}	
-
-
 setMethod('reclassify', signature(x='Raster', rcl='ANY'), 
 function(x, rcl, filename='', include.lowest=FALSE, right=TRUE, ...) {
 	

@@ -44,7 +44,7 @@ returnCluster()
   \item{nsteps}{integer. Number of steps the progress bar will make from start to end (e.g. nrow(raster)) }
   \item{progress}{character. 'text', 'window', or ''}
   \item{style}{style for text progress bar. See \code{\link[utils]{txtProgressBar}} }
-  \item{label}{character. Label for the window type prograss bar}
+  \item{label}{character. Label for the window type progress bar}
   \item{...}{additional arguments (None implemented, except for 'silent=TRUE' for readStart for files read with gdal, and other arguments passed to gdal.open)}
   \item{pb}{ progress bar object created with pbCreate }
   \item{step}{which step is this ( 1 <= step <= nsteps ). If step is \code{NULL}, a single step is taken }

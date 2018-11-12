@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("calc")) {
-	setGeneric("calc", function(x, fun, ...)
-		standardGeneric("calc"))
-}	
 
 
 .makeTextFun <- function(fun) {

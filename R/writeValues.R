@@ -4,11 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric('writeValues')) {
-	setGeneric('writeValues', function(x, v, start)
-		standardGeneric('writeValues')) 
-}
-
 
 setMethod('writeValues', signature(x='RasterLayer', v='vector'), 
 	function(x, v, start) {

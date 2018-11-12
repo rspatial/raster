@@ -104,7 +104,7 @@ rs2 <- calc(s, fun=function(x){x * 10})
 # recycling by layer
 rs3 <- calc(s, fun=function(x){x * c(1, 5, 10)})
 
-# use overlay when you want to refer to indiviudal layer in the function
+# use overlay when you want to refer to individual layer in the function
 # but it can be done with calc: 
 rs4 <- calc(s, fun=function(x){x[1]+x[2]*x[3]})
 

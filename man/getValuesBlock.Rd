@@ -25,9 +25,9 @@ getValuesBlock returns values for a block (rectangular area) of values of a Rast
 \arguments{
  \item{x}{Raster* object}
  \item{row}{positive integer. Row number to start from, should be between 1 and nrow(x)}
- \item{nrows}{postive integer. How many rows? Default is 1}
- \item{col}{postive integer. Column number to start from, should be between 1 and ncol(x)}
- \item{ncols}{postive integer. How many columns? Default is the number of colums left after the start column}
+ \item{nrows}{positive integer. How many rows? Default is 1}
+ \item{col}{positive integer. Column number to start from, should be between 1 and ncol(x)}
+ \item{ncols}{positive integer. How many columns? Default is the number of columns left after the start column}
  \item{format}{character. When \code{x} is a \code{RasterLayer}, if \code{format='matrix'} or \code{format='m'}, a matrix is returned instead of a vector. If \code{format='matrix'}, it is a nrow x ncol matrix. If \code{format='m'} it is a 1 column matrix (the benefit is that the type of output is now the same for all Raster objects)}
  \item{lyrs}{integer (vector). Which layers? Default is all layers (\code{1:nlayers(x)})}
  \item{...}{additional arguments (none implemented)}

@@ -35,7 +35,7 @@ values(x, ...)
  \item{x}{Raster* object}
  \item{row}{Numeric. Row number, should be between 1 and nrow(x), or missing in which case all values are returned}
  \item{nrows}{Numeric. Number of rows. Should be an integer > 0, or missing}
- \item{...}{Additional arguments. When x is a \code{RasterLayer}: \code{format} to specifiy the output format. Either "matrix" or, the default "", in which case a vector is returned}
+ \item{...}{Additional arguments. When x is a \code{RasterLayer}: \code{format} to specify the output format. Either "matrix" or, the default "", in which case a vector is returned}
 }
 
 \value{
