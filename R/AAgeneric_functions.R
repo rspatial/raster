@@ -1,5 +1,7 @@
 if (!isGeneric("as.data.frame")) { setGeneric("as.data.frame", function(x, row.names = NULL, optional = FALSE, ...) standardGeneric("as.data.frame")) }	
-if (!isGeneric("calc")) {setGeneric("calc", function(x, fun, ...) standardGeneric("calc")) }	
+if (!isGeneric("calc")) {setGeneric("calc", function(x, fun, ...) standardGeneric("calc")) }
+if (!isGeneric("clamp")) {setGeneric("clamp", function(x, ...) standardGeneric("clamp")) }	
+	
 if (!isGeneric("crop")) { setGeneric("crop", function(x, y, ...) standardGeneric("crop"))}	
 if (!isGeneric("crs")) { setGeneric("crs", function(x, ...) standardGeneric("crs")) }	
 if (!isGeneric("crs<-")) { setGeneric("crs<-", function(x, ..., value) standardGeneric("crs<-")) }	
@@ -8,6 +10,7 @@ if (!isGeneric("extract")) { setGeneric("extract", function(x, y, ...) standardG
 
 if (!isGeneric("focal")) { setGeneric("focal", function(x, ...) standardGeneric("focal"))}
 if (!isGeneric("geom")) { setGeneric("geom", function(x, ...) standardGeneric("geom"))}	
+if (!isGeneric("gridDistance")) {setGeneric("gridDistance", function(x, ...) standardGeneric("gridDistance"))}	
 if (!isGeneric("head")) { setGeneric("head", function(x, ...) standardGeneric("head"))}	
 if (!isGeneric("image")) {setGeneric("image", function(x,...) standardGeneric("image"))}	
 
@@ -19,6 +22,7 @@ if (!isGeneric("nrow")) { setGeneric("nrow", function(x) standardGeneric("nrow")
 if (!isGeneric("nrow<-")) { setGeneric("nrow<-", function(x, ..., value) standardGeneric("nrow<-")) }	
 
 if (!isGeneric('overlay')) { setGeneric('overlay', function(x, y, ...) standardGeneric('overlay'))}
+if (!isGeneric("predict")) {setGeneric("predict", function(object, ...) standardGeneric("predict"))}
 
 if (!isGeneric("rasterize")) {setGeneric("rasterize", function(x, y, ...) standardGeneric("rasterize"))}	
 if (!isGeneric("reclassify")) { setGeneric("reclassify", function(x, rcl, ...) standardGeneric("reclassify"))}	

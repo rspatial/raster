@@ -4,11 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("clamp")) {
-	setGeneric("clamp", function(x, ...)
-		standardGeneric("clamp"))
-}	
-
 
 setMethod('clamp', signature(x='Raster'), 
 function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename='', ...) {

@@ -9,11 +9,6 @@
 
 
 
-if (!isGeneric("gridDistance")) {
-	setGeneric("gridDistance", function(x, ...)
-		standardGeneric("gridDistance"))
-}	
-
 setMethod("gridDistance", signature("RasterLayer"), 
 
 function(x, origin, omit=NULL, filename="", ...) {

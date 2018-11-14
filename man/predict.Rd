@@ -1,4 +1,4 @@
- \name{predict}
+\name{predict}
 
 \docType{methods}
 
@@ -21,7 +21,7 @@ This approach (predict a fitted model to raster data) is commonly used in remote
 
 
 \arguments{
-  \item{object}{Raster* object. Typicially a multi-layer type (RasterStack or RasterBrick)}
+  \item{object}{Raster* object. Typically a multi-layer type (RasterStack or RasterBrick)}
   \item{model}{fitted model of any class that has a 'predict' method (or for which you can supply a similar method as \code{fun} argument. E.g. glm, gam, or randomForest }
   \item{filename}{character. Optional output filename }
   \item{fun}{function. Default value is 'predict', but can be replaced with e.g. predict.se (depending on the type of model), or your own custom function.}

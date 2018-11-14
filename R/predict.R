@@ -3,10 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("predict")) {
-	setGeneric("predict", function(object, ...)
-		standardGeneric("predict"))
-}	
 
 setMethod('predict', signature(object='Raster'), 
 	function(object, model, filename="", fun=predict, ext=NULL, const=NULL, index=1, 
