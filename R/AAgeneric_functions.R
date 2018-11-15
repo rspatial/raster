@@ -35,8 +35,7 @@ if (!isGeneric("rasterize")) {setGeneric("rasterize", function(x, y, ...) standa
 if (!isGeneric("reclassify")) { setGeneric("reclassify", function(x, rcl, ...) standardGeneric("reclassify"))}	
 
 if (!isGeneric("readStart")) {setGeneric("readStart", function(x, ...) standardGeneric("readStart"))}
-if (!isGeneric("readStop")) {setGeneric("readStop", function(x)	standardGeneric("readStop"))}
-}	
+if (!isGeneric("readStop")) {setGeneric("readStop", function(x)	standardGeneric("readStop"))}	
 if (!isGeneric("res")) { setGeneric("res", function(x) standardGeneric("res")) }
 if (!isGeneric("sampleRegular")) { setGeneric("sampleRegular", function(x, size, ...) standardGeneric("sampleRegular"))}
 

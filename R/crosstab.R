@@ -32,8 +32,9 @@ setMethod('crosstab', signature(x='RasterStackBrick', y='missing'),
 			res <- getValues(x)
 			res <- lapply(1:nl, function(i) round(res[, i], digits=digits))
 			res <- do.call(table, c(res, useNA='always'))
-			res <- as.data.frame(res)
-			
+			if (long) {
+				res <- as.data.frame(res)
+			}
 		} else {
 			tr <- blockSize(x)
 			pb <- pbCreate(tr$n, label='crosstab', progress=progress)	
@@ -75,7 +76,9 @@ setMethod('crosstab', signature(x='RasterStackBrick', y='missing'),
 				colnames(res) <- c(nms, 'Freq')	
 				res <- res[res$Freq > 0,  ,drop=FALSE]
 			}
-		} 
+		} else {
+			res <- data.frame(res)
+		}
 		return(res)
 	}
 )
