@@ -46,10 +46,6 @@ couldBeLonLat <- function(x, warnings=TRUE) {
 }
 
 
-if (!isGeneric("isLonLat")) {
-	setGeneric("isLonLat", function(x)
-		standardGeneric("isLonLat"))
-}	
 
 
 setMethod('isLonLat', signature(x='Spatial'), 

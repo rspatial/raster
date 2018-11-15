@@ -6,10 +6,7 @@
 # April 2012: Several patches & improvements by Jim Regetz
 
 
-if (!isGeneric("disaggregate")) {
-	setGeneric("disaggregate", function(x, ...)
-		standardGeneric("disaggregate"))
-}
+
 
 setMethod('disaggregate', signature(x='Raster'), 
 function(x, fact=NULL, method='', filename='', ...) {

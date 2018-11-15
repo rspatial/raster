@@ -20,10 +20,6 @@
 }
 
 
-if (!isGeneric("area")) {
-	setGeneric("area", function(x, ...)
-		standardGeneric("area"))
-}	
 
 setMethod('area', signature(x='SpatialPolygons'), 
 	function(x, ...) {

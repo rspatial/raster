@@ -4,10 +4,7 @@
 # Licence GPL v3
 
 
-if (!isGeneric("readStart")) {
-	setGeneric("readStart", function(x, ...)
-		standardGeneric("readStart"))
-}	
+	
 
 setMethod('readStart', signature(x='Raster'), 
 	function(x, ...) {
@@ -59,12 +56,6 @@ setMethod('readStart', signature(x='RasterStack'),
 }
 
 
-
-
-if (!isGeneric("readStop")) {
-	setGeneric("readStop", function(x)
-		standardGeneric("readStop"))
-}	
 
 setMethod('readStop', signature(x='Raster'), 
 	function(x) {

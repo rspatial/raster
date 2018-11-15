@@ -1,8 +1,5 @@
 
-if (!isGeneric("erase")) {
-	setGeneric("erase", function(x, y, ...)
-		standardGeneric("erase"))
-}	
+	
 
 .gDif <- function(x, y, type='polygons') {
 	xln <- length(x)

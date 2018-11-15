@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("atan2")) {
-	setGeneric("atan2", function(y, x)
-		standardGeneric("atan2"))
-}	
 
 setMethod("atan2", signature(y='Raster', x='Raster'),
 	function(y, x) { 
