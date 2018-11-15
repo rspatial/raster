@@ -31,10 +31,8 @@ setMethod('crosstab', signature(x='RasterStackBrick', y='missing'),
 		if (canProcessInMemory(x)) {
 			res <- getValues(x)
 			res <- lapply(1:nl, function(i) round(res[, i], digits=digits))
-			res <- do.call(table, c(res, useNA='always'))
-			if (long) {
-				res <- as.data.frame(res)
-			}
+			res <- do.call(table, c(res, useNA='ifany'))
+			res <- as.data.frame(res)
 		} else {
 			tr <- blockSize(x)
 			pb <- pbCreate(tr$n, label='crosstab', progress=progress)	
@@ -42,42 +40,56 @@ setMethod('crosstab', signature(x='RasterStackBrick', y='missing'),
 			for (i in 1:tr$n) {
 				d <- getValuesBlock(x, row=tr$row[i], nrows=tr$nrows[i])
 				d <- lapply(1:nl, function(i) round(d[, i], digits=digits))
-				d <- do.call(table, c(d, useNA='always'))
+				d <- do.call(table, c(d, useNA='ifany'))
 				d <- as.data.frame(d)
 				res <- rbind(res, d)
 				pbStep(pb, i)
 			}
 			pbClose(pb)
-			
-			if (nrow(res) == 0) {
-				res <- data.frame(matrix(nrow=0, ncol=length(nms)+1))
-			} 
-			colnames(res) <- c(nms, 'Freq')
-			
-			if (! useNA ) {
-				i <- which(apply(res, 1, function(x) sum(is.na(x))>0))				
-				res <- res[-i,  ,drop=FALSE]
-			}
- 
-			# keep NA classes if there are any
-			for (i in 1:(ncol(res)-1)) {
-				if (any(is.na(res[,i]))) {
-					res[,i] <- factor(res[,i], levels=c(levels(res[,i]), NA), exclude=NULL) 
+			res <- res[res$Freq > 0,  ,drop=FALSE]
+
+			# some complexity to aggregate keeping 
+			# variables that are NA
+			if (useNA) {
+				for (i in 1:(ncol(res)-1)) {
+					if (any(is.na(res[,i]))) {
+						res[,i] <- factor(res[,i], levels=c(levels(res[,i]), NA), exclude=NULL) 
+					}
 				}
 			}
-			f <- eval(parse(text=paste('Freq ~ ', paste(nms , collapse='+'))))
-			res <- stats::xtabs(f, data=res)
-			
+			res <- aggregate(res[, ncol(res), drop=FALSE], res[, 1:(ncol(res)-1), drop=FALSE], sum)
+			if (useNA) {
+				for (i in 1:(ncol(res)-1)) {
+					res[,i] <- as.numeric(as.character(res[,i]))
+				}
+			}			
 		}
 		
-		if (long) {
-			if (nrow(res) > 1) {
-				res <- data.frame(res)
-				colnames(res) <- c(nms, 'Freq')	
-				res <- res[res$Freq > 0,  ,drop=FALSE]
+		if (nrow(res) == 0) {
+			res <- data.frame(matrix(nrow=0, ncol=length(nms)+1))
+		} 
+		colnames(res) <- c(nms, 'Freq')
+			
+		if (! useNA ) {
+			i <- apply(res, 1, function(x) any(is.na(x)))
+			res <- res[!i,  ,drop=FALSE]
+		}
+		 
+			# keep NA classes if there are any
+		for (i in 1:(ncol(res)-1)) {
+			if (any(is.na(res[,i]))) {
+#				res[,i] <- factor(res[,i], levels=c(levels(res[,i]), NA), exclude=NULL) 
 			}
+			res[,i] <- as.numeric(res[,i])
+		}
+		
+		if (!long) {
+			f <- eval(parse(text=paste('Freq ~ ', paste(nms , collapse='+'))))
+			res <- stats::xtabs(f, data=res, addNA=useNA)
 		} else {
-			res <- data.frame(res)
+			res <- res[res$Freq > 0,  ,drop=FALSE]
+			res <- res[order(res[,1], res[,2]), ]
+			rownames(res) <- NULL
 		}
 		return(res)
 	}
