@@ -8,16 +8,16 @@ Suggests: rgdal (>= 0.9-1), rgeos (>= 0.3-8), ncdf4, igraph, tcltk, parallel, ra
 LinkingTo: Rcpp
 Imports: methods, Rcpp
 SystemRequirements: C++11
+Description: Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported.
+License: GPL (>=3)
+URL: http://www.rspatial.org/
 Authors@R: c(
 	person("Robert J.", "Hijmans", role = c("cre", "aut"),  
 			email = "r.hijmans@gmail.com", 
 			comment = c(ORCID = "0000-0001-5872-2872")),
 	person("Jacob", "van Etten", role = "ctb"),
-	person("Joe", "Cheng", role = "ctb"),
 	person("Michael", "Sumner", role = "ctb"),
-	person("Matteo", "Mattiuzzi", role = "ctb"),
-	person("Jonathan A.", "Greenberg", role = "ctb"),
-	person("Oscar", "Perpinan Lamigueiro", role = "ctb"),
+	person("Joe", "Cheng", role = "ctb"),
 	person("Andrew", "Bevan", role = "ctb"),
 	person("Roger", "Bivand", role = "ctb"),
 	person("Lorenzo", "Busetto", role = "ctb"),
@@ -26,19 +26,19 @@ Authors@R: c(
 	person("Aniruddha", "Ghosh", role = "ctb"),
 	person("Duncan", "Golicher", role = "ctb"),
 	person("Josh", "Gray", role = "ctb"),
+	person("Jonathan A.", "Greenberg", role = "ctb"),
 	person("Paul", "Hiemstra", role = "ctb"),
 	person("Institute for Mathematics Applied Geosciences", role="cph"),
 	person("Charles", "Karney", role = "ctb"),
+	person("Matteo", "Mattiuzzi", role = "ctb"),
 	person("Steven", "Mosher", role = "ctb"),
 	person("Jakub", "Nowosad", role = "ctb"),
 	person("Edzer", "Pebesma", role = "ctb"),
+	person("Oscar", "Perpinan Lamigueiro", role = "ctb"),
 	person("Etienne B.", "Racine", role = "ctb"),
 	person("Barry", "Rowlingson", role = "ctb"),
 	person("Ashton", "Shortridge", role = "ctb"),
 	person("Bill", "Venables", role = "ctb"),
 	person("Rafael", "Wueest", role = "ctb")
 	)
-Description: Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported.
-License: GPL (>=3)
-URL: http://www.rspatial.org/
-ByteCompile: TRUE
+

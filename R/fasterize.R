@@ -48,14 +48,14 @@
 .fasterize <- function(p, r, values, background = NA, filename="", ...) {
 	if (class(p) != "Rcpp_SpPolygons") p <- .makeSpPolygons(p)
 	if (missing(values)) values <- 1:p$size()
-	if (canProcessInMemory(r, 4)) { 
-		out <- setValues(r, p$rasterize(nrow(r), ncol(r), as.vector(extent(r)), values, background))
+	out <- raster(r)
+	if (canProcessInMemory(out, 4)) { 
+		out <- setValues(out, p$rasterize(nrow(r), ncol(r), as.vector(extent(r)), values, background))
 		if (filename != "") { 
 			out <- writeRaster(out, filename=filename, ...)			
 		}
 		return(out)
-	} else {
-		out <- raster(r)
+	} else {		
 		tr <- blockSize(out)
 		pb <- pbCreate(tr$n, label='fasterize', ...)
 		out <- writeStart(out, filename=filename, ... )
@@ -68,9 +68,7 @@
 		out <- writeStop(out)
 		pbClose(pb)
 		return(out)
-
 	}
-	
 }
 
 

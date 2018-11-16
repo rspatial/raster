@@ -58,11 +58,9 @@ setMethod('crosstab', signature(x='RasterStackBrick', y='missing'),
 				}
 			}
 			res <- aggregate(res[, ncol(res), drop=FALSE], res[, 1:(ncol(res)-1), drop=FALSE], sum)
-			if (useNA) {
-				for (i in 1:(ncol(res)-1)) {
-					res[,i] <- as.numeric(as.character(res[,i]))
-				}
-			}			
+		}
+		for (i in 1:(ncol(res)-1)) {
+			res[,i] <- as.numeric(as.character(res[,i]))
 		}
 		
 		if (nrow(res) == 0) {
