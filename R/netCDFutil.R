@@ -19,9 +19,10 @@
 	prj <- matrix(c("albers_conical_equal_area", "aea", "azimuthal_equidistant", "aeqd", "lambert_cylindrical_equal_area", "cea", "lambert_azimuthal_equal_area", "laea", "lambert_conformal_conic", "lcc", "latitude_longitude", "longlat", "mercator", "merc", "orthographic", "ortho", "polar_stereographic", "stere", "stereographic", "stere", "transverse_mercator", "tmerc"), ncol=2, byrow=TRUE)
 	
 	m <- matrix(c("grid_mapping_name", "+proj", "false_easting", "+x_0","false_northing", "+y_0", "scale_factor_at_projection_origin", "+k_0", "scale_factor_at_central_meridian", "+k_0", "standard_parallel", "+lat_1", "standard_parallel1", "+lat_1", "standard_parallel2", "+lat_2", "longitude_of_central_meridian", "+lon_0", "longitude_of_projection_origin", "+lon_0", "latitude_of_projection_origin", "+lat_0", "straight_vertical_longitude_from_pole", "+lon_0",
-	"longitude_of_prime_meridian", "+lon_0", "semi_major_axis", "+a", "inverse_flattening", "+rf", 
+	"longitude_of_prime_meridian", "+pm", "semi_major_axis", "+a", "semi_minor_axis", "+b", "inverse_flattening", "+rf", 
 	"earth_radius", "+a"), ncol=2, byrow=TRUE)
 
+	# add logic that if prime merid is defined but not centr merid. centr merid is same as prime.
 	
 	sp <- g$standard_parallel
 	if (!is.null(sp)) {

@@ -4,6 +4,7 @@ faster rasterization of polygons (introduced in previous versions, but, by mista
 faster handling of GMT ncdf files by Mike Sumner
 new argument "na.last" to "unique" suggsted by Marco Sciaini. https://github.com/rspatial/raster/issues/23 
 crosstab for small objects returned a data.frame instead of a table with long=FALSE. Reported by Jakub Nowosad
+Refined matching CF crs descriptions (in climate ncdf files) with proj, with suggestions from Paul Newell
 
 --- 2-Nov-2018, version: 2.8-4
 Improved estimation of available RAM with contributions by Lorenzo Busetto. RAM available is now computed on windows, linux and mac. No more that 60% of available RAM is used (if the estimated RAM needed is not too low). Not more than raster:::.maxmemory() is used; but it should now be safe to set this to Inf. If canProcessInMemory() returns FALSE, chunksize is set 25% of available RAM, or raster:::.chunksize(), whichever is lower. (set options via rasterOptions())
