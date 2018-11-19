@@ -1,5 +1,11 @@
 # raster
 
+
+[![Travis build
+status](https://travis-ci.org/rspatial/raster.svg?branch=master)](https://travis-ci.org/rspatial/raster)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/raster)](https://cran.r-project.org/package=raster)
+
 This is the source code for the R package "raster". Released versions are on [CRAN](https://cran.r-project.org/web/packages/raster/index.html).
 
 To install the development version you can do:
