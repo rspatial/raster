@@ -126,9 +126,7 @@ projectExtent <- function(object, crs) {
 }
 
 
-.getAlignedRaster <- function(x,y) {
-	x <- raster(x)
-	y <- raster(y)
+.getAlignedRaster <- function(y,x) {
 	p <- projectRaster(x, crs=projection(y))
 	m <- merge(extent(y), extent(p))
 	rx <- extend(y, m)
