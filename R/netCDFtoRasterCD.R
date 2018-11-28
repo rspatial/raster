@@ -127,7 +127,7 @@
 	on.exit( ncdf4::nc_close(nc) )		
 	conv <- ncdf4::ncatt_get(nc, 0, "Conventions")
 		
-	# assuming "CF-1.0"
+	# assuming > "CF-1.0"
 	
 	zvar <- .varName(nc, varname, warn=warn)
 	# datatype <- .getRasterDTypeFromCDF( nc$var[[zvar]]$prec )
