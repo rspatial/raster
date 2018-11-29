@@ -35,8 +35,8 @@
 }
 
 
-setMethod("adjacent", signature(x="RasterLayer"), 
-function(x, cells, directions=4, pairs=TRUE, target=NULL, sorted=FALSE, include=FALSE, id=FALSE) {
+setMethod("adjacent", signature(x="BasicRaster"), 
+function(x, cells, directions=4, pairs=TRUE, target=NULL, sorted=FALSE, include=FALSE, id=FALSE, ...) {
 
 	if (is.character(directions)) { 
 		directions <- tolower(directions) 

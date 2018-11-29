@@ -1,6 +1,7 @@
 \name{adjacent}
 
 \alias{adjacent}
+\alias{adjacent,BasicRaster-method}
 
 \title{Adjacent cells}
 
@@ -9,8 +10,8 @@ Identify cells that are adjacent to a set of cells on a raster.
 }
 
 \usage{
-adjacent(x, cells, directions=4, pairs=TRUE, target=NULL, sorted=FALSE, 
-         include=FALSE, id=FALSE) 
+\S4method{adjacent}{BasicRaster}(x, cells, directions=4, pairs=TRUE, target=NULL, sorted=FALSE, 
+         include=FALSE, id=FALSE, ...) 
 }
 
 \arguments{
@@ -22,7 +23,8 @@ adjacent(x, cells, directions=4, pairs=TRUE, target=NULL, sorted=FALSE,
   \item{sorted}{logical. Should the results be sorted? }
   \item{include}{logical. Should the focal cells be included in the result? }
   \item{id}{logical. Should the id of the cells be included in the result? (numbered from 1 to length(cells) }
- }
+  \item{...}{additional arguments. None implemented }
+}
 
 \details{
 A neighborhood matrix identifies the cells around each cell that are considered adjacent. The matrix should have one, and only one, cell with value 0 (the focal cell); at least one cell with value 1 (the adjacent cell(s)); All other cells are not considered adjacent and ignored.
