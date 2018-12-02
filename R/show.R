@@ -46,7 +46,7 @@ setMethod ('show' , 'RasterLayer',
 		if (hasValues(object)) {
 			fd <- object@data@fromdisk
 			if (fd) {
-				cat('data source :', filename(object), '\n')
+				cat('data source :', gsub("\\", "/", filename(object), fixed=TRUE), '\n')
 			} else {
 				cat('data source : in memory\n')			
 			}
@@ -145,7 +145,7 @@ setMethod ('show' , 'RasterBrick',
 		if (hasValues(object)) {
 			fd <- object@data@fromdisk
 			if (fd) {
-				cat('data source :', filename(object), '\n')
+				cat('data source :', gsub("\\", "/", filename(object), fixed=TRUE), '\n')
 			} else {
 				cat('data source : in memory\n')			
 			}
