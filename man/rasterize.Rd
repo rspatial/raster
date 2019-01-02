@@ -90,7 +90,7 @@ y <- runif(n) * 180 - 90
 xy <- cbind(x, y)
 # get the (last) indices
 r0 <- rasterize(xy, r)
-# prensence/absensce (NA) (is there a point or not?)
+# presence/absensce (NA) (is there a point or not?)
 r1 <- rasterize(xy, r, field=1)
 # how many points?
 r2 <- rasterize(xy, r, fun=function(x,...)length(x))
