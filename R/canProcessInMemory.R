@@ -44,8 +44,12 @@ canProcessInMemory <- function(x, n=4, verbose=FALSE) {
 		return(FALSE)
 	}
 
+	nc <- ncell(x)
+	# avoid vectors that are too long
+	if (nc > (2^31 -1)) return(FALSE)
+	
 	n <- n * nlayers(x)
-	memneed <- ncell(x) * n * 8
+	memneed <- nc * n * 8
 	maxmem <- .maxmemory()
 	memavail <- .availableRAM(maxmem)
 	if (verbose) {

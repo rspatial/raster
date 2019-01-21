@@ -407,13 +407,16 @@
 				}	
 								
 				if (updateHoles) {
+					updateHoles <- FALSE
 					rvtmp[holes < 1] <- NA
 					vals <- cbind(vals, rvtmp)
 					rvtmp <- rv1
+					holes <- holes1
 				}	
 			}
 		}	
 		
+		#print(vals)
 		
 		rrv <- rv1
 		if (!is.null(vals)) {
