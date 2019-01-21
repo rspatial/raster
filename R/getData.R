@@ -400,26 +400,24 @@ ccodes <- function() {
 	colTile <- colFromX(rs, lon)
 	if (rowTile < 10) { rowTile <- paste('0', rowTile, sep='') }
 	if (colTile < 10) { colTile <- paste('0', colTile, sep='') }
+
+	baseurl <- "http://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/"
 	
-	f <- paste('srtm_', colTile, '_', rowTile, sep="")
-	zipfilename <- paste(path, "/", f, ".ZIP", sep="")
-	tiffilename <- paste(path, "/", f, ".TIF", sep="")
+	f <- paste0("srtm_", colTile, "_", rowTile, ".zip")
+
+	zipfilename <- file.path(path, f)
+	tiffilename <- file.path(path, gsub(".zip$", ".tif", f))
 	
 	if (!file.exists(tiffilename)) {
 		if (!file.exists(zipfilename)) {
 			if (download) { 
-				theurl <- paste("ftp://xftp.jrc.it/pub/srtmV4/tiff/", f, ".zip", sep="")
+				theurl <- paste0(baseurl, f)
 				test <- try (.download(theurl, zipfilename) , silent=TRUE)
 				if (class(test) == 'try-error') {
-					theurl <- paste("http://hypersphere.telascience.org/elevation/cgiar_srtm_v4/tiff/zip/", f, ".ZIP", sep="")
-					test <- try (.download(theurl, zipfilename) , silent=TRUE)
-					if (class(test) == 'try-error') {
-						theurl <- paste("http://srtm.csi.cgiar.org/SRT-ZIP/SRTM_V41/SRTM_Data_GeoTiff/", f, ".ZIP", sep="")
-						.download(theurl, zipfilename)
-					}
+					stop("cannot download the file")
 				}
-			} else {message('file not available locally, use download=TRUE') }	
-		}
+			} else {message("file not available locally, use download=TRUE") }	
+		} 
 		if (file.exists(zipfilename)) { 
 			utils::unzip(zipfilename, exdir=dirname(zipfilename))
 			file.remove(zipfilename)
@@ -434,3 +432,4 @@ ccodes <- function() {
 	}
 }
 
+#.SRTM(lon=5.5, lat=44.5, TRUE, ".")
