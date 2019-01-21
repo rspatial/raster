@@ -14,8 +14,16 @@
 	#	return(x)
 	#}
 	p <- as(from, 'Spatial')	
-	if (ncol(p) == 0) {
-		p <- as(p, 'SpatialPolygons')	
+	if (isTRUE(ncol(p) == 0)) {
+	# for the degerate Spatial*DataFrame that has zero variables
+		if (inherits(p, 'SpatialPolygons')) {
+			p <- as(p, 'SpatialPolygons')	
+		} else if (inherits(p, 'SpatialLines')) {
+			p <- as(p, 'SpatialLines')	
+		} else if (inherits(p, 'SpatialPoints')) {
+			p <- as(p, 'SpatialPoints')	
+		}
 	}
 	p
 }
+

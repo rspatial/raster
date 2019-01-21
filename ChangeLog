@@ -1,6 +1,8 @@
 
 --- current version
-
+fixed sf to sp coercion problem for degenerate Spatial*DataFrame with zero variables. Problem reported by Jakub Nowasad https://github.com/rspatial/raster/issues/29
+fixed SRTM download in getData (new URL) and uppercase issue reported by tatianic
+https://github.com/rspatial/raster/issues/34
 raster::isLonLat("+init=epsg:4326") now returns TRUE. Suggested by Mike Sumner https://github.com/rspatial/raster/issues/32
 faster rasterization of polygons (introduced in previous versions, but, by mistake, was not used in most cases)
 faster handling of GMT ncdf files by Mike Sumner
