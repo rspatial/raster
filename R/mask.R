@@ -4,11 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("mask")) {
-	setGeneric("mask", function(x, mask, ...)
-		standardGeneric("mask"))
-}	
-
 
 setMethod('mask', signature(x='Raster', mask='sf'), 
 function(x, mask, ...) {

@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("cover")) {
-	setGeneric("cover", function(x, y, ...)
-		standardGeneric("cover"))
-}	
 
 setMethod('cover', signature(x='RasterLayer', y='RasterLayer'), 
 	function(x, y, ..., filename=''){ 

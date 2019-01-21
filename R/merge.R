@@ -8,10 +8,6 @@
 # October 2011
 # version 1
 
-if (!isGeneric("merge")) {
-	setGeneric("merge", function(x, y, ...)
-		standardGeneric("merge"))
-}	
 
 
 setMethod('merge', signature(x='Extent', y='ANY'), 

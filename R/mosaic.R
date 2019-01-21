@@ -6,11 +6,6 @@
 # October 2011
 # version 1
 
-if (!isGeneric("mosaic")) {
-	setGeneric("mosaic", function(x, y, ...)
-		standardGeneric("mosaic"))
-}	
-
 
 setMethod('mosaic', signature(x='Raster', y='Raster'), 
 function(x, y, ..., fun, tolerance=0.05, filename="") { 

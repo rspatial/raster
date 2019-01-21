@@ -1,15 +1,23 @@
 
 --- current version
+higher precision extract with weights for small polygons. See https://stackoverflow.com/questions/53854910/issue-with-estimating-weighted-mean-from-raster-for-a-polygon-shape-in-r/
+
 fixed error with rasterize when counting overlapping polygons with holes, reported by Boris Leroy. See:
 https://gis.stackexchange.com/questions/307770/inconsistencies-in-r-rasterize-polygons-packages-raster-and-sf
+
 fixed sf to sp coercion problem for degenerate Spatial*DataFrame with zero variables. Problem reported by Jakub Nowasad https://github.com/rspatial/raster/issues/29
+
 fixed SRTM download in getData (new URL) and uppercase issue reported by tatianic
 https://github.com/rspatial/raster/issues/34
 raster::isLonLat("+init=epsg:4326") now returns TRUE. Suggested by Mike Sumner https://github.com/rspatial/raster/issues/32
+
 faster rasterization of polygons (introduced in previous versions, but, by mistake, was not used in most cases)
+
 faster handling of GMT ncdf files by Mike Sumner
 new argument "na.last" to "unique" suggsted by Marco Sciaini. https://github.com/rspatial/raster/issues/23 
+
 crosstab for small objects returned a data.frame instead of a table with long=FALSE. Reported by Jakub Nowosad
+
 Refined matching CF crs descriptions (in climate ncdf files) with proj, with suggestions from Paul Newell
 
 --- 2-Nov-2018, version: 2.8-4

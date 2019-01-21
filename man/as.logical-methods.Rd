@@ -23,7 +23,7 @@
 \item{...}{additional optional arguments as for \code{\link{writeRaster}}}
 }
 
-\seealso{ \code{\link[base]{as.logical}}, \code{\link[base]{as.integer}}  }
+\seealso{ \code{\link[base]{logical}}, \code{\link[base]{integer}}  }
 
 \examples{
 r <- raster(nrow=10, ncol=10)

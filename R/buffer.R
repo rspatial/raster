@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric('buffer')) {
-	setGeneric('buffer', function(x, ...)
-		standardGeneric('buffer'))
-}	
 
 .pointBuffer <- function(xy, d, lonlat=TRUE, a=6378137, f=1/298.257223563, crs=NA, ... ) {
 	

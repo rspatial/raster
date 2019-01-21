@@ -5,12 +5,6 @@
 # Licence GPL v3
 
 
-	
-if (!isGeneric("zoom")) {
-	setGeneric("zoom", function(x, ...)
-		standardGeneric("zoom"))
-}	
-
 
 setMethod('zoom', signature(x='Raster'), 
 function(x, ext=drawExtent(), maxpixels=100000, layer=1, new=TRUE, useRaster=TRUE, ...) {

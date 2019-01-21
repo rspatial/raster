@@ -3,11 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("distance")) {
-	setGeneric("distance", function(x, y, ...)
-		standardGeneric("distance"))
-}	
-
 
 setMethod('distance', signature(x='RasterLayer', y='missing'), 
 function(x, y, filename='', doEdge=TRUE, ...) {

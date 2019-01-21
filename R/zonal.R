@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("zonal")) {
-	setGeneric("zonal", function(x, z, ...)
-		standardGeneric("zonal"))
-}	
-
-
 
 setMethod('zonal', signature(x='RasterLayer', z='RasterLayer'), 
 	function(x, z, fun='mean', digits=0, na.rm=TRUE, ...) {

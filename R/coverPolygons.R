@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-
-if (!isGeneric("cover")) {
-	setGeneric("cover", function(x, y, ...)
-		standardGeneric("cover"))
-}	
-
 setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'), 
 	function(x, y, ..., identity=FALSE){ 
 	
