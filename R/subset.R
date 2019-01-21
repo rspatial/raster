@@ -26,22 +26,19 @@ function(x, subset, drop=TRUE, filename='', ...) {
 		stop('not a valid subset')
 	}
 
-	if (length(subset) == 1 & drop) {
-	  if (length(x@z)>0) {
+	if (length(x@z) > 0) {
 	    z <- lapply(x@z, function(x) x[subset])
-	  } else {
-	    z <- NULL
-	  }
+	} else {
+	    z <- list()
+	}
+	
+	if (length(subset) == 1 & drop) {
 		x <- x@layers[[subset]]
-		if (!is.null(z)) {
-		  x@z <- z
-		}
 	} else {
 		x@layers <- x@layers[subset]
-		if (length(x@z)>0) {
-			x@z <- lapply(x@z, function(x) x[subset])
-		}
 	}
+	x@z <- z
+
 	if (filename != '') {
 		x <- writeRaster(x, filename, ...)
 	}
@@ -81,20 +78,15 @@ function(x, subset, drop=TRUE, filename='', ...) {
 		return(x)
 	}
 
-	#if (nl==1) {return(x)} # this does not drop
-
-	# probably not needed any more, due to removing
-	# the filename function below
-	#varname <- attr(x@data, "zvar")
-	#if (is.null(varname)) {
-	#	varname <- ""
-	#}
-
-	# these values may have been changed
-	# really? how?
 	nav <- NAvalue(x)
 	e <- extent(x)
 
+	if (length(x@z)>0) {
+		z <- lapply(x@z, function(x) x[subset])
+	} else {
+		z <- list()
+	}
+	
 	if (fromDisk(x)) {
 		nms <- names(x)
 		if (drop & length(subset)==1) {
@@ -107,20 +99,13 @@ function(x, subset, drop=TRUE, filename='', ...) {
 		NAvalue(x) <- nav
 	} else {
 		if (drop & length(subset)==1) {
-		  if (length(x@z)>0) {
-	      z <- lapply(x@z, function(x) x[subset])
-	    } else {
-	      z <- NULL
-	    }
 			if (hasValues(x)) {
 				x <- raster(x, subset)
 			} else {
 				x <- raster(x)
 			}
 
-		  if (!is.null(z)) {
-		    x@z <- z
-		  }
+			x@z <- z
 			extent(x) <- e
 			NAvalue(x) <- nav
 			return(x)
@@ -132,9 +117,7 @@ function(x, subset, drop=TRUE, filename='', ...) {
 			x@data@max <- x@data@max[subset]
 		}
 		x@data@names <- x@data@names[subset]
-		if (length(x@z) > 0) {
-			x@z[[1]] <- x@z[[1]][subset]
-		}
+		x@z <- z
 		x@data@nlayers <- as.integer(length(subset))
 		f <- is.factor(x)
 		if (any(f)) {
@@ -146,6 +129,7 @@ function(x, subset, drop=TRUE, filename='', ...) {
 		x <- writeRaster(x, filename, ...)
 	}
 	x
-} )
+} 
+)
 
 
