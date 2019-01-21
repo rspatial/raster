@@ -4,9 +4,9 @@
 # Licence GPL v3
 
 .sf2sp <- function(from) {
-	if (!requireNamespace("sf")) {
-		stop('package sf is not available')
-	}
+	#if (!requireNamespace("sf")) {
+	#	stop('package sf is not available')
+	#}
 	# to do
 	#if (from == 'GEOMETRYCOLLECTION') {
 	#	x <- list()

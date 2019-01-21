@@ -97,12 +97,15 @@ setMethod('isLonLat', signature(x='CRS'),
 		if (is.na(x@projargs)) { 
 			return(FALSE)
 		} else {
-			p4str <- trim(x@projargs)
+			s <- trim(x@projargs)
 		}	
-		if (is.na(p4str) || nchar(p4str) == 0) {
+		if (is.na(s) || nchar(s) == 0) {
 			return(FALSE)
 		} 
-		res <- grep("longlat", p4str, fixed = TRUE)
+		s <- gsub(" ", "", s)
+		res1 <- grep("longlat", s)
+		res2 <- grep("+init=epsg:4326", s)
+		res <- c(res1, res2)
 		if (length(res) == 0) {
 			return(FALSE)
 		} else {

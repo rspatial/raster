@@ -1,5 +1,7 @@
 
 --- current version
+
+raster::isLonLat("+init=epsg:4326") now returns TRUE. Suggested by Mike Sumner https://github.com/rspatial/raster/issues/32
 faster rasterization of polygons (introduced in previous versions, but, by mistake, was not used in most cases)
 faster handling of GMT ncdf files by Mike Sumner
 new argument "na.last" to "unique" suggsted by Marco Sciaini. https://github.com/rspatial/raster/issues/23 
