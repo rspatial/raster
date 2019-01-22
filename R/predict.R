@@ -5,9 +5,7 @@
 
 
 setMethod('predict', signature(object='Raster'), 
-	function(object, model, filename="", fun=predict, ext=NULL, const=NULL, index=1, 
-				na.rm=TRUE, inf.rm=FALSE, factors=NULL,
-				format, datatype, overwrite=FALSE, progress='', ...) {
+	function(object, model, filename="", fun=predict, ext=NULL, const=NULL, index=1, na.rm=TRUE, inf.rm=FALSE, factors=NULL, format, datatype, overwrite=FALSE, progress='', ...) {
 	
 		filename <- trim(filename)
 		if (missing(format)) { format <- .filetype(filename=filename) } 
@@ -74,11 +72,13 @@ setMethod('predict', signature(object='Raster'),
 				}
 			} else if (!is.null(factors)) {
 				haveFactor <- TRUE 
-				factlevels <- list()
-				for (i in 1:length(f)) {
-					f <- names(factors)
-					factlevels <- factors
-				}
+#				factlevels <- list()
+# Roelof Kindt
+# 				for (i in 1:length(f)) {
+				f <- names(factors)
+				factlevels <- factors
+#				}
+# Roelof Kindt
 			}
 		}		
 		

@@ -157,7 +157,6 @@ spplot(r4)
 
 
 # cforest (other Random Forest implementation) example with factors argument
-
 v$red <- as.factor(round(v$red/100))
 logo$red <- round(logo[[1]]/100)
 
@@ -165,15 +164,18 @@ library(party)
 m <- cforest(pa~., control=cforest_unbiased(mtry=3), data=v)
 f <- list(levels(v$red))
 names(f) <- 'red'
-pc <- predict(logo, m, OOB=TRUE, factors=f)
+# the second argument in party:::predict.RandomForest
+# is "OOB", and not "newdata" or similar. We need to write a wrapper
+# predict function to deal with this 	
+predfun <- function(m, d, ...) predict(m, newdata=d, ...)
 
+pc <- predict(logo, m, OOB=TRUE, factors=f, fun=predfun)
 
 # knn example, using calc instead of predict
 library(class)
 cl <- factor(c(rep(1, nrow(p)), rep(0, nrow(a))))
 train <- extract(logo, rbind(p, a))
 k <- calc(logo, function(x) as.integer(as.character(knn(train, x, cl))))
-
 }
 }
 
