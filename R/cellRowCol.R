@@ -114,7 +114,7 @@ setMethod(rowColFromCell, signature(object="BasicRaster", cell="numeric"),
 
 
 setMethod(cellFromRowCol, signature(object="BasicRaster", row="numeric", col="numeric"), 
-	function(object, row, col) {
+	function(object, row, col, ...) {
 		rows <- object@nrows
 		cols <- object@ncols
 		.doCellFromRowCol(rows, cols, row, col)

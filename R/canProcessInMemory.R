@@ -46,7 +46,6 @@ canProcessInMemory <- function(x, n=4, verbose=FALSE) {
 
 	nc <- ncell(x)
 	# avoid vectors that are too long
-	if (nc > (2^31 -1)) return(FALSE)
 	
 	n <- n * nlayers(x)
 	memneed <- nc * n * 8
@@ -60,6 +59,7 @@ canProcessInMemory <- function(x, n=4, verbose=FALSE) {
 		cat(paste("\nmem needed   :", round(memneed / gb, 2)))
 		cat(paste("\nmax allowed  :", round(maxmem / gb, 2), " (if available)\n"))
 	}
+	if (nc > (2^31 -1)) return(FALSE)
 
 	# can't use all of it; default is 60%
 	memavail <- .memfrac() * memavail

@@ -13,6 +13,10 @@ You can do this by providing the new projection as a single argument in which ca
 be adjusted (e.g. by setting its resolution) and used as a template \code{'to'} in \code{projectRaster}. 
 }
 
+\note{
+If the resolution of the output is much larger than that of the input, you should first aggregate the input such that the resolution of the input becomes more similar (perhaps a little smaller) to the output.
+}
+
 \usage{
 projectRaster(from, to, res, crs, method="bilinear", 
              alignOnly=FALSE, over=FALSE, filename="", ...) 

@@ -27,7 +27,7 @@ The last cell number equals the number of cells of the Raster* object.
 }
 
 \usage{
-cellFromRowCol(object, row, col)
+cellFromRowCol(object, row, col, ...)
 cellFromRowColCombine(object, rownr, colnr)
 cellFromRow(object, rownr)
 cellFromCol(object, colnr)
@@ -52,6 +52,7 @@ fourCellsFromXY(object, xy, duplicates=TRUE)
   \item{p}{SpatialPolygons object}
   \item{weights}{Logical. If \code{TRUE}, the fraction of each cell that is covered is also returned}
   \item{duplicates}{Logical. If \code{TRUE}, the same cell number can be returned twice (if the point in the middle of a division between two cells) or four times (if a point is in the center of a cell)}
+  \item{...}{additional arguments (none implemented)}
 }
   
 \details{
