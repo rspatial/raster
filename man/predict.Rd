@@ -47,7 +47,7 @@ RasterLayer or RasterBrick
 }
 
 \note{
-For more on the use of the predict function see this resource on \href{http://www.rspatial.org/sdm/}{species distribution modeling}.
+For more on the use of the predict function see this resource on \href{https://www.rspatial.org/sdm/}{species distribution modeling}.
 }
 
 \examples{
