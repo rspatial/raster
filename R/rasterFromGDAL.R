@@ -245,7 +245,7 @@
 	maxv[maxv == 4294967295] <- -Inf
 	try ( datatype <- .getRasterDType ( GDType[1] ), silent=TRUE )
 	
-	if (all( is.finite(minv)) && (all(is.finite(maxv)) ) {
+	if ( all(is.finite(minv)) && all(is.finite(maxv)) ) {
 		r@data@haveminmax <- TRUE 
 	}
 	r@file@datanotation <- datatype
