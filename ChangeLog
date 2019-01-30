@@ -1,5 +1,9 @@
 
 --- current version
+
+
+--- 29-Jan-2019, version: 2.8-19
+
 higher precision extract with weights for small polygons. See https://stackoverflow.com/questions/53854910/issue-with-estimating-weighted-mean-from-raster-for-a-polygon-shape-in-r/
 
 fixed error with rasterize when counting overlapping polygons with holes, reported by Boris Leroy. See:
