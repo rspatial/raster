@@ -81,7 +81,7 @@
 			offwarn = TRUE
 			xn <- 0 
 		} else {
-			xn <- xn - 0.5 * d
+			xn <- xc - 0.5 * d
 		}
 	}
 	
