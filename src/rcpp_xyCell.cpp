@@ -46,7 +46,7 @@ NumericVector doCellFromXY(
 
 // [[Rcpp::export(name = ".doXYFromCell")]]
 NumericMatrix doXYFromCell(
-    int ncols, int nrows, double xmin, double xmax, double ymin, double ymax,
+    unsigned ncols, unsigned nrows, double xmin, double xmax, double ymin, double ymax,
     NumericVector cell	//    IntegerVector cell
 ) {
   size_t len = cell.size();
@@ -59,9 +59,8 @@ NumericMatrix doXYFromCell(
   for (size_t i = 0; i < len; i++) {
     // double in stead of int
     double c = cell[i] - 1;
-	// fmod in stead of %
-    size_t col = fmod(c, ncols);
-    size_t row = (c / ncols);
+    size_t row = c / ncols;
+    size_t col = c - row * ncols;
     result(i,0) = (col + 0.5) * xres + xmin;
     result(i,1) = ymax - (row + 0.5) * yres;
   }

@@ -6,7 +6,7 @@
 
 .rasterObjectFromFile <- function(x, band=1, objecttype='RasterLayer', native=FALSE, silent=TRUE, offset=NULL, ncdf=FALSE, ...) {
 	x <- trim(x)
-	if (x=='' | x=='.') { # etc?
+	if (x=="" | x==".") { # etc?
 		stop('provide a valid filename')
 	}
 

@@ -5,8 +5,7 @@
 
 
 
-.startWriteCDF <- function(x, filename, datatype='FLT4S', overwrite=FALSE, progress='', att, 
-		varname, varunit, varatt, longname, xname, yname, zname, zunit, zatt, NAflag, force_v4=FALSE, ...) {
+.startWriteCDF <- function(x, filename, datatype='FLT4S', overwrite=FALSE, progress='', att, varname, varunit, varatt, longname, xname, yname, zname, zunit, zatt, NAflag, force_v4=FALSE, ...) {
 
 	stopifnot(requireNamespace("ncdf4"))
 		
@@ -49,9 +48,8 @@
 			}
 		}
 	}	
-	x@title <- varname
-	if (missing(varunit))  varunit <- ''
-	if (missing(longname))  longname <- varname
+	if (missing(varunit))  varunit <- ""
+	if (missing(longname))  longname <- ""
 
 	if (inherits(x, 'RasterBrick')) {
 		zv <- 1:nl
@@ -90,17 +88,29 @@
 	if (missing(zunit)) {
 		zunit <- 'unknown'
 	}
+	if (missing(NAflag)) {
+		NAflag <- NAvalue(x)
+	}
+
 	
 	xdim <- ncdf4::ncdim_def( xname, xunit, xFromCol(x, 1:ncol(x)) )
 	ydim <- ncdf4::ncdim_def( yname, yunit, yFromRow(x, 1:nrow(x)) )
 	if (inherits(x, 'RasterBrick')) {
 		zdim <- ncdf4::ncdim_def( zname, zunit, zv, unlim=TRUE )
-		vardef <- ncdf4::ncvar_def( varname, varunit, list(xdim, ydim, zdim), NAvalue(x), prec = ncdatatype, ... )
+		vardef <- ncdf4::ncvar_def( varname, varunit, list(xdim, ydim, zdim), NAflag, longname, prec = ncdatatype, ... )
 	} else {
-		vardef <- ncdf4::ncvar_def( varname, varunit, list(xdim, ydim), NAvalue(x), prec = ncdatatype, ... )
+		vardef <- ncdf4::ncvar_def( varname, varunit, list(xdim, ydim), NAflag, longname, prec = ncdatatype, ... )
 	}
-	nc <- ncdf4::nc_create(filename, vardef, force_v4=force_v4)
+	crsdef <- ncdf4::ncvar_def("crs", "", list(), NULL, prec="integer")
+	defs <- list(crsdef, vardef)
 
+	nc <- ncdf4::nc_create(filename, defs, force_v4=force_v4)
+	prj <- crs(x)
+	if (!is.na(prj)) {
+		ncdf4::ncatt_put(nc, "crs", "proj4", as.character(prj), prec='text')
+		ncdf4::ncatt_put(nc, varname, "grid_mapping", "crs")
+		ncdf4::ncatt_put(nc, varname, "proj4", as.character(prj), prec='text')
+	}
 	if (! missing(zatt)){
 		for (i in 1:length(zatt)) {
 			a <- trim(unlist(strsplit(zatt[[i]], '=')))
@@ -108,20 +118,11 @@
 		}
 	}
 
-	if (!missing(NAflag)) {
-		x@file@nodatavalue <- NAflag
-	} 
+	
 		
-	ncdf4::ncatt_put(nc, varname, '_FillValue', x@file@nodatavalue, prec=ncdatatype, definemode=TRUE)
-	ncdf4::ncatt_put(nc, varname, 'missing_value', x@file@nodatavalue, prec=ncdatatype)
-	ncdf4::ncatt_put(nc, varname, 'long_name', longname, prec='text')
-
-	proj <- projection(x) 
-	if (! is.na(proj)) { 
-		ncdf4::ncatt_put(nc, 0, 'proj4', proj, prec='text')
-		#ncdf4::ncatt_put(nc, 0, 'crs', proj, prec='text')
-		#ncdf4::ncatt_put(nc, 0, 'crs_format', 'PROJ.4', prec='text')
-	}
+#	ncdf4::ncatt_put(nc, varname, '_FillValue', x@file@nodatavalue, prec=ncdatatype, definemode=TRUE)
+#	ncdf4::ncatt_put(nc, varname, 'missing_value', x@file@nodatavalue, prec=ncdatatype)
+#	ncdf4::ncatt_put(nc, varname, 'long_name', longname, prec='text')
 
 	if (! missing(varatt)){
 		for (i in 1:length(varatt)) {
@@ -151,7 +152,9 @@
 	x@data@haveminmax <- FALSE
 	x@file@driver <- 'netcdf'
 	x@file@name <- filename
-	
+	x@file@nodatavalue <- NAflag
+	x@title <- varname
+
 	return(x)
 }
 

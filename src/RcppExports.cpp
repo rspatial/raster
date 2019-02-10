@@ -261,13 +261,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // doXYFromCell
-NumericMatrix doXYFromCell(int ncols, int nrows, double xmin, double xmax, double ymin, double ymax, NumericVector cell);
+NumericMatrix doXYFromCell(unsigned ncols, unsigned nrows, double xmin, double xmax, double ymin, double ymax, NumericVector cell);
 RcppExport SEXP _raster_doXYFromCell(SEXP ncolsSEXP, SEXP nrowsSEXP, SEXP xminSEXP, SEXP xmaxSEXP, SEXP yminSEXP, SEXP ymaxSEXP, SEXP cellSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type ncols(ncolsSEXP);
-    Rcpp::traits::input_parameter< int >::type nrows(nrowsSEXP);
+    Rcpp::traits::input_parameter< unsigned >::type ncols(ncolsSEXP);
+    Rcpp::traits::input_parameter< unsigned >::type nrows(nrowsSEXP);
     Rcpp::traits::input_parameter< double >::type xmin(xminSEXP);
     Rcpp::traits::input_parameter< double >::type xmax(xmaxSEXP);
     Rcpp::traits::input_parameter< double >::type ymin(yminSEXP);
