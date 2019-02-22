@@ -45,7 +45,7 @@ z2 <- setValues(r, rep(1, ncell(r)))
 # or  
 r[] <- rep(1, ncell(r))
 # or  
-r[] <- 1
+values(r) <- 1
 }
 
 \keyword{spatial}

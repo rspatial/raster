@@ -9,7 +9,7 @@
 \title{Unique values}
 
 \description{
-This function returns the unique values of the layers in a Raster* object.
+This function returns the unique values in a RasterLayer object or the unique combinations of the layers in a multilayer object.
 }
 
 \usage{
@@ -36,9 +36,11 @@ vector or matrix
 
 \examples{
 r <- raster(ncol=10, nrow=10)
-r[] <- round(runif(ncell(r))*10)
+values(r) <- round(runif(ncell(r))*10)
 unique(r)
-unique(stack(r, round(r/2)))
+u <- unique(stack(r, round(r/2)))
+do.call(rbind, u)
+lapply(u, unique)
 }
 
 \keyword{spatial}

@@ -23,7 +23,7 @@ list
 
 \examples{
 r <- raster(ncol=3, nrow=3)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 as.list(r)
 
 s <- stack(r,r*2,r*3)

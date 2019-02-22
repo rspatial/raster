@@ -63,7 +63,13 @@ function(x, filename, format, ...) {
 		try( out@history <- x@history, silent=TRUE)
 		levels(out) <- levels(x)
 		out@legend@colortable <- colortable(x)
-		out <- .startRasterWriting(out, filename, format=filetype, ...)
+		dots <- list(...)
+		if (is.integer(x[1]) & is.null(dots$dataype)) {
+			out <- .startRasterWriting(out, filename, format=filetype, dataytpe="INT4S", ...)
+		} else {
+			out <- .startRasterWriting(out, filename, format=filetype, ...)
+		}
+
 		out <- writeValues(out, values(x), 1)
 		return( .stopRasterWriting(out) )
 	

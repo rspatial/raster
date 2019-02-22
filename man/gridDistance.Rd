@@ -43,8 +43,7 @@ If the RasterLayer to be processed is big, it will be processed in chunks. This 
 \examples{
 
 #world lon/lat raster
-r <- raster(ncol=10,nrow=10)
-r[] <- 1
+r <- raster(ncol=10,nrow=10, vals=1)
 r[48] <- 2
 r[66:68] <- 3
 d <- gridDistance(r,origin=2,omit=3) 

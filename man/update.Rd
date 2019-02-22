@@ -37,8 +37,7 @@ RasterLayer or RasterBrick
 
 \examples{
 # setting up an example RasterLayer with file
-r <- raster(nrow=5, ncol=10)
-r[] = 0
+r <- raster(nrow=5, ncol=10, vals=0)
 r <- writeRaster(r, 'test', overwrite=TRUE, datatype='INT2S')
 as.matrix(r)
 

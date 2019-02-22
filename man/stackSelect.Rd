@@ -34,8 +34,7 @@ Raster* object
 
 
 \examples{
-r <- raster(ncol=10, nrow=10)
-r[] <- 1
+r <- raster(ncol=10, nrow=10, vals=1)
 s <- stack(r, r+2, r+5)
 r[] <- round((runif(ncell(r)))*3)
 x <- stackSelect(s, r)

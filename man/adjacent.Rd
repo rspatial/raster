@@ -61,7 +61,7 @@ adjacent(r, cells = c(1,55,90), directions=rook, sorted=TRUE)
 # occurs next to a cell with a certain value
 set.seed(0)
 r <- raster(ncol=10, nrow=10)
-r[] <- round(runif(ncell(r)) * 5)
+values(r) <- round(runif(ncell(r)) * 5)
 a <- adjacent(r, 1:ncell(r), 4, pairs=TRUE)
 tb <- table(r[a[,1]], r[a[,2]])
 tb
