@@ -8,7 +8,7 @@
 setMethod('mask', signature(x='Raster', mask='sf'), 
 function(x, mask, ...) {
 	mask <- .sf2sp(mask)
-	mask(x, mask)
+	mask(x, mask, ...)
 }
 )
 
