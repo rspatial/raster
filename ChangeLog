@@ -1,9 +1,12 @@
 
 --- current version
-Fixed bug when creating a RasterLayer from an ascii file using the native driver and the file specifies xllcenter. Problem reported by Ram: https://stackoverflow.com/questions/54373701/error-in-if-xn-xx-missing-value-where-true-false-needed
+Bug fixes: 
+When creating a RasterLayer from an ascii file using the native driver and the file specifies xllcenter. Problem reported by Ram: https://stackoverflow.com/questions/54373701/error-in-if-xn-xx-missing-value-where-true-false-needed
+Error coercing raster with one non-NA value to SpatialPixelsDataFrame
+https://gis.stackexchange.com/questions/314472/error-coercing-raster-with-one-non-na-value-to-spatialpixelsdataframe/
 
 The crs is now written to ncdf files, using proj4=""
-
+reclassify now keeps the layer names
 
 --- 29-Jan-2019, version: 2.8-19
 

@@ -30,7 +30,7 @@ setAs('Raster', 'SpatialPixels',
 		sp <- rasterToPoints(from, fun=NULL, spatial=FALSE)
 		
 		r <- raster(from)
-		sp <- SpatialPoints(sp[,1:2], proj4string= crs(r))
+		sp <- SpatialPoints(sp[,1:2,drop=FALSE], proj4string= crs(r))
 		grd <- as(r, 'GridTopology')
 		SpatialPixels(points=sp, grid=grd)
 	}
@@ -44,7 +44,7 @@ setAs('Raster', 'SpatialPixelsDataFrame',
 		v <- rasterToPoints(from, fun=NULL, spatial=FALSE)
 
 		r <- raster(from)
-		sp <- SpatialPoints(v[,1:2], proj4string= crs(r))
+		sp <- SpatialPoints(v[,1:2,drop=FALSE], proj4string= crs(r))
 
 		grd <- as(r, 'GridTopology')
 		

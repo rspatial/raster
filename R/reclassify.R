@@ -69,7 +69,7 @@ function(x, rcl, filename='', include.lowest=FALSE, right=TRUE, ...) {
 	} else { 
 		out <- brick(x, values=FALSE) 
 	}
-
+	names(out) <- names(x)
 	include.lowest <- as.integer(include.lowest)
 	right <- as.integer(right)
 	#hasNA <- as.integer(hasNA)
