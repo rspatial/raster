@@ -18,7 +18,8 @@ setMethod("modal", signature(x='Raster'),
 		
 		nl <- nlayers(x)
 		if (nl < 2) {
-			stop('there is not much point in computing a modal value for a single layer')
+			warning('there is not much point in computing a modal value for a single layer')
+			return(x[[1]])
 		} else if (nl == 2) {
 			warning('running modal with only two layers!')
 		}

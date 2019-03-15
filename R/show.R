@@ -102,7 +102,7 @@ setMethod ('show' , 'RasterLayer',
 			if (length(z) > 0) {
 				name <- names(object@z)
 				if (is.null(name)) name <- 'z-value'
-				name <- paste(sprintf("%-12s", name), ':', sep='')
+				name <- paste(sprintf("%-11s", name), ':', sep='')
 				cat(name, as.character(z[1]), '\n')
 			}
 
@@ -145,9 +145,9 @@ setMethod ('show' , 'RasterBrick',
 		if (hasValues(object)) {
 			fd <- object@data@fromdisk
 			if (fd) {
-				cat('source    :', gsub("\\", "/", filename(object), fixed=TRUE), '\n')
+				cat('source     :', gsub("\\", "/", filename(object), fixed=TRUE), '\n')
 			} else {
-				cat('source    : memory\n')			
+				cat('source     : memory\n')			
 			}
 			
 			if (object@data@haveminmax) {
@@ -189,7 +189,7 @@ setMethod ('show' , 'RasterBrick',
 		if (length(z) > 0) {
 			name <- names(object@z)
 			if (is.null(name)) name <- 'z-value'
-			name <- paste(sprintf("%-12s", name), ':', sep='')
+			name <- paste(sprintf("%-11s", name), ':', sep='')
 			if (length(z) < mnr) {
 				cat(name, paste(as.character(z), collapse=', '), '\n')
 			} else {

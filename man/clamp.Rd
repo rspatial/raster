@@ -7,7 +7,7 @@
 \title{Clamp values}
 
 \description{
-Clamp values to a minimum and maximum value. That is, all values below the lower clamp value and the upper clamp value become NA (or the lower/upper value if \code{useValue=TRUE}) 
+Clamp values to a minimum and maximum value. That is, all values below the lower clamp value and above the upper clamp value become NA (or the lower/upper value if \code{useValue=TRUE}) 
 }
 
 \usage{
