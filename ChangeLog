@@ -6,9 +6,9 @@ Error coercing raster with one non-NA value to SpatialPixelsDataFrame (ickf.se)
 https://gis.stackexchange.com/questions/314472/error-coercing-raster-with-one-non-na-value-to-spatialpixelsdataframe/
 mask with sf object ignored other arguments (Jakub Nowasad)
 
-The crs is now written to ncdf files, using proj4=""
-reclassify now keeps the layer names
-
+The crs is now written to ncdf files, using proj4=" "
+reclassify now keeps the layer names (suggested by Matthieu Stigler)
+modal of a single layer now returns that layer with a warning instead of throwing an error (suggested by Ben Tupper)
 
 --- 29-Jan-2019, version: 2.8-19
 
