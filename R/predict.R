@@ -56,7 +56,7 @@ setMethod('predict', signature(object='Raster'),
 			}
 		} else {
 			dataclasses <- try (attr(model$terms, "dataClasses")[-1], silent=TRUE)
-			if (class(dataclasses) != "try-error") {
+			if ((!is.null(dataclasses)) && (class(dataclasses) != "try-error")) {
 				varnames <- names(dataclasses)
 				if ( length( unique(lyrnames[(lyrnames %in% varnames)] )) != length(lyrnames[(lyrnames %in% varnames)] )) {
 					stop('duplicate names in Raster* object: ', lyrnames)
