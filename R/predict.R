@@ -92,7 +92,9 @@ setMethod('predict', signature(object='Raster'),
 						haveFactor <- TRUE 
 						factors <- list()
 						for (i in 1:length(f)) {
-							factors[[i]] <- levels( model$data[f][,1] )
+							#ff <- levels( model$data[[ f[i] ]] )
+							ff <- names(which(table(model$data[[ f[i] ]]) != 0))
+							factors[[i]] <- ff
 						}
 					}
 				}

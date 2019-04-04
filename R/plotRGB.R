@@ -92,7 +92,9 @@ function(x, r=1, g=2, b=3, scale, maxpixels=500000, stretch=NULL, ext=NULL, inte
 
 	
 	if (!add) {
-		if ((!axes) & (!border)) graphics::par(plt=c(0,1,0,1))
+		if ((!axes) & (!border)) {
+			graphics::par(plt=c(0,1,0,1))
+		}
 
 		if (is.null(asp)) {
 			if (couldBeLonLat(x)) {

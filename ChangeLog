@@ -5,7 +5,9 @@ When creating a RasterLayer from an ascii file using the native driver and the f
 Error coercing raster with one non-NA value to SpatialPixelsDataFrame (ickf.se)
 https://gis.stackexchange.com/questions/314472/error-coercing-raster-with-one-non-na-value-to-spatialpixelsdataframe/
 mask with sf object ignored other arguments (Jakub Nowasad)
+improved handling of factors in "predict". Fixed a bug with gbm models (dismo). Reported by Jane Elith.
 
+new argument to plotRGB to allow plotting whitespace around images.
 The crs is now written to ncdf files, using proj4=" "
 reclassify now keeps the layer names (suggested by Matthieu Stigler)
 modal of a single layer now returns that layer with a warning instead of throwing an error (suggested by Ben Tupper)
