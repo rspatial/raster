@@ -44,44 +44,60 @@ setMethod('predict', signature(object='Raster'),
 		
 		haveFactor <- FALSE
 		facttest <- TRUE
-		
-		if (inherits(model, "randomForest")) {
-			f <- names(which(sapply(model$forest$xlevels, max) != "0"))
-			if (length(f) > 0) { 
-				haveFactor <- TRUE 
-				factlevels <- list()
-				for (i in 1:length(f)) {
-					factlevels[[i]] <- model$forest$xlevels[[ f[i] ]]
-				}
+
+		if (!is.null(factors)) {
+			stopifnot(is.list(factors))
+			haveFactor <- TRUE 
+			f <- names(factors)
+			if (any(trimws(f) == "")) {
+				stop("all factors must be named")
+			}
+			if (!all(f %in% lyrnames)) {
+				ff <- f[!(f %in% lyrnames)]
+				stop(paste("factor name(s):", paste(ff, collapse=", "), " not in layer names"))
 			}
 		} else {
-			dataclasses <- try (attr(model$terms, "dataClasses")[-1], silent=TRUE)
-			if ((!is.null(dataclasses)) && (class(dataclasses) != "try-error")) {
-				varnames <- names(dataclasses)
-				if ( length( unique(lyrnames[(lyrnames %in% varnames)] )) != length(lyrnames[(lyrnames %in% varnames)] )) {
-					stop('duplicate names in Raster* object: ', lyrnames)
-				}
-				f <- names( which(dataclasses == 'factor') )
-				f <- f[f %in% names(object)]
+			if (inherits(model, "randomForest")) {
+				f <- names(which(sapply(model$forest$xlevels, max) != "0"))
 				if (length(f) > 0) { 
 					haveFactor <- TRUE 
-					factlevels <- list()
+					factors <- list()
 					for (i in 1:length(f)) {
-						factlevels[[i]] <- levels( model$data[f][,1] )
+						factors[[i]] <- model$forest$xlevels[[ f[i] ]]
 					}
 				}
-			} else if (!is.null(factors)) {
-				haveFactor <- TRUE 
-#				factlevels <- list()
-# Roelof Kindt
-# 				for (i in 1:length(f)) {
-				f <- names(factors)
-				factlevels <- factors
-#				}
-# Roelof Kindt
-			}
-		}		
-		
+			} else if (inherits(model, "gbm")) {
+				dafr <- model$gbm.call$dataframe 
+				i <- sapply(dafr, is.factor)
+				if (any(i)) {
+					haveFactor <- TRUE 
+					j <- which(i)
+					factors <- list()
+					for (i in 1:length(j)) {
+						factors[[i]] <- levels(dafr[[ j[i] ]])
+					}
+					f <- colnames(dafr)[j]
+					#names(factors) <- f
+				}
+			} else { #glm and others
+				dataclasses <- try (attr(model$terms, "dataClasses")[-1], silent=TRUE)
+				if ((!is.null(dataclasses)) && (class(dataclasses) != "try-error")) {
+					varnames <- names(dataclasses)
+					if ( length( unique(lyrnames[(lyrnames %in% varnames)] )) != length(lyrnames[(lyrnames %in% varnames)] )) {
+						stop('duplicate names in Raster* object: ', lyrnames)
+					}
+					f <- names( which(dataclasses == 'factor') )
+					f <- f[f %in% names(object)]
+					if (length(f) > 0) { 
+						haveFactor <- TRUE 
+						factors <- list()
+						for (i in 1:length(f)) {
+							factors[[i]] <- levels( model$data[f][,1] )
+						}
+					}
+				}
+			}		
+		}
 		if (!canProcessInMemory(predrast) && filename == '') {
 			filename <- rasterTmpFile()
 		} 
@@ -98,7 +114,6 @@ setMethod('predict', signature(object='Raster'),
 		factres	<- FALSE
 		pb <- pbCreate(tr$n,  progress=progress, label='predict' )			
 
-		factorwarned <- FALSE
 		for (i in 1:tr$n) {
 		
 			if (i==tr$n) {
@@ -121,19 +136,10 @@ setMethod('predict', signature(object='Raster'),
 			} 
 			if (haveFactor) {
 				for (j in 1:length(f)) {
-					fl <- NULL
-					try(fl <- factlevels[[j]], silent=TRUE)
-					fv <- blockvals[,f[j]]
-					if (!is.null(fl)) {
-						fv[! fv %in% factlevels[[j]] ] <- NA 
-						blockvals[,f[j]] <- factor(fv, levels=fl)
-					} else {
-						blockvals[,f[j]] <- factor(fv)
-						if (!factorwarned) {
-							warning('not sure if the correct factor levels are used here')
-							factorwarned <- TRUE
-						}
-					}
+					flev <- factors[[j]]
+					fv <- blockvals[, f[j]]
+					fv[!(fv %in% flev)] <- NA 
+					blockvals[,f[j]] <- factor(fv, levels=flev)
 				}
 			}
 			
