@@ -35,7 +35,8 @@ function(x, filename, format, ...) {
 	}
 	
 	verylarge <- ncell(x) > 1000000000
-
+	
+	# to simplify we could treat all cases as !inMemory
 	if (! inMemory(x) | verylarge ) {
 		if ( toupper(x@file@name) == toupper(filename) ) {
 			stop('filenames of source and target should be different')
