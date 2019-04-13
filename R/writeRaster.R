@@ -34,8 +34,9 @@ function(x, filename, format, ...) {
 		return(invisible(x))
 	}
 	
-	
-	if (! inMemory(x) ) {
+	verylarge <- ncell(x) > 1000000000
+
+	if (! inMemory(x) | verylarge ) {
 		if ( toupper(x@file@name) == toupper(filename) ) {
 			stop('filenames of source and target should be different')
 		}
@@ -70,7 +71,7 @@ function(x, filename, format, ...) {
 			out <- .startRasterWriting(out, filename, format=filetype, ...)
 		}
 
-		out <- writeValues(out, values(x), 1)
+		out <- writeValues(out, x@data@values, 1)
 		return( .stopRasterWriting(out) )
 	
 	} else if (filetype=='ascii') {
@@ -81,7 +82,7 @@ function(x, filename, format, ...) {
 
 	} else if (filetype=='CDF') {
 		x <- .startWriteCDF(x, filename=filename, ...)
-		x <- .writeValuesCDF(x, getValues(x))
+		x <- .writeValuesCDF(x, x@data@values)
 		return( .stopWriteCDF(x) )
 		
 	} else { 
@@ -170,6 +171,8 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		return(invisible(x))
 	}
 	
+	verylarge <- (ncell(x) * nlayers(x)) > 1000000000
+	
 	if (.isNativeDriver(filetype)) {
 		if (! filetype %in% c("raster", "BIL", "BSQ", "BIP") ) {
 			stop('this file format does not support multi-band files')
@@ -183,8 +186,9 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		}
 		out <- writeStart(out, filename, format=filetype, ...)
 	
-		if (inMemory(x)) {
-			out <- writeValues(out, getValues(x), 1)
+	
+		if (inMemory(x) & (!verylarge)) {
+			out <- writeValues(out, x@data@values, 1)
 		} else {
 			tr <- blockSize(x)
 			pb <- pbCreate(tr$n, ...)
@@ -200,13 +204,13 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 	
 	# else 
 
-	if ( inMemory(x) ) {
+	if ( inMemory(x) & (!verylarge)) {
 	
 		if (filetype=='CDF') {
 			b <- brick(x, values=FALSE)
 			b@z  <- x@z
 			b <- .startWriteCDF(b, filename=filename,  ...)
-			x <- .writeValuesBrickCDF(b, values(x) )	
+			x <- .writeValuesBrickCDF(b, x@data@values)	
 			x <- .stopWriteCDF(x) 
 		} else {
 			x <- .writeGDALall(x, filename=filename, format=filetype, ...) 
