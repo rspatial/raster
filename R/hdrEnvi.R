@@ -9,7 +9,6 @@
 	extension(hdrfile) <- ".hdr"
 	thefile <- file(hdrfile, "w") 
 	cat("ENVI\n", file = thefile)
-	cat("description = {", names(r), "}", "\n", file = thefile)
 	cat("samples = ", ncol(r), "\n", file = thefile)		
 	cat("lines = ", nrow(r), "\n", file = thefile)		
 	cat("bands = ", r@file@nbands, "\n", file = thefile)		
@@ -53,6 +52,9 @@
 		cat("projection info =", projection(r), "\n", file = thefile) 
 	}
 	cat("z plot range = {", minValue(r),", ", maxValue(r), "}\n", file = thefile) 
+	
+	cat("band names = {", paste(names(r),collapse=","), "}", "\n", file = thefile)
+	
 	close(thefile)	
 }
 

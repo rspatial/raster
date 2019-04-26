@@ -118,7 +118,24 @@ setMethod ('print' , 'Spatial',
 			wrn <- getOption('warn')
 			on.exit(options('warn' = wrn))
 			options('warn'=-1) 
-			r <- apply(x, 2, range, na.rm=TRUE)
+						
+			# r <- apply(x, 2, range, na.rm=TRUE)
+			# can give bad sorting (locale dependent)
+			# because as.matrix can add whitespace to numbers
+			
+			rangefun <- function(x) {
+				if(is.factor(x)) { 
+					range(as.character(x), na.rm=TRUE)
+				} else {
+					range(x, na.rm=TRUE)
+				}
+			}
+			#r <- sapply(x, as.character)
+			r <- sapply(x, rangefun)
+			i <- r[1,] == "Inf"
+			r[,i] <- NA
+
+
 			minv <- as.vector(r[1, ])
 			maxv <- as.vector(r[2, ])
 			if (nc > maxnl) {
