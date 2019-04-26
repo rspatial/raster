@@ -7,6 +7,7 @@ Error coercing raster with one non-NA value to SpatialPixelsDataFrame (ickf.se)
 https://gis.stackexchange.com/questions/314472/error-coercing-raster-with-one-non-na-value-to-spatialpixelsdataframe/
 mask with sf object ignored other arguments (Jakub Nowasad)
 improved handling of factors in "predict". Fixed a bug with gbm models (dismo) reported by Jane Elith. Also removes factor levels that are not in model for GLM (predictions become NA).
+show(Spatial*) could have the order of the min max values wrong on linux due to prepended spaces by as.matrix in apply(x, 2, range). Reported by Barry Rowlingson. 
 
 new argument to plotRGB to allow plotting whitespace around images.
 The crs is now written to ncdf files, using proj4=" "
