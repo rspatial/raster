@@ -130,11 +130,9 @@ setMethod ('print' , 'Spatial',
 					range(x, na.rm=TRUE)
 				}
 			}
-			#r <- sapply(x, as.character)
 			r <- sapply(x, rangefun)
 			i <- r[1,] == "Inf"
 			r[,i] <- NA
-
 
 			minv <- as.vector(r[1, ])
 			maxv <- as.vector(r[2, ])
