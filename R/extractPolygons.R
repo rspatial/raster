@@ -219,7 +219,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 					if (normalizeWeights) {
 						weight <- xy[,3] / sum(xy[,3])
 					} else {
-						weight <- xy[,3] / 100			
+						weight <- xy[,3] #/ 100			
 					}
 					xy <- xy[,-3,drop=FALSE]
 				} else {
