@@ -51,7 +51,7 @@
 		line <- methods::as(line, 'SpatialLines')
 	}
 	if (inherits(x, 'SpatialLines')) {
-		requireNamespace('raster')
+		#requireNamespace('raster')
 		x <- geom(x)
 		allpts <- NULL
 		for (p in unique(x[, 'cump'])) {
@@ -72,7 +72,7 @@
 		line <- methods::as(line, 'SpatialLines')
 	}
 	if (inherits(x, 'SpatialLines')) {
-		requireNamespace('raster')
+		#requireNamespace('raster')
 		x <- geom(x)
 		allpts <- NULL
 		for (p in unique(x[, 'cump'])) {
