@@ -11,6 +11,7 @@ SystemRequirements: C++11
 Description: Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported.
 License: GPL (>=3)
 URL: https://www.rspatial.org/
+BugReports: https://github.com/rspatial/raster/issues/
 Authors@R: c(
 	person("Robert J.", "Hijmans", role = c("cre", "aut"),  
 			email = "r.hijmans@gmail.com", 
