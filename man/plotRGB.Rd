@@ -16,7 +16,7 @@ Make a Red-Green-Blue plot based on three layers (in a RasterBrick or RasterStac
 \usage{
 \S4method{plotRGB}{RasterStackBrick}(x, r=1, g=2, b=3, scale, maxpixels=500000, stretch=NULL, 
 ext=NULL, interpolate=FALSE, colNA='white', alpha, bgalpha, addfun=NULL, zlim=NULL, 
-zlimcol=NULL, axes=FALSE, xlab='', ylab='', asp=NULL, add=FALSE, border=FALSE, ...)
+zlimcol=NULL, axes=FALSE, xlab='', ylab='', asp=NULL, add=FALSE, margins=FALSE, ...)
 }
 
 \arguments{
@@ -40,7 +40,7 @@ zlimcol=NULL, axes=FALSE, xlab='', ylab='', asp=NULL, add=FALSE, border=FALSE, .
   \item{ylab}{character. Label of y-axis}
   \item{asp}{numeric. Aspect (ratio of x and y. If NULL, and appropriate value is computed to match data for the longitude/latitude coordinate reference system, and 1 for planar coordinate reference systems}
   \item{add}{logical. If \code{TRUE} add values to current plot}
-  \item{border}{logical. If \code{TRUE} whitespace borders are used. If \code{FALSE}, graphics::par(plt=c(0,1,0,1)) is used}
+  \item{margins}{logical. If \code{TRUE} standard whitespace margins are used. If \code{FALSE}, graphics::par(plt=c(0,1,0,1)) is used}
   \item{...}{graphical parameters as in \code{\link{plot}} or \code{\link{rasterImage}}}
 }
 
