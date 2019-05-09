@@ -29,17 +29,22 @@ RasterLayer or RasterBrick
 
 
 \examples{
-r <- raster(nrow=10, ncol=10, xmn=0, xmx=10, ymn=0, ymx=10, crs=NA)
-r[] <- runif(ncell(r))
-r[r<0.5] <- NA
+r <- raster(nrow=5, ncol=5, xmn=0, xmx=10, ymn=0, ymx=10, crs=NA)
+set.seed(1)
+values(r) <- sample(1:25)
+r[r < 15] <- NA
 xyz <- rasterToPoints(r)
 
-r2 <- rasterFromXYZ(xyz)
+rst <- rasterFromXYZ(xyz)
 
 # equivalent to:
-r3 <- raster(nrow=10, ncol=10, xmn=0, xmx=10, ymn=0, ymx=10)
-cells <- cellFromXY(r3, xyz[,1:2])
-r3[cells] <- xyz[,3]
+rr <- raster(nrow=5, ncol=5, xmn=0, xmx=10, ymn=0, ymx=10)
+cells <- cellFromXY(rr, xyz[,1:2])
+rr[cells] <- xyz[,3]
+
+# multiple layers
+xyzz <- cbind(xyz, a=1:nrow(xyz), b=nrow(xyz):1)
+b <- rasterFromXYZ(xyzz)
 }
 
 \keyword{methods}
