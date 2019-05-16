@@ -37,7 +37,7 @@ tmpDir(create=TRUE)
 \item{progress}{character. Valid values are "text",  "window" and "" (the default in most functions, no progress bar)}
 \item{timer}{Logical. If \code{TRUE}, the time it took to complete the function is printed}
 \item{chunksize}{integer. Maximum number of bytes to read/write in a single chunk while processing (chunk by chunk) disk based Raster* objects}
-\item{maxmemory}{numeric. Maximum number of bytes to read into memory. If a process is expected to require more than this value, \code{\link[raster]{canProcessInMemory}} will return \code{FALSE} }
+\item{maxmemory}{numeric. Maximum number of bytes to read into memory. If a process is expected to require more than this value, \code{\link{canProcessInMemory}} will return \code{FALSE} }
 \item{memfrac}{numeric. Fraction of available RAM that may be used by a process}
 \item{todisk}{logical. For debugging only. Default is \code{FALSE} and should normally not be changed. If \code{TRUE}, results are always written to disk, even if no filename is supplied (a temporary filename is used)}
 \item{setfileext}{logical. Default is \code{TRUE}. If \code{TRUE}, the file extension will be changed when writing (if known for the file type). E.g. GTiff files will be saved with the .tif extension }

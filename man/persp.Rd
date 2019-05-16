@@ -28,7 +28,7 @@ Perspective plot of a RasterLayer. This is an implementation of a generic functi
 }
 
 
-\seealso{ \code{\link[rasterVis]{plot3D}}, \code{\link[graphics]{persp}}, \code{\link[raster]{contour}}, \code{\link[raster]{plot}} }
+\seealso{ \code{\link[rasterVis:plot3d]{plot3D}}, \code{\link[graphics]{persp}}, \code{\link[raster]{contour}}, \code{\link[raster]{plot}} }
 
 
 

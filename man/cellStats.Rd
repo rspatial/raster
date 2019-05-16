@@ -34,7 +34,7 @@ Numeric
 }
 
 \seealso{ 
-\code{\link[raster]{freq}}, \code{\link[raster]{quantile}}, \code{\link[raster]{minValue}}, \code{\link[raster]{maxValue}}, \code{\link[raster]{setMinMax}}
+\code{\link[raster]{freq}}, \code{\link[raster]{quantile}}, \code{\link[raster:extremeValues]{minValue}}, \code{\link[raster:extremeValues]{maxValue}}, \code{\link[raster]{setMinMax}}
 }
 
 

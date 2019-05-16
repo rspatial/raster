@@ -18,7 +18,7 @@ clearValues(x)
 }
 
 
-\seealso{ \code{\link[raster]{values}}, \code{\link[raster]{replacement} }}
+\seealso{ \code{\link{values}}, \code{\link[raster]{replacement} }}
 
 
 \value{

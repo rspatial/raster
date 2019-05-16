@@ -29,7 +29,7 @@ Extract the coordinates of a Spatial object
 Matrix with 6, (5 SpatialLines), or 3 (SpatialPoints) columns. object (sequential object number) part (sequential part number within the object; not for SpatialPoints), cump (cumulative part number; not for SpatialPoints), hole (is this a hole or not; only for SpatialPolygons), x (x coordinate or longitude), y (y coordinate or latitude)
 }
 
-\seealso{ \code{\link[sp]{coordinates}}, \code{\link[sp]{geometry}} }
+\seealso{ \code{\link[sp]{coordinates}}, \code{\link[sp:geometry-methods]{geometry}} }
 
 
 \examples{

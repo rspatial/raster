@@ -29,7 +29,7 @@ This (hopefully) allows for reading the binary data (.gri), perhaps after changi
 
 
 
-\seealso{ \code{\link[raster]{writeRaster}}, \code{\link[rgdal]{writeGDAL}} }
+\seealso{ \code{\link[raster]{writeRaster}}, \code{\link[rgdal:readGDAL]{writeGDAL}} }
 
 \examples{ 
 r <- raster(system.file("external/test.grd", package="raster"))

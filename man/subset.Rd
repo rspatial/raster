@@ -31,7 +31,7 @@ Raster* object
 
 
 
-\seealso{ \code{\link[raster]{dropLayer}}}
+\seealso{ \code{\link[raster:addLayer]{dropLayer}}}
 
 \examples{
 s <- stack(system.file("external/rlogo.grd", package="raster"))
