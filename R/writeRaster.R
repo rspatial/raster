@@ -189,7 +189,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 	
 	
 		if (inMemory(x) & (!verylarge)) {
-			out <- writeValues(out, x@data@values, 1)
+			out <- writeValues(out, values(x), 1)
 		} else {
 			tr <- blockSize(x)
 			pb <- pbCreate(tr$n, ...)

@@ -59,8 +59,8 @@ NumericMatrix doXYFromCell(
   for (size_t i = 0; i < len; i++) {
     // double in stead of int
     double c = cell[i] - 1;
-    size_t row = c / ncols;
-    size_t col = c - row * ncols;
+    double row = floor(c / ncols);
+    double col = c - row * ncols;
     result(i,0) = (col + 0.5) * xres + xmin;
     result(i,1) = ymax - (row + 0.5) * yres;
   }
