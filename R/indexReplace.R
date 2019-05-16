@@ -157,18 +157,21 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 			}
 			r <- brick(x, values=FALSE)
 			r <- writeStart(r, filename=rasterTmpFile(), overwrite=TRUE )
-			add <- (0:(nl-1)) * ncell(x)
+#			add <- (0:(nl-1)) * ncell(x)
+# remove the added cells again....
+			i <- i[i <= ncell(x)]
+			nc <- ncol(x)
 			for (k in 1:tr$n) {
-				cells <- cellFromRowCol(x, tr$row[k], 1):cellFromRowCol(x, tr$row[k]+tr$nrows[k]-1, ncol(x))
+				startcell <- cellFromRowCol(x, tr$row[k], 1)
+				endcell <- cellFromRowCol(x, tr$row[k]+tr$nrows[k]-1, ncol(x)) 
 				if (hv) {
 					v <- getValues(x, row=tr$row[k], nrows=tr$nrows[k])
 				} else {
-					v <- matrix(NA, nrow=length(cells), ncol=nl)
+					v <- matrix(NA, nrow=tr$nrows[k] * nc, ncol=nl)
 				}
-				cells <- cells + rep(add, each=length(cells))
-				j <- cells %in% i
+				j <- i >= startcell & i <= endcell
 				if (sum(j) > 0) {
-					v[j] <- value
+					v[i[j]-startcell+1,] <- value[j,]
 				}
 				r <- writeValues(r, v, tr$row[k])
 				pbStep(pb, k)

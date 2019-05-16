@@ -8,8 +8,9 @@ https://gis.stackexchange.com/questions/314472/error-coercing-raster-with-one-no
 mask with sf object ignored other arguments (Jakub Nowasad)
 improved handling of factors in "predict". Fixed a bug with gbm models (dismo) reported by Jane Elith. Also removes factor levels that are not in model for GLM (predictions become NA).
 show(Spatial*) could have the order of the min max values wrong on linux due to prepended spaces by as.matrix in apply(x, 2, range). Reported by Barry Rowlingson. 
+Fixed bug in rasterFromXYZ (if multiple layers and writing to disk) reported by Mike Nosal https://github.com/rspatial/raster/issues/49
 
-new argument to plotRGB to allow plotting whitespace around images.
+new argument "margins" to plotRGB to allow plotting whitespace around images.
 The crs is now written to ncdf files, using proj4=" "
 reclassify now keeps the layer names (suggested by Matthieu Stigler)
 modal of a single layer now returns that layer with a warning instead of throwing an error (suggested by Ben Tupper)
