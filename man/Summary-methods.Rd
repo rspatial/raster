@@ -20,9 +20,9 @@ These methods compute a summary statistic based on cell values of RasterLayers a
 You can mix RasterLayer, RasterStack and RasterBrick objects with single numeric or logical values. However, because generic functions are used, the method applied is chosen based on the first argument: '\code{x}'. This means that if \code{r} is a RasterLayer object, \code{mean(r, 5)} will work, but \code{mean(5, r)} will not work.
  
  
-To summarize all cells within a single RasterLayer, see \code{\link[raster]{cellStats}} and \code{\link[raster]{maxValue}} and \code{\link[raster]{minValue}}
+To summarize all cells within a single RasterLayer, see \code{\link[raster]{cellStats}} and \code{\link[raster:extremeValues]{maxValue}} and \code{\link[raster:extremeValues]{minValue}}
 }
-
+ 
 \value{a RasterLayer}
 
 \seealso{ \code{\link{calc}} }
