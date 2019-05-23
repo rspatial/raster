@@ -217,6 +217,9 @@
  
 	long_name <- zvar
 	unit <- ''
+
+	natest <- ncdf4::ncatt_get(nc, zvar, "_FillValue")
+	natest2 <- ncdf4::ncatt_get(nc, zvar, "missing_value")		
 	
 	prj <- NA
 	a <- ncdf4::ncatt_get(nc, zvar, "long_name")
@@ -228,23 +231,7 @@
 		gridmap  <- a$value 
 		try(atts <- ncdf4::ncatt_get(nc, gridmap), silent=TRUE)
 		try(prj <- .getCRSfromGridMap4(atts), silent=TRUE)
-	} else {
-		# deprecated
-		a <- ncdf4::ncatt_get(nc, zvar, "projection_format")
-		if ( a$hasatt ) { 
-			projection_format  <- a$value 
-			if (isTRUE(projection_format == "PROJ.4")) {
-				a <- ncdf4::ncatt_get(nc, zvar, "projection")
-				if ( a$hasatt ) { 
-					prj <- a$value 
-				}
-			}
-		}
-	}
-	natest <- ncdf4::ncatt_get(nc, zvar, "_FillValue")
-	natest2 <- ncdf4::ncatt_get(nc, zvar, "missing_value")		
-		
-		
+	}		
 	if (is.na(prj)) {
 		if ((tolower(substr(nc$var[[zvar]]$dim[[dims[1]]]$name, 1, 3)) == 'lon')  &
 		   ( tolower(substr(nc$var[[zvar]]$dim[[dims[2]]]$name, 1, 3)) == 'lat' ) ) {
@@ -259,10 +246,8 @@
 		}
 	} 
 		
-		
 	crs <- .getProj(prj, crs)
-		
-		
+				
 	if (type == 'RasterLayer') {
 		r <- raster(xmn=xrange[1], xmx=xrange[2], ymn=yrange[1], ymx=yrange[2], ncols=ncols, nrows=nrows, crs=crs)
 		names(r) <- long_name
@@ -316,7 +301,9 @@
 		if ( nc$var[[zvar]]$dim[[dim3]]$name == 'time' ) {
 			try( r <- .doTime(r, nc, zvar, dim3) )
 		} else {
-			names(r@z) <- nc$var[[zvar]]$dim[[dim3]]$units
+			vname <- nc$var[[zvar]]$dim[[dim3]]$name
+			vunit <- nc$var[[zvar]]$dim[[dim3]]$units
+			names(r@z) <- paste0(vname, " (", vunit, ")")
 		}
 	}
 

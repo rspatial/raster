@@ -12,7 +12,11 @@
 		crs=vals[vars=="proj4"] 
 		return(crs)
 	}
-	
+	if (any(vars == "epsg_code")) {
+		crs <- vals[vars=="epsg_code"] 
+		crs <- paste0("+init=", crs)
+		return(crs)
+	}
 # based on info at 
 # http://trac.osgeo.org/gdal/wiki/NetCDF_ProjectionTestingStatus
 # accessed 7 October 2012
@@ -42,7 +46,7 @@
 		vr <- vars[is.na(i)]
 		vl <- vals[is.na(i)]
 		gg <- cbind(vr, vl)
-		gg <- gg[!(gg[,1] %in% c("crs_wkt", "esri_pe_string")), ]
+		gg <- gg[!(gg[,1] %in% c("crs_wkt", "esri_pe_string")), ,drop=FALSE]
 		if (NROW(gg) > 0) {
 			mtxt <- paste(apply(gg, 1, function(x) paste(x, collapse='=')), collapse='\n')
 			warning("cannot process these parts of the CRS:\n", mtxt)
