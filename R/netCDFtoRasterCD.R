@@ -118,11 +118,12 @@
 }
 
 
-.rasterObjectFromCDF <- function(filename, varname='', band=NA, type='RasterLayer', lvar=3, level=0, 
+.rasterObjectFromCDF <- function(filename, varname='', band=NA, type='RasterLayer', lvar, level=0, 
                         warn=TRUE, dims=1:3, crs=NA, stopIfNotEqualSpaced=TRUE, ...) {
 
 	stopifnot(requireNamespace("ncdf4"))
-
+	stopifnot(type %in% c('RasterLayer', "RasterBrick"))
+	
 	nc <- ncdf4::nc_open(filename, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
 	conv <- ncdf4::ncatt_get(nc, 0, "Conventions")
@@ -140,9 +141,20 @@
 		
 	} else if (ndims == 4) { 
 		if (type != 'RasterQuadBrick') {
+			if (missing(lvar)) {
+				nlevs3 <- nc$var[[zvar]]$dim[[3]]$len
+				nlevs4 <- nc$var[[zvar]]$dim[[4]]$len
+				if (nlevs3 > 1 & nlevs4 == 1) {
+					lvar <- 4
+				} else {
+					lvar <- 3
+				}
+			}
 			nlevs <- nc$var[[zvar]]$dim[[lvar]]$len
 			if (level <=0 ) {
 				level <- 1
+				# perhaps detect case where lvar should be 4?
+				#https://stackoverflow.com/questions/56261199/extracting-all-levels-from-netcdf-file-in-r/
 				if (nlevs > 1) {
 					warning('"level" set to 1 (there are ', nlevs, ' levels)')
 				}

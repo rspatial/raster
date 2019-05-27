@@ -24,6 +24,7 @@ if (!isGeneric("focal")) { setGeneric("focal", function(x, ...) standardGeneric(
 if (!isGeneric("geom")) { setGeneric("geom", function(x, ...) standardGeneric("geom"))}	
 if (!isGeneric("gridDistance")) {setGeneric("gridDistance", function(x, ...) standardGeneric("gridDistance"))}	
 if (!isGeneric("head")) { setGeneric("head", function(x, ...) standardGeneric("head"))}	
+if (!isGeneric("ifel")) {setGeneric("ifel", function(test, yes, no, ...) standardGeneric("ifel"))}	
 if (!isGeneric("image")) {setGeneric("image", function(x,...) standardGeneric("image"))}	
 if (!isGeneric("isLonLat")) { setGeneric("isLonLat", function(x) standardGeneric("isLonLat"))}	
 

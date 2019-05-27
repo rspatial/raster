@@ -1,9 +1,8 @@
 
 --- current version
-
+New method "ifel", that is, ifelse for Raster objects (this is the R implementation of the arcpy "Con" method)
 
 --- 14-May-2019, version: 2.9-5
-
 Bug fixes: 
 writing very large Raster objects that were entirely in memory could fail with a "long vectors not supported yet". https://github.com/rspatial/raster/issues/33
 When creating a RasterLayer from an ascii file using the native driver and the file specifies xllcenter. Problem reported by Ram: https://stackoverflow.com/questions/54373701/error-in-if-xn-xx-missing-value-where-true-false-needed
