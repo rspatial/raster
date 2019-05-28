@@ -234,6 +234,12 @@
 	natest2 <- ncdf4::ncatt_get(nc, zvar, "missing_value")		
 	
 	prj <- NA
+	minv <- maxv <- NULL
+	a <- ncdf4::ncatt_get(nc, zvar, "min")
+	if (a$hasatt) { minv <- a$value }
+	a <- ncdf4::ncatt_get(nc, zvar, "max")
+	if (a$hasatt) { maxv <- a$value }
+
 	a <- ncdf4::ncatt_get(nc, zvar, "long_name")
 	if (a$hasatt) { long_name <- a$value }
 	a <- ncdf4::ncatt_get(nc, zvar, "units")
@@ -346,13 +352,26 @@
 				r@data@band <- band
 			}
 			r@z <- list( getZ(r)[r@data@band] )
+			if (!(is.null(minv) | is.null(maxv))) {
+				r@data@min <- minv[band]
+				r@data@max <- maxv[band]
+				r@data@haveminmax <- TRUE
+			}
+			
 		} 
 
 	} else {
 		r@data@nlayers <- r@file@nbands
-		r@data@min <- rep(Inf, r@file@nbands)
-		r@data@max <- rep(-Inf, r@file@nbands)
 		try( names(r) <- as.character(r@z[[1]]), silent=TRUE )
+		if (!(is.null(minv) | is.null(maxv))) {
+			r@data@min <- minv
+			r@data@max <- maxv
+			r@data@haveminmax <- TRUE
+		} else {
+			r@data@min <- rep(Inf, r@file@nbands)
+			r@data@max <- rep(-Inf, r@file@nbands)
+		}
+		
 	}
 	
 	return(r)

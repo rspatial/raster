@@ -211,8 +211,8 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 			b <- brick(x, values=FALSE)
 			b@z  <- x@z
 			b <- .startWriteCDF(b, filename=filename,  ...)
-			x <- .writeValuesBrickCDF(b, x@data@values)	
-			x <- .stopWriteCDF(x) 
+			b <- .writeValuesBrickCDF(b, values(x))	
+			x <- .stopWriteCDF(b) 
 		} else {
 			x <- .writeGDALall(x, filename=filename, format=filetype, ...) 
 		}

@@ -187,7 +187,7 @@
 	nr <- length(v) / x@ncols
 	v <- matrix(v, ncol=nr)
 
-	nc <- ncdf4::nc_open(x@file@name, write=TRUE, suppress_dimvals = TRUE)
+	nc <- ncdf4::nc_open(x@file@name, write=TRUE)
 	on.exit( ncdf4::nc_close(nc) )
 	try ( ncdf4::ncvar_put(nc, x@title, v, start=c(1, start), count=c(x@ncols, nr)) )
 	return(x)
@@ -223,12 +223,11 @@
 	}
 	ncols <- x@ncols
 
-
 	v[is.na(v)] = x@file@nodatavalue
 	rows <- length(v) / (ncols * nl)
 	v <- array(v, c(rows, ncols, nl))
 
-	nc <- ncdf4::nc_open(x@file@name, write=TRUE, suppress_dimvals = TRUE)
+	nc <- ncdf4::nc_open(x@file@name, write=TRUE)
 	on.exit( ncdf4::nc_close(nc) )
 	try ( ncdf4::ncvar_put(nc, x@title, v, start=c(1, start, lstart), count=c(ncols, rows, lend) ) )
 	
