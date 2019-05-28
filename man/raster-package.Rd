@@ -339,8 +339,8 @@ Some of these functions are in the \code{sp} package. The name in \bold{bold} is
     \code{\link{pointDistance}} \tab Distance between points \cr
     \code{\link{readIniFile}} \tab Read a (windows) 'ini' file \cr
     \code{\link{hdr}} \tab Write header file for a number of raster formats \cr
-    \code{\link{trim}} \tab Remove leading and trainling blanks from a character string \cr
-    \code{\link{extension}} \tab Get or set the extentsion of a filename \cr
+    \code{\link{trim}} \tab Remove leading and trailing blanks from a character string \cr
+    \code{\link{extension}} \tab Get or set the extension of a filename \cr
     \code{\link{cv}} \tab Coefficient of variation  \cr
     \code{\link{modal}} \tab Modal value  \cr
     \code{\link{sampleInt}} \tab Random sample of (possibly very large) range of integer values \cr
@@ -368,7 +368,7 @@ Some of these functions are in the \code{sp} package. The name in \bold{bold} is
 
 \author{Except where indicated otherwise, the functions in this package were written by Robert J. Hijmans}
 
-\section{Acknowledgements}{
+\section{Acknowledgments}{
 Extensive contributions were made by Jacob van Etten, Jonathan Greenberg, Matteo Mattiuzzi, and Michael Sumner. Significant help was also provided by Phil Heilman, Agustin Lobo, Oscar Perpinan Lamigueiro, Stefan Schlaffer, Jon Olav Skoien, Steven Mosher, and Kevin Ummel. Contributions were also made by Jochen Albrecht, Neil Best, Andrew Bevan, Roger Bivand, Isabelle Boulangeat, Lyndon Estes, Josh Gray, Tim Haering, Herry Herry, Paul Hiemstra, Ned Hornig, Mayeul Kauffmann, Bart Kranstauber, Rainer Krug, Alice Laborte, John Lewis, Lennon Li, Justin McGrath, Babak Naimi, Carsten Neumann, Joshua Perlman, Richard Plant, Edzer Pebesma, Etienne Racine, David Ramsey, Shaun Walbridge, Julian Zeidler and many others.
 }
 
