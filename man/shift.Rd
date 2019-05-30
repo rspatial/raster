@@ -41,7 +41,7 @@ Same object type as \code{x}
 
 \examples{
 r <- raster()
-r <- shift(r, x=1, y=-1)
+r <- shift(r, dx=1, dy=-1)
 }
 
 \keyword{spatial}
