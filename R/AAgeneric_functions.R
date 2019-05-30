@@ -26,6 +26,8 @@ if (!isGeneric("gridDistance")) {setGeneric("gridDistance", function(x, ...) sta
 if (!isGeneric("head")) { setGeneric("head", function(x, ...) standardGeneric("head"))}	
 if (!isGeneric("ifel")) {setGeneric("ifel", function(test, yes, no, ...) standardGeneric("ifel"))}	
 if (!isGeneric("image")) {setGeneric("image", function(x,...) standardGeneric("image"))}	
+if (!isGeneric("init")) {setGeneric("init", function(x, ...) standardGeneric("init"))}	
+
 if (!isGeneric("isLonLat")) { setGeneric("isLonLat", function(x) standardGeneric("isLonLat"))}	
 
 if (!isGeneric("mask")) { setGeneric("mask", function(x, mask, ...) standardGeneric("mask"))}

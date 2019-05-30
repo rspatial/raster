@@ -3,7 +3,8 @@
 # Version 1.0
 # Licence GPL v3
 
-init <- function(x, fun='cell', filename="", ...) {
+setMethod("init", signature(x="Raster"), 
+function(x, fun='cell', filename="", ...) {
 
 	vv <- list(...)$v
 	v <- NULL
@@ -102,4 +103,4 @@ init <- function(x, fun='cell', filename="", ...) {
 	}
 	return(out)
 }
-
+)

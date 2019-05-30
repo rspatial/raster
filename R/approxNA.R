@@ -8,9 +8,6 @@ if (!isGeneric("approxNA")) {
 		standardGeneric("approxNA"))
 }	
 
-
-
-
 setMethod('approxNA', signature(x='RasterStackBrick'), 
 function(x, filename="", method="linear", yleft, yright, rule=1, f=0, ties=mean, z=NULL, NArule=1, ...) { 
 
