@@ -1,6 +1,8 @@
 \name{initialize}
 
 \alias{init}
+\alias{init,Raster-method}
+
 
 \title{Initialize a Raster object with values}
 
