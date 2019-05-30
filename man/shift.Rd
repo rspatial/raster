@@ -15,21 +15,21 @@ Shift the location of a Raster* of vector type Spatial* object in the x and/or y
 }
 
 \usage{
-\S4method{shift}{Raster}(object, x=0, y=0, filename='', ...)
+\S4method{shift}{Raster}(x, dx=0, dy=0, filename='', ...)
 
-\S4method{shift}{SpatialPolygons}(object, x=0, y=0,  ...)
+\S4method{shift}{SpatialPolygons}(x, dx=0, dy=0,  ...)
 
-\S4method{shift}{SpatialLines}(object, x=0, y=0,  ...)
+\S4method{shift}{SpatialLines}(x, dx=0, dy=0,  ...)
 
-\S4method{shift}{SpatialPoints}(object, x=0, y=0,  ...)
+\S4method{shift}{SpatialPoints}(x, dx=0, dy=0,  ...)
 }
 
 \arguments{
-  \item{object}{Raster* or Spatial* object}
-  \item{x}{numeric. The shift in horizontal direction}
-  \item{y}{numeric. The shift in vertical direction}
+  \item{x}{Raster* or Spatial* object}
+  \item{dx}{numeric. The shift in horizontal direction}
+  \item{dy}{numeric. The shift in vertical direction}
   \item{filename}{character file name (optional)}
-  \item{...}{if \code{object} is a Raster* object: additional arguments as for \code{\link{writeRaster}} } 
+  \item{...}{if \code{x} is a Raster* object: additional arguments as for \code{\link{writeRaster}} } 
 }
  
 \value{

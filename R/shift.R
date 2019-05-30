@@ -4,44 +4,40 @@
 # Licence GPL v3
 
 	
-if (!isGeneric("shift")) {
-	setGeneric("shift", function(object, ...)
-		standardGeneric("shift"))
-}	
 
 
-setMethod('shift', signature(object='Raster'), 
-	function(object, x=0, y=0, filename='', ...) {
-		x <- as.numeric(x[1])
-		y <- as.numeric(y[1])
-		stopifnot(!is.na(x) | !is.na(y))
-		e <- object@extent
-		e@xmin <- e@xmin + x
-		e@ymin <- e@ymin + y
-		e@xmax <- e@xmax + x
-		e@ymax <- e@ymax + y
-		object@extent <- e
+setMethod('shift', signature(x='Raster'), 
+	function(x, dx=0, dy=0, filename='', ...) {
+		dx <- as.numeric(dx[1])
+		dy <- as.numeric(dy[1])
+		stopifnot(!is.na(dx) | !is.na(dy))
+		e <- x@extent
+		e@xmin <- e@xmin + dx
+		e@ymin <- e@ymin + dy
+		e@xmax <- e@xmax + dx
+		e@ymax <- e@ymax + dy
+		x@extent <- e
 		if (filename != '') {
-			object <- writeRaster(object, filename=filename, ...)
+			x <- writeRaster(x, filename=filename, ...)
 		}
-		if (inherits(object, 'RasterStack')) {
-			object@layers <- sapply(object@layers, function(x){ extent(x) <- e; x})
+		if (inherits(x, 'RasterStack')) {
+			x@layers <- sapply(x@layers, function(i){ extent(i) <- e; i})
 		}
-		return(object)
+		return(x)
 	}
 )
 
 
 
-setMethod('shift', signature(object='SpatialPolygons'), 
-	function(object, x=0, y=0, ...) {
-		a <- data.frame(geom(object))
-		a$x <- a$x + x
-		a$y <- a$y + y
+setMethod('shift', signature(x='SpatialPolygons'), 
+	function(x, dx=0, dy=0, ...) {
+		a <- data.frame(geom(x))
+		a$x <- a$x + dx
+		a$y <- a$y + dy
 		a <- as(a, 'SpatialPolygons')			
-		crs(a) <- crs(object)
-		if (inherits(object, 'SpatialPolygonsDataFrame')) {
-			a <- SpatialPolygonsDataFrame(a, object@data, match.ID = FALSE)	
+		crs(a) <- crs(x)
+		if (inherits(x, 'SpatialPolygonsDataFrame')) {
+			a <- SpatialPolygonsDataFrame(a, x@data, match.ID = FALSE)	
 		}
 		return(a)
 	}
@@ -49,26 +45,26 @@ setMethod('shift', signature(object='SpatialPolygons'),
 
 
 
-setMethod('shift', signature(object='SpatialLines'), 
-	function(object, x=0, y=0, ...) {
-		a <- data.frame(geom(object))
-		a$x <- a$x + x
-		a$y <- a$y + y
+setMethod('shift', signature(x='SpatialLines'), 
+	function(x, dx=0, dy=0, ...) {
+		a <- data.frame(geom(x))
+		a$x <- a$x + dx
+		a$y <- a$y + dy
 		a <- as(a, 'SpatialLines')					
-		crs(a) <- crs(object)		
-		if (inherits(object, 'SpatialLinesDataFrame')) {
-			a <- SpatialLinesDataFrame(a, object@data, match.ID = FALSE)	
+		crs(a) <- crs(x)		
+		if (inherits(x, 'SpatialLinesDataFrame')) {
+			a <- SpatialLinesDataFrame(a, x@data, match.ID = FALSE)	
 		}
 		return(a)
 	}
 )
 
 
-setMethod('shift', signature(object='SpatialPoints'),
-    function(object, x=0, y=0, ...) {
-		object@coords[,1] <- object@coords[,1] + x
-		object@coords[,2] <- object@coords[,2] + y
-        return(object)
+setMethod('shift', signature(x='SpatialPoints'),
+    function(x, dx=0, dy=0, ...) {
+		x@coords[,1] <- x@coords[,1] + dx
+		x@coords[,2] <- x@coords[,2] + dy
+        return(x)
     }
 )
 

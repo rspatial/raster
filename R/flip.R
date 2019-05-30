@@ -3,11 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("flip")) {
-	setGeneric("flip", function(x, direction, ...)
-		standardGeneric("flip"))
-}
-
 
 setMethod('flip', signature(x='RasterLayer', direction='ANY'), 
 	function(x, direction='y', filename='', ...)  {
