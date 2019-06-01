@@ -3,12 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-	
-if (!isGeneric("unique")) {
-	setGeneric("unique", function(x, incomparables=FALSE, ...)
-		standardGeneric("unique"))
-}	
-
 
 setMethod('unique', signature(x='RasterLayer', incomparables='missing'), 
 function(x, incomparables=FALSE, na.last=NA, progress="", ...) {
