@@ -55,17 +55,19 @@ cellFromCol <- function(object, colnr) {
 }
 
 
-cellFromRowColCombine <- function(object, rownr, colnr) {
-	object <- raster(object)
-	rownr[rownr < 1 | rownr > object@nrows] <- NA
-	colnr[colnr < 1 | colnr > object@ncols] <- NA
-	cols <- rep(colnr, times=length(rownr))
-	dim(cols) <- c(length(colnr), length(rownr))
-	cols <- t(cols)
-	rownr <- (rownr-1) * object@ncols
-	cols <- cols + rownr
-	as.vector(t(cols))
-}
+setMethod(cellFromRowColCombine, signature(object="BasicRaster", row="numeric", col="numeric"), 
+	function(object, row, col) {
+		object <- raster(object)
+		row[row < 1 | row > object@nrows] <- NA
+		col[col < 1 | col > object@ncols] <- NA
+		cols <- rep(col, times=length(row))
+		dim(cols) <- c(length(col), length(row))
+		cols <- t(cols)
+		row <- (row-1) * object@ncols
+		cols <- cols + row
+		as.vector(t(cols))
+	}
+)
 
 setMethod(colFromCell, signature(object="BasicRaster", cell="numeric"), 	
 	function(object, cell) {
