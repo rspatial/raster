@@ -144,7 +144,7 @@ You can coerce Raster* objects to Spatial* objects using \code{as}, as in \code{
     \code{\link{rasterToPoints}} \tab Create points from a RasterLayer \cr
     \code{\link{rasterToPolygons}} \tab Create polygons from a RasterLayer \cr
     \code{\link{rasterToContour}} \tab Contour lines from a RasterLayer \cr
-    \code{\link{rasterFromXYZ}} \tab RasterLayer from regularly spaces points\cr
+    \code{\link{rasterFromXYZ}} \tab RasterLayer from regularly spaced points\cr
     \code{\link{rasterFromCells}} \tab RasterLayer from a Raster object and cell numbers\cr
   --------------------------- \tab ------------------------------------------------------------------------------------------ \cr
   }
