@@ -38,7 +38,7 @@ SpatialPolygons*
 if (require(rgdal) & require(rgeos)) {
 	p <- shapefile(system.file("external/lux.shp", package="raster"))
 	b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
-	projection(b) <- projection(p)
+	crs(b) <- crs(p)
 	sd <- symdif(p, b)
 	plot(sd, col='red')
 }

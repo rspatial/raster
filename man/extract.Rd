@@ -113,7 +113,7 @@ extract(r, xy[1:3,], buffer=1000000, fun=mean)
  for (i in 1:length(z)) { s[z[[i]]] <- i }
  
 ## compare with raster that is not longitude/latitude
- projection(r) <- "+proj=utm +zone=17" 
+ crs(r) <- "+proj=utm +zone=17" 
  xy[,1] <- 50
  z <- extract(r, xy, buffer=8)
  for (i in 1:length(z)) { s[z[[i]]] <- i }

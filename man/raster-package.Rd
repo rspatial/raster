@@ -239,7 +239,7 @@ Basic parameters of existing Raster* objects can be obtained, and in most cases 
     \code{\link{ymax}} \tab The maximum y coordinate (or latitude) \cr
 	\code{\link{extent}} \tab The extent (minimum and maximum x and y coordinates) \cr
 	\code{\link{origin}} \tab The origin of a Raster* object\cr
-    \code{\link{projection}} \tab The coordinate reference system (map projection) \cr	
+    \code{\link{crs}} \tab The coordinate reference system (map projection) \cr	
     \code{\link{isLonLat}} \tab Test if an object has a longitude/latitude coordinate reference system \cr
     \code{\link{filename}} \tab Filename to which a RasterLayer or RasterBrick is linked \cr	
     \code{\link{bandnr}} \tab layer (=band) of a multi-band file that this RasterLayer is linked to \cr	

@@ -100,7 +100,7 @@ z <- mask(z, r)
 
 ## kriging
 coordinates(meuse) <- ~x+y
-projection(meuse) <- projection(r)
+crs(meuse) <- crs(r)
 
 ## ordinary kriging
 v <- variogram(log(zinc)~1, meuse)
