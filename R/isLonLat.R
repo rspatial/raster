@@ -19,11 +19,7 @@
 }
 
 
-.couldBeLonLat <- function(...) {
-	couldBeLonLat(...)
-}
-
-couldBeLonLat <- function(x, warnings=TRUE) {
+.couldBeLonLat <- function(x, warnings=TRUE) {
 	crsLL <- isLonLat(x)
 	crsNA <- is.na(projection(x))
 	e <- extent(x)
