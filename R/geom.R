@@ -88,3 +88,20 @@ setMethod('geom', signature(x='SpatialPoints'),
 	}
 )
 		
+
+setMethod("geom", signature(x="data.frame"), 
+	function(x, d, gt, crs, ...) {	
+		if (gt == "polygons") {
+			sp <- as(g, "SpatialPolygons")
+			sp <- sp::SpatialPolygonsDataFrame(sp, d)
+		} else if (gt == "lines") {
+			sp <- as(g, "SpatialLines")		
+			sp <- sp::SpatialLinesDataFrame(sp, d)
+		} else {
+			sp <- as(g, "SpatialPoints")
+			sp <- sp::SpatialPointsDataFrame(sp, d)
+		}
+		crs(sp)<- crs
+		sp
+	}
+)

@@ -489,3 +489,8 @@ setMethod('raster', signature(x='GridTopology'),
 	}
 )
 
+setMethod('raster', signature(x='SpatRaster'),
+	function(x) {
+		as(x[[1]], "Raster")
+	}
+)
