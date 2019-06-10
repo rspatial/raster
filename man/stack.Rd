@@ -11,6 +11,7 @@
 \alias{stack,SpatialPixelsDataFrame-method}
 \alias{stack,SpatialGridDataFrame-method}
 \alias{stack,kasc-method}
+\alias{stack,SpatRaster-method}
 
 
 \title{Create a RasterStack object}
