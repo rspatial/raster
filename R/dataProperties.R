@@ -54,15 +54,16 @@ inMemory <- function(x) {
 	}
 }
 
-
-hasValues <- function(x) {
-	if (class(x) == 'BasicRaster') { return(FALSE) }
-	if (inherits(x, 'RasterStack')) { 
-		if (nlayers(x) > 0) return(TRUE) else return(FALSE)
+setMethod("hasValues", signature(x="BasicRaster"), 
+	function(x, ...) {
+		if (class(x) == 'BasicRaster') { return(FALSE) }
+		if (inherits(x, 'RasterStack')) { 
+			if (nlayers(x) > 0) return(TRUE) else return(FALSE)
+		}
+		if ( fromDisk(x)  | inMemory(x) ) {
+			return(TRUE)
+		} else {
+			return(FALSE)
+		}
 	}
-	if ( fromDisk(x)  | inMemory(x) ) {
-		return(TRUE)
-	} else {
-		return(FALSE)
-	}
-}
+)
