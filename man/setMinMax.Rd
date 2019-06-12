@@ -17,7 +17,7 @@ setMinMax(x, ...)
 }
 
 \arguments{
-  \item{x}{Raster*} object }
+  \item{x}{Raster object }
   \item{\dots}{additional arguments, none implemented}
 }
 
