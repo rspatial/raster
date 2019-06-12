@@ -4,6 +4,7 @@
 
 \alias{spplot}
 \alias{spplot,Raster-method}
+\alias{spplot,SpatRaster-method}
 \alias{spplot,SpatialPoints-method}
 \alias{lines,SpatialPolygons-method}
 
