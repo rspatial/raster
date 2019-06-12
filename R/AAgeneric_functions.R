@@ -53,6 +53,8 @@ if (!isGeneric("readStart")) {setGeneric("readStart", function(x, ...) standardG
 if (!isGeneric("readStop")) {setGeneric("readStop", function(x)	standardGeneric("readStop"))}	
 if (!isGeneric("res")) { setGeneric("res", function(x) standardGeneric("res")) }
 if (!isGeneric("sampleRegular")) { setGeneric("sampleRegular", function(x, size, ...) standardGeneric("sampleRegular"))}
+if (!isGeneric('setMinMax')) {setGeneric('setMinMax', function(x, ...) standardGeneric('setMinMax')) }	
+
 
 if (!isGeneric("shift")) {setGeneric("shift", function(x, ...)
 standardGeneric("shift"))}	
