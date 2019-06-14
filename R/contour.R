@@ -58,7 +58,7 @@ filledContour <- function(x, y=1, maxpixels=100000, ...) {
 	Y <- yFromRow(x, nrow(x):1)
 	Z <- t( matrix( getValues(x), ncol=x@ncols, byrow=TRUE)[nrow(x):1,] )
 	
-	lonlat <- .couldBeLonLat(x, warnings=FALSE)
+	lonlat <- couldBeLonLat(x, warnings=FALSE)
 	asp <- list(...)$asp
  	if (is.null(asp)) {
 		if (lonlat) {

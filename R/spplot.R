@@ -54,3 +54,20 @@ function(x, ...) {
 }
 )
 
+
+setMethod("spplot", signature(obj='SpatRaster'), 
+	function(obj, ..., maxpixels=50000, as.table=TRUE, zlim)  {
+		obj <- sampleRegular(obj, maxpixels)
+		obj <- as(obj, "Raster")
+		if (!missing(zlim)) {
+			if (length(zlim) != 2) {
+				warning('zlim should be a vector of two elements')
+			} 
+			if (length(zlim) >= 2) {
+				obj[obj < zlim[1] | obj > zlim[2]] <- NA
+			}
+		}
+		obj <- as(obj, 'SpatialGridDataFrame')
+		spplot(obj, ..., as.table=as.table)
+	}
+)

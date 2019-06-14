@@ -130,11 +130,9 @@ setMethod("plot", signature(x='Raster', y='ANY'),
 				if ((length(obj@legend@colortable) > 0) & hasNoCol) {
 					.plotCT(obj, maxpixels=maxpixels, ext=ext, interpolate=interpolate, main=main, addfun=addfun, ...)
 				} else if (useRaster) {
-					.plotraster2(obj, col=col, maxpixels=maxpixels, xaxt=xa, yaxt=ya, main=main[y[i]], 
-						ext=ext, interpolate=interpolate, colNA=colNA, addfun=addfun, alpha=alpha, ...) 
+					.plotraster2(obj, col=col, maxpixels=maxpixels, xaxt=xa, yaxt=ya, main=main[y[i]], ext=ext, interpolate=interpolate, colNA=colNA, addfun=addfun, alpha=alpha, ...) 
 				} else {
-					.plotraster(obj, col=col, maxpixels=maxpixels, xaxt=xa, yaxt=ya, main=main[y[i]], 
-						ext=ext, interpolate=interpolate, addfun=addfun, ...) 
+					.plotraster(obj, col=col, maxpixels=maxpixels, xaxt=xa, yaxt=ya, main=main[y[i]], ext=ext, interpolate=interpolate, addfun=addfun, ...) 
 				}
 			}		
 		}

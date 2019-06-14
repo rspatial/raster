@@ -12,6 +12,7 @@
 \alias{cellFromRow}
 \alias{cellFromCol}
 \alias{cellFromRowColCombine}
+\alias{cellFromRowColCombine,BasicRaster,numeric,numeric-method}
 \alias{fourCellsFromXY}
 \alias{cellFromLine}
 \alias{cellFromPolygon}
@@ -28,7 +29,7 @@ The last cell number equals the number of cells of the Raster* object.
 
 \usage{
 cellFromRowCol(object, row, col, ...)
-cellFromRowColCombine(object, rownr, colnr)
+cellFromRowColCombine(object, row, col, ...)
 cellFromRow(object, rownr)
 cellFromCol(object, colnr)
 colFromX(object, x)

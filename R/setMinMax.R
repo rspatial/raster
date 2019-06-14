@@ -4,15 +4,10 @@
 # Licence GPL v3
 
 
-if (!isGeneric('setMinMax')) {
-	setGeneric('setMinMax', function(x)
-		standardGeneric('setMinMax')) 
-	}	
-
 
 	
 setMethod('setMinMax', signature(x='RasterLayer'), 
-function(x) {
+function(x, ...) {
 	w <- getOption('warn')
 	on.exit(options('warn' = w))
 	options('warn'=-1) 
@@ -49,7 +44,7 @@ function(x) {
 
 
 setMethod('setMinMax', signature(x='RasterBrick'), 
-function(x) {
+function(x, ...) {
 	
 	inMem <- inMemory(x)
 
@@ -101,7 +96,7 @@ function(x) {
 
 
 setMethod('setMinMax', signature(x='RasterStack'), 
-	function(x) {
+	function(x, ...) {
 		for (i in 1:nlayers(x)) {
 			x@layers[[i]] <- setMinMax(x@layers[[i]])
 		}

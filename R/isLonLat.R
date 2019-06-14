@@ -19,11 +19,7 @@
 }
 
 
-.couldBeLonLat <- function(...) {
-	couldBeLonLat(...)
-}
-
-couldBeLonLat <- function(x, warnings=TRUE) {
+.couldBeLonLat <- function(x, warnings=TRUE) {
 	crsLL <- isLonLat(x)
 	crsNA <- is.na(projection(x))
 	e <- extent(x)
@@ -46,10 +42,20 @@ couldBeLonLat <- function(x, warnings=TRUE) {
 }
 
 
+setMethod("couldBeLonLat", signature("BasicRaster"), 
+	function(x, warnings=TRUE, ...) {
+		.couldBeLonLat(x, warnings=warnings)
+	}
+)
 
+setMethod("couldBeLonLat", signature("Spatial"), 
+	function(x, warnings=TRUE, ...) {
+		.couldBeLonLat(x, warnings=warnings)
+	}
+)
 
 setMethod('isLonLat', signature(x='Spatial'), 
-	function(x){
+	function(x, ...){
 		isLonLat(projection(x))
     }
 )
@@ -59,7 +65,7 @@ setMethod('isLonLat', signature(x='BasicRaster'),
 # copied from the SP package (slightly adapted)
 #author:
 # ...
-	function(x){
+	function(x, ...){
 		p4str <- projection(x)
 		if (is.na(p4str) || nchar(p4str) == 0) {
 			return(FALSE)
@@ -77,7 +83,7 @@ setMethod('isLonLat', signature(x='character'),
 # copied from the SP package (slightly adapted)
 #author:
 # ...
-	function(x){
+	function(x, ...){
 		res <- grep("longlat", x, fixed = TRUE)
 		if (length(res) == 0) {
 			return(FALSE)
@@ -93,7 +99,7 @@ setMethod('isLonLat', signature(x='CRS'),
 # copied from the SP package (slightly adapted)
 #author:
 # ...
-	function(x){
+	function(x, ...){
 		if (is.na(x@projargs)) { 
 			return(FALSE)
 		} else {
@@ -115,7 +121,7 @@ setMethod('isLonLat', signature(x='CRS'),
 )
 
 setMethod('isLonLat', signature(x='ANY'), 
-	function(x){
+	function(x, ...){
 		isLonLat(as.character(x))
     }
 )

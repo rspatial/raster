@@ -82,14 +82,10 @@
 
 	if (sethook) {
 		setHook("plot.new", function(...) {
-			w <- getOption('warn')
-			on.exit(options('warn' = w))
-			options('warn'=-1) 
-		    on.exit(graphics::par(old.par))
-			}, 	action="replace")
-		setHook("plot.new", function(...) setHook("plot.new", NULL, "replace"))
+		    graphics::par(old.par)
+			setHook("plot.new", function(...) setHook("plot.new", NULL, "replace"))
+		}, 	action="replace")
 	}
-	
 }
 
 

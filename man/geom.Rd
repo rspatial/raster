@@ -6,6 +6,7 @@
 \alias{geom,SpatialPolygons-method}
 \alias{geom,SpatialLines-method}
 \alias{geom,SpatialPoints-method}
+\alias{geom,data.frame-method}
 
 
 \title{Get the coordinates of a vector type Spatial* object}
@@ -16,12 +17,18 @@ Extract the coordinates of a Spatial object
 
 \usage{
 \S4method{geom}{SpatialPolygons}(x, sepNA=FALSE, ...)
+\S4method{geom}{SpatialLines}(x, sepNA=FALSE, ...)
+\S4method{geom}{SpatialPoints}(x, ...)
+\S4method{geom}{data.frame}(x, d, gt, crs, ...)
 }
 
 \arguments{
-  \item{x}{SpatialPolygons*, SpatialLines*, or SpatialPoints* object}
+  \item{x}{SpatialPolygons*, SpatialLines*, or SpatialPoints* object; or a data.frame}
   \item{sepNA}{logical. If \code{TRUE}, geometries are separated by a row with \code{NA} values}
   \item{...}{additional arguments, none implemented}
+  \item{d}{data.frame that matches the number of objects in data.frame \code{x}}
+  \item{gt}{character. geometry type. Must be one of "polygons", "lines", "points"}
+  \item{crs}{character. PROJ.4 crs string}  
 }
 
 

@@ -13,19 +13,19 @@ The minimum and maximum value of a RasterLayer are computed (from a file on disk
 }
 
 \usage{
-setMinMax(x)
+setMinMax(x, ...)
 }
 
 \arguments{
-  \item{x}{ A \code{Raster*} object }
+  \item{x}{Raster object }
+  \item{\dots}{additional arguments, none implemented}
 }
 
 \value{
-a Raster* object
+Raster object
 }
 
 \seealso{ \code{\link[raster]{getValues}} }
-
 
 
 \examples{ 
@@ -33,7 +33,6 @@ r <- raster(system.file("external/test.grd", package="raster"))
 r
 r <- setMinMax(r)
 r
-	
 }
 
 \keyword{ spatial }

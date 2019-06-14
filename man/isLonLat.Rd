@@ -7,6 +7,8 @@
 \alias{isLonLat,character-method}
 \alias{isLonLat,ANY-method}
 \alias{couldBeLonLat}
+\alias{couldBeLonLat,BasicRaster-method}
+\alias{couldBeLonLat,Spatial-method}
 
   
 \title{Is this longitude/latitude data?}
@@ -16,13 +18,16 @@ Test whether a Raster* or other object has a longitude/latitude coordinate refer
 }
 
 \usage{
-isLonLat(x)
-couldBeLonLat(x, warnings=TRUE)
+\S4method{isLonLat}{BasicRaster}(x, ...)
+\S4method{isLonLat}{Spatial}(x, ...)
+\S4method{couldBeLonLat}{BasicRaster}(x, warnings=TRUE, ...)
+\S4method{couldBeLonLat}{Spatial}(x, warnings=TRUE, ...)
 }
 
 \arguments{
-\item{x}{Raster* object}
+\item{x}{Raster* or Spatial* object}
 \item{warnings}{logical. If \code{TRUE}, a warning is given if the CRS is \code{NA} or when the CRS is longitude/latitude but the coordinates do not match that}
+\item{...}{additional arguments. None implemented}
 }
 
 
@@ -35,7 +40,7 @@ Logical
 \examples{
 r <- raster()
 isLonLat(r)
-projection(r) <- "+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +ellps=WGS84"
+crs(r) <- "+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +ellps=WGS84"
 isLonLat(r)
 }
 

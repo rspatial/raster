@@ -243,3 +243,10 @@ setMethod('stack', signature(x='kasc'),
 		as(x, 'RasterStack')
 	}
 )
+
+setMethod('stack', signature(x='SpatRaster'), 
+	function(x) {
+		x <- as(x, "Raster")
+		stack(x)
+	}
+)

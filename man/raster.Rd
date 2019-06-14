@@ -24,6 +24,9 @@
 \alias{raster,grf-method}
 \alias{raster,sf-method}
 \alias{raster,GridTopology-method}
+\alias{raster,SpatRaster-method}
+
+
 
 \title{Create a RasterLayer object}
 

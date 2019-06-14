@@ -50,7 +50,7 @@ d <- gridDistance(r,origin=2,omit=3)
 plot(d)
 
 #UTM small area
-projection(r) <- "+proj=utm +zone=15 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
+crs(r) <- "+proj=utm +zone=15 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 d <- gridDistance(r,origin=2,omit=3) 
 plot(d)
 
