@@ -19,6 +19,9 @@ function(x, fun='cell', filename="", ...) {
 		} else {
 			stop("argument 'fun' is a character variable, but not one of 'x', 'y', 'row', 'col', 'cell', or 'chess'")
 		}
+	} else if (is.numeric(fun)) {
+		value <- fun
+		fun <- function(...) value
 	}
 
 	out <- raster(x)
