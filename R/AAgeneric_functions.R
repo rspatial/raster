@@ -7,7 +7,6 @@ if (!isGeneric("atan2")) { setGeneric("atan2", function(y, x) standardGeneric("a
 
 if (!isGeneric('buffer')) {setGeneric('buffer', function(x, ...) standardGeneric('buffer'))}	
 
-
 if (!isGeneric("calc")) {setGeneric("calc", function(x, fun, ...) standardGeneric("calc")) }
 if (!isGeneric("clamp")) {setGeneric("clamp", function(x, ...) standardGeneric("clamp")) }	
 if (!isGeneric("cover")) {setGeneric("cover", function(x, y, ...) standardGeneric("cover"))}		
@@ -46,6 +45,8 @@ if (!isGeneric("nrow<-")) { setGeneric("nrow<-", function(x, ..., value) standar
 if (!isGeneric('overlay')) { setGeneric('overlay', function(x, y, ...) standardGeneric('overlay'))}
 if (!isGeneric("predict")) {setGeneric("predict", function(object, ...) standardGeneric("predict"))}
 
+if (!isGeneric("plotRGB")) { setGeneric("plotRGB", function(x, ...) standardGeneric("plotRGB"))}	
+
 if (!isGeneric("rasterize")) {setGeneric("rasterize", function(x, y, ...) standardGeneric("rasterize"))}	
 if (!isGeneric("reclassify")) { setGeneric("reclassify", function(x, rcl, ...) standardGeneric("reclassify"))}	
 
@@ -58,6 +59,7 @@ if (!isGeneric('setMinMax')) {setGeneric('setMinMax', function(x, ...) standardG
 
 if (!isGeneric("shift")) {setGeneric("shift", function(x, ...)
 standardGeneric("shift"))}	
+if (!isGeneric("stretch")) {setGeneric("stretch", function(x, ...) standardGeneric("stretch"))}	
 
 if (!isGeneric("t")) { setGeneric("t", function(x) standardGeneric("t"))}	
 

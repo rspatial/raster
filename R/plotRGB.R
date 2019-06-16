@@ -5,11 +5,6 @@
 
 # partly based on functions in the pixmap package by Friedrich Leisch
 
-if (!isGeneric("plotRGB")) {
-	setGeneric("plotRGB", function(x, ...)
-		standardGeneric("plotRGB"))
-}	
-
 
 setMethod("plotRGB", signature(x='RasterStackBrick'), 
 function(x, r=1, g=2, b=3, scale, maxpixels=500000, stretch=NULL, ext=NULL, interpolate=FALSE, colNA='white', alpha, bgalpha, addfun=NULL, zlim=NULL, zlimcol=NULL, axes=FALSE, xlab='', ylab='', asp=NULL, add=FALSE, margins=FALSE, ...) { 

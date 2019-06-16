@@ -5,15 +5,15 @@
 \title{Stretch}
 
 \description{
-Linear strech of values in a Raster object
+Linear stretch of values in a Raster object
 }
 
 \usage{
-stretch(x, minv=0, maxv=255, minq=0, maxq=1, filename='', ...) 
+\S4method{stretch}{Raster}(x, minv=0, maxv=255, minq=0, maxq=1, filename='', ...) 
 }
 
 \arguments{
-\item{x}{Raster* object} 
+\item{x}{Raster object} 
 \item{minv}{numeric >= 0 and smaller than maxv. lower bound of streched value}
 \item{maxv}{numeric <= 255 and larger than maxv. upper bound of streched value}
 \item{minq}{numeric >= 0 and smaller than maxq. lower quitile bound of original value}
@@ -24,7 +24,7 @@ stretch(x, minv=0, maxv=255, minq=0, maxq=1, filename='', ...)
  
  
 \value{
-Raster* object
+Raster
 }
   
 \seealso{stretch argument in \code{\link{plotRGB}}}

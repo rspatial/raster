@@ -32,9 +32,8 @@
 }
 
 
-# This one works for multilayer objects
-# Linear stretch between min and max values
-stretch <- function(x, minv=0, maxv=255, minq=0, maxq=1, filename='', ...) {
+setMethod("stretch", signature(x="SpatRaster"), 
+function(x, minv=0, maxv=255, minq=0, maxq=1, filename="", ...) {
 	minq <- max(0,minq)
 	maxq <- min(1,maxq)
 	stopifnot(minq < maxq)
@@ -92,4 +91,4 @@ stretch <- function(x, minv=0, maxv=255, minq=0, maxq=1, filename='', ...) {
 	}
 	return(out)
 }
-
+)
