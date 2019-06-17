@@ -6,6 +6,8 @@
 \alias{spplot,Raster-method}
 \alias{spplot,SpatRaster-method}
 \alias{spplot,SpatialPoints-method}
+\alias{spplot,SpatialLines-method}
+\alias{spplot,SpatialPolygons-method}
 \alias{lines,SpatialPolygons-method}
 
 
@@ -14,19 +16,23 @@
 \description{
 A wrapper function around \link[sp]{spplot} (sp package). With spplot it is easy to map several layers with a single legend for all maps. ssplot is itself a wrapper around the \link[lattice]{levelplot} function in the lattice package, and see the help for these functions for additional options.
 
-One of the advantages of these wrapper functions is the additional \code{maxpixels} argument to sample large Raster objects for faster drawing.
+One of the advantages of the wrapper function for Raster objects s is the additional \code{maxpixels} argument to sample large objects for faster drawing.
+
+We also add spplot methods for Spatial objects that have no data.frame.
 }
 
-\section{Methods}{
-\describe{
-\code{spplot(obj, ..., maxpixels=50000, as.table=TRUE)}
-
-\tabular{rll}{
-\tab \code{obj} \tab  A Raster* object  \cr
-\tab \code{...} \tab  Any argument that can be passed to \code{\link[sp]{spplot}} and \link[lattice]{levelplot} \cr
-\tab \code{maxpixels} \tab Integer. Number of pixels to sample from each layer of large Raster objects \cr
+\usage{
+\S4method{spplot}{Raster}(obj, ..., maxpixels=50000, as.table=TRUE, zlim)
 }
-}}
+
+
+\arguments{
+\item{obj}{Raster* object}
+\item{...}{Any argument that can be passed to \code{\link[sp]{spplot}} and \link[lattice]{levelplot}}
+\item{maxpixels}{integer. Number of pixels to sample from each layer of large Raster objects}
+\item{as.table}{If \code{TRUE}, the plots are ordered from top to bottom} 
+\item{zlim}{Vector of two elements indicating the minimum and maximum values to be mapped (values outside that ranage are set to these limits)} 
+}
 
 
 \seealso{

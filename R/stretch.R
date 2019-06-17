@@ -32,7 +32,7 @@
 }
 
 
-setMethod("stretch", signature(x="SpatRaster"), 
+setMethod("stretch", signature(x="Raster"), 
 function(x, minv=0, maxv=255, minq=0, maxq=1, filename="", ...) {
 	minq <- max(0,minq)
 	maxq <- min(1,maxq)

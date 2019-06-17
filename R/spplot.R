@@ -18,7 +18,9 @@ setMethod("spplot", signature(obj='Raster'),
 				warning('zlim should be a vector of two elements')
 			} 
 			if (length(zlim) >= 2) {
-				obj[obj < zlim[1] | obj > zlim[2]] <- NA
+				zlim <- sort(zlim[1:2])
+				obj[obj < zlim[1]] <- zlim[1]
+				obj[obj > zlim[2]] <- zlim[2]
 			}
 		}
 		obj <- as(obj, 'SpatialGridDataFrame')

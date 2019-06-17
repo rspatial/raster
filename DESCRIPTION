@@ -8,7 +8,7 @@ Suggests: rgdal (>= 0.9-1), rgeos (>= 0.3-8), ncdf4, igraph, tcltk, parallel, ra
 LinkingTo: Rcpp
 Imports: Rcpp, methods
 SystemRequirements: C++11
-Description: Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported. See the materials on https://rspatial.org/ to get started
+Description: Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported. There is a also support for vector data operations such as intersections. See the manual and tutorials on https://rspatial.org/ to get started.
 License: GPL (>=3)
 URL: https://CRAN.R-project.org/package=raster
 BugReports: https://github.com/rspatial/raster/issues/

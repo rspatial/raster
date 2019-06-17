@@ -1,6 +1,5 @@
 \name{xyFromCell}
 
-
 \alias{xFromCol}
 \alias{xFromCol,Raster,numeric-method}
 \alias{xFromCol,Raster,missing-method}
@@ -15,6 +14,9 @@
 \alias{xyFromCell,BasicRaster-method}
 \alias{xyFromCell,BasicRaster,ANY-method}
 \alias{xyFromCell,Raster-method}
+\alias{xyFromCell,Raster-method}
+\alias{coordinates}
+\alias{coordinates,Raster-method}
 
 
 \title{Coordinates from a row, column or cell number}
@@ -29,6 +31,7 @@ These functions get coordinates of the center of raster cells for a row, column,
 \S4method{xFromCell}{Raster,numeric}(object, cell)
 \S4method{yFromCell}{Raster,numeric}(object, cell)
 \S4method{xyFromCell}{BasicRaster,ANY}(object, cell, spatial=FALSE, ...)
+\S4method{coordinates}{Raster}(obj, ...)
 }
 
 
@@ -39,6 +42,7 @@ These functions get coordinates of the center of raster cells for a row, column,
   \item{cell}{cell number(s)}
   \item{spatial}{If \code{spatial=TRUE}, \code{xyFromCell} returns a SpatialPoints object instead of a matrix}
   \item{...}{additional arguments. None implemented}
+  \item{obj}{Raster object}
 }
   
 \details{
@@ -50,6 +54,8 @@ The last cell number equals the number of cells of the Raster* object.
 xFromCol, yFromCol, xFromCell, yFromCell: vector of x or y coordinates 
 
 xyFromCell: matrix(x,y) with coordinate pairs 
+
+coordinates: xy coordinates for all cells
 }
 
 

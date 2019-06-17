@@ -1,6 +1,7 @@
 \name{stretch}
 
 \alias{stretch}
+\alias{stretch,Raster-method}
   
 \title{Stretch}
 
