@@ -115,7 +115,7 @@ r2c <- clusterR(logo, predict, args=list(model=model, fun=predfun, index=1:2))
 
 # principal components of a RasterBrick
 # here using sampling to simulate an object too large
-# too feed all its values to prcomp
+# to feed all its values to prcomp
 sr <- sampleRandom(logo, 100)
 pca <- prcomp(sr)
 
