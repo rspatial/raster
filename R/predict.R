@@ -47,65 +47,38 @@ setMethod('predict', signature(object='Raster'),
 
 		if (!is.null(factors)) {
 			stopifnot(is.list(factors))
-			haveFactor <- TRUE 
 			f <- names(factors)
 			if (any(trimws(f) == "")) {
 				stop("all factors must be named")
-			}
-			if (!all(f %in% lyrnames)) {
-				ff <- f[!(f %in% lyrnames)]
-				stop(paste("factor name(s):", paste(ff, collapse=", "), " not in layer names"))
 			}
 		} else {
 			if (inherits(model, "randomForest")) {
 				f <- names(which(sapply(model$forest$xlevels, max) != "0"))
 				if (length(f) > 0) { 
-					haveFactor <- TRUE 
 					factors <- model$forest$xlevels[f]
-					#factors <- list()
-					#for (i in 1:length(f)) {
-					#	factors[[i]] <- model$forest$xlevels[[ f[i] ]]
-					#}
 				}
 			} else if (inherits(model, "gbm")) {
 				dafr <- model$gbm.call$dataframe 
 				i <- sapply(dafr, is.factor)
 				if (any(i)) {
-					haveFactor <- TRUE 
 					j <- which(i)
 					factors <- list()
-					for (i in 1:length(j)) {
-						factors[[i]] <- levels(dafr[[ j[i] ]])
+					for (k in 1:length(j)) {
+						factors[[k]] <- levels(dafr[[ j[k] ]])
 					}
 					f <- colnames(dafr)[j]
-					#names(factors) <- f
 				}
 			} else { #glm and others
-				dataclasses <- try (attr(model$terms, "dataClasses")[-1], silent=TRUE)
-				if ((!is.null(dataclasses)) && (class(dataclasses) != "try-error")) {
-					varnames <- names(dataclasses)
-					if ( length( unique(lyrnames[(lyrnames %in% varnames)] )) != length(lyrnames[(lyrnames %in% varnames)] )) {
-						stop('duplicate names in Raster* object: ', lyrnames)
-					}
-					f <- names( which(dataclasses == "factor") )
-					k <- f %in% names(object)
-					if (!all(k)) {
-						stop(paste("model factors not all variables in Raster object"), f[!k])
-					}
-					if (length(f) > 0) { 
-						haveFactor <- TRUE 
-						factors <- model$xlevels
-						if (length(factors) != length(f)) {
-							stop("not able to extract factor levels, set them manually")
-						}
-						#factors <- list()
-						#for (i in 1:length(f)) {
-							#ff <- names(which(table(model$data[[ f[i] ]]) != 0))
-							#factors[[i]] <- ff
-						#}
-					}
-				}
+				try(factors <- model$xlevels, silent=TRUE)
+				f <- names(factors)
 			}		
+		}
+		if (length(factors) > 0) {
+			haveFactor <- TRUE 
+			if (!all(f %in% lyrnames)) {
+				ff <- f[!(f %in% lyrnames)]
+				stop(paste("factor name(s):", paste(ff, collapse=", "), " not in layer names"))
+			}			
 		}
 		if (!canProcessInMemory(predrast) && filename == '') {
 			filename <- rasterTmpFile()
