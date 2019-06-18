@@ -61,10 +61,11 @@ setMethod('predict', signature(object='Raster'),
 				f <- names(which(sapply(model$forest$xlevels, max) != "0"))
 				if (length(f) > 0) { 
 					haveFactor <- TRUE 
-					factors <- list()
-					for (i in 1:length(f)) {
-						factors[[i]] <- model$forest$xlevels[[ f[i] ]]
-					}
+					factors <- model$forest$xlevels[f]
+					#factors <- list()
+					#for (i in 1:length(f)) {
+					#	factors[[i]] <- model$forest$xlevels[[ f[i] ]]
+					#}
 				}
 			} else if (inherits(model, "gbm")) {
 				dafr <- model$gbm.call$dataframe 
@@ -86,16 +87,22 @@ setMethod('predict', signature(object='Raster'),
 					if ( length( unique(lyrnames[(lyrnames %in% varnames)] )) != length(lyrnames[(lyrnames %in% varnames)] )) {
 						stop('duplicate names in Raster* object: ', lyrnames)
 					}
-					f <- names( which(dataclasses == 'factor') )
-					f <- f[f %in% names(object)]
+					f <- names( which(dataclasses == "factor") )
+					k <- f %in% names(object)
+					if (!all(k)) {
+						stop(paste("model factors not all variables in Raster object"), f[!k])
+					}
 					if (length(f) > 0) { 
 						haveFactor <- TRUE 
-						factors <- list()
-						for (i in 1:length(f)) {
-							#ff <- levels( model$data[[ f[i] ]] )
-							ff <- names(which(table(model$data[[ f[i] ]]) != 0))
-							factors[[i]] <- ff
+						factors <- model$xlevels
+						if (length(factors) != length(f)) {
+							stop("not able to extract factor levels, set them manually")
 						}
+						#factors <- list()
+						#for (i in 1:length(f)) {
+							#ff <- names(which(table(model$data[[ f[i] ]]) != 0))
+							#factors[[i]] <- ff
+						#}
 					}
 				}
 			}		
@@ -104,7 +111,7 @@ setMethod('predict', signature(object='Raster'),
 			filename <- rasterTmpFile()
 		} 
 
-		if (filename == '') {
+		if (filename == "") {
 			v <- matrix(NA, ncol=nlayers(predrast), nrow=ncell(predrast))
 		} else {
 			predrast <- writeStart(predrast, filename=filename, format=format, datatype=datatype, overwrite=overwrite )
