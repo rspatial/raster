@@ -3,26 +3,29 @@
 # Version 1.0
 # Licence GPL v3
 
-ratify <- function(x, filename='', count=FALSE, ...) {
-	stopifnot(nlayers(x) == 1)
-	if (count) {
-		f <- freq(x, useNA='no')
-		f <- data.frame(f)
-		colnames(f) <- c('ID', 'COUNT')
-	} else {
-		f <- data.frame(ID=unique(x))
-	}
-	x@data@isfactor <- TRUE
-	x@data@attributes <- list(f)
-	if (filename != '') {
-		x <- writeRaster(x, filename, ...)
-		# only native format stores this, hence re-assign these:
-		x@data@isfactor <- TRUE
-		x@data@attributes <- list(f)	
-	}
-	return(x)
-}
+if (!isGeneric("ratify")) {setGeneric("ratify", function(x, ...)		standardGeneric("ratify"))}	
 
+setMethod("ratify", signature(x="Raster"), 
+	function(x, filename="", count=FALSE, ...) {
+		stopifnot(nlayers(x) == 1)
+		if (count) {
+			f <- freq(x, useNA='no')
+			f <- data.frame(f)
+			colnames(f) <- c('ID', 'COUNT')
+		} else {
+			f <- data.frame(ID=unique(x))
+		}
+		x@data@isfactor <- TRUE
+		x@data@attributes <- list(f)
+		if (filename != '') {
+			x <- writeRaster(x, filename, ...)
+			# only native format stores this, hence re-assign these:
+			x@data@isfactor <- TRUE
+			x@data@attributes <- list(f)	
+		}
+		return(x)
+	}
+)
 
 .unweightRAT <- function(rat, fun='mean') {
 

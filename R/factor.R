@@ -57,12 +57,6 @@ factorValues <- function(x, v, layer=1, att=NULL, append.names=FALSE) {
 }
 
 
-	
-if (!isGeneric("is.factor")) {
-	setGeneric("is.factor", function(x)
-		standardGeneric("is.factor"))
-}	
-
 setMethod('is.factor', signature(x='Raster'), 
 	function(x) {
 		f <- x@data@isfactor
@@ -183,14 +177,6 @@ setMethod('levels<-', signature(x='Raster'),
 		return(x)		
 	}
 )
-
-
-
-
-if (!isGeneric("as.factor")) {
-	setGeneric("as.factor", function(x)
-		standardGeneric("as.factor"))
-}
 
 
 setMethod('as.factor', signature(x='RasterLayer'), 

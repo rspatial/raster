@@ -5,6 +5,12 @@ if (!isGeneric("area")) {setGeneric("area", function(x, ...) standardGeneric("ar
 if (!isGeneric("approxNA")) {setGeneric("approxNA", function(x, ...)		standardGeneric("approxNA"))}	
 
 if (!isGeneric("as.data.frame")) { setGeneric("as.data.frame", function(x, row.names = NULL, optional = FALSE, ...) standardGeneric("as.data.frame")) }	
+
+if (!isGeneric("as.factor")) {setGeneric("as.factor", function(x) standardGeneric("as.factor"))}
+
+if (!isGeneric("is.factor")) {setGeneric("is.factor", function(x) standardGeneric("is.factor"))}
+
+
 if (!isGeneric("atan2")) { setGeneric("atan2", function(y, x) standardGeneric("atan2"))}	
 
 if (!isGeneric('buffer')) {setGeneric('buffer', function(x, ...) standardGeneric('buffer'))}	
