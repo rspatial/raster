@@ -75,9 +75,10 @@ setMethod('predict', signature(object='Raster'),
 		}
 		if (length(factors) > 0) {
 			haveFactor <- TRUE 
-			if (!all(f %in% lyrnames)) {
-				ff <- f[!(f %in% lyrnames)]
-				stop(paste("factor name(s):", paste(ff, collapse=", "), " not in layer names"))
+			lyrnamesc <- c(lyrnames, names(const))
+			if (!all(f %in% lyrnamesc)) {
+				ff <- f[!(f %in% lyrnamesc)]
+				warning(paste("factor name(s):", paste(ff, collapse=", "), " not in layer names"))
 			}			
 		}
 		if (!canProcessInMemory(predrast) && filename == '') {
