@@ -4,7 +4,9 @@
 # Licence GPL v3
 
 .pointsToMatrix <- function(p) {
-	if (inherits(p, 'SpatialPoints')) {
+	if (inherits(p, "sf")) {
+		p <- coordinates(as(p, "Spatial"))
+	} else if (inherits(p, 'SpatialPoints')) {
 		p <- coordinates(p)
 	} else if (is.data.frame(p)) {
 		p <- as.matrix(p)
