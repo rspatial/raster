@@ -33,6 +33,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// do_clamp
+Rcpp::NumericVector do_clamp(std::vector<double> d, std::vector<double> r, bool usevals);
+RcppExport SEXP _raster_do_clamp(SEXP dSEXP, SEXP rSEXP, SEXP usevalsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type d(dSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type r(rSEXP);
+    Rcpp::traits::input_parameter< bool >::type usevals(usevalsSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_clamp(d, r, usevals));
+    return rcpp_result_gen;
+END_RCPP
+}
 // getPolygons
 NumericMatrix getPolygons(NumericMatrix xyv, NumericVector res, int nodes);
 RcppExport SEXP _raster_getPolygons(SEXP xyvSEXP, SEXP resSEXP, SEXP nodesSEXP) {
@@ -140,6 +153,23 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< bool >::type narm(narmSEXP);
     rcpp_result_gen = Rcpp::wrap(doRowMax(x, narm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_terrains
+Rcpp::NumericVector do_terrains(std::vector<double> d, std::vector<int> dim, std::vector<double> res, int unit, std::vector<bool> option, bool geo, std::vector<double> gy);
+RcppExport SEXP _raster_do_terrains(SEXP dSEXP, SEXP dimSEXP, SEXP resSEXP, SEXP unitSEXP, SEXP optionSEXP, SEXP geoSEXP, SEXP gySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type d(dSEXP);
+    Rcpp::traits::input_parameter< std::vector<int> >::type dim(dimSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type res(resSEXP);
+    Rcpp::traits::input_parameter< int >::type unit(unitSEXP);
+    Rcpp::traits::input_parameter< std::vector<bool> >::type option(optionSEXP);
+    Rcpp::traits::input_parameter< bool >::type geo(geoSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type gy(gySEXP);
+    rcpp_result_gen = Rcpp::wrap(do_terrains(d, dim, res, unit, option, geo, gy));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -296,21 +326,35 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// reclassify
+Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, bool dolowest, bool doright, bool NAonly, double NAval);
+RcppExport SEXP _raster_reclassify(SEXP dSEXP, SEXP rclSEXP, SEXP dolowestSEXP, SEXP dorightSEXP, SEXP NAonlySEXP, SEXP NAvalSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type rcl(rclSEXP);
+    Rcpp::traits::input_parameter< bool >::type dolowest(dolowestSEXP);
+    Rcpp::traits::input_parameter< bool >::type doright(dorightSEXP);
+    Rcpp::traits::input_parameter< bool >::type NAonly(NAonlySEXP);
+    Rcpp::traits::input_parameter< double >::type NAval(NAvalSEXP);
+    rcpp_result_gen = Rcpp::wrap(reclassify(d, rcl, dolowest, doright, NAonly, NAval));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 RcppExport SEXP _broom(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP _do_clamp(SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _do_layerize(SEXP, SEXP, SEXP);
-RcppExport SEXP _do_terrain(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _edge(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _focal_fun(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _focal_get(SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _focal_sum(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP _reclass(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 RcppExport SEXP _rcpp_module_boot_spmod();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_raster_doBilinear", (DL_FUNC) &_raster_doBilinear, 4},
     {"_raster_doCellFromRowCol", (DL_FUNC) &_raster_doCellFromRowCol, 4},
+    {"_raster_do_clamp", (DL_FUNC) &_raster_do_clamp, 3},
     {"_raster_getPolygons", (DL_FUNC) &_raster_getPolygons, 3},
     {"_raster_availableRAM", (DL_FUNC) &_raster_availableRAM, 1},
     {"_raster_getMode", (DL_FUNC) &_raster_getMode, 2},
@@ -320,6 +364,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raster_ppmax", (DL_FUNC) &_raster_ppmax, 3},
     {"_raster_doRowMin", (DL_FUNC) &_raster_doRowMin, 2},
     {"_raster_doRowMax", (DL_FUNC) &_raster_doRowMax, 2},
+    {"_raster_do_terrains", (DL_FUNC) &_raster_do_terrains, 7},
     {"_raster_aggregate_get", (DL_FUNC) &_raster_aggregate_get, 2},
     {"_raster_aggregate_fun", (DL_FUNC) &_raster_aggregate_fun, 4},
     {"_raster_get_area_polygon", (DL_FUNC) &_raster_get_area_polygon, 2},
@@ -330,16 +375,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raster_doCellFromXY", (DL_FUNC) &_raster_doCellFromXY, 8},
     {"_raster_doXYFromCell", (DL_FUNC) &_raster_doXYFromCell, 7},
     {"_raster_doFourCellsFromXY", (DL_FUNC) &_raster_doFourCellsFromXY, 9},
+    {"_raster_reclassify", (DL_FUNC) &_raster_reclassify, 6},
     {"_rcpp_module_boot_spmod", (DL_FUNC) &_rcpp_module_boot_spmod, 0},
     {"_broom",                          (DL_FUNC) &_broom,                          6},
-    {"_do_clamp",                       (DL_FUNC) &_do_clamp,                       4},
     {"_do_layerize",                    (DL_FUNC) &_do_layerize,                    3},
-    {"_do_terrain",                     (DL_FUNC) &_do_terrain,                     8},
     {"_edge",                           (DL_FUNC) &_edge,                           6},
     {"_focal_fun",                      (DL_FUNC) &_focal_fun,                      7},
     {"_focal_get",                      (DL_FUNC) &_focal_get,                      4},
     {"_focal_sum",                      (DL_FUNC) &_focal_sum,                      7},
-    {"_reclass",                        (DL_FUNC) &_reclass,                        7},
     {NULL, NULL, 0}
 };
 

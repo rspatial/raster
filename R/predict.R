@@ -59,6 +59,8 @@ setMethod('predict', signature(object='Raster'),
 				}
 			} else if (inherits(model, "gbm")) {
 				dafr <- model$gbm.call$dataframe 
+				vars <- model$gbm.call$gbm.x
+				dafr <- dafr[,vars]
 				i <- sapply(dafr, is.factor)
 				if (any(i)) {
 					j <- which(i)
@@ -79,6 +81,7 @@ setMethod('predict', signature(object='Raster'),
 			if (!all(f %in% lyrnamesc)) {
 				ff <- f[!(f %in% lyrnamesc)]
 				warning(paste("factor name(s):", paste(ff, collapse=", "), " not in layer names"))
+				f[(f %in% lyrnamesc)]
 			}			
 		}
 		if (!canProcessInMemory(predrast) && filename == '') {

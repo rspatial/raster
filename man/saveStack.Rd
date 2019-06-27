@@ -37,9 +37,10 @@ RasterStack object
 \examples{
 file <- system.file("external/test.grd", package="raster")
 s <- stack(c(file, file))
+
+\dontrun{
 s <- stackSave(s, "mystack")
 # note that filename adds an extension .stk to a stackfile  
-\dontrun{
 s2 <- stackOpen("mystack.stk")
 s2
 }

@@ -89,6 +89,8 @@ This function is used for the side-effect of writing values to a file.
 \seealso{\code{\link[raster]{writeFormats}}, \code{\link[raster]{writeValues}} }  
 
 \examples{ 
+\dontrun{
+
 r <- raster(system.file("external/test.grd", package="raster"))
 
 # take a small part
@@ -110,6 +112,7 @@ if (require(rgdal)) {
 # write to netcdf 
 if (require(ncdf4)) {	
  rnc <- writeRaster(r, filename='netCDF.nc', format="CDF", overwrite=TRUE)   
+}
 }
 }
 

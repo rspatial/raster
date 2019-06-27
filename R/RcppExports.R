@@ -9,6 +9,10 @@
     .Call(`_raster_doCellFromRowCol`, nrow, ncol, rownr, colnr)
 }
 
+.clamp <- function(d, r, usevals) {
+    .Call(`_raster_do_clamp`, d, r, usevals)
+}
+
 .getPolygons <- function(xyv, res, nodes) {
     .Call(`_raster_getPolygons`, xyv, res, nodes)
 }
@@ -43,6 +47,10 @@
 
 .doRowMax <- function(x, narm) {
     .Call(`_raster_doRowMax`, x, narm)
+}
+
+.terrain <- function(d, dim, res, unit, option, geo, gy) {
+    .Call(`_raster_do_terrains`, d, dim, res, unit, option, geo, gy)
 }
 
 .aggregate_get <- function(d, dims) {
@@ -83,5 +91,9 @@
 
 .doFourCellsFromXY <- function(ncols, nrows, xmin, xmax, ymin, ymax, xy, duplicates, isGlobalLonLat) {
     .Call(`_raster_doFourCellsFromXY`, ncols, nrows, xmin, xmax, ymin, ymax, xy, duplicates, isGlobalLonLat)
+}
+
+.reclassify <- function(d, rcl, dolowest, doright, NAonly, NAval) {
+    .Call(`_raster_reclassify`, d, rcl, dolowest, doright, NAonly, NAval)
 }
 

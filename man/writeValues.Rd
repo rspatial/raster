@@ -45,6 +45,7 @@ RasterLayer or RasterBrick
 
 \examples{ 
 
+\dontrun{
 r <- raster(system.file("external/test.grd", package="raster"))
 # write to a new binary file in chunks
 s <- raster(r)
@@ -84,7 +85,7 @@ for (i in 1:tr$n) {
 b <- writeStop(b)
 # note that the above is equivalent to 
 # b <- writeRaster(s, filename="test.grd", format="raster",overwrite=TRUE)
-
+}
 }
 
 \keyword{ spatial }
