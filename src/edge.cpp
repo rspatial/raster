@@ -51,18 +51,19 @@ std::vector<double> do_edge(std::vector<double> d, std::vector<int> dim, bool cl
 			}
 		} 
 	} else { // by class
-		int test;
 		for (size_t i = 1; i < (nrow-1); i++) {
 			for (size_t j = 1; j < (ncol-1); j++) {
 				size_t cell = i*ncol+j;
-				test = d[ cell+r[0]*ncol+c[0] ];
-				if (std::isnan(test)) {
-					val[cell] = NAN;			
-				} else {
-					val[cell] = falseval;
-				}
-				for (size_t k=1; k < dirs; k++) {
-					if (test != d[ cell+r[k]*ncol +c[k] ]) {
+				double test = d[cell+r[0]*ncol+c[0]];
+				val[cell] = std::isnan(test) ? NAN : falseval;
+				for (size_t k=1; k<dirs; k++) {
+					double v = d[cell+r[k]*ncol +c[k]];
+					if (std::isnan(test)) {
+						if (!std::isnan(v)) {
+							val[cell] = 1;
+							break;
+						}
+					} else if (test != v) {
 						val[cell] = 1;
 						break;
 					}

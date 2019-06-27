@@ -28,11 +28,11 @@ function(x, type='inner', classes=FALSE, directions=8, asNA=FALSE, filename="", 
 	}
 		
 	if (type=='inner') { 
-		type <- as.integer(0) 
+		type <- FALSE
 	} else { 
-		type <- as.integer(1) 
+		type <- TRUE
 	}
-	classes <- as.integer(as.logical(classes))
+	classes <- as.logical(classes)
 	directions <- as.integer(directions)
 	stopifnot(directions %in% c(4,8))
 	
