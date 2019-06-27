@@ -5,12 +5,32 @@
     .Call(`_raster_doBilinear`, xy, x, y, v)
 }
 
+.broom <- function(d, f, dm, dist, down) {
+    .Call(`_raster_broom`, d, f, dm, dist, down)
+}
+
 .doCellFromRowCol <- function(nrow, ncol, rownr, colnr) {
     .Call(`_raster_doCellFromRowCol`, nrow, ncol, rownr, colnr)
 }
 
 .clamp <- function(d, r, usevals) {
     .Call(`_raster_do_clamp`, d, r, usevals)
+}
+
+.edge <- function(d, dim, classes, edgetype, dirs) {
+    .Call(`_raster_do_edge`, d, dim, classes, edgetype, dirs)
+}
+
+.focal_fun <- function(d, w, dim, fun, naonly) {
+    .Call(`_raster_do_focal_fun`, d, w, dim, fun, naonly)
+}
+
+.focal_get <- function(d, dim, ngb) {
+    .Call(`_raster_do_focal_get`, d, dim, ngb)
+}
+
+.focal_sum <- function(d, w, dim, narm, naonly, bemean) {
+    .Call(`_raster_do_focal_sum`, d, w, dim, narm, naonly, bemean)
 }
 
 .getPolygons <- function(xyv, res, nodes) {

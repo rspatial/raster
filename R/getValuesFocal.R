@@ -86,7 +86,7 @@ function(x, row, nrows, ngb, names=FALSE, padValue=NA, array=FALSE, ...) {
 			v <- cbind(add, v, add)
 		}
 		
-		v <- .Call('_focal_get', as.vector(t(v)), as.integer(dim(v)), as.integer(ngb), NAOK=TRUE, PACKAGE='raster')
+		v <- .focal_get(as.vector(t(v)), as.integer(dim(v)), as.integer(ngb))
 		m <- matrix(v, nrow=nrows*nc, byrow=TRUE)
 		if (names) {
 			rownames(m) <- cellFromRowCol(xx, row, 1):cellFromRowCol(xx, row+nrows-1,nc)

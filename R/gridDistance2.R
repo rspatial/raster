@@ -22,10 +22,10 @@
 		x <- getValues(x)
 		a <- as.integer(dim(z1))
 		b <- c(xdist, ydist, xydist)
-		z1a[] <- .Call('_broom', x, f, a , b, as.integer(1), NAOK=TRUE, PACKAGE='raster')
-		z2a[] <- .Call('_broom', x, f, a , b, as.integer(0), NAOK=TRUE, PACKAGE='raster')
+		z1a[] <- .broom(x, f, a, b, TRUE)
+		z2a[] <- .broom(x, f, a, b, FALSE)
 		x <- min(z1a, z2a)
-		if (filename != '') {
+		if (filename != "") {
 			x <- writeRaster(x, filename, ...)
 		}
 	} else {
@@ -35,12 +35,12 @@
 		i <- 1
 		v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 		f <- rep(Inf, nc)
-		z <- .Call('_broom', v, 	f, as.integer(c(tr$nrows[i], nc)), c(xdist, ydist, xydist), as.integer(1), NAOK=TRUE, PACKAGE='raster')
+		z <- .broom(v, f, as.integer(c(tr$nrows[i], nc)), c(xdist, ydist, xydist), TRUE)
 		z1 <- writeValues(z1, z, tr$row[i])
 		f <- z[(length(z)-nc+1):length(z)]
 		for (i in 2:tr$n) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
-			z <- .Call('_broom', v, f, as.integer(c(tr$nrows[i], nc)), c(xdist, ydist, xydist), as.integer(1), NAOK=TRUE, PACKAGE='raster')
+			z <- .broom(v, f, as.integer(c(tr$nrows[i], nc)), c(xdist, ydist, xydist), TRUE)
 			z1 <- writeValues(z1, z, tr$row[i])
 			f <- z[(length(z)-nc+1):length(z)]
 			pbStep(pb, i)
@@ -51,18 +51,18 @@
 		i <- tr$n
 		v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 		f <- rep(Inf, nc)
-		z <- .Call('_broom', v, 	f, as.integer(c(tr$nrows[i], nc)), c(xdist, ydist, xydist), as.integer(0), NAOK=TRUE, PACKAGE='raster')
+		z <- .broom(v, f, as.integer(c(tr$nrows[i], nc)), c(xdist, ydist, xydist), TRUE)
 		z2 <- writeValues(z2, z, tr$row[i])
 		f <- z[1:nc]
 		for (i in (tr$n-1):1) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
-			z <- .Call('_broom', v, f, as.integer(c(tr$nrows[i], nc)), c(xdist, ydist, xydist), as.integer(0), NAOK=TRUE, PACKAGE='raster')
+			z <- .broom(v, f, as.integer(c(tr$nrows[i], nc)), c(xdist, ydist, xydist), FALSE)
 			z2 <- writeValues(z2, z, tr$row[i])
 			f <- z[1:nc]
 			pbStep(pb, i)
 		}
 		z2 <- writeStop(z2)
-		x <- calc(stack(z1, z2), fun=min, filename=filename)
+		x  <- calc(stack(z1, z2), fun=min, filename=filename, ...)
 		file.remove(filename(z1))
 		file.remove(filename(z2))
 	}
