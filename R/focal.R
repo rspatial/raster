@@ -142,7 +142,7 @@ function(x, w, fun, filename='', na.rm=FALSE, pad=FALSE, padValue=NA, NAonly=FAL
 			if (dofun) {
 				v <- .focal_fun(as.vector(t(v)), w, paddim, runfun, NAonly)
 			} else {
-				v <- .focal_sum( as.vector(t(v)), w, paddim, narm, NAonly, domean=domean)
+				v <- .focal_sum( as.vector(t(v)), w, paddim, narm, NAonly, domean)
 			}
 
 			v <- matrix(v, nrow=paddim[1], ncol=paddim[2], byrow=TRUE)
@@ -158,7 +158,7 @@ function(x, w, fun, filename='', na.rm=FALSE, pad=FALSE, padValue=NA, NAonly=FAL
 			if (dofun) {
 				v <- .focal_fun(values(x), w, as.integer(dim(out)), runfun, NAonly)
 			} else {
-				v <- .focal_sum( values(x), w, as.integer(dim(out)), narm, NAonly, domean=domean)
+				v <- .focal_sum( values(x), w, as.integer(dim(out)), narm, NAonly, domean)
 			}
 		}
 		
@@ -197,7 +197,7 @@ function(x, w, fun, filename='', na.rm=FALSE, pad=FALSE, padValue=NA, NAonly=FAL
 			if (dofun) {
 				v <- .focal_fun(as.vector(t(v)), w, paddim, runfun, NAonly)
 			} else {
-				v <- .focal_sum( as.vector(t(v)), w, paddim, narm, NAonly, domean=domean)
+				v <- .focal_sum( as.vector(t(v)), w, paddim, narm, NAonly, domean)
 			}
 			v <- matrix(v, nrow=paddim[1], ncol=paddim[2], byrow=TRUE)
 			if (padrows) {
@@ -226,7 +226,7 @@ function(x, w, fun, filename='', na.rm=FALSE, pad=FALSE, padValue=NA, NAonly=FAL
 				if (dofun) {
 					v <- .focal_fun(as.vector(t(v)), w, paddim, runfun, NAonly)
 				} else {
-					v <- .focal_sum( as.vector(t(v)), w, paddim, narm, NAonly, domean=domean)
+					v <- .focal_sum( as.vector(t(v)), w, paddim, narm, NAonly, domean)
 				}
 				v <- matrix(v, nrow=paddim[1], ncol=paddim[2], byrow=TRUE)
 				if (padrows) {
@@ -256,7 +256,7 @@ function(x, w, fun, filename='', na.rm=FALSE, pad=FALSE, padValue=NA, NAonly=FAL
 			if (dofun) {
 				v <- .focal_fun(as.vector(t(v)), w, paddim, runfun, NAonly)
 			} else {
-				v <- .focal_sum( as.vector(t(v)), w, paddim, narm, NAonly, domean=domean)
+				v <- .focal_sum( as.vector(t(v)), w, paddim, narm, NAonly, domean)
 			}
 			v <- matrix(v, nrow=paddim[1], ncol=paddim[2], byrow=TRUE)
 			if (padrows) {
@@ -275,7 +275,7 @@ function(x, w, fun, filename='', na.rm=FALSE, pad=FALSE, padValue=NA, NAonly=FAL
 			if (dofun) {
 				v <- .focal_fun(v, w, as.integer(c(tr$nrows[1]+addr, nc)), runfun, NAonly)
 			} else {
-				v <- .focal_sum( v, w, as.integer(c(tr$nrows[1]+addr, nc)), narm, NAonly, domean=domean)
+				v <- .focal_sum( v, w, as.integer(c(tr$nrows[1]+addr, nc)), narm, NAonly, domean)
 			}
 			out <- writeValues(out, v, 1)
 			pbStep(pb)
@@ -284,7 +284,7 @@ function(x, w, fun, filename='', na.rm=FALSE, pad=FALSE, padValue=NA, NAonly=FAL
 				if (dofun) {
 					v <- .focal_fun(v, w, as.integer(c(tr$nrows[i]+(2*addr), nc)), runfun, NAonly)
 				} else {
-					v <- .focal_sum( v, w, as.integer(c(tr$nrows[i]+(2*addr), nc)), narm, NAonly, domean=domean)
+					v <- .focal_sum( v, w, as.integer(c(tr$nrows[i]+(2*addr), nc)), narm, NAonly, domean)
 				}
 				out <- writeValues(out, v[-nc1], tr$row[i])
 				pbStep(pb) 
@@ -294,7 +294,7 @@ function(x, w, fun, filename='', na.rm=FALSE, pad=FALSE, padValue=NA, NAonly=FAL
 			if (dofun) {
 				v <- .focal_fun(v, w, as.integer(c(tr$nrows[i]+addr, nc)), runfun, NAonly)
 			} else {
-				v <- .focal_sum( v, w, as.integer(c(tr$nrows[i]+addr, nc)), narm, NAonly, domean=domean)
+				v <- .focal_sum( v, w, as.integer(c(tr$nrows[i]+addr, nc)), narm, NAonly, domean)
 			}
 			out <- writeValues(out, v[-nc1], tr$row[i])
 			pbStep(pb) 
