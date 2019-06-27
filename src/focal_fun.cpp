@@ -28,7 +28,6 @@ std::vector<double> do_focal_fun(std::vector<double> d, Rcpp::NumericMatrix w, s
 
 	int nwc = ncol - wc - 1;
 	int col = 0;
-	Rcpp::List out(1);
 	
 	if (naonly) {
 		// first rows
@@ -50,8 +49,8 @@ std::vector<double> do_focal_fun(std::vector<double> d, Rcpp::NumericMatrix w, s
 							q++;
 						}
 					}
-					out[1] = fun(x);
-					ans[i] = out[1];
+					Rcpp::NumericVector out = fun(x);
+					ans[i] = out[0];
 
 					if (std::isnan(ans[i])) {
 						ans[i] = NAN;
@@ -84,8 +83,8 @@ std::vector<double> do_focal_fun(std::vector<double> d, Rcpp::NumericMatrix w, s
 						q++;
 					}
 				}
-				out[1] = fun(x);
-				ans[i] = out[1];
+				Rcpp::NumericVector out = fun(x);
+				ans[i] = out[0];
 				if (std::isnan(ans[i])) {
 					ans[i] = NAN;
 				}
