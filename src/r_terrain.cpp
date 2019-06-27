@@ -2,6 +2,9 @@
 #include <Rcpp.h>
 #include "util.h"
 
+#include <random>
+
+
 double dmod(double x, double n) {
 	return(x - n * floor(x/n));
 }
@@ -28,7 +31,7 @@ double distHav(double lon1, double lat1, double lon2, double lat2, double r) {
 
 
 // [[Rcpp::export(name = ".terrain")]]
-Rcpp::NumericVector do_terrains(std::vector<double> d, std::vector<int> dim, std::vector<double> res, int unit, std::vector<bool> option, bool geo, std::vector<double> gy) {
+std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std::vector<double> res, int unit, std::vector<bool> option, bool geo, std::vector<double> gy) {
 					
 	double zy, zx; 
 	
@@ -53,7 +56,7 @@ Rcpp::NumericVector do_terrains(std::vector<double> d, std::vector<int> dim, std
 		}
 	} 
 
-	Rcpp::NumericVector val(n*nopt);
+	std::vector<double> val(n*nopt);
 
 	size_t add=0;
 	int addn=0;
@@ -341,39 +344,45 @@ Rcpp::NumericVector do_terrains(std::vector<double> d, std::vector<int> dim, std
 		
 	} if (option[7]) { 
 	  // flow direction
+
+		std::default_random_engine generator(std::random_device{}());
+		//generator.seed(seed);
+		std::uniform_int_distribution<> distrib(0, 1);
+	
+		//auto gen = std::bind(std::uniform_int_distribution<>(0,1),std::default_random_engine());
+
 		addn = add * n;
-		int v;
-		double d[8] = {0,0,0,0,0,0,0,0};
+		double r[8] = {0,0,0,0,0,0,0,0};
 		double p[8] = {1,2,4,8,16,32,64,128}; // pow(2, j)
 		double dxy = sqrt(dx * dx + dy * dy);
-		double dmin;
 		for (size_t i = ncol+1; i < (ncol * (nrow-1)-1); i++) {
 			if (std::isnan(d[i])) {
 				val[i+addn] = NAN;
 			} else {
-				d[0] = (d[i] - d[i+1]) / dx;
-				d[1] = (d[i] - d[i+1+ncol]) / dxy;
-				d[2] = (d[i] - d[i+ncol]) / dy;
-				d[3] = (d[i] - d[i-1+ncol]) / dxy;
-				d[4] = (d[i] - d[i-1]) / dx;
-				d[5] = (d[i] - d[i-1-ncol]) / dxy;
-				d[6] = (d[i] - d[i-ncol]) / dy;
-				d[7] = (d[i] - d[i+1-ncol]) / dxy;
+				r[0] = (d[i] - d[i+1]) / dx;
+				r[1] = (d[i] - d[i+1+ncol]) / dxy;
+				r[2] = (d[i] - d[i+ncol]) / dy;
+				r[3] = (d[i] - d[i-1+ncol]) / dxy;
+				r[4] = (d[i] - d[i-1]) / dx;
+				r[5] = (d[i] - d[i-1-ncol]) / dxy;
+				r[6] = (d[i] - d[i-ncol]) / dy;
+				r[7] = (d[i] - d[i+1-ncol]) / dxy;
 				// using the lowest neighbor, even if it is higher than the focal cell.
-				dmin = d[0];
-				v = 0;
+				double dmin = r[0];
+				int k = 0;
 				for (size_t j=1; j<8; j++) {
-					if (d[j] > dmin) {
-						dmin = d[j];
-						v = j;
-					} else if (d[j] == dmin) {
-						if (unif_rand() > 0.5) {
-							dmin = d[j];
-							v = j;
+					if (r[j] > dmin) {
+						dmin = r[j];
+						k = j;
+					} else if (r[j] == dmin) {
+						bool b = distrib(generator);
+						if (b) {
+							dmin = r[j];
+							k = j;
 						}
 					}
 				}
-				val[i+addn] = p[v];
+				val[i+addn] = p[k];
 			}
 		}
 		add++;
@@ -384,16 +393,16 @@ Rcpp::NumericVector do_terrains(std::vector<double> d, std::vector<int> dim, std
 	for (size_t j=0; j<add; j++) {
 	    int jn = j * n;
 		for (size_t i = 0; i < ncol; i++) {  
-			val[i+jn] = R_NaReal;
+			val[i+jn] = NAN;
 		}
 	// last row	
 		for (size_t i = ncol * (nrow-1); i < n; i++) {  
-			val[i+jn] = R_NaReal; 
+			val[i+jn] = NAN; 
 		}
 	// first and last columns
 		for (size_t i = 1; i < nrow; i++) {  
-			val[i * ncol + jn] = R_NaReal;
-			val[i * ncol - 1 + jn] = R_NaReal;
+			val[i * ncol + jn] = NAN;
+			val[i * ncol - 1 + jn] = NAN;
 		}
 	}
 

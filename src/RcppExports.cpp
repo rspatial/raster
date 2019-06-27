@@ -231,7 +231,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // do_terrains
-Rcpp::NumericVector do_terrains(std::vector<double> d, std::vector<int> dim, std::vector<double> res, int unit, std::vector<bool> option, bool geo, std::vector<double> gy);
+std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std::vector<double> res, int unit, std::vector<bool> option, bool geo, std::vector<double> gy);
 RcppExport SEXP _raster_do_terrains(SEXP dSEXP, SEXP dimSEXP, SEXP resSEXP, SEXP unitSEXP, SEXP optionSEXP, SEXP geoSEXP, SEXP gySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
