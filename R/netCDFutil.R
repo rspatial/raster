@@ -6,8 +6,8 @@
 
 .getCRSfromGridMap4 <- function(g) {
 
-	vars <- names(g)
-	vals <- as.vector(unlist(g))
+	vals <- sapply(g, function(i) i[1]) 
+	vars <- names(vals)
 	if (any(vars == "proj4")) {
 		crs=vals[vars=="proj4"] 
 		return(crs)

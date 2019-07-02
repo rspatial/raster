@@ -7,8 +7,8 @@
 \alias{yres,BasicRaster-method}
 \alias{res,BasicRaster-method}
 
-
 \alias{res<-}
+\alias{res<-,BasicRaster-method}
 
 
 \title{Resolution}

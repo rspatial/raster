@@ -73,7 +73,8 @@ std::vector<double> SpPolygons::rasterize(unsigned nrow, unsigned ncol, std::vec
 					vv = rasterize_polygon(vv, background, part.xHole[h], part.yHole[h], nrow, ncol, extent[0], extent[3], resx, resy);
 				}
 				for (size_t q=0; q < vv.size(); q++) {
-					if (vv[q] != background) {
+					if ((vv[q] != background) && (!std::isnan(vv[q]))) {
+					//if (vv[q] != background) {
 						v[q] = vv[q];
 					}
 				}
