@@ -12,6 +12,7 @@ if (!isGeneric("is.factor")) {setGeneric("is.factor", function(x) standardGeneri
 
 
 if (!isGeneric("atan2")) { setGeneric("atan2", function(y, x) standardGeneric("atan2"))}	
+if (!isGeneric("boundaries")) {	setGeneric("boundaries", function(x, ...) standardGeneric("boundaries"))}	
 
 if (!isGeneric('buffer')) {setGeneric('buffer', function(x, ...) standardGeneric('buffer'))}	
 

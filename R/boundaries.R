@@ -6,14 +6,9 @@
 
 # name overlap with igraph
 
-if (!isGeneric("boundaries")) {
-	setGeneric("boundaries", function(x, ...)
-		standardGeneric("boundaries"))
-}	
 
 setMethod('boundaries', signature(x='RasterLayer'), 
 function(x, type='inner', classes=FALSE, directions=8, asNA=FALSE, filename="", ...) {
-
 
 	stopifnot( nlayers(x) == 1 )
 	stopifnot( hasValues(x) )

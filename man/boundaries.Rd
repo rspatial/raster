@@ -27,7 +27,6 @@ Detect boundaries (edges). boundaries are cells that have more than one class in
 RasterLayer. Cell values are either 1 (a border) or 0 (not a border), or \code{NA}
 }
 
-\note{'edge' is obsolete and should not be used. It will be removed from this pacakge}
 
 \seealso{ \code{\link{focal}}, \code{\link{clump}} }
 

@@ -33,7 +33,7 @@ std::vector<double> do_edge(std::vector<double> d, std::vector<int> dim, bool cl
 				}
 			}
 		
-		} else if (edgetype) { //outer
+		} else { //outer
 			for (size_t i = 1; i < (nrow-1); i++) {
 				for (size_t j = 1; j < (ncol-1); j++) {
 					size_t cell = i*ncol+j;
