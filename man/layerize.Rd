@@ -34,12 +34,11 @@ RasterBrick
 }
 
 \examples{
-r <- raster(nrow=36, ncol=72)
-r[] <- round(runif(ncell(r))*5)
-r[1:5] <- NA
+r <- raster(nrow=20, ncol=20)
+values(r) <- c(rep(NA, 50), rep(1:5, 70))
 b <- layerize(r)
 
-r2 <- raster(nrow=10, ncol=10)
+r2 <- raster(nrow=5, ncol=5)
 b2 <- layerize(r, r2)
 }
 

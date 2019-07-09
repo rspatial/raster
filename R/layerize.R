@@ -32,7 +32,7 @@ setMethod('layerize', signature(x='RasterLayer', y='missing'),
 
 			v <- as.integer(getValues(x))
 			if (doC) {
-				v <- .Call("_do_layerize", v, as.integer(classes), as.integer(falseNA), PACKAGE='raster')
+				v <- .layerize(v, as.integer(classes), falseNA)
 				v <- matrix(v, ncol=length(classes))
 			} else {
 				v <- t( apply(matrix(v), 1, function(x) x == classes) )
@@ -67,11 +67,11 @@ setMethod('layerize', signature(x='RasterLayer', y='missing'),
 		tr <- blockSize(out)
 		pb <- pbCreate(tr$n, label='layerize', ...)
 
-		fNA <- as.integer(falseNA)
+		#fNA <- as.integer(falseNA)
 		if (doC) {
 			for (i in 1:tr$n) {
 				v <- as.integer(getValues(x, tr$row[i], tr$nrows[i]))
-				v <- .Call("_do_layerize", v, classes, fNA, PACKAGE='raster')
+				v <- .layerize(v, classes, falseNA)
 				v <- matrix(v, ncol=length(classes))
 				out <- writeValues(out, v*1, tr$row[i])
 				pbStep(pb, i) 

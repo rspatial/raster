@@ -37,6 +37,10 @@
     .Call(`_raster_getPolygons`, xyv, res, nodes)
 }
 
+.layerize <- function(d, cls, falsena) {
+    .Call(`_raster_layerize`, d, cls, falsena)
+}
+
 .availableRAM <- function(ram) {
     .Call(`_raster_availableRAM`, ram)
 }
@@ -69,10 +73,6 @@
     .Call(`_raster_doRowMax`, x, narm)
 }
 
-.terrain <- function(d, dim, res, unit, option, geo, gy) {
-    .Call(`_raster_do_terrains`, d, dim, res, unit, option, geo, gy)
-}
-
 .aggregate_get <- function(d, dims) {
     .Call(`_raster_aggregate_get`, d, dims)
 }
@@ -101,6 +101,14 @@
     .Call(`_raster_dest_point`, xybd, lonlat, a, f)
 }
 
+.reclassify <- function(d, rcl, dolowest, doright, NAonly, NAval) {
+    .Call(`_raster_reclassify`, d, rcl, dolowest, doright, NAonly, NAval)
+}
+
+.terrain <- function(d, dim, res, unit, option, geo, gy) {
+    .Call(`_raster_do_terrains`, d, dim, res, unit, option, geo, gy)
+}
+
 .doCellFromXY <- function(ncols, nrows, xmin, xmax, ymin, ymax, x, y) {
     .Call(`_raster_doCellFromXY`, ncols, nrows, xmin, xmax, ymin, ymax, x, y)
 }
@@ -111,9 +119,5 @@
 
 .doFourCellsFromXY <- function(ncols, nrows, xmin, xmax, ymin, ymax, xy, duplicates, isGlobalLonLat) {
     .Call(`_raster_doFourCellsFromXY`, ncols, nrows, xmin, xmax, ymin, ymax, xy, duplicates, isGlobalLonLat)
-}
-
-.reclassify <- function(d, rcl, dolowest, doright, NAonly, NAval) {
-    .Call(`_raster_reclassify`, d, rcl, dolowest, doright, NAonly, NAval)
 }
 
