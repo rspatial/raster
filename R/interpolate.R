@@ -1,8 +1,4 @@
 
-if (!isGeneric("interpolate")) {
-	setGeneric("interpolate", function(object, ...)
-		standardGeneric("interpolate"))
-}	
 
 # to do: should allow index to be a vector
 

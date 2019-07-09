@@ -31,18 +31,20 @@ Raster* object or list
 
 \examples{ 
 r <- raster(nc=10, nr=10)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 
 m <- list(wave=list(a=1, b=2, c=c('cool', 'important')), that=list(red='44', blue=1:5,
        days=as.Date(c('2014-1-15','2014-2-15'))), this='888 miles from here', today=NA)
 
 metadata(r) <- m
-x <- writeRaster(r, 'test.grd', overwrite=TRUE)
+
+\dontrun{
+
+x <- writeRaster(r, rasterTmpFile(), overwrite=TRUE)
 metax <- metadata(x)
 
 identical(metax, m)
 
-\dontrun{
 # nested too deep
 badmeta1 <- list(wave=list(a=1, b=2, c='x'), that=list(red='4', blue=list(bad=5)))
 metadata(r) <- badmeta1

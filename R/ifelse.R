@@ -3,8 +3,9 @@
 # Version 1.0
 # Licence GPL v3
 
-setMethod("ifel", signature(test="Raster", yes="ANY", no="ANY"), 
-	function(test, yes, no, filename="", ...) {
+#setMethod("ifel", signature(test="Raster", yes="ANY", no="ANY"), 
+
+.ifel <- function(test, yes, no, filename="", ...) {
 		if (!inherits(no, "Raster")) {
 			stopifnot(is.numeric(no))
 			if (length(no) > 1) warning('only the first element of "no" is used')
@@ -19,4 +20,4 @@ setMethod("ifel", signature(test="Raster", yes="ANY", no="ANY"),
 		}
 		cover(no, yes, filename=filename)
 	}
-)
+#)

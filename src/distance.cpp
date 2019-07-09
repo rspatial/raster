@@ -2,9 +2,6 @@
 
 */
 
-#ifndef M_PI
-#define M_PI (3.14159265358979323846)
-#endif
 
 #include <Rcpp.h>
 using namespace Rcpp;
@@ -12,6 +9,7 @@ using namespace std;
 #include <vector>
 #include "geodesic.h"
 #include <math.h>
+#include "util.h"
 
 
 double distance_lonlat(double lon1, double lat1, double lon2, double lat2, double a, double f) {
@@ -90,16 +88,6 @@ std::vector<double> distanceToNearest_plane(std::vector<double> x1, std::vector<
   	return r;
 }
 
-
-
-// Convert degrees to radians 
-double toRad(double deg) {
-	return( deg * 0.0174532925199433 );
-}
-
-double toDeg(double rad) {
-	return( rad * 57.2957795130823 );
-}
 
 
 

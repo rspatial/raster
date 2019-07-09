@@ -1,9 +1,14 @@
-#include    <R.h>
-#include	<stdio.h>
-#include	<stdlib.h>
-#include	<math.h>
+
+#ifndef RASTERUTIL_GUARD
+#define RASTERUTIL_GUARD
+
+
+#include <math.h>
 #include "Rmath.h"
 
+#ifndef M_PI
+#define M_PI (3.14159265358979323846)
+#endif
 
 
 double mod(double x, double n) {
@@ -29,4 +34,7 @@ double toDeg(double rad) {
 }
 
 
+
+
+#endif
 

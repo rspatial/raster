@@ -81,10 +81,10 @@ values(r) <- runif(ncell(r))
 m <- c(0, 0.25, 1,  0.25, 0.5, 2,  0.5, 1, 3)
 m <- matrix(m, ncol=3, byrow=TRUE)
 rc1 <- clusterR(r, reclassify, args=list(rcl=m, right=FALSE), 
-               filename='rcltest.grd', datatype='INT2S', overwrite=TRUE)
+               filename=rasterTmpFile(), datatype='INT2S', overwrite=TRUE)
 
 # equivalent to:
-rc2 <- reclassify(r, rcl=m, right=FALSE, filename='rcltest.grd', datatype='INT2S', overwrite=TRUE)
+rc2 <- reclassify(r, rcl=m, right=FALSE, filename=rasterTmpFile(), datatype='INT2S', overwrite=TRUE)
 
 
 # example with the calc function

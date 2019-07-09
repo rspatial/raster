@@ -7,15 +7,10 @@ if (!isGeneric("approxNA")) {setGeneric("approxNA", function(x, ...)		standardGe
 if (!isGeneric("as.data.frame")) { setGeneric("as.data.frame", function(x, row.names = NULL, optional = FALSE, ...) standardGeneric("as.data.frame")) }	
 
 if (!isGeneric("as.factor")) {setGeneric("as.factor", function(x) standardGeneric("as.factor"))}
-
 if (!isGeneric("is.factor")) {setGeneric("is.factor", function(x) standardGeneric("is.factor"))}
-
-
 if (!isGeneric("atan2")) { setGeneric("atan2", function(y, x) standardGeneric("atan2"))}	
 if (!isGeneric("boundaries")) {	setGeneric("boundaries", function(x, ...) standardGeneric("boundaries"))}	
-
 if (!isGeneric('buffer')) {setGeneric('buffer', function(x, ...) standardGeneric('buffer'))}	
-
 if (!isGeneric("calc")) {setGeneric("calc", function(x, fun, ...) standardGeneric("calc")) }
 if (!isGeneric("clamp")) {setGeneric("clamp", function(x, ...) standardGeneric("clamp")) }	
 if (!isGeneric("cover")) {setGeneric("cover", function(x, y, ...) standardGeneric("cover"))}		
@@ -23,9 +18,10 @@ if (!isGeneric("crop")) { setGeneric("crop", function(x, y, ...) standardGeneric
 if (!isGeneric("crs")) { setGeneric("crs", function(x, ...) standardGeneric("crs")) }	
 if (!isGeneric("crs<-")) { setGeneric("crs<-", function(x, ..., value) standardGeneric("crs<-")) }	
 if (!isGeneric("disaggregate")) {setGeneric("disaggregate", function(x, ...) standardGeneric("disaggregate"))}
-
 if (!isGeneric("distance")) {setGeneric("distance", function(x, y, ...)standardGeneric("distance"))}	
 if (!isGeneric("erase")) {setGeneric("erase", function(x, y, ...) standardGeneric("erase"))}
+
+if (!isGeneric("extend")) {setGeneric("extend", function(x, y, ...) standardGeneric("extend"))}	
 if (!isGeneric("extract")) { setGeneric("extract", function(x, y, ...) standardGeneric("extract"))}	
 if (!isGeneric("flip")) { setGeneric("flip", function(x, direction, ...) standardGeneric("flip")) }
 if (!isGeneric("focal")) { setGeneric("focal", function(x, ...) standardGeneric("focal"))}
@@ -37,7 +33,7 @@ if (!isGeneric("hasValues")) { setGeneric("hasValues", function(x, ...) standard
 if (!isGeneric("ifel")) {setGeneric("ifel", function(test, yes, no, ...) standardGeneric("ifel"))}	
 if (!isGeneric("image")) {setGeneric("image", function(x,...) standardGeneric("image"))}	
 if (!isGeneric("init")) {setGeneric("init", function(x, ...) standardGeneric("init"))}	
-
+if (!isGeneric("interpolate")) { setGeneric("interpolate", function(object, ...) standardGeneric("interpolate"))}	
 if (!isGeneric("isLonLat")) { setGeneric("isLonLat", function(x, ...) standardGeneric("isLonLat"))}	
 if (!isGeneric("couldBeLonLat")) { setGeneric("couldBeLonLat", function(x, ...) standardGeneric("couldBeLonLat"))}	
 

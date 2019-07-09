@@ -6,11 +6,6 @@
 
 
 
-if (!isGeneric("extend")) {
-	setGeneric("extend", function(x, y, ...)
-		standardGeneric("extend"))
-}	
-
 setMethod('extend', signature(x='Extent'), 
 # function by Etienne B. Racine
 function(x, y, ...) {

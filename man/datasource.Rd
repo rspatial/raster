@@ -49,9 +49,9 @@ fromDisk(rs)
 rs <- setValues(rs, 1:ncell(rs))
 inMemory(rs)
 fromDisk(rs)
-rs <- writeRaster(rs, filename='test', overwrite=TRUE)
-inMemory(rs)
-fromDisk(rs)
+#rs <- writeRaster(rs, filename=rasterTmpFile(), overwrite=TRUE)
+#inMemory(rs)
+#fromDisk(rs)
 }
 
 \keyword{ spatial }

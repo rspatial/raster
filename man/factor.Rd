@@ -104,8 +104,8 @@ i
 factorValues(r, i)
 
 # write to file:
-rr <- writeRaster(r, 'test.grd', overwrite=TRUE)
-rr
+# rr <- writeRaster(r, rasterTmpFile(), overwrite=TRUE)
+# rr
 
 # create a single-layer factor 
 x <- deratify(r, 'landcover')
