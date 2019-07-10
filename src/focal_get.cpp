@@ -19,8 +19,8 @@ std::vector<double> do_focal_get(std::vector<double> d, std::vector<unsigned> di
 		return(val);
 	}
 
-	int wr = floor(wrows / 2.0);
-	int wc = floor(wcols / 2.0);
+	int wr = wrows / 2;
+	int wc = wcols / 2;
 	wr = std::min(wr, nrow);
 	wc = std::min(wc, ncol);
 	

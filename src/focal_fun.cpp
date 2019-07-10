@@ -21,8 +21,8 @@ std::vector<double> do_focal_fun(std::vector<double> d, Rcpp::NumericMatrix w, s
 		Rcpp::Rcerr << "weights matrix must have uneven sides";
 		return(ans);
 	}
-	int wr = floor(wrows / 2.0);
-	int wc = floor(wcols / 2.0);
+	int wr = wrows / 2;
+	int wc = wcols / 2;
 	wr = std::min(wr, nrow);
 	wc = std::min(wc, ncol);
 	
