@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("text")) {
-	setGeneric("text", function(x, ...)
-		standardGeneric("text"))
-}	
 
 
 .haloText <- function(x, y=NULL, labels, col='black', hc='white', hw=0.1, ... ) {

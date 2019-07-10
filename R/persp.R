@@ -3,10 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("persp")) {
-	setGeneric("persp", function(x,...)
-		standardGeneric("persp"))
-}	
 
 setMethod("persp", signature(x='RasterLayer'), 
 	function(x, maxpixels=100000, ext=NULL, ...)  {

@@ -23,7 +23,7 @@ Perspective plot of a RasterLayer. This is an implementation of a generic functi
   \item{x}{Raster* object}
   \item{y}{integer \code{> 0 & <= nlayers(x)} to select the layer of \code{x} if \code{x} is a RasterLayer or RasterBrick}
   \item{maxpixels}{integer > 0. Maximum number of cells to use for the plot. If \code{maxpixels < ncell(x)}, \code{sampleRegular} is used before plotting}
-  \item{ext}{Extent. Van be used to zoom in a region (see also \code{\link{zoom}} and \code{\link{crop}(x, \link{drawExtent}())}}
+  \item{ext}{Extent. Can be used to zoom in to a region (see also \code{\link{zoom}} and \code{\link{crop}(x, \link{drawExtent}())}}
   \item{...}{Any argument that can be passed to \code{\link[graphics]{persp}} (graphics package)}  
 }
 

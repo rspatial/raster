@@ -1,12 +1,10 @@
 #include <Rcpp.h>
-using namespace Rcpp;
 #include "aggregate.h"
 
 
-
-NumericMatrix std2rcp(	std::vector<std::vector<double > > x) {
+Rcpp::NumericMatrix std2rcp(	std::vector<std::vector<double > > x) {
   int nr = x.size(), nc = x[0].size() ;
-  NumericMatrix m( nr, nc ) ;
+  Rcpp::NumericMatrix m( nr, nc ) ;
   for( int i=0; i<nr; i++){
     for( int j=0; j<nc; j++) {
       m(i,j) = x[i][j] ;
@@ -17,11 +15,11 @@ NumericMatrix std2rcp(	std::vector<std::vector<double > > x) {
 
 
 
-std::vector<std::vector<double > > rcp2std( NumericMatrix x) {
-  int nr = x.nrow(), nc = x.ncol();
+std::vector<std::vector<double > > rcp2std( Rcpp::NumericMatrix x) {
+  size_t nr = x.nrow(), nc = x.ncol();
   std::vector< std::vector<double> > m(nr, std::vector<double>(nc));
-  for( int i=0; i<nr; i++) {
-    for( int j=0; j<nc; j++){
+  for( size_t i=0; i<nr; i++) {
+    for( size_t j=0; j<nc; j++){
       m[i][j] = x(i,j) ;
     }
   }
@@ -31,7 +29,7 @@ std::vector<std::vector<double > > rcp2std( NumericMatrix x) {
 
 
 // [[Rcpp::export(name = ".aggregate_get")]]
-NumericMatrix aggregate_get(NumericMatrix d, NumericVector dims) {
+Rcpp::NumericMatrix aggregate_get(Rcpp::NumericMatrix d, Rcpp::NumericVector dims) {
   
   std::vector<std::vector< double > > x = rcp2std(d);
   std::vector<int> y = Rcpp::as<std::vector<int> >(dims);
@@ -39,13 +37,13 @@ NumericMatrix aggregate_get(NumericMatrix d, NumericVector dims) {
   y = get_dims(y);
   x = get_aggregates(x, y);
   
-  NumericMatrix z = std2rcp(x);
+  Rcpp::NumericMatrix z = std2rcp(x);
   return(z);
 }
 
 
 // [[Rcpp::export(name = ".aggregate_fun")]]
-NumericMatrix aggregate_fun(NumericMatrix d, NumericVector dims, bool narm, int fun) {
+Rcpp::NumericMatrix aggregate_fun(Rcpp::NumericMatrix d, Rcpp::NumericVector dims, bool narm, int fun) {
   
   std::vector<std::vector< double > > x = rcp2std(d);
   std::vector<int> y = Rcpp::as<std::vector<int> >(dims);
@@ -53,6 +51,7 @@ NumericMatrix aggregate_fun(NumericMatrix d, NumericVector dims, bool narm, int 
   y = get_dims(y);
   x = aggregate(x, y, narm, fun);
   
-  NumericMatrix z = std2rcp(x);
+  Rcpp::NumericMatrix z = std2rcp(x);
   return(z);
 }
+

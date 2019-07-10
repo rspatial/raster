@@ -17,8 +17,8 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 		return(val);
 	}
 
-	int wr = floor(wrows / 2);
-	int wc = floor(wcols / 2);
+	int wr = floor(wrows / 2.0);
+	int wc = floor(wcols / 2.0);
 	wr = std::min(wr, nrow);
 	wc = std::min(wc, ncol);
 

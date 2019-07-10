@@ -1,8 +1,4 @@
  
- if (!isGeneric("pairs")) {
-	setGeneric("pairs", function(x, ...)
-		standardGeneric("pairs"))
-}
  
 
 setMethod('pairs', signature(x='RasterStackBrick'), 

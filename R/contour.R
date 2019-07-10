@@ -3,10 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("contour")) {
-	setGeneric("contour", function(x,...)
-		standardGeneric("contour"))
-}	
 
 setMethod("contour", signature(x='RasterLayer'), 
 	function(x, maxpixels=100000, ...)  {

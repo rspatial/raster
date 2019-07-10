@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("density")) {
-	setGeneric("density", function(x, ...)
-		standardGeneric("density"))
-}	
 
 setMethod('density', signature(x='Raster'), 
 	function(x, layer, maxpixels=100000, plot=TRUE, main, ...) {
