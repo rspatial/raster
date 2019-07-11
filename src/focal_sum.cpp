@@ -5,8 +5,8 @@
 // [[Rcpp::export(name = ".focal_sum")]]
 std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, std::vector<double> dim, bool narm, bool naonly, bool bemean) {
 
-	size_t wrows = w.nrow();
-	size_t wcols = w.ncol();
+	int wrows = w.nrow();
+	int wcols = w.ncol();
 	int nrow = dim[0];
 	int ncol = dim[1];
 	int n = nrow * ncol;

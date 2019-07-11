@@ -10,8 +10,8 @@ std::vector<double> do_focal_fun(std::vector<double> d, Rcpp::NumericMatrix w, s
 	int ncol = dim[1];
 	int n = nrow * ncol;
 
-	size_t wrows = w.nrow();
-	size_t wcols = w.ncol();
+	int wrows = w.nrow();
+	int wcols = w.ncol();
 	size_t wn = wrows * wcols;
 
 	std::vector<double> ans(n);
