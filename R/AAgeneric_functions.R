@@ -53,6 +53,7 @@ if (!isGeneric("reclassify")) { setGeneric("reclassify", function(x, rcl, ...) s
 if (!isGeneric("res")) { setGeneric("res", function(x) standardGeneric("res")) }
 if (!isGeneric("res<-")) { setGeneric("res<-", function(x, value) standardGeneric("res<-")) }
 if (!isGeneric("sampleRegular")) { setGeneric("sampleRegular", function(x, size, ...) standardGeneric("sampleRegular"))}
+if (!isGeneric("select")) {setGeneric("select", function(x, ...) standardGeneric("select"))}
 if (!isGeneric('setMinMax')) {setGeneric('setMinMax', function(x, ...) standardGeneric('setMinMax')) }	
 if (!isGeneric("shift")) {setGeneric("shift", function(x, ...)
 standardGeneric("shift"))}	

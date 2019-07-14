@@ -6,11 +6,12 @@
 
 setMethod("Math2", signature(x='Extent'), 
 	function (x, digits=0) {
-		digits <- max(0, round(digits))
+		#digits <- max(0, round(digits))
 		x@xmin <- methods::callGeneric( x@xmin, digits)
 		x@xmax <- methods::callGeneric( x@xmax, digits)
 		x@ymin <- methods::callGeneric( x@ymin, digits)
 		x@ymax <- methods::callGeneric( x@ymax, digits)
+		validObject(x)
 		return(x)
 	}
 )
