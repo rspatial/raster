@@ -244,25 +244,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // aggregate_get
-NumericMatrix aggregate_get(NumericMatrix d, NumericVector dims);
+Rcpp::NumericMatrix aggregate_get(Rcpp::NumericMatrix d, Rcpp::NumericVector dims);
 RcppExport SEXP _raster_aggregate_get(SEXP dSEXP, SEXP dimsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type d(dSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type dims(dimsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type d(dSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type dims(dimsSEXP);
     rcpp_result_gen = Rcpp::wrap(aggregate_get(d, dims));
     return rcpp_result_gen;
 END_RCPP
 }
 // aggregate_fun
-NumericMatrix aggregate_fun(NumericMatrix d, NumericVector dims, bool narm, int fun);
+Rcpp::NumericMatrix aggregate_fun(Rcpp::NumericMatrix d, Rcpp::NumericVector dims, bool narm, int fun);
 RcppExport SEXP _raster_aggregate_fun(SEXP dSEXP, SEXP dimsSEXP, SEXP narmSEXP, SEXP funSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type d(dSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type dims(dimsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type d(dSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type dims(dimsSEXP);
     Rcpp::traits::input_parameter< bool >::type narm(narmSEXP);
     Rcpp::traits::input_parameter< int >::type fun(funSEXP);
     rcpp_result_gen = Rcpp::wrap(aggregate_fun(d, dims, narm, fun));
@@ -270,25 +270,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_area_polygon
-NumericVector get_area_polygon(NumericMatrix d, bool lonlat);
+Rcpp::NumericVector get_area_polygon(Rcpp::NumericMatrix d, bool lonlat);
 RcppExport SEXP _raster_get_area_polygon(SEXP dSEXP, SEXP lonlatSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type d(dSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type d(dSEXP);
     Rcpp::traits::input_parameter< bool >::type lonlat(lonlatSEXP);
     rcpp_result_gen = Rcpp::wrap(get_area_polygon(d, lonlat));
     return rcpp_result_gen;
 END_RCPP
 }
 // point_distance
-NumericVector point_distance(NumericMatrix p1, NumericMatrix p2, bool lonlat, double a, double f);
+Rcpp::NumericVector point_distance(Rcpp::NumericMatrix p1, Rcpp::NumericMatrix p2, bool lonlat, double a, double f);
 RcppExport SEXP _raster_point_distance(SEXP p1SEXP, SEXP p2SEXP, SEXP lonlatSEXP, SEXP aSEXP, SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type p1(p1SEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type p2(p2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type p1(p1SEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type p2(p2SEXP);
     Rcpp::traits::input_parameter< bool >::type lonlat(lonlatSEXP);
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     Rcpp::traits::input_parameter< double >::type f(fSEXP);
@@ -297,13 +297,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // distanceToNearestPoint
-NumericVector distanceToNearestPoint(NumericMatrix d, NumericMatrix p, bool lonlat, double a, double f);
+Rcpp::NumericVector distanceToNearestPoint(Rcpp::NumericMatrix d, Rcpp::NumericMatrix p, bool lonlat, double a, double f);
 RcppExport SEXP _raster_distanceToNearestPoint(SEXP dSEXP, SEXP pSEXP, SEXP lonlatSEXP, SEXP aSEXP, SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type d(dSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type d(dSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type p(pSEXP);
     Rcpp::traits::input_parameter< bool >::type lonlat(lonlatSEXP);
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     Rcpp::traits::input_parameter< double >::type f(fSEXP);
@@ -312,13 +312,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // directionToNearestPoint
-NumericVector directionToNearestPoint(NumericMatrix d, NumericMatrix p, bool lonlat, bool degrees, bool from, double a, double f);
+Rcpp::NumericVector directionToNearestPoint(Rcpp::NumericMatrix d, Rcpp::NumericMatrix p, bool lonlat, bool degrees, bool from, double a, double f);
 RcppExport SEXP _raster_directionToNearestPoint(SEXP dSEXP, SEXP pSEXP, SEXP lonlatSEXP, SEXP degreesSEXP, SEXP fromSEXP, SEXP aSEXP, SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type d(dSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type d(dSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type p(pSEXP);
     Rcpp::traits::input_parameter< bool >::type lonlat(lonlatSEXP);
     Rcpp::traits::input_parameter< bool >::type degrees(degreesSEXP);
     Rcpp::traits::input_parameter< bool >::type from(fromSEXP);
@@ -329,12 +329,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // dest_point
-NumericMatrix dest_point(NumericMatrix xybd, bool lonlat, double a, double f);
+Rcpp::NumericMatrix dest_point(Rcpp::NumericMatrix xybd, bool lonlat, double a, double f);
 RcppExport SEXP _raster_dest_point(SEXP xybdSEXP, SEXP lonlatSEXP, SEXP aSEXP, SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type xybd(xybdSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type xybd(xybdSEXP);
     Rcpp::traits::input_parameter< bool >::type lonlat(lonlatSEXP);
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     Rcpp::traits::input_parameter< double >::type f(fSEXP);
@@ -343,8 +343,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // reclassify
-Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, bool dolowest, bool doright, bool NAonly, double NAval);
-RcppExport SEXP _raster_reclassify(SEXP dSEXP, SEXP rclSEXP, SEXP dolowestSEXP, SEXP dorightSEXP, SEXP NAonlySEXP, SEXP NAvalSEXP) {
+Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, bool dolowest, bool doright, bool doleftright, bool NAonly, double NAval);
+RcppExport SEXP _raster_reclassify(SEXP dSEXP, SEXP rclSEXP, SEXP dolowestSEXP, SEXP dorightSEXP, SEXP doleftrightSEXP, SEXP NAonlySEXP, SEXP NAvalSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -352,9 +352,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type rcl(rclSEXP);
     Rcpp::traits::input_parameter< bool >::type dolowest(dolowestSEXP);
     Rcpp::traits::input_parameter< bool >::type doright(dorightSEXP);
+    Rcpp::traits::input_parameter< bool >::type doleftright(doleftrightSEXP);
     Rcpp::traits::input_parameter< bool >::type NAonly(NAonlySEXP);
     Rcpp::traits::input_parameter< double >::type NAval(NAvalSEXP);
-    rcpp_result_gen = Rcpp::wrap(reclassify(d, rcl, dolowest, doright, NAonly, NAval));
+    rcpp_result_gen = Rcpp::wrap(reclassify(d, rcl, dolowest, doright, doleftright, NAonly, NAval));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -458,7 +459,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_raster_distanceToNearestPoint", (DL_FUNC) &_raster_distanceToNearestPoint, 5},
     {"_raster_directionToNearestPoint", (DL_FUNC) &_raster_directionToNearestPoint, 7},
     {"_raster_dest_point", (DL_FUNC) &_raster_dest_point, 4},
-    {"_raster_reclassify", (DL_FUNC) &_raster_reclassify, 6},
+    {"_raster_reclassify", (DL_FUNC) &_raster_reclassify, 7},
     {"_raster_do_terrains", (DL_FUNC) &_raster_do_terrains, 7},
     {"_raster_doCellFromXY", (DL_FUNC) &_raster_doCellFromXY, 8},
     {"_raster_doXYFromCell", (DL_FUNC) &_raster_doXYFromCell, 7},

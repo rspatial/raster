@@ -71,6 +71,12 @@ function(x, rcl, filename='', include.lowest=FALSE, right=TRUE, ...) {
 	}
 	names(out) <- names(x)
 	include.lowest <- as.integer(include.lowest)
+	if (is.na(right)) {
+		leftright <- TRUE
+		right <- TRUE
+	} else {
+		leftright <- FALSE
+	}
 	right <- as.integer(right)
 	#hasNA <- as.integer(hasNA)
 	onlyNA <- as.integer(onlyNA)
@@ -80,8 +86,9 @@ function(x, rcl, filename='', include.lowest=FALSE, right=TRUE, ...) {
 		rcl <- rcl[ , 2:3, drop=FALSE]
 	}
 	
+	
 	if (canProcessInMemory(out)) {
-		out <- setValues(out, .reclassify(values(x), rcl, include.lowest, right, onlyNA, valNA))
+		out <- setValues(out, .reclassify(values(x), rcl, include.lowest, right, leftright, onlyNA, valNA))
 		if ( filename != "" ) { 
 			out <- writeRaster(out, filename=filename, ...) 
 		}
@@ -95,7 +102,7 @@ function(x, rcl, filename='', include.lowest=FALSE, right=TRUE, ...) {
 		
 		for (i in 1:tr$n) {
 			vals <- getValues( x, row=tr$row[i], nrows=tr$nrows[i] )
-			vals <- .reclassify(vals, rcl, include.lowest, right, onlyNA, valNA)
+			vals <- .reclassify(vals, rcl, include.lowest, right, leftright, onlyNA, valNA)
 			if (nl > 1) {
 				vals <- matrix(vals, ncol=nl)
 			}

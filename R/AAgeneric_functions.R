@@ -24,6 +24,7 @@ if (!isGeneric("extend")) {setGeneric("extend", function(x, y, ...) standardGene
 if (!isGeneric("extract")) { setGeneric("extract", function(x, y, ...) standardGeneric("extract"))}	
 if (!isGeneric("flip")) { setGeneric("flip", function(x, direction, ...) standardGeneric("flip")) }
 if (!isGeneric("focal")) { setGeneric("focal", function(x, ...) standardGeneric("focal"))}
+if (!isGeneric("freq")) {setGeneric("freq", function(x, ...) standardGeneric("freq"))}
 if (!isGeneric("geom")) { setGeneric("geom", function(x, ...) standardGeneric("geom"))}	
 if (!isGeneric("gridDistance")) {setGeneric("gridDistance", function(x, ...) standardGeneric("gridDistance"))}	
 if (!isGeneric("head")) { setGeneric("head", function(x, ...) standardGeneric("head"))}	

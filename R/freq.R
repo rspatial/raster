@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("freq")) {
-	setGeneric("freq", function(x, ...)
-		standardGeneric("freq"))
-}
 
 
 setMethod('freq', signature(x='RasterLayer'), 

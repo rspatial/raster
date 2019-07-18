@@ -101,8 +101,8 @@
     .Call(`_raster_dest_point`, xybd, lonlat, a, f)
 }
 
-.reclassify <- function(d, rcl, dolowest, doright, NAonly, NAval) {
-    .Call(`_raster_reclassify`, d, rcl, dolowest, doright, NAonly, NAval)
+.reclassify <- function(d, rcl, dolowest, doright, doleftright, NAonly, NAval) {
+    .Call(`_raster_reclassify`, d, rcl, dolowest, doright, doleftright, NAonly, NAval)
 }
 
 .terrain <- function(d, dim, res, unit, option, geo, gy) {

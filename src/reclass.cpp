@@ -3,17 +3,12 @@
 #include <Rcpp.h>
 
 // [[Rcpp::export(name = ".reclassify")]]
-Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, bool dolowest, bool doright, bool NAonly, double NAval) {
+Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, bool dolowest, bool doright, bool doleftright, bool NAonly, double NAval) {
 					
 	double lowval, lowres;
 	size_t a = rcl.nrow(); 
 	size_t nc = rcl.ncol();
 	size_t b = a * 2;
-	
-	bool doleftright = false;
-	if (std::isnan(doright)) {
-		doleftright = true;
-	}
 
 	size_t n = d.size();
 	
