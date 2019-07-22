@@ -158,7 +158,7 @@
 		test <- length(test) / 5
 	}
 	nlout <- as.integer(test)
-
+	
 	list(doapply=doapply, makemat=makemat, trans=trans, nlout=nlout)
 }
 
@@ -174,12 +174,12 @@ function(x, fun, filename='', na.rm, forcefun=FALSE, forceapply=FALSE, ...) {
 	doapply <- test$doapply
 	makemat <- test$makemat
 	trans <- test$trans
-
-	if (test$nlout == 1) {
+	nlout <- test$nlout
+	if (nlout == 1) {
 		out <- raster(x)
 	} else {
 		out <- brick(x, values=FALSE)
-		out@data@nlayers <- test$nlout
+		out@data@nlayers <- nlout
 	}
 
 	fun <- .makeTextFun(fun)
@@ -230,6 +230,9 @@ function(x, fun, filename='', na.rm, forcefun=FALSE, forceapply=FALSE, ...) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 			if ( ! doapply ) {
 				v <- fun(v)
+				if (nlout > 1 && !is.matrix(v)) {
+					v <- matrix(v, ncol=nlout)
+				}
 			} else {
 				if (makemat) { 
 					v <- matrix(v, ncol=1) 
@@ -247,6 +250,9 @@ function(x, fun, filename='', na.rm, forcefun=FALSE, forceapply=FALSE, ...) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 			if ( ! doapply ) {
 				v <- fun(v, na.rm=na.rm)
+				if (nlout > 1 && !is.matrix(v)) {
+					v <- matrix(v, ncol=nlout)
+				}
 			} else {
 				if (makemat) { 
 					v <- matrix(v, ncol=1) 
