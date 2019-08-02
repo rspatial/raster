@@ -77,7 +77,7 @@ setMethod('cellStats', signature(x='RasterStackBrick'),
 					return(v)
 					
 				} else if (stat == 'countNA') { 
-					warning ("'countNA' is deprecated. Use freq(x, 'value=NA') instead")
+					warning ("'countNA' is deprecated. Use 'freq(x, value=NA)' instead")
 					return( colSums(is.na(x)) )
 				
 				} else if (stat == 'sd') { 

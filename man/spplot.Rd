@@ -10,15 +10,17 @@
 \alias{spplot,SpatialPolygons-method}
 \alias{lines,SpatialPolygons-method}
 
+\alias{spplot,SpatVector-method}
 
-\title{Use spplot to plot a Raster* object}
+
+\title{Use spplot to plot a Raster* or other object}
 
 \description{
 A wrapper function around \link[sp]{spplot} (sp package). With spplot it is easy to map several layers with a single legend for all maps. ssplot is itself a wrapper around the \link[lattice]{levelplot} function in the lattice package, and see the help for these functions for additional options.
 
-One of the advantages of the wrapper function for Raster objects s is the additional \code{maxpixels} argument to sample large objects for faster drawing.
+One of the advantages of the wrapper function for Raster* objects is the additional \code{maxpixels} argument to sample large objects for faster drawing.
 
-We also add spplot methods for Spatial objects that have no data.frame.
+There are also added spplot methods for Spatial objects that have no data.frame and for SpatVector (terra package)
 }
 
 \usage{

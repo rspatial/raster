@@ -22,6 +22,16 @@
 \alias{ymin,Spatial-method}
 \alias{ymax,Spatial-method}
 
+\alias{xmin<-,Extent,numeric-method}
+\alias{xmin<-,BasicRaster,numeric-method}
+\alias{xmax<-,Extent,numeric-method}
+\alias{xmax<-,BasicRaster,numeric-method}
+\alias{ymin<-,Extent,numeric-method}
+\alias{ymin<-,BasicRaster,numeric-method}
+\alias{ymax<-,Extent,numeric-method}
+\alias{ymax<-,BasicRaster,numeric-method}
+
+
   
 \title{Coordinates of the Extent of a Raster object}
 
@@ -35,20 +45,21 @@ xmax(x)
 ymin(x)
 ymax(x)
 
-xmin(x) <- value
-xmax(x) <- value
-ymin(x) <- value
-ymax(x) <- value
+xmin(x, ...) <- value
+xmax(x, ...) <- value
+ymin(x, ...) <- value
+ymax(x, ...) <- value
 }
 
 \arguments{
-  \item{x}{A Raster* object}
-  \item{value}{A new x or y coordinate}  
+  \item{x}{Raster* or Extent object}
+  \item{value}{numeric. x or y coordinate}  
+  \item{...}{additional arguments. None implemented}  
 }
 
 
 \value{
-a single number
+numeric
 }
 
 \seealso{ \code{\link[raster]{extent}},  \code{\link[raster]{dimensions}} }

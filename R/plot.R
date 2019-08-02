@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("plot")) {
-	setGeneric("plot", function(x,y,...)
-		standardGeneric("plot"))
-}	
-
-
 setMethod("plot", signature(x='Raster', y='ANY'), 
 	function(x, y, maxpixels=500000, col, alpha=NULL, colNA=NA, add=FALSE, ext=NULL, useRaster=TRUE, interpolate=FALSE, addfun=NULL, nc, nr, maxnl=16, main, npretty=0, ...)  {
 

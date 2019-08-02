@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("sampleStratified")) {
-	setGeneric("sampleStratified", function(x, size, ...)
-		standardGeneric("sampleStratified"))
-}	
-
-
 setMethod('sampleStratified', signature(x='RasterLayer'), 
 function(x, size, exp=10, na.rm=TRUE, xy=FALSE, ext=NULL, sp=FALSE, ...) {
 

@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("sampleRandom")) {
-	setGeneric("sampleRandom", function(x, size, ...)
-		standardGeneric("sampleRandom"))
-}	
-
-
 setMethod('sampleRandom', signature(x='Raster'), 
 function(x, size, na.rm=TRUE, ext=NULL, cells=FALSE, rowcol=FALSE, xy=FALSE, sp=FALSE, asRaster=FALSE, ...) {
 

@@ -18,50 +18,59 @@ setMethod("nrow<-", signature('BasicRaster', 'numeric'),
 	}
 )
 
-#'ncol<-' <- function(x, value) {
-#	dim(x) <- c(nrow(x), value)
-#	return(x)
-#}	
 
-#'nrow<-' <- function(x, value) {
-#	dim(x) <- c(value, ncol(x))
-#	return(x)
-#}	
-
-
-'xmin<-' <- function(x, value) {
-	if (inherits(x, 'Extent')) {
+setMethod("xmin<-", signature('Extent', 'numeric'), 
+	function(x, ..., value) {
 		x@xmin <- value
-	} else {
-		x@extent@xmin <- value
+		return(x)
 	}
-	return(x)
-}
-
-'xmax<-' <- function(x, value) {
-	if (inherits(x, 'Extent')) {
+)
+setMethod("xmax<-", signature('Extent', 'numeric'), 
+	function(x, ..., value) {
 		x@xmax <- value
-	} else {
-		x@extent@xmax <- value
+		return(x)
 	}
-	return(x)
-}
-
-'ymin<-' <- function(x, value) {
-	if (inherits(x, 'Extent')) {
+)
+setMethod("ymin<-", signature('Extent', 'numeric'), 
+	function(x, ..., value) {
 		x@ymin <- value
-	} else {
-		x@extent@ymin <- value
+		return(x)
 	}
-	return(x)
-}
-
-'ymax<-' <- function(x, value) {
-	if (inherits(x, 'Extent')) {
+)
+setMethod("ymax<-", signature('Extent', 'numeric'), 
+	function(x, ..., value) {
 		x@ymax <- value
-	} else {
-		x@extent@ymax <- value
+		return(x)
 	}
-	return(x)
-}
+)
+
+setMethod("xmin<-", signature('BasicRaster', 'numeric'), 
+	function(x, ..., value) {
+		x@extent@xmin <- value
+		return(x)
+	}
+)
+
+setMethod("xmax<-", signature('BasicRaster', 'numeric'), 
+	function(x, ..., value) {
+		x@extent@xmax <- value
+		return(x)
+	}
+)
+
+
+setMethod("ymin<-", signature('BasicRaster', 'numeric'), 
+	function(x, ..., value) {
+		x@extent@ymin <- value
+		return(x)
+	}
+)
+
+
+setMethod("ymax<-", signature('BasicRaster', 'numeric'), 
+	function(x, ..., value) {
+		x@extent@ymax <- value
+		return(x)
+	}
+)
 

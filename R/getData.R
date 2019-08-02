@@ -93,7 +93,7 @@ ccodes <- function() {
 
 .getDataPath <- function(path) {
 	path <- trim(path)
-	if (path=='') {
+	if (path=="") {
 		path <- .dataloc()
 	} else {
 		if (substr(path, nchar(path)-1, nchar(path)) == '//' ) {

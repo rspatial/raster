@@ -3,10 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("xmin")) {setGeneric("xmin", function(x) standardGeneric("xmin"))}
-if (!isGeneric("xmax")) {setGeneric("xmax", function(x)	standardGeneric("xmax"))}
-if (!isGeneric("ymin")) {setGeneric("ymin", function(x)	standardGeneric("ymin"))}
-if (!isGeneric("ymax")) {setGeneric("ymax", function(x)	standardGeneric("ymax"))}
 
 
 setMethod('xmin', signature(x='BasicRaster'), 

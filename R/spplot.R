@@ -73,3 +73,19 @@ setMethod("spplot", signature(obj='SpatRaster'),
 		spplot(obj, ..., as.table=as.table)
 	}
 )
+
+
+setMethod("spplot", signature(obj="SpatVector"), 
+	function(obj, ...)  {
+		x <- as(obj, "Spatial")
+		if (.hasSlot(x, "data")) {
+			for (i in 1:ncol(x@data)) {
+				if (is.character(x@data[,i])) {
+					x@data[,i] <- as.factor(x@data[,i])
+				}
+			}
+		}
+		spplot(x, ...)
+	}
+)
+
