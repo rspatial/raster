@@ -4,10 +4,6 @@
 # Version 1.0
 # Licence GPL v3
 
-
-setGeneric("modal", function(x, ...)
-	standardGeneric("modal"))
-	
 	
 setMethod('modal', signature(x='ANY'), 
 function(x, ..., ties='random', na.rm=FALSE, freq=FALSE) {
