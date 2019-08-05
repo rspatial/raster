@@ -10,9 +10,9 @@ rasterFromXYZ <- function(xyz, res=c(NA, NA), crs=NA, digits=5) {
 
 	if (inherits(xyz, 'SpatialPoints')) {
 		if (inherits(xyz, 'SpatialPointsDataFrame')) {
-			xyz <- cbind(coordinates(xyz), xyz@data[,1])
+			xyz <- cbind(coordinates(xyz)[,1:2,drop=FALSE], xyz@data[,1])
 		} else {
-			xyz <- coordinates(xyz)		
+			xyz <- coordinates(xyz)[,1:2,drop=FALSE]		
 		}
 	}
 	

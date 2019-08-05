@@ -331,7 +331,7 @@ function(x, y) {
 		
 	} else {
 		y <- extent(y)
-		xy <- coordinates(x)
+		xy <- coordinates(x)[,1:2,drop=FALSE]
 		i <- xy[,1] >= y@xmin & xy[,1] <= y@xmax & xy[,2] >= y@ymin & xy[,2] <= y@ymax
 		x[i, ]
 	}

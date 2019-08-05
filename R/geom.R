@@ -81,7 +81,7 @@ setMethod('geom', signature(x='SpatialLines'),
 
 setMethod('geom', signature(x='SpatialPoints'), 
 	function(x, ...) {
-		xy <- coordinates(x)
+		xy <- coordinates(x)[,1:2,drop=FALSE]
 		xy <- cbind(1:nrow(xy), xy)
 		colnames(xy) <- c('object', 'x', 'y')
 		return(xy)

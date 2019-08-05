@@ -33,7 +33,7 @@ function(x, y, ..., df=FALSE, sp=FALSE){
 		}
 	}
 	if (sp) {
-		v <- .xyValues(x, coordinates(y), ..., df=TRUE)
+		v <- .xyValues(x, coordinates(y)[,1:2,drop=FALSE], ..., df=TRUE)
 		if (!.hasSlot(y, 'data')) {
 			y <- SpatialPointsDataFrame(y,  v[, -1, drop=FALSE])
 		} else {
@@ -41,7 +41,7 @@ function(x, y, ..., df=FALSE, sp=FALSE){
 		}
 		return(y)
 	} else {
-		.xyValues(x, coordinates(y), ..., df=df)
+		.xyValues(x, coordinates(y)[,1:2,drop=FALSE], ..., df=df)
 	}
 })
 

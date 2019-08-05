@@ -19,7 +19,7 @@ setMethod("[", c("Raster", "Spatial", "missing"),
 function(x, i, j, ... ,drop=TRUE) {
 
 	if (inherits(i, 'SpatialPoints')) {
-		i <- coordinates(i)
+		i <- coordinates(i)[,1:2,drop=FALSE]
 		i <- cellFromXY(x, i)
 		.doExtract(x, i, ..., drop=drop)
 	

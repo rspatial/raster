@@ -2,7 +2,10 @@
 --- current version
 Bug fixes: 
 calc failed when writing to disk if the functon returned multiple layers as a vector. Reported by Antoine Stevens
-recalassify bug reported by Jacub Nowasad. https://github.com/rspatial/raster/issues/62
+reclassify bug reported by Jacub Nowasad. https://github.com/rspatial/raster/issues/62
+extract failed for sf objects with a Z dimension. https://github.com/rspatial/raster/issues/64
+More generics and namespace exports for compatability with "terra"
+
 
 --- 10-July-2019, version: 2.9-22
 New (hidden) function ".ifel", that is, ifelse for Raster objects (this is the R implementation of the arcpy "Con" method)

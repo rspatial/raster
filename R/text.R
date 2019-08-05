@@ -88,7 +88,7 @@ setMethod('text', signature(x='SpatialPolygons'),
 			labels <- as.character(labels)
 		}
 		
-		xy <- coordinates(x)
+		xy <- coordinates(x)[,1:2,drop=FALSE]
 		if (halo) {
 			.haloText(xy[,1], xy[,2], labels, ...)
 		} else {
@@ -118,7 +118,7 @@ setMethod('text', signature(x='SpatialPoints'),
 			labels <- as.character(labels)
 		}
 
-		xy <- coordinates(x)		
+		xy <- coordinates(x)[,1:2,drop=FALSE]		
 		if (halo) {
 			.haloText(xy[,1], xy[,2], labels, ...)
 		} else {

@@ -191,7 +191,7 @@ setReplaceMethod("[", c("Raster", "Spatial", "missing"),
 			return( .linesToRaster(i, x, field=v, fun='last', mask=FALSE, update=TRUE, updateValue="all", silent=TRUE) )
 			
 		} else { # if (inherits(i, 'SpatialPoints')) {
-			i <- cellFromXY(x, coordinates(i))
+			i <- cellFromXY(x, coordinates(i)[,1:2,drop=FALSE])
 
 			return( .replace(x, i, value=value, recycle=1) )
 		}

@@ -71,7 +71,7 @@ function(x, width=1, dissolve=TRUE, ...) {
 			lonlat = FALSE
 		}
 		
-		pb <- .pointBuffer(xy=coordinates(x), d=width, lonlat=lonlat, crs=crs(x), ...)
+		pb <- .pointBuffer(xy=coordinates(x)[,1:2,drop=FALSE], d=width, lonlat=lonlat, crs=crs(x), ...)
 
 		if (dissolve) {
 			pb <- aggregate(pb)
