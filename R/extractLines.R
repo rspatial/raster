@@ -155,7 +155,11 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 		}		
 
 		lyrs <- layer:(layer+nl-1)
-		colnames(res) <- c('ID', names(x)[lyrs])
+		if (cellnumbers) {
+			colnames(res) <- c("ID", "cell", names(x)[lyrs])
+		} else {
+			colnames(res) <- c("ID", names(x)[lyrs])		
+		}
 		
 		if (any(is.factor(x)) & factors) {
 			v <- res[, -1, drop=FALSE]
