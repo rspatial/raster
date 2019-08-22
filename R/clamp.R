@@ -18,6 +18,7 @@ function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename='', ...) {
 	} else {
 		out <- raster(x)
 	}
+	names(out) <- names(x)
 	useValues <- as.integer(useValues)
 	if (canProcessInMemory(out)) {
 		out <- setValues(out, .clamp(values(x), range, useValues)) 

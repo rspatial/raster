@@ -1,9 +1,10 @@
 
 --- current version
 Bug fixes: 
-calc failed when writing to disk if the functon returned multiple layers as a vector. Reported by Antoine Stevens
+calc failed when writing to disk if the supplied function returned multiple layers as a vector. Reported by Antoine Stevens
 reclassify bug reported by Jacub Nowasad. https://github.com/rspatial/raster/issues/62
 extract failed for sf objects with a Z dimension. https://github.com/rspatial/raster/issues/64
+
 More generics and namespace exports for compatability with "terra"
 
 
