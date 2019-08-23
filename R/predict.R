@@ -122,14 +122,16 @@ setMethod('predict', signature(object='Raster'),
 			} 
 			if (haveFactor) {
 				for (j in 1:length(f)) {
-					flev <- factors[[j]]
+					flev <- fvs <- factors[[j]]
+					if (!is.numeric(fvs)) {
+						flev <- 1:length(flev)
+					}
 					fv <- blockvals[, f[j]]
 					fv[!(fv %in% flev)] <- NA 
-					blockvals[,f[j]] <- factor(fv, levels=flev)
+					fv <- factor(fv, levels=flev, labels=fvs)
+					blockvals[,f[j]] <- fv 
 				}
 			}
-			
-
 			if (na.rm) { 
 				if (inf.rm) {
 					blockvals[!is.finite(as.matrix(blockvals))] <- NA
