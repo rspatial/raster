@@ -136,7 +136,7 @@
 		#https://stackoverflow.com/questions/53854910/issue-with-estimating-weighted-mean-from-raster-for-a-polygon-shape-in-r/
 		fctr <- ifelse(nc < 5, 100, ifelse(nc < 17, 20, 10))
 		rstr <- disaggregate(raster(rstr), fctr)
-		r <- .fasterize(p, rstr, rep(1, npol), background=0) 
+		r <- .fasterize(p, rstr, rep(1, npol), background=0, datatype="INT1U") 
 		return( aggregate(r, fctr, mean, na.rm=TRUE, filename=filename, ...) )
 	} 
 	

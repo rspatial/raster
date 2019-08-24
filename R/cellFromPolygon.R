@@ -26,7 +26,7 @@ cellFromPolygon <- function(object, p, weights=FALSE) {
 		} else {
 			rc <- crop(rr, extent(pp)+addres)
 			if (weights) {
-				rc <- .polygonsToRaster(pp, rc, getCover=TRUE, silent=TRUE)
+				rc <- .polygonsToRaster(pp, rc, getCover=TRUE, silent=TRUE, datatype="FLT4S")
 				rc[rc==0] <- NA
 				xy <- rasterToPoints(rc)
 				weight <- xy[,3] / 100
