@@ -62,7 +62,7 @@ clusterR: as for the function called with argument \code{fun}
 beginCluster()
 
 r <- raster()
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 
 x <- clusterR(r, sqrt, verbose=T)
 

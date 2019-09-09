@@ -43,7 +43,7 @@ See the \code{gdistance} package for more advanced distances, and the \code{geos
 
 \examples{
 r <- raster(ncol=36,nrow=18)
-r[] <- NA
+values(r) <- NA
 r[500] <- 1
 dist <- distance(r) 
 #plot(dist / 1000)

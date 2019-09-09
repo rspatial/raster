@@ -32,7 +32,7 @@ Raster* object
 \examples{
 
 r <- raster(ncols=36, nrows=18)
-r[] <- rnorm(ncell(r)) 
+values(r) <- rnorm(ncell(r)) 
 breaks <- -2:2 * 3
 rc <- cut(r, breaks=breaks)
 }

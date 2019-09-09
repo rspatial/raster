@@ -102,7 +102,7 @@ plot(s, 2)
 plot(s)
 
 # two objects, different range, one scale:
-r[] <- runif(ncell(r))
+values(r) <- runif(ncell(r))
 r2 <- r/2
 brks <- seq(0, 1, by=0.1) 
 nb <- length(brks)-1 

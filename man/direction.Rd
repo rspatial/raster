@@ -36,7 +36,7 @@ For the direction between (longitude/latitude) points, see the \code{azimuth} fu
 
 \examples{
 r <- raster(ncol=36,nrow=18)
-r[] <- NA
+values(r) <- NA
 r[306] <- 1
 b <- direction(r) 
 #plot(b)

@@ -35,7 +35,7 @@ RasterLayer
 \examples{
 r <- raster(ncol=10, nrow=10)
 set.seed(0)
-r[] <- runif(ncell(r))
+values(r) <- runif(ncell(r))
 r[r < 0.2 ] <- 0
 r[r > 0.8] <- 1
 r[r > 0 & r < 1 ] <- 0.5

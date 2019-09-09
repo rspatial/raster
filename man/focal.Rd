@@ -59,7 +59,7 @@ RasterLayer
 
 \examples{
 r <- raster(ncols=36, nrows=18, xmn=0)
-r[] <- runif(ncell(r)) 
+values(r) <- runif(ncell(r)) 
 
 # 3x3 mean filter
 r3 <- focal(r, w=matrix(1/9,nrow=3,ncol=3)) 

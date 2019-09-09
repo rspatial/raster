@@ -45,7 +45,7 @@ RasterLayer or RasterBrick object; or SpatialLines or SpatialPolygons object.
 
 \examples{
 r <- raster(nrow=45, ncol=90)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 e <- extent(-160, 10, 30, 60)
 rc <- crop(r, e)	
 

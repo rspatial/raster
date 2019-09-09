@@ -43,7 +43,7 @@ Raster object
 
 \examples{
 r <- raster(ncol=10, nrow=10)
-r[] <- round(runif(ncell(r)) * 10)
+values(r) <- round(runif(ncell(r)) * 10)
 df <- data.frame(id=2:8, v=c(10,10,11,11,12:14))
 x <- subs(r, df)
 x2 <- subs(r, df, subsWithNA=FALSE)

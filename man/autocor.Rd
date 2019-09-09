@@ -50,7 +50,7 @@ Anselin, L., 1995. Local indicators of spatial association-LISA. Geographical An
 
 \examples{
 r <- raster(nrows=10, ncols=10)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 
 Moran(r)
 # Rook's case

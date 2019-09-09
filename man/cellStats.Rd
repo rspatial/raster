@@ -41,7 +41,7 @@ Numeric
 
 \examples{
 r <- raster(nrow=18, ncol=36)
-r[] <- runif(ncell(r)) * 10
+values(r) <- runif(ncell(r)) * 10
 # works for large files
 cellStats(r, 'mean')
 # same, but does not work for very large files

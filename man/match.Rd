@@ -40,7 +40,7 @@ Raster* obeject
 
 \examples{
 r <- raster(nrow=10, ncol=10)
-r[] <- 1:100
+values(r) <- 1:100
 m <- match(r, c(5:10, 50:55))
 n <- r \%in\% c(5:10, 50:55)
 }

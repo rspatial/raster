@@ -40,7 +40,7 @@ r <- raster()
 bb <- extent(-5, 5, -5, 5)
 cells <- cellsFromExtent(r, bb)
 r <- crop(r, bb)
-r[] <- cells
+values(r) <- cells
 
 e <- extentFromCells(r, 50:55)
 }

@@ -45,7 +45,7 @@ y <- init(r, fun=runif)
 # This is equivalent to (but not memory safe):
 z2 <- setValues(r, rep(1, ncell(r)))
 # or  
-r[] <- rep(1, ncell(r))
+values(r) <- rep(1, ncell(r))
 # or  
 values(r) <- 1
 }

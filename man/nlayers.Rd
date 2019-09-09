@@ -31,7 +31,7 @@ integer
 
 \examples{
 r <- raster(ncols=10, nrows=10)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 s <- stack(r, r, r)
 nlayers(s)
 s <- stack(s,s)

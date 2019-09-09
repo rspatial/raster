@@ -53,7 +53,7 @@ These are shorthand methods that work best for relatively small Raster* objects.
 
 \examples{
 r <- raster(ncol=10, nrow=5)
-r[] <- 1:ncell(r) * 2
+values(r) <- 1:ncell(r) * 2
 r[1,] <- 1
 r[,1] <- 2
 r[1,1] <- 3

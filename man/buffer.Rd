@@ -40,7 +40,7 @@ Except for SpatialLines and SpatialPolygons that are currently handled by rgeos,
 
 \examples{
 r <- raster(ncol=36,nrow=18)
-r[] <- NA
+values(r) <- NA
 r[500] <- 1
 b <- buffer(r, width=5000000) 
 #plot(b)

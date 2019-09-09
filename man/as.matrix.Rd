@@ -55,7 +55,7 @@ matrix, array, or vector
 
 \examples{
 r <- raster(ncol=3, nrow=3)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 as.matrix(r)
 s <- stack(r,r)
 as.array(s)

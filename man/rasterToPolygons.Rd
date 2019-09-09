@@ -35,7 +35,7 @@ SpatialPolygonsDataFrame
 
 \examples{ 
 r <- raster(nrow=18, ncol=36)
-r[] <- runif(ncell(r)) * 10
+values(r) <- runif(ncell(r)) * 10
 r[r>8] <- NA
 pol <- rasterToPolygons(r, fun=function(x){x>6})
 

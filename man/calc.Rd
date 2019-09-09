@@ -80,7 +80,7 @@ Because the mean value of each chunk will likely be different. Rather do somethi
 
 \examples{
 r <- raster(ncols=36, nrows=18)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 
 # multiply values with 10
 fun <- function(x) { x * 10 }

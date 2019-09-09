@@ -28,7 +28,7 @@
 \examples{
 r <- raster(nrow=10, ncol=10)
 set.seed(0)
-r[] <- runif(ncell(r)) * 10
+values(r) <- runif(ncell(r)) * 10
 r
 r <- as.integer(r)
 r

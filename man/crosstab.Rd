@@ -39,7 +39,7 @@ A table or data.frame
 
 \examples{
 r <- raster(nc=5, nr=5)
-r[] <- runif(ncell(r)) * 2
+values(r) <- runif(ncell(r)) * 2
 s <- setValues(r, runif(ncell(r)) * 3)
 crosstab(r,s)
 

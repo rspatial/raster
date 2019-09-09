@@ -33,7 +33,7 @@ A matrix with three columns: x, y, and v (value), or a SpatialPointsDataFrame ob
 
 \examples{ 
 r <- raster(nrow=18, ncol=36)
-r[] <- runif(ncell(r)) * 10
+values(r) <- runif(ncell(r)) * 10
 r[r>8] <- NA
 p <- rasterToPoints(r)
 p <- rasterToPoints(r, fun=function(x){x>6})

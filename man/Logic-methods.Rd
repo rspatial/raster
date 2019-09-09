@@ -40,7 +40,7 @@ A Raster object with logical (\code{TRUE/FALSE} values)
 
 \examples{
 r <- raster(ncols=10, nrows=10)
-r[] <- runif(ncell(r)) * 10
+values(r) <- runif(ncell(r)) * 10
 r1 <- r < 3 | r > 6
 r2 <- !r1
 r3 <- r >= 3 & r <= 6

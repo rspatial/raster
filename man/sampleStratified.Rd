@@ -41,7 +41,7 @@ matrix of cell numbers (and optionally coordinates) by stratum
 \examples{
  r <- raster(ncol=10, nrow=10)
  names(r) <- 'stratum'
- r[] <- round((runif(ncell(r))+0.5)*3)
+ values(r) <- round((runif(ncell(r))+0.5)*3)
  sampleStratified(r, size=3)
 }
 

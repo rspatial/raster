@@ -50,7 +50,7 @@ a RasterLayer object
 
 \examples{
 r <- raster(ncol=10, nrow=10)
-r[] <- runif(ncell(r)) * 10
+values(r) <- runif(ncell(r)) * 10
 s <- round(r)
 
 }

@@ -30,7 +30,7 @@ RasterLayer or RasterBrick
 
 \examples{
 r <- raster(nrow=18, ncol=36)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 rt <- t(r)
 }
 

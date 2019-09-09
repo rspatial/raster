@@ -118,8 +118,7 @@
 }
 
 
-.rasterObjectFromCDF <- function(filename, varname='', band=NA, type='RasterLayer', lvar, level=0, 
-                        warn=TRUE, dims=1:3, crs=NA, stopIfNotEqualSpaced=TRUE, ...) {
+.rasterObjectFromCDF <- function(filename, varname='', band=NA, type='RasterLayer', lvar, level=0, warn=TRUE, dims=1:3, crs=NA, stopIfNotEqualSpaced=TRUE, ...) {
 
 	stopifnot(requireNamespace("ncdf4"))
 	stopifnot(type %in% c('RasterLayer', "RasterBrick"))

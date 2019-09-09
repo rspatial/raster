@@ -49,7 +49,7 @@ data.frame
 
 \examples{
 r <- raster(ncol=3, nrow=3)
-r[] <- sqrt(1:ncell(r))
+values(r) <- sqrt(1:ncell(r))
 r[3:5] <- NA
 as.data.frame(r)
 s <- stack(r, r*2)

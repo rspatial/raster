@@ -34,9 +34,9 @@ RasterLayer or RasterBrick
 \examples{
 r <- raster(nrow=18, ncol=36)
 m <- matrix(1:ncell(r), nrow=18)
-r[] <- as.vector(t(m))
+values(r) <- as.vector(t(m))
 rx <- flip(r, direction='x')
-r[] <- as.vector(m)
+values(r) <- as.vector(m)
 ry <- flip(r, direction='y')
 }
 

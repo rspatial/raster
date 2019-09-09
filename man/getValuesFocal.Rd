@@ -38,7 +38,7 @@ If \code{x} has multiple layers, an array (if \code{array=TRUE}) or a list of su
 
 \examples{
 r <- raster(nr=5, nc=5, crs='+proj=utm +zone=12')
-r[] <- 1:25
+values(r) <- 1:25
 as.matrix(r)
 getValuesFocal(r, row=1, nrows=2, ngb=3, names=TRUE)
 getValuesFocal(stack(r,r), row=1, nrows=1, ngb=3, names=TRUE, array=TRUE)

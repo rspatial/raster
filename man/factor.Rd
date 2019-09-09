@@ -71,7 +71,7 @@ Raster* object; list (levels); boolean (is.factor); matrix (factorValues)
 \examples{
 set.seed(0)
 r <- raster(nrow=10, ncol=10)
-r[] <- runif(ncell(r)) * 10
+values(r) <- runif(ncell(r)) * 10
 is.factor(r)
 
 r <- round(r)
@@ -86,7 +86,7 @@ levels(f)
 f
 
 r <- raster(nrow=10, ncol=10)
-r[] = 1
+values(r) = 1
 r[51:100] = 2
 r[3:6, 1:5] = 3
 r <- ratify(r)

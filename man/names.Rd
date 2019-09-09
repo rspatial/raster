@@ -38,7 +38,7 @@ Character
 
 \examples{
 r <- raster(ncols=5, nrows=5)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 s <- stack(r, r, r)
 nlayers(s)
 names(s)

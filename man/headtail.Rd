@@ -39,7 +39,7 @@ matrix
 
 \examples{
 r <- raster(nrow=25, ncol=25)
-r[] = 1:ncell(r)
+values(r) = 1:ncell(r)
 head(r)
 tail(r, cols=10, rows=5)
 }

@@ -59,7 +59,7 @@ r <- raster(ncol=10, nrow=10)
 vals <- 1:ncell(r)
 r <- setValues(r, vals)
 # equivalent to
-r[] <- vals
+values(r) <- vals
 }
 
 

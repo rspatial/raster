@@ -34,7 +34,7 @@ RasterLayer or a RasterBrick object
 
 r <- raster(nrow=18, ncol=36)
 m <- matrix(1:ncell(r), nrow=18)
-r[] <- as.vector(t(m))
+values(r) <- as.vector(t(m))
 extent(r) <- extent(0, 360, -90, 90)
 rr <- rotate(r)
 }

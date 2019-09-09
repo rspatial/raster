@@ -45,7 +45,7 @@ Raster* or Spatial* object
 
 # select a subset of a RasterLayer
 r <- raster(nrow=10, ncol=10)
-r[] <- 1:ncell(r)
+values(r) <- 1:ncell(r)
 plot(r)
 s <- select(r) # now click on the map twice
 
