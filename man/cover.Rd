@@ -40,7 +40,7 @@ RasterLayer or RasterBrick object, or SpatialPolygons object
 \examples{
 # raster objects
 r1 <- raster(ncols=36, nrows=18)
-r1[] <- 1:ncell(r1)
+values(r1) <- 1:ncell(r1)
 r2 <- setValues(r1, runif(ncell(r1)))
 r2[r2 < 0.5] <- NA
 r3 <- cover(r2, r1)

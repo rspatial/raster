@@ -62,7 +62,7 @@ A Raster* object, and in some cases the side effect of a new file on disk.
 
 \examples{
 r1 <- raster(ncols=10, nrows=10)
-r1[] <- runif(ncell(r1))
+values(r1) <- runif(ncell(r1))
 r2 <- setValues(r1, 1:ncell(r1) / ncell(r1) )
 r3 <- r1 + r2
 r2 <- r1 / 10

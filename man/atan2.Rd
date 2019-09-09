@@ -25,8 +25,8 @@ atan2(y, x)
 
 \examples{
 r1 <- r2 <- raster(nrow=10, ncol=10)
-r1[] <- (runif(ncell(r1))-0.5) * 10
-r2[] <- (runif(ncell(r1))-0.5) * 10
+values(r1) <- (runif(ncell(r1))-0.5) * 10
+values(r2) <- (runif(ncell(r1))-0.5) * 10
 atan2(r1, r2)
 }
 

@@ -114,7 +114,7 @@ plot(r2, breaks=brks, col=cols, lab.breaks=brks, zlim=c(0,1), main='second')
 
 # breaks and labels
 x <- raster(nc=10, nr=10)
-x[] <- runif(ncell(x))
+values(x) <- runif(ncell(x))
 brk <- c(0, 0.25, 0.75, 1)
 arg <- list(at=c(0.12,0.5,0.87), labels=c("Low","Med.","High"))
 plot(x, col=terrain.colors(3), breaks=brk)

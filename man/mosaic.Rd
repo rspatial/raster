@@ -44,9 +44,9 @@ r1 <- crop(r, extent(-10, 11, -10, 11))
 r2 <- crop(r, extent(0, 20, 0, 20))
 r3 <- crop(r, extent(9, 30, 9, 30))
 
-r1[] <- 1:ncell(r1)
-r2[] <- 1:ncell(r2)
-r3[] <- 1:ncell(r3)
+values(r1) <- 1:ncell(r1)
+values(r2) <- 1:ncell(r2)
+values(r3) <- 1:ncell(r3)
 
 m1 <- mosaic(r1, r2, r3, fun=mean)
 

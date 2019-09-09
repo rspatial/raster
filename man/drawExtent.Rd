@@ -24,7 +24,7 @@ Extent
 \examples{
 \dontrun{
 r1 <- raster(nrow=10, ncol=10)
-r1[] <- runif(ncell(r1))
+values(r1) <- runif(ncell(r1))
 plot(r1)
 # after running the following line, click on the map twice
 e <- drawExtent()

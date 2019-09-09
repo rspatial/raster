@@ -54,7 +54,7 @@ Create a new Raster* object that has the same values as \code{x}, except for the
 r <- raster(ncol=10, nrow=10)
 m <- raster(ncol=10, nrow=10)
 values(r) <- runif(ncell(r)) * 10
-m[] <- runif(ncell(r))
+values(m) <- runif(ncell(r))
 m[m < 0.5] <- NA
 mr <- mask(r, m)
 
