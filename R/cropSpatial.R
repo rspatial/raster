@@ -18,6 +18,11 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 			}
 			y@proj4string <- x@proj4string		
 		}
+		if (inherits(y, 'SpatialPolygons')) {
+			y <- rgeos::gUnaryUnion(y)
+			row.names(y) <- '1'
+			y <- geometry(y)
+		}
 		
 		if (! compareCRS(x, y) ) {
 			warning('non identical CRS')
@@ -41,8 +46,6 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 
 .cropSpatialPolygons <- function(x, y, ...) {
 	
-		y <- rgeos::gUnaryUnion(y)
-		row.names(y) <- '1'
 		rnx <- row.names(x)
 		row.names(x) <- as.character(1:length(rnx))
 		
@@ -77,38 +80,27 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 }
 
 
-
 .cropSpatialLines <- function(x, y, ...) {
 	
-		rnx <- row.names(x)
-		row.names(x) <- as.character(1:length(rnx))
+	rnx <- row.names(x)
+	row.names(x) <- as.character(1:length(rnx))
 
-		if (.hasSlot(x, 'data')) {
-		
-			# in future versions of rgeos, this intermediate step should not be necessary
-			i <- as.vector( rgeos::gIntersects(x, y, byid=TRUE) )
-			if (sum(i) == 0) {
-				return(NULL)
-			}
-			y <- rgeos::gIntersection(x[i,], y, byid=TRUE)
-			if (inherits(y, "SpatialCollections")) {
-				y <- y@lineobj
-			}
+	xy <- rgeos::gIntersection(x, y, byid=TRUE)
+	if (inherits(xy, "SpatialCollections")) {
+		xy <- xy@lineobj
+	}
+
+	if (.hasSlot(x, 'data')) {
+					
+		ids <- strsplit(row.names(xy), ' ') 
+		ids <- as.numeric(do.call(rbind, ids)[,1])
+		#row.names(y) <- as.character(rnx[ids])
+		data <- x@data[ids, ,drop=FALSE]
+		#rownames(data) <- rnx[ids]
 			
-			ids <- strsplit(row.names(y), ' ') 
-			ids <- as.numeric(do.call(rbind, ids)[,1])
-			row.names(y) <- as.character(rnx[ids])
-			data <- x@data[ids, ,drop=FALSE]
-			rownames(data) <- rnx[ids]
-			
-			SpatialLinesDataFrame(y, data)
-		} else {
-			y <- rgeos::gIntersection(x, y)
-			if (inherits(y, "SpatialCollections")) {
-				y <- y@lineyobj
-			}
-			return(y)
-		}
+		xy <- SpatialLinesDataFrame(xy, data, match.ID = FALSE)
+	} 
+	return(xy)
 }
 
 
