@@ -6,46 +6,46 @@
 
 
 
-setMethod("crs", signature('ANY'), 
+setMethod("crs", signature("ANY"), 
 	function(x, asText=FALSE, ...) {
 		projection(x, asText=asText)
 	}
 )
 
 
-#'crs<-' <- function(x, value) {
+#"crs<-" <- function(x, value) {
 #	projection(x) <- value
 #	x
 #}
 
-setMethod("crs<-", signature('BasicRaster', 'ANY'), 
+setMethod("crs<-", signature("BasicRaster", "ANY"), 
 	function(x, ..., value) {
 		projection(x) <- value
 		x
 	}
 )
 
-setMethod("crs<-", signature('Spatial', 'ANY'), 
+setMethod("crs<-", signature("Spatial", "ANY"), 
 	function(x, ..., value) {
 		projection(x) <- value
 		x
 	}
 )
 
-setMethod('is.na', signature(x='CRS'), 
+setMethod("is.na", signature(x="CRS"), 
 	function(x) {
 		is.na(x@projargs)
 	}
 )
 
 
-setMethod('as.character', signature(x='CRS'), 
+setMethod("as.character", signature(x="CRS"), 
 	function(x, ...) {
 		x@projargs
 	}
 )
 
-'projection<-' <- function(x, value) {
+"projection<-" <- function(x, value) {
 
 	if (class(value)=="CRS") {
 		crs <- value
@@ -53,14 +53,14 @@ setMethod('as.character', signature(x='CRS'),
 		crs <- .newCRS(value)
 	}	
 	
-	if (inherits(x, 'RasterStack')) {
+	if (inherits(x, "RasterStack")) {
 		if (nlayers(x) > 0) {
 			for (i in 1:nlayers(x)) {
 				x@layers[[i]]@crs <- crs
 			}
 		}
 	} 
-	if (inherits(x, 'Spatial')) {
+	if (inherits(x, "Spatial")) {
 		x@proj4string <- crs
 	} else {
 		x@crs <- crs
@@ -78,8 +78,8 @@ projection <- function(x, asText=TRUE) {
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- x@proj4string
 	} else if (methods::extends(class(x), "sf")) {
-		return( attr(x$geometry, 'crs')$proj4string )
-	} else if (class(x) == 'character') { 
+		return( attr(x$geometry, "crs")$proj4string )
+	} else if (class(x) == "character") { 
 		if (asText) {
 			return(x)
 		} else {
@@ -101,7 +101,7 @@ projection <- function(x, asText=TRUE) {
 }
 
 
-setMethod("proj4string", signature('Raster'), 
+setMethod("proj4string", signature("Raster"), 
 # redundant, for compatibility with sp
 	function(obj) {
 		projection(obj)
@@ -109,7 +109,7 @@ setMethod("proj4string", signature('Raster'),
 )
 
 
-setMethod("proj4string<-", signature('Raster'), 
+setMethod("proj4string<-", signature("Raster"), 
 # redundant, for compatibility with sp
 	function(obj, value) {
 		projection(obj) <- value

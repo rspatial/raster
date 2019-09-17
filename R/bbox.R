@@ -5,7 +5,7 @@
 # Licence GPL v3
 
 
-setMethod('bbox', signature(obj='Extent'), 
+setMethod("bbox", signature(obj="Extent"), 
 	function(obj) {
 		bb <- matrix(ncol=2, nrow=2)
 		colnames(bb) <- c("min","max")
@@ -18,7 +18,7 @@ setMethod('bbox', signature(obj='Extent'),
 	}	
 )
 
-setMethod('bbox', signature(obj='Raster'), 
+setMethod("bbox", signature(obj="Raster"), 
 	function(obj) {
 		obj <- extent(obj)
 		return( bbox(obj) )

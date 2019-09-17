@@ -1,6 +1,7 @@
 \name{terrain}
 
 \alias{terrain}
+\alias{terrain,RasterLayer-method}
 
 \title{Terrain characteristics}
 
@@ -10,7 +11,7 @@ Compute slope, aspect and other terrain characteristics from a raster with eleva
 }
 
 \usage{
-terrain(x, opt='slope', unit='radians', neighbors=8, filename='', ...)  
+\S4method{terrain}{RasterLayer}(x, opt="slope", unit="radians", neighbors=8, filename="", ...)  
 }
 
 

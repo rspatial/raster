@@ -1,6 +1,6 @@
 
 
-setMethod('as.character', signature(x='Extent'), 
+setMethod("as.character", signature(x="Extent"), 
 	function(x, ...) {
 		e <- extent(x)
 		paste0("extent(", paste(as.vector(e), collapse=", "), ")")
@@ -8,7 +8,7 @@ setMethod('as.character', signature(x='Extent'),
 )
 
 
-setMethod('as.character', signature(x='Raster'), 
+setMethod("as.character", signature(x="Raster"), 
 	function(x, ...) {
 		e <- extent(x)
 		crs <- crs(x)
