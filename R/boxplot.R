@@ -4,10 +4,6 @@
 # Licence GPL v3
  
 
-if (!isGeneric("boxplot")) {
-	setGeneric("boxplot", function(x, ...)
-		standardGeneric("boxplot"))
-}
 
 setMethod('boxplot', signature(x='RasterStackBrick'), 
 	function(x, maxpixels=100000, ...) {

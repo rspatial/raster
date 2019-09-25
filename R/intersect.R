@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 	
-if (!isGeneric("intersect")) {
-	setGeneric("intersect", function(x, y)
-		standardGeneric("intersect"))
-}	
 
 
 setMethod('intersect', signature(x='Raster', y='ANY'), 

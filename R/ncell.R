@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("ncell")) {
-	setGeneric("ncell", function(x)
-		standardGeneric("ncell"))
-}	
 
 setMethod('ncell', signature(x='BasicRaster'), 
 	function(x) {

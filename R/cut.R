@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("cut")) {
-	setGeneric("cut", function(x, ...)
-		standardGeneric("cut"))
-}	
 
 setMethod('cut', signature(x='Raster'), 
 function(x, breaks, ..., filename='', format, datatype='INT2S', overwrite, progress)  {

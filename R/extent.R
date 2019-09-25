@@ -5,14 +5,12 @@
 
 
 
-if (!isGeneric("extent")) {
-	setGeneric("extent", function(x, ...)
-		standardGeneric("extent"))
-}	
+if (!isGeneric("extent")) { setGeneric("extent", function(x, ...) standardGeneric("extent")) }	
 
 setMethod('extent', signature(x='Extent'), 
 	function(x){ return(x) }
 )
+
 
 setMethod('extent', signature(x='BasicRaster'), 
 	function(x, r1, r2, c1, c2){ 

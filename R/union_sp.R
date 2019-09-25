@@ -3,10 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-if (!isGeneric("union")) {
-	setGeneric("union", function(x, y)
-		standardGeneric("union"))
-}	
 
 
 setMethod('union', signature(x='SpatialPolygons', y='SpatialPolygons'), 

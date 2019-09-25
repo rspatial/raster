@@ -6,10 +6,6 @@
 # RH: updated for igraph (from igraph0)
 # sept 23, 2012
 
-if (!isGeneric("clump")) {
-	setGeneric("clump", function(x, ...)
-		standardGeneric("clump"))
-}	
 
 
 .smallClump <- function(x, directions=8) {

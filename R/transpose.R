@@ -4,11 +4,6 @@
 # Licence GPL v3
 
 	
-if (!isGeneric("t")) {
-	setGeneric("t", function(x)
-		standardGeneric("t"))
-}	
-
 
 setMethod('t', signature(x='RasterLayer'), 
 	function(x) {

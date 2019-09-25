@@ -3,12 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-	
-if (!isGeneric("intersect")) {
-	setGeneric("intersect", function(x, y)
-		standardGeneric("intersect"))
-}	
-
 
 
 setMethod('intersect', signature(x='SpatialPolygons', y='SpatialPolygons'), 

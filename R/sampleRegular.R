@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("sampleRegular")) {
-	setGeneric("sampleRegular", function(x, size, ...)
-		standardGeneric("sampleRegular"))
-}	
-
-
 setMethod('sampleRegular', signature(x='Raster'), 
 function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, useGDAL=FALSE, ...) {
 

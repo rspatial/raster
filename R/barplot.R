@@ -3,10 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-if (!isGeneric("barplot")) {
-	setGeneric("barplot", function(height,...)
-		standardGeneric("barplot"))
-}	
 
 
 setMethod('barplot', 'RasterLayer', 

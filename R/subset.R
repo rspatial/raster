@@ -5,10 +5,6 @@
 
 
 
-if (!isGeneric('subset')) {
-	setGeneric('subset', function(x, ...)
-		standardGeneric('subset'))
-}
 
 setMethod('subset', signature(x='RasterStack'),
 function(x, subset, drop=TRUE, filename='', ...) {

@@ -3,12 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-	
-if (!isGeneric("resample")) {
-	setGeneric("resample", function(x, y, ...)
-		standardGeneric("resample"))
-}
-
 
 setMethod('resample', signature(x='Raster', y='Raster'), 
 function(x, y, method="bilinear", filename="", ...)  {

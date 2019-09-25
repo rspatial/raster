@@ -3,11 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-	
-if (!isGeneric("rotate")) {
-	setGeneric("rotate", function(x, ...)
-		standardGeneric("rotate"))
-}	
 
 
 setMethod('rotate', signature(x='Raster'), 
