@@ -74,13 +74,14 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 			y@proj4string <- x@proj4string
 		}
 		
-		if (!.hasSlot(x, 'data')) {
-			d <- data.frame(ID=1:length(x))
+		if (!.hasSlot(x, "data")) {
+			d <- data.frame(erase_dissolve_ID=1:length(x))
 			rownames(d) <- row.names(x)
 			x <- SpatialPolygonsDataFrame(x, data=d)
 			dropframe <- TRUE
 		} else {
 			dropframe <- FALSE
+			x$erase_dissolve_ID <- 1:nrow(x)
 		}
 
 		y <- aggregate(y)
@@ -111,6 +112,7 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 		if (dropframe) {
 			return( as(part2, 'SpatialPolygons') )
 		} else {
+			part2$erase_dissolve_ID <- NULL
 			return( part2 )
 		}
 	}
