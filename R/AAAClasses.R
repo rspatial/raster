@@ -93,6 +93,7 @@ setClass('.RasterFile',
 		blockrows='integer',
 		blockcols='integer',
 		driver ='character',
+		dimreadorder = 'numeric',
 		open = 'logical'
 		),
 	prototype (	
@@ -108,6 +109,7 @@ setClass('.RasterFile',
 		blockrows = as.integer(0),
 		blockcols= as.integer(0),
 		driver = '', 
+		dimreadorder = c(1),
 		open = FALSE
 	),
 	validity = function(object) {

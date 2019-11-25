@@ -287,6 +287,7 @@
 	
 	r@file@name <- filename
 	r@file@toptobottom <- toptobottom
+	r@file@dimreadorder <- dims
 	r@data@unit <- unit
 	
 	
