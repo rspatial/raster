@@ -48,7 +48,7 @@
 		count <- ncx
 		for (i in 1:length(rows)) {
 			start <- (readrows[i]-1) * ncx + 1
-			v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+			v <- as.vector(getfun(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count) ))
 			thisrow <- subset(colrow, colrow[,2] == rows[i])
 			colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 		}	
@@ -56,7 +56,7 @@
 		count <- c(x@ncols, 1)
 		for (i in 1:length(rows)) {
 			start <- c(1, readrows[i])
-			v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+			v <- as.vector(getfun(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count) ))
 			thisrow <- subset(colrow, colrow[,2] == rows[i])
 			colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 		}	
@@ -64,7 +64,7 @@
 		count <- c(x@ncols, 1, 1)
 		for (i in 1:length(rows)) {
 			start <- c(1, readrows[i], time)
-			v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+			v <- as.vector(getfun(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count) ))
 			thisrow <- subset(colrow, colrow[,2] == rows[i])
 			colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 		}	
@@ -73,7 +73,7 @@
 			count <- c(x@ncols, 1, 1, 1)
 			for (i in 1:length(rows)) {
 				start <- c(1, readrows[i], x@data@level, time)
-				v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+				v <- as.vector(getfun(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count) ))
 				thisrow <- subset(colrow, colrow[,2] == rows[i])
 				colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 			}
@@ -81,7 +81,7 @@
 			count <- c(x@ncols, 1, 1, 1)
 			for (i in 1:length(rows)) {
 				start <- c(1, readrows[i], time, x@data@level)
-				v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+				v <- as.vector(getfun(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count) ))
 				thisrow <- subset(colrow, colrow[,2] == rows[i])
 				colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 			}
@@ -135,14 +135,14 @@
 		res <- matrix(NA, nrow=length(cells), ncol=1)
 		for (i in j) {
 			start <- c(cols[i], rows[i])
-			res[i] <- getfun(nc, varid=zvar, start=start, count=count)
+			res[i] <- getfun(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count) )
 		}	
 	} else if (nc$var[[zvar]]$ndims == 3) {
 		count <- c(1, 1, nl)
 		res <- matrix(NA, nrow=length(cells), ncol=nl)
 		for (i in j) {
 			start <- c(cols[i], rows[i], layer)
-			res[i,] <- getfun(nc, varid=zvar, start=start, count=count)
+			res[i,] <- getfun(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count) )
 		}	
 	} else {
 		if (x@data@dim3 == 4) {
