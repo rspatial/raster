@@ -285,11 +285,11 @@ function(object, v, cell, band, ...) {
 			startrow <- rowFromCell(object, cell)
 			startcol <- colFromCell(object, cell)
 			if (nc$var[[zvar]]$ndims == 2) {
-				try ( ncdf4::ncvar_put(nc, zvar, v, start=c(startcol, startrow)[x@file@dimreadorder], count=c(ncol(v), nrow(v))[x@file@dimreadorder]) )
+				try ( ncdf4::ncvar_put(nc, zvar, v, start=c(startcol, startrow), count=c(ncol(v), nrow(v))) )
 			} else if (nc$var[[zvar]]$ndims == 3) {
-				try ( ncdf4::ncvar_put(nc, zvar, v, start=c(startcol, startrow, band)[x@file@dimreadorder], count=c(ncol(v), nrow(v), 1)[x@file@dimreadorder]) )
+				try ( ncdf4::ncvar_put(nc, zvar, v, start=c(startcol, startrow, band), count=c(ncol(v), nrow(v), 1)) )
 			} else if (nc$var[[zvar]]$ndims == 4) {
-				try ( ncdf4::ncvar_put(nc, zvar, v, start=c(startcol, startrow, object@data@level, band)[x@file@dimreadorder], count=c(ncol(v), nrow(v), 1, 1)[x@file@dimreadorder]) )
+				try ( ncdf4::ncvar_put(nc, zvar, v, start=c(startcol, startrow, object@data@level, band), count=c(ncol(v), nrow(v), 1, 1)) )
 			}
 			
 		} else {
@@ -303,22 +303,22 @@ function(object, v, cell, band, ...) {
 				if (nr == 1) {
 					#v <- as.matrix(v)
 					if (nc$var[[zvar]]$ndims == 2) {
-						try ( ncdf4::ncvar_put(nc, zvar, v, start=c(cols[1], rows)[x@file@dimreadorder], count=c(length(cols), 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, v, start=c(cols[1], rows), count=c(length(cols), 1)) )
 					} else if (nc$var[[zvar]]$ndims == 3) {
-						try ( ncdf4::ncvar_put(nc, zvar, v, start=c(cols[1], rows, band)[x@file@dimreadorder], count=c(length(cols), 1, 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, v, start=c(cols[1], rows, band), count=c(length(cols), 1, 1)) )
 					} else if (nc$var[[zvar]]$ndims == 4) {
-						try ( ncdf4::ncvar_put(nc, zvar, v, start=c(cols[1], rows, object@data@level, band)[x@file@dimreadorder], count=c(length(cols), 1, 1, 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, v, start=c(cols[1], rows, object@data@level, band), count=c(length(cols), 1, 1, 1)) )
 					}
 				} else {	
 					offset <- c(cols[1], rows[1])
 					ncols <- object@ncols - cols[1]
 					vv <- v[1:ncols]
 					if (nc$var[[zvar]]$ndims == 2) {
-						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(cols[1], rows)[x@file@dimreadorder], count=c(length(cols), 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(cols[1], rows), count=c(length(cols), 1)) )
 					} else if (nc$var[[zvar]]$ndims == 3) {
-						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(cols[1], rows, band)[x@file@dimreadorder], count=c(length(cols), 1, 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(cols[1], rows, band), count=c(length(cols), 1, 1)) )
 					} else if (nc$var[[zvar]]$ndims == 4) {
-						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(cols[1], rows, object@data@level, band)[x@file@dimreadorder], count=c(length(cols), 1, 1, 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(cols[1], rows, object@data@level, band), count=c(length(cols), 1, 1, 1)) )
 					}
 					v <- v[-(1:nc)]
 					if (nr > 2) {
@@ -326,20 +326,20 @@ function(object, v, cell, band, ...) {
 						nrows <- nr-2
 						n <- nrows * object@ncols
 						if (nc$var[[zvar]]$ndims == 2) {
-							try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows)[x@file@dimreadorder], count=c(ncols, 1)[x@file@dimreadorder]) )
+							try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows), count=c(ncols, 1)) )
 						} else if (nc$var[[zvar]]$ndims == 3) {
-							try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows, band)[x@file@dimreadorder], count=c(ncols, 1, 1)[x@file@dimreadorder]) )
+							try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows, band), count=c(ncols, 1, 1)) )
 						} else if (nc$var[[zvar]]$ndims == 4) {
-							try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows, object@data@level, band)[x@file@dimreadorder], count=c(ncols, 1, 1, 1)[x@file@dimreadorder]) )
+							try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows, object@data@level, band), count=c(ncols, 1, 1, 1)) )
 						}
 						v <- v[-(1:n)]
 					}
 					if (nc$var[[zvar]]$ndims == 2) {
-						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows)[x@file@dimreadorder], count=c(1, rows[nr])[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows), count=c(1, rows[nr])) )
 					} else if (nc$var[[zvar]]$ndims == 3) {
-						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows, band)[x@file@dimreadorder], count=c(1, rows[nr], 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows, band), count=c(1, rows[nr], 1)) )
 					} else if (nc$var[[zvar]]$ndims == 4) {
-						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows, object@data@level, band)[x@file@dimreadorder], count=c(1, rows[nr], 1, 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, vv, start=c(1, rows, object@data@level, band), count=c(1, rows[nr], 1, 1)) )
 					}
 				} 
 			} else {
@@ -347,15 +347,15 @@ function(object, v, cell, band, ...) {
 				cols <- colFromCell(object, cell)
 				if (nc$var[[zvar]]$ndims == 2) {
 					for (i in 1:length(cell)) {
-						try ( ncdf4::ncvar_put(nc, zvar, v[i], start=c(cols[i], rows[i])[x@file@dimreadorder], count=c(1, 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, v[i], start=c(cols[i], rows[i]), count=c(1, 1)) )
 					}
 				} else if (nc$var[[zvar]]$ndims == 3) {
 					for (i in 1:length(cell)) {
-						try ( ncdf4::ncvar_put(nc, zvar, v[i], start=c(cols[i], rows[i], band)[x@file@dimreadorder], count=c(1, 1, 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, v[i], start=c(cols[i], rows[i], band), count=c(1, 1, 1)) )
 					}
 				} else if (nc$var[[zvar]]$ndims == 4) {
 					for (i in 1:length(cell)) {
-						try ( ncdf4::ncvar_put(nc, zvar, v[i], start=c(cols[i], rows[i], object@data@level, band)[x@file@dimreadorder], count=c(1, 1, 1, 1)[x@file@dimreadorder]) )
+						try ( ncdf4::ncvar_put(nc, zvar, v[i], start=c(cols[i], rows[i], object@data@level, band), count=c(1, 1, 1, 1)) )
 					}
 				}
 			}
