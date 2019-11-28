@@ -135,7 +135,6 @@
 	} else {
 		start <- c(col, row, layer)
 		count <- c(ncols, nrows,  nn)
-		d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
   	d <- ncdf4::ncvar_get(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count), collapse_degen = FALSE )
   	d <- aperm(d, perm = x@file@dimreadorder)
 	}
