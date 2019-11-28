@@ -33,22 +33,22 @@
 
 	
 	} else if (nc$var[[zvar]]$ndims == 2) {
-		start <- c(col, row)[x@file@dimreadorder]
-		count <- c(ncols, nrows)[x@file@dimreadorder]
+		start <- c(col, row)
+		count <- c(ncols, nrows)
 		d <- ncdf4::ncvar_get( nc, varid=zvar,  start=start, count=count )		
 	} else if (nc$var[[zvar]]$ndims == 3) {
-		start <- c(col, row, x@data@band)[x@file@dimreadorder]
-		count <- c(ncols, nrows, 1)[x@file@dimreadorder]
+		start <- c(col, row, x@data@band)
+		count <- c(ncols, nrows, 1)
 		d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
 		
 	} else {
 		if (x@data@dim3 == 4) {
-			start <- c(col, row, x@data@level, x@data@band)[x@file@dimreadorder]
-			count <- c(ncols, nrows, 1, 1)[x@file@dimreadorder]
+			start <- c(col, row, x@data@level, x@data@band)
+			count <- c(ncols, nrows, 1, 1)
 			d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
 		} else {
-			start <- c(col, row, x@data@band, x@data@level)[x@file@dimreadorder]
-			count <- c(ncols, nrows, 1, 1)[x@file@dimreadorder]
+			start <- c(col, row, x@data@band, x@data@level)
+			count <- c(ncols, nrows, 1, 1)
 			d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
 		}
 	}
@@ -119,15 +119,15 @@
 	
 	if (nc$var[[zvar]]$ndims == 4) {
 		if (x@data@dim3 == 4) {
-			start <- c(col, row, x@data@level, layer)[x@file@dimreadorder]
-			count <- c(ncols, nrows, 1, nn)[x@file@dimreadorder]
+			start <- c(col, row, x@data@level, layer)
+			count <- c(ncols, nrows, 1, nn)
 		} else {
-			start <- c(col, row, layer, x@data@level)[x@file@dimreadorder]
-			count <- c(ncols, nrows, nn, 1)[x@file@dimreadorder]
+			start <- c(col, row, layer, x@data@level)
+			count <- c(ncols, nrows, nn, 1)
 		}		
 	} else {
-		start <- c(col, row, layer)[x@file@dimreadorder]
-		count <- c(ncols, nrows,  nn)[x@file@dimreadorder]
+		start <- c(col, row, layer)
+		count <- c(ncols, nrows,  nn)
 	}
 	
 	d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)	
