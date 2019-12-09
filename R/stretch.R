@@ -43,11 +43,15 @@ function(x, minv=0, maxv=255, minq=0, maxq=1, samplesize=1000000, filename="", .
 	nl <- nlayers(x)
 	nc <- ncell(x)
 	
-	if (samplesize[1] < nc) {
-		stopifnot(samplesize[1] > 1) 
-		x <- sampleRegular(x, samplesize, asRaster=TRUE)
+	if ((minq==0 & maxq==1) & (x@data@haveminmax)) {
+		q <- c(minValue(x), maxValue(x))
+	} else {
+		if (samplesize[1] < nc) {
+			stopifnot(samplesize[1] > 1) 
+			x <- sampleRegular(x, samplesize, asRaster=TRUE)
+		}
+		q <- quantile(x, c(minq, maxq), na.rm=TRUE)
 	}
-	q <- quantile(x, c(minq, maxq), na.rm=TRUE)
 	
 	if (nl == 1) {	
 		out <- raster(x)
