@@ -33,27 +33,32 @@
 
 
 setMethod("stretch", signature(x="Raster"), 
-function(x, minv=0, maxv=255, minq=0, maxq=1, samplesize=1000000, filename="", ...) {
-	minq <- max(0,minq)
-	maxq <- min(1,maxq)
-	stopifnot(minq < maxq)
+function(x, minv=0, maxv=255, minq=0, maxq=1, qmin=NA, qmax=NA, samplesize=1000000, filename="", ...) {
+
 	maxv <- maxv[1]
 	minv <- minv[1]
 	stopifnot(maxv > minv)
-	nl <- nlayers(x)
-	nc <- ncell(x)
-	
-	if ((minq==0 & maxq==1) & (x@data@haveminmax)) {
-		q <- c(minValue(x), maxValue(x))
+
+	if (!is.na(qmin) & !is.na(qmax)) {
+		stopifnot(qmin < qmax)
+		q <- c(qmin, qmax)
 	} else {
-		if (samplesize[1] < nc) {
-			stopifnot(samplesize[1] > 1) 
-			x <- sampleRegular(x, samplesize, asRaster=TRUE)
+		minq <- max(0,minq)
+		maxq <- min(1,maxq)
+		stopifnot(minq < maxq)
+	
+		if ((minq==0 & maxq==1) & (x@data@haveminmax)) {
+			q <- c(minValue(x), maxValue(x))
+		} else {
+			if (samplesize[1] < ncell(x)) {
+				stopifnot(samplesize[1] > 1) 
+				x <- sampleRegular(x, samplesize, asRaster=TRUE)
+			}
+			q <- quantile(x, c(minq, maxq), na.rm=TRUE)
 		}
-		q <- quantile(x, c(minq, maxq), na.rm=TRUE)
 	}
 	
-	if (nl == 1) {	
+	if (nlayers(x) == 1) {	
 		out <- raster(x)
 		if (canProcessInMemory(out)) {
 			x <- getValues(x)
