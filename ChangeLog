@@ -1,5 +1,9 @@
 
 --- current version
+new argument "samplesize" to "stretch". See https://github.com/rspatial/raster/issues/70
+
+
+--- 24-September-2019, version 3.0-7
 Bug fixes: 
 predict with character label factor variables returned NA only https://github.com/rspatial/raster/issues/68
 
