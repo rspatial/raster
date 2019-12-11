@@ -41,14 +41,13 @@
 	
 	nc <- ncdf4::nc_open(x@file@name, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
-	getfun <- ncdf4::ncvar_get
 
 	if (nc$var[[zvar]]$ndims == 1) {
 		ncx <- x@ncols
 		count <- ncx
 		for (i in 1:length(rows)) {
 			start <- (readrows[i]-1) * ncx + 1
-			v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+			v <- as.vector(ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count))
 			thisrow <- subset(colrow, colrow[,2] == rows[i])
 			colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 		}	
@@ -56,7 +55,7 @@
 		count <- c(x@ncols, 1)
 		for (i in 1:length(rows)) {
 			start <- c(1, readrows[i])
-			v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+			v <- as.vector(ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count))
 			thisrow <- subset(colrow, colrow[,2] == rows[i])
 			colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 		}	
@@ -64,7 +63,7 @@
 		count <- c(x@ncols, 1, 1)
 		for (i in 1:length(rows)) {
 			start <- c(1, readrows[i], time)
-			v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+			v <- as.vector(ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count))
 			thisrow <- subset(colrow, colrow[,2] == rows[i])
 			colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 		}	
@@ -73,7 +72,7 @@
 			count <- c(x@ncols, 1, 1, 1)
 			for (i in 1:length(rows)) {
 				start <- c(1, readrows[i], x@data@level, time)
-				v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+				v <- as.vector(ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count))
 				thisrow <- subset(colrow, colrow[,2] == rows[i])
 				colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 			}

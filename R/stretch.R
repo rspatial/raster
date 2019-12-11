@@ -33,28 +33,30 @@
 
 
 setMethod("stretch", signature(x="Raster"), 
-function(x, minv=0, maxv=255, minq=0, maxq=1, qmin=NA, qmax=NA, samplesize=1000000, filename="", ...) {
+function(x, minv=0, maxv=255, minq=0, maxq=1, smin=NA, smax=NA, samplesize=1000000, filename="", ...) {
 
 	maxv <- maxv[1]
 	minv <- minv[1]
 	stopifnot(maxv > minv)
 
-	if (!is.na(qmin) & !is.na(qmax)) {
-		stopifnot(qmin < qmax)
-		q <- c(qmin, qmax)
+	if (!any(is.na(smin)) & !(any(is.na(smax)))) {
+		stopifnot(all(smin < smax))
+		q <- cbind(smin, smax)
 	} else {
-		minq <- max(0,minq)
-		maxq <- min(1,maxq)
+		minq <- max(0,minq[1])
+		maxq <- min(1,maxq[1])
 		stopifnot(minq < maxq)
 	
 		if ((minq==0 & maxq==1) & (x@data@haveminmax)) {
-			q <- c(minValue(x), maxValue(x))
+			q <- cbind(minValue(x), maxValue(x))
 		} else {
 			if (samplesize[1] < ncell(x)) {
 				stopifnot(samplesize[1] > 1) 
-				x <- sampleRegular(x, samplesize, asRaster=TRUE)
+				y <- sampleRegular(x, samplesize, asRaster=TRUE)
+				q <- quantile(y, c(minq, maxq), na.rm=TRUE)
+			} else {
+				q <- quantile(x, c(minq, maxq), na.rm=TRUE)
 			}
-			q <- quantile(x, c(minq, maxq), na.rm=TRUE)
 		}
 	}
 	
