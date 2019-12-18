@@ -123,10 +123,12 @@ setMethod('predict', signature(object='Raster'),
 			if (haveFactor) {
 				for (j in 1:length(f)) {
 					flev <- fvs <- factors[[j]]
-					if (!is.numeric(fvs)) {
-						flev <- 1:length(flev)
-					}
+					## commented out to work with "const"
+					#if (!is.numeric(fvs)) {
+					#	flev <- 1:length(flev)
+					#}
 					fv <- blockvals[, f[j]]
+					
 					fv[!(fv %in% flev)] <- NA 
 					fv <- factor(fv, levels=flev, labels=fvs)
 					blockvals[,f[j]] <- fv 
