@@ -76,7 +76,7 @@ function(x, minv=0, maxv=255, minq=0, maxq=1, smin=NA, smax=NA, samplesize=10000
 			for (i in 1:tr$n) {
 				v <- getValues(x, tr$row[i], tr$nrows[i])
 				v <- mult*(v-q[1])
-				v[v < 0] <- 0
+				v[v < minv] <- maxv
 				v[v > maxv] <- maxv
 				out <- writeValues(out, v, tr$row[i])
 			}
@@ -89,7 +89,7 @@ function(x, minv=0, maxv=255, minq=0, maxq=1, smin=NA, smax=NA, samplesize=10000
 		if (canProcessInMemory(out)) {
 			x <- getValues(x)
 			x <- t(apply(x, 1, fun))
-			x[x < 0] <- 0
+			x[x < minv] <- minv
 			x[x > maxv] <- maxv
 			out <- setValues(out, x)
 		} else {
@@ -99,7 +99,7 @@ function(x, minv=0, maxv=255, minq=0, maxq=1, smin=NA, smax=NA, samplesize=10000
 			for (i in 1:tr$n) {
 				v <- getValues(x, tr$row[i], tr$nrows[i])
 				v <- t(apply(v, 1, fun))
-				v[v < 0] <- 0
+				v[v < minv] <- minv
 				v[v > maxv] <- maxv
 				out <- writeValues(out, v, tr$row[1])
 			}
