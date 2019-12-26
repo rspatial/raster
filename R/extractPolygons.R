@@ -108,6 +108,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 
 		.sendCall <- eval( parse( text="parallel:::sendCall") )
 		parallel::clusterExport(cl, c('rsbb', 'rr', 'weights', 'addres', 'cellnumbers', 'small'), envir=environment())
+		
 		clFun <- function(i, pp) {
 			spbb <- bbox(pp)
 		
@@ -188,7 +189,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 			if (doFun) {
 				if (!is.null(d$value$value)) {
 					if (nl > 1 & !weights) {
-						res[[i]] <- apply(d$value$value, 2, fun, na.rm=na.rm)							
+						res[[d$value$tag]] <- apply(d$value$value, 2, fun, na.rm=na.rm)							
 					} else { 
 						res[[d$value$tag]] <- fun(d$value$value)
 					}
