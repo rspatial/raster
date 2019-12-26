@@ -46,8 +46,8 @@ function(x, minv=0, maxv=255, minq=0, maxq=1, smin=NA, smax=NA, samplesize=10000
 		minq <- max(0,minq[1])
 		maxq <- min(1,maxq[1])
 		stopifnot(minq < maxq)
-	
-		if ((minq==0 & maxq==1) & (x@data@haveminmax)) {
+
+		if ((minq==0 & maxq==1) & (.haveMinMax(x))) {
 			q <- cbind(minValue(x), maxValue(x))
 		} else {
 			if (samplesize[1] < ncell(x)) {

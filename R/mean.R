@@ -4,6 +4,26 @@
 # Version 1.0
 # Licence GPL v3
 
+.deepCopyRasterLayer <- function(x, filename="", ...) {
+	out <- raster(x)
+	if (canProcessInMemory(x)) {
+		return( setValues(out, getValues(x)) )
+	} else {
+		tr <- blockSize(x)
+		pb <- pbCreate(tr$n, label='copy')
+		out <- writeStart(out, filename=filename)
+		x <- readStart(x, ...)
+		for (i in 1:tr$n) {
+			v <- getValues( x, row=tr$row[i], nrows=tr$nrows[i] )
+			out <- writeValues(out, v, tr$row[i])
+			pbStep(pb, i)
+		}
+		pbClose(pb)
+		x <- readStop(x)
+		return( writeStop(out) )
+	}
+}
+
 
 setMethod("mean", signature(x='Raster'),
 	function(x, ..., trim=NA, na.rm=FALSE){
@@ -21,6 +41,11 @@ setMethod("mean", signature(x='Raster'),
 		d <- dim(x)
 		nc <- ncell(out)
 		if (is.null(add)) {
+		
+			if (nlayers(x) == 1) {
+				return(.deepCopyRasterLayer(x))
+			}
+		
 			if (canProcessInMemory(x)) {
 				x <- getValues(x)
 				x <- setValues(out, .rowMeans(x, nc, d[3], na.rm=na.rm))

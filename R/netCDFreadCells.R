@@ -80,7 +80,7 @@
 			count <- c(x@ncols, 1, 1, 1)
 			for (i in 1:length(rows)) {
 				start <- c(1, readrows[i], time, x@data@level)
-				v <- as.vector(getfun(nc, varid=zvar, start=start, count=count))
+				v <- as.vector(ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count))
 				thisrow <- subset(colrow, colrow[,2] == rows[i])
 				colrow[colrow[,2]==rows[i], 3] <- v[thisrow[,1]]
 			}
@@ -125,7 +125,7 @@
 
 	nc <- ncdf4::nc_open(x@file@name, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
-	getfun <- ncdf4::ncvar_get
+	
 	
 	# this needs to be optimized. Read chunks and extract cells
 	j <- which(!is.na(cells))
@@ -134,14 +134,14 @@
 		res <- matrix(NA, nrow=length(cells), ncol=1)
 		for (i in j) {
 			start <- c(cols[i], rows[i])
-			res[i] <- getfun(nc, varid=zvar, start=start, count=count)
+			res[i] <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
 		}	
 	} else if (nc$var[[zvar]]$ndims == 3) {
 		count <- c(1, 1, nl)
 		res <- matrix(NA, nrow=length(cells), ncol=nl)
 		for (i in j) {
 			start <- c(cols[i], rows[i], layer)
-			res[i,] <- getfun(nc, varid=zvar, start=start, count=count)
+			res[i,] <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
 		}	
 	} else {
 		if (x@data@dim3 == 4) {
@@ -149,14 +149,14 @@
 			res <- matrix(NA, nrow=length(cells), ncol=nl)
 			for (i in j) {
 				start <- c(cols[i], rows[i], x@data@level, layer)
-				res[i,] <- getfun(nc, varid=zvar, start=start, count=count)
+				res[i,] <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
 			}	
 		} else {
 			count <- c(1, 1, nl, 1)
 			res <- matrix(nrow=length(cells), ncol=nl)
 			for (i in 1:length(cells)) {
 				start <- c(cols[i], rows[i], layer, x@data@level)
-				res[i,] <- getfun(nc, varid=zvar, start=start, count=count)
+				res[i,] <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
 			}	
 		}
 	}

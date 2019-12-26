@@ -1,6 +1,10 @@
 
 --- current version
-new arguments "smin", "smax" and "samplesize" to "stretch". See https://github.com/rspatial/raster/issues/70
+new arguments "smin", "smax" and "samplesize" to "stretch"; and bug fixes. See https://github.com/rspatial/raster/issues/70
+
+new method "median" for Raster objects
+
+bug fixes in raster::predict for use with factor data.
 
 
 --- 24-September-2019, version 3.0-7
