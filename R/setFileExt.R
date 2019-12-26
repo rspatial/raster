@@ -20,8 +20,8 @@
 		extension(fname) <- ".bip"
 	} else if (type == 'BSQ') {
 		extension(fname) <- ".bsq"
-	} else if (type == 'big.matrix') {
-		extension(fname) <- ".big"
+#	} else if (type == 'big.matrix') {
+#		extension(fname) <- ".big"
 	} else {
 		stop('unknown file format')
 	}

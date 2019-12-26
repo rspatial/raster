@@ -108,31 +108,31 @@ setMethod('raster', signature(x='matrix'),
 )
 
 
-setMethod('raster', signature(x='big.matrix'), 
-	function(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, template=NULL) {
-		if (isTRUE(is.na(crs))) {
-			crs <- as.character(NA)
-		}	
-		if (!is.null(template)) {
-			if (inherits(template, 'Extent')) {
-				r <- raster(template, crs=crs)
-			} else {
-				r <- raster(template)
-			}
-		} else {
-			r <- raster(ncols=ncol(x), nrows=nrow(x), xmn=xmn, xmx=xmx, ymn=ymn, ymx=ymx, crs=crs)
-		}
+# setMethod('raster', signature(x='big.matrix'), 
+	# function(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, template=NULL) {
+		# if (isTRUE(is.na(crs))) {
+			# crs <- as.character(NA)
+		# }	
+		# if (!is.null(template)) {
+			# if (inherits(template, 'Extent')) {
+				# r <- raster(template, crs=crs)
+			# } else {
+				# r <- raster(template)
+			# }
+		# } else {
+			# r <- raster(ncols=ncol(x), nrows=nrow(x), xmn=xmn, xmx=xmx, ymn=ymn, ymx=ymx, crs=crs)
+		# }
 		
-#		r@file@driver <- 'big.matrix'
-#		if (is.filebacked(x)) {
-#			r@file@name <- bigmemory:::file.name(x)
-#		}
-		r@data@fromdisk <- TRUE
-		r@data@inmemory <- FALSE
-		attr(r@file, 'big.matrix') <- x
-		return(r)
-	}
-)
+# #		r@file@driver <- 'big.matrix'
+# #		if (is.filebacked(x)) {
+# #			r@file@name <- bigmemory:::file.name(x)
+# #		}
+		# r@data@fromdisk <- TRUE
+		# r@data@inmemory <- FALSE
+		# attr(r@file, 'big.matrix') <- x
+		# return(r)
+	# }
+# )
 
 
 

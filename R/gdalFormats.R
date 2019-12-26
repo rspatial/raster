@@ -4,7 +4,8 @@
 # Licence GPL v3
 
 .isSupportedFormat <- function(dname) {
-	res <- dname %in% c(.nativeDrivers(), 'ascii', 'big.matrix', 'CDF')
+	#res <- dname %in% c(.nativeDrivers(), 'ascii', 'big.matrix', 'CDF')
+	res <- dname %in% c(.nativeDrivers(), 'ascii', 'CDF')
 	if (!res) { 
 		res <- .isSupportedGDALFormat(dname) 
 	} 

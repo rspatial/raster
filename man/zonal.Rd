@@ -43,7 +43,7 @@ r <- raster(ncols=10, nrows=10)
 values(r) <- runif(ncell(r)) * 1:ncell(r)
 z <- r
 values(z) <- rep(1:5, each=20)
-# for big files, use a character value rather than a function
+# for large files, use a character value rather than a function
 zonal(r, z, 'sum')
 
 # for smaller files you can also provide a function

@@ -15,7 +15,6 @@
 \alias{raster,SpatialGrid-method}
 \alias{raster,SpatialPixels-method}
 \alias{raster,matrix-method}
-\alias{raster,big.matrix-method}
 \alias{raster,list-method}
 \alias{raster,im-method}
 \alias{raster,asc-method}
@@ -54,8 +53,6 @@ For an overview of the functions in the raster package have a look here: \code{\
 \S4method{raster}{Extent}(x, nrows=10, ncols=10, crs=NA, ...)
 
 \S4method{raster}{matrix}(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, template=NULL)
-
-\S4method{raster}{big.matrix}(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, template=NULL)
 
 \S4method{raster}{Spatial}(x, origin, ...) 
 

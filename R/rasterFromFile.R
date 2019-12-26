@@ -55,9 +55,9 @@
 		} 
 	}
 
-	if ( fileext == ".BIG" | fileext == ".BRD") {
-		return( .rasterFromRasterFile(x, band=band, objecttype, driver='big.matrix', ...) )
-	}
+#	if ( fileext == ".BIG" | fileext == ".BRD") {
+#		return( .rasterFromRasterFile(x, band=band, objecttype, driver='big.matrix', ...) )
+#	}
 
 	if (!is.null(offset)) {
 		return ( .rasterFromASCIIFile(x, offset, ...) )
