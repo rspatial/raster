@@ -287,6 +287,8 @@
 	
 	r@file@name <- filename
 	r@file@toptobottom <- toptobottom
+	if (type == 'RasterLayer') { r@file@dimreadorder <- dims[1:2]
+	} else {r@file@dimreadorder <- dims }
 	r@data@unit <- unit
 	
 	

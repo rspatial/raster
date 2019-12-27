@@ -35,21 +35,24 @@
 	} else if (nc$var[[zvar]]$ndims == 2) {
 		start <- c(col, row)
 		count <- c(ncols, nrows)
-		d <- ncdf4::ncvar_get( nc, varid=zvar,  start=start, count=count )		
+		d <- ncdf4::ncvar_get(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count), collapse_degen = FALSE )
+		d <- aperm(d, perm = x@file@dimreadorder)
 	} else if (nc$var[[zvar]]$ndims == 3) {
 		start <- c(col, row, x@data@band)
 		count <- c(ncols, nrows, 1)
-		d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
-		
+		d <- ncdf4::ncvar_get(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count), collapse_degen = FALSE )
+		d <- aperm(d, perm = x@file@dimreadorder)[, , 1]
 	} else {
 		if (x@data@dim3 == 4) {
 			start <- c(col, row, x@data@level, x@data@band)
 			count <- c(ncols, nrows, 1, 1)
-			d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
+  		d <- ncdf4::ncvar_get(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count), collapse_degen = FALSE )
+  		d <- aperm(d, perm = x@file@dimreadorder)[, , 1, 1]
 		} else {
 			start <- c(col, row, x@data@band, x@data@level)
 			count <- c(ncols, nrows, 1, 1)
-			d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)
+  		d <- ncdf4::ncvar_get(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count), collapse_degen = FALSE )
+  		d <- aperm(d, perm = x@file@dimreadorder)[, , 1, 1]
 		}
 	}
 	
@@ -121,16 +124,20 @@
 		if (x@data@dim3 == 4) {
 			start <- c(col, row, x@data@level, layer)
 			count <- c(ncols, nrows, 1, nn)
+    	d <- ncdf4::ncvar_get(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count), collapse_degen = FALSE )
+    	d <- aperm(d, perm = x@file@dimreadorder)[ , , 1, ]
 		} else {
 			start <- c(col, row, layer, x@data@level)
 			count <- c(ncols, nrows, nn, 1)
+    	d <- ncdf4::ncvar_get(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count), collapse_degen = FALSE )
+    	d <- aperm(d, perm = x@file@dimreadorder)[ , , , 1]
 		}		
 	} else {
 		start <- c(col, row, layer)
 		count <- c(ncols, nrows,  nn)
+  	d <- ncdf4::ncvar_get(nc, varid=zvar, start=order_count_dim(x, start), count=order_count_dim(x, count), collapse_degen = FALSE )
+  	d <- aperm(d, perm = x@file@dimreadorder)
 	}
-	
-	d <- ncdf4::ncvar_get(nc, varid=zvar, start=start, count=count)	
 	
 
 	#if (!is.na(x@file@nodatavalue)) { 	d[d==x@file@nodatavalue] <- NA	}
@@ -197,3 +204,10 @@
 	return(v)
 }
 
+
+order_count_dim <- function(x, count){
+  if (length(count) == 1) {return(count)}
+  dimreadorder <- x@file@dimreadorder
+  count[dimreadorder] <- count
+  return(count) 
+}
