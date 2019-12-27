@@ -11,7 +11,6 @@
 \alias{brick,RasterBrick-method}
 \alias{brick,Extent-method}
 \alias{brick,array-method}
-\alias{brick,big.matrix-method}
 \alias{brick,list-method}
 \alias{brick,SpatialPixels-method}
 \alias{brick,SpatialGrid-method}
@@ -42,8 +41,6 @@ A RasterBrick can be created from RasterLayer objects, from a RasterStack, or fr
 
 \S4method{brick}{array}(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, transpose=FALSE)
 
-\S4method{brick}{big.matrix}(x, template, filename='', ...)
-
 \S4method{brick}{SpatialGrid}(x)
 
 \S4method{brick}{SpatialPixels}(x)
@@ -64,13 +61,12 @@ A RasterBrick can be created from RasterLayer objects, from a RasterStack, or fr
 \item{ymx}{maximum y coordinate (top border)}
 \item{crs}{character or object of class CRS. PROJ4 type description of a Coordinate Reference System (map projection). If this argument is missing, and the x coordinates are within -360 .. 360 and the y coordinates are within -90 .. 90, "+proj=longlat +datum=WGS84" is used}
 \item{transpose}{if \code{TRUE}, the values in the array are transposed}
-\item{template}{Raster* object used to set the extent, number of rows and columns and CRS}
 }
 
 \details{
 If \code{x} is a RasterLayer, the additional arguments can be used to pass additional Raster* objects.
 
-If there is a \code{filename} argument, the additional arguments are as for \code{\link{writeRaster}}. The big.matrix most have rows representing cells and columns representing layers.
+If there is a \code{filename} argument, the additional arguments are as for \code{\link{writeRaster}}. 
 
 If \code{x} represents a filename there is the following additional argument:
 

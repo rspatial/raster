@@ -3,8 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-
-
 setMethod('extract', signature(x='Raster', y='vector'), 
 function(x, y, ...){ 
 	y <- round(y)
@@ -19,7 +17,4 @@ function(x, y, ...){
 	extract(x, y, ...)
 }
 )
-
-
-
 

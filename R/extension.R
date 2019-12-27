@@ -75,7 +75,7 @@ extension <- function(filename, value=NULL, maxchar=10) {
 	} else if (format == 'CDF') { return('.nc')
 	} else if (format == 'KML') { return('.kml')
 	} else if (format == 'KMZ') { return('.kmz')
-	} else if (format == 'BIG.MATRIX') { return('.big')
+#	} else if (format == 'BIG.MATRIX') { return('.big')
 	} else if (format == 'BIL') { return('.bil')
 	} else if (format == 'BSQ') { return('.bsq')
 	} else if (format == 'BIP') { return('.bip')

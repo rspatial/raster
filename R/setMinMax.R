@@ -103,3 +103,14 @@ setMethod('setMinMax', signature(x='RasterStack'),
 		return(x)
 	}
 )
+
+
+.haveMinMax <- function(x) {
+	if (inherits(x, "RasterLayer") || inherits(x, "RasterBrick")) {
+		return(x@data@haveminmax)
+	} else if (inherits(x, "RasterStack")) {
+		return(all(sapply(x@layers, function(y) y@data@haveminmax)))
+	} else {
+		return(FALSE)
+	}
+}

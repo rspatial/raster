@@ -133,7 +133,7 @@ function(x, y, method="bilinear", filename="", ...)  {
 			}
 			v <- setValues(y, v)
 			if (filename != '') {
-				writeRaster(v, filename, ...)
+				v <- writeRaster(v, filename, ...)
 				
 			}
 			pbClose(pb)

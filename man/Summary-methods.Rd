@@ -4,6 +4,7 @@
 
 \alias{Summary-methods}
 \alias{mean,Raster-method}
+\alias{median,Raster-method}
 \alias{Summary,Raster-method}
 
 \title{ Summary methods }
@@ -11,7 +12,7 @@
 \description{
 The following summary methods are available for Raster* objects:
  
- \code{mean, max, min, range, prod, sum, any, all}
+\code{mean, median, max, min, range, prod, sum, any, all}
 
 
 All methods take \code{na.rm} as an additional logical argument. Default is \code{na.rm=FALSE}. If \code{TRUE}, \code{NA} values are removed from calculations. 

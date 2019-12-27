@@ -21,7 +21,6 @@ foo <- packageDescription("raster")
 
 This vignette is now available here:
 
-https://rspatial.org/raster/
-
+https://rspatial.org/raster/pkg/index.html
 
 \end{document}

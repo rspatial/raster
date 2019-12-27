@@ -5,7 +5,7 @@
 
 
 setMethod('predict', signature(object='Raster'), 
-	function(object, model, filename="", fun=predict, ext=NULL, const=NULL, index=1, na.rm=TRUE, inf.rm=FALSE, factors=NULL, format, datatype, overwrite=FALSE, progress='', ...) {
+	function(object, model, filename="", fun=predict, ext=NULL, const=NULL, index=1, na.rm=TRUE, inf.rm=FALSE, factors=NULL, format, datatype, overwrite=FALSE, progress="", ...) {
 	
 		filename <- trim(filename)
 		if (missing(format)) { format <- .filetype(filename=filename) } 
@@ -84,6 +84,8 @@ setMethod('predict', signature(object='Raster'),
 				f[(f %in% lyrnamesc)]
 			}			
 		}
+		constnames <- names(const)
+	
 		if (!canProcessInMemory(predrast) && filename == '') {
 			filename <- rasterTmpFile()
 		} 
@@ -98,7 +100,7 @@ setMethod('predict', signature(object='Raster'),
 		
 		napred <- matrix(rep(NA, ncol(predrast) * tr$nrows[1] * nlayers(predrast)), ncol=nlayers(predrast))
 		factres	<- FALSE
-		pb <- pbCreate(tr$n,  progress=progress, label='predict' )			
+		pb <- pbCreate(tr$n,  progress=progress, label="predict")			
 
 		for (i in 1:tr$n) {
 		
@@ -119,14 +121,19 @@ setMethod('predict', signature(object='Raster'),
 			
 			if (! is.null(const)) {
 				blockvals <- cbind(blockvals, const)
+				constnames <- names(const)
 			} 
 			if (haveFactor) {
 				for (j in 1:length(f)) {
 					flev <- fvs <- factors[[j]]
-					if (!is.numeric(fvs)) {
-						flev <- 1:length(flev)
+					if (! is.null(const)) {
+						if (!(f[j] %in% constnames)) {
+							if (!is.numeric(fvs)) {
+								flev <- 1:length(flev)
+							}
+						}
 					}
-					fv <- blockvals[, f[j]]
+					fv <- blockvals[, f[j]]	
 					fv[!(fv %in% flev)] <- NA 
 					fv <- factor(fv, levels=flev, labels=fvs)
 					blockvals[,f[j]] <- fv 

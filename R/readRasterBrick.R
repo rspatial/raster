@@ -164,12 +164,12 @@
  	} else if (object@file@driver == 'netcdf') {
 		result <- .readRowsBrickNetCDF(object, startrow, nrows, startcol, ncols)
 	
- 	} else if (object@file@driver == 'big.matrix') {
-
-		b <- attr(object@file, 'big.matrix')
-		start <- cellFromRowCol(object, startrow, startcol)
-		end <- cellFromRowCol(object, endrow, endcol)
-		result <- b[start:end, ]
+# 	} else if (object@file@driver == 'big.matrix') {
+#
+#		b <- attr(object@file, 'big.matrix')
+#		start <- cellFromRowCol(object, startrow, startcol)
+#		end <- cellFromRowCol(object, endrow, endcol)
+#		result <- b[start:end, ]
  
 	} else {
 	#use GDAL  			

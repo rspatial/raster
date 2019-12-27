@@ -21,11 +21,15 @@
 writeFormats <- function() {
 	if ( .requireRgdal(FALSE) ) {
 		gd <- .gdalWriteFormats() 
-		short <- c(.nativeDrivers(),  'ascii', 'CDF', 'big', as.vector(gd[,1]))
-		long <- c(.nativeDriversLong(), 'Arc ASCII', 'NetCDF', 'big.matrix', as.vector(gd[,2]))
+		short <- c(.nativeDrivers(),  'ascii', 'CDF', as.vector(gd[,1]))
+		long <- c(.nativeDriversLong(), 'Arc ASCII', 'NetCDF', as.vector(gd[,2]))
+	#	short <- c(.nativeDrivers(),  'ascii', 'CDF', 'big', as.vector(gd[,1]))
+	#	long <- c(.nativeDriversLong(), 'Arc ASCII', 'NetCDF', 'big.matrix', as.vector(gd[,2]))
 	} else {
-		short <- c(.nativeDrivers(), 'ascii', 'CDF', 'big', "")
-		long <- c(.nativeDriversLong(), "Arc ASCII", "NetCDF", "big.matrix", "", "rgdal not installed")
+		short <- c(.nativeDrivers(), 'ascii', 'CDF', "")
+		long <- c(.nativeDriversLong(), "Arc ASCII", "NetCDF", "", "rgdal not installed")
+#		short <- c(.nativeDrivers(), 'ascii', 'CDF', 'big', "")
+#		long <- c(.nativeDriversLong(), "Arc ASCII", "NetCDF", "big.matrix", "", "rgdal not installed")
 	}
 	
 	m <- cbind(short, long)

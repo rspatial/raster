@@ -38,7 +38,7 @@ A RasterStack is a collection of RasterLayer objects with the same spatial exten
 \item{native}{logical. If \code{TRUE} native drivers are used instead of gdal drivers (where available, such as for  BIL and Arc-ASCII files)}
 \item{RAT}{logical. If \code{TRUE} a raster attribute table is created for files that have one}
 \item{quick}{logical. If \code{TRUE} the extent and resolution of the objects are not compared. This speeds up the creation of the RasteStack but should be use with great caution. Only use this option when you are absolutely sure that all the data in all the files are aligned, and you need to create RasterStack for many (>100) files}
-\item{varname}{character. To select the variable of interest in a NetCDF file (see \code{\link{raster}}}
+\item{varname}{character. To select the variable of interest in a NetCDF file (see \code{\link{raster}})}
 \item{...}{additional filenames or Raster* objects}
 }
 

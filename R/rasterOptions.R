@@ -479,7 +479,7 @@ tmpDir <- function(create=TRUE) {
 		} else if (ext == '.nc' | ext == '.cdf' | ext == '.ncdf') { return('CDF')
 		} else if (ext == '.kml') { return('KML')
 		} else if (ext == '.kmz') { return('KML')		
-		} else if (ext == '.big') { return('big.matrix')
+#		} else if (ext == '.big') { return('big.matrix')
 		} else if (ext == '.sgrd') { return('SAGA')
 		} else if (ext == '.sdat') { return('SAGA')
 		} else if (ext == '.bil') { return('BIL')

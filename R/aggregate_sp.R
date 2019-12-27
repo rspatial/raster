@@ -147,12 +147,15 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 			if (rgeos::version_GEOS0() < "3.3.0") {
 				x <- lapply(1:nrow(id), function(y) spChFIDs(rgeos::gUnionCascaded(x[dc[dc$v==y,1],]), as.character(y)))
 			} else {
+			
 				x <- lapply(1:nrow(id), 
 						function(y) {
 							z <- x[dc[dc$v==y, 1], ]
-							try( z <- rgeos::gUnaryUnion(z), silent=TRUE )
-							spChFIDs(z, as.character(y))
-						} 
+							z <- try( rgeos::gUnaryUnion(z) )
+							if (class(z) != "try-error") {
+								spChFIDs(z, as.character(y))
+							}
+						}
 					)
 			}	
 		} else {

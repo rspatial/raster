@@ -33,17 +33,34 @@
 
 
 setMethod("stretch", signature(x="Raster"), 
-function(x, minv=0, maxv=255, minq=0, maxq=1, filename="", ...) {
-	minq <- max(0,minq)
-	maxq <- min(1,maxq)
-	stopifnot(minq < maxq)
+function(x, minv=0, maxv=255, minq=0, maxq=1, smin=NA, smax=NA, samplesize=1000000, filename="", ...) {
+
 	maxv <- maxv[1]
 	minv <- minv[1]
 	stopifnot(maxv > minv)
-	nl <- nlayers(x)
-	q <- quantile(x, c(minq, maxq), na.rm=TRUE)
+
+	if (!any(is.na(smin)) & !(any(is.na(smax)))) {
+		stopifnot(all(smin < smax))
+		q <- cbind(smin, smax)
+	} else {
+		minq <- max(0,minq[1])
+		maxq <- min(1,maxq[1])
+		stopifnot(minq < maxq)
+
+		if ((minq==0 & maxq==1) & (.haveMinMax(x))) {
+			q <- cbind(minValue(x), maxValue(x))
+		} else {
+			if (samplesize[1] < ncell(x)) {
+				stopifnot(samplesize[1] > 1) 
+				y <- sampleRegular(x, samplesize, asRaster=TRUE)
+				q <- quantile(y, c(minq, maxq), na.rm=TRUE)
+			} else {
+				q <- quantile(x, c(minq, maxq), na.rm=TRUE)
+			}
+		}
+	}
 	
-	if (nl == 1) {	
+	if (nlayers(x) == 1) {	
 		out <- raster(x)
 		if (canProcessInMemory(out)) {
 			x <- getValues(x)
@@ -59,7 +76,7 @@ function(x, minv=0, maxv=255, minq=0, maxq=1, filename="", ...) {
 			for (i in 1:tr$n) {
 				v <- getValues(x, tr$row[i], tr$nrows[i])
 				v <- mult*(v-q[1])
-				v[v < 0] <- 0
+				v[v < minv] <- maxv
 				v[v > maxv] <- maxv
 				out <- writeValues(out, v, tr$row[i])
 			}
@@ -72,7 +89,7 @@ function(x, minv=0, maxv=255, minq=0, maxq=1, filename="", ...) {
 		if (canProcessInMemory(out)) {
 			x <- getValues(x)
 			x <- t(apply(x, 1, fun))
-			x[x < 0] <- 0
+			x[x < minv] <- minv
 			x[x > maxv] <- maxv
 			out <- setValues(out, x)
 		} else {
@@ -82,7 +99,7 @@ function(x, minv=0, maxv=255, minq=0, maxq=1, filename="", ...) {
 			for (i in 1:tr$n) {
 				v <- getValues(x, tr$row[i], tr$nrows[i])
 				v <- t(apply(v, 1, fun))
-				v[v < 0] <- 0
+				v[v < minv] <- minv
 				v[v > maxv] <- maxv
 				out <- writeValues(out, v, tr$row[1])
 			}

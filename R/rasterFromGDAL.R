@@ -127,9 +127,14 @@
 			bnames <- NULL
 		}
 	} else {
-		bnames <- NULL
+		gobj <- rgdal::GDAL.open(filename)
+		bnames <- rep("", nbands)
+		for (i in 1:nbands) {
+			objbnd <- rgdal::getRasterBand(gobj, i)
+			bnames[i] <- rgdal::getDescription(objbnd)
+		}
+		rgdal::GDAL.close(gobj)		
 	}
-		
 	
 	if (type == 'RasterBrick') {
 	
@@ -217,7 +222,8 @@
 	}
 	
 	if (type == 'RasterBrick') {
-		if (length(bnames) == nlayers(r)) {
+		ub <- unique(bnames)
+		if (length(ub) == nlayers(r)) {
 			names(r) <- bnames		
 		} else {
 			names(r) <- rep(gsub(" ", "_", extension(basename(filename), "")), nbands)

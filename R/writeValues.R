@@ -75,12 +75,12 @@ setMethod('writeValues', signature(x='RasterLayer', v='vector'),
 
 			x <- .writeValuesCDF(x, v, start)
 			
-		} else if ( driver == 'big.matrix') {
-
-			b <- attr(x@file, 'big.matrix')
-			nrows <- length(v) / ncol(x)
-			# b[rowColFromCell(x, start:(start+length(v)-1))] <- v
-			b[start:(start+nrows-1), ] <-  matrix(v, nrow=nrows, byrow=TRUE)
+#		} else if ( driver == 'big.matrix') {
+#
+#			b <- attr(x@file, 'big.matrix')
+#			nrows <- length(v) / ncol(x)
+#			# b[rowColFromCell(x, start:(start+length(v)-1))] <- v
+#			b[start:(start+nrows-1), ] <-  matrix(v, nrow=nrows, byrow=TRUE)
 
 		} else if ( driver == 'ascii') {
 		

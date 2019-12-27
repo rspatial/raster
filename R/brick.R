@@ -243,32 +243,32 @@ setMethod('brick', signature(x='array'),
 	
 
 
-setMethod('brick', signature(x='big.matrix'), 
-	function(x, template, filename='', ...) {
-		stopifnot(inherits(template, 'BasicRaster'))
-		stopifnot(nrow(x) == ncell(template))
-		r <- brick(template)
-		filename <- trim(filename)
-		names(r) <- colnames(x)
-		if (canProcessInMemory(r)) {
-			r <- setValues(r, x[])
-			if (filename != '') {
-				r <- writeRaster(r, filename, ...)
-			}
-		} else {
-			tr <- blockSize(r)
-			pb <- pbCreate(tr$n, ...)
-			r <- writeStart(r, filename, ...)
-			for (i in 1:tr$n) {
-				r <- writeValues(r, x[tr$row[i]:(tr$row[i]+tr$nrows[i]-1), ], tr$row[i] )
-				pbStep(pb) 
-			}
-			r <- writeStop(r)
-			pbClose(pb)
-		}
-		return(r)
-	}
-)
+# setMethod('brick', signature(x='big.matrix'), 
+	# function(x, template, filename='', ...) {
+		# stopifnot(inherits(template, 'BasicRaster'))
+		# stopifnot(nrow(x) == ncell(template))
+		# r <- brick(template)
+		# filename <- trim(filename)
+		# names(r) <- colnames(x)
+		# if (canProcessInMemory(r)) {
+			# r <- setValues(r, x[])
+			# if (filename != '') {
+				# r <- writeRaster(r, filename, ...)
+			# }
+		# } else {
+			# tr <- blockSize(r)
+			# pb <- pbCreate(tr$n, ...)
+			# r <- writeStart(r, filename, ...)
+			# for (i in 1:tr$n) {
+				# r <- writeValues(r, x[tr$row[i]:(tr$row[i]+tr$nrows[i]-1), ], tr$row[i] )
+				# pbStep(pb) 
+			# }
+			# r <- writeStop(r)
+			# pbClose(pb)
+		# }
+		# return(r)
+	# }
+# )
 
 	
 	
