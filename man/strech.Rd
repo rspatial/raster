@@ -10,7 +10,8 @@ Linear stretch of values in a Raster object. Provide the desired output range (m
 }
 
 \usage{
-\S4method{stretch}{Raster}(x, minv=0, maxv=255, minq=0, maxq=1, smin=NA, smax=NA, samplesize=1000000, filename='', ...) 
+\S4method{stretch}{Raster}(x, minv=0, maxv=255, minq=0, maxq=1, smin=NA, smax=NA,
+          samplesize=1000000, filename='', ...)
 }
 
 \arguments{

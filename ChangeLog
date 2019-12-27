@@ -1,3 +1,7 @@
+to do
+
+There are bugs when using netCDF files that have latitude as the first dimension, and longitude as the second. Fixes proposed by Kassel Hingee. https://github.com/rspatial/raster/issues/83 https://github.com/rspatial/raster/pull/84/
+
 
 --- current version
 improvements:
@@ -10,8 +14,6 @@ layer names in GTiff files are now read from file. Requested by Kyle Taylor
 https://github.com/rspatial/raster/issues/88
 
 bug fixes:
-
-There were bugs when using netCDF files that have latitude as the first dimension, and longitude as the second. Fixed by Kassel Hingee. https://github.com/rspatial/raster/issues/83 https://github.com/rspatial/raster/pull/84/
 
 parellel version of extract with polygons and "fun" messed up the order of the values (reported by Jacory). https://github.com/rspatial/raster/issues/79
 
