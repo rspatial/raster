@@ -29,6 +29,7 @@ Authors@R: c(
 	person("Josh", "Gray", role = "ctb"),
 	person("Jonathan A.", "Greenberg", role = "ctb"),
 	person("Paul", "Hiemstra", role = "ctb"),
+	person("Kassel", "Hingee", role = "ctb"),
 	person("Institute for Mathematics Applied Geosciences", role="cph"),
 	person("Charles", "Karney", role = "ctb"),
 	person("Matteo", "Mattiuzzi", role = "ctb"),
