@@ -169,7 +169,7 @@ ccodes <- function() {
 	} else {
 		f <- "countries_gadm36_sp.rds"	
 	}
-	filename <- file.path(path, f, sep="")
+	filename <- file.path(path, f)
 	
 	if (!file.exists(filename)) {
 		if (download) {
