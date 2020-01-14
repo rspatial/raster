@@ -27,7 +27,7 @@ setMethod('interpolate', signature(object='Raster'),
 		dataclasses <- try( attr(model$terms, "dataClasses")[-1], silent=TRUE)
 		if (!is.null(dataclasses)) {
 			varnames <- names(dataclasses)
-			if (class(dataclasses) != 'try-error') {
+			if (! inherits(dataclasses, "try-error")) {
 				if ( length( unique(lyrnames[(lyrnames %in% varnames)] )) != length(lyrnames[(lyrnames %in% varnames)] )) {
 					stop('duplicate names in Raster* object: ', lyrnames)
 				}

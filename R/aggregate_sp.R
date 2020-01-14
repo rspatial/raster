@@ -152,7 +152,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 						function(y) {
 							z <- x[dc[dc$v==y, 1], ]
 							z <- try( rgeos::gUnaryUnion(z) )
-							if (class(z) != "try-error") {
+							if (! inherits(z, "try-error")) {
 								spChFIDs(z, as.character(y))
 							}
 						}

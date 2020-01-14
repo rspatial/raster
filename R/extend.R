@@ -42,7 +42,7 @@ function(x, y, value=NA, filename='', ...) {
 	}
 	
 	test <- try ( y <- extent(y), silent=TRUE )
-	if (class(test) == "try-error") {
+	if (inherits(test, "try-error")) {
 		stop('Cannot get an Extent object from argument y')
 	}
 

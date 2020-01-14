@@ -16,7 +16,7 @@
 	} else {
 		projs <- trim(projs)
 		prj <- try(CRS(projs), silent = TRUE)
-		if (class(prj) == "try-error") { 
+		if (inherits(prj, "try-error")) { 
 			warning(paste(projs, 'is not a valid PROJ.4 CRS string')) 
 			prj <- CRS()
 		}

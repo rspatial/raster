@@ -267,7 +267,7 @@ setMethod('raster', signature(x='RasterBrick'),
 				
 				# ncdf files
 				zvar <- try(methods::slot(x@data, 'zvar'), silent=TRUE)
-				if (class(zvar) != 'try-error') {
+				if (!(inherits(zvar, "try-error"))) {
 					attr(r@data, "zvar") <- zvar
 					attr(r@data, "dim3") <- x@data@dim3
 					attr(r@data, "level") <- x@data@level

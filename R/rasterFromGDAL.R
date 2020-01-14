@@ -47,7 +47,7 @@
 	gdalinfo <- try ( rgdal::GDALinfo(filename, silent=silent, returnRAT=RAT, returnCategoryNames=RAT) )
 	options('warn'= w) 
 
-	if (class(gdalinfo) == 'try-error') {
+	if ( inherits(gdalinfo, "try-error")) {
 		gdalinfo <- rgdal::GDALinfo(filename, silent=silent, returnRAT=FALSE, returnCategoryNames=FALSE)
 		warning('Could not read RAT or Category names')
 	}
@@ -123,7 +123,7 @@
 		bn <- sapply(strsplit(bnames, '='), function(x) x[2])
 		bi <- gsub("Band_", "", sapply(strsplit(bnames, '='), function(x) x[1]))
 		bnames <- try(bn[order(as.integer(bi))], silent=TRUE)
-		if (class(bnames)=='try-error') {
+		if ( inherits(bnames, "try-error") ) {
 			bnames <- NULL
 		}
 	} else {

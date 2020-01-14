@@ -13,7 +13,7 @@ function(x, y, filename='', doEdge=TRUE, ...) {
 		pts <- try(  rasterToPoints(x)[,1:2, drop=FALSE] )
 	}
 	
-	if (class(pts) == "try-error") {
+	if (inherits(pts, "try-error")) {
 		return( .distanceRows(x, filename=filename, ...) )
 	}
 	if (nrow(pts) == 0) {

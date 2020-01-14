@@ -27,7 +27,7 @@ function(x, y, filename='', snap='near', datatype=NULL, ...) {
 	filename <- trim(filename)
 
 	y <- try ( extent(y), silent=TRUE )
-	if (class(y) == "try-error") {
+	if (inherits(y, "try-error")) {
 		stop('Cannot get an Extent object from argument y')
 	}
 	methods::validObject(y)

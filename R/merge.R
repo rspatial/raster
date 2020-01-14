@@ -74,7 +74,7 @@ function(x, y, ..., tolerance=0.05, filename="", overlap=TRUE, ext=NULL) {
 		out1 <- crop(out1, ext)
 
 		test <- try( intersect(extent(out), extent(out1)) )
-		if (class(test) == 'try-error') {
+		if (inherits(test, "try-error")) {
 			stop('"ext" does not overlap with any of the input data')
 		} 
 		out <- out1

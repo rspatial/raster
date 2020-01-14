@@ -26,7 +26,7 @@ function(x, filename='', degrees=FALSE, from=FALSE, doEdge=FALSE, ...) {
 	} else {
 		pts <- try(  rasterToPoints(x)[,1:2, drop=FALSE] )
 	}
-	if (class(pts) == "try-error") {
+	if (inherits(pts, "try-error")) {
 		stop('This function has not yet been implemented for very large files')
 	}
 	if (nrow(pts) == 0) {

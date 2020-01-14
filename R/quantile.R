@@ -8,7 +8,7 @@ setMethod('quantile', signature(x='Raster'),
 	function(x, ..., na.rm=TRUE, ncells=NULL) {
 		if (is.null(ncells)) {
 			v <- try ( getValues(x) )
-			if (class(v) == 'try-error') {
+			if (inherits(v, "try-error")) {
 				stop('raster too large. You can sample it with argument "ncells"')
 			}
 		} else {
@@ -17,7 +17,7 @@ setMethod('quantile', signature(x='Raster'),
 			} else {
 				v <- try ( sampleRandom(x, ncells) ) 
 			}
-			if (class(v) == 'try-error') {
+			if (inherits(v, "try-error")) {
 				stop('ncells too large')
 			}
 		}

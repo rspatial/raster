@@ -216,12 +216,12 @@ setReplaceMethod("[", c("RasterStackBrick","missing","missing"),
 			
 		} else {
 			v <- try( matrix(nrow=ncell(x), ncol=nl) )
-			if (class(x) != 'try-error') {
+			if (! inherits(x, "try-error")) {
 				v[] <- value
 				x <- try( setValues(x, v) )
 			}
 		}
-		if (class(x) == 'try-error') {
+		if (inherits(x, "try-error")) {
 			stop('cannot set values on this raster (it is too large)')
 		}
 		return(x)

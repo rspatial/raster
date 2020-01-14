@@ -41,12 +41,12 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 			x <- try( setValues(x, rep(value, times=ncell(x))) )
 		} else {
 			v <- try( vector(length=ncell(x)) )
-			if (class(x) != 'try-error') {
+			if (! inherits(x, "try-error")) {
 				v[] <- value
 				x <- try( setValues(x, v) )
 			}
 		}
-		if (class(x) == 'try-error') {
+		if (inherits(x, "try-error")) {
 			stop('cannot replace values on this raster (it is too large')
 		}
 		return(x)

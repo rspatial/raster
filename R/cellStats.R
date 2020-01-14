@@ -6,7 +6,7 @@
 
 
 .csTextFun <- function(fun) {
-	if (class(fun) != 'character') {
+	if (class(fun)[1] != 'character') {
 		if (is.primitive(fun)) {
 			test <- try(deparse(fun)[[1]], silent=TRUE)
 			if (test == '.Primitive(\"sum\")') { fun <- 'sum' 

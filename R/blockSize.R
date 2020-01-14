@@ -14,7 +14,7 @@ blockSize <- function(x, chunksize, n=nlayers(x), minblocks=4, minrows=1) {
 	}
 
 	blockrows <- try(methods::slot(x@file, 'blockrows'), silent=TRUE)
-	if (class(blockrows) == 'try-error') {
+	if (class(blockrows)[1] == 'try-error') {
 		blockrows <- 1
 	}
 	blockrows <- max(blockrows, 1)

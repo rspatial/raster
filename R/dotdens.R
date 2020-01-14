@@ -37,7 +37,7 @@
     for (i in 1:n) {
 		if (d[i] > 0) {
 			ires <- try (spsample(p[i, ], d[i], type=f), silent=TRUE  )
-			if (class(ires) == 'try-error') {
+			if (inherits(ires, "try-error")) {
 				print(paste('error, ', d[i]))
 				ires <- NULL
 			}

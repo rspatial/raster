@@ -66,7 +66,7 @@ setMethod('zonal', signature(x='RasterLayer', z='RasterLayer'),
 			
 		} else {
 		
-			if (class(fun) != 'character') {
+			if (class(fun)[1] != 'character') {
 				stop("RasterLayers cannot be processed in memory.\n You can use fun='sum', 'mean', 'sd', 'min', 'max', or 'count' but not a function")
 			}
 			if (! fun %in% c('sum', 'mean', 'sd', 'min', 'max', 'count')) {
@@ -228,7 +228,7 @@ setMethod('zonal', signature(x='RasterStackBrick', z='RasterLayer'),
 			
 		} else {
 		
-			if (class(fun) != 'character') {
+			if (class(fun)[1] != 'character') {
 				stop("RasterLayers cannot be processed in memory.\n You can use fun='sum', 'mean', 'sd', 'min', 'max', or 'count' but not a function")
 			}
 			if (! fun %in% c('sum', 'mean', 'sd', 'min', 'max', 'count')) {

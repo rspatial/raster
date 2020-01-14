@@ -73,7 +73,7 @@
 	tab[1,3] <- prj[j,2]
 	cr <- paste(apply(tab[,2:3], 1, function(x) paste(x, collapse='=')), collapse=' ')
 	crtst <- try(CRS(cr), silent=TRUE)
-	if (class(crtst) == 'try-error') {
+	if ( inherits(crtst, "try-error")) {
 		mtxt <- paste(m, collapse='; ')
 		warning("cannot create a valid CRS\n", mtxt)
 		return(NA)

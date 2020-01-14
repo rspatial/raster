@@ -413,7 +413,7 @@ ccodes <- function() {
 			if (download) { 
 				theurl <- paste0(baseurl, f)
 				test <- try (.download(theurl, zipfilename) , silent=TRUE)
-				if (class(test) == 'try-error') {
+				if (inherits(test, "try-error")) {
 					stop("cannot download the file")
 				}
 			} else {message("file not available locally, use download=TRUE") }	
