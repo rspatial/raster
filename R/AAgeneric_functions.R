@@ -11,6 +11,8 @@ if (!isGeneric("bbox")) {setGeneric("bbox", function(obj) standardGeneric("bbox"
 if (!isGeneric("barplot")) {setGeneric("barplot", function(height,...) standardGeneric("barplot"))}	
 if (!isGeneric("boundaries")) {	setGeneric("boundaries", function(x, ...) standardGeneric("boundaries"))}	
 if (!isGeneric("boxplot")) { setGeneric("boxplot", function(x, ...)	standardGeneric("boxplot")) }
+if (!isGeneric("brick")) { setGeneric("brick", function(x, ...)	standardGeneric("brick"))}	
+
 if (!isGeneric('buffer')) {setGeneric('buffer', function(x, ...) standardGeneric('buffer'))}	
 if (!isGeneric("calc")) {setGeneric("calc", function(x, fun, ...) standardGeneric("calc")) }
 if (!isGeneric("clamp")) {setGeneric("clamp", function(x, ...) standardGeneric("clamp")) }
@@ -57,6 +59,8 @@ if (!isGeneric("plot")) {setGeneric("plot", function(x,y,...)standardGeneric("pl
 if (!isGeneric("plotRGB")) { setGeneric("plotRGB", function(x, ...) standardGeneric("plotRGB"))}	
 if (!isGeneric("predict")) {setGeneric("predict", function(object, ...) standardGeneric("predict"))}
 if (!isGeneric("quantile")) {setGeneric("quantile", function(x, ...)standardGeneric("quantile"))}	
+if ( !isGeneric("raster") ) {setGeneric("raster", function(x, ...)	standardGeneric("raster"))}
+
 if (!isGeneric("rasterize")) {setGeneric("rasterize", function(x, y, ...) standardGeneric("rasterize"))}	
 if (!isGeneric("readStart")) {setGeneric("readStart", function(x, ...) standardGeneric("readStart"))}
 if (!isGeneric("readStop")) {setGeneric("readStop", function(x)	standardGeneric("readStop"))}	

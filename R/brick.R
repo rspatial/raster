@@ -3,12 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("brick")) {
-	setGeneric("brick", function(x, ...)
-		standardGeneric("brick"))
-}	
-
-
 
 setMethod('brick', signature(x='missing'), 
 	function(nrows=180, ncols=360, xmn=-180, xmx=180, ymn=-90, ymx=90, nl=1, crs) {
