@@ -44,6 +44,7 @@ if (!isGeneric("interpolate")) { setGeneric("interpolate", function(object, ...)
 if (!isGeneric("intersect")) { setGeneric("intersect", function(x, y) standardGeneric("intersect"))}	
 if (!isGeneric("isLonLat")) { setGeneric("isLonLat", function(x, ...) standardGeneric("isLonLat"))}	
 if (!isGeneric("mask")) { setGeneric("mask", function(x, mask, ...) standardGeneric("mask"))}
+if (!isGeneric(".median")) {setGeneric(".median", function(x, y, ...) standardGeneric(".median"))}	
 if (!isGeneric("merge")) {setGeneric("merge", function(x, y, ...) standardGeneric("merge"))}	
 if (!isGeneric("mosaic")) {setGeneric("mosaic", function(x, y, ...)standardGeneric("mosaic"))}	
 if (!isGeneric("modal")) {setGeneric("modal", function(x, ...) standardGeneric("modal"))}

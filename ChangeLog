@@ -8,8 +8,6 @@ improvements:
 
 new arguments "smin", "smax" and "samplesize" to "stretch"; and bug fixes. See https://github.com/rspatial/raster/issues/70
 
-new method "median" for Raster objects
-
 layer names in GTiff files are now read from file. Requested by Kyle Taylor
 https://github.com/rspatial/raster/issues/88
 

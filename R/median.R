@@ -5,7 +5,7 @@
 # Licence GPL v3
 
 
-setMethod("median", signature(x='Raster'),
+setMethod(".median", signature(x='Raster'),
 	function(x, na.rm=FALSE, ...){
 		
 		dots <- list(...)
