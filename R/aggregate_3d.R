@@ -9,7 +9,7 @@
 
 
 setMethod('aggregate', signature(x='Raster'), 
-function(x, fact=2, fun='mean', expand=TRUE, na.rm=TRUE, filename="", ...)  {
+function(x, fact, fun='mean', expand=TRUE, na.rm=TRUE, filename="", ...)  {
 
 
 	fact <- round(fact)

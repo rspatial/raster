@@ -22,14 +22,14 @@ Aggregate a SpatialPolygon* object, optionally by combining polygons that have t
 }
 
 \usage{
-\S4method{aggregate}{Raster}(x, fact=2, fun=mean, expand=TRUE, na.rm=TRUE, filename='', ...)
+\S4method{aggregate}{Raster}(x, fact, fun=mean, expand=TRUE, na.rm=TRUE, filename='', ...)
 
 \S4method{aggregate}{SpatialPolygons}(x, by, sums, dissolve=TRUE, vars=NULL, ...)
 }
 
 \arguments{
   \item{x}{Raster* object or SpatialPolygons* object}
-  \item{fact}{integer. Aggregation factor expressed as number of cells in each direction (horizontally and vertically). Or two integers (horizontal and vertical aggregation factor) or three integers (when also aggregating over layers). See Details}  
+  \item{fact}{postive integer. Aggregation factor expressed as number of cells in each direction (horizontally and vertically). Or two integers (horizontal and vertical aggregation factor) or three integers (when also aggregating over layers). See Details}  
   \item{fun}{function used to aggregate values }  
   \item{expand}{logical. If \code{TRUE} the output Raster* object will be larger then the input Raster* object if a division of the number of columns or rows with \code{factor} is not an integer}
   \item{na.rm}{logical. If \code{TRUE}, NA cells are removed from calculations }
