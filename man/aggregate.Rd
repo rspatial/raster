@@ -18,7 +18,7 @@ Aggregation groups rectangular areas to create larger cells. The value for the r
 
 SpatialPolygon*:
 
-Aggregate a SpatialPolygon* object, optionally by combining polygons that have the same attributes for one or more variables. If the polygons touch or overlap, internal boundaries are optinally "dissolved".
+Aggregate a SpatialPolygon* object, optionally by combining polygons that have the same attributes for one or more variables. If the polygons touch or overlap, internal boundaries are optionally "dissolved".
 }
 
 \usage{
@@ -47,7 +47,7 @@ Aggregate a SpatialPolygon* object, optionally by combining polygons that have t
 \details{
 Aggregation of a \code{x} will result in a Raster* object with fewer cells. The number of cells is the number of cells of \code{x} divided by \code{fact*fact} (when fact is a single number) or \code{prod(fact)} (when fact consists of 2 or 3 numbers). If necessary this number is adjusted according to the value of \code{expand}. For example, \code{fact=2} will result in a new Raster* object with \code{2*2=4} times fewer cells. If two numbers are supplied, e.g., \code{fact=c(2,3)}, the first will be used for aggregating in the horizontal direction, and the second for aggregating in the vertical direction, and the returned object will have \code{2*3=6} times fewer cells. Likewise, \code{fact=c(2,3,4)} aggregates cells in groups of 2 (rows) by 3 (columns) and 4 (layers).
  
-Aggregation starts at the upper-left end of a raster (you can use \code{\link{flip}} if you want to start elsewhere). If a division of the number of columns or rows with \code{factor} does not return an integer, the extent of the resulting Raster object will either be somewhat smaller or somewhat larger then the original RasterLayer. For example, if an input RasterLayer has 100 columns, and \code{fact=12}, the output Raster object will have either 8 columns (\code{expand=FALSE}) (using \code{8 x 12 = 96} of the original columns) or 9 columns (\code{expand=TRUE}). In both cases, the maximum x coordinate of the output RasterLayer would, of course, also be adjusted.
+Aggregation starts at the upper-left end of a raster (you can use \code{\link{flip}} if you want to start elsewhere). If a division of the number of columns or rows with \code{factor} does not return an integer, the extent of the resulting Raster object will either be somewhat smaller or somewhat larger than the original RasterLayer. For example, if an input RasterLayer has 100 columns, and \code{fact=12}, the output Raster object will have either 8 columns (\code{expand=FALSE}) (using \code{8 x 12 = 96} of the original columns) or 9 columns (\code{expand=TRUE}). In both cases, the maximum x coordinate of the output RasterLayer would, of course, also be adjusted.
   
 The function \code{fun} should take multiple numbers, and return a single number. For example \code{mean}, \code{modal}, \code{min} or \code{max}. 
 It should also accept a \code{na.rm} argument (or ignore it as one of the 'dots' arguments). 

@@ -14,7 +14,7 @@ Add a layer to a Raster* object or drop a layer from a RasterStack or RasterBric
 
 \usage{
 addLayer(x, ...) 
-dropLayer(x, i, ...) 
+dropLayer(x, i) 
 }
 
 \arguments{
