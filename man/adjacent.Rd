@@ -17,7 +17,7 @@ Identify cells that are adjacent to a set of cells on a raster.
 \arguments{
   \item{x}{Raster* object}
   \item{cells}{vector of cell numbers for which adjacent cells should be found. Cell numbers start with 1 in the upper-left corner and increase from left to right and from top to bottom}
-  \item{directions}{the number of directions in which cells should be connected: 4 (rook's case), 8 (queen's case), 16 (knight and one-cell queen moves), or 'bishop' to connect cells with one-cell diagonal moves. Or a neigborhood matrix (see Details)}
+  \item{directions}{the number of directions in which cells should be connected: 4 (rook's case), 8 (queen's case), 16 (knight and one-cell queen moves), or 'bishop' to connect cells with one-cell diagonal moves. Or a neighborhood matrix (see Details)}
   \item{pairs}{logical. If \code{TRUE}, a matrix of pairs of adjacent cells is returned. If \code{FALSE}, a vector of cells adjacent to \code{cells} is returned}
   \item{target}{optional vector of target cell numbers that should be considered. All other adjacent cells are ignored}
   \item{sorted}{logical. Should the results be sorted? }

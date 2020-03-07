@@ -11,7 +11,7 @@ Overview of the functions in the raster package
 \description{
 The raster package provides classes and functions to manipulate geographic (spatial) data in 'raster' format. Raster data divides space into cells (rectangles; pixels) of equal size (in units of the coordinate reference system). Such continuous spatial data are also referred to as 'grid' data, and be contrasted with discrete (object based) spatial data (points, lines, polygons).
 
-The package should be particularly useful when using very large datasets that can not be loaded into the computer's memory. Functions will work correctly, because they they process large files in chunks, i.e., they read, compute, and write blocks of data, without loading all values into memory at once.
+The package should be particularly useful when using very large datasets that can not be loaded into the computer's memory. Functions will work correctly, because they process large files in chunks, i.e., they read, compute, and write blocks of data, without loading all values into memory at once.
 
 Below is a list of some of the most important functions grouped by theme. See the vignette for more information and some examples (you can open it by running this command: \code{vignette('Raster')})
 }
@@ -30,7 +30,7 @@ Below is a list of some of the most important functions grouped by theme. See th
     \item Easy access to raster cell-values
     \item Plotting (making maps)
     \item Manipulation of raster extent, resolution and origin
-    \item Computation of row, col and cell numbers to coordinates and vice versa
+    \item Computation of row, column and cell numbers to coordinates and vice versa
     \item Reading and writing various raster file types
   }
 . 
@@ -302,7 +302,7 @@ Some of these functions are in the \code{sp} package. The name in \bold{bold} is
   \code{\link{erase}} or "-" \tab \bold{erase} parts of a SpatialPolygons* object\cr
   \code{\link{intersect}} or "*"  \tab \bold{intersect} SpatialPolygons* objects\cr
   \code{\link{union}} or "+" \tab \bold{union} SpatialPolygons* objects\cr
-  \code{\link{cover}} \tab \bold{update} and \bold{identity} a SpatialPolygons object with another one\cr
+  \code{\link{cover}} \tab \bold{update} and \bold{identity} for a SpatialPolygons and another one\cr
   \code{\link{symdif}} \tab\bold{symmetrical difference} of two SpatialPolygons* objects \cr 
   \code{\link{aggregate}} \tab \bold{dissolve} smaller polygons into larger ones \cr
   \code{\link[sp]{disaggregate}} \tab \bold{explode}: turn polygon parts into separate polygons (in the \code{sp} package) \cr
@@ -357,7 +357,7 @@ Some of these functions are in the \code{sp} package. The name in \bold{bold} is
   \code{\link{pbCreate}} \tab Initialize a progress bar  \cr
   \code{\link{pbStep}} \tab Take a progress bar step \cr
   \code{\link{pbClose}} \tab Close a progress bar \cr
-  \code{\link{readStart}} \tab Open file connections for efficient multi-chunck reading \cr
+  \code{\link{readStart}} \tab Open file connections for efficient multi-chunk reading \cr
   \code{\link{readStop}} \tab Close file connections \cr
   \code{\link{rasterTmpFile}}  \tab Get a name for a temporary file \cr
   \code{\link{inMemory}} \tab Are the cell values in memory? \cr
