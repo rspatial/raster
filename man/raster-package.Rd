@@ -302,7 +302,7 @@ Some of these functions are in the \code{sp} package. The name in \bold{bold} is
   \code{\link{erase}} or "-" \tab \bold{erase} parts of a SpatialPolygons* object\cr
   \code{\link{intersect}} or "*"  \tab \bold{intersect} SpatialPolygons* objects\cr
   \code{\link{union}} or "+" \tab \bold{union} SpatialPolygons* objects\cr
-  \code{\link{cover}} \tab \bold{update} and \bold{identify} a SpatialPolygons object with another one\cr
+  \code{\link{cover}} \tab \bold{update} and \bold{identity} for a SpatialPolygons and another one\cr
   \code{\link{symdif}} \tab\bold{symmetrical difference} of two SpatialPolygons* objects \cr 
   \code{\link{aggregate}} \tab \bold{dissolve} smaller polygons into larger ones \cr
   \code{\link[sp]{disaggregate}} \tab \bold{explode}: turn polygon parts into separate polygons (in the \code{sp} package) \cr
