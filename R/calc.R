@@ -191,7 +191,7 @@ function(x, fun, filename='', na.rm, forcefun=FALSE, forceapply=FALSE, ...) {
 	filename <- trim(filename)
 	
 	estnl <- (nlayers(x) + nlayers(out)) * 2
-	if (canProcessInMemory(x, estnl) {
+	if (canProcessInMemory(x, estnl)) {
 		x <- getValues(x)
 		if (makemat) { 
 			x <- matrix(x, ncol=1) 
