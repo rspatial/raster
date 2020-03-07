@@ -59,6 +59,7 @@ function(x, ...) {
 
 setMethod("spplot", signature(obj='SpatRaster'), 
 	function(obj, ..., maxpixels=50000, as.table=TRUE, zlim)  {
+		obs <- as(obj, "Raster")
 		obj <- sampleRegular(obj, maxpixels)
 		obj <- as(obj, "Raster")
 		if (!missing(zlim)) {

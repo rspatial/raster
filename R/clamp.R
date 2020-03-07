@@ -3,10 +3,8 @@
 # Version 1.0
 # Licence GPL v3
 
-
-
-setMethod('clamp', signature(x='Raster'), 
-function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename='', ...) {
+setMethod("clamp", signature(x="Raster"), 
+function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename="", ...) {
 
 	stopifnot(lower <= upper)
 
@@ -22,9 +20,12 @@ function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename='', ...) {
 	useValues <- as.integer(useValues)
 	if (canProcessInMemory(out)) {
 		out <- setValues(out, .clamp(values(x), range, useValues)) 
+		if (filename != "") {
+			writeRaster(out, filename, ...)
+		}
 	} else {
 		tr <- blockSize(out)
-		pb <- pbCreate(tr$n, label='clamp', ...)
+		pb <- pbCreate(tr$n, label="clamp", ...)
 		out <- writeStart(out, filename=filename, ...)
 		
 		for (i in 1:tr$n) {
@@ -44,7 +45,7 @@ function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename='', ...) {
 )
 
 
-setMethod('clamp', signature(x='numeric'), 
+setMethod("clamp", signature(x="numeric"), 
 function(x, lower=-Inf, upper=Inf, ...) {
 	stopifnot(lower <= upper)
 	x[x < lower] <- lower

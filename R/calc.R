@@ -189,8 +189,9 @@ function(x, fun, filename='', na.rm, forcefun=FALSE, forceapply=FALSE, ...) {
 	} 
 	
 	filename <- trim(filename)
-
-	if (canProcessInMemory(x, max(nlayers(x), nlayers(out)) * 2)) {
+	
+	estnl <- (nlayers(x) + nlayers(out)) * 2
+	if (canProcessInMemory(x, estnl) {
 		x <- getValues(x)
 		if (makemat) { 
 			x <- matrix(x, ncol=1) 
@@ -222,7 +223,7 @@ function(x, fun, filename='', na.rm, forcefun=FALSE, forceapply=FALSE, ...) {
 	
 	x <- readStart(x)
 	out <- writeStart(out, filename=filename, ...)
-	tr <- blockSize(out)
+	tr <- blockSize(out, n=estnl)
 	pb <- pbCreate(tr$n, label='calc', ...)			
 
 	if (missing(na.rm)) {
