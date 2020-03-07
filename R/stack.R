@@ -43,9 +43,9 @@ function(x, ..., bands=NULL, varname="", native=FALSE, RAT=TRUE, quick=FALSE) {
 
     if ( varname != "") {
 		if (length(rlist) == 1) {
-			return(.stackCDF(x, varname=varname, bands=bands))
+			return(.stackCDF(x, varname=varname, band=bands))
 		} else {
-			s <- stack(sapply(rlist, function(x) raster(x, varname=varname, bands=bands)))
+			s <- stack(sapply(rlist, function(i) stack(i, varname=varname, band=bands)))
 		}
 		
 	} else {
