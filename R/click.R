@@ -154,6 +154,7 @@ setMethod('click', signature(x='Raster'),
 	} else {
 		values
 	}
+	return(values)
 })
 
 

@@ -9,6 +9,7 @@
 \alias{couldBeLonLat}
 \alias{couldBeLonLat,BasicRaster-method}
 \alias{couldBeLonLat,Spatial-method}
+\alias{couldBeLonLat,ANY-method}
 
   
 \title{Is this longitude/latitude data?}

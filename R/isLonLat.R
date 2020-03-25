@@ -42,6 +42,12 @@
 }
 
 
+setMethod("couldBeLonLat", signature("ANY"), 
+	function(x, warnings=TRUE, ...) {
+		.couldBeLonLat(x, warnings=warnings)
+	}
+)
+
 setMethod("couldBeLonLat", signature("BasicRaster"), 
 	function(x, warnings=TRUE, ...) {
 		.couldBeLonLat(x, warnings=warnings)
