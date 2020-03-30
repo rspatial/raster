@@ -87,8 +87,14 @@ if (!isGeneric("unique")) { setGeneric("unique", function(x, incomparables=FALSE
 if (!isGeneric("union")) {setGeneric("union", function(x, y)standardGeneric("union"))}	
 if (!isGeneric("values")) { setGeneric("values", function(x, ...) standardGeneric("values")) }	
 if (!isGeneric("values<-")) { setGeneric("values<-", function(x, value) standardGeneric("values<-"))}	
+if (!isGeneric("which.max")) {setGeneric("which.max", function(x)standardGeneric("which.max"))}	
+if (!isGeneric("which.min")) {setGeneric("which.min", function(x)standardGeneric("which.min"))}	
+
 if (!isGeneric('writeRaster')) {setGeneric('writeRaster', function(x, filename, ...) standardGeneric('writeRaster'))}
 if (!isGeneric('writeValues')) { setGeneric('writeValues', function(x, v, start) standardGeneric('writeValues')) }
+
+
+
 if (!isGeneric("xres")) { setGeneric("xres", function(x) standardGeneric("xres")) }
 if (!isGeneric("yres")) { setGeneric("yres", function(x) standardGeneric("yres")) }
 if (!isGeneric("zonal")) {setGeneric("zonal", function(x, z, ...) standardGeneric("zonal"))}	

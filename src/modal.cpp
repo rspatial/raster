@@ -6,7 +6,7 @@ double getMode(NumericVector values, int ties) {
 	int n = values.length();
     IntegerVector counts(n);
 
-	if (ties < 3) {
+	if (ties < 2) {
 		std::sort(values.begin(), values.end());
 	}
 	

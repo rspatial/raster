@@ -3,19 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-if (!isGeneric("which.max")) {
-	setGeneric("which.max", function(x)
-		standardGeneric("which.max"))
-}	
-
-
-if (!isGeneric("which.min")) {
-	setGeneric("which.min", function(x)
-		standardGeneric("which.min"))
-}	
-
-
-
 setMethod("which.max", "RasterLayer",  
 	function(x) { 
 		m <- maxValue(x, warn=FALSE)
@@ -118,8 +105,4 @@ setMethod("which.max", "RasterStackBrick",
 		}
 	} 
 )
-
-
-
- 
 

@@ -155,9 +155,16 @@ if (!isGeneric("coordinates")) {
 }	
 
 		   
-setMethod('coordinates', signature(obj='Raster'), 
+setMethod("coordinates", signature(obj="Raster"), 
     function(obj, ...){
 		xyFromCell(obj, cell=1:ncell(obj), ...)
+	}
+)
+
+setMethod("coordinates", signature(obj="Extent"), 
+    function(obj, ...){
+		e <- as.vector(obj)
+		rbind(cbind(e[1], e[3:4]), cbind(e[2], e[4:3]))
 	}
 )
 

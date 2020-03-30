@@ -17,6 +17,7 @@
 \alias{xyFromCell,Raster-method}
 \alias{coordinates}
 \alias{coordinates,Raster-method}
+\alias{coordinates,Extent-method}
 
 
 \title{Coordinates from a row, column or cell number}
@@ -32,6 +33,7 @@ These functions get coordinates of the center of raster cells for a row, column,
 \S4method{yFromCell}{Raster,numeric}(object, cell)
 \S4method{xyFromCell}{BasicRaster,ANY}(object, cell, spatial=FALSE, ...)
 \S4method{coordinates}{Raster}(obj, ...)
+\S4method{coordinates}{Extent}(obj, ...)
 }
 
 

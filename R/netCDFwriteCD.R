@@ -66,10 +66,10 @@
 								zname <- 'time'
 							}
 							if (cls == 'Date') {
-								zatt <- list('units=days since 1970-01-01 00:00:00')
+								zatt <- list('units=days since 1970-1-1')
 								zunit <- 'days'
 							} else {
-								zatt <- list('units=seconds since 1970-01-01 00:00:00')							
+								zatt <- list('units=seconds since 1970-1-1 00:00:00')							
 								zunit <- 'seconds'
 							}
 						}
