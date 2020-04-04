@@ -46,6 +46,7 @@ function(x, ..., bands=NULL, varname="", native=FALSE, RAT=TRUE, quick=FALSE) {
 			return(.stackCDF(x, varname=varname, bands=bands))
 		} else {
 			s <- stack(sapply(rlist, function(i) stack(i, varname=varname, bands=bands)))
+			return(s)
 		}
 		
 	} else {

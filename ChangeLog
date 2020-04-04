@@ -13,10 +13,15 @@ https://github.com/rspatial/raster/issues/88
 
 bug fixes:
 
-parellel version of extract with polygons and "fun" messed up the order of the values (reported by Jacory). https://github.com/rspatial/raster/issues/79
+parallel version of extract with polygons and "fun" messed up the order of the values (reported by Jacory). https://github.com/rspatial/raster/issues/79
 
 raster::predict bug when using factors (reported by vvirkki). https://github.com/rspatial/raster/issues/73
 
+distanceFromPoints with large files: https://github.com/rspatial/raster/issues/103
+
+colortable lost when cropping RasterBrick: https://github.com/rspatial/raster/issues/105
+
+Error in stack() when providing both bands and varname: https://github.com/rspatial/raster/issues/97
 
 --- 24-September-2019, version 3.0-7
 Bug fixes: 
