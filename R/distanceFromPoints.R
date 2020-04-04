@@ -16,10 +16,10 @@ distanceFromPoints <- function(object, xy, filename='', ...) {
 	}
 	                                                                        
 	out <- raster(object)
+	a = 6378137.0
+	f = 1/298.257223563
 	if (canProcessInMemory(out, 4)) {
 		xy <- xyFromCell(out, 1:ncell(out))
-		a = 6378137.0
-		f = 1/298.257223563
 		out <- setValues(out, .Call('_raster_distanceToNearestPoint', xy,  pts, longlat, a, f , PACKAGE = 'raster'))
 
 		if (filename != '') {
@@ -37,7 +37,7 @@ distanceFromPoints <- function(object, xy, filename='', ...) {
 			xy <- xy[1:(ncol(out)*tr$nrows[i]), ]
 		}
 		xy[,2] <- rep(yFromRow(out, tr$row[i]:(tr$row[i]+tr$nrows[i]-1)), each=ncol(out))
-		vals <- .Call('_raster_distanceToNearestPoint', xy, pts, longlat, 0.0, 0.0, PACKAGE='raster')
+		vals <- .Call('_raster_distanceToNearestPoint', xy, pts, longlat, a, f, PACKAGE='raster')
 		out <- writeValues(out, vals, tr$row[i])
 		pbStep(pb) 	
 	}	
