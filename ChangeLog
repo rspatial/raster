@@ -23,6 +23,8 @@ colortable lost when cropping RasterBrick: https://github.com/rspatial/raster/is
 
 Error in stack() when providing both bands and varname: https://github.com/rspatial/raster/issues/97
 
+rasterize and mutli-polygon containing hole: https://github.com/rspatial/raster/issues/93
+
 --- 24-September-2019, version 3.0-7
 Bug fixes: 
 predict with character label factor variables returned NA only https://github.com/rspatial/raster/issues/68

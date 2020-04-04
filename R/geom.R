@@ -22,7 +22,9 @@ setMethod('geom', signature(x='SpatialPolygons'),
 				nsubobs <- length(x@polygons[[i]]@Polygons)
 				ps <- lapply(1:nsubobs, 
 						function(j) 
-							cbind(j, j+cnt, x@polygons[[i]]@Polygons[[j]]@hole, x@polygons[[i]]@Polygons[[j]]@coords)
+							cbind(j, j+cnt, 
+							ifelse(x@polygons[[i]]@Polygons[[j]]@hole, j-1, 0),
+							x@polygons[[i]]@Polygons[[j]]@coords)
 						)
 				objlist[[i]] <- cbind(i, do.call(rbind, ps))
 				cnt <- cnt+nsubobs
