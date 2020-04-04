@@ -92,7 +92,7 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 		}	
 	}
 	
-	if ( inMemory(x) ) {
+	if ( inMemory(x) & hasValues(x) ) {
 		x@data@values[i] <- value
 		x <- setMinMax(x)
 		x <- .clearFile(x)
@@ -105,14 +105,18 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 				x <- readAll(x) 
 			}
 			x <- .clearFile(x)
+			x@data@values[i] <- value
+			x <- setMinMax(x)			
 		} else if ( fromDisk(x) ) {
 			x <- readAll(x)
 			x <- .clearFile(x)
+			x@data@values[i] <- value
+			x <- setMinMax(x)
 		} else {
-			x <- setValues(x, rep(NA, times=ncell(x)))
+			vals <- rep(NA, times=ncell(x))
+			vals[i] <- value
+			x <- setValues(x, vals)
 		}
-		x@data@values[i] <- value
-		x <- setMinMax(x)
 		return(x)
 			
 	} else {

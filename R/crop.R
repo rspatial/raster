@@ -5,7 +5,10 @@
 
 
 .copyWithProperties <- function(x) {
-	if (inherits(x, 'RasterStackBrick')) {
+	if (inherits(x, 'RasterBrick')) {
+		out <- brick(x, values=FALSE)	
+		out@legend <- x@legend
+	} else if (inherits(x, 'RasterStack')) {
 		out <- brick(x, values=FALSE)	
 	} else { 
 		out <- raster(x)
