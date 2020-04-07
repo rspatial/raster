@@ -21,7 +21,7 @@
 Extract values from a Raster* object at the locations of other spatial data. You can use coordinates (points), lines, polygons or an Extent (rectangle) object. You can also use cell numbers to extract values. 
 
 If \code{y} represents points, \code{extract} returns the values of a Raster* object for the cells in which a set of points fall.
-If \code{y} represents lines, the \code{extract} method returns the values of the cells of a Raster* object that are touched by a line. If \code{y} represents polygons, the \code{extract} method returns the values of the cells of a Raster* object that are covered by a polygon. A cell is covered if its center is inside the polygon (but see the \code{weights} option for considering partly covered cells; and argument \code{small} for getting values for small polygons anyway).
+If \code{y} represents lines, the \code{extract} method returns the values of the cells of a Raster* object that are touched by a line. If \code{y} represents polygons, the \code{extract} method returns the values of the cells of a Raster* object that are covered by a polygon. A cell is covered if its center is inside the polygon (but see the \code{weights} option for considering partly covered cells; and argument \code{small} for getting values for small polygons).
 
 It is also possible to extract values for point locations from SpatialPolygons.
 }
