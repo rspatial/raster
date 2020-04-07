@@ -50,7 +50,6 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 			stop('cannot replace values on this raster (it is too large')
 		}
 		return(x)
-	
 	}
 )
 

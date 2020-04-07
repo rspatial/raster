@@ -68,6 +68,10 @@
 
 	nbands <- as.integer(gdalinfo[["bands"]])
 
+	if (isTRUE(attr(gdalinfo, "ysign") == 1)) {
+		warning("data seems flipped. Consider using: flip(x, direction='y')")
+	}
+
 	rotated <- FALSE
 	if (gdalinfo['oblique.x'] != 0 | gdalinfo['oblique.y'] != 0) {
 		rotated <- TRUE

@@ -56,13 +56,16 @@
 		}
 		return(out)
 	} else {		
+		temp <- out
 		tr <- blockSize(out)
-		pb <- pbCreate(tr$n, label='fasterize', ...)
+		pb <- pbCreate(tr$n, label='rasterize', ...)
 		out <- writeStart(out, filename=filename, ... )
 		for (i in 1:tr$n) {
-			x <- crop(out, extent(out, r1=tr$row[i], r2=tr$row[i]+tr$nrows[i]-1, c1=1, c2=ncol(out)))
-			x <- setValues(x, p$rasterize(nrow(x), ncol(x), as.vector(extent(x)), values, background))
-			out <- writeValues(out, values(x), tr$row[i])
+			x <- crop(temp, extent(temp, r1=tr$row[i], r2=tr$row[i]+tr$nrows[i]-1, c1=1, c2=ncol(out)))
+			#x <- setValues(x, p$rasterize(nrow(x), ncol(x), as.vector(extent(x)), values, background))
+			#out <- writeValues(out, values(x), tr$row[i])
+			x <- p$rasterize(nrow(x), ncol(x), as.vector(extent(x)), values, background)
+			out <- writeValues(out, x, tr$row[i])
 			pbStep(pb, i) 			
 		} 
 		out <- writeStop(out)

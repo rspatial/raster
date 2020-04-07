@@ -6,22 +6,23 @@
 
 
 setMethod('mask', signature(x='Raster', mask='sf'), 
-function(x, mask, ...) {
-	mask <- .sf2sp(mask)
-	mask(x, mask, ...)
-}
+	function(x, mask, ...) {
+		mask <- .sf2sp(mask)
+		mask(x, mask, ...)
+	}
 )
 
 
 setMethod('mask', signature(x='Raster', mask='Spatial'), 
-function(x, mask, filename="", inverse=FALSE, updatevalue=NA, updateNA=FALSE, ...){ 
-	if (inherits(mask, 'SpatialPolygons')) {
-		m <- .fasterize(mask, x, values=rep(1,length(mask)))
-	} else {
-		m <- rasterize(mask, x, 1, silent=TRUE)
-	}
-	mask(x, m, filename=filename, inverse=inverse, maskvalue=NA, updatevalue=updatevalue, ...)
-} )
+	function(x, mask, filename="", inverse=FALSE, updatevalue=NA, updateNA=FALSE, ...){ 
+		if (inherits(mask, 'SpatialPolygons')) {
+			m <- .fasterize(mask, x, values=rep(1,length(mask)))
+		} else {
+			m <- rasterize(mask, x, 1, silent=TRUE)
+		}
+		mask(x, m, filename=filename, inverse=inverse, maskvalue=NA, updatevalue=updatevalue, ...)
+	} 
+)
 
 
 
