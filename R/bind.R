@@ -108,13 +108,13 @@ function(x, y, ..., keepnames=FALSE) {
 		projx <- proj4string(x[[1]])
 		for (i in 2:length(x)) {
 			if (is.na(proj4string(x[[i]]))) {
-				x[[i]]@proj4string <- x[[1]]@proj4string			
+				proj4string(x[[i]]) <- proj4string(x[[1]])			
 			} else if (! identical(projx, proj4string(x[[i]])) ) {
 				if (!haswarned) {
 					warning('non identical CRS')
 					haswarned <- TRUE
 				}
-				x[[i]]@proj4string <- x[[1]]@proj4string
+				proj4string(x[[i]]) <- proj4string(x[[1]])
 			}
 		}	
 				
@@ -198,13 +198,13 @@ setMethod('bind', signature(x='SpatialLines', y='SpatialLines'),
 		projx <- proj4string(x[[1]])
 		for (i in 2:length(x)) {
 			if (is.na(proj4string(x[[i]]))) {
-				x[[i]]@proj4string <- x[[1]]@proj4string			
+				proj4string(x[[i]]) <- proj4string(x[[1]])			
 			} else if (! identical(projx, proj4string(x[[i]])) ) {
 				if (!haswarned) {
 					warning('non identical CRS')
 					haswarned <- TRUE
 				}
-				x[[i]]@proj4string <- x[[1]]@proj4string
+				proj4string(x[[i]]) <- proj4string(x[[1]])
 			}
 		}	
 		

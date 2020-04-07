@@ -61,7 +61,7 @@ setMethod("as.character", signature(x="CRS"),
 		}
 	} 
 	if (inherits(x, "Spatial")) {
-		x@proj4string <- crs
+		proj4string(x) <- crs
 	} else {
 		x@crs <- crs
 	}
@@ -76,7 +76,7 @@ projection <- function(x, asText=TRUE) {
 	if (methods::extends(class(x), "BasicRaster")) { 
 		x <- x@crs 
 	} else if (methods::extends(class(x), "Spatial")) { 
-		x <- x@proj4string
+		x <- proj4string(x)
 	} else if (methods::extends(class(x), "sf")) {
 		return( attr(x$geometry, "crs")$proj4string )
 	} else if (class(x) == "character") { 
@@ -89,15 +89,15 @@ projection <- function(x, asText=TRUE) {
 		return(as.logical(NA))
 	}
 	
-	if (asText) {
+	if (asText & (class(x) == "CRS")) { 
 		if (is.na(x@projargs)) { 
 			return(as.character(NA))
 		} else {
 			return(trim(x@projargs))
-		}	
-	} else {
-		return(x)
-	}
+		}
+	} 
+	return(x)
+
 }
 
 

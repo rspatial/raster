@@ -170,7 +170,7 @@ setMethod('click', signature(x='SpatialPolygons'),
 		}
 
 		xyCoords <- SpatialPoints(xyCoords)
-		xyCoords@proj4string <- x@proj4string
+		proj4string(xyCoords) <- proj4string(x)
 		i <- which(!is.na(over(x, xyCoords)))
 		if (length(i) > 0) {
 			if (.hasSlot(x, 'data')) {
@@ -193,7 +193,7 @@ setMethod('click', signature(x='SpatialPolygons'),
 setMethod('click', signature(x='SpatialLines'), 
 	function(x, ...) {
 		e <- as(drawExtent(), 'SpatialPolygons')
-		e@proj4string <- x@proj4string
+		proj4string(e) <- proj4string(x)
 		i <- which(!is.na(over(x, e)))
 		if (length(i) > 0) {
 			if (.hasSlot(x, 'data')) {
@@ -211,7 +211,7 @@ setMethod('click', signature(x='SpatialLines'),
 setMethod('click', signature(x='SpatialPoints'), 
 	function(x, ...) {
 		e <- as(drawExtent(), 'SpatialPolygons')
-		e@proj4string <- x@proj4string
+		proj4string(e) <- proj4string(x)
 		i <- which(!is.na(over(x, e)))
 		if (length(i) > 0) {
 			if (.hasSlot(x, 'data')) {

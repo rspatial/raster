@@ -317,7 +317,7 @@ setMethod('raster', signature(x='sf'),
 setMethod('raster', signature(x='Spatial'), 
 	function(x, origin, ...){
 		r <- raster(extent(x), ...)
-		r@crs <- x@proj4string
+		r@crs <- proj4string(x)
 		if (!missing(origin)) {
 			origin(r) <- origin
 			r <- extend(r, 1)
@@ -331,7 +331,7 @@ setMethod('raster', signature(x='Spatial'),
 setMethod('raster', signature(x='SpatialGrid'), 
 	function(x, layer=1, values=TRUE){
 		r <- raster(extent(x))
-		projection(r) <- x@proj4string
+		projection(r) <- proj4string(x)
 		dim(r) <- c(x@grid@cells.dim[2], x@grid@cells.dim[1])	
 		if (layer < 1) {
 			values <- FALSE

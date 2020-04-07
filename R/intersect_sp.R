@@ -25,7 +25,7 @@ function(x, y) {
 		
 	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
-		y@proj4string <- x@proj4string
+		proj4string(y) <- proj4string(x)
 	}	
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -118,7 +118,7 @@ function(x, y) {
 		
 	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
-		y@proj4string <- x@proj4string
+		proj4string(y) <- proj4string(x)
 	}	
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -142,7 +142,7 @@ function(x, y) {
 		
 	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
-		y@proj4string <- x@proj4string
+		proj4string(y) <- proj4string(x)
 	}	
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -214,7 +214,7 @@ function(x, y) {
 
 	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
-		y@proj4string <- x@proj4string
+		proj4string(y) <- proj4string(x)
 	} 
 	
 	
@@ -281,7 +281,7 @@ function(x, y) {
 	
 	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
-		y@proj4string <- x@proj4string
+		proj4string(y) <- proj4string(x)
 	} 
 	
 	i <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -302,7 +302,7 @@ function(x, y) {
 	
 		if (! identical(proj4string(x), proj4string(y)) ) {
 			warning('non identical CRS')
-			y@proj4string <- x@proj4string
+			proj4string(y) <- proj4string(x)
 		} 
 
 		stopifnot(requireNamespace("rgeos"))
