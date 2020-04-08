@@ -10,22 +10,34 @@ setMethod('geom', signature(x='SpatialPolygons'),
 			sep <- rep(NA,5)
 			for (i in 1:nobs) {
 				nsubobs <- length(x@polygons[[i]]@Polygons)
-				ps <- lapply(1:nsubobs, 
-						function(j)
-							rbind(cbind(j, j+cnt, x@polygons[[i]]@Polygons[[j]]@hole, x@polygons[[i]]@Polygons[[j]]@coords), sep)
-						)
+				ps <- list()
+				last <- 0
+				for (j in 1:nsubobs) { 
+					if (!x@polygons[[i]]@Polygons[[j]]@hole) {
+						last <- last + 1
+						hole <- 0
+					} else {
+						hole <- max(1, last)
+					}	
+					ps[[j]] <- rbind(cbind(j, j+cnt, hole, x@polygons[[i]]@Polygons[[j]]@coords),sep)
+				}
 				objlist[[i]] <- cbind(i, do.call(rbind, ps))
-				cnt <- cnt+nsubobs
+				cnt <- cnt+nsubobs			
 			}
 		} else {
 			for (i in 1:nobs) {
 				nsubobs <- length(x@polygons[[i]]@Polygons)
-				ps <- lapply(1:nsubobs, 
-						function(j) 
-							cbind(j, j+cnt, 
-							ifelse(x@polygons[[i]]@Polygons[[j]]@hole, j-1, 0),
-							x@polygons[[i]]@Polygons[[j]]@coords)
-						)
+				ps <- list()
+				last <- 0
+				for (j in 1:nsubobs) { 
+					if (!x@polygons[[i]]@Polygons[[j]]@hole) {
+						last <- last + 1
+						hole <- 0
+					} else {
+						hole <- max(1, last)
+					}	
+					ps[[j]] <- cbind(j, j+cnt, hole, x@polygons[[i]]@Polygons[[j]]@coords)
+				}
 				objlist[[i]] <- cbind(i, do.call(rbind, ps))
 				cnt <- cnt+nsubobs
 			}

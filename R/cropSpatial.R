@@ -16,7 +16,7 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 				methods::validObject(y)
 				y <- as(y, 'SpatialPolygons')
 			}
-			proj4string(y) <- proj4string(x)		
+			y@proj4string <- x@proj4string		
 		}
 		if (inherits(y, 'SpatialPolygons')) {
 			y <- rgeos::gUnaryUnion(y)
@@ -24,10 +24,10 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 			y <- geometry(y)
 		}
 		
-		if (! compareCRS(x, y) ) {
+		if (!compareCRS(x, y) ) {
 			warning('non identical CRS')
 		}
-		proj4string(y) <- proj4string(x)
+		y@proj4string <- x@proj4string
 		
 		if (inherits(x, 'SpatialPolygons')) {
 			stopifnot(requireNamespace("rgeos"))
