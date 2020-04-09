@@ -20,18 +20,23 @@ If you want to write all values of a Raster* object at once, you can also use \c
 }
 
 \usage{
-writeStart(x, filename, ...)
-writeValues(x, v, start)
-writeStop(x)
+\S4method{writeStart}{RasterLayer,character}(x, filename, options=NULL, format, prj=FALSE, ...)
+\S4method{writeStart}{RasterBrick,character}(x, filename, options=NULL, format, prj=FALSE, ...)
+\S4method{writeValues}{RasterLayer,vector}(x, v, start, ...)
+\S4method{writeValues}{RasterBrick,matrix}(x, v, start, ...)
+\S4method{writeStop}{RasterLayer}(x)
+\S4method{writeStop}{RasterBrick}(x)
 }
 
 \arguments{
   \item{x}{Raster* object}
   \item{filename}{character. Output file name}
+  \item{options}{character, see \code{\link{writeRaster}}}
+  \item{format}{character, see \code{\link{writeRaster}}}
+  \item{prj}{logical. If \code{TRUE}, a "prj" file is written}
   \item{...}{additional arguments as for \code{\link{writeRaster}}}
   \item{v}{vector (RasterLayer) or matrix (RasterBrick) of values}
   \item{start}{Integer. Row number (counting starts at 1) from where to start writing \code{v}}
-
 }
 
 

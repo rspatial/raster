@@ -1,8 +1,8 @@
 Package: raster
 Type: Package
 Title: Geographic Data Analysis and Modeling
-Version: 3.1-0
-Date: 2020-04-03
+Version: 3.1-1
+Date: 2020-04-09
 Depends: sp (>= 1.2-0), R (>= 3.0.0)
 Suggests: rgdal (>= 0.9-1), rgeos (>= 0.3-8), ncdf4, igraph, tcltk, parallel, rasterVis, MASS, sf, testthat
 LinkingTo: Rcpp
@@ -10,7 +10,7 @@ Imports: Rcpp, methods
 SystemRequirements: C++11
 Description: Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported. There is a also support for vector data operations such as intersections. See the manual and tutorials on <https://rspatial.org/> to get started.
 License: GPL (>=3)
-URL: https://CRAN.R-project.org/package=raster
+URL: https://rspatial.org/raster
 BugReports: https://github.com/rspatial/raster/issues/
 Authors@R: c(
 	person("Robert J.", "Hijmans", role = c("cre", "aut"),  

@@ -5,31 +5,31 @@
 
 
 
-setMethod('writeValues', signature(x='RasterLayer', v='vector'), 
-	function(x, v, start) {
+setMethod("writeValues", signature(x="RasterLayer", v="vector"), 
+	function(x, v, start, ...) {
 
 		v[is.infinite(v)] <- NA
 
 		datanotation <- x@file@datanotation
-		if (substr(datanotation,1,1) != 'F') {
+		if (substr(datanotation,1,1) != "F") {
 			v <- round(v)
 			size <- substr(datanotation,4,4)
-			if (substr(datanotation, 1, 3) == 'LOG') {
+			if (substr(datanotation, 1, 3) == "LOG") {
 				v[v != 1] <- 0
-			} else if (substr(datanotation, 5, 5) == 'U') {
+			} else if (substr(datanotation, 5, 5) == "U") {
 				v[v < 0] <- NA
-				if (size == '1') {
+				if (size == "1") {
 					v[v > 255] <- NA
-				} else if (size == '2') {
+				} else if (size == "2") {
 					v[v > 65535] <- NA
 				} else {
 					v[v > 4294967295] <- NA				
 				}
 			} else {
-				if (size == '1') {
+				if (size == "1") {
 					v[v < -128] <- NA
 					v[v > 127] <- NA
-				} else if (size == '2') {
+				} else if (size == "2") {
 					v[v < -32768] <- NA
 					v[v > 32767] <- NA
 				} else {
@@ -47,7 +47,7 @@ setMethod('writeValues', signature(x='RasterLayer', v='vector'),
 
 		driver <- x@file@driver
 		
-		if ( driver == 'gdal' ) {
+		if ( driver == "gdal" ) {
 			off <- c(start-1, 0)
 			v[is.na(v)] <- x@file@nodatavalue
 			v <- matrix(v, nrow=x@ncols)
@@ -57,7 +57,7 @@ setMethod('writeValues', signature(x='RasterLayer', v='vector'),
 			if (x@file@dtype == "FLT" ) { 
 				# v may be integers, while the filetype is FLT
 				v  <- as.numeric( v ) 
-				if (driver != 'raster') {
+				if (driver != "raster") {
 					v[is.na(v)] <- x@file@nodatavalue
 				}
 			
@@ -67,37 +67,37 @@ setMethod('writeValues', signature(x='RasterLayer', v='vector'),
 			}
 			
 			start <- (start-1) * x@ncols * x@file@dsize
-			seek(x@file@con, start, rw='w')	
+			seek(x@file@con, start, rw="w")	
 #			print(v)
 			writeBin(v, x@file@con, size=x@file@dsize )
 			
-		} else if ( driver == 'netcdf') {
+		} else if ( driver == "netcdf") {
 
 			x <- .writeValuesCDF(x, v, start)
 			
-#		} else if ( driver == 'big.matrix') {
+#		} else if ( driver == "big.matrix") {
 #
-#			b <- attr(x@file, 'big.matrix')
+#			b <- attr(x@file, "big.matrix")
 #			nrows <- length(v) / ncol(x)
 #			# b[rowColFromCell(x, start:(start+length(v)-1))] <- v
 #			b[start:(start+nrows-1), ] <-  matrix(v, nrow=nrows, byrow=TRUE)
 
-		} else if ( driver == 'ascii') {
+		} else if ( driver == "ascii") {
 		
-			opsci = options('scipen')
-			if (x@file@dtype == 'INT') {
+			opsci = options("scipen")
+			if (x@file@dtype == "INT") {
 				options(scipen=10)
 				v <- round(v)				
 			} 
 			
 			v[is.na(v)] <- x@file@nodatavalue
 			
-			if (x@file@dtype == 'FLT') {
+			if (x@file@dtype == "FLT") {
 				# hack to make sure that ArcGIS does not 
 				# assume values are integers if the first 
 				# values have no decimal point
 				v <- as.character(v)
-				v[1] <- formatC(as.numeric(v[1]), 15, format='f')
+				v[1] <- formatC(as.numeric(v[1]), 15, format="f")
 			}
 					
 			v <- matrix(v, ncol=ncol(x), byrow=TRUE)
@@ -105,7 +105,7 @@ setMethod('writeValues', signature(x='RasterLayer', v='vector'),
 			options(scipen=opsci)
 			
 		} else {
-			stop('was writeStart used?')
+			stop("was writeStart used?")
 		}
 		return(x)
 	} 		
@@ -113,20 +113,20 @@ setMethod('writeValues', signature(x='RasterLayer', v='vector'),
 
 
 
-setMethod('writeValues', signature(x='RasterBrick', v='matrix'), 
-	function(x, v, start) {
+setMethod("writeValues", signature(x="RasterBrick", v="matrix"), 
+	function(x, v, start, ...) {
 	
 		v[is.infinite(v)] <- NA
 		if (is.logical(v)) {
 			v[] <- as.integer(v)
 		}
 
-		w <- getOption('warn')
-		options('warn'=-1) 
+		w <- getOption("warn")
+		options("warn"=-1) 
 		rng <- apply(v, 2, range, na.rm=TRUE)
 		x@data@min <- pmin(x@data@min, rng[1,])
 		x@data@max <- pmax(x@data@max, rng[2,])
-		options('warn'= w) 		
+		options("warn"= w) 		
 		
 		driver <- x@file@driver
 		if ( driver %in% .nativeDrivers() ) {
@@ -138,7 +138,7 @@ setMethod('writeValues', signature(x='RasterBrick', v='matrix'),
 				dm <- dim(v)
 				v <- as.integer(round(v))  
 				dim(v) <- dm
-			} else if ( x@file@dtype =='LOG' ) {
+			} else if ( x@file@dtype =="LOG" ) {
 				v[v != 1] <- 0
 				v[is.na(v)] <- x@file@nodatavalue
 				dm <- dim(v)
@@ -149,10 +149,10 @@ setMethod('writeValues', signature(x='RasterBrick', v='matrix'),
 			}
 
 		
-			if (x@file@bandorder=='BIL') {
+			if (x@file@bandorder=="BIL") {
 			
 				start <- (start-1) * x@ncols * x@file@dsize * nlayers(x)
-				seek(x@file@con, start, rw='w')			
+				seek(x@file@con, start, rw="w")			
 				
 				loop <- nrow(v) / x@ncols
 				start <- 1
@@ -162,32 +162,32 @@ setMethod('writeValues', signature(x='RasterBrick', v='matrix'),
 					start <- end + 1
 				}
 				
-			} else if (x@file@bandorder=='BIP') {
+			} else if (x@file@bandorder=="BIP") {
 			
 				start <- (start-1) * x@ncols * x@file@dsize * nlayers(x)
-				seek(x@file@con, start, rw='w')	
+				seek(x@file@con, start, rw="w")	
 				writeBin(as.vector(t(v)), x@file@con, size=x@file@dsize )
 				
-			} else if (x@file@bandorder=='BSQ') {
+			} else if (x@file@bandorder=="BSQ") {
 			
 				start <- (start-1) * x@ncols * x@file@dsize
 				nc <- ncell(x) * x@file@dsize
 				for (i in 1:ncol(v)) {
 					pos <- start + nc * (i-1)
-					seek(x@file@con, pos, rw='w')
+					seek(x@file@con, pos, rw="w")
 					writeBin(v[,i], x@file@con, size=x@file@dsize )
 				}
 			} else {
-				stop('unknown band order')
+				stop("unknown band order")
 			}
 			
-		} else if ( driver == 'netcdf') {
+		} else if ( driver == "netcdf") {
 
 			x <- .writeValuesBrickCDF(x, v, start)
 
-		} else if ( driver == 'big.matrix') {
+		} else if ( driver == "big.matrix") {
 
-			b <- attr(x@file, 'big.matrix')
+			b <- attr(x@file, "big.matrix")
 			startcell <- cellFromRowCol(x, start, 1)
 			endcell <- startcell+nrow(v)-1
 			b[startcell:endcell, ] <- v
@@ -195,7 +195,7 @@ setMethod('writeValues', signature(x='RasterBrick', v='matrix'),
 		} else { # rgdal
 		
 			off <- c(start-1, 0)
-			if (x@file@datanotation == 'INT1U') {
+			if (x@file@datanotation == "INT1U") {
 				v[v < 0] <- NA
 			}
 

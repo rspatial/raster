@@ -13,7 +13,7 @@ if (!isGeneric("boundaries")) {	setGeneric("boundaries", function(x, ...) standa
 if (!isGeneric("boxplot")) { setGeneric("boxplot", function(x, ...)	standardGeneric("boxplot")) }
 if (!isGeneric("brick")) { setGeneric("brick", function(x, ...)	standardGeneric("brick"))}	
 
-if (!isGeneric('buffer')) {setGeneric('buffer', function(x, ...) standardGeneric('buffer'))}	
+if (!isGeneric("buffer")) {setGeneric("buffer", function(x, ...) standardGeneric("buffer"))}	
 if (!isGeneric("calc")) {setGeneric("calc", function(x, fun, ...) standardGeneric("calc")) }
 if (!isGeneric("clamp")) {setGeneric("clamp", function(x, ...) standardGeneric("clamp")) }
 if (!isGeneric("clump")) {setGeneric("clump", function(x, ...) standardGeneric("clump")) }	
@@ -53,7 +53,7 @@ if (!isGeneric("ncol")) { setGeneric("nrow", function(x) standardGeneric("nrow")
 if (!isGeneric("ncol<-")) { setGeneric("ncol<-", function(x, ..., value) standardGeneric("ncol<-")) }	
 if (!isGeneric("nrow")) { setGeneric("nrow", function(x) standardGeneric("nrow")) }	
 if (!isGeneric("nrow<-")) { setGeneric("nrow<-", function(x, ..., value) standardGeneric("nrow<-")) }	
-if (!isGeneric('overlay')) { setGeneric('overlay', function(x, y, ...) standardGeneric('overlay'))}
+if (!isGeneric("overlay")) { setGeneric("overlay", function(x, y, ...) standardGeneric("overlay"))}
 if (!isGeneric("pairs")) { setGeneric("pairs", function(x, ...)	standardGeneric("pairs"))}
 if (!isGeneric("persp")) { setGeneric("persp", function(x,...) standardGeneric("persp")) }	
 if (!isGeneric("plot")) {setGeneric("plot", function(x,y,...)standardGeneric("plot"))}	
@@ -74,10 +74,10 @@ if (!isGeneric("sampleRegular")) { setGeneric("sampleRegular", function(x, size,
 if (!isGeneric("sampleRandom")) { setGeneric("sampleRandom", function(x, size, ...) standardGeneric("sampleRandom"))}	
 if (!isGeneric("sampleStratified")) {setGeneric("sampleStratified", function(x, size, ...) standardGeneric("sampleStratified"))}	
 if (!isGeneric("select")) {setGeneric("select", function(x, ...) standardGeneric("select"))}
-if (!isGeneric('setMinMax')) {setGeneric('setMinMax', function(x, ...) standardGeneric('setMinMax')) }	
+if (!isGeneric("setMinMax")) {setGeneric("setMinMax", function(x, ...) standardGeneric("setMinMax")) }	
 if (!isGeneric("shift")) {setGeneric("shift", function(x, ...) standardGeneric("shift"))}	
 if (!isGeneric("stretch")) {setGeneric("stretch", function(x, ...) standardGeneric("stretch"))}	
-if (!isGeneric('subset')) { setGeneric('subset', function(x, ...) standardGeneric('subset'))}
+if (!isGeneric("subset")) { setGeneric("subset", function(x, ...) standardGeneric("subset"))}
 if (!isGeneric("t")) { setGeneric("t", function(x) standardGeneric("t"))}	
 if (!isGeneric("tail")) { setGeneric("tail", function(x, ...) standardGeneric("tail"))}	
 if (!isGeneric("terrain")) { setGeneric("terrain", function(x, ...) standardGeneric("terrain"))}	
@@ -90,8 +90,10 @@ if (!isGeneric("values<-")) { setGeneric("values<-", function(x, value) standard
 if (!isGeneric("which.max")) {setGeneric("which.max", function(x)standardGeneric("which.max"))}	
 if (!isGeneric("which.min")) {setGeneric("which.min", function(x)standardGeneric("which.min"))}	
 
-if (!isGeneric('writeRaster')) {setGeneric('writeRaster', function(x, filename, ...) standardGeneric('writeRaster'))}
-if (!isGeneric('writeValues')) { setGeneric('writeValues', function(x, v, start) standardGeneric('writeValues')) }
+if (!isGeneric("writeRaster")) {setGeneric("writeRaster", function(x, filename, ...) standardGeneric("writeRaster"))}
+if (!isGeneric("writeStart")) { setGeneric("writeStart", function(x, filename, ...)	standardGeneric("writeStart"))}
+if (!isGeneric("writeStop")) { setGeneric("writeStop", function(x)	standardGeneric("writeStop"))}
+if (!isGeneric("writeValues")) { setGeneric("writeValues", function(x, v, ...) standardGeneric("writeValues")) }
 
 
 
