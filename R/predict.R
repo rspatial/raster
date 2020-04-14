@@ -134,8 +134,14 @@ setMethod('predict', signature(object='Raster'),
 						}
 					}
 					fv <- blockvals[, f[j]]	
-					fv[!(fv %in% flev)] <- NA 
-					fv <- factor(fv, levels=flev, labels=fvs)
+
+					# failed with character factors. See #91
+					#fv[!(fv %in% flev)] <- NA 
+					#fv <- factor(fv, levels=flev, labels=fvs)
+
+					mlev <- 1:length(flev)
+					fv[!(fv %in% mlev)] <- NA 
+					fv <- factor(fv, levels=mlev, labels=fvs)					
 					blockvals[,f[j]] <- fv 
 				}
 			}
