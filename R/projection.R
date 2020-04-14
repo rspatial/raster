@@ -27,16 +27,18 @@ setMethod("crs<-", signature("BasicRaster", "ANY"),
 
 setMethod("crs<-", signature("Spatial", "ANY"), 
 	function(x, ..., value) {
+
 	
 		w <- getOption("warn")
 		on.exit(options("warn" = w))
 		options("warn"=-1)
+
 		ll_warn <- get_ll_warn()
 		ll_warn <- TRUE
 		#ReplCRS <- get_ReplCRS_warn()
 		#ll_TOL <- get_ll_TOL()
 
-		proj4string(x) <- crs
+		proj4string(x) <- value
 
 		set_ll_warn(ll_warn)
 		#set_ReplCRS_warn(ReplCRS)	
