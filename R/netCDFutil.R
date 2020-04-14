@@ -6,6 +6,15 @@
 
 .getCRSfromGridMap4 <- function(g) {
 
+	sp <- g$standard_parallel
+	if (!is.null(sp)) {
+		if (length(sp) > 1) {
+			g$standard_parallel1 <- sp[1]
+			g$standard_parallel2 <- sp[2]
+			g$standard_parallel <- NULL
+		}
+	}
+
 	vals <- sapply(g, function(i) i[1]) 
 	vars <- names(vals)
 	if (any(vars == "proj4")) {
@@ -36,6 +45,7 @@
 			g$standard_parallel <- NULL
 		}
 	}
+	
 	i <- match(vars, m[,1])
 	if (all(is.na(i))) {
 		gg <- cbind(vars, vals)
