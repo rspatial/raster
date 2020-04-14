@@ -59,9 +59,6 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 	if ( is.logical(i) ) {
 		i <- which(i)
 	} else {
-	#	if (! is.numeric(i)) { 
-	#		i <- as.integer(i) 
-	#	}
 		i <- stats::na.omit(i)
 	}
 
@@ -162,8 +159,9 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 			r <- writeStart(r, filename=rasterTmpFile(), overwrite=TRUE )
 #			add <- (0:(nl-1)) * ncell(x)
 # remove the added cells again....
-			i <- i[i <= ncell(x)]
+
 			nc <- ncol(x)
+			ii <- (i-1) %% ncell(x) + 1
 			for (k in 1:tr$n) {
 				startcell <- cellFromRowCol(x, tr$row[k], 1)
 				endcell <- cellFromRowCol(x, tr$row[k]+tr$nrows[k]-1, ncol(x)) 
@@ -172,9 +170,15 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 				} else {
 					v <- matrix(NA, nrow=tr$nrows[k] * nc, ncol=nl)
 				}
-				j <- i >= startcell & i <= endcell
-				if (sum(j) > 0) {
-					v[i[j]-startcell+1,] <- value[j,]
+
+				j <- i[ii >= startcell & ii <= endcell] - startcell + 1
+				if (length(j) > 0) {
+					jj <- (j %/% ncell(x)) * tr$nrow[k] * ncol(x) + (j %% ncell(x))
+					if (length(value) == length(i)) {
+						v[jj] <- value[jj]
+					} else {
+						v[jj] <- value
+					}
 				}
 				r <- writeValues(r, v, tr$row[k])
 				pbStep(pb, k)
