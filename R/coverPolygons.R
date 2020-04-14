@@ -30,7 +30,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 				warning('non identical CRS')
 				haswarned <- TRUE
 			}
-			proj4string(y) <- proj4string(x)
+			crs(y) <- proj4string(x)
 		}	
 		subs <- rgeos::gIntersects(x, y, byid=TRUE)
 		if (!any(subs)) {
@@ -57,7 +57,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 				warning('non identical CRS')
 				haswarned <- TRUE
 			}
-			proj4string(y) <- proj4string(x)
+			crs(y) <- proj4string(x)
 		}	
 		
 		i <- rgeos::gIntersects(x, y)

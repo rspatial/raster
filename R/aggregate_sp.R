@@ -163,7 +163,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		}
 		
 		x <- do.call(rbind, x)
-		proj4string(x) <- crs
+		crs(x) <- crs
 		rownames(dat) <- NULL
 		SpatialPolygonsDataFrame(x, dat, FALSE)
 	}
@@ -242,7 +242,7 @@ function(x, by=NULL, sums=NULL, ...) {
 		x <- lapply(1:nrow(id), function(y) spChFIDs(aggregate(x[dc[dc$v==y,1],]), as.character(y)))
 		
 		x <- do.call(rbind, x)
-		proj4string(x) <- crs
+		crs(x) <- crs
 		rownames(dat) <- NULL
 		SpatialLinesDataFrame(x, dat, FALSE)
 	}

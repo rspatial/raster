@@ -36,7 +36,7 @@
 	
 	r <- as(pts, 'SpatialPolygons')
 	row.names(r) <- row.names(x)
-	proj4string(r) <- proj4string(x)
+	crs(r) <- proj4string(x)
 	
 	if (.hasSlot(x, 'data')) {
 		r <- SpatialPolygonsDataFrame(r, x@data)
