@@ -13,6 +13,9 @@ function(x, y, method="bilinear", filename="", ...)  {
 	nl <- nlayers(x)
 	if (nl == 1) {
 		y <- raster(y)
+		if (method=='ngb') { 
+			colortable(y) <- colortable(x)
+		}
 	} else {
 		y <- brick(y, values=FALSE, nl=nl)
 	}

@@ -218,16 +218,22 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 	if (!method %in% c('bilinear', 'ngb')) { 
 		stop('invalid method') 
 	}
-	if (method=='ngb') { 
-		method <- 'simple' # for extract (.xyValues)
-	} 
 
 	nl <- nlayers(from)
 	if ( nl == 1) {
 		to <- raster(to)
+		if (method=="ngb") { 
+			colortable(to) <- colortable(from)
+		}
 	} else {
 		to <- brick(to, values=FALSE, nl=nl)
 	}
+
+	if (method=='ngb') { 
+		method <- 'simple' # for extract (.xyValues)
+	} 
+
+
 	names(to) <- names(from)
 	if ( ! hasValues(from) ) {
 		warning("'from' has no cell values")
