@@ -45,7 +45,8 @@ There is, however, a difference if \code{NA} values are considered. One can use 
 
 Laplacian filter: \code{filter=matrix(c(0,1,0,1,-4,1,0,1,0), nrow=3)}
 
-Sobel filter: \code{filter=matrix(c(1,2,1,0,0,0,-1,-2,-1) / 4, nrow=3)}
+Sobel filters: \code{fx=matrix(c(-1,-2,-1,0,0,0,1,2,1) / 4, nrow=3)}
+and \code{fy=matrix(c(1,0,-1,2,0,-2,1,0,-1)/4, nrow=3)}
 
 see the \code{\link{focalWeight}} function to create distance based circular, rectangular, or Gaussian filters.
 }
@@ -115,6 +116,16 @@ init <- raster(m)
 
 # run the model
 sim(init, gameOfLife, n=150, pause=0.05)
+
+## Implementation of Sobel edge-detection filter
+## for RasterLayer r
+sobel <- function(r) {
+	fy <- matrix(c(1,0,-1,2,0,-2,1,0,-1), nrow=3)
+	fx <- matrix(c(-1,-2,-1,0,0,0,1,2,1) , nrow=3)
+	rx <- focal(r, fx)
+	ry <- focal(r, fy)
+	sqrt(rx^2 + ry^2)
+}
 }
 }
 
