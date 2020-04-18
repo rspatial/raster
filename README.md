@@ -5,6 +5,10 @@
 status](https://travis-ci.org/rspatial/raster.svg?branch=master)](https://travis-ci.org/rspatial/raster)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/raster)](https://cran.r-project.org/package=raster)
+[![](http://www.r-pkg.org/badges/version/raster)](http://www.r-pkg.org/pkg/raster)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/raster)](http://www.r-pkg.org/pkg/raster)
+[![Coverage Status](https://img.shields.io/codecov/c/github/rspatial/raster/master.svg)](https://codecov.io/github/rspatial/raster?branch=master)
+
 
 This is the source code for the R package "raster". Released versions are on [CRAN](https://cran.r-project.org/web/packages/raster/index.html).
 
