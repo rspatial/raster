@@ -11,7 +11,7 @@
         main <- ''
     }
 
-	sethook <- FALSE
+	#sethook <- FALSE
 	if (!add) {
 		graphics::plot.new()
 		if (missing(axes)) {
@@ -23,7 +23,7 @@
 			#graphics::par(plt=c(0,1,0,1))
 			graphics::par(mar=c(0,0,0,0), xaxs='i',yaxs='i')
 			
-			sethook <- TRUE
+			#sethook <- TRUE
 		}	
 		if (missing(asp)) {
 			if (couldBeLonLat(x)) {
@@ -80,12 +80,12 @@
 		}
 	}
 
-	if (sethook) {
-		setHook("plot.new", function(...) {
-		    graphics::par(old.par)
-			setHook("plot.new", function(...) setHook("plot.new", NULL, "replace"))
-		}, 	action="replace")
-	}
+	#if (sethook) {
+	#	setHook("plot.new", function(...) {
+	#	    graphics::par(old.par)
+	#		setHook("plot.new", function(...) setHook("plot.new", NULL, "replace"))
+	#	}, 	action="replace")
+	#}
 }
 
 
