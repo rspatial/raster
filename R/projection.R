@@ -98,8 +98,14 @@ projection <- function(x, asText=TRUE) {
 		x <- x@crs 
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- proj4string(x)
-	} else if (methods::extends(class(x), "sf")) {
-		return( attr(x$geometry, "crs")$proj4string )
+	} else if (inherits(x, c("sf", "sfc"))) {
+		if (!requireNamespace("sf", quietly = TRUE))
+			stop("sf required: install that first") # nocov
+		crs = sf::st_crs(x)
+		if (asText)
+			return(crs$proj4string) # extracts proj4string from WKT
+		else
+			return(as(crs, "CRS")) # passes on WKT comment
 	} else if (class(x) == "character") { 
 		if (asText) {
 			return(x)
