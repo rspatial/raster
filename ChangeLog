@@ -4,7 +4,7 @@ There are bugs when using netCDF files that have latitude as the first dimension
 
 --- current version
 
-
+Removed the @crs slot from Raster objects
 
 --- 18-April-2020, version 3.1-5
 improvements:
