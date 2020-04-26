@@ -22,8 +22,9 @@ function(x, y, ...){
 
 setMethod('extract', signature(x='Raster', y='SpatialPoints'), 
 function(x, y, ..., df=FALSE, sp=FALSE){ 
-	px <- projection(x, asText=FALSE)
-	comp <- compareCRS(px, projection(y), unknown=TRUE)
+	#px <-.get_projection(x, asText=FALSE)
+	px <-.get_projection(x)
+	comp <- compareCRS(px,.get_projection(y), unknown=TRUE)
 	if (!comp) {
 		if (!.requireRgdal()) {
 			warning('CRS of SpatialPoints and rater do not match')

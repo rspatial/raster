@@ -49,7 +49,7 @@
 	if (.requireRgdal(FALSE)) {
 		cat("coordinate system string = {", rgdal::showWKT(projection(r)), "}\n", file = thefile, sep="")
 	} else {
-		cat("projection info =", projection(r), "\n", file = thefile) 
+		cat("projection info =",.get_projection(r), "\n", file = thefile) 
 	}
 	cat("z plot range = {", minValue(r),", ", maxValue(r), "}\n", file = thefile) 
 	

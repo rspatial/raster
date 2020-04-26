@@ -1,5 +1,5 @@
 
-.makeSpPolygons <- function(polys, attr=NULL, crs=NA, ...) {
+.makeSpPolygons <- function(polys, attr=NULL, crs="", ...) {
 
 		x <- data.frame(geom(polys))
 		x$cump <- NULL

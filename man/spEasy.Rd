@@ -10,15 +10,15 @@ Helper functions to simplify the creation of SpatialLines* or SpatialPolygons* o
 }
 
 \usage{
-spLines(x, ..., attr=NULL, crs=NA) 
-spPolygons(x, ..., attr=NULL, crs=NA) 
+spLines(x, ..., attr=NULL, crs="") 
+spPolygons(x, ..., attr=NULL, crs="") 
 }
 
 \arguments{
 \item{x}{matrix of list with matrices. Each matrix must have two columns with x and y coordinates (or longitude and latitude, in that order). Multi-line or multi-polygon objects can be formed by combining matrices in a list}
 \item{...}{additional matrices and/or lists with matrices}  
 \item{attr}{data.frame with the attributes to create a *DataFrame object. The number of rows must match the number of lines/polgyons}
-\item{crs}{the coordinate reference system (PROJ4 notation)}
+\item{crs}{the coordinate reference system (PROJ4 or WKT notation)}
 }
 
 \value{

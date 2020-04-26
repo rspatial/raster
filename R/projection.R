@@ -5,18 +5,11 @@
 
 
 
-
 setMethod("crs", signature("ANY"), 
 	function(x, asText=FALSE, ...) {
 		projection(x, asText=asText)
 	}
 )
-
-
-#"crs<-" <- function(x, value) {
-#	projection(x) <- value
-#	x
-#}
 
 setMethod("crs<-", signature("BasicRaster", "ANY"), 
 	function(x, ..., value) {
@@ -25,10 +18,12 @@ setMethod("crs<-", signature("BasicRaster", "ANY"),
 	}
 )
 
+#rgdal::showWKT(projection(x)))
+
 setMethod("crs<-", signature("Spatial", "ANY"), 
 	function(x, ..., value) {
 
-		if (class(value)=="CRS") {
+		if (inherits(value, "CRS")) {
 			crs <- value
 		} else {	
 			crs <- .newCRS(value)
@@ -68,23 +63,21 @@ setMethod("as.character", signature(x="CRS"),
 
 "projection<-" <- function(x, value) {
 
-	if (class(value)=="CRS") {
-		crs <- value
-	} else {	
-		crs <- .newCRS(value)
-	}	
+	value <- .get_projection(value)
 	
 	if (inherits(x, "RasterStack")) {
 		if (nlayers(x) > 0) {
 			for (i in 1:nlayers(x)) {
-				x@layers[[i]]@crs <- crs
+				x@layers[[i]]@srs <- value
+				#x@layers[[i]]@crs <- CRS(value)
 			}
 		}
 	} 
 	if (inherits(x, "Spatial")) {
-		proj4string(x) <- crs
+		proj4string(x) <- CRS(value[1])
 	} else {
-		x@crs <- crs
+		x@srs <- value
+		#x@crs <- CRS(value)
 	}
 	return(x)
 	
@@ -92,10 +85,63 @@ setMethod("as.character", signature(x="CRS"),
 
 
 
+
+.get_projection <- function(x, ...) {
+
+	if (is.null(x)) {
+		x <- ""
+	} else if (methods::extends(class(x), "BasicRaster")) { 
+		if (.hasSlot(x, "srs")) {
+			x <- x@srs
+		} else {
+			x <- x@crs
+			if (is.na(x@projargs)) { 
+				x <- ""
+			} else {
+				x <- trim(x@projargs)
+			}
+		}
+	} else if (methods::extends(class(x), "Spatial")) { 
+		x <- proj4string(x)
+	} else if (inherits(x, c("sf", "sfc"))) {
+		if (!requireNamespace("sf", quietly = TRUE)) {
+			stop("sf required: install that first") 
+		}
+		crs <- sf::st_crs(x)
+		
+		#if (asCRS) {
+		#	return(as(crs, "CRS")) # passes on WKT comment
+		#} else {
+			
+		return(crs$proj4string) # extracts proj4string from WKT
+	} else if (inherits(x, "CRS")) { 
+		if (is.na(x@projargs)) { 
+			x <- ""
+		} else {
+			x <- trim(x@projargs)
+		}
+	} else if (inherits(x, "SpatRaster")) { 
+		x <- crs(x)
+	} else if (inherits(x, "SpatVector")) { 
+		x <- crs(x)
+	}
+	
+	if (is.na(x)) {
+		x <- ""
+	}	
+	as.character(x)
+}
+
+
+
 projection <- function(x, asText=TRUE) {
 
 	if (methods::extends(class(x), "BasicRaster")) { 
-		x <- x@crs 
+		if (.hasSlot(x, "srs")) {
+			x <- CRS(x@srs)
+		} else {
+			x <- x@crs 
+		}
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- proj4string(x)
 	} else if (inherits(x, c("sf", "sfc"))) {

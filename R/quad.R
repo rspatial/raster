@@ -11,9 +11,9 @@ setMethod('.quad', signature(x='missing'),
 		e <- extent(xmn, xmx, ymn, ymx)
 		if (missing(crs)) {
 			if (e@xmin > -400 & e@xmax < 400 & e@ymin > -90.1 & e@ymax < 90.1) { 
-				crs ="+proj=longlat +datum=WGS84"
+				crs <- "+proj=longlat +datum=WGS84"
 			} else {
-				crs=NA
+				crs <- ""
 			}
 		}
 		b <- .quad(e, nrows=nrows, ncols=ncols, crs=crs, levels=levels, steps=steps)

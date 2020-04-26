@@ -37,9 +37,9 @@ A RasterBrick can be created from RasterLayer objects, from a RasterStack, or fr
 
 \S4method{brick}{missing}(nrows=180, ncols=360, xmn=-180, xmx=180, ymn=-90, ymx=90, nl=1, crs)
 
-\S4method{brick}{Extent}(x, nrows=10, ncols=10, crs=NA, nl=1)
+\S4method{brick}{Extent}(x, nrows=10, ncols=10, crs="", nl=1)
 
-\S4method{brick}{array}(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, transpose=FALSE)
+\S4method{brick}{array}(x, xmn=0, xmx=1, ymn=0, ymx=1, crs="", transpose=FALSE)
 
 \S4method{brick}{SpatialGrid}(x)
 

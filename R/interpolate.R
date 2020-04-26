@@ -120,7 +120,7 @@ setMethod('interpolate', signature(object='Raster'),
 			if (gstatmod) { 
 				if (sp) { 
 					row.names(p) <- 1:nrow(p)
-					blockvals <- SpatialPointsDataFrame(coords=p, data = blockvals, proj4string=projection(predrast, asText = FALSE))
+					blockvals <- SpatialPointsDataFrame(coords=p, data = blockvals, proj4string=CRS(.get_projection(predrast)))
 				}
 				if (i == 1) { 
 					predv <- predict(model, blockvals, debug.level=debug.level, ...) 

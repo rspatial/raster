@@ -21,8 +21,8 @@ setMethod("Arith", signature(e1='Raster', e2='Raster'),
 		nl2 <- nlayers(e2)
 		nl <- max(nl1, nl2)
 
-		proj1 <- projection(e1)
-		proj2 <- projection(e2)
+		proj1 <-.get_projection(e1)
+		proj2 <-.get_projection(e2)
 	
 		if ( ! compareRaster(e1, e2, crs=FALSE, stopiffalse=FALSE) ) {
 			if ( compareRaster(e1, e2, extent=FALSE, rowcol=FALSE, crs=TRUE, res=TRUE, orig=TRUE, stopiffalse=TRUE) ) {

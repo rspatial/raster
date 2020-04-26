@@ -89,8 +89,6 @@ This function is used for the side-effect of writing values to a file.
 \seealso{\code{\link[raster]{writeFormats}}, \code{\link[raster]{writeValues}} }  
 
 \examples{ 
-\dontrun{
-
 tmp <- tempdir()
 r <- raster(system.file("external/test.grd", package="raster"))
 
@@ -116,7 +114,7 @@ if (require(ncdf4)) {
  rnc <- writeRaster(r, filename=file.path(tmp, "netCDF.nc"), format="CDF", overwrite=TRUE)   
 }
 }
-}
+
 
 \keyword{ spatial }
 \keyword{ methods }

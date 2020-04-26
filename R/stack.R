@@ -94,7 +94,7 @@ function(x, bands=NULL, native=FALSE, RAT=TRUE, ...) {
 				s@nrows <- x[[1]]@nrows
 				s@ncols <- x[[1]]@ncols
 				s@extent <- x[[1]]@extent
-				s@crs <- x[[1]]@crs
+				crs(s) <- crs(x[[1]])
 				return(s)
 			}
 			warning('RasterLayer objects without cell values were removed')
@@ -107,7 +107,7 @@ function(x, bands=NULL, native=FALSE, RAT=TRUE, ...) {
 		s@nrows <- x[[1]]@nrows
 		s@ncols <- x[[1]]@ncols
 		s@extent <- x[[1]]@extent
-		s@crs <- x[[1]]@crs
+		crs(s) <- crs(x[[1]])
 		s@layers <- x
 		if (namesFromList) {
 			names(s) <- lstnames
@@ -207,7 +207,7 @@ function(x, bands=NULL, native=FALSE, RAT=TRUE, ...) {
 			x@nrows <- r@nrows
 			x@ncols <- r@ncols
 			x@extent <- r@extent
-			x@crs <- r@crs
+			crs(x) <- crs(r)
 			if(rotated(r)) {
 				x@rotated = r@rotated
 				x@rotation = r@rotation

@@ -11,7 +11,7 @@ setMethod('brick', signature(x='missing'),
 			if (e@xmin > -400 & e@xmax < 400 & e@ymin > -90.1 & e@ymax < 90.1) { 
 				crs ="+proj=longlat +datum=WGS84"
 			} else {
-				crs=NA
+				crs=""
 			}
 		}
 		b <- brick(e, nrows=nrows, ncols=ncols, crs=crs, nl=nl)
@@ -67,7 +67,7 @@ setMethod('brick', signature(x='RasterStack'),
 	function(x, values=TRUE, nl, filename='', ...){
 	
 		e <- x@extent
-		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=projection(x))
+		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=projection(x)[1])
 		if (rotated(x)) {
 			b@rotated <- TRUE
 			b@rotation <- x@rotation
@@ -148,13 +148,12 @@ setMethod('brick', signature(x='RasterBrick'),
 
 
 setMethod('brick', signature(x='Extent'), 
-	function(x, nrows=10, ncols=10, crs=NA, nl=1) {
-		bb <- extent(x)
+	function(x, nrows=10, ncols=10, crs="", nl=1) {
 		nr = as.integer(round(nrows))
 		nc = as.integer(round(ncols))
 		if (nc < 1) { stop("ncols should be > 0") }
 		if (nr < 1) { stop("nrows should be > 0") }
-		b <- methods::new("RasterBrick", extent=bb, ncols=nc, nrows=nr)
+		b <- methods::new("RasterBrick", extent=x, ncols=nc, nrows=nr)
 		projection(b) <- crs
 		nl <- max(round(nl), 0)
 		b@data@nlayers <- as.integer(nl)
@@ -210,7 +209,7 @@ setMethod('brick', signature(x='SpatialPixels'),
 
 	
 setMethod('brick', signature(x='array'), 
-	function(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, transpose=FALSE) {
+	function(x, xmn=0, xmx=1, ymn=0, ymx=1, crs="", transpose=FALSE) {
 		dm <- dim(x)
 		if (is.matrix(x)) {
 			stop('cannot coerce a matrix to a RasterBrick')

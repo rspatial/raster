@@ -97,7 +97,7 @@ setMethod ('print' , 'Spatial',
 		cat('extent      : ' , e[1,1], ', ', e[1,2], ', ', e[2,1], ', ', e[2,2], '  (xmin, xmax, ymin, ymax)\n', sep="")
 	}
 	
-	cat('crs         :' , projection(x, TRUE), '\n')
+	cat('crs         :' ,.get_projection(x), '\n')
 	
 	if (hasData) {
 		x <- x@data

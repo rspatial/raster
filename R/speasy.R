@@ -6,7 +6,7 @@
 
 # easy functions for creating SpatialLines* and SpatialPolygons*
 
-spLines <- function(x, ..., attr=NULL, crs=NA) {
+spLines <- function(x, ..., attr=NULL, crs="") {
 	x <- c(list(x), list(...))
 	x <- rapply(x, Line, how='replace')
 	x <- lapply(1:length(x), function(i) Lines(x[[i]], as.character(i)))
@@ -28,7 +28,7 @@ spLines <- function(x, ..., attr=NULL, crs=NA) {
 }
 
 
-spPolygons <- function(x, ..., attr=NULL, crs=NA) {
+spPolygons <- function(x, ..., attr=NULL, crs="") {
 	x <- c(list(x), list(...))
 	x <- rapply(x, Polygon, how='replace')
 

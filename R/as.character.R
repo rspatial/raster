@@ -11,7 +11,7 @@ setMethod("as.character", signature(x="Extent"),
 setMethod("as.character", signature(x="Raster"), 
 	function(x, ...) {
 		e <- extent(x)
-		crs <- crs(x)
+		crs <- .get_projection(x)
 		crs <- ifelse(is.na(crs), ", crs=''", paste0(", crs='", crs, "'"))
 		if (nlayers(x) < 2) {
 			paste0("raster(", 

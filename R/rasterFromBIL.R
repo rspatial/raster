@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 
-.rasterFromGenericFile <- function(filename, band=1, SIGNEDINT=NULL, type='RasterLayer', crs=NA, ...) {
+.rasterFromGenericFile <- function(filename, band=1, SIGNEDINT=NULL, type='RasterLayer', crs="", ...) {
 	hdrfname <- .setFileExtensionHeader(filename, "BIL")
 	
 	ini <- readIniFile(hdrfname, token=' ')

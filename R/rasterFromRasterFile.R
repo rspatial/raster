@@ -25,8 +25,11 @@
 
 
 .getProj <- function(proj, crs) {
-	if ( ! is.na(crs) ) {
-		if (is.na(proj)) {
+	if (is.na(proj)) {
+		proj <- ""
+	}
+	if ( crs != "" ) {
+		if (proj == "") {
 			proj <- crs
 		} else {
 			warning('argument "crs" ignored because the file provides a crs') 
@@ -70,7 +73,7 @@
 }
 
 
-.rasterFromRasterFile <- function(filename, band=1, type='RasterLayer', driver='raster', RAT=TRUE, crs=NA, ...) {
+.rasterFromRasterFile <- function(filename, band=1, type='RasterLayer', driver='raster', RAT=TRUE, crs="", ...) {
 
 	valuesfile <- .setFileExtensionValues(filename, driver)
 	if (!file.exists( valuesfile )){

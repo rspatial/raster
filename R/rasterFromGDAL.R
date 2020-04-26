@@ -23,7 +23,7 @@
 
 
 
-.rasterFromGDAL <- function(filename, band, type, sub=0, RAT=TRUE, silent=TRUE, warn=TRUE, crs=NA, ...) {	
+.rasterFromGDAL <- function(filename, band, type, sub=0, RAT=TRUE, silent=TRUE, warn=TRUE, crs="", ...) {	
 
 	.requireRgdal() 
 	

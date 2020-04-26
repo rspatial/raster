@@ -20,8 +20,8 @@ Get or set the coordinate reference system (CRS) of a Raster* object.
 }
 
 \usage{
-\S4method{crs}{ANY}(x, asText=FALSE, ...)
 
+\S4method{crs}{ANY}(x, asText=FALSE, ...)
 crs(x, ...) <- value
 
 projection(x, asText=TRUE)
@@ -31,13 +31,13 @@ projection(x) <- value
 \arguments{
   \item{x}{Raster* or Spatial object }
   \item{asText}{logical. If \code{TRUE}, the projection is returned as text. Otherwise a \code{\link[sp]{CRS-class}} object is returned}
-  \item{...}{additional arguments. None implemented}
+   \item{...}{additional arguments. None implemented}
   \item{value}{\code{CRS} object or a character string describing a projection and datum in the PROJ.4 format }
 }
 
 
 \value{
-Raster*, Spatial*, CRS, or character object
+Raster*, Spatial*, or character object
 }
 
 \note{

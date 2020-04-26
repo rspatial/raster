@@ -18,7 +18,7 @@
 	cat("ymin=", as.character(ymin(x)), "\n", file = thefile, sep='')
 	cat("xmax=", as.character(xmax(x)), "\n", file = thefile, sep='')
 	cat("ymax=", as.character(ymax(x)), "\n", file = thefile, sep='')
-	cat("projection=", projection(x), "\n", file = thefile, sep='')
+	cat("projection=",.get_projection(x), "\n", file = thefile, sep='')
 
 	cat("[data]", "\n", file = thefile, sep='')
 	cat("datatype=",  x@file@datanotation, "\n", file = thefile, sep='')

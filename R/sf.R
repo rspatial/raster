@@ -5,23 +5,23 @@
 
 .sf2sp <- function(from) {
 	#if (!requireNamespace("sf")) {
-	#	stop('package sf is not available')
+	#	stop("package sf is not available")
 	#}
 	# to do
-	#if (from == 'GEOMETRYCOLLECTION') {
+	#if (from == "GEOMETRYCOLLECTION") {
 	#	x <- list()
 	#	for (i in 1:3 ) { 		}
 	#	return(x)
 	#}
-	p <- as(from, 'Spatial')	
+	p <- as(from, "Spatial")	
 	if (isTRUE(ncol(p) == 0)) {
-	# for the degerate Spatial*DataFrame that has zero variables
-		if (inherits(p, 'SpatialPolygons')) {
-			p <- as(p, 'SpatialPolygons')	
-		} else if (inherits(p, 'SpatialLines')) {
-			p <- as(p, 'SpatialLines')	
-		} else if (inherits(p, 'SpatialPoints')) {
-			p <- as(p, 'SpatialPoints')	
+	# for the degenerate Spatial*DataFrame that has zero variables
+		if (inherits(p, "SpatialPolygons")) {
+			p <- as(p, "SpatialPolygons")	
+		} else if (inherits(p, "SpatialLines")) {
+			p <- as(p, "SpatialLines")	
+		} else if (inherits(p, "SpatialPoints")) {
+			p <- as(p, "SpatialPoints")	
 		}
 	}
 	p

@@ -31,7 +31,7 @@ compareRaster <- function(x, ..., extent=TRUE, rowcol=TRUE, crs=TRUE, res=FALSE,
 		return(result)
 	}	
 	minres <- min(res(objects[[1]]))
-	proj1 <- projection(objects[[1]])
+	proj1 <-.get_projection(objects[[1]])
 	ext1 <- extent(objects[[1]])
 	ncol1 <- ncol(objects[[1]])
 	nrow1 <- nrow(objects[[1]])
@@ -60,7 +60,7 @@ compareRaster <- function(x, ..., extent=TRUE, rowcol=TRUE, crs=TRUE, res=FALSE,
 			}
 		}
 		if (crs) {
-			thisproj <- projection(objects[[i]])
+			thisproj <-.get_projection(objects[[i]])
 			if (is.na(proj1)) {
 				proj1 <- thisproj
 			} else {

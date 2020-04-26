@@ -15,13 +15,11 @@ projectExtent <- function(object, crs) {
 	dm[2] <- max(10, dm[2])
 	dim(object) <- dm
 	
-	methods::validObject(projection(object, asText=FALSE))
-	methods::validObject(projection(crs, asText=FALSE))
-	projfrom <- projection(object)
-	projto <- projection(crs)
-	
-	
-	
+	methods::validObject(CRS(.get_projection(object)))
+	methods::validObject(CRS(.get_projection(crs)))
+	projfrom <-.get_projection(object)
+	projto <-.get_projection(crs)
+		
 #	rs <- res(object)
 #	xmn <- object@extent@xmin - 0.5 * rs[1]
 #	xmx <- object@extent@xmax + 0.5 * rs[1]
@@ -110,7 +108,7 @@ projectExtent <- function(object, crs) {
 	y1 <- y - 0.5 * res[2]
 	y2 <- y + 0.5 * res[2]
 	xy <- cbind(c(x1, x2, x, x), c(y, y, y1, y2))
-	pXY <- rgdal::rawTransform( projection(obj), crs, nrow(xy), xy[,1], xy[,2] )
+	pXY <- rgdal::rawTransform(.get_projection(obj), crs, nrow(xy), xy[,1], xy[,2] )
 	pXY <- cbind(pXY[[1]], pXY[[2]])
 	out <- c((pXY[2,1] - pXY[1,1]), (pXY[4,2] - pXY[3,2]))
 	if (any(is.na(out))) {
@@ -140,8 +138,8 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 
 	.requireRgdal()
 
-	methods::validObject( projection(from, asText=FALSE) )
-	projfrom <- projection(from)
+	methods::validObject( CRS(.get_projection(from) ))
+	projfrom <-.get_projection(from)
 	if (is.na(projfrom)) { 
 		stop("input projection is NA") 
 	}
@@ -151,7 +149,9 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		if (missing(crs)) {
 			stop("'crs' argument is missing.")
 		}
-		projto <- projection(crs)
+		projto <-.get_projection(crs)
+		#compareCRS(projfrom, projto)
+		if (projto == projfrom) return(from)
 		to <- projectExtent(from, projto)
 		if (missing(res)) {
 			res <- .computeRes(from, projto)
@@ -175,7 +175,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		}
 		to <- extend(to, e)
 	} else {
-		projto <- projection(to)
+		projto <-.get_projection(to)
 		if (is.na(projto)) { 
 			stop("output projection is NA") 
 		} 
@@ -196,7 +196,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 	}
 	
 	methods::validObject(to)
-	methods::validObject(projection(to, asText=FALSE))
+	methods::validObject(CRS(.get_projection(to)))
 
 	#if (identical(projfrom, projto)) {
 	#	warning('projections of "from" and "to" are the same')
@@ -211,7 +211,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		to <- .getAlignedRaster(to, from)
 	}
 	
-#	pbb <- projectExtent(to, projection(from))
+#	pbb <- projectExtent(to,.get_projection(from))
 #	bb <- intersect(extent(pbb), extent(from))
 #	methods::validObject(bb)
 

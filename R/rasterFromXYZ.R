@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 
-rasterFromXYZ <- function(xyz, res=c(NA, NA), crs=NA, digits=5) {
+rasterFromXYZ <- function(xyz, res=c(NA, NA), crs="", digits=5) {
 
 	if (length(res) == 1) res = c(res, res)
 

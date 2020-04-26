@@ -109,7 +109,7 @@ function(x, size, exp=10, na.rm=TRUE, xy=FALSE, ext=NULL, sp=FALSE, ...) {
 		if (!xy & is.null(ext)) {
 		  pts <- xyFromCell(x, res[,1])
 		}
-		res <- SpatialPointsDataFrame(pts, data.frame(res), proj4string=projection(x, asText=FALSE))
+		res <- SpatialPointsDataFrame(pts, data.frame(res), proj4string=CRS(.get_projection(x)))
 	}
 	return(res)
 }

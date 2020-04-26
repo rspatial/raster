@@ -5,7 +5,7 @@
 
 
 
-.pointBuffer <- function(xy, d, lonlat=TRUE, a=6378137, f=1/298.257223563, crs=NA, ... ) {
+.pointBuffer <- function(xy, d, lonlat=TRUE, a=6378137, f=1/298.257223563, crs="", ... ) {
 	
 	n <- list(...)$quadsegs
 	if (is.null(n)) {

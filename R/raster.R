@@ -12,20 +12,20 @@ setMethod('raster', signature(x='missing'),
 		}
 		if (missing(crs)) {
 			if (ext@xmin > -360.01 & ext@xmax < 360.01 & ext@ymin > -90.01 & ext@ymax < 90.01) { 
-				crs <- CRS("+proj=longlat +datum=WGS84")
+				crs <- "+proj=longlat +datum=WGS84"
 			} else {
 				# if sp >= 1.2.1  crs <- CRS(as.character(NA), doCheckCRSArgs=FALSE)
-				crs <- CRS(as.character(NA))
+				crs <- ""
 			}
 		} else {
-			crs <- CRS(as.character(projection(crs)))
+			crs <- .get_projection(crs)
 		}
 		if (missing(resolution)) {
 			nrows <- as.integer(max(1, round(nrows)))
 			ncols <- as.integer(max(1, round(ncols)))
-			r <- methods::new('RasterLayer', extent=ext, nrows=nrows, ncols=ncols, crs=crs)
+			r <- methods::new('RasterLayer', extent=ext, nrows=nrows, ncols=ncols, srs=crs)
 		} else {
-			r <- methods::new('RasterLayer', extent=ext, crs=crs)
+			r <- methods::new('RasterLayer', extent=ext, srs=crs)
 			res(r) <- resolution
 		}
 		if (!is.null(vals)) {
@@ -68,10 +68,11 @@ setMethod('raster', signature(x='list'),
 			if (xmn > -360.1 & xmx < 360.1 & ymn > -90.1 & ymx < 90.1) { 
 				crs <- "+proj=longlat +datum=WGS84"
 			} else {
-				crs <- as.character(NA)
+				crs <- ""
 			}
-		} 
-		
+		} else {
+			crs <- .get_projection(crs)
+		}
 		x <- t(x$z)
 		x <- x[nrow(x):1, ]
 		r <- raster( x, xmn=xmn, xmx=xmx, ymn=ymn, ymx=ymx, crs=crs )
@@ -82,10 +83,8 @@ setMethod('raster', signature(x='list'),
 
 
 setMethod('raster', signature(x='matrix'), 
-	function(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, template=NULL) {
-		if (isTRUE(is.na(crs))) {
-			crs <- as.character(NA)
-		}	
+	function(x, xmn=0, xmx=1, ymn=0, ymx=1, crs="", template=NULL) {
+		crs <- .get_projection(crs)
 		if (!is.null(template)) {
 			if (inherits(template, 'Extent')) {
 				r <- raster(template, crs=crs)
@@ -140,7 +139,7 @@ setMethod('raster', signature(x='character'),
 
 setMethod('raster', signature(x='BasicRaster'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=x@crs)
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.get_projection(x))
 		if (rotated(x)) {
 			r@rotated <- TRUE
 			r@rotation <- x@rotation
@@ -151,7 +150,7 @@ setMethod('raster', signature(x='BasicRaster'),
 
 setMethod('raster', signature(x='RasterLayer'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=x@crs)
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.get_projection(x))
 		r@rotated <- x@rotated
 		r@rotation <- x@rotation
 		r@file@blockrows <- x@file@blockrows
@@ -162,7 +161,7 @@ setMethod('raster', signature(x='RasterLayer'),
 
 setMethod('raster', signature(x='RasterLayerSparse'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=x@crs)
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.get_projection(x))
 		if (length(stats::na.omit(x@data@values)) > 0) {
 			v <- rep(NA, ncell(r))
 			v[x@index] <- x@data@values
@@ -195,7 +194,7 @@ setMethod('raster', signature(x='RasterStack'),
 		} else {
 			r <- raster(extent(x))
 			dim(r) <- c(nrow(x), ncol(x))
-			projection(r) <- projection(x)
+			projection(r) <-.get_projection(x)
 		}
 		extent(r) <- extent(x) # perhaps it was changed by user and different on disk
 		if (rotated(x@layers[[1]])) {
@@ -232,7 +231,7 @@ setMethod('raster', signature(x='RasterBrick'),
 				# better raster(filename(x), band=dindex)  ?
 				# with zvar for ncdf files?
 				
-				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=projection(x))	
+				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.get_projection(x))	
 				r@file <- x@file
 
 				r@file@blockrows <- x@file@blockrows
@@ -272,7 +271,7 @@ setMethod('raster', signature(x='RasterBrick'),
 				
 			} else {
 			
-				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=projection(x))	
+				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.get_projection(x))	
 				if ( inMemory(x) ) {
 					if ( dindex != layer ) { warning(paste("layer was changed to", dindex)) }
 					r <- setValues(r, x@data@values[,dindex])
@@ -286,7 +285,7 @@ setMethod('raster', signature(x='RasterBrick'),
 			}
 			
 		} else {
-			r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=projection(x))	
+			r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.get_projection(x))	
 		}
 
 		if (rotated(x)) {
@@ -300,7 +299,8 @@ setMethod('raster', signature(x='RasterBrick'),
 
 
 setMethod('raster', signature(x='Extent'), 
-	function(x, nrows=10, ncols=10, crs=NA, ...) {
+	function(x, nrows=10, ncols=10, crs="", ...) {
+		crs <- .get_projection(crs)
 		raster(xmn=x@xmin, xmx=x@xmax, ymn=x@ymin, ymx=x@ymax, ncols=ncols, nrows=nrows, crs=crs, ...)
 	}
 )
@@ -308,8 +308,8 @@ setMethod('raster', signature(x='Extent'),
 
 setMethod('raster', signature(x='sf'), 
 	function(x, origin, ...){
-		x <- .sf2sp(x)
-		raster(x, origin, ...)
+		sp <- .sf2sp(x)
+		raster(sp, origin, ...)
 	}
 )
 
@@ -317,7 +317,7 @@ setMethod('raster', signature(x='sf'),
 setMethod('raster', signature(x='Spatial'), 
 	function(x, origin, ...){
 		r <- raster(extent(x), ...)
-		r@crs <- CRS(proj4string(x))
+		crs(r) <- .get_projection(x)
 		if (!missing(origin)) {
 			origin(r) <- origin
 			r <- extend(r, 1)
@@ -331,7 +331,7 @@ setMethod('raster', signature(x='Spatial'),
 setMethod('raster', signature(x='SpatialGrid'), 
 	function(x, layer=1, values=TRUE){
 		r <- raster(extent(x))
-		projection(r) <- CRS(proj4string(x))
+		projection(r) <-.get_projection(x)
 		dim(r) <- c(x@grid@cells.dim[2], x@grid@cells.dim[1])	
 		if (layer < 1) {
 			values <- FALSE

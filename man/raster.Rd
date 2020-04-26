@@ -50,9 +50,9 @@ For an overview of the functions in the raster package have a look here: \code{\
 \S4method{raster}{missing}(nrows=180, ncols=360, xmn=-180, xmx=180, ymn=-90, ymx=90, 
 		crs, ext, resolution, vals=NULL)
 
-\S4method{raster}{Extent}(x, nrows=10, ncols=10, crs=NA, ...)
+\S4method{raster}{Extent}(x, nrows=10, ncols=10, crs="", ...)
 
-\S4method{raster}{matrix}(x, xmn=0, xmx=1, ymn=0, ymx=1, crs=NA, template=NULL)
+\S4method{raster}{matrix}(x, xmn=0, xmx=1, ymn=0, ymx=1, crs="", template=NULL)
 
 \S4method{raster}{Spatial}(x, origin, ...) 
 

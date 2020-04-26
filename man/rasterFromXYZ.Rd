@@ -10,7 +10,7 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
 }
 
 \usage{
-rasterFromXYZ(xyz, res=c(NA,NA), crs=NA, digits=5)
+rasterFromXYZ(xyz, res=c(NA,NA), crs="", digits=5)
 }
 
 \arguments{
@@ -29,7 +29,7 @@ RasterLayer or RasterBrick
 
 
 \examples{
-r <- raster(nrow=5, ncol=5, xmn=0, xmx=10, ymn=0, ymx=10, crs=NA)
+r <- raster(nrow=5, ncol=5, xmn=0, xmx=10, ymn=0, ymx=10, crs="")
 set.seed(1)
 values(r) <- sample(1:25)
 r[r < 15] <- NA

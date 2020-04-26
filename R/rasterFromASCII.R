@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 
-.rasterFromASCIIFile <- function(filename, offset=6, crs=NA, ...) {
+.rasterFromASCIIFile <- function(filename, offset=6, crs="", ...) {
 	
 	offset <- as.integer(offset)
 	stopifnot(offset > 2)
