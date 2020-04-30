@@ -17,8 +17,8 @@ projectExtent <- function(object, crs) {
 	
 	#methods::validObject(.getCRS((object)))
 	#methods::validObject(.getCRS((crs)))
-	projfrom <-.get_projection(object)
-	projto <-.get_projection(crs)
+	projfrom <- .get_projection(object)
+	projto <- .get_projection(crs)
 		
 #	rs <- res(object)
 #	xmn <- object@extent@xmin - 0.5 * rs[1]
@@ -175,6 +175,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		}
 		to <- extend(to, e)
 	} else {
+	
 		projto <-.get_projection(to)
 		if (is.na(projto)) { 
 			stop("output projection is NA") 

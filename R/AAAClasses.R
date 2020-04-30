@@ -37,19 +37,6 @@ setClass("Extent",
 
 
 
-setClass(".RasterSRS",
-	representation (
-		input = "character",
-		proj4 = "character",
-		wkt = "character"
-	),
-	prototype (	
-		input = "",
-		proj4 = "",
-		wkt = ""
-	)
-)
-
 
 setClass(".Rotation",
 	representation (
