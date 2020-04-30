@@ -113,7 +113,7 @@
 
 	rgdal::GDALcall(transient, "SetGeoTransform", gt)
 	# as.character to ensure NA is character
-	prj <-.get_projection(r)[1]
+	prj <- wkt(r)
 	prj <- ifelse(prj=="", as.character(NA), prj)
 	rgdal::GDALcall(transient, "SetProject", prj) 
 	if (is.null(options)) {

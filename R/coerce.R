@@ -165,7 +165,7 @@ setAs('SpatialGrid', 'BasicRaster',
 	function(from){ 
 		to <- methods::new('BasicRaster')
 		to@extent <- extent(from)
-		crs(to) <- .srs_from_sp(from)
+		crs(to) <- from@proj4string
 		dim(to) <- c(from@grid@cells.dim[2], from@grid@cells.dim[1])	
 		return(to)
 	}
@@ -176,7 +176,7 @@ setAs('SpatialPixels', 'BasicRaster',
 	function(from){ 
 		to <- methods::new('BasicRaster')
 		to@extent <- extent(from)
-		crs(to) <- .srs_from_sp(from)
+		crs(to) <- from@proj4string
 		dim(to) <- c(from@grid@cells.dim[2], from@grid@cells.dim[1])	
 		return(to)
 	}

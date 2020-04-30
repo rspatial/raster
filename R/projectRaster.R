@@ -151,7 +151,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		}
 		projto <- .get_projection(crs)
 		#compareCRS(projfrom, projto)
-		if (projto == projfrom) return(from)
+		if (.oldproj4string(projto) == .oldproj4string(projfrom)) return(from)
 		to <- projectExtent(from, projto)
 		if (missing(res)) {
 			res <- .computeRes(from, projto)

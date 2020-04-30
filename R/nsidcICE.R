@@ -50,7 +50,7 @@
         dat[r100] <- NA
        ## dat[r0] <- NA
 ##      }
-    r <- raster(t(matrix(dat, dims[1])), xmn=ext[1], xmx=ext[2], ymn=ext[3], ymx=ext[4], crs = prj)
+    r <- raster(t(matrix(dat, dims[1])), xmn=ext[1], xmx=ext[2], ymn=ext[3], ymx=ext[4], crs = CRS(prj))
 
     setZ(r, dts, name = "time")
 

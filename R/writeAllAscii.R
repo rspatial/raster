@@ -34,11 +34,9 @@
 	utils::write.table(v, x@file@name, append = TRUE, quote = FALSE, sep = " ", eol = "\n", dec = ".", row.names = FALSE, col.names = FALSE)
 
 	if (prj) {
-		crs <-.get_projection(x)
+		crs <- .get_projection(x)
 		if (!is.na(crs)) {
-			if (.requireRgdal(FALSE)) { 
-				writeLines(rgdal::showWKT(crs), extension(filename, 'prj') )
-			}
+			writeLines(wkt(x), extension(filename, 'prj') )
 		}
 	}	
 	

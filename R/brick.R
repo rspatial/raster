@@ -37,7 +37,7 @@ setMethod('brick', signature(x='RasterLayer'),
 		}
 		
 		if (!values) {
-			b <- brick(x@extent, nrows=nrow(x), ncols=ncol(x), crs=projection(x), nl=nl)
+			b <- brick(x@extent, nrows=nrow(x), ncols=ncol(x), crs=x@crs, nl=nl)
 			if (rotated(x)) {
 				b@rotated <- TRUE
 				b@rotation <- x@rotation
@@ -67,7 +67,7 @@ setMethod('brick', signature(x='RasterStack'),
 	function(x, values=TRUE, nl, filename='', ...){
 	
 		e <- x@extent
-		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=projection(x)[1])
+		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=x@crs)
 		if (rotated(x)) {
 			b@rotated <- TRUE
 			b@rotation <- x@rotation
@@ -133,7 +133,7 @@ setMethod('brick', signature(x='RasterBrick'),
 			nl <- nlayers(x) 
 		}
 		e <- x@extent
-		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=projection(x))
+		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=x@crs)
 		b@data@nlayers <- as.integer(nl)
 		b@data@min <- rep(Inf, nl)
 		b@data@max <- rep(-Inf, nl)
@@ -167,7 +167,7 @@ setMethod('brick', signature(x='SpatialGrid'),
 	function(x){
 		b <- brick()
 		extent(b) <- extent(x)
-		crs(b) <- .srs_from_sp(x)
+		crs(b) <- x@proj4string
 		dim(b) <- c(x@grid@cells.dim[2], x@grid@cells.dim[1])	
 				
 		if (class(x) == 'SpatialGridDataFrame') {

@@ -69,9 +69,7 @@ function(x, filename, options=NULL, format, prj=FALSE, ...) {
 	if (prj) {
 		crs <-.get_projection(x)
 		if (!is.na(crs)) {
-			if (.requireRgdal(FALSE)) { 
-				writeLines(rgdal::showWKT(crs), extension(filename, "prj") )
-			}
+			writeLines(wkt(x), extension(filename, "prj") )
 		}
 	}	
 	

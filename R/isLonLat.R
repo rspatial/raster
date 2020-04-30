@@ -72,7 +72,7 @@ setMethod('isLonLat', signature(x='BasicRaster'),
 #author:
 # ...
 	function(x, ...){
-		p4str <-.get_projection(x)
+		p4str <- .oldproj4string(x)
 		if (is.na(p4str) || nchar(p4str) == 0) {
 			return(FALSE)
 		} 

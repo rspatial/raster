@@ -7,7 +7,7 @@
 .writeHdrPRJ <- function(x, ESRI=TRUE) {
 	if (.requireRgdal()) {
 
-		p4s <- try(	rgdal::showWKT(projection(x), file = NULL, morphToESRI = ESRI) )
+		p4s <- wkt(x)
 		if (! inherits(p4s, "try-error")) {
 			prjfile <- filename(x)
 			extension(prjfile) <- '.prj'

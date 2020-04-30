@@ -94,6 +94,7 @@ if (!isGeneric("writeRaster")) {setGeneric("writeRaster", function(x, filename, 
 if (!isGeneric("writeStart")) { setGeneric("writeStart", function(x, filename, ...)	standardGeneric("writeStart"))}
 if (!isGeneric("writeStop")) { setGeneric("writeStop", function(x)	standardGeneric("writeStop"))}
 if (!isGeneric("writeValues")) { setGeneric("writeValues", function(x, v, ...) standardGeneric("writeValues")) }
+if (!isGeneric("wkt")) { setGeneric("wkt", function(obj) standardGeneric("wkt")) }
 
 
 

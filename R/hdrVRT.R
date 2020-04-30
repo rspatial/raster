@@ -46,7 +46,7 @@
 	if (! x@file@toptobottom) { rotation <- 180 } else { rotation <- 0 }
 	e <- x@extent
 	r <- res(x)
-	prj <-.get_projection(x)
+	prj <- .oldproj4string(x)
 
 	f <- file(fname, "w") 
 	cat('<VRTDataset rasterXSize="', x@ncols, '" rasterYSize="', x@nrows, '">\n' , sep = "", file = f)

@@ -47,9 +47,9 @@
 		cat("map info = {projection, 1, 1,", xmin(r),", ", ymax(r),", ", xres(r),", ", yres(r), "}\n", file = thefile)
 	}
 	if (.requireRgdal(FALSE)) {
-		cat("coordinate system string = {", rgdal::showWKT(projection(r)), "}\n", file = thefile, sep="")
+		cat("coordinate system string = {", wkt(r), "}\n", file = thefile, sep="")
 	} else {
-		cat("projection info =",.get_projection(r), "\n", file = thefile) 
+		cat("projection info =", .oldproj4string(r), "\n", file = thefile) 
 	}
 	cat("z plot range = {", minValue(r),", ", maxValue(r), "}\n", file = thefile) 
 	

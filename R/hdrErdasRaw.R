@@ -41,7 +41,7 @@
 	cat("----------------------------------------------------------------\n", file = thefile)
 	cat("CREATOR=R package:raster\n", file = thefile)
 	cat("CREATED=", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n", file = thefile)
-	cat("Projection=",.get_projection(raster), "\n", file = thefile)
+	cat("Projection=", .oldproj4string(raster), "\n", file = thefile)
 	cat("MinValue=",  minValue(raster), "\n", file = thefile)
 	cat("MaxValue=",  maxValue(raster), "\n", file = thefile)
 	close(thefile)	
