@@ -69,9 +69,9 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 	
 		requireNamespace("rgeos")
 
-		if (! identical(proj4string(x), proj4string(y)) ) {
+		if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 			warning('non identical CRS')
-			crs(y) <- proj4string(x)
+			y@proj4string <- x@proj4string
 		}
 		
 		if (!.hasSlot(x, "data")) {
@@ -122,9 +122,9 @@ setMethod(erase, signature(x='SpatialLines', y='SpatialPolygons'),
     function(x, y, ...){ 
 	
 		requireNamespace("rgeos")
-		if (! identical(proj4string(x), proj4string(y)) ) {
+		if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 			warning('non identical CRS')
-			crs(y) <- proj4string(x)
+			y@proj4string <- x@proj4string
 		}
 		
 		if (!.hasSlot(x, 'data')) {

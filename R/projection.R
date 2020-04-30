@@ -4,6 +4,38 @@
 # Licence GPL v3
 
 
+.getCRS <- function(x) {
+	srs <- c(x@srs, "")
+	.makeCRS(srs[1], srs[2])
+}
+
+.srs_from_sp <- function(x) {
+	crs <- x@proj4string
+	pj <- crs@projargs
+	wk <- wkt(crs)
+	return(c(pj, wk))
+}
+
+.oldproj4string <- function(x) {
+	crs <- x@proj4string
+	crs@projargs
+}
+
+.makeCRS <- function(user="", prj="", wkt="") {
+	if (wkt != "") {
+		CRS(SRS_string=wkt)
+	} else if (user !="") {
+		if (substr(trim(user), 1 ,1) == "+") {
+			CRS(user)
+		} else {
+			CRS(SRS_string=user)
+		}
+	} else {
+		CRS(prj)
+	}
+}
+
+
 
 setMethod("crs", signature("ANY"), 
 	function(x, asText=FALSE, ...) {
@@ -23,27 +55,15 @@ setMethod("crs<-", signature("BasicRaster", "ANY"),
 setMethod("crs<-", signature("Spatial", "ANY"), 
 	function(x, ..., value) {
 
-		if (inherits(value, "CRS")) {
-			crs <- value
-		} else {	
-			crs <- .newCRS(value)
+		if (!inherits(value, "CRS")) {
+			value <- .makeCRS(value)
 		}	
 	
 		w <- getOption("warn")
 		on.exit(options("warn" = w))
 		options("warn"=-1)
 
-		ll_warn <- get_ll_warn()
-		ll_warn <- TRUE
-		#ReplCRS <- get_ReplCRS_warn()
-		#ll_TOL <- get_ll_TOL()
-
-		value <- as.character(value)
-		proj4string(x) <- value
-
-		set_ll_warn(ll_warn)
-		#set_ReplCRS_warn(ReplCRS)	
-		#set_ll_TOL(ll_TOL)
+		x@proj4string <- value
 		x
 	}
 )
@@ -74,7 +94,7 @@ setMethod("as.character", signature(x="CRS"),
 		}
 	} 
 	if (inherits(x, "Spatial")) {
-		proj4string(x) <- CRS(value[1])
+		x@proj4string <- CRS(value[1])
 	} else {
 		x@srs <- value
 		#x@crs <- CRS(value)
@@ -102,7 +122,7 @@ setMethod("as.character", signature(x="CRS"),
 			}
 		}
 	} else if (methods::extends(class(x), "Spatial")) { 
-		x <- proj4string(x)
+		x <- .oldproj4string(x)
 	} else if (inherits(x, c("sf", "sfc"))) {
 		if (!requireNamespace("sf", quietly = TRUE)) {
 			stop("sf required: install that first") 
@@ -143,15 +163,16 @@ projection <- function(x, asText=TRUE) {
 			x <- x@crs 
 		}
 	} else if (methods::extends(class(x), "Spatial")) { 
-		x <- proj4string(x)
+		x <- x@proj4string
 	} else if (inherits(x, c("sf", "sfc"))) {
 		if (!requireNamespace("sf", quietly = TRUE))
 			stop("sf required: install that first") # nocov
 		crs = sf::st_crs(x)
-		if (asText)
+		if (asText) {
 			return(crs$proj4string) # extracts proj4string from WKT
-		else
+		} else {
 			return(as(crs, "CRS")) # passes on WKT comment
+		}
 	} else if (class(x) == "character") { 
 		if (asText) {
 			return(x)
@@ -188,7 +209,7 @@ setMethod("proj4string", signature("Raster"),
 setMethod("proj4string<-", signature("Raster"), 
 # redundant, for compatibility with sp
 	function(obj, value) {
-		projection(obj) <- value
+		crs(obj) <- value
 		obj
 	}
 )

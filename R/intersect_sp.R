@@ -23,9 +23,9 @@ function(x, y) {
 	x <- spChFIDs(x, as.character(1:length(x)))
 	y <- spChFIDs(y, as.character(1:length(y)))
 		
-	if (! identical(proj4string(x), proj4string(y)) ) {
+	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 		warning('non identical CRS')
-		crs(y) <- proj4string(x)
+		y@proj4string <- x@proj4string
 	}	
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -116,9 +116,9 @@ function(x, y) {
 
 	requireNamespace("rgeos")
 		
-	if (! identical(proj4string(x), proj4string(y)) ) {
+	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 		warning('non identical CRS')
-		proj4string(y) <- proj4string(x)
+		y@proj4string <- x@proj4string
 	}	
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -140,9 +140,9 @@ function(x, y) {
 	x <- spChFIDs(x, as.character(1:length(x)))
 	y <- spChFIDs(y, as.character(1:length(y)))
 		
-	if (! identical(proj4string(x), proj4string(y)) ) {
+	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 		warning('non identical CRS')
-		crs(y) <- proj4string(x)
+		y@proj4string <- x@proj4string
 	}	
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -212,9 +212,9 @@ setMethod('intersect', signature(x='SpatialLines', y='SpatialLines'),
 function(x, y) {
 	stopifnot(requireNamespace("rgeos"))
 
-	if (! identical(proj4string(x), proj4string(y)) ) {
+	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 		warning('non identical CRS')
-		crs(y) <- proj4string(x)
+		y@proj4string <- x@proj4string
 	} 
 	
 	
@@ -227,7 +227,7 @@ function(x, y) {
 	if (! any(c(xdata, ydata))) {
 		z <- rgeos::gIntersection(x, y, byid=TRUE)
 		if (is.null(z)) {
-			z <- SpatialPoints(cbind(0,0), proj4string=crs(x))
+			z <- SpatialPoints(cbind(0,0), proj4string=x@proj4string)
 			z <- SpatialPointsDataFrame(z,data.frame(x=0, y=0))
 			return( z[-1, ] )
 		}
@@ -242,7 +242,7 @@ function(x, y) {
 	z <- rgeos::gIntersection(y, x, byid=TRUE)
 	
 	if (is.null(z)) {
-		z <- SpatialPoints(cbind(0,0), proj4string=crs(x))
+		z <- SpatialPoints(cbind(0,0), proj4string=x@proj4string)
 		return( z[-1, ] )
 	}
 	
@@ -279,9 +279,9 @@ function(x, y) {
 	
 	stopifnot(requireNamespace("rgeos"))
 	
-	if (! identical(proj4string(x), proj4string(y)) ) {
+	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 		warning('non identical CRS')
-		crs(y) <- proj4string(x)
+		y@proj4string <- x@proj4string
 	} 
 	
 	i <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -300,9 +300,9 @@ function(x, y) {
 	
 	if (inherits(y, 'SpatialPolygons')) {
 	
-		if (! identical(proj4string(x), proj4string(y)) ) {
+		if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 			warning('non identical CRS')
-			crs(y) <- proj4string(x)
+			y@proj4string <- x@proj4string
 		} 
 
 		stopifnot(requireNamespace("rgeos"))

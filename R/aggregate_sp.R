@@ -101,7 +101,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 				nsubobs <- length(x@polygons[[i]]@Polygons)
 				p <- c(p, lapply(1:nsubobs, function(j) x@polygons[[i]]@Polygons[[j]]))
 			}
-			x <- SpatialPolygons(list(Polygons(p, '1')), proj4string=proj4string(x))
+			x <- SpatialPolygons(list(Polygons(p, '1')), proj4string=.oldproj4string(x))
 		}
 		#if (hd) {
 		#	x <- SpatialPolygonsDataFrame(x, data=data.frame(ID=1))
@@ -115,7 +115,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		v <- .getVars(by, cn)
 		
 		dat <- dat[,v, drop=FALSE]
-		crs <- proj4string(x)
+		crs <- x@proj4string
 		dc <- apply(dat, 1, function(y) paste(as.character(y), collapse='_'))
 		dc <- data.frame(oid=1:length(dc), v=as.integer(as.factor(dc)))
 		id <- dc[!duplicated(dc$v), , drop=FALSE]
@@ -163,7 +163,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		}
 		
 		x <- do.call(rbind, x)
-		crs(x) <- crs
+		x@proj4string <- crs
 		rownames(dat) <- NULL
 		SpatialPolygonsDataFrame(x, dat, FALSE)
 	}
@@ -203,7 +203,7 @@ function(x, by=NULL, sums=NULL, ...) {
 			nsubobs <- length(x@lines[[i]]@Lines)
 			p <- c(p, lapply(1:nsubobs, function(j) x@lines[[i]]@Lines[[j]]))
 		}
-		x <- SpatialLines(list(Lines(p, '1')), proj4string=proj4string(x))
+		x <- SpatialLines(list(Lines(p, '1')), proj4string=.oldproj4string(x))
 		return(x)
 		
 	} else {
@@ -213,7 +213,7 @@ function(x, by=NULL, sums=NULL, ...) {
 		v <- .getVars(by, cn)
 		
 		dat <- dat[,v, drop=FALSE]
-		crs <- proj4string(x)
+		crs <- x@proj4string
 		dc <- apply(dat, 1, function(y) paste(as.character(y), collapse='_'))
 		dc <- data.frame(oid=1:length(dc), v=as.integer(as.factor(dc)))
 		id <- dc[!duplicated(dc$v), , drop=FALSE]

@@ -17,7 +17,7 @@
 		out <- rbind(out, gg)
 	}
 	out <- as(data.frame(out), 'SpatialPolygons')
-	crs(out) <- proj4string(p)
+	out@proj4string <- p@proj4string
 	if (.hasSlot(p, 'data')) {
 		out <- SpatialPolygonsDataFrame(out, p@data)
 	}

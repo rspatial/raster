@@ -15,8 +15,8 @@ projectExtent <- function(object, crs) {
 	dm[2] <- max(10, dm[2])
 	dim(object) <- dm
 	
-	methods::validObject(CRS(.get_projection(object)))
-	methods::validObject(CRS(.get_projection(crs)))
+	#methods::validObject(.getCRS((object)))
+	#methods::validObject(.getCRS((crs)))
 	projfrom <-.get_projection(object)
 	projto <-.get_projection(crs)
 		
@@ -138,7 +138,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 
 	.requireRgdal()
 
-	methods::validObject( CRS(.get_projection(from) ))
+	methods::validObject( .getCRS(from) )
 	projfrom <-.get_projection(from)
 	if (is.na(projfrom)) { 
 		stop("input projection is NA") 
@@ -149,7 +149,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		if (missing(crs)) {
 			stop("'crs' argument is missing.")
 		}
-		projto <-.get_projection(crs)
+		projto <- .get_projection(crs)
 		#compareCRS(projfrom, projto)
 		if (projto == projfrom) return(from)
 		to <- projectExtent(from, projto)
@@ -196,7 +196,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 	}
 	
 	methods::validObject(to)
-	methods::validObject(CRS(.get_projection(to)))
+	methods::validObject(.getCRS((to)))
 
 	#if (identical(projfrom, projto)) {
 	#	warning('projections of "from" and "to" are the same')

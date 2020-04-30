@@ -13,9 +13,9 @@ function(x, y) {
 	x <- spChFIDs(x, as.character(1:length(x)))
 	y <- spChFIDs(y, as.character(1:length(y)))
 
-	if (! identical(proj4string(x), proj4string(y)) ) {
+	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
 		warning('non identical CRS')
-		crs(y) <- proj4string(x)
+		y@proj4string <- x@proj4string
 	}
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)

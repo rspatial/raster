@@ -242,9 +242,9 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 
 		if (sp) {
 			if (hv) {
-				m <- SpatialPointsDataFrame(xyFromCell(x, cell), data.frame(m), proj4string=crs(x))
+				m <- SpatialPointsDataFrame(xyFromCell(x, cell), data.frame(m), proj4string=.getCRS(x))
 			} else {
-				m <- SpatialPoints(xyFromCell(x, cell), proj4string=crs(x))			
+				m <- SpatialPoints(xyFromCell(x, cell), proj4string=.getCRS(x))			
 			}
 		}
 		

@@ -40,7 +40,7 @@ setMethod ('show' , 'RasterLayer',
 		cat('dimensions : ', nrow(object), ', ', ncol(object), ', ', ncell(object),'  (nrow, ncol, ncell)\n', sep="" ) 
 		cat('resolution : ' , xres(object), ', ', yres(object), '  (x, y)\n', sep="")
 		cat('extent     : ' , object@extent@xmin, ', ', object@extent@xmax, ', ', object@extent@ymin, ', ', object@extent@ymax, '  (xmin, xmax, ymin, ymax)\n', sep="")
-		cat('crs        :' ,.get_projection(object), '\n')
+		cat('crs        :' , .get_projection(object)[1], '\n')
 		
 
 		if (hasValues(object)) {
