@@ -3,7 +3,7 @@ Type: Package
 Title: Geographic Data Analysis and Modeling
 Version: 3.2-1
 Date: 2020-04-26
-Depends: sp (>= 1.4.2), R (>= 3.0.0)
+Depends: sp (>= 1.4.2), R (>= 3.5.0)
 Suggests: rgdal (>= 1.5-8), rgeos (>= 0.3-8), ncdf4, igraph, tcltk, parallel, rasterVis, MASS, sf, testthat
 LinkingTo: Rcpp
 Imports: Rcpp, methods

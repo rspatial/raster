@@ -192,7 +192,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 					if (nl > 1 & !weights) {
 						res[[d$value$tag]] <- apply(d$value$value, 2, fun, na.rm=na.rm)							
 					} else { 
-						res[[d$value$tag]] <- fun(d$value$value)
+						res[[d$value$tag]] <- fun(d$value$value, na.rm=na.rm)
 					}
 				}
 			} else {
