@@ -174,9 +174,10 @@
 		r@rotation <- rot
 	}	
 
-	projection(r) <- .getProj(attr(gdalinfo, 'projection'), crs)
+	crs <- .getProj(attr(gdalinfo, 'projection'), crs)
+	r@crs <- CRS(crs, FALSE)  # to avoid warnings about other than WGS84 datums or ellipsoids  
 	
-#   	r@history[[1]] <- mdata
+#  	r@history[[1]] <- mdata
 
 		
 	bi <- attr(gdalinfo, 'df')
