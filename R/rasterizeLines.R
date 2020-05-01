@@ -199,7 +199,7 @@
 	
 	rstr <- raster(x)
 	if (!is.na(projection(lns))) {
-		projection(rstr) <-.get_projection(lns)
+		projection(rstr) <-.getCRS(lns)
 	}
 	
 	if (inherits(lns, 'SpatialPolygons')) {

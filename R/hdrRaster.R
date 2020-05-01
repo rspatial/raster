@@ -18,7 +18,7 @@
 	cat("ymin=", as.character(ymin(x)), "\n", file = thefile, sep='')
 	cat("xmax=", as.character(xmax(x)), "\n", file = thefile, sep='')
 	cat("ymax=", as.character(ymax(x)), "\n", file = thefile, sep='')
-	cat("projection=", .oldproj4string(x), "\n", file = thefile, sep='')
+	cat("projection=", proj4string(x), "\n", file = thefile, sep='')
 
 	cat("[data]", "\n", file = thefile, sep='')
 	cat("datatype=",  x@file@datanotation, "\n", file = thefile, sep='')

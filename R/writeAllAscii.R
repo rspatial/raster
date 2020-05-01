@@ -34,7 +34,7 @@
 	utils::write.table(v, x@file@name, append = TRUE, quote = FALSE, sep = " ", eol = "\n", dec = ".", row.names = FALSE, col.names = FALSE)
 
 	if (prj) {
-		crs <- .get_projection(x)
+		crs <- .getCRS(x)
 		if (!is.na(crs)) {
 			writeLines(wkt(x), extension(filename, 'prj') )
 		}

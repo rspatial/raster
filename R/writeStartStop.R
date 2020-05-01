@@ -31,7 +31,7 @@ function(x, filename, options=NULL, format, prj=FALSE, ...) {
 	}		
 	
 	if (prj) {
-		crs <-.get_projection(x)
+		crs <-.getCRS(x)
 		if (crs != "") {
 			writeLines(wkt(x), extension(filename, "prj") )
 		}
@@ -65,7 +65,7 @@ function(x, filename, options=NULL, format, prj=FALSE, ...) {
 	}
 	
 	if (prj) {
-		crs <-.get_projection(x)
+		crs <-.getCRS(x)
 		if (!is.na(crs)) {
 			writeLines(wkt(x), extension(filename, "prj") )
 		}

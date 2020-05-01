@@ -42,7 +42,7 @@ setMethod('rotate', signature(x='Raster'),
 		out@z <- x@z
 		
 		# suggested by Mike Sumner:
-		p <-.get_projection(out)	
+		p <- proj4string(out)	
 		if (length(grep("\\+over", p)) > 0) {
 			projection(out) <- gsub("[[:space:]]\\+over", "", p)
 		}

@@ -23,7 +23,7 @@ function(x, y) {
 	x <- spChFIDs(x, as.character(1:length(x)))
 	y <- spChFIDs(y, as.character(1:length(y)))
 		
-	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
+	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
 		y@proj4string <- x@proj4string
 	}	
@@ -116,7 +116,7 @@ function(x, y) {
 
 	requireNamespace("rgeos")
 		
-	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
+	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
 		y@proj4string <- x@proj4string
 	}	
@@ -140,7 +140,7 @@ function(x, y) {
 	x <- spChFIDs(x, as.character(1:length(x)))
 	y <- spChFIDs(y, as.character(1:length(y)))
 		
-	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
+	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
 		y@proj4string <- x@proj4string
 	}	
@@ -212,7 +212,7 @@ setMethod('intersect', signature(x='SpatialLines', y='SpatialLines'),
 function(x, y) {
 	stopifnot(requireNamespace("rgeos"))
 
-	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
+	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
 		y@proj4string <- x@proj4string
 	} 
@@ -279,7 +279,7 @@ function(x, y) {
 	
 	stopifnot(requireNamespace("rgeos"))
 	
-	if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
+	if (! identical(proj4string(x), proj4string(y)) ) {
 		warning('non identical CRS')
 		y@proj4string <- x@proj4string
 	} 
@@ -300,7 +300,7 @@ function(x, y) {
 	
 	if (inherits(y, 'SpatialPolygons')) {
 	
-		if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
+		if (! identical(proj4string(x), proj4string(y)) ) {
 			warning('non identical CRS')
 			y@proj4string <- x@proj4string
 		} 

@@ -15,10 +15,9 @@ projectExtent <- function(object, crs) {
 	dm[1] <- max(10, dm[1])
 	dm[2] <- max(10, dm[2])
 	dim(object) <- dm
-	
+	pfrom <- .getCRS(object)
+	pto <- .getCRS(crs)
 	if (use_proj6) {
-		pfrom <- .get_projection(object)
-		pto <- .get_projection(crs)
 		projfrom <- wkt(pfrom)
 		projto <- wkt(pto)
 		if (is.null(projfrom) || is.null(projto)) {
@@ -27,8 +26,8 @@ projectExtent <- function(object, crs) {
 			projto <- pto
 		}
 	} else {
-		projfrom <- .get_projection(object)
-		projto <- .get_projection(crs)
+		projfrom <- proj4string(pfrom)
+		projto <- proj4string(pto)
 	}
 
 #	rs <- res(object)
@@ -81,7 +80,11 @@ projectExtent <- function(object, crs) {
 	
 	}
 	
-	res <- rgdal::rawTransform( projfrom, projto, nrow(xy), xy[,1], xy[,2], wkt=use_proj6)	
+	if (use_proj6) {
+		res <- rgdal::rawTransform( projfrom, projto, nrow(xy), xy[,1], xy[,2], wkt=use_proj6)	
+	} else {
+		res <- rgdal::rawTransform( projfrom, projto, nrow(xy), xy[,1], xy[,2])		
+	}
 	
 	x <- res[[1]]
 	y <- res[[2]]
@@ -119,11 +122,15 @@ projectExtent <- function(object, crs) {
 	y1 <- y - 0.5 * res[2]
 	y2 <- y + 0.5 * res[2]
 	xy <- cbind(c(x1, x2, x, x), c(y, y, y1, y2))
-	fromcrs <- .get_projection(obj)
+	fromcrs <- .getCRS(obj)
 	if (proj6) {
 		fromcrs <- wkt(fromcrs)
+		pXY <- rgdal::rawTransform(fromcrs, crs, nrow(xy), xy[,1], xy[,2], wkt=proj6)
+	} else {
+		fromcrs <- proj4string(fromcrs)	
+		pXY <- rgdal::rawTransform(fromcrs, crs, nrow(xy), xy[,1], xy[,2])
 	}
-	pXY <- rgdal::rawTransform(fromcrs, crs, nrow(xy), xy[,1], xy[,2], wkt=proj6)
+	
 	pXY <- cbind(pXY[[1]], pXY[[2]])
 	out <- c((pXY[2,1] - pXY[1,1]), (pXY[4,2] - pXY[3,2]))
 	if (any(is.na(out))) {
@@ -142,7 +149,7 @@ projectExtent <- function(object, crs) {
 .getAlignedRaster <- function(x,y) {
 	x <- raster(x)
 	y <- raster(y)
-	p <- projectRaster(x, crs=.get_projection(y))
+	p <- projectRaster(x, crs=.getCRS(y))
 	m <- merge(extent(y), extent(p))
 	rx <- extend(y, m)
 	crop(rx, p)
@@ -154,11 +161,15 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 	.requireRgdal()
 	use_proj6 <- .useproj6()
 
-	projfrom <- .get_projection(from)
+	projfrom <- .getCRS(from)
 	if (is.na(projfrom)) { 
 		stop("input projection is NA") 
 	}
-	if (is.null(wkt(projfrom))) use_proj6 = FALSE
+	if (use_proj6) {
+		if (is.null(wkt(projfrom))) {
+			use_proj6 = FALSE
+		}
+	}
 	
 	lonlat <- isLonLat(projfrom)
 	
@@ -166,22 +177,28 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		if (missing(crs)) {
 			stop("both 'to' and 'crs' arguments are missing.")
 		}
-		projto <- .get_projection(crs)
-		if (is.null(wkt(projto))) {
-			use_proj6 = FALSE
-		}  
+		projto <- .getCRS(crs)
+		if (use_proj6) {
+			if (is.null(wkt(projto))) {
+				use_proj6 = FALSE
+			}
+		}
 		#compareCRS(projfrom, projto)
 		if (use_proj6) {
 			if (rgdal::compare_CRS(projto, projfrom)["strict"]) return(from) 
 			projfrom <- wkt(projfrom)
 		} else {
-			if (.oldproj4string(projto) == .oldproj4string(projfrom)) return(from)
-			projfrom <- .oldproj4string(projfrom)
+			if (proj4string(projto) == proj4string(projfrom)) return(from)
+			projfrom <- proj4string(projfrom)
 		}
 		to <- projectExtent(from, projto)
 		to@crs <- projto
 
-		if (use_proj6) projto <- wkt(projto)
+		if (use_proj6) {
+			projto <- wkt(projto)
+		} else {
+			projto <- proj4string(projto)		
+		}
 		if (missing(res)) {
 			res <- .computeRes(from, projto, use_proj6)
 		}
@@ -204,7 +221,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		to <- extend(to, e)
 	} else {
 	
-		projto <-.get_projection(to)
+		projto <-.getCRS(to)
 		if (is.na(projto)) { 
 			stop("output projection is NA") 
 		} 
@@ -212,8 +229,8 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 			if (rgdal::compare_CRS(projto, projfrom)["strict"]) return(from) 
 			projfrom <- wkt(projfrom)
 		} else {
-			if (.oldproj4string(projto) == .oldproj4string(projfrom)) return(from)
-			projfrom = .oldproj4string(projfrom)
+			if (proj4string(projto) == proj4string(projfrom)) return(from)
+			projfrom = proj4string(projfrom)
 		}
 		
 		e <- extent( projectExtent(from, projto) )
@@ -232,7 +249,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		if (use_proj6) {
 			projto <- wkt(projto)
 		} else {
-			projto <- .oldproj4string(projto)
+			projto <- proj4string(projto)
 		}
 	}
 	
@@ -252,7 +269,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		to <- .getAlignedRaster(to, from)
 	}
 	
-#	pbb <- projectExtent(to,.get_projection(from))
+#	pbb <- projectExtent(to,.getCRS(from))
 #	bb <- intersect(extent(pbb), extent(from))
 #	methods::validObject(bb)
 
@@ -312,7 +329,12 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 			v <- matrix(nrow=length(cells), ncol=nl)
 			if (nrow(xy) > 0) {
 				ci <- match(cellFromXY(to, xy), cells)
-				xy <- rgdal::rawTransform(projto_int, projfrom, nrow(xy), xy[,1], xy[,2], wkt=use_proj6)
+				if (use_proj6) {
+					xy <- rgdal::rawTransform(projto_int, projfrom, nrow(xy), xy[,1], xy[,2], wkt=use_proj6)
+				} else {
+					xy <- rgdal::rawTransform(projto_int, projfrom, nrow(xy), xy[,1], xy[,2])				
+				}
+			
 				xy <- cbind(xy[[1]], xy[[2]])
 				v[ci, ] <- .xyValues(from, xy, method=method)
 			} 
@@ -384,7 +406,11 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 			xy <- coordinates(to) 
 			xy <- subset(xy, xy[,1] > e@xmin & xy[,1] < e@xmax)
 			cells <- cellFromXY(to, xy)
-			xy <- rgdal::rawTransform( projto_int, projfrom, nrow(xy), xy[,1], xy[,2], wkt=use_proj6 )
+			if (use_proj6) {
+				xy <- rgdal::rawTransform( projto_int, projfrom, nrow(xy), xy[,1], xy[,2], wkt=use_proj6 )
+			} else {
+				xy <- rgdal::rawTransform( projto_int, projfrom, nrow(xy), xy[,1], xy[,2])
+			}
 			xy <- cbind(xy[[1]], xy[[2]])
 			to[cells] <- .xyValues(from, xy, method=method)
 			
@@ -404,7 +430,12 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 				xy <- subset(xy, xy[,1] > e@xmin & xy[,1] < e@xmax)
 				if (nrow(xy) > 0) {
 					ci <- match(cellFromXY(to, xy), cells)
-					xy <- rgdal::rawTransform( projto_int, projfrom, nrow(xy), xy[,1], xy[,2], wkt=use_proj6 )
+
+					if (use_proj6) {
+						xy <- rgdal::rawTransform( projto_int, projfrom, nrow(xy), xy[,1], xy[,2], wkt=use_proj6 )
+					} else {
+						xy <- rgdal::rawTransform( projto_int, projfrom, nrow(xy), xy[,1], xy[,2])
+					}
 					xy <- cbind(xy[[1]], xy[[2]])
 					v <- matrix(nrow=length(cells), ncol=nl)
 					v[ci, ] <- .xyValues(from, xy, method=method)

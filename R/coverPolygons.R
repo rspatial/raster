@@ -25,7 +25,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 	
 	haswarned <- FALSE
 	for (y in yy) {
-		if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
+		if (! identical(proj4string(x), proj4string(y)) ) {
 			if (!haswarned) {
 				warning('non identical CRS')
 				haswarned <- TRUE
@@ -52,7 +52,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 
 	haswarned <- FALSE
 	for (y in yy) {
-		if (! identical(.oldproj4string(x), .oldproj4string(y)) ) {
+		if (! identical(proj4string(x), proj4string(y)) ) {
 			if (!haswarned) {
 				warning('non identical CRS')
 				haswarned <- TRUE

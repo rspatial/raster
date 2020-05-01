@@ -4,11 +4,20 @@
 # Licence GPL v3
 
 
-setMethod("wkt", signature(obj="Raster"), 
+# to be removed when released sp has this for CRS
+setMethod("wkt", signature(obj="ANY"), 
 	function(obj) {
-		w <- comment(obj@crs)
+		if (!inherits(obj, "CRS")) {
+			obj <- obj@crs
+		} else if (inherits(obj, c("sf", "sfc"))) {
+			obj <- sf::st_crs(obj)
+			obj <- as(obj, "CRS") # passes on WKT comment
+		}
+		
+		w <- comment(obj)
 		if (is.null(w)) {
-			return (obj@crs@projargs)
+			warning("no wkt comment")
+			return("")
 		} else {
 			return(w)
 		}
@@ -16,11 +25,19 @@ setMethod("wkt", signature(obj="Raster"),
 )
 
 
-.getCRS <- function(x) {
-	#srs <- c(x@srs, "")
-	#.makeCRS(srs[1], srs[2])
-	x@crs
-}
+setMethod("wkt", signature(obj="Raster"), 
+	function(obj) {
+		w <- comment(obj@crs)
+		if (is.null(w)) {
+			warning("no wkt comment")
+			return("")
+		} else {
+			return(w)
+		}
+	}
+)
+
+
 
 .srs_from_sp <- function(x) {
 	crs <- x@proj4string
@@ -30,22 +47,13 @@ setMethod("wkt", signature(obj="Raster"),
 }
 
 
-.oldproj4string <- function(x) {
-	if (inherits(x, "Spatial")) {
-		crs <- x@proj4string
-	} else if (inherits(x, "CRS")) {
-		crs <- x
-	} else if (is.character(x)) {
-		crs <- CRS(x)
-	} else {
-		crs <- x@crs
-	}
-	crs@projargs
-}
-
 .makeCRS <- function(user="", prj="", wkt="") {
 	if (wkt != "") {
-		CRS(SRS_string=wkt)
+		if (prj != "") {
+			CRS(prj, SRS_string=wkt)
+		} else {
+			CRS(SRS_string=wkt)		
+		}
 	} else if (user !="") {
 		if (substr(trim(user), 1 ,1) == "+") {
 			CRS(user)
@@ -57,6 +65,33 @@ setMethod("wkt", signature(obj="Raster"),
 	}
 }
 
+
+.getCRS <- function(x) {
+	if (is.null(x)) {
+		x <- CRS()
+	} else if (methods::extends(class(x), "BasicRaster")) { 
+		x <- x@crs
+	} else if (methods::extends(class(x), "Spatial")) { 
+		x <- x@proj4string
+	} else if (inherits(x, c("sf", "sfc"))) {
+		x <- sf::st_crs(x)
+		x <- as(x, "CRS") # passes on WKT comment
+	} else if (inherits(x, "SpatRaster")) { 
+		crs <- crs(x)
+		x <- .makeCRS(x[1], x[2])
+	} else if (inherits(x, "SpatVector")) { 
+		crs <- crs(x)
+		x <- .makeCRS(x[1], x[2])
+	} else if (is.character(x)) {
+		x <- CRS(x)
+	}
+
+	if (is.na(x)) {
+		x <- CRS()
+	}	
+	
+	x
+}
 
 
 setMethod("crs", signature("ANY"), 
@@ -97,15 +132,9 @@ setMethod("is.na", signature(x="CRS"),
 )
 
 
-setMethod("as.character", signature(x="CRS"), 
-	function(x, ...) {
-		x@projargs
-	}
-)
-
 "projection<-" <- function(x, value) {
 
-	value <- .get_projection(value)
+	value <- .getCRS(value)
 	
 	if (inherits(x, "RasterStack")) {
 		if (nlayers(x) > 0) {
@@ -122,35 +151,6 @@ setMethod("as.character", signature(x="CRS"),
 		#x@crs <- CRS(value)
 	}
 	return(x)
-}
-
-
-.get_projection <- function(x, ...) {
-
-	if (is.null(x)) {
-		x <- CRS()
-	} else if (methods::extends(class(x), "BasicRaster")) { 
-		x <- x@crs
-	} else if (methods::extends(class(x), "Spatial")) { 
-		x <- x@proj4string
-	} else if (inherits(x, c("sf", "sfc"))) {
-		x <- sf::st_crs(x)
-		x <- as(x, "CRS") # passes on WKT comment
-	} else if (inherits(x, "SpatRaster")) { 
-		crs <- crs(x)
-		x <- .makeCRS(x[1], x[2])
-	} else if (inherits(x, "SpatVector")) { 
-		crs <- crs(x)
-		x <- .makeCRS(x[1], x[2])
-	} else if (is.character(x)) {
-		x <- CRS(x)
-	}
-
-	if (is.na(x)) {
-		x <- CRS()
-	}	
-	
-	x
 }
 
 
@@ -193,16 +193,28 @@ projection <- function(x, asText=TRUE) {
 }
 
 
+
+
 setMethod("proj4string", signature("Raster"), 
-# redundant, for compatibility with sp
 	function(obj) {
-		projection(obj)
+		obj@crs@projargs
+	}
+)	
+
+setMethod("as.character", signature("CRS"), 
+	function(x, ...) {
+		x@projargs
 	}
 )
 
+setMethod("proj4string", signature("CRS"), 
+	function(obj) {
+		obj@projargs
+	}
+)	
+
 
 setMethod("proj4string<-", signature("Raster"), 
-# redundant, for compatibility with sp
 	function(obj, value) {
 		crs(obj) <- value
 		obj

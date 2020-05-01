@@ -7,9 +7,9 @@
 setMethod('extract', signature(x='Raster', y='SpatialLines'), 
 function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, factors=FALSE, along=FALSE, sp=FALSE, ...){ 
 
-	#px <-.get_projection(x, asText=FALSE)
-	px <-.get_projection(x)
-	comp <- compareCRS(px,.get_projection(y), unknown=TRUE)
+	#px <-.getCRS(x, asText=FALSE)
+	px <-.getCRS(x)
+	comp <- compareCRS(px,.getCRS(y), unknown=TRUE)
 	if (!comp) {
 		.requireRgdal()
 		warning('Transforming SpatialLines to the CRS of the Raster object')

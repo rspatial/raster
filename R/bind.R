@@ -102,14 +102,14 @@ function(x, y, ..., keepnames=FALSE) {
 
 		x <- list(x, y, ...)
 
-		#p <- sapply(x, .oldproj4string)
+		#p <- sapply(x, proj4string)
 		#if (!isTRUE(all(p==p[1]))) { }
 		haswarned <- FALSE
-		projx <- .oldproj4string(x[[1]])
+		projx <- proj4string(x[[1]])
 		for (i in 2:length(x)) {
-			if (is.na(.oldproj4string(x[[i]]))) {
+			if (is.na(proj4string(x[[i]]))) {
 				x[[i]]@proj4string <- x[[1]]@proj4string			
-			} else if (! identical(projx, .oldproj4string(x[[i]])) ) {
+			} else if (! identical(projx, proj4string(x[[i]])) ) {
 				if (!haswarned) {
 					warning('non identical CRS')
 					haswarned <- TRUE
@@ -195,11 +195,11 @@ setMethod('bind', signature(x='SpatialLines', y='SpatialLines'),
 		x <- list(x, y, ...)
 
 		haswarned <- FALSE
-		projx <- .oldproj4string(x[[1]])
+		projx <- proj4string(x[[1]])
 		for (i in 2:length(x)) {
-			if (is.na(.oldproj4string(x[[i]]))) {
+			if (is.na(proj4string(x[[i]]))) {
 				x[[i]]@proj4string <- x[[1]]@proj4string			
-			} else if (! identical(projx, .oldproj4string(x[[i]])) ) {
+			} else if (! identical(projx, proj4string(x[[i]])) ) {
 				if (!haswarned) {
 					warning('non identical CRS')
 					haswarned <- TRUE

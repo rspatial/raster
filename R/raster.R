@@ -18,7 +18,7 @@ setMethod('raster', signature(x='missing'),
 				crs <- CRS(as.character(NA), doCheckCRSArgs=FALSE)
 			}
 		} else {
-			crs <- .get_projection(crs)
+			crs <- .getCRS(crs)
 		}
 		if (missing(resolution)) {
 			nrows <- as.integer(max(1, round(nrows)))
@@ -71,7 +71,7 @@ setMethod('raster', signature(x='list'),
 				crs <- CRS(as.character(NA))
 			}
 		} else {
-			crs <- .get_projection(crs)
+			crs <- .getCRS(crs)
 		}
 		x <- t(x$z)
 		x <- x[nrow(x):1, ]
@@ -84,7 +84,7 @@ setMethod('raster', signature(x='list'),
 
 setMethod('raster', signature(x='matrix'), 
 	function(x, xmn=0, xmx=1, ymn=0, ymx=1, crs="", template=NULL) {
-		crs <- .get_projection(crs)
+		crs <- .getCRS(crs)
 		if (!is.null(template)) {
 			if (inherits(template, 'Extent')) {
 				r <- raster(template, crs=crs)
@@ -139,7 +139,7 @@ setMethod('raster', signature(x='character'),
 
 setMethod('raster', signature(x='BasicRaster'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.get_projection(x))
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.getCRS(x))
 		if (rotated(x)) {
 			r@rotated <- TRUE
 			r@rotation <- x@rotation
@@ -150,7 +150,7 @@ setMethod('raster', signature(x='BasicRaster'),
 
 setMethod('raster', signature(x='RasterLayer'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.get_projection(x))
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.getCRS(x))
 		r@rotated <- x@rotated
 		r@rotation <- x@rotation
 		r@file@blockrows <- x@file@blockrows
@@ -161,7 +161,7 @@ setMethod('raster', signature(x='RasterLayer'),
 
 setMethod('raster', signature(x='RasterLayerSparse'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.get_projection(x))
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.getCRS(x))
 		if (length(stats::na.omit(x@data@values)) > 0) {
 			v <- rep(NA, ncell(r))
 			v[x@index] <- x@data@values
@@ -194,7 +194,7 @@ setMethod('raster', signature(x='RasterStack'),
 		} else {
 			r <- raster(extent(x))
 			dim(r) <- c(nrow(x), ncol(x))
-			projection(r) <-.get_projection(x)
+			projection(r) <-.getCRS(x)
 		}
 		extent(r) <- extent(x) # perhaps it was changed by user and different on disk
 		if (rotated(x@layers[[1]])) {
@@ -231,7 +231,7 @@ setMethod('raster', signature(x='RasterBrick'),
 				# better raster(filename(x), band=dindex)  ?
 				# with zvar for ncdf files?
 				
-				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.get_projection(x))	
+				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.getCRS(x))	
 				r@file <- x@file
 
 				r@file@blockrows <- x@file@blockrows
@@ -271,7 +271,7 @@ setMethod('raster', signature(x='RasterBrick'),
 				
 			} else {
 			
-				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.get_projection(x))	
+				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.getCRS(x))	
 				if ( inMemory(x) ) {
 					if ( dindex != layer ) { warning(paste("layer was changed to", dindex)) }
 					r <- setValues(r, x@data@values[,dindex])
@@ -285,7 +285,7 @@ setMethod('raster', signature(x='RasterBrick'),
 			}
 			
 		} else {
-			r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.get_projection(x))	
+			r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.getCRS(x))	
 		}
 
 		if (rotated(x)) {
@@ -300,7 +300,7 @@ setMethod('raster', signature(x='RasterBrick'),
 
 setMethod('raster', signature(x='Extent'), 
 	function(x, nrows=10, ncols=10, crs="", ...) {
-		crs <- .get_projection(crs)
+		crs <- .getCRS(crs)
 		raster(xmn=x@xmin, xmx=x@xmax, ymn=x@ymin, ymx=x@ymax, ncols=ncols, nrows=nrows, crs=crs, ...)
 	}
 )
@@ -317,7 +317,7 @@ setMethod('raster', signature(x='sf'),
 setMethod('raster', signature(x='Spatial'), 
 	function(x, origin, ...){
 		r <- raster(extent(x), ...)
-		crs(r) <- .get_projection(x)
+		crs(r) <- .getCRS(x)
 		if (!missing(origin)) {
 			origin(r) <- origin
 			r <- extend(r, 1)
@@ -331,7 +331,7 @@ setMethod('raster', signature(x='Spatial'),
 setMethod('raster', signature(x='SpatialGrid'), 
 	function(x, layer=1, values=TRUE){
 		r <- raster(extent(x))
-		projection(r) <-.get_projection(x)
+		projection(r) <-.getCRS(x)
 		dim(r) <- c(x@grid@cells.dim[2], x@grid@cells.dim[1])	
 		if (layer < 1) {
 			values <- FALSE

@@ -61,6 +61,12 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 	} else {
 		i <- stats::na.omit(i)
 	}
+	if (any(i < 1)) {
+		if (!all(i < 1)) {stop("you cannot mix negative and positive subscript")}
+		j <- i
+		i <- 1:ncell(x)
+		i <- i[j]
+	}
 
 	nl <- nlayers(x)
   # recycling
