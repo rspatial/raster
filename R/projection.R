@@ -113,8 +113,14 @@ setMethod("crs<-", signature("Spatial", "ANY"),
 	function(x, ..., value) {
 
 		if (!inherits(value, "CRS")) {
-			value <- .makeCRS(value)
-		}	
+			if (is.na(value)) {
+				value <- CRS()
+			} else if (is.character(value)) {
+				value <- CRS(value)
+			} else {
+				value <- crs(value)
+			}
+		}
 	
 		w <- getOption("warn")
 		on.exit(options("warn" = w))
@@ -168,25 +174,25 @@ projection <- function(x, asText=TRUE) {
 		} else {
 			return(as(crs, "CRS")) # passes on WKT comment
 		}
-	} else if (class(x) == "character") { 
+	} else if (inherits(x, "character")) { 
 		if (asText) {
 			return(x)
 		} else {
 			return( CRS(x) )
 		}
-	} else if (class(x) != "CRS") { 
+	} else if (!inherits(x, "CRS")) { 
 		return(as.logical(NA))
 	}
 	
 	if (asText) {
-		if (class(x) == "CRS") { 
+		if (inherits(x, "CRS")) { 
 			if (is.na(x@projargs)) { 
 				return(as.character(NA))
 			} else {
 				return(trim(x@projargs))
 			}
 		}
-	} else if (class(x) != "CRS") { 
+	} else if (!inherits(x, "CRS")) { 
 		x <- CRS(x)
 	}
 	return(x)
@@ -194,8 +200,7 @@ projection <- function(x, asText=TRUE) {
 
 
 
-
-setMethod("proj4string", signature("Raster"), 
+setMethod("proj4string", signature("BasicRaster"), 
 	function(obj) {
 		obj@crs@projargs
 	}
