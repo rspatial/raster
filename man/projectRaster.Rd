@@ -79,7 +79,7 @@ RasterLayer or RasterBrick object.
 r <- raster(xmn=-110, xmx=-90, ymn=40, ymx=60, ncols=40, nrows=40)
 r <- setValues(r, 1:ncell(r))
 crs(r)
-wkt(r)
+# wkt(r)
 # proj.4 projection description
 newproj <- "+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"
 

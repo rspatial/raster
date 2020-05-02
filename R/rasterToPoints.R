@@ -17,7 +17,7 @@ rasterToPoints <- function(x, fun=NULL, spatial=FALSE, ...) {
 	if (! inherits(x, 'RasterStack' )) {
 		if ( ! fromDisk(x) & ! inMemory(x) ) {
 			if (spatial) {
-				crs <- x@proj4string
+				crs <- proj4string(x)
 				return(SpatialPoints(coords=xyFromCell(x, 1:ncell(x)), proj4string=crs) )
 			} else {
 				return(xyFromCell(x, 1:ncell(x)))
@@ -81,7 +81,7 @@ rasterToPoints <- function(x, fun=NULL, spatial=FALSE, ...) {
 	}
 	
 	if (spatial) {
-		crs <- x@proj4string
+		crs <- proj4string(x)
 		if (nrow(xyv) == 0) {
 			xyv <- rbind(xyv, 0)
 			v <- data.frame(xyv[ ,-c(1:2), drop=FALSE])
