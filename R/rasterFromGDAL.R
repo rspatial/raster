@@ -175,11 +175,13 @@
 	}	
 
 	crs <- .getProj(attr(gdalinfo, 'projection'), crs)
-	r@crs <- CRS(crs, FALSE)  # to avoid warnings about other than WGS84 datums or ellipsoids  
+	r@crs <- CRS(crs, TRUE) 
+	#r@crs <- CRS(crs, FALSE) 
+	# F to avoid warnings about other than WGS84 datums or ellipsoids  
 	
 #  	r@history[[1]] <- mdata
 
-		
+
 	bi <- attr(gdalinfo, 'df')
 	GDType <- as.character(bi[['GDType']])
 	hasNoDataValues <- bi[['hasNoDataValue']]

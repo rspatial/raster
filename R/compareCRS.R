@@ -8,6 +8,8 @@
 	compareCRS(...)
 }
 
+# see sp:identicalCRS(x, y)
+
 compareCRS <- function(x, y, unknown=FALSE, verbatim=FALSE, verbose=FALSE) {
 	
 	x <- tolower(projection(x))

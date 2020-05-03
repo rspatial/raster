@@ -53,11 +53,11 @@ canProcessInMemory <- function(x, n=4, verbose=FALSE) {
 	memavail <- .availableRAM(maxmem)
 	if (verbose) {
 		gb <- 1073741824
-		cat("memory stats in GB")
-		cat(paste("\nmem available:", round(memavail / gb, 2)))
-		cat(paste0("\n        ", round(100*.memfrac()) , "%  : ", round(.memfrac() * memavail / gb, 2)))
-		cat(paste("\nmem needed   :", round(memneed / gb, 2)))
-		cat(paste("\nmax allowed  :", round(maxmem / gb, 2), " (if available)\n"))
+		cat("            GB")
+		cat(paste("\navailable :", round(memavail / gb, 2)))
+		cat(paste0("\n      ", round(100*.memfrac()) , "% : ", round(.memfrac() * memavail / gb, 2)))
+		cat(paste("\n   needed :", round(memneed / gb, 2)))
+		cat(paste("\n  allowed :", round(maxmem / gb, 2), " (if available)\n"))
 	}
 	if (nc > (2^31 -1)) return(FALSE)
 
