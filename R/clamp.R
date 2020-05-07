@@ -6,14 +6,22 @@
 setMethod("clamp", signature(x="Raster"), 
 function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename="", ...) {
 	
+	nl <- nlayers(x)
 	if ((length(lower) > 1) | (length(upper) > 1)) {
-		warning("only the first lower and upper limit are used")
-		lower <- lower[1]
-		upper <- upper[1]
+		if (nl == 1) {
+			warning("only the first element of lower/upper is used")
+			lower <- lower[1]
+			upper <- upper[1]
+			stopifnot(lower <= upper)
+		} else {
+			lower = rep_len(lower, nl)
+			upper = rep_len(upper, nl)
+			stopifnot(all (lower <= upper) )
+		}
+	} else {
+		stopifnot(lower <= upper)
 	}
-	
 
-	stopifnot(lower <= upper)
 
 	if (!hasValues(x)) return(x)
 	range <- sort(as.numeric(c(lower[1], upper[1])))
