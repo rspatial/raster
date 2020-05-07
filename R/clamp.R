@@ -52,8 +52,8 @@ function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename="", ...) {
 			
 			for (i in 1:tr$n) {
 				vals <- getValues( x, row=tr$row[i], nrows=tr$nrows[i] )
-				for (i in 1:ncol(vals)) {
-					vals[,i] <- .clamp(vals[,i], crange[i,], useValues)
+				for (j in 1:ncol(vals)) {
+					vals[,j] <- .clamp(vals[,j], crange[j,], useValues)
 				}
 				out <- writeValues(out, vals, tr$row[i])
 				pbStep(pb, i)
