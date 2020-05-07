@@ -5,55 +5,85 @@
 
 setMethod("clamp", signature(x="Raster"), 
 function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename="", ...) {
+
+	if (!hasValues(x)) return(x)
+	useValues <- as.integer(useValues)
 	
+	byCol = FALSE
 	nl <- nlayers(x)
-	if ((length(lower) > 1) | (length(upper) > 1)) {
-		if (nl == 1) {
+	if (nl == 1) {
+		if ((length(lower) > 1) | (length(upper) > 1)) {
 			warning("only the first element of lower/upper is used")
 			lower <- lower[1]
 			upper <- upper[1]
-			stopifnot(lower <= upper)
-		} else {
+		} 
+		stopifnot(lower <= upper)
+		out <- raster(x)
+		crange <- c(lower, upper)
+	} else {
+		if ((length(lower) > 1) | (length(upper) > 1)) {
 			lower = rep_len(lower, nl)
 			upper = rep_len(upper, nl)
 			stopifnot(all (lower <= upper) )
+			byCol = TRUE
+			crange <- cbind(lower, upper)
+		} else {
+			stopifnot(lower <= upper)
+			crange <- c(lower, upper)
 		}
-	} else {
-		stopifnot(lower <= upper)
-	}
-
-
-	if (!hasValues(x)) return(x)
-	range <- sort(as.numeric(c(lower[1], upper[1])))
-	nl <- nlayers(x)
-	if (nl > 1) {
 		out <- brick(x, values=FALSE)
-	} else {
-		out <- raster(x)
 	}
 	names(out) <- names(x)
-	useValues <- as.integer(useValues)
-	if (canProcessInMemory(out)) {
-		out <- setValues(out, .clamp(values(x), range, useValues)) 
-		if (filename != "") {
-			writeRaster(out, filename, ...)
+
+	if (byCol) {
+		if (canProcessInMemory(out)) {
+			v <- values(x)
+			for (i in 1:ncol(v)) {
+				v[,i] <- .clamp(v[,i], crange[i,], useValues)
+			}
+			out <- setValues(out, v) 
+			if (filename != "") {
+				writeRaster(out, filename, ...)
+			}
+		} else {
+			tr <- blockSize(out)
+			pb <- pbCreate(tr$n, label="clamp", ...)
+			out <- writeStart(out, filename=filename, ...)
+			
+			for (i in 1:tr$n) {
+				vals <- getValues( x, row=tr$row[i], nrows=tr$nrows[i] )
+				for (i in 1:ncol(vals)) {
+					vals[,i] <- .clamp(vals[,i], crange[i,], useValues)
+				}
+				out <- writeValues(out, vals, tr$row[i])
+				pbStep(pb, i)
+			}
+			out <- writeStop(out)
+			pbClose(pb)
 		}
 	} else {
-		tr <- blockSize(out)
-		pb <- pbCreate(tr$n, label="clamp", ...)
-		out <- writeStart(out, filename=filename, ...)
-		
-		for (i in 1:tr$n) {
-			vals <- getValues( x, row=tr$row[i], nrows=tr$nrows[i] )
-			vals <- .clamp(vals, range, useValues)
-			if (nl > 1) {
-				vals <- matrix(vals, ncol=nl)
+		if (canProcessInMemory(out)) {
+			out <- setValues(out, .clamp(values(x), crange, useValues)) 
+			if (filename != "") {
+				writeRaster(out, filename, ...)
 			}
-			out <- writeValues(out, vals, tr$row[i])
-			pbStep(pb, i)
+		} else {
+			tr <- blockSize(out)
+			pb <- pbCreate(tr$n, label="clamp", ...)
+			out <- writeStart(out, filename=filename, ...)
+			
+			for (i in 1:tr$n) {
+				vals <- getValues( x, row=tr$row[i], nrows=tr$nrows[i] )
+				vals <- .clamp(vals, crange, useValues)
+				if (nl > 1) {
+					vals <- matrix(vals, ncol=nl)
+				}
+				out <- writeValues(out, vals, tr$row[i])
+				pbStep(pb, i)
+			}
+			out <- writeStop(out)
+			pbClose(pb)
 		}
-		out <- writeStop(out)
-		pbClose(pb)
 	}
 	return(out)
 }
