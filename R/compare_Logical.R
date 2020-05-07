@@ -383,7 +383,7 @@ setMethod("Compare", signature(e1='Raster', e2='Raster'),
 	
 		cond <- compareRaster(c(r, e2), extent=TRUE, rowcol=TRUE, crs=TRUE, tolerance=0.05, stopiffalse=FALSE) 
 		if (!cond) {
-			stop("Cannot compare Rasters that have different BasicRaster attributes. See compare()")
+			stop("Cannot compare Rasters that have different BasicRaster attributes. See compareRaster()")
 		}	
 		
 		if (canProcessInMemory(r, 3)) {
@@ -424,7 +424,7 @@ setMethod("Logic", signature(e1='Raster', e2='Raster'),
 	
 		cond <- compareRaster(c(r, e2), extent=TRUE, rowcol=TRUE, crs=TRUE, tolerance=0.05, stopiffalse=FALSE) 
 		if (!cond) {
-			stop("Cannot compare Rasters that have different BasicRaster attributes. See compare()")
+			stop("Cannot compare Rasters that have different BasicRaster attributes. See compareRaster()")
 		}	
 		
 		if (canProcessInMemory(r, 3)) {
