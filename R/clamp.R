@@ -5,6 +5,13 @@
 
 setMethod("clamp", signature(x="Raster"), 
 function(x, lower=-Inf, upper=Inf, useValues=TRUE, filename="", ...) {
+	
+	if ((length(lower) > 1) | (length(upper) > 1)) {
+		warning("only the first lower and upper limit are used")
+		lower <- lower[1]
+		upper <- upper[1]
+	}
+	
 
 	stopifnot(lower <= upper)
 
