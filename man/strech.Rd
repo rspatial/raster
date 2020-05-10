@@ -18,8 +18,8 @@ Linear stretch of values in a Raster object. Provide the desired output range (m
 \item{x}{Raster object} 
 \item{minv}{numeric >= 0 and smaller than maxv. lower bound of stretched value}
 \item{maxv}{numeric <= 255 and larger than maxv. upper bound of stretched value}
-\item{minq}{numeric >= 0 and smaller than maxq. lower quintile bound of original value. Ignored if qmin is supplied}
-\item{maxq}{numeric <= 1 and larger than minq. upper quintile bound of original value. Ignored if qmax is supplied}
+\item{minq}{numeric >= 0 and smaller than maxq. lower quintile bound of original value. Ignored if smin is supplied}
+\item{maxq}{numeric <= 1 and larger than minq. upper quintile bound of original value. Ignored if smax is supplied}
 \item{smin}{numeric < smax. user supplied lower value for the layers, to be used instead of a quintile computed by the function itself}
 \item{smax}{numeric > smin. user supplied upper value for the layers, to be used instead of a quintile computed by the function itself}
 

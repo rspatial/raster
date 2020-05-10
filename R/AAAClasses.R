@@ -287,29 +287,6 @@ setClass (".RasterBrickSparse",
 )	
 
 
-#setClass (".RasterQuad",
-#	contains = "Raster",
-#	representation (
-#	    filename ="character",
-#		bricks ="list"
-#		),
-#	prototype (
-#		filename="",
-#		bricks = list()
-#		),
-#	validity = function(object) {
-#		if (length(object@bricks) > 1) {
-#			test <- compareRaster(object@bricks, extent=TRUE, rowcol=TRUE, tolerance=0.05, stopiffalse=FALSE, showwarning=FALSE) 
-#		} else {
-#			test <- TRUE
-#		}
-#		return(test)
-#	}
-#)
-
-
-#setClassUnion("RasterStackBrickList", c("RasterStack", "RasterBrick", "RasterList"))
-
 setClassUnion("SpatialVector", c("SpatialPoints", "SpatialLines", "SpatialPolygons"))
 
 

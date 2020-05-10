@@ -144,3 +144,9 @@ function(x, ...) {
 	lines(x, ...)
 }
 )
+
+setMethod("lines", signature(x='Extent'),
+function(x, ...) {
+	plot(x, add=TRUE, ...)
+}
+)

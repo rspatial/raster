@@ -64,7 +64,6 @@ setMethod('trim', signature(x='matrix'),
 		cols <- apply(x, 2, function(i) sum(i %in% values))
 	}
 	rows <- which(rows != ncol(x))
-	cols <- which(cols != nrow(x))
 	if (length(rows)==0) { 	stop('only NA values found') }
 	
 	rows <- pmin(pmax(1, c(min(rows) - padding, max(rows + padding))), nrow(r))
@@ -82,7 +81,7 @@ function(x, padding=0, values=NA, filename='', ...) {
 	if (!hasValues(x)) { stop('The Raster object has no values') } 
 	
 	if (nlayers(x) == 1 && canProcessInMemory(x)) {
-		x <- .memtrimlayer(x, padding=padding, ...) 
+		x <- .memtrimlayer(x, padding=padding, values=values, ...) 
 		return(x)
 	}
 	
