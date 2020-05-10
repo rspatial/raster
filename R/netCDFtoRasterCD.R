@@ -271,18 +271,8 @@
 	} else if (type == 'RasterBrick') {
 		r <- brick(xmn=xrange[1], xmx=xrange[2], ymn=yrange[1], ymx=yrange[2], ncols=ncols, nrows=nrows, crs=crs)
 		r@title <- long_name
-	} else if (type == 'RasterQuadBrick') {
-		r <- .quad(xmn=xrange[1], xmx=xrange[2], ymn=yrange[1], ymx=yrange[2], ncols=ncols, nrows=nrows, crs=crs)
-		r@title <- long_name	
-		if (lvar == 4) { 
-			dim3 <- 3 
-			step3 <- 4
-		} else { 
-			dim3 <- 4 
-			step3 <- 3
-		}
-		r@nlevels <- nc$var[[zvar]]$dim[[dim3]]$len
-		r@steps  <- nc$var[[zvar]]$dim[[step3]]$len
+	} else {
+		stop("unknown object type")
 	}
 	
 	r@file@name <- filename
