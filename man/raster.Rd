@@ -149,11 +149,11 @@ r5 <- raster(s, 3)
 baseurl <- "ftp://sidads.colorado.edu/pub/DATASETS/"
 # southern hemisphere
 f1 <- paste(baseurl, 
- "nsidc0051_gsfc_nasateam_seaice/final-gsfc/south/daily/2013/nt_20130114_f17_v01_s.bin",
+ "nsidc0051_gsfc_nasateam_seaice/final-gsfc/south/daily/2013/nt_20130114_f17_v1.1_s.bin",
  sep='')
 # or northern hemisphere
 f2 <- paste(baseurl, 
- "nsidc0051_gsfc_nasateam_seaice/final-gsfc/north/daily/2013/nt_20130105_f17_v01_n.bin",
+ "nsidc0051_gsfc_nasateam_seaice/final-gsfc/north/daily/2013/nt_20130105_f17_v1.1_n.bin",
  sep='')
      
 if (!file.exists(basename(f1))) download.file(f1, basename(f1), mode = "wb")
