@@ -62,7 +62,7 @@ setClass ("BasicRaster",
 		z = "list"
 	),
 	prototype (	
-		crs = CRS(doCheckCRSArgs=FALSE)
+		crs = CRS(doCheckCRSArgs=FALSE),
 		rotated = FALSE,
 		ncols= as.integer(1),
 		nrows= as.integer(1),
