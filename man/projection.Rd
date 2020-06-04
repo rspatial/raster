@@ -1,6 +1,7 @@
 \name{projection}
 
 \alias{wkt}
+\alias{wkt,ANY-method}
 \alias{wkt,Raster-method}
 \alias{crs}
 \alias{crs,ANY-method}

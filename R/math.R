@@ -99,25 +99,6 @@ setMethod("Math", signature(x='Raster'),
 
 
 
-setMethod("Math", signature(x='RasterLayerSparse'),
-    function(x){ 
-
-		if (!hasValues(x)) {
-			return(x)
-		}
-#		funname <- as.character(sys.call(sys.parent())[[1]])
-		funname <- .Generic
-
-
-		if (substr(funname, 1, 3) == 'cum' ) { 
-			setValues(x, do.call(funname, list(x@data@values)))
-		} else {
-			setValues(x, methods::callGeneric(x@data@values))
-		}
-	}
-)
-
-
 
 setMethod("Math2", signature(x='Raster'), 
 	function (x, digits=0) {

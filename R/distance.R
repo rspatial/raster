@@ -85,8 +85,8 @@ function(x, y, ...) {
 	if (!requireNamespace("rgeos")) {
 		stop('This function needs the rgeos package to be available')
 	} 
-	stopifnot(inherits(class(x), 'SpatialVector'))
-	stopifnot(inherits(class(y), 'SpatialVector'))	
+	stopifnot(inherits(x, 'SpatialVector'))
+	stopifnot(inherits(y, 'SpatialVector'))	
 	d <- rgeos::gDistance(x, y, byid=TRUE)
 	apply(d, 1, min)
 }

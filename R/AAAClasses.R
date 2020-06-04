@@ -62,6 +62,7 @@ setClass ("BasicRaster",
 		z = "list"
 	),
 	prototype (	
+		crs = CRS(doCheckCRSArgs=FALSE)
 		rotated = FALSE,
 		ncols= as.integer(1),
 		nrows= as.integer(1),
@@ -265,26 +266,6 @@ setClass ("RasterStack",
 
 setClassUnion("RasterStackBrick", c("RasterStack", "RasterBrick"))
 
-
-setClass ("RasterLayerSparse",
-	contains = "RasterLayer",
-	representation (
-		index = "vector"
-	),
-	prototype (
-		index = vector(mode="numeric")
-	)
-)	
-
-setClass (".RasterBrickSparse",
-	contains = "RasterBrick",
-	representation (
-		index = "vector"
-	),
-	prototype (
-		index = vector(mode="numeric")
-	)
-)	
 
 
 setClassUnion("SpatialVector", c("SpatialPoints", "SpatialLines", "SpatialPolygons"))

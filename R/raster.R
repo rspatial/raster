@@ -159,18 +159,6 @@ setMethod('raster', signature(x='RasterLayer'),
 	}
 )
 
-setMethod('raster', signature(x='RasterLayerSparse'), 
-	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.getCRS(x))
-		if (length(stats::na.omit(x@data@values)) > 0) {
-			v <- rep(NA, ncell(r))
-			v[x@index] <- x@data@values
-			setValues(r, v)
-		} else {
-			r
-		}
-	}
-)
 
 
 setMethod('raster', signature(x='RasterStack'), 

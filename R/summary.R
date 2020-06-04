@@ -15,14 +15,16 @@ setMethod('summary', signature(object='RasterLayer'),
 	function(object, maxsamp=100000, ...) {
 		
 		if ( inMemory(object) ) {
-			sm <- as.matrix( stats::quantile( object@data@values, na.rm=TRUE) )
-			sm <- c(sm, sum(is.na( object@data@values) ))
+			sm <- as.matrix( stats::quantile( values(object), na.rm=TRUE) )
+			sm <- c(sm, sum(is.na( values(object) )))
 			
-		} else if (  fromDisk(object) ) {
+		} else if ( fromDisk(object) ) {
 			if (ncell(object) > maxsamp) {
-				v <- sampleRandom(object, maxsamp)
-				warning(paste('summary is an estimate based on a sample of ', maxsamp, ' cells (', round(100*maxsamp/ncell(object), 2), '% of all cells)\n', sep=''))
+				v <- sampleRegular(object, maxsamp)
 				nas <- round(sum(is.na(v)) * ncell(object) / maxsamp)
+
+				warning(paste('summary is an estimate based on a sample of ', maxsamp, ' cells (', round(100*maxsamp/ncell(object), 2), '% of all cells)\n', sep=''))
+
 			} else {
 				v <- getValues(object)
 				nas <- sum(is.na(v))

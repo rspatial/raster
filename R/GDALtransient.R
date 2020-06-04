@@ -113,7 +113,7 @@
 
 	rgdal::GDALcall(transient, "SetGeoTransform", gt)
 	
-	if (.useproj6() ) {
+	if (.useproj6() & !is.na(r@crs)) {
 		rgdal::GDALcall(transient, "SetProjectWkt", r@crs) 
 	} else {
 		prj <- proj4string(r)

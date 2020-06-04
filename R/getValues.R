@@ -67,29 +67,3 @@ function(x) {
 }
 )
 
-
-setMethod("getValues", signature(x='RasterLayerSparse', row='missing', nrows='missing'), 
-function(x, format='') {
-	
-	cr <- c(x@ncols, x@nrows)
-	
-	if ( inMemory(x) ) {
-		i <- x@index
-		v <- x@data@values
-		x <- rep(NA, ncell(x))
-		x[i] <- v
-	} else if ( fromDisk(x) ) {
-		# not yet implemented
-		### x <- .readRasterLayerValues(x, 1, x@nrows)
-	} else {
-		x <- rep(NA, ncell(x))
-	}
-
-	if (format=='matrix') { 
-		x <- matrix(x, ncol=cr[1], nrow=cr[2], byrow=TRUE) 
-	}	
-
-	return( x ) 
-}
-)
-

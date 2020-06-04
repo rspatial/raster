@@ -83,13 +83,19 @@ setMethod("wkt", signature(obj="Raster"),
 		crs <- crs(x)
 		x <- .makeCRS(x[1], x[2])
 	} else if (is.character(x)) {
-		x <- CRS(x)
-	}
+		# x <- CRS(x)
 
-	if (is.na(x)) {
+		if (trimws(x) == "") {
+			x <- return(CRS())
+		} else {
+			wkt <- showSRID(x)
+			x <- CRS()
+			x@projargs <- showP4(wkt)
+			attr(x, "comment") <- wkt
+		}
+	} else if (is.na(x)) {
 		x <- CRS()
-	}	
-	
+	}
 	x
 }
 

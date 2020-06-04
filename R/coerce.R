@@ -274,17 +274,6 @@ setAs('RasterLayer', 'matrix',
 )
 
 
-#setAs('RasterLayerSparse', 'RasterLayer', function(from){ raster(from) } )
-
-setAs('RasterLayer', 'RasterLayerSparse', 
-	function(from){ 
-		x <- methods::new('RasterLayerSparse')
-		v <- stats::na.omit(cbind(1:ncell(from), getValues(from)))
-		setValues(x, v[,2], v[,1])
-	}
-)
-
-
 
 # "image" 
 .rasterToImage <- function(r) {

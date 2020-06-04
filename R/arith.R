@@ -171,25 +171,6 @@ setMethod("Arith", signature(e1='numeric', e2='RasterLayer'),
 )
 
 
-
-setMethod("Arith", signature(e1='RasterLayerSparse', e2='numeric'),
-    function(e1, e2){ 
-	
-		if (!hasValues(e1)) { stop('RasterLayerSparse has no values') }
-		stopifnot(length(e2) == 1)
-		setValues(e1,  methods::callGeneric(as.numeric(e1@data@values), e2))
-	}
-)
-
-setMethod("Arith", signature(e1='numeric', e2='RasterLayerSparse'),
-    function(e1, e2){ 
-		if (!hasValues(e2)) { stop('RasterLayerSparse has no values') }
-		stopifnot(length(e1) == 1)
-		setValues(e2,  methods::callGeneric(as.numeric(e2@data@values), e1) )
-	}
-)
-
-
 setMethod("Arith", signature(e1='RasterLayer', e2='logical'),
     function(e1, e2){ 
 		e2 <- as.integer(e2)
