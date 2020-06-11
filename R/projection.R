@@ -88,9 +88,9 @@ setMethod("wkt", signature(obj="Raster"),
 		if (trimws(x) == "") {
 			x <- return(CRS())
 		} else {
-			wkt <- showSRID(x)
+			wkt <- rgdal::showSRID(x)
 			x <- CRS()
-			x@projargs <- showP4(wkt)
+			x@projargs <- rgdal::showP4(wkt)
 			attr(x, "comment") <- wkt
 		}
 	} else if (is.na(x)) {
