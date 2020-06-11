@@ -21,7 +21,6 @@ setMethod('interpolate', signature(object='Raster'),
 		ncols <- ncol(predrast)
 			
 		lyrnames <- names(object)
-		xylyrnames <- c('x', 'y', lyrnames)
 
 		haveFactor <- FALSE
 		dataclasses <- try( attr(model$terms, "dataClasses")[-1], silent=TRUE)
