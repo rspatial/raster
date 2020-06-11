@@ -153,7 +153,12 @@ ccodes <- function() {
 		}
 	}	
 	if (file.exists(filename)) {
-		return(readRDS(filename))
+		x <- readRDS(filename)
+		# avoid pesky warnings
+		if (type != 'sf') {
+			crs(x) <- "+proj=longlat +datum=WGS84"
+		}
+		return(x)
 	} else {
 		return(NULL)
 	}
@@ -186,6 +191,7 @@ ccodes <- function() {
 		#thisenvir = new.env()
 		#data <- get(load(filename, thisenvir), thisenvir)
 		data <- readRDS(filename)
+		crs(data) <- "+proj=longlat +datum=WGS84"
 		return(data)
 	} 
 }
