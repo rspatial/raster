@@ -57,7 +57,8 @@ cellFromCol <- function(object, colnr) {
 
 setMethod(cellFromRowColCombine, signature(object="BasicRaster", row="numeric", col="numeric"), 
 	function(object, row, col) {
-		object <- raster(object)
+		# faster without this according to PR #131
+		# object <- raster(object)
 		row[row < 1 | row > object@nrows] <- NA
 		col[col < 1 | col > object@ncols] <- NA
 		cols <- rep(col, times=length(row))
