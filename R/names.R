@@ -5,15 +5,13 @@
 
 
 .uniqueNames <- function(x, sep='.') {
-	y <- as.matrix(table(x))
-	y <- y[y[,1] > 1, ,drop=F]
-	if (nrow(y) > 0) {
-		y <- rownames(y)
-		for (i in 1:length(y)) {
-			j <- which(x==y[i])
-			x[j] <- paste(x[j], sep, 1:length(j), sep='')
-		}
+	dups <- unique(x[duplicated(x)])
+
+	for (dup in dups) {
+	   j <- which(x == dup)
+	   x[j] <- paste(x[j], sep, 1:length(j), sep='')
 	}
+
 	x
 }
 
