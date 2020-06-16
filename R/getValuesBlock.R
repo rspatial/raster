@@ -35,7 +35,7 @@ setMethod('getValuesBlock', signature(x='RasterStack'),
 				stop("no valid layers selected")
 			}
 			nlyrs <- length(lyrs)
-			x <- x[[lyrs]]
+			x <- x[[lyrs, drop=FALSE]]
 		}
 		
 		startcell <- cellFromRowCol(x, row, col)
