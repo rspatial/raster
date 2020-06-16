@@ -19,6 +19,7 @@ Authors@R: c(
 	person("Jacob", "van Etten", role = "ctb"),
 	person("Michael", "Sumner", role = "ctb"),
 	person("Joe", "Cheng", role = "ctb"),
+	person("Dan", "Baston", role = "ctb"),
 	person("Andrew", "Bevan", role = "ctb"),
 	person("Roger", "Bivand", role = "ctb"),
 	person("Lorenzo", "Busetto", role = "ctb"),

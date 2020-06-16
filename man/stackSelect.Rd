@@ -7,7 +7,7 @@
 \title{Select cell values from a multi-layer Raster* object}
 
 \description{
-Use a Raster* object to select cell values from different layers in a multi-layer Raster* object. The object to select values \code{y} should have cell values between \code{1} and \code{nlayers(x)}. The values of \code{y} are rounded. 
+Use a Raster* object to select cell values from different layers in a multi-layer Raster* object. The object to select values \code{y} should have values between \code{1} and \code{nlayers(x)}. The values of \code{y} are rounded. 
 
 See \code{\link{extract}} for extraction of values by cell, point, or otherwise.
 }
