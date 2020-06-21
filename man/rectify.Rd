@@ -1,6 +1,7 @@
 \name{rectify}
 
 \alias{rectify}
+\alias{rectify,Raster-method}
 
 
 \title{rectify a Raster object}
@@ -12,7 +13,7 @@ rectify changes a rotated Raster* object into a non-rotated (rectangular) object
 
 
 \usage{
-rectify(x, ext, res, method='ngb', filename='', ...) 
+\S4method{rectify}{Raster}(x, ext, res, method='ngb', filename='', ...) 
 }
 
 \arguments{
@@ -28,8 +29,6 @@ rectify(x, ext, res, method='ngb', filename='', ...)
 \value{
 RasterLayer or RasterBrick object
 }
-
-
 
 
 \keyword{spatial}
