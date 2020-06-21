@@ -27,7 +27,7 @@ logical
 }
 
 
-\seealso{\code{\link[sp]{identicalCRS}}   \code{\link{crs} }}
+\seealso{\code{sp::identicalCRS},  \code{\link{crs} }}
 
 
 \examples{ 

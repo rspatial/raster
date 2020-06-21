@@ -26,6 +26,7 @@ setMethod('readAll', signature(object='RasterLayer'),
 		object@data@haveminmax <- TRUE
 		object@data@inmemory <- TRUE
 		object@data@fromdisk <- FALSE
+		object@file@name <- ""
 		
 		return(object)
 	}
@@ -61,6 +62,7 @@ setMethod('readAll', signature(object='RasterBrick'),
 		object@data@haveminmax <- TRUE
 		object@data@inmemory <- TRUE
 		object@data@fromdisk <- FALSE
+		object@file@name <- ""
 		return(object)
 	}
 )

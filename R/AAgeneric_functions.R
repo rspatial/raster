@@ -1,4 +1,6 @@
 
+if (!isGeneric("rectify")) {setGeneric("rectify", function(x, ...) standardGeneric("rectify"))}	
+
 
 if (!isGeneric("adjacent")) {setGeneric("adjacent", function(x, ...) standardGeneric("adjacent"))}	
 if (!isGeneric("approxNA")) {setGeneric("approxNA", function(x, ...)		standardGeneric("approxNA"))}	
