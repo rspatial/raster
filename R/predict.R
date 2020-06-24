@@ -126,7 +126,7 @@ setMethod('predict', signature(object='Raster'),
 			if (haveFactor) {
 				for (j in 1:length(f)) {
 					flev <- fvs <- factors[[j]]
-					if (! is.null(const)) {
+					if (!is.null(const)) {
 						if (!(f[j] %in% constnames)) {
 							if (!is.numeric(fvs)) {
 								flev <- 1:length(flev)
@@ -138,10 +138,12 @@ setMethod('predict', signature(object='Raster'),
 					# failed with character factors. See #91
 					#fv[!(fv %in% flev)] <- NA 
 					#fv <- factor(fv, levels=flev, labels=fvs)
-
-					mlev <- 1:length(flev)
-					fv[!(fv %in% mlev)] <- NA 
-					fv <- factor(fv, levels=mlev, labels=fvs)					
+					if (is.numeric(fv)) {
+						flev <- as.numeric(flev)
+						if (any(is.na(flev))) stop("cannot process these factors")
+					}
+					fv[!(fv %in% flev)] <- NA
+					fv <- factor(fv, levels=flev, labels=fvs)					
 					blockvals[,f[j]] <- fv 
 				}
 			}
