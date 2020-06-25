@@ -5,7 +5,7 @@
     bx <- basename(x)
     ## test that we can get a date from this
     ## (as POSIXct so that Z-comparisons are more natural)
-    dts <- as.POSIXct(basename(x), format = "nt_%Y%m%d", tz = "GMT")
+    dts <- as.POSIXct(basename(x), format = "nt_%Y%m%d", tz = "UTC")
     ## test that we see _f and _v
     fyes <- tolower(substr(bx, 13L, 13L)) %in% c("f", "n")
     vyes <- tolower(substr(bx, 17L, 17L)) %in% c("v", "n")

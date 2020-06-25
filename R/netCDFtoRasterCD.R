@@ -25,8 +25,8 @@
 		mult <- 1
 	}
 	if (!dodays) {
-		start <- strptime(startTime, "%Y-%m-%d %H:%M:%OS")
-		if (is.na(start)) start <- strptime(startTime, "%Y-%m-%d")
+		start <- strptime(startTime, "%Y-%m-%d %H:%M:%OS", tz = "UTC")
+		if (is.na(start)) start <- strptime(startTime, "%Y-%m-%d", tz = "UTC")
 		if (is.na(start)) return(x)
 		startTime <- start
 		time <- startTime + as.numeric(getZ(x)) * mult
