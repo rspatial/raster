@@ -8,25 +8,33 @@
 .doTime <- function(x, nc, zvar, dim3) {
 	dodays <- TRUE
 	dohours <- FALSE
+	doseconds <- FALSE
 
 	un <- nc$var[[zvar]]$dim[[dim3]]$units	
 	if (substr(un, 1, 10) == "days since") { 
 		startDate = as.Date(substr(un, 12, 22))
-	} else {
-		if (substr(un, 1, 11) == "hours since") { 
-			dohours <- TRUE
-		}
+	} else if (substr(un, 1, 11) == "hours since") { 
+		dohours <- TRUE
 		dodays <- FALSE
-	}
-	if (dohours) {
 		startTime <- substr(un, 13, 30)
-		startTime <- strptime(startTime, "%Y-%m-%d %H:%M:%OS")
-		time <- startTime + as.numeric(getZ(x)) * 3600
+		mult <- 3600
+	} else if (substr(un, 1, 12) == "seconds from") { 
+		doseconds <- TRUE
+		dodays <- FALSE
+		startTime = as.Date(substr(un, 14, 30))
+		mult <- 1
+	}
+	if (!dodays) {
+		start <- strptime(startTime, "%Y-%m-%d %H:%M:%OS")
+		if (is.na(start)) start <- strptime(startTime, "%Y-%m-%d")
+		if (is.na(start)) return(x)
+		startTime <- start
+		time <- startTime + as.numeric(getZ(x)) * mult
 		time <- as.character(time)
 		if (!is.na(time[1])) {
 			x@z <- list(time)
 			names(x@z) <- as.character('Date/time')
-		}
+		}	
 	} else if (dodays) {
 		# cal = nc$var[[zvar]]$dim[[dim3]]$calendar ?
 		cal <- ncdf4::ncatt_get(nc, "time", "calendar")
@@ -139,36 +147,34 @@
 		return(.rasterObjectFromCDF_GMT(nc))
 		
 	} else if (ndims == 4) { 
-		if (type != 'RasterQuadBrick') {
-			if (missing(lvar)) {
-				nlevs3 <- nc$var[[zvar]]$dim[[3]]$len
-				nlevs4 <- nc$var[[zvar]]$dim[[4]]$len
-				if (nlevs3 > 1 & nlevs4 == 1) {
-					lvar <- 4
-				} else {
-					lvar <- 3
-				}
-			}
-			nlevs <- nc$var[[zvar]]$dim[[lvar]]$len
-			if (level <=0 ) {
-				level <- 1
-				# perhaps detect case where lvar should be 4?
-				#https://stackoverflow.com/questions/56261199/extracting-all-levels-from-netcdf-file-in-r/
-				if (nlevs > 1) {
-					warning('"level" set to 1 (there are ', nlevs, ' levels)')
-				}
+		if (missing(lvar)) {
+			nlevs3 <- nc$var[[zvar]]$dim[[3]]$len
+			nlevs4 <- nc$var[[zvar]]$dim[[4]]$len
+			if (nlevs3 > 1 & nlevs4 == 1) {
+				lvar <- 4
 			} else {
-				oldlevel <- level <- round(level)
-				level <- max(1, min(level, nlevs))
-				if (oldlevel != level) {
-					warning('level set to: ', level)
-				}
+				lvar <- 3
 			}
-			if (lvar == 4) { 
-				dim3 <- 3 
-			} else { 
-				dim3 <- 4 
+		}
+		nlevs <- nc$var[[zvar]]$dim[[lvar]]$len
+		if (level <=0 ) {
+			level <- 1
+			# perhaps detect case where lvar should be 4?
+			#https://stackoverflow.com/questions/56261199/extracting-all-levels-from-netcdf-file-in-r/
+			if (nlevs > 1) {
+				warning('"level" set to 1 (there are ', nlevs, ' levels)')
 			}
+		} else {
+			oldlevel <- level <- round(level)
+			level <- max(1, min(level, nlevs))
+			if (oldlevel != level) {
+				warning('level set to: ', level)
+			}
+		}
+		if (lvar == 4) { 
+			dim3 <- 3 
+		} else { 
+			dim3 <- 4 
 		}
 	} else if (ndims > 4) { 
 		warning(zvar, ' has more than 4 dimensions, I do not know what to do with these data')
