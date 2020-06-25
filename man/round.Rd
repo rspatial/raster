@@ -41,8 +41,6 @@ round(x, digits = 0)
 see ?base::round
 }
 
-\seealso{ \code{\link[base]{round}} }
-
 \value{
 a RasterLayer object
 }

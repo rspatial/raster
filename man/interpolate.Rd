@@ -40,13 +40,17 @@ Raster* object
 
 
 \examples{
-\dontrun{
+\donttest{
 ## Thin plate spline interpolation with x and y only
 # some example data
 r <- raster(system.file("external/test.grd", package="raster"))
 ra <- aggregate(r, 10)
 xy <- data.frame(xyFromCell(ra, 1:ncell(ra)))
 v <- getValues(ra)
+# remove NAs
+i <- !is.na(v)
+xy <- xy[i,]
+v <- v[i]
 
 #### Thin plate spline model
 library(fields) 
@@ -66,7 +70,6 @@ plot(se)
 ## another variable; let's call it elevation
 elevation <- (init(r, 'x') * init(r, 'y')) / 100000000
 names(elevation) <- 'elev'
-elevation <- mask(elevation, r)
 
 z <- extract(elevation, xy)
 
