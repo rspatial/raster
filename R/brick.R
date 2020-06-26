@@ -295,8 +295,7 @@ setMethod('brick', signature(x='list'),
 
 setMethod('brick', signature(x='SpatRaster'), 
 	function(x) {
-		x <- as(x, "Raster")
-		brick(x)
+		as(x, "Raster")
 	}
 )
 
