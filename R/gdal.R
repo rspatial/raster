@@ -38,7 +38,11 @@
 	pkg.info <- utils::packageDescription('rgdal') 
 	new_rgdal <- utils::compareVersion(pkg.info[["Version"]], "1.5-7") > 0
 	if (new_rgdal) {
-		if (rgdal::new_proj_and_gdal()) return (TRUE)
+		if (rgdal::new_proj_and_gdal()) {
+			return (TRUE)
+		} else {
+			return (FALSE)
+		}
 	} else {
 		return (FALSE)
 	}
