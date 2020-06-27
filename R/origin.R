@@ -3,10 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("origin")) {
-	setGeneric("origin", function(x, ...)
-		standardGeneric("origin"))
-}
 
 
 setMethod('origin', signature(x='BasicRaster'), 
