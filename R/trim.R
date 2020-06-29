@@ -5,7 +5,7 @@
 
 
 
-setMethod('trim', signature(x='character'), 
+setMethod("trim", signature(x="character"), 
 	function(x, internal=FALSE, ...) {
 		if (internal) {
 			gsub("^ *|(?<= ) | *$", "", x, perl=TRUE)
@@ -16,12 +16,12 @@ setMethod('trim', signature(x='character'),
 )
 
 
-setMethod('trim', signature(x='data.frame'), 
+setMethod("trim", signature(x="data.frame"), 
 	function(x, ...) {
 		for (i in 1:ncol(x)) {
-			if (class(x[,i]) == 'character') {
+			if (class(x[,i]) == "character") {
 				x[,i] <- trim(x[,i])
-			} else if (class(x[,i]) == 'factor') {
+			} else if (class(x[,i]) == "factor") {
 				x[,i] <- as.factor(trim(as.character(x[,i])))
 			}	
 		}
@@ -30,7 +30,7 @@ setMethod('trim', signature(x='data.frame'),
 )
 
 
-setMethod('trim', signature(x='matrix'), 
+setMethod("trim", signature(x="matrix"), 
 	function(x, ...) {
 		if (is.character(x)) {
 			x[] = trim(as.vector(x))
@@ -54,7 +54,7 @@ setMethod('trim', signature(x='matrix'),
 # June 2013, modification by Mike Sumner, added argument "value"
 
 
-.memtrimlayer <- function(r, padding=0, values=NA, filename='', ...) {
+.memtrimlayer <- function(r, padding=0, values=NA, filename="", ...) {
 	x <- as.matrix(r)
 	if (all(is.na(values))) {
 		rows <- rowSums(is.na(x))
@@ -64,7 +64,8 @@ setMethod('trim', signature(x='matrix'),
 		cols <- apply(x, 2, function(i) sum(i %in% values))
 	}
 	rows <- which(rows != ncol(x))
-	if (length(rows)==0) { 	stop('only NA values found') }
+	if (length(rows)==0) { 	stop("only NA values found") }
+	cols <- which(cols != nrow(x))
 	
 	rows <- pmin(pmax(1, c(min(rows) - padding, max(rows + padding))), nrow(r))
 	cols <- pmin(pmax(1, c(min(cols) - padding, max(cols + padding))), ncol(r))
@@ -74,11 +75,11 @@ setMethod('trim', signature(x='matrix'),
 }
 
 
-setMethod('trim', signature(x='Raster'), 
-function(x, padding=0, values=NA, filename='', ...) {
+setMethod("trim", signature(x="Raster"), 
+function(x, padding=0, values=NA, filename="", ...) {
 
 	filename <- trim(filename)
-	if (!hasValues(x)) { stop('The Raster object has no values') } 
+	if (!hasValues(x)) { stop("The Raster object has no values") } 
 	
 	if (nlayers(x) == 1 && canProcessInMemory(x)) {
 		x <- .memtrimlayer(x, padding=padding, values=values, ...) 
@@ -99,7 +100,7 @@ function(x, padding=0, values=NA, filename='', ...) {
 		}
 		cnt <- cnt + 1
 	}
-	if ( cnt == nr) { stop('only NA values found') }
+	if ( cnt == nr) { stop("only NA values found") }
 	firstrow <- min(max(r-padding, 1), nr)
 	
 	for (r in nr:firstrow) {
