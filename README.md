@@ -19,8 +19,6 @@ install_github("rspatial/raster")
 
 If you are on Windows, you need to first install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) to get a C++ compiler that R can use. 
 
-If that is a problem, you may be able to get a recent version from [R-Forge](https://r-forge.r-project.org/R/?group_id=294) with this command `install.packages("raster", repos="http://R-Forge.R-project.org")`.
-
 On [rspatial.org](http://rspatial.org/) you can learn about spatial data analysis with R.
 
 [stackoverflow](https://stackoverflow.com/) is the best place to ask questions if you get stuck.
