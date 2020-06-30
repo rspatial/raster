@@ -21,7 +21,7 @@ Create density plots of values in a Raster object
 \item{maxpixels}{the maximum number of (randomly sampled) cells to be used for creating the plot}
 \item{plot}{if \code{TRUE} produce a plot, else return a density object}
 \item{main}{main title for each plot (can be missing)}
-\item{...}{Additional arguments passed to \code{\link[base]{plot}}}
+\item{...}{Additional arguments passed to base plot}
 }
 
 \value{

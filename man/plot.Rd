@@ -44,7 +44,7 @@ See the \code{rasterVis} package for more advanced (trellis/lattice) plotting of
   \item{addfun}{Function to add additional items such as points or polygons to the plot (map). Typically containing statements like
         "points(xy); plot(polygons, add=TRUE)". This is particularly useful to add something to each map when plotting a multi-layer Raster* object.}
   \item{npretty}{integer. Number of decimals for \link{pretty} lables on the axes}  
-  \item{...}{Graphical parameters. Any argument that can be passed to \code{\link[fields]{image.plot}} and to \code{\link[base]{plot}}, 
+  \item{...}{Graphical parameters. Any argument that can be passed to \code{\link[fields]{image.plot}} and to base \code{plot}, 
         such as axes=FALSE, main='title', ylab='latitude'}
   \item{xlab}{Optional. x-axis label)}
   \item{ylab}{Optional. y-axis label)}

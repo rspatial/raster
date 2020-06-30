@@ -31,7 +31,7 @@ zoom(x, ...)
 \item{layer}{Positive integer to select the layer to be used if x is a mutilayer Raster object}
 \item{new}{Logical. If \code{TRUE}, the zoomed in map will appear on a new device (window)}
 \item{useRaster}{Logical. If \code{TRUE}, a bitmap raster is used to plot the image instead of polygons}
-\item{...}{additional paramters for \code{\link[base]{plot}}}
+\item{...}{additional paramters for base plot}
 }
 
 \value{
