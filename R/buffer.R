@@ -82,7 +82,11 @@ function(x, width=1, dissolve=TRUE, ...) {
 	}
 	
 	stopifnot(requireNamespace("rgeos"))
-	rgeos::gBuffer(x, byid=!dissolve, width=width, ...)
+	prj <- x@proj4string
+	x@proj4string <- CRS(as.character(NA))
+	x <- rgeos::gBuffer(x, byid=!dissolve, width=width, ...)
+	x@proj4string <- prj
+	x
 }
 )
 

@@ -8,6 +8,9 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 	function(x, y, ..., identity=FALSE){ 
 	
 	stopifnot(requireNamespace("rgeos"))
+	prj <- x@proj4string
+	if (is.na(prj)) prj <- y@proj4string
+	x@proj4string <- CRS(as.character(NA))
 	
 	yy <- list(y, ...)
 
@@ -20,18 +23,13 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 	} 
 
 	if (identity) {
-		return(.coverIdentity(x, yy))
+		x <- .coverIdentity(x, yy)
+		x@proj4string <- prj
+		return(x)
 	}
 	
-	haswarned <- FALSE
 	for (y in yy) {
-		if (! identical(proj4string(x), proj4string(y)) ) {
-			if (!haswarned) {
-				warning('non identical CRS')
-				haswarned <- TRUE
-			}
-			y@proj4string <- x@proj4string
-		}	
+		y@proj4string <- CRS(as.character(NA))
 		subs <- rgeos::gIntersects(x, y, byid=TRUE)
 		if (!any(subs)) {
 			next
@@ -41,6 +39,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 			x <- bind(x, int)
 		}
 	}
+	x@proj4string <- prj
 	x
 } 
 )
@@ -50,16 +49,8 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 
 .coverIdentity <- function(x, yy) {
 
-	haswarned <- FALSE
 	for (y in yy) {
-		if (! identical(proj4string(x), proj4string(y)) ) {
-			if (!haswarned) {
-				warning('non identical CRS')
-				haswarned <- TRUE
-			}
-			y@proj4string <- x@proj4string
-		}	
-		
+		y@proj4string <- CRS(as.character(NA))
 		i <- rgeos::gIntersects(x, y)
 		if (!i) {
 			next

@@ -69,11 +69,11 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 	
 		requireNamespace("rgeos")
 
-		if (! identical(proj4string(x), proj4string(y)) ) {
-			warning('non identical CRS')
-			y@proj4string <- x@proj4string
-		}
-		
+		prj <- x@proj4string
+		if (is.na(prj)) prj <- y@proj4string
+		x@proj4string <- CRS(as.character(NA))
+		y@proj4string <- CRS(as.character(NA))
+
 		if (!.hasSlot(x, "data")) {
 			d <- data.frame(erase_dissolve_ID=1:length(x))
 			rownames(d) <- row.names(x)
@@ -109,6 +109,8 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 		if (length(part2@polygons) > 1) {	
 			part2 <- aggregate(part2, colnames(part2@data))
 		}
+		part2@proj4string <- prj
+
 		if (dropframe) {
 			return( as(part2, 'SpatialPolygons') )
 		} else {

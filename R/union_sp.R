@@ -13,10 +13,10 @@ function(x, y) {
 	x <- spChFIDs(x, as.character(1:length(x)))
 	y <- spChFIDs(y, as.character(1:length(y)))
 
-	if (! identical(proj4string(x), proj4string(y)) ) {
-		warning('non identical CRS')
-		y@proj4string <- x@proj4string
-	}
+	prj <- x@proj4string
+	if (is.na(prj)) prj <- y@proj4string
+	x@proj4string <- CRS(as.character(NA))
+	y@proj4string <- CRS(as.character(NA))
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
 	
@@ -49,7 +49,7 @@ function(x, y) {
 			x <- x[[1]]
 		}
 	}
-
+	x@proj4string <- prj
 	x
 }
 )
@@ -65,6 +65,9 @@ function(x, y) {
 	if (n < 2) {
 		return(x)
 	}
+
+	prj <- x@proj4string
+	x@proj4string <- CRS(as.character(NA))
 	
 	#if (!rgeos::gIntersects(x)) {
 	# this is a useful test, but returned topologyerrors
@@ -89,7 +92,7 @@ function(x, y) {
 	u@data[!is.na(u@data)] <- 1
 	u@data[is.na(u@data)] <- 0
 	u$count <- rowSums(u@data)
-	
+	u@proj4string <- prj
 	u
 }	
 )

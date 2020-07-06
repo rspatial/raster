@@ -97,7 +97,7 @@ setMethod ('print' , 'Spatial',
 		cat('extent      : ' , e[1,1], ', ', e[1,2], ', ', e[2,1], ', ', e[2,2], '  (xmin, xmax, ymin, ymax)\n', sep="")
 	}
 	
-	cat('crs         :' , proj4string(x), '\n')
+	cat('crs         :' , x@proj4string@projargs, '\n')
 	
 	if (hasData) {
 		x <- x@data

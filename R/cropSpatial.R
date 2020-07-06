@@ -18,28 +18,31 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 			}
 			y@proj4string <- x@proj4string		
 		}
+
+		prj <- x@proj4string
+		if (is.na(prj)) prj <- y@proj4string
+		x@proj4string <- CRS(as.character(NA))
+		y@proj4string <- CRS(as.character(NA))
+
 		if (inherits(y, 'SpatialPolygons')) {
 			y <- rgeos::gUnaryUnion(y)
 			row.names(y) <- '1'
 			y <- geometry(y)
 		}
-		
-		if (!compareCRS(x, y) ) {
-			warning('non identical CRS')
-		}
-		y@proj4string <- x@proj4string
-		
+				
 		if (inherits(x, 'SpatialPolygons')) {
 			stopifnot(requireNamespace("rgeos"))
-			.cropSpatialPolygons(x, y, ...)
+			x <- .cropSpatialPolygons(x, y, ...)
 		} else if (inherits(x, 'SpatialLines')) {
 			stopifnot(requireNamespace("rgeos"))
-			.cropSpatialLines(x, y, ...)
+			x <- .cropSpatialLines(x, y, ...)
 		} else if (inherits(x, 'SpatialPoints')) {
-			.cropSpatialPoints(x, y, ...)
+			x <- .cropSpatialPoints(x, y, ...)
 		} else {
-			return( x[y] )
+			x <- x[y]
 		}
+		x@proj4string <- prj
+		x
 	}
 )	
 
@@ -68,7 +71,6 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 			row.names(y) <- as.character(rnx[ids])
 			data <- x@data[ids, ,drop=FALSE]
 			rownames(data) <- rnx[ids]
-			
 			return( SpatialPolygonsDataFrame(y, data) )
 		} else {
 			y <- rgeos::gIntersection(x, y, drop_lower_td=TRUE)
