@@ -208,7 +208,9 @@
 		} else {
 			fun2 <- fun
 		}
-		if (inherits(object, 'RasterLayer')) {
+		#if (inherits(object, 'RasterLayer')) {
+		
+		if (nl == 1) {
 			cv <- unlist(lapply(cv, fun2), use.names = FALSE)
 		} else {
 			np <- length(cv)
