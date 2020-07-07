@@ -124,10 +124,11 @@ setMethod(erase, signature(x='SpatialLines', y='SpatialPolygons'),
     function(x, y, ...){ 
 	
 		requireNamespace("rgeos")
-		if (! identical(proj4string(x), proj4string(y)) ) {
-			warning('non identical CRS')
-			y@proj4string <- x@proj4string
-		}
+		prj <- x@proj4string
+		if (is.na(prj)) prj <- y@proj4string
+		x@proj4string <- CRS(as.character(NA))
+		y@proj4string <- CRS(as.character(NA))
+
 		
 		if (!.hasSlot(x, 'data')) {
 			d <- data.frame(ID=1:length(x))
@@ -163,6 +164,8 @@ setMethod(erase, signature(x='SpatialLines', y='SpatialPolygons'),
 		if (length(part2@lines) > 1) {	
 			part2 <- aggregate(part2, colnames(part2@data))
 		}
+		
+		part2@proj4string <- prj
 		if (dropframe) {
 			return( as(part2, 'SpatialLines') )
 		} else {

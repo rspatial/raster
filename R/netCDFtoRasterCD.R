@@ -131,7 +131,7 @@
 	stopifnot(requireNamespace("ncdf4"))
 	stopifnot(type %in% c('RasterLayer', "RasterBrick"))
 	
-	nc <- ncdf4::nc_open(filename, suppress_dimvals = TRUE)
+	nc <- ncdf4::nc_open(filename, readunlim=FALSE, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
 	conv <- ncdf4::ncatt_get(nc, 0, "Conventions")
 		

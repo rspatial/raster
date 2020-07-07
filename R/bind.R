@@ -100,22 +100,19 @@ function(x, y, ..., variables=NULL) {
 setMethod('bind', signature(x='SpatialPolygons', y='SpatialPolygons'), 
 function(x, y, ..., keepnames=FALSE) {
 
-		x <- list(x, y, ...)
+		prj <- x@proj4string
+		if (is.na(prj)) prj <- y@proj4string
 
+		x <- list(x, y, ...)
 		#p <- sapply(x, proj4string)
 		#if (!isTRUE(all(p==p[1]))) { }
-		haswarned <- FALSE
-		projx <- proj4string(x[[1]])
-		for (i in 2:length(x)) {
-			if (is.na(proj4string(x[[i]]))) {
-				x[[i]]@proj4string <- x[[1]]@proj4string			
-			} else if (! identical(projx, proj4string(x[[i]])) ) {
-				if (!haswarned) {
-					warning('non identical CRS')
-					haswarned <- TRUE
-				}
-				x[[i]]@proj4string <- x[[1]]@proj4string			
+
+
+		for (i in 1:length(x)) {
+			if (!inherits(x[[i]], "SpatialPolygons")) {
+				stop("all additional arguments must be SpatialPolygons")
 			}
+			x[[i]]@proj4string <- CRS(as.character(NA))
 		}	
 				
 		rwn <- lapply(x, row.names)
@@ -146,7 +143,9 @@ function(x, y, ..., keepnames=FALSE) {
 
 		cls <- sapply(x, class)
 		if (all(cls == 'SpatialPolygons')) {
-			return( do.call( rbind, x))
+			x <- do.call( rbind, x)
+			x@proj4string <- prj
+			return(x)
 		}
 
 		if (all(cls == 'SpatialPolygonsDataFrame')) {
@@ -155,7 +154,9 @@ function(x, y, ..., keepnames=FALSE) {
 			x <- sapply(x, function(y) as(y, 'SpatialPolygons'))
 			x <- do.call( rbind, x)
 			rownames(dat) <- row.names(x)
-			return( SpatialPolygonsDataFrame(x, dat) )
+			x <- SpatialPolygonsDataFrame(x, dat) 
+			x@proj4string <- prj
+			return(x)
 		}
 
 		
@@ -182,7 +183,9 @@ function(x, y, ..., keepnames=FALSE) {
 #		if (! dataFound ) { return( do.call(rbind, x) ) }
 		x <- sapply(x, function(x) as(x, 'SpatialPolygons'))
 		x <- do.call(rbind, x)
-		SpatialPolygonsDataFrame(x, dat, match.ID=FALSE)
+		x <- SpatialPolygonsDataFrame(x, dat, match.ID=FALSE)
+		x@proj4string <- prj
+		x
 }
 )
 
@@ -192,20 +195,16 @@ function(x, y, ..., keepnames=FALSE) {
 setMethod('bind', signature(x='SpatialLines', y='SpatialLines'), 
 	function(x, y, ..., keepnames=FALSE) {
 
+		prj <- x@proj4string
+		if (is.na(prj)) prj <- y@proj4string
+
 		x <- list(x, y, ...)
 
-		haswarned <- FALSE
-		projx <- proj4string(x[[1]])
-		for (i in 2:length(x)) {
-			if (is.na(proj4string(x[[i]]))) {
-				x[[i]]@proj4string <- x[[1]]@proj4string			
-			} else if (! identical(projx, proj4string(x[[i]])) ) {
-				if (!haswarned) {
-					warning('non identical CRS')
-					haswarned <- TRUE
-				}
-				x[[i]]@proj4string <- x[[1]]@proj4string			
+		for (i in 1:length(x)) {
+			if (!inherits(x[[i]], "SpatialLines")) {
+				stop("all additional arguments must be SpatialLines")
 			}
+			x[[i]]@proj4string <- CRS(as.character(NA))
 		}	
 		
 		
@@ -237,7 +236,9 @@ setMethod('bind', signature(x='SpatialLines', y='SpatialLines'),
 
 		cls <- sapply(x, class)
 		if (all(cls == 'SpatialLines')) {
-			return( do.call( rbind, x))
+			x <- do.call( rbind, x)
+			x@proj4string <- prj
+			return(x)
 		}
 
 		if (all(cls == 'SpatialLinesDataFrame')) {
@@ -246,7 +247,9 @@ setMethod('bind', signature(x='SpatialLines', y='SpatialLines'),
 			x <- sapply(x, function(y) as(y, 'SpatialLines'))
 			x <- do.call( rbind, x)
 			rownames(dat) <- row.names(x)
-			return( SpatialLinesDataFrame(x, dat) )
+			x <- SpatialLinesDataFrame(x, dat)
+			x@proj4string <- prj
+			return(x)
 		}
 
 		
@@ -273,7 +276,11 @@ setMethod('bind', signature(x='SpatialLines', y='SpatialLines'),
 #		if (! dataFound ) { return( do.call(rbind, x) ) }
 		x <- sapply(x, function(x) as(x, 'SpatialLines'))
 		x <- do.call(rbind, x)
-		SpatialLinesDataFrame(x, dat, match.ID=FALSE)
+		x <- SpatialLinesDataFrame(x, dat, match.ID=FALSE)
+		x@proj4string <- prj
+		x
+
+
 }
 )
 
