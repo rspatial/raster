@@ -18,7 +18,7 @@
 		dodays <- FALSE
 		startTime <- substr(un, 13, 30)
 		mult <- 3600
-	} else if (substr(un, 1, 13) == "seconds since") { 
+	} else if ((substr(un, 1, 13) == "seconds since") ||  (substr(un, 1, 12) == "seconds from")) { 
 		doseconds <- TRUE
 		dodays <- FALSE
 		startTime = as.Date(substr(un, 15, 31))
