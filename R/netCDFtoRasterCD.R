@@ -23,6 +23,8 @@
 		dodays <- FALSE
 		startTime = as.Date(substr(un, 15, 31))
 		mult <- 1
+	} else {
+	  return(x)
 	}
 	if (!dodays) {
 		start <- strptime(startTime, "%Y-%m-%d %H:%M:%OS", tz = "UTC")
