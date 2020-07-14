@@ -6,7 +6,7 @@
 \title{Stretch}
 
 \description{
-Linear stretch of values in a Raster object. Provide the desired output range (minv and maxv) and the lower and upper bounds in the original data, either as quintiles (if \code{minq=0} and \code{maxq=1} you use the minimum and maximum cell values), or as actual values (\code{smin} and \code{smax}; e.g. precomputed quantile values). If \code{smin} and \code{smax} are both not \code{NA}, \code{minq} and \code{maxq} are ignored.
+Linear stretch of values in a Raster object. Provide the desired output range (minv and maxv) and the lower and upper bounds in the original data, either as quantiles (if \code{minq=0} and \code{maxq=1} you use the minimum and maximum cell values), or as actual values (\code{smin} and \code{smax}; e.g. precomputed quantile values). If \code{smin} and \code{smax} are both not \code{NA}, \code{minq} and \code{maxq} are ignored.
 }
 
 \usage{
@@ -18,10 +18,10 @@ Linear stretch of values in a Raster object. Provide the desired output range (m
 \item{x}{Raster object} 
 \item{minv}{numeric >= 0 and smaller than maxv. lower bound of stretched value}
 \item{maxv}{numeric <= 255 and larger than maxv. upper bound of stretched value}
-\item{minq}{numeric >= 0 and smaller than maxq. lower quintile bound of original value. Ignored if smin is supplied}
-\item{maxq}{numeric <= 1 and larger than minq. upper quintile bound of original value. Ignored if smax is supplied}
-\item{smin}{numeric < smax. user supplied lower value for the layers, to be used instead of a quintile computed by the function itself}
-\item{smax}{numeric > smin. user supplied upper value for the layers, to be used instead of a quintile computed by the function itself}
+\item{minq}{numeric >= 0 and smaller than maxq. lower quantile bound of original value. Ignored if smin is supplied}
+\item{maxq}{numeric <= 1 and larger than minq. upper quantile bound of original value. Ignored if smax is supplied}
+\item{smin}{numeric < smax. user supplied lower value for the layers, to be used instead of a quantile computed by the function itself}
+\item{smax}{numeric > smin. user supplied upper value for the layers, to be used instead of a quantile computed by the function itself}
 
 \item{samplesize}{numeric > 1. If samplesize < ncell(x), a regular sample of samplesize is taken from x to compute the quantiles (to speed things up)}
 \item{filename}{character. Filename for the output Raster object (optional)}
