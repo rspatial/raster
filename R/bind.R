@@ -144,7 +144,7 @@ function(x, y, ..., keepnames=FALSE) {
 		cls <- sapply(x, class)
 		if (all(cls == 'SpatialPolygons')) {
 			x <- do.call( rbind, x)
-			x@proj4string <- prj
+			if (inherits(x, "Spatial")) { x@proj4string <- prj }
 			return(x)
 		}
 

@@ -41,7 +41,7 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 		} else {
 			x <- x[y]
 		}
-		x@proj4string <- prj
+		if (inherits(x, "Spatial")) { x@proj4string <- prj }
 		x
 	}
 )	

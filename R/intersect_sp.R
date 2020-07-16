@@ -127,7 +127,7 @@ function(x, y) {
 		return(NULL)
 	}
 
-	x@proj4string <- prj
+	if (inherits(x, "Spatial")) { x@proj4string <- prj }
 	i <- which(apply(subs, 2, any))
 	x[i, ]
 }
@@ -294,7 +294,7 @@ function(x, y) {
 	
 	i <- rgeos::gIntersects(x, y, byid=TRUE)
 	i <- which(apply(i, 2, any))
-	x@proj4string <- prj
+	if (inherits(x, "Spatial")) { x@proj4string <- prj }
 	x[i, ]
 }
 )

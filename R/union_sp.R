@@ -49,7 +49,7 @@ function(x, y) {
 			x <- x[[1]]
 		}
 	}
-	x@proj4string <- prj
+	if (inherits(x, "Spatial")) { x@proj4string <- prj }
 	x
 }
 )
