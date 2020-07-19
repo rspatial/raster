@@ -101,7 +101,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 				nsubobs <- length(x@polygons[[i]]@Polygons)
 				p <- c(p, lapply(1:nsubobs, function(j) x@polygons[[i]]@Polygons[[j]]))
 			}
-			x <- SpatialPolygons(list(Polygons(p, '1')), proj4string=proj4string(x))
+			x <- SpatialPolygons(list(Polygons(p, '1')), proj4string=x@proj4string)
 		}
 		#if (hd) {
 		#	x <- SpatialPolygonsDataFrame(x, data=data.frame(ID=1))

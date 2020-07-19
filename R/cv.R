@@ -23,7 +23,7 @@ function(x, ..., aszero=FALSE, na.rm=FALSE) {
 	} else if (length(z) == 1 & aszero == TRUE) { 
 		return(0)
 	} else {
-		# abs to avoid very small (or zero) mean with e.g. -5:5
+	# abs to avoid very small (or zero) mean with e.g. -5:5
 		x <- mean(abs(z))  
 		if (x == 0) {
 			return(NA)

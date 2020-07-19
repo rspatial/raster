@@ -1,6 +1,6 @@
 
 
-setMethod('geom', signature(x='SpatialPolygons'), 
+setMethod("geom", signature(x="SpatialPolygons"), 
 	function(x, sepNA=FALSE, ...) {
 		
 		nobs <- length(x@polygons)
@@ -44,7 +44,7 @@ setMethod('geom', signature(x='SpatialPolygons'),
 		}
 		
 		obs <- do.call(rbind, objlist)
-		colnames(obs) <- c('object', 'part', 'cump', 'hole', 'x', 'y')
+		colnames(obs) <- c("object", "part", "cump", "hole", "x", "y")
 		rownames(obs) <- NULL
 		
 		if (sepNA) {
@@ -56,7 +56,7 @@ setMethod('geom', signature(x='SpatialPolygons'),
 
 
 
-setMethod('geom', signature(x='SpatialLines'), 
+setMethod("geom", signature(x="SpatialLines"), 
 	function(x, sepNA=FALSE, ...) {
 			
 		nobs <- length(x@lines)
@@ -82,7 +82,7 @@ setMethod('geom', signature(x='SpatialLines'),
 			}
 		}
 		obs <- do.call(rbind, objlist)
-		colnames(obs) <- c('object', 'part', 'cump', 'x', 'y')
+		colnames(obs) <- c("object", "part", "cump", "x", "y")
 		rownames(obs) <- NULL
 
 		if (sepNA) {
@@ -93,11 +93,11 @@ setMethod('geom', signature(x='SpatialLines'),
 )
 
 
-setMethod('geom', signature(x='SpatialPoints'), 
+setMethod("geom", signature(x="SpatialPoints"), 
 	function(x, ...) {
 		xy <- coordinates(x)[,1:2,drop=FALSE]
 		xy <- cbind(1:nrow(xy), xy)
-		colnames(xy) <- c('object', 'x', 'y')
+		colnames(xy) <- c("object", "x", "y")
 		return(xy)
 	}
 )
