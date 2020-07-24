@@ -7,7 +7,7 @@
 # To sp pixel/grid objects	
 
 
-setAs('Raster', 'GridTopology', 
+setAs("Raster", "GridTopology", 
 	function(from) {
 		rs <- res(from)
 		orig <- bbox(from)[,1] + 0.5 * rs
@@ -15,38 +15,38 @@ setAs('Raster', 'GridTopology',
 	}
 )
 
-setAs('GridTopology', 'RasterLayer',
+setAs("GridTopology", "RasterLayer",
 	function(from) {
 		raster(extent(from), nrows=from@cells.dim[2], ncols=from@cells.dim[1])
 	}
 )
 
 
-setAs('Raster', 'SpatialPixels', 
+setAs("Raster", "SpatialPixels", 
 	function(from) {
 		if (rotated(from)) {
-			stop('\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* object\n or first use the "rectify" function')
+			stop("\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* object\n or first use the 'rectify' function")
 		}	
 		sp <- rasterToPoints(from, fun=NULL, spatial=FALSE)
 		
 		r <- raster(from)
 		sp <- SpatialPoints(sp[,1:2,drop=FALSE], proj4string= .getCRS(r))
-		grd <- as(r, 'GridTopology')
+		grd <- as(r, "GridTopology")
 		SpatialPixels(points=sp, grid=grd)
 	}
 )
 
-setAs('Raster', 'SpatialPixelsDataFrame', 
+setAs("Raster", "SpatialPixelsDataFrame", 
 	function(from) { 
 		if (rotated(from)) {
-			stop('\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* object\n or first use the "rectify" function')
+			stop("\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* object\n or first use the 'rectify' function")
 		}	
 		v <- rasterToPoints(from, fun=NULL, spatial=FALSE)
 
 		r <- raster(from)
 		sp <- SpatialPoints(v[,1:2,drop=FALSE], proj4string= .getCRS(r))
 
-		grd <- as(r, 'GridTopology')
+		grd <- as(r, "GridTopology")
 		
 		if (ncol(v) > 2) {
 			v <- data.frame(v[, 3:ncol(v), drop = FALSE])
@@ -60,37 +60,37 @@ setAs('Raster', 'SpatialPixelsDataFrame',
 			}
 			SpatialPixelsDataFrame(points=sp, data=v, grid=grd)
 		} else {
-			warning('object has no values, returning a "SpatialPixels" object')
+			warning("object has no values, returning a 'SpatialPixels' object")
 			SpatialPixels(points=sp, grid=grd)
 		}
 	}
 )
 
 
-setAs('Raster', 'SpatialGrid', 
+setAs("Raster", "SpatialGrid", 
 	function(from) { 
 		if (rotated(from)) {
-			stop('\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* from\n or first use the "rectify" function')
+			stop("\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* from\n or first use the 'rectify' function")
 		}	
 		r <- raster(from)
-		grd <- as(r, 'GridTopology')
+		grd <- as(r, "GridTopology")
 		SpatialGrid(grd, proj4string=.getCRS(r))
 	}
 )
 
-setAs('Raster', 'SpatialGridDataFrame', 
+setAs("Raster", "SpatialGridDataFrame", 
 	function(from) { 
 		if (rotated(from)) {
-			stop('\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* from\n or first use the "rectify" function')
+			stop("\n Cannot coerce because the object is rotated.\n Either coerce to SpatialPoints* from\n or first use the 'rectify' function")
 		}	
 
 		r <- raster(from)
-		grd <- as(r, 'GridTopology')
+		grd <- as(r, "GridTopology")
 
 		if (hasValues(from)) {
 			sp <- SpatialGridDataFrame(grd, proj4string=.getCRS(r), data=as.data.frame(from))
 		} else { 
-			warning('object has no values, returning a "SpatialGrid" object')
+			warning("object has no values, returning a 'SpatialGrid' object")
 			sp  <- SpatialGrid(grd, proj4string=.getCRS(r))
 		}
 		sp
@@ -100,48 +100,48 @@ setAs('Raster', 'SpatialGridDataFrame',
 
 # To sp vector objects	
 
-setAs('Raster', 'SpatialPolygons', 
+setAs("Raster", "SpatialPolygons", 
 	function(from){ 
 		r <- rasterToPolygons(from[[1]])
-		as(r, 'SpatialPolygons')
+		as(r, "SpatialPolygons")
 	}
 )
 
-setAs('Raster', 'SpatialPolygonsDataFrame', 
+setAs("Raster", "SpatialPolygonsDataFrame", 
 	function(from){ 
 		return( rasterToPolygons(from) ) 
 	} 
 )
 
-setAs('Raster', 'SpatialPoints', 
+setAs("Raster", "SpatialPoints", 
 	function(from) { 
 		SpatialPoints(rasterToPoints(from, spatial=FALSE)[,1:2], proj4string=.getCRS(from))
 	}
 )
 
-setAs('Raster', 'SpatialPointsDataFrame', 
+setAs("Raster", "SpatialPointsDataFrame", 
 	function(from) { 
 		rasterToPoints(from, spatial=TRUE)
 	}
 )
 
 
-setAs('Extent', 'SpatialPolygons', 
+setAs("Extent", "SpatialPolygons", 
 	function(from){ 
 		p <- rbind(c(from@xmin, from@ymin), c(from@xmin, from@ymax), c(from@xmax, from@ymax), c(from@xmax, from@ymin), c(from@xmin, from@ymin) )
-		SpatialPolygons(list(Polygons(list(Polygon(p)), '1'))) 
+		SpatialPolygons(list(Polygons(list(Polygon(p)), "1"))) 
 	}
 )
 
-setAs('Extent', 'SpatialLines', 
+setAs("Extent", "SpatialLines", 
 	function(from){ 
 		p <- rbind(c(from@xmin, from@ymin), c(from@xmin, from@ymax), c(from@xmax, from@ymax), c(from@xmax, from@ymin), c(from@xmin, from@ymin) )
-		SpatialLines(list(Lines(list(Line(p)), '1'))) 
+		SpatialLines(list(Lines(list(Line(p)), "1"))) 
 	}
 )
 
 
-setAs('Extent', 'SpatialPoints', 
+setAs("Extent", "SpatialPoints", 
 	function(from){ 
 		p <- cbind( x=c( from@xmin, from@xmin, from@xmax, from@xmax), y=c(from@ymin, from@ymax, from@ymin, from@ymax) )
 		SpatialPoints(p)
@@ -151,19 +151,19 @@ setAs('Extent', 'SpatialPoints',
 
 # to RasterLayer
 
-setAs('SpatialGrid', 'RasterLayer', 
+setAs("SpatialGrid", "RasterLayer", 
 	function(from){ return(raster (from)) }
 )
 
-setAs('SpatialPixels', 'RasterLayer', 
+setAs("SpatialPixels", "RasterLayer", 
 	function(from){ return(raster (from)) }
 )
 
 
 
-setAs('SpatialGrid', 'BasicRaster', 
+setAs("SpatialGrid", "BasicRaster", 
 	function(from){ 
-		to <- methods::new('BasicRaster')
+		to <- methods::new("BasicRaster")
 		to@extent <- extent(from)
 		crs(to) <- from@proj4string
 		dim(to) <- c(from@grid@cells.dim[2], from@grid@cells.dim[1])	
@@ -172,9 +172,9 @@ setAs('SpatialGrid', 'BasicRaster',
 )
 
 
-setAs('SpatialPixels', 'BasicRaster', 
+setAs("SpatialPixels", "BasicRaster", 
 	function(from){ 
-		to <- methods::new('BasicRaster')
+		to <- methods::new("BasicRaster")
 		to@extent <- extent(from)
 		crs(to) <- from@proj4string
 		dim(to) <- c(from@grid@cells.dim[2], from@grid@cells.dim[1])	
@@ -185,13 +185,13 @@ setAs('SpatialPixels', 'BasicRaster',
 
 
 # to RasterStack
-setAs('SpatialGrid', 'RasterStack',
+setAs("SpatialGrid", "RasterStack",
 	function(from){ 
 		stack(from)
 	}
 )
 
-setAs('SpatialPixels', 'RasterStack', 
+setAs("SpatialPixels", "RasterStack", 
 	function(from){
 		stack(from)
 	}
@@ -200,14 +200,14 @@ setAs('SpatialPixels', 'RasterStack',
 
 # to RasterBrick
 
-setAs('SpatialGrid', 'RasterBrick',
+setAs("SpatialGrid", "RasterBrick",
 	function(from){ 
 		return(brick(from)) 
 	}
 )
 
 
-setAs('SpatialPixels', 'RasterBrick', 
+setAs("SpatialPixels", "RasterBrick", 
 	function(from){ 
 		return(brick(from)) 
 	}
@@ -215,14 +215,14 @@ setAs('SpatialPixels', 'RasterBrick',
 
 
 
-setAs('STFDF', 'RasterBrick', 
+setAs("STFDF", "RasterBrick", 
 	function(from) {
 		time <- from@time
 		nc <- ncol(from@data)
 		r <- raster(from@sp)
 		b <- brick(r, nl=length(time) * nc)
 		b <- setZ(b, rep(time, nc)) # rep changes some time formats
-		names(b) <- paste(rep(colnames(from@data), each=length(time)), as.character(time), sep='')
+		names(b) <- paste(rep(colnames(from@data), each=length(time)), as.character(time), sep="")
 		# need to improve this for character, factor variables
 		m <- as.numeric(as.matrix(from@data))
 		setValues(b, m)
@@ -230,47 +230,47 @@ setAs('STFDF', 'RasterBrick',
 )
 
 
-setAs('STSDF', 'RasterBrick', 
+setAs("STSDF", "RasterBrick", 
 	function(from) {
-		from <- as(from, 'STFDF')
-		as(from, 'RasterBrick')
+		from <- as(from, "STFDF")
+		as(from, "RasterBrick")
 	}
 )
 
 
 
 # Between Raster objects
-setAs('RasterStack', 'RasterLayer', 
+setAs("RasterStack", "RasterLayer", 
 	function(from){ return( raster(from)) }
 )
 
-setAs('RasterBrick', 'RasterLayer', 
+setAs("RasterBrick", "RasterLayer", 
 	function(from){ return( raster(from)) }
 )
 
-setAs('RasterStack', 'RasterBrick', 
+setAs("RasterStack", "RasterBrick", 
 	function(from){ return( brick(from)) }
 )
 
 
-setAs('RasterBrick', 'RasterStack', 
+setAs("RasterBrick", "RasterStack", 
 	function(from){ return( stack(from)) }
 )
 
-setAs('RasterLayer', 'RasterStack', 
+setAs("RasterLayer", "RasterStack", 
 	function(from){ return( stack(from)) }
 )
 
-setAs('RasterLayer', 'RasterBrick', 
+setAs("RasterLayer", "RasterBrick", 
 	function(from){ return( brick(from)) }
 )
 
-setAs('matrix', 'RasterLayer',
+setAs("matrix", "RasterLayer",
 	function(from){ return(raster(from)) }
 )
 
-setAs('RasterLayer', 'matrix',
-	function(from){ return( getValues(from, format='matrix')) }
+setAs("RasterLayer", "matrix",
+	function(from){ return( getValues(from, format="matrix")) }
 )
 
 
@@ -286,26 +286,26 @@ setAs('RasterLayer', 'matrix',
 	
 
 # spatstat
-setAs('im', 'RasterLayer', 
+setAs("im", "RasterLayer", 
 	function(from) {
-		r <- raster(nrows=from$dim[1], ncols=from$dim[2], xmn=from$xrange[1], xmx=from$xrange[2], ymn=from$yrange[1], ymx=from$yrange[2], crs='')
+		r <- raster(nrows=from$dim[1], ncols=from$dim[2], xmn=from$xrange[1], xmx=from$xrange[2], ymn=from$yrange[1], ymx=from$yrange[2], crs="")
 		r <- setValues(r, from$v)
-		flip(r, direction='y')
+		flip(r, direction="y")
 	}
 )
 
 # adehabitat
-setAs('asc', 'RasterLayer', 
+setAs("asc", "RasterLayer", 
 	function(from) {
 		d <- t(from[])
 		d <- d[nrow(d):1, ]
 		type <- attr(from, "type") 
-		if (type == 'factor') {
-			warning('factor type converted to numeric')
+		if (type == "factor") {
+			warning("factor type converted to numeric")
 		}
 		cz <- attr(from, "cellsize")
-		xmn <- attr(from, 'xll') - 0.5 * cz
-		ymn <- attr(from, 'yll') - 0.5 * cz
+		xmn <- attr(from, "xll") - 0.5 * cz
+		ymn <- attr(from, "yll") - 0.5 * cz
 		xmx <- xmn + ncol(d) * cz
 		ymx <- ymn + nrow(d) * cz
 		e <- extent(xmn, xmx, ymn, ymx)
@@ -316,14 +316,14 @@ setAs('asc', 'RasterLayer',
 )
 
 
-setAs('RasterLayer', 'asc', 
+setAs("RasterLayer", "asc", 
 	function(from) {
-		asc <- getValues(from, format='matrix')
+		asc <- getValues(from, format="matrix")
 		asc <- asc[nrow(asc):1, ]
 		attr(asc, "cellsize") <- xres(from)
 		attr(asc, "xll") <- xmin(from) + 0.5 * xres(from)
 		attr(asc, "yll") <- ymin(from) + 0.5 * yres(from)
-		attr(asc, "type") <- 'numeric'
+		attr(asc, "type") <- "numeric"
 		class(asc) <- "asc"		
 		return(asc)	
 	}
@@ -331,14 +331,14 @@ setAs('RasterLayer', 'asc',
 
 
 
-setAs('kasc', 'RasterBrick', 
+setAs("kasc", "RasterBrick", 
 	function(from) {
 		names <- colnames(from)
 		cz <- attr(from, "cellsize")
-		ncol <- attr(from, 'ncol')
-		nrow <- attr(from, 'nrow')
-		xmn <- attr(from, 'xll') - 0.5 * cz
-		ymn <- attr(from, 'yll') - 0.5 * cz
+		ncol <- attr(from, "ncol")
+		nrow <- attr(from, "nrow")
+		xmn <- attr(from, "xll") - 0.5 * cz
+		ymn <- attr(from, "yll") - 0.5 * cz
 		xmx <- xmn + ncol * cz
 		ymx <- ymn + nrow * cz
 		e <- extent(xmn, xmx, ymn, ymx)
@@ -355,14 +355,14 @@ setAs('kasc', 'RasterBrick',
 )
 
 
-setAs('kasc', 'RasterStack', 
+setAs("kasc", "RasterStack", 
 	function(from) {
 		names <- colnames(from)
 		cz <- attr(from, "cellsize")
-		ncol <- attr(from, 'ncol')
-		nrow <- attr(from, 'nrow')
-		xmn <- attr(from, 'xll') - 0.5 * cz
-		ymn <- attr(from, 'yll') - 0.5 * cz
+		ncol <- attr(from, "ncol")
+		nrow <- attr(from, "nrow")
+		xmn <- attr(from, "xll") - 0.5 * cz
+		ymn <- attr(from, "yll") - 0.5 * cz
 		xmx <- xmn + ncol * cz
 		ymx <- ymn + nrow * cz
 		e <- extent(xmn, xmx, ymn, ymx)
@@ -384,7 +384,7 @@ setAs('kasc', 'RasterStack',
 
 # kernel density estimate (kde) from package ks
 
-setAs('kde', 'RasterLayer', 
+setAs("kde", "RasterLayer", 
 	function(from) {
 		x <- t(from$estimate)
 		x <- x[nrow(x):1,]
@@ -394,7 +394,7 @@ setAs('kde', 'RasterLayer',
 )
 
 
-setAs('grf', 'RasterBrick', 
+setAs("grf", "RasterBrick", 
 	function(from) {
 		x <- from$data
 		if (!is.matrix(x)) {
@@ -407,14 +407,14 @@ setAs('grf', 'RasterBrick',
 		
 		x = aperm(x, perm=c(2,1,3))
 		b <- brick(x)
-		b <- flip(b, 'y')
+		b <- flip(b, "y")
 		extent(b) <- extent(as.vector(apply(from$coords, 2, range)))
 		b
 	}
 )
 
 
-setAs('grf', 'RasterLayer', 
+setAs("grf", "RasterLayer", 
 	function(from) {
 		x <- from$data
 		if (is.matrix(x)) {
@@ -432,11 +432,11 @@ setAs('grf', 'RasterLayer',
 
 
 
-# setAs('RasterStackBrick', 'big.matrix', 
+# setAs("RasterStackBrick", "big.matrix", 
 # function(from, filename="") {
 	# b <- big.matrix(ncell(from), nlayers(from), backingfile=filename )
 	# names(b) <- colnames(from)
-	# op <- options('bigmemory.allow.dimnames')
+	# op <- options("bigmemory.allow.dimnames")
 	# options(bigmemory.allow.dimnames=TRUE)
 	# colnames(b) <- names(from)
 	# options(bigmemory.allow.dimnames=op)
