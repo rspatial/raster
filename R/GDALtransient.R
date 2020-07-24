@@ -114,6 +114,12 @@
 	rgdal::GDALcall(transient, "SetGeoTransform", gt)
 	
 	if (.useproj6() & !is.na(r@crs)) {
+		if (!is.na(r@crs)) {
+			cmt <- attr(r@crs, "comment")
+			if (is.null(cmt)) {
+				r@crs <- CRS(r@crs@projargs)
+			}
+		}
 		rgdal::GDALcall(transient, "SetProjectWkt", r@crs) 
 	} else {
 		prj <- proj4string(r)
