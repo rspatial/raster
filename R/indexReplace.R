@@ -115,7 +115,7 @@ setReplaceMethod("[", c("RasterLayer","missing","missing"),
 			x@data@values[i] <- value
 			x <- setMinMax(x)
 		} else {
-			vals <- rep(NA, times=ncell(x))
+			vals <- rep(NA, times=ncell(x)*nl)
 			vals[i] <- value
 			x <- setValues(x, vals)
 		}

@@ -26,6 +26,8 @@
 	cv <- list()
 	obj <- raster(object) 
 # ?	centralcells <- cellFromXY(obj, xy)
+
+# needs to deal with global wrapping....
 	if (couldBeLonLat(obj)) { 
 		# from m to degrees
 		bufy <- buffer / 111319.5
