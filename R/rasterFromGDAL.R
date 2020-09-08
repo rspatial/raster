@@ -230,7 +230,7 @@
 	
 	if (type == 'RasterBrick') {
 		ub <- unique(bnames)
-		if (length(ub) == nlayers(r)) {
+		if ((ub != "") && (length(ub) == nlayers(r))) {
 			names(r) <- bnames		
 		} else {
 			names(r) <- rep(gsub(" ", "_", extension(basename(filename), "")), nbands)
@@ -238,7 +238,7 @@
 	} else {
 		lnames <- gsub(" ", "_", extension(basename(filename), ""))
 		if (nbands > 1) {
-			lnames <- paste(lnames, '_', band, sep='')
+			lnames <- paste0(lnames, '_', band)
 		}
 		names(r) <- lnames
 		
