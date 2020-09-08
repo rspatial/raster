@@ -8,8 +8,8 @@ setMethod('flip', signature(x='RasterLayer', direction='ANY'),
 	function(x, direction='y', filename='', ...)  {
 	
 		filename <- trim(filename)
-		outRaster <- raster(x)
-
+		outRaster <- .copyWithProperties(x)	
+	
 		if (direction[1] == 1) { 
 			direction <- 'x'
 		} else if (direction[1] == 2) { 
