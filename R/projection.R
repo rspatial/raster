@@ -83,8 +83,12 @@ setMethod("wkt", signature(obj="Raster"),
 		crs <- crs(x)
 		x <- .makeCRS(x[1], x[2])
 	} else if (is.character(x)) {
-		x <- CRS(x)
-
+		x <- trimws(x)
+		if (substr(x, 1, 1) == "+") {
+			x <- CRS(x)
+		} else {
+			x <- CRS(SRS_string = x)
+		}
 		#if (trimws(x) == "") {
 		#	x <- return(CRS())
 		#} else {
@@ -93,7 +97,10 @@ setMethod("wkt", signature(obj="Raster"),
 		#	x@projargs <- rgdal::showP4(wkt)
 		#	attr(x, "comment") <- wkt
 		#}
-	} else if (is.na(x)) {
+	} else if (is.numeric(x)) {
+		x <- paste0("EPSG:", round(x))
+		x <- CRS(SRS_string = x)	
+	} else { #if (is.na(x)) {
 		x <- CRS()
 	}
 	x
