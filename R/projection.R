@@ -100,9 +100,9 @@ setMethod("wkt", signature(obj="Raster"),
 	} else if (is.numeric(x)) {
 		x <- paste0("EPSG:", round(x))
 		x <- CRS(SRS_string = x)	
-	} else { #if (is.na(x)) {
+	} else if (is.na(x)) {
 		x <- CRS()
-	}
+	} # else if "is CRS"
 	x
 }
 
