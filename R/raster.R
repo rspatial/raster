@@ -182,7 +182,7 @@ setMethod('raster', signature(x='RasterStack'),
 		} else {
 			r <- raster(extent(x))
 			dim(r) <- c(nrow(x), ncol(x))
-			projection(r) <-.getCRS(x)
+			projection(r) <- .getCRS(x)
 		}
 		extent(r) <- extent(x) # perhaps it was changed by user and different on disk
 		if (rotated(x@layers[[1]])) {

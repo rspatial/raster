@@ -84,7 +84,9 @@ setMethod("wkt", signature(obj="Raster"),
 		x <- .makeCRS(x[1], x[2])
 	} else if (is.character(x)) {
 		x <- trimws(x)
-		if (substr(x, 1, 1) == "+") {
+		if (x == "") {
+			x <- CRS()
+		} else if (substr(x, 1, 1) == "+") {
 			x <- CRS(x)
 		} else {
 			x <- CRS(SRS_string = x)
