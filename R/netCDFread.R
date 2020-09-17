@@ -124,7 +124,10 @@
 		} else {
 			start <- c(col, row, layer, x@data@level)
 			count <- c(ncols, nrows, nn, 1)
-		}		
+		}	
+	} else if (nc$var[[zvar]]$ndims == 2) {
+		start <- c(col, row)
+		count <- c(ncols, nrows)		
 	} else {
 		start <- c(col, row, layer)
 		count <- c(ncols, nrows,  nn)
