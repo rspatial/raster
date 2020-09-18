@@ -84,6 +84,18 @@ setMethod('extent', signature(x='Spatial'),
 	}
 )
 
+
+setMethod('extent', signature(x='bbox'), 
+	function(x){ 
+		e <- methods::new('Extent')
+		e@xmin <- x[1]
+		e@xmax <- x[3]
+		e@ymin <- x[2]
+		e@ymax <- x[4]
+		return(e) 
+	}
+)
+
 setMethod('extent', signature(x='sf'), 
 	function(x){ 
 		if (!requireNamespace("sf")) {
