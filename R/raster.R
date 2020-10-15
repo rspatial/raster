@@ -130,9 +130,7 @@ setMethod('raster', signature(x='matrix'),
 
 setMethod('raster', signature(x='character'), 
 	function(x, band=1, ...) {
-		if (substr(x, 1, 3) != 'PG:') {
-			x <- .fullFilename(x)
-		}
+		x <- .fullFilename(x)
 		r <- .rasterObjectFromFile(x, band=band, objecttype='RasterLayer', ...)
 		return(r)
 	}

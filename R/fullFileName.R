@@ -12,7 +12,10 @@
 .fullFilename <- function(x, expand=FALSE) {
 	x <- trim(x)
 	if (identical(basename(x), x)) {
-		x <- file.path(getwd(), x)
+		#exlude PG:xxx and perhaps others
+		if (length(grep(":", x)) == 0) {
+			x <- file.path(getwd(), x)
+		}
 	}
 	if (expand) {
 		x <- path.expand(x)
