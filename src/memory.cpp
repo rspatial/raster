@@ -1,9 +1,7 @@
 #ifdef _WIN32 
 #include <windows.h>
 #elif __linux__
-#include "sys/types.h"
-#include "sys/sysinfo.h"
-#include <unistd.h>
+#include <stdio.h>
 #elif __APPLE__
 #include <mach/vm_statistics.h>
 #include <mach/mach_types.h>
@@ -20,9 +18,29 @@ double availableRAM(double ram) {
 		GlobalMemoryStatusEx(&statex);
 		ram = statex.ullAvailPhys;
 	#elif __linux__
-		struct sysinfo memInfo;
-		sysinfo (&memInfo);
-		ram = memInfo.freeram;
+		// source available memory from /proc/meminfo
+		// default to searching for MemAvailable field (kernel versions >= 3.14)
+		FILE *fp = popen("awk '/MemAvailable/ {print $2}' /proc/meminfo", "r");
+		if (fp == NULL) {
+			return ram;
+		}
+		double ramkb;
+		fscanf(fp, "%lf", &ramkb);  // returned in kB
+		pclose(fp);
+		if (ramkb > 0) {
+			return ramkb * 1000.;
+		}
+		
+		// fallback to estimating memory from other fields if MemAvailable not found
+		FILE *fp2 = popen("awk -v low=$(grep low /proc/zoneinfo | awk '{k+=$2}END{print k}') '{a[$1]=$2}END{print a[\"MemFree:\"]+a[\"Active(file):\"]+a[\"Inactive(file):\"]+a[\"SReclaimable:\"]-(12*low);}' /proc/meminfo", "r");
+		if (fp2 == NULL) {
+			return ram;
+		}
+		fscanf(fp2, "%lf", &ramkb);  // returned in kB
+		pclose(fp2);
+		if (ramkb > 0) {
+			return ramkb * 1000.;
+		}
 	#elif __APPLE__
 		vm_size_t page_size;
 		mach_port_t mach_port;
@@ -43,4 +61,3 @@ double availableRAM(double ram) {
 	
 	return ram;
 }
-
