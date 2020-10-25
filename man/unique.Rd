@@ -38,9 +38,7 @@ vector or matrix
 r <- raster(ncol=10, nrow=10)
 values(r) <- round(runif(ncell(r))*10)
 unique(r)
-u <- unique(stack(r, round(r/2)))
-do.call(rbind, u)
-lapply(u, unique)
+unique(stack(r, round(r/2)))
 }
 
 \keyword{spatial}
