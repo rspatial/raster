@@ -276,6 +276,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 
 	if (alignOnly) {
 		to <- .getAlignedRaster(to, from)
+		return (to)
 	}
 	
 #	pbb <- projectExtent(to,.getCRS(from))
@@ -303,7 +304,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 
 	names(to) <- names(from)
 	if ( ! hasValues(from) ) {
-		warning("'from' has no cell values")
+		#warning("'from' has no cell values")
 		return(to)
 	}
 	
