@@ -1,3 +1,6 @@
+// Robert Hijmans with improvments by Ben Fasoli
+// https://github.com/rspatial/raster/pull/175
+
 #ifdef _WIN32 
 #include <windows.h>
 #elif __linux__
