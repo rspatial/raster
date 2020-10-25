@@ -25,7 +25,7 @@ double availableRAM(double ram) {
 			return ram;
 		}
 		double ramkb;
-		fscanf(fp, "%lf", &ramkb);  // returned in kB
+		int ok = fscanf(fp, "%lf", &ramkb);  // returned in kB
 		pclose(fp);
 		if (ramkb > 0) {
 			return ramkb * 1000.;
@@ -36,7 +36,7 @@ double availableRAM(double ram) {
 		if (fp2 == NULL) {
 			return ram;
 		}
-		fscanf(fp2, "%lf", &ramkb);  // returned in kB
+		ok = fscanf(fp2, "%lf", &ramkb);  // returned in kB
 		pclose(fp2);
 		if (ramkb > 0) {
 			return ramkb * 1000.;
