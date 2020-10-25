@@ -4,11 +4,7 @@
 # version 1
 # Licence GPL v3
 
-
-if (!isGeneric("%in%")) {
-	setGeneric("%in%", function(x, table)
-		standardGeneric("%in%"))
-}	
+	
 
 setMethod("%in%", signature(x='Raster', table='ANY'),
 	function(x, table) {

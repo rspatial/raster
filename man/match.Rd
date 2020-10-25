@@ -30,7 +30,7 @@ x \%in\% table
 }
 
 \value{
-Raster* obeject
+Raster* object
 }
 
 \seealso{ \code{\link{calc}, \link[base]{match}} }

@@ -5,6 +5,7 @@
 \alias{extent,BasicRaster-method}
 \alias{extent,Spatial-method}
 \alias{extent,sf-method}
+\alias{extent,bbox-method}
 \alias{extent,matrix-method}
 \alias{extent,numeric-method}
 \alias{extent,list-method}
@@ -28,7 +29,7 @@ extent(x, ...)
 }
 
 \arguments{
-\item{x}{Raster* or Extent object, a matrix, or a vector of four numbers } 
+\item{x}{Raster* or Extent object, a matrix, a bbox, or a vector of four numbers } 
 \item{...}{Additional arguments. When x is a single number representing 'xmin', you can pass three additional numbers (xmax, ymin, ymax)
 
 When \code{x} is a Raster* object, you can pass four additional arguments to crop the extent: \code{r1, r2, c1, c2}, representing the first and last row and column number }

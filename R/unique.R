@@ -54,17 +54,17 @@ function(x, incomparables=FALSE, na.last=NA, progress="", ...) {
 	if ( inMemory(x) ) {
 	
 		x <- unique(getValues(x), incomparables=incomparables, ...)
-		if (is.list(x)) {
-			for (i in 1:length(x)) {
-				x[[i]] <- sort(x[[i]], na.last=na.last)
-			}
-		} else {
-			xx <- vector(length=ncol(x), mode='list')
-			for (i in 1:ncol(x)) {
-				xx[[i]] <- sort(x[,i], na.last=na.last)
-			}
-			x <- xx
-		}
+#		if (is.list(x)) {
+#			for (i in 1:length(x)) {
+#				x[[i]] <- sort(x[[i]], na.last=na.last)
+#			}
+#		} else {
+#			xx <- vector(length=ncol(x), mode='list')
+#			for (i in 1:ncol(x)) {
+#				xx[[i]] <- sort(x[,i], na.last=na.last)
+#			}
+#			x <- xx
+#		}
 		return(x)
 		
 	} else {
