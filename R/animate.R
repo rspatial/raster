@@ -1,8 +1,4 @@
 
-if (!isGeneric("animate")) {
-	setGeneric("animate", function(x, ...)
-		standardGeneric("animate"))
-}	
 
 setMethod('animate', signature(x='RasterStackBrick'), 
 function(x, pause=0.25, main, zlim, maxpixels=50000, n=10, ...) {
