@@ -265,7 +265,7 @@
 		}
 	}
 	
-	polinfo <- matrix(NA, nrow=npol * 2, ncol=6)
+	polinfo <- data.frame(matrix(NA, nrow=npol * 2, ncol=6))
 	colnames(polinfo) <- c('part', 'miny', 'maxy', 'value', 'hole', 'object')
 	addpol <- matrix(NA, nrow=500, ncol=6)
 
