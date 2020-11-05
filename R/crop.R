@@ -55,8 +55,11 @@ function(x, y, filename='', snap='near', datatype=NULL, ...) {
 	row1 <- rowFromY(x, ymax(out)-0.5*yres(out))
 	row2 <- rowFromY(x, ymin(out)+0.5*yres(out))
 	if (row1==1 & row2==nrow(x) & col1==1 & col2==ncol(x)) {
+	if (filename == "") { 
 		return(x)
-	}
+	} else {
+		return(writeRaster(x, filename=filename, datatype=datatype, ...))
+	}	
 
 	nc <- ncol(out)
 	
