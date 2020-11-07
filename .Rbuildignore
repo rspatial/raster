@@ -2,7 +2,7 @@
 LICENSE
 README.md
 TODO
-^revdep$
+^revdep/
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .travis.yml

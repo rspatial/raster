@@ -67,6 +67,11 @@ setMethod("wkt", signature(obj="Raster"),
 
 
 .getCRS <- function(x) {
+
+	if (methods::extends(class(x), "CRS")) { 
+		return(x)
+	}
+
 	if (is.null(x)) {
 		x <- CRS()
 	} else if (methods::extends(class(x), "BasicRaster")) { 
@@ -82,6 +87,8 @@ setMethod("wkt", signature(obj="Raster"),
 	} else if (inherits(x, "SpatVector")) { 
 		crs <- crs(x)
 		x <- .makeCRS(x[1], x[2])
+	} else if (is.na(x)) {
+		x <- CRS()
 	} else if (is.character(x)) {
 		x <- trimws(x)
 		if (x == "") {
@@ -102,7 +109,7 @@ setMethod("wkt", signature(obj="Raster"),
 	} else if (is.numeric(x)) {
 		x <- paste0("EPSG:", round(x))
 		x <- CRS(SRS_string = x)	
-	} else if (is.na(x)) {
+	} else {
 		x <- CRS()
 	} # else if "is CRS"
 	x

@@ -267,8 +267,8 @@
 	
 	polinfo <- data.frame(matrix(NA, nrow=npol * 2, ncol=6))
 	colnames(polinfo) <- c('part', 'miny', 'maxy', 'value', 'hole', 'object')
-	addpol <- matrix(NA, nrow=500, ncol=6)
-
+	addpol <- polinfo[rep(1, 500), ]
+	rownames(addpol) <- NULL
 	pollist <- list()
 	cnt <- 0
 	for (i in 1:npol) {
