@@ -18,7 +18,7 @@
 \title{Extract values from Raster objects}
 
 \description{
-Extract values from a Raster* object at the locations of other spatial data. You can use coordinates (points), lines, polygons or an Extent (rectangle) object. You can also use cell numbers to extract values. 
+Extract values from a Raster* object at the locations of spatial vector data. There are methods for points, lines, and polygons (classes from `sp` or `sf`), for a matrix or data.frame of points. You can also use cell numbers and Extent (rectangle) objects to extract values. 
 
 If \code{y} represents points, \code{extract} returns the values of a Raster* object for the cells in which a set of points fall.
 If \code{y} represents lines, the \code{extract} method returns the values of the cells of a Raster* object that are touched by a line. If \code{y} represents polygons, the \code{extract} method returns the values of the cells of a Raster* object that are covered by a polygon. A cell is covered if its center is inside the polygon (but see the \code{weights} option for considering partly covered cells; and argument \code{small} for getting values for small polygons).
@@ -44,7 +44,7 @@ It is also possible to extract values for point locations from SpatialPolygons.
 \arguments{
 \item{x}{Raster* object}
 
-\item{y}{points represented by a two-column matrix or data.frame, or \code{\link{SpatialPoints}*}; \code{\link{SpatialPolygons}*}; \code{\link[sp]{SpatialLines}}; \code{\link{Extent}}; or a numeric vector representing cell numbers}
+\item{y}{points represented by a two-column matrix or data.frame, or \code{\link{SpatialPoints}*}; \code{\link{SpatialPolygons}*}; \code{\link[sp]{SpatialLines}}; \code{sf} spatial vector objects; \code{\link{Extent}}; or a numeric vector representing cell numbers}
 
 \item{method}{character. \code{'simple'} or \code{'bilinear'}. If \code{'simple'} values for the cell a point falls in are returned. If \code{'bilinear'} the returned values are interpolated from the values of the four nearest raster cells.}
 
