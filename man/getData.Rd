@@ -61,7 +61,7 @@ Not all combinations are available. See www.worldclim.org for details.
 }
 
 \references{
-\url{http://www.worldclim.org}
+\url{https://www.worldclim.org}
 
 \url{https://gadm.org}
 

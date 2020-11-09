@@ -37,8 +37,7 @@ flowdir returns the 'flow direction' (of water), i.e. the direction of the great
 
 If two cells have the same drop in elevation, a random cell is picked. That is not ideal as it may prevent the creation of connected flow networks. ArcGIS implements the approach of Greenlee (1987) and I might adopt that in the future.
 
-
-The terrain indices are according to Wilson et al. (2007), as in \href{http://www.gdal.org/gdaldem.html}{gdaldem}. TRI (Terrain Ruggedness Index) is the mean of the absolute differences between the value of a cell and the value of its 8 surrounding cells. TPI (Topographic Position Index) is the difference between the value of a cell and the mean value of its 8 surrounding cells. Roughness is the difference between the maximum and the minimum value of a cell and its 8 surrounding cells.
+The terrain indices are according to Wilson et al. (2007), as in \href{https://gdal.org/programs/gdaldem.html}{gdaldem}. TRI (Terrain Ruggedness Index) is the mean of the absolute differences between the value of a cell and the value of its 8 surrounding cells. TPI (Topographic Position Index) is the difference between the value of a cell and the mean value of its 8 surrounding cells. Roughness is the difference between the maximum and the minimum value of a cell and its 8 surrounding cells.
 
 Such measures can also be computed with the \code{\link{focal}} function:
 

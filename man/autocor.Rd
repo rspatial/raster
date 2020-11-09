@@ -45,7 +45,7 @@ Geary, R.C., 1954. The contiguity ratio and statistical mapping. The Incorporate
 
 Anselin, L., 1995. Local indicators of spatial association-LISA. Geographical Analysis 27:93-115
 
-\url{http://en.wikipedia.org/wiki/Indicators_of_spatial_association}
+\url{https://en.wikipedia.org/wiki/Indicators_of_spatial_association}
 }
 
 \examples{
