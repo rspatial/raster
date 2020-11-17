@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("click")) {
-	setGeneric("click", function(x, ...)
-		standardGeneric("click"))
-}	
-
-
 
 .getClicks <- function(...) {
 	res <- list()

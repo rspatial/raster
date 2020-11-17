@@ -3,10 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-if (!isGeneric('writeRaster')) {
-	setGeneric('writeRaster', function(x, filename, ...)
-		standardGeneric('writeRaster')) 
-}
 
 
 setMethod('writeRaster', signature(x='RasterLayer', filename='character'), 

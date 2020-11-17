@@ -4,12 +4,6 @@
 # Licence GPL v3
 
 
-if ( !isGeneric("corLocal") ) {
-	setGeneric("corLocal", function(x, y, ...)
-		standardGeneric("corLocal"))
-}
-
-
 setMethod('corLocal', signature(x='RasterLayer', y='RasterLayer'), 
 	function(x, y, ngb=5, method = c("pearson", "kendall", "spearman"), test=FALSE, filename='', ...) {
 		

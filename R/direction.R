@@ -4,11 +4,7 @@
 # Version 1.0
 # Licence GPL v3
 
-
-if (!isGeneric("direction")) {
-	setGeneric("direction", function(x, ...)
-		standardGeneric("direction"))
-}	
+	
 
 setMethod('direction', signature(x='RasterLayer'), 
 function(x, filename='', degrees=FALSE, from=FALSE, doEdge=FALSE, ...) {

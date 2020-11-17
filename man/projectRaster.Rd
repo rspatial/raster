@@ -57,6 +57,10 @@ Also see \code{projInfo('proj')}, \code{projInfo('ellps')}, and \code{projInfo('
 }
 
 \note{
+User beware. Sadly, the PROJ.4 notation has been partly deprecated in the GDAL/PROJ library that is used by this function. You can still use it, but *only* with the the WGS84 datum. Other datums are silently ignored. 
+
+When printing a Spat* object the PROJ.4 notation is shown because it is the most concise and clear format available. However, internally a WKT representation is used (see \code{\link{crs}}).
+
 Vector (points, lines, polygons) can be transformed with \code{\link[sp]{spTransform}}.
 
 \code{projectExtent} does not work very well when transforming projected circumpolar data to (e.g.) longitude/latitude. 

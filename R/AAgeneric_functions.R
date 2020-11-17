@@ -21,14 +21,24 @@ if (!isGeneric("brick")) { setGeneric("brick", function(x, ...)	standardGeneric(
 if (!isGeneric("buffer")) {setGeneric("buffer", function(x, ...) standardGeneric("buffer"))}	
 if (!isGeneric("calc")) {setGeneric("calc", function(x, fun, ...) standardGeneric("calc")) }
 if (!isGeneric("clamp")) {setGeneric("clamp", function(x, ...) standardGeneric("clamp")) }
+
+if (!isGeneric("click")) { setGeneric("click", function(x, ...)	standardGeneric("click"))}	
+
+
 if (!isGeneric("clump")) {setGeneric("clump", function(x, ...) standardGeneric("clump")) }	
-if (!isGeneric("contour")) { setGeneric("contour", function(x,...) standardGeneric("contour"))}		
+if (!isGeneric("contour")) { setGeneric("contour", function(x,...) standardGeneric("contour"))}
+
+if ( !isGeneric("corLocal") ) { setGeneric("corLocal", function(x, y, ...) standardGeneric("corLocal"))}
+		
 if (!isGeneric("couldBeLonLat")) { setGeneric("couldBeLonLat", function(x, ...) standardGeneric("couldBeLonLat"))}	
 if (!isGeneric("cover")) {setGeneric("cover", function(x, y, ...) standardGeneric("cover"))}
-if (!isGeneric("cut")) {setGeneric("cut", function(x, ...) standardGeneric("cut"))}	
 if (!isGeneric("crop")) { setGeneric("crop", function(x, y, ...) standardGeneric("crop"))}	
+if (!isGeneric("crosstab")) { setGeneric("crosstab", function(x, y, ...) standardGeneric("crosstab"))}
 if (!isGeneric("crs")) { setGeneric("crs", function(x, ...) standardGeneric("crs")) }	
 if (!isGeneric("crs<-")) { setGeneric("crs<-", function(x, ..., value) standardGeneric("crs<-")) }	
+if (!isGeneric("cut")) {setGeneric("cut", function(x, ...) standardGeneric("cut"))}	
+
+if (!isGeneric("direction")) {setGeneric("direction", function(x, ...) standardGeneric("direction"))}
 if (!isGeneric("density")) { setGeneric("density", function(x, ...) standardGeneric("density"))}	
 if (!isGeneric("disaggregate")) {setGeneric("disaggregate", function(x, ...) standardGeneric("disaggregate"))}
 if (!isGeneric("distance")) {setGeneric("distance", function(x, y, ...)standardGeneric("distance"))}	

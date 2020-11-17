@@ -5,10 +5,6 @@
 
 # revised April 2011
 
-if (!isGeneric("crosstab")) {
-	setGeneric("crosstab", function(x, y, ...)
-		standardGeneric("crosstab"))
-}
 
 
 setMethod('crosstab', signature(x='Raster', y='Raster'), 
