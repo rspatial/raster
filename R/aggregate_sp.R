@@ -90,6 +90,11 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 	
 	if (isTRUE(is.null(by))) {
 		if (dissolve) {
+			gval <- rgeos::get_RGEOS_CheckValidity()
+			if (gval != 2) {
+				on.exit(rgeos::set_RGEOS_CheckValidity(gval))
+				rgeos::set_RGEOS_CheckValidity(2L)
+			}
 			if (rgeos::version_GEOS() < "3.3.0") {
 				x <- rgeos::gUnionCascaded(x)
 			} else {

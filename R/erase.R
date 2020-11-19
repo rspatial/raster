@@ -67,7 +67,7 @@
 setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
     function(x, y, ...){ 
 	
-		requireNamespace("rgeos")
+		.checkGEOS()
 
 		prj <- x@proj4string
 		if (is.na(prj)) prj <- y@proj4string
@@ -123,7 +123,7 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 setMethod(erase, signature(x='SpatialLines', y='SpatialPolygons'),
     function(x, y, ...){ 
 	
-		requireNamespace("rgeos")
+		.checkGEOS()
 		prj <- x@proj4string
 		if (is.na(prj)) prj <- y@proj4string
 		x@proj4string <- CRS(as.character(NA))

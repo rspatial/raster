@@ -31,10 +31,10 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 		}
 				
 		if (inherits(x, 'SpatialPolygons')) {
-			stopifnot(requireNamespace("rgeos"))
+			on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
 			x <- .cropSpatialPolygons(x, y, ...)
 		} else if (inherits(x, 'SpatialLines')) {
-			stopifnot(requireNamespace("rgeos"))
+			on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
 			x <- .cropSpatialLines(x, y, ...)
 		} else if (inherits(x, 'SpatialPoints')) {
 			x <- .cropSpatialPoints(x, y, ...)

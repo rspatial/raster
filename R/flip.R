@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 
-setMethod('flip', signature(x='RasterLayer', direction='ANY'), 
+setMethod('flip', signature(x='RasterLayer'), 
 	function(x, direction='y', filename='', ...)  {
 	
 		filename <- trim(filename)
@@ -72,7 +72,7 @@ setMethod('flip', signature(x='RasterLayer', direction='ANY'),
 
 
 
-setMethod('flip', signature(x='RasterStackBrick', direction='ANY'), 
+setMethod('flip', signature(x='RasterStackBrick'), 
 	function(x, direction='y', filename='', ...)  {
 	
 		filename <- trim(filename)

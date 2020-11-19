@@ -122,8 +122,7 @@ function(x, filename='', col=rainbow(25),  breaks=NULL, alpha=FALSE, colNA='whit
 }
 )
 
-#x = raster(nr=10, nc=10)
-#x[] = 1:100
+#x = raster(nr=10, nc=10, vals=1:100)
 #y = RGB(x)
 #plotRGB(y)
 

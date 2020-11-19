@@ -7,7 +7,8 @@
 setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'), 
 	function(x, y, ..., identity=FALSE){ 
 	
-	stopifnot(requireNamespace("rgeos"))
+	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
 	x@proj4string <- CRS(as.character(NA))

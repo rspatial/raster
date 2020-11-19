@@ -4,12 +4,18 @@
 # Licence GPL v3
 
 
+.checkGEOS <- function() {
+	stopifnot(requireNamespace("rgeos"))
+	gval <- rgeos::get_RGEOS_CheckValidity()
+	rgeos::set_RGEOS_CheckValidity(2L)
+	gval
+}
+
 
 setMethod('intersect', signature(x='SpatialPolygons', y='SpatialPolygons'), 
 function(x, y) {
 
-	requireNamespace("rgeos")
-
+	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
 	x@proj4string <- CRS(as.character(NA))
@@ -114,7 +120,13 @@ function(x, y) {
 setMethod('intersect', signature(x='SpatialPolygons', y='SpatialLines'), 
 function(x, y) {
 
-	requireNamespace("rgeos")
+	.checkGEOS()
+	gval <- rgeos::get_RGEOS_CheckValidity()
+	if (gval != 2) {
+		on.exit(rgeos::set_RGEOS_CheckValidity(gval))
+		rgeos::set_RGEOS_CheckValidity(2L)
+	}
+
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
 	x@proj4string <- CRS(as.character(NA))
@@ -136,7 +148,13 @@ function(x, y) {
 setMethod('intersect', signature(x='SpatialLines', y='SpatialPolygons'), 
 function(x, y) {
 
-	requireNamespace("rgeos")
+	.checkGEOS()
+	gval <- rgeos::get_RGEOS_CheckValidity()
+	if (gval != 2) {
+		on.exit(rgeos::set_RGEOS_CheckValidity(gval))
+		rgeos::set_RGEOS_CheckValidity(2L)
+	}
+	
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
 	x@proj4string <- CRS(as.character(NA))
@@ -216,7 +234,12 @@ function(x, y) {
 
 setMethod('intersect', signature(x='SpatialLines', y='SpatialLines'), 
 function(x, y) {
-	stopifnot(requireNamespace("rgeos"))
+	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	gval <- rgeos::get_RGEOS_CheckValidity()
+	if (gval != 2) {
+		on.exit(rgeos::set_RGEOS_CheckValidity(gval))
+		rgeos::set_RGEOS_CheckValidity(2L)
+	}
 
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
@@ -285,7 +308,13 @@ function(x, y) {
 setMethod('intersect', signature(x='SpatialPolygons', y='SpatialPoints'), 
 function(x, y) {
 	
-	stopifnot(requireNamespace("rgeos"))
+	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	gval <- rgeos::get_RGEOS_CheckValidity()
+	if (gval != 2) {
+		on.exit(rgeos::set_RGEOS_CheckValidity(gval))
+		rgeos::set_RGEOS_CheckValidity(2L)
+	}
+
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
 	x@proj4string <- CRS(as.character(NA))
@@ -309,8 +338,12 @@ function(x, y) {
 	
 	if (inherits(y, 'SpatialPolygons')) {
 
-		stopifnot(requireNamespace("rgeos"))
-
+		on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+		gval <- rgeos::get_RGEOS_CheckValidity()
+		if (gval != 2) {
+			on.exit(rgeos::set_RGEOS_CheckValidity(gval))
+			rgeos::set_RGEOS_CheckValidity(2L)
+		}
 		prj <- x@proj4string
 		if (is.na(prj)) prj <- y@proj4string
 		x@proj4string <- CRS(as.character(NA))

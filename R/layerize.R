@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("layerize")) {
-	setGeneric("layerize", function(x, y, ...)
-		standardGeneric("layerize"))
-}
 
 
 setMethod('layerize', signature(x='RasterLayer', y='missing'), 

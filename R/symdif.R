@@ -12,7 +12,7 @@ if (!isGeneric('symdif')) {
 
 setMethod('symdif', signature(x='SpatialPolygons', y='SpatialPolygons'), 
 function(x, y, ...) {
-	stopifnot(requireNamespace("rgeos"))
+	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
 
 	haswarned <- FALSE
 

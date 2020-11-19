@@ -45,7 +45,7 @@ if (!isGeneric("distance")) {setGeneric("distance", function(x, y, ...)standardG
 if (!isGeneric("erase")) {setGeneric("erase", function(x, y, ...) standardGeneric("erase"))}
 if (!isGeneric("extend")) {setGeneric("extend", function(x, y, ...) standardGeneric("extend"))}	
 if (!isGeneric("extract")) { setGeneric("extract", function(x, y, ...) standardGeneric("extract"))}	
-if (!isGeneric("flip")) { setGeneric("flip", function(x, direction, ...) standardGeneric("flip")) }
+if (!isGeneric("flip")) { setGeneric("flip", function(x, ...) standardGeneric("flip")) }
 if (!isGeneric("focal")) { setGeneric("focal", function(x, ...) standardGeneric("focal"))}
 if (!isGeneric("freq")) {setGeneric("freq", function(x, ...) standardGeneric("freq"))}
 if (!isGeneric("geom")) { setGeneric("geom", function(x, ...) standardGeneric("geom"))}	
@@ -58,6 +58,8 @@ if (!isGeneric("init")) {setGeneric("init", function(x, ...) standardGeneric("in
 if (!isGeneric("interpolate")) { setGeneric("interpolate", function(object, ...) standardGeneric("interpolate"))}	
 if (!isGeneric("intersect")) { setGeneric("intersect", function(x, y) standardGeneric("intersect"))}	
 if (!isGeneric("isLonLat")) { setGeneric("isLonLat", function(x, ...) standardGeneric("isLonLat"))}	
+if (!isGeneric("layerize")) { setGeneric("layerize", function(x, y, ...) standardGeneric("layerize"))}
+
 if (!isGeneric("match")) { setGeneric("match", function(x, table, nomatch=NA_integer_, incomparables=NULL)		standardGeneric("match"))}	
 if (!isGeneric("mask")) { setGeneric("mask", function(x, mask, ...) standardGeneric("mask"))}
 if (!isGeneric(".median")) {setGeneric(".median", function(x, y, ...) standardGeneric(".median"))}	

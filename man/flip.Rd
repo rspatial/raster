@@ -13,13 +13,16 @@ Flip the values of a Raster* object by inverting the order of the rows (directio
 }
 
 \usage{
-flip(x, direction, ...)
+\S4method{flip}{RasterLayer}(x, direction='y', filename='', ...)
+
+\S4method{flip}{RasterStackBrick}(x, direction='y', filename='', ...)
 }
 
 \arguments{
   \item{x}{Raster* object}
   \item{direction}{Character. 'y' or 'x'; or 1 (=x) or 2 (=y)}
-   \item{...}{Additional arguments as for \code{\link{writeRaster}}}  
+  \item{filename}{character. Output filename (optional)}
+  \item{...}{if \code{x} is a Raster* object, additional arguments as for \code{\link{writeRaster}}}
 }
 
 \value{
