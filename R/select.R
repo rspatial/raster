@@ -53,7 +53,7 @@ setMethod('select', signature(x='Spatial'),
 		}
 
 		if (inherits(x, 'SpatialPolygons')) {
-			on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+			valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 		
 			int <- rgeos::gIntersects(x, e, byid=TRUE)
 			int <- apply(int, 2, any)
@@ -67,7 +67,7 @@ setMethod('select', signature(x='Spatial'),
 			}
 			
 		} else if (inherits(x, 'SpatialLines')) {
-			on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+			valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 			
 			int <- rgeos::gIntersects(x, e, byid=TRUE)
 			int <- apply(int, 2, any)

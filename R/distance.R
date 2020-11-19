@@ -82,7 +82,7 @@ function(x, y, ...) {
 
 setMethod('distance', signature(x='Spatial', y='Spatial'), 
 function(x, y, ...) {
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	stopifnot(inherits(x, 'SpatialVector'))
 	stopifnot(inherits(y, 'SpatialVector'))	
 	d <- rgeos::gDistance(x, y, byid=TRUE)

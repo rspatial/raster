@@ -109,7 +109,7 @@
 
 .rasterizeLineLength <- function(x, r, background=NA, filename="", ...) {
 
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	r <- raster(r)
 
 	if (canProcessInMemory(r, n=8)) {

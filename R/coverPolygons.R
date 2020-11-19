@@ -7,7 +7,7 @@
 setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'), 
 	function(x, y, ..., identity=FALSE){ 
 	
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string

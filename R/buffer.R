@@ -81,7 +81,7 @@ function(x, width=1, dissolve=TRUE, ...) {
 		return(pb)		
 	}
 	
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	
 	prj <- x@proj4string
 	x@proj4string <- CRS(as.character(NA))

@@ -8,7 +8,7 @@
 setMethod('union', signature(x='SpatialPolygons', y='SpatialPolygons'), 
 function(x, y) {
 
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 
 	x <- spChFIDs(x, as.character(1:length(x)))
 	y <- spChFIDs(y, as.character(1:length(y)))
@@ -60,7 +60,7 @@ function(x, y) {
 setMethod('union', signature(x='SpatialPolygons', y='missing'), 
 function(x, y) {
 
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	n <- length(x)
 	if (n < 2) {
 		return(x)

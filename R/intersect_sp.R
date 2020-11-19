@@ -15,7 +15,7 @@
 setMethod('intersect', signature(x='SpatialPolygons', y='SpatialPolygons'), 
 function(x, y) {
 
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
 	x@proj4string <- CRS(as.character(NA))
@@ -234,7 +234,7 @@ function(x, y) {
 
 setMethod('intersect', signature(x='SpatialLines', y='SpatialLines'), 
 function(x, y) {
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	gval <- rgeos::get_RGEOS_CheckValidity()
 	if (gval != 2) {
 		on.exit(rgeos::set_RGEOS_CheckValidity(gval))
@@ -308,7 +308,7 @@ function(x, y) {
 setMethod('intersect', signature(x='SpatialPolygons', y='SpatialPoints'), 
 function(x, y) {
 	
-	on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	gval <- rgeos::get_RGEOS_CheckValidity()
 	if (gval != 2) {
 		on.exit(rgeos::set_RGEOS_CheckValidity(gval))
@@ -338,7 +338,7 @@ function(x, y) {
 	
 	if (inherits(y, 'SpatialPolygons')) {
 
-		on.exit(rgeos::set_RGEOS_CheckValidity(.checkGEOS()))
+		valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 		gval <- rgeos::get_RGEOS_CheckValidity()
 		if (gval != 2) {
 			on.exit(rgeos::set_RGEOS_CheckValidity(gval))
