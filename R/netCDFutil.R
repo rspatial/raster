@@ -15,13 +15,12 @@
 
 	vals <- sapply(g, function(i) i[1]) 
 	vars <- names(vals)
-	if (any(vars == "proj4")) {
-		crs=vals[vars=="proj4"] 
-		return(crs)
-	}
 	if (any(vars == "epsg_code")) {
 		crs <- vals[vars=="epsg_code"] 
-		crs <- paste0("+init=", crs)
+		crs <- paste0("+init=epsg:", crs)
+		return(crs)
+	} else if (any(vars == "proj4")) {
+		crs=vals[vars=="proj4"] 
 		return(crs)
 	}
 # based on info at 

@@ -12,20 +12,21 @@ setMethod('raster', signature(x='missing'),
 		}
 		if (missing(crs)) {
 			if (ext@xmin > -360.01 & ext@xmax < 360.01 & ext@ymin > -90.01 & ext@ymax < 90.01) { 
-				crs <- CRS("+proj=longlat +datum=WGS84")
+				prj <- CRS("+proj=longlat +datum=WGS84")
 			} else {
 				# if sp >= 1.2.1  crs <- CRS(as.character(NA), doCheckCRSArgs=FALSE)
-				crs <- CRS(as.character(NA), doCheckCRSArgs=FALSE)
+				prj <- CRS(as.character(NA), doCheckCRSArgs=FALSE)
 			}
 		} else {
-			crs <- .getCRS(crs)
+			prj <- CRS(as.character(NA), doCheckCRSArgs=FALSE)			
+			try(prj <- .getCRS(crs))
 		}
 		if (missing(resolution)) {
 			nrows <- as.integer(max(1, round(nrows)))
 			ncols <- as.integer(max(1, round(ncols)))
-			r <- methods::new('RasterLayer', extent=ext, nrows=nrows, ncols=ncols, crs=crs)
+			r <- methods::new('RasterLayer', extent=ext, nrows=nrows, ncols=ncols, crs=prj)
 		} else {
-			r <- methods::new('RasterLayer', extent=ext, crs=crs)
+			r <- methods::new('RasterLayer', extent=ext, crs=prj)
 			res(r) <- resolution
 		}
 		if (!is.null(vals)) {
