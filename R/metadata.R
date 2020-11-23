@@ -1,7 +1,9 @@
 
-metadata <- function(x) {
-	x@history
-}
+setMethod('metadata', signature(x='Raster'), 
+	function(x, ...) {
+		x@history
+	}
+)
 
 'metadata<-' <- function(x, value) {
 	stopifnot(is.list(value))

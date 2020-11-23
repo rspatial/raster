@@ -60,7 +60,9 @@ if (!isGeneric("intersect")) { setGeneric("intersect", function(x, y) standardGe
 if (!isGeneric("isLonLat")) { setGeneric("isLonLat", function(x, ...) standardGeneric("isLonLat"))}	
 if (!isGeneric("layerize")) { setGeneric("layerize", function(x, y, ...) standardGeneric("layerize"))}
 
-if (!isGeneric("match")) { setGeneric("match", function(x, table, nomatch=NA_integer_, incomparables=NULL)		standardGeneric("match"))}	
+if (!isGeneric("metadata")) { setGeneric("metadata", function(x, ...) standardGeneric("metadata"))}	
+
+if (!isGeneric("match")) { setGeneric("match", function(x, table, nomatch=NA_integer_, incomparables=NULL) standardGeneric("match"))}	
 if (!isGeneric("mask")) { setGeneric("mask", function(x, mask, ...) standardGeneric("mask"))}
 if (!isGeneric(".median")) {setGeneric(".median", function(x, y, ...) standardGeneric(".median"))}	
 if (!isGeneric("merge")) {setGeneric("merge", function(x, y, ...) standardGeneric("merge"))}	

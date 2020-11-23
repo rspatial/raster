@@ -120,7 +120,7 @@ function(x, y) {
 setMethod('intersect', signature(x='SpatialPolygons', y='SpatialLines'), 
 function(x, y) {
 
-	.checkGEOS()
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	gval <- rgeos::get_RGEOS_CheckValidity()
 	if (gval != 2) {
 		on.exit(rgeos::set_RGEOS_CheckValidity(gval))
@@ -148,7 +148,7 @@ function(x, y) {
 setMethod('intersect', signature(x='SpatialLines', y='SpatialPolygons'), 
 function(x, y) {
 
-	.checkGEOS()
+	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	gval <- rgeos::get_RGEOS_CheckValidity()
 	if (gval != 2) {
 		on.exit(rgeos::set_RGEOS_CheckValidity(gval))
