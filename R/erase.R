@@ -114,11 +114,7 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 		if (dropframe) {
 			return( as(part2, 'SpatialPolygons') )
 		} else {
-			if (nrow(part2)  == 0) {
-				part2 <- part2[0, 1:(ncol(part2)-1)]
-			} else {
-				part2$erase_dissolve_ID <- NULL
-			}
+			part2@data$erase_dissolve_ID <- NULL
 			return( part2 )
 		}
 	}
