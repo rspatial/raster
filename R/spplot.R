@@ -59,9 +59,8 @@ function(x, ...) {
 
 setMethod("spplot", signature(obj='SpatRaster'), 
 	function(obj, ..., maxpixels=50000, as.table=TRUE, zlim)  {
-		obs <- as(obj, "Raster")
-		obj <- sampleRegular(obj, maxpixels)
 		obj <- as(obj, "Raster")
+		obj <- sampleRegular(obj, maxpixels, asRaster=TRUE)
 		if (!missing(zlim)) {
 			if (length(zlim) != 2) {
 				warning('zlim should be a vector of two elements')
