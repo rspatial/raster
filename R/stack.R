@@ -39,7 +39,12 @@ setMethod("stack", signature(x='Raster'),
 setMethod("stack", signature(x='character'), 
 function(x, ..., bands=NULL, varname="", native=FALSE, RAT=TRUE, quick=FALSE) {
 
+	if (length(x) == 0) {
+		stop("no filenames supplied")
+	}
+	
 	rlist <- c(x, list(...))
+
 
     if ( varname != "") {
 		if (length(rlist) == 1) {

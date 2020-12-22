@@ -49,8 +49,7 @@ setMethod('summary', signature(object='RasterLayer'),
 setMethod('summary', signature(object='RasterStackBrick'), 
 	function(object, maxsamp=100000, ...) {
 			
-		if ( inMemory(object) ) {
-		
+		if ( inMemory(object) & inherits(object, "RasterBrick")) {
 			sm <- apply(object@data@values, 2, quantile, na.rm=TRUE)
 			nas <- apply(is.na(object@data@values), 2, sum)
 			values <- rbind(sm, nas)
