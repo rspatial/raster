@@ -279,7 +279,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 	}
 
 	if (alignOnly) {
-		to <- .getAlignedRaster(to, from)
+		to <- .getAlignedRaster(from, to)
 		return (to)
 	}
 	
