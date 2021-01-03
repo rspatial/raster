@@ -59,7 +59,7 @@ MoranLocal <- function(x, w=matrix(c(1,1,1,1,0,1,1,1,1),3,3)) {
 	n <- ncell(x) - cellStats(x, 'countNA')
 	s2 <- cellStats(x, 'sd')^2 
 	# adjust variance denominator from n-1 to n 
-	s2 <- (s2 * (n-1)) / n 
+	#s2 <- (s2 * (n-1)) / n 
 
 	(z / s2) * lz
 } 

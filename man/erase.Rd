@@ -16,6 +16,7 @@ Erase parts of a SpatialPolygons* or SpatialLines* object with a SpatialPolygons
 
 \usage{
 \S4method{erase}{SpatialPolygons,SpatialPolygons}(x, y, ...)
+
 \S4method{erase}{SpatialLines,SpatialPolygons}(x, y, ...)
 }
 
@@ -31,7 +32,6 @@ Spatial*
 
 \seealso{The equivalent for raster data is \code{\link{mask}}}
 
-\author{Robert J. Hijmans}
 
 \examples{
 if (require(rgdal) & require(rgeos)) {

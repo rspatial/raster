@@ -27,8 +27,6 @@ Symetrical difference of SpatialPolygons* objects
 SpatialPolygons*
 }
 
-\author{Robert J. Hijmans}
-
 \seealso{
 \code{\link{erase}} 
 }

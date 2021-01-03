@@ -32,7 +32,6 @@ Geary <- function(x, w=matrix(c(1,1,1,1,0,1,1,1,1),3,3)) {
 	w <- .getFilter(w, warn=FALSE)
 	
 	i <- trunc(length(w)/2)+1 
-
 	n <- ncell(x) - cellStats(x, 'countNA')
 	
 	fun <- function(x,...) sum(w*(x-x[i])^2, ...)
@@ -41,8 +40,8 @@ Geary <- function(x, w=matrix(c(1,1,1,1,0,1,1,1,1),3,3)) {
 	Eij <- cellStats(focal(x, w=w2, fun=fun, na.rm=TRUE, pad=TRUE), sum)	
 
 	if (sum(! unique(w) %in% 0:1) > 0) {
-		x <- calc(x, fun=function(x) ifelse(is.na(x), NA ,1))
-		W <- focal(x, w=w, na.rm=TRUE, pad=TRUE ) 
+		xx <- calc(x, fun=function(x) ifelse(is.na(x), NA ,1))
+		W <- focal(xx, w=w, na.rm=TRUE, pad=TRUE ) 
 	} else {
 		w[w==0] <- NA
 		W <- focal(x, w=w, fun=function(x, ...){  sum(!is.na(x)) }, pad=TRUE )
@@ -63,11 +62,11 @@ GearyLocal <- function(x, w=matrix(c(1,1,1,1,0,1,1,1,1),3,3)) {
 	w2[] <- 1
 	Eij <- focal(x, w=w2, fun=fun, na.rm=TRUE, pad=TRUE)
 
-	s2 <-  cellStats(x, 'sd')^2 
+	s2 <- cellStats(x, 'sd')^2 
 	if (ncell(x) < 1000000) { n <- ncell(x) - cellStats(x, 'countNA' )
 	} else { n <- ncell(x) }
 	
-	s2 <- (s2 * (n-1)) / n 
+	#s2 <- (s2 * (n-1)) / n 
 	Eij / s2
 }
 

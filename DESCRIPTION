@@ -36,6 +36,7 @@ Authors@R: c(
 	person("Charles", "Karney", role = "ctb"),
 	person("Matteo", "Mattiuzzi", role = "ctb"),
 	person("Steven", "Mosher", role = "ctb"),
+	person("Babak", "Naimi", role = "ctb"),	
 	person("Jakub", "Nowosad", role = "ctb"),
 	person("Edzer", "Pebesma", role = "ctb"),
 	person("Oscar", "Perpinan Lamigueiro", role = "ctb"),

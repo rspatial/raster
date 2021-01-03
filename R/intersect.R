@@ -4,8 +4,6 @@
 # Licence GPL v3
 
 	
-
-
 setMethod('intersect', signature(x='Raster', y='ANY'), 
 function(x, y) {
 	y <- extent(y)
