@@ -19,8 +19,8 @@
 		crs <- vals[vars=="epsg_code"] 
 		crs <- paste0("+init=epsg:", crs)
 		return(crs)
-	} else if (any(vars == "proj4")) {
-		crs=vals[vars=="proj4"] 
+	} else if (any(vars %in% c("proj4", "crs_wkt", "spatial_ref"))) {
+		crs=vals[vars %in% c("proj4", "crs_wkt", "spatial_ref")][1]
 		return(crs)
 	}
 # based on info at 
