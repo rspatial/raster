@@ -9,6 +9,12 @@ setMethod('rotate', signature(x='Raster'),
 	function(x, filename='', ...) {
 		
 		e <- extent(x)
+		
+		if (e@xmin < -60) {
+			warning('xmin is much smaller than zero. No rotation done')
+			return(x)
+		}
+
 		xrange <- e@xmax - e@xmin
 		if (xrange < 350 | xrange > 370 | e@xmin < -10 | e@xmax > 370) {
 			if (xrange < 350 | xrange > 370 | e@xmin < -190 | e@xmax > 190) {	 
