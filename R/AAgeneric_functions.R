@@ -1,5 +1,7 @@
 
 if (!isGeneric("rectify")) {setGeneric("rectify", function(x, ...) standardGeneric("rectify"))}	
+if (!isGeneric("whiches.max")) {setGeneric("whiches.max", function(x, ...)standardGeneric("whiches.max"))}	
+if (!isGeneric("whicheses.min")) {setGeneric("whiches.min", function(x, ...)standardGeneric("whiches.min"))}	
 
 if (!isGeneric("%in%")) { setGeneric("%in%", function(x, table) standardGeneric("%in%"))}
 
@@ -81,6 +83,8 @@ if (!isGeneric("plot")) {setGeneric("plot", function(x,y,...)standardGeneric("pl
 if (!isGeneric("plotRGB")) { setGeneric("plotRGB", function(x, ...) standardGeneric("plotRGB"))}	
 if (!isGeneric("predict")) {setGeneric("predict", function(object, ...) standardGeneric("predict"))}
 if (!isGeneric("quantile")) {setGeneric("quantile", function(x, ...)standardGeneric("quantile"))}	
+
+if (!isGeneric("RGB")) {setGeneric("RGB", function(x, ...)	standardGeneric("RGB"))}	
 if ( !isGeneric("raster") ) {setGeneric("raster", function(x, ...)	standardGeneric("raster"))}
 
 if (!isGeneric("rasterize")) {setGeneric("rasterize", function(x, y, ...) standardGeneric("rasterize"))}	

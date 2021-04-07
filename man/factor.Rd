@@ -92,7 +92,7 @@ r[3:6, 1:5] = 3
 r <- ratify(r)
 
 rat <- levels(r)[[1]]
-rat$landcover <- c('Pine', 'Oak', 'Meadow')
+rat$landcover <- c("Pine", "Oak", "Meadow")
 rat$code <- c(12,25,30)
 levels(r) <- rat
 r
@@ -108,7 +108,7 @@ factorValues(r, i)
 # rr
 
 # create a single-layer factor 
-x <- deratify(r, 'landcover')
+x <- deratify(r, "landcover")
 x
 is.factor(x)
 levels(x)

@@ -14,17 +14,6 @@
 }
 
 
-if (!isGeneric("whiches.max")) {
-	setGeneric("whiches.max", function(x, ...)
-		standardGeneric("whiches.max"))
-}	
-
-
-if (!isGeneric("whicheses.min")) {
-	setGeneric("whiches.min", function(x, ...)
-		standardGeneric("whiches.min"))
-}	
-
 
 setMethod("whiches.min", "RasterStackBrick",  
 	function(x) { 

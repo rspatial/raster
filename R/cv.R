@@ -20,13 +20,13 @@ function(x, ..., aszero=FALSE, na.rm=FALSE) {
 		return(NA) 
 	} else if (na.rm == FALSE & (length(z) < length(x))) { 
 		return(NA)	 
-	} else if (length(z) == 1 & aszero == TRUE) { 
+	} else if (length(z) == 1 & aszero) { 
 		return(0)
 	} else {
 	# abs to avoid very small (or zero) mean with e.g. -5:5
 		x <- mean(abs(z))  
-		if (x == 0) {
-			return(NA)
+		if (x == 0) {# all values are 0
+			return(0)
 		} else {
 			return(100 * stats::sd(z) / x)
 		}

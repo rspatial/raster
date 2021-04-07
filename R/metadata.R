@@ -1,6 +1,6 @@
 
 setMethod('metadata', signature(x='Raster'), 
-	function(x, ...) {
+	function(x) {
 		x@history
 	}
 )
