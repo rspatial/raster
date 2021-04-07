@@ -144,7 +144,7 @@ r4 <- raster(s)
 r5 <- raster(s, 3)
 
 }
-}
+
 
 \keyword{methods}
 \keyword{spatial}
