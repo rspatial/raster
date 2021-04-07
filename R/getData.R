@@ -407,7 +407,7 @@ ccodes <- function() {
 	if (rowTile < 10) { rowTile <- paste('0', rowTile, sep='') }
 	if (colTile < 10) { colTile <- paste('0', colTile, sep='') }
 
-	baseurl <- "http://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/"
+	baseurl <- "https://srtm.csi.cgiar.org/wp-content/uploads/files/srtm_5x5/TIFF/"
 	
 	f <- paste0("srtm_", colTile, "_", rowTile, ".zip")
 
