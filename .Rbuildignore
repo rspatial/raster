@@ -6,3 +6,4 @@ TODO
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .travis.yml
+^\.github$

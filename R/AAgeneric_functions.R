@@ -3,6 +3,9 @@ if (!isGeneric("rectify")) {setGeneric("rectify", function(x, ...) standardGener
 if (!isGeneric("whiches.max")) {setGeneric("whiches.max", function(x, ...)standardGeneric("whiches.max"))}	
 if (!isGeneric("whicheses.min")) {setGeneric("whiches.min", function(x, ...)standardGeneric("whiches.min"))}	
 
+	
+if (!isGeneric("weighted.mean")) {setGeneric("weighted.mean", function(x, w, ...) standardGeneric("weighted.mean"))}	
+
 if (!isGeneric("%in%")) { setGeneric("%in%", function(x, table) standardGeneric("%in%"))}
 
 if (!isGeneric("adjacent")) {setGeneric("adjacent", function(x, ...) standardGeneric("adjacent"))}

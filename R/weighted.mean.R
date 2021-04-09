@@ -3,11 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-	
-if (!isGeneric("weighted.mean")) {
-	setGeneric("weighted.mean", function(x, w, ...)
-		standardGeneric("weighted.mean"))
-}	
 
 
 setMethod('weighted.mean', signature(x='RasterStackBrick', w='vector'), 
