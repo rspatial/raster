@@ -36,7 +36,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           install.packages("pkgdown", type = "binary")
-          install.packages(c("pls", "randomForest", "party"), type = "binary")
+          install.packages(c("pls", "randomForest", "party", "devtools"), type = "binary")          
         shell: Rscript {0}
 
       - name: Install package

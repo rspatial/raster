@@ -24,5 +24,5 @@ On [rspatial.org](http://rspatial.org/) you can learn about spatial data analysi
 [stackoverflow](https://stackoverflow.com/) is the best place to ask questions if you get stuck.
 Make sure to include a [simple reproducible example](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example). 
 
-Please send me an email if you have a bug report. See `maintainer("raster")` for the email address; or you can file an [issue](https://github.com/rspatial/raster/issues) on this github site.
+If you have found a bug, you can file an [issue](https://github.com/rspatial/raster/issues).
 
