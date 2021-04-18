@@ -200,6 +200,8 @@
 	}
 	
 	if (! is.null(fun)) {
+	
+		fun <- match.fun(fun)
 		if (na.rm) {
 			fun2 <- function(x){
 						x <- stats::na.omit(x)

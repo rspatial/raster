@@ -50,6 +50,7 @@ function(x, y, ..., df=FALSE, sp=FALSE){
 	
 .xyValues <- function(object, xy, method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, fun=NULL, na.rm=TRUE, layer, nl, df=FALSE, factors=FALSE, sp=FALSE, ...) { 
 
+
 	nlyrs <- nlayers(object)
 	if (nlyrs > 1) {
 		if (missing(layer)) { layer <- 1 } 

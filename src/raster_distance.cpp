@@ -5,7 +5,6 @@ July 2016
 #include <Rcpp.h>
 
 #include "distance.h"
-#include "area.h"
 
 
 // [[Rcpp::export(name = ".get_area_polygon")]]
