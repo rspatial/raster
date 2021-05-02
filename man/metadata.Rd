@@ -1,6 +1,7 @@
 \name{metadata}
 
 \alias{metadata}
+\alias{metadata,Raster-method}
 \alias{metadata<-}
 
 \title{ Metadata }
@@ -10,7 +11,7 @@ Get or set a metadata to a Raster object
 }
 
 \usage{
-metadata(x, ...) 
+\S4method{metadata}{Raster}(x, ...)
 metadata(x) <- value
 }
 
@@ -21,7 +22,7 @@ metadata(x) <- value
 }
 
 \note{
-The matadata can contain single values or vectors of basic data types (character, integer, numeric) and Date. Some other types may also be supported. You cannot use a matrix or data.frame as a meta-data element.
+The metadata can contain single values or vectors of basic data types (character, integer, numeric) and Date. Some other types may also be supported. You cannot use a matrix or data.frame as a meta-data element.
 }
 
 
