@@ -174,7 +174,14 @@
 		r@rotation <- rot
 	}	
 
-	crs <- .getProj(attr(gdalinfo, 'projection'), crs)
+	prj <- attr(gdalinfo, 'projection')
+	if (!is.na(prj)) {
+		prjcom <- attr(prj, 'comment')
+		if ((!is.null(prjcom) && !is.na(prjcom))) {
+			prj <- prjcom
+		}
+	}
+	crs <- .getProj(prjcom, crs)
 	r@crs <- CRS(crs, TRUE) 
 	#r@crs <- CRS(crs, FALSE) 
 	# F to avoid warnings about other than WGS84 datums or ellipsoids  
