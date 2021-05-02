@@ -9,7 +9,7 @@ Get geographic data for anywhere in the world. Data are read from files that are
 }
 
 \usage{
-getData(name, download=TRUE, path='', ...)
+getData(name, download=TRUE, path="", ...)
 ccodes()
 }
 
@@ -65,12 +65,10 @@ Not all combinations are available. See www.worldclim.org for details.
 
 \url{https://gadm.org}
 
-\url{http://srtm.csi.cgiar.org/}
+\url{https://srtm.csi.cgiar.org/}
 
-\url{http://diva-gis.org/gdata}
+\url{https://diva-gis.org/gdata}
 }
-
-
 
 
 \keyword{ spatial }

@@ -27,7 +27,7 @@ Distances for \code{longlat} data are computed on the WGS84 spheroid using Geogr
 }
 
 \references{
-C.F.F. Karney, 2013. Algorithms for geodesics, J. Geodesy 87: 43-55. \url{https://dx.doi.org/10.1007/s00190-012-0578-z}.
+C.F.F. Karney, 2013. Algorithms for geodesics, J. Geodesy 87: 43-55. \doi{10.1007/s00190-012-0578-z}.
 }
 
 
