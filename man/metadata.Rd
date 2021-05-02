@@ -11,13 +11,12 @@ Get or set a metadata to a Raster object
 }
 
 \usage{
-\S4method{metadata}{Raster}(x, ...)
+\S4method{metadata}{Raster}(x)
 metadata(x) <- value
 }
 
 \arguments{
   \item{x}{Raster* object }
-  \item{...}{additional arguments (none implemented)}
   \item{value}{list with named elements. Each element may be another list of named elements (but these nested lists are not allowed to be lists themselves)}
 }
 

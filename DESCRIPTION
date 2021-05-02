@@ -2,7 +2,7 @@ Package: raster
 Type: Package
 Title: Geographic Data Analysis and Modeling
 Version: 3.4-9
-Date: 2020-05-01
+Date: 2021-05-01
 Depends: sp (>= 1.4.1), R (>= 3.4.0)
 Suggests: rgdal (>= 1.5-8), rgeos (>= 0.3-8), ncdf4, igraph, tcltk, parallel, rasterVis, MASS, sf, tinytest, gstat, fields
 LinkingTo: Rcpp
