@@ -1,4 +1,6 @@
---- current version
+
+
+--- 17-July-2020, version 3.3-13
 
 overhaul of crs to be ready for PROJ6
 several bug fixes (see https://github.com/rspatial/raster/issues?q=is%3Aissue+)

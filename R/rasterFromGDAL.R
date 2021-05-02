@@ -181,7 +181,7 @@
 			prj <- prjcom
 		}
 	}
-	crs <- .getProj(prjcom, crs)
+	crs <- .getProj(prj, crs)
 	r@crs <- CRS(crs, TRUE) 
 	#r@crs <- CRS(crs, FALSE) 
 	# F to avoid warnings about other than WGS84 datums or ellipsoids  
