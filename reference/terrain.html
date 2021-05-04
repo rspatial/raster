@@ -74,7 +74,7 @@ Compute slope, aspect and other terrain characteristics from a raster with eleva
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.4-9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.4-11</span>
       </span>
     </div>
 
@@ -165,7 +165,7 @@ If slope = 0, aspect is set to 0.5*pi radians (or 90 degrees if unit='degrees').
 
 
 <p>If two cells have the same drop in elevation, a random cell is picked. That is not ideal as it may prevent the creation of connected flow networks. ArcGIS implements the approach of Greenlee (1987) and I might adopt that in the future.</p>
-<p>The terrain indices are according to Wilson et al. (2007), as in <a href='https://gdal.org/programs/gdaldem.html'>gdaldem</a>. TRI (Terrain Ruggedness Index) is the mean of the absolute differences between the value of a cell and the value of its 8 surrounding cells. TPI (Topographic Position Index) is the difference between the value of a cell and the mean value of its 8 surrounding cells. Roughness is the difference between the maximum and the minimum value of a cell and its 8 surrounding cells.</p>
+<p>The terrain indices are according to Wilson et al. (2007). TRI (Terrain Ruggedness Index) is the mean of the absolute differences between the value of a cell and the value of its 8 surrounding cells. TPI (Topographic Position Index) is the difference between the value of a cell and the mean value of its 8 surrounding cells. Roughness is the difference between the maximum and the minimum value of a cell and its 8 surrounding cells.</p>
 <p>Such measures can also be computed with the <code><a href='focal.html'>focal</a></code> function:</p>
 <p>f &lt;- matrix(1, nrow=3, ncol=3)</p>
 <p>TRI &lt;- focal(x, w=f, fun=function(x, ...) sum(abs(x[-5]-x[5]))/8, pad=TRUE, padValue=NA)</p>

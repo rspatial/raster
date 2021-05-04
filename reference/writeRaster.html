@@ -73,7 +73,7 @@ When writing a file to disk, the file format is determined by the 'format=' argu
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.4-9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.4-11</span>
       </span>
     </div>
 
@@ -154,8 +154,7 @@ For some other formats you can use the 'options' argument (see below)</p>
 <p><code>options</code>: Character. File format specific GDAL options. E.g., when
 writing a geotiff file you can use: <code>options=c("COMPRESS=NONE", "TFW=YES")</code></p>
 <p>You can use options=c("PROFILE=BASELINE") to create a plain  tif with no GeoTIFF tags. 
-This can be useful when writing files to be read by applications intolerant of unrecognised tags. 
-(see <a href='https://gdal.org/drivers/raster/gtiff.html'>https://gdal.org/drivers/raster/gtiff.html</a>)</p>
+This can be useful when writing files to be read by applications intolerant of unrecognised tags.</p>
 <p>NetCDF files have the following additional, optional, arguments: <code>varname</code>, <code>varunit</code>, <code>longname</code>, <code>xname</code>, <code>yname</code>, <code>zname</code>, <code>zunit</code></p>
 <p><code>prj</code>: Logical. If <code>TRUE</code>, the crs is written to a .prj file. This can be useful 
 when writing to an ascii file or another file type that does not store the crs</p>

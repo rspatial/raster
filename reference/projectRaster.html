@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Project a Raster object — projectRaster" />
-<meta property="og:description" content="Project the values of a Raster* object to a new Raster* object with another projection (coordinate reference system, (CRS)). 
+<meta property="og:description" content="Project the values of a Raster* object to a new Raster* object with another projection (coordinate reference system, (CRS)).
 You can do this by providing the new projection as a single argument in which case the function sets the extent and resolution of the new object. To have more control over the transformation, and, for example, to assure that the new object lines up with other datasets, you can provide a Raster* object with the properties that the input data should be projected to.
 projectExtent returns a RasterLayer with a projected extent, but without any values. This RasterLayer can then 
 be adjusted (e.g. by setting its resolution) and used as a template 'to' in projectRaster." />
@@ -75,7 +75,7 @@ be adjusted (e.g. by setting its resolution) and used as a template 'to' in proj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.4-9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.4-11</span>
       </span>
     </div>
 
@@ -117,8 +117,8 @@ be adjusted (e.g. by setting its resolution) and used as a template 'to' in proj
     </div>
 
     <div class="ref-description">
-    <p>Project the values of a Raster* object to a new Raster* object with another projection (coordinate reference system, (CRS)). 
-You can do this by providing the new projection as a single argument in which case the function sets the extent and resolution of the new object. To have more control over the transformation, and, for example, to assure that the new object lines up with other datasets, you can provide a Raster* object with the properties that the input data should be projected to.</p>
+    <p>Project the values of a Raster* object to a new Raster* object with another projection (coordinate reference system, (CRS)).</p>
+<p>You can do this by providing the new projection as a single argument in which case the function sets the extent and resolution of the new object. To have more control over the transformation, and, for example, to assure that the new object lines up with other datasets, you can provide a Raster* object with the properties that the input data should be projected to.</p>
 <p><code>projectExtent</code> returns a RasterLayer with a projected extent, but without any values. This RasterLayer can then 
 be adjusted (e.g. by setting its resolution) and used as a template <code>'to'</code> in <code>projectRaster</code>.</p>
     </div>
@@ -180,12 +180,10 @@ be adjusted (e.g. by setting its resolution) and used as a template <code>'to'</
 
     <p>There are two approaches you can follow to project the values of a Raster object.</p>
 <p>1) Provide a <code>crs</code> argument, and, optionally, a <code>res</code> argument, but do not provide a <code>to</code> argument.</p>
-<p>2) Create a template Raster with the CRS you want to project to. You can use an existing object, or use <code>projectExtent</code> for this
-or an existing Raster* object. Also set the number of rows and columns (or the resolution), and perhaps adjust the extent. The resolution of the output raster should normally be similar to that of the input raster. Then use that object as <code>from</code> argument to project the input Raster to. 
+<p>2) Create a template Raster with the CRS you want to project to. You can use an existing object, or use <code>projectExtent</code> for this or an existing Raster* object. Also set the number of rows and columns (or the resolution), and perhaps adjust the extent. The resolution of the output raster should normally be similar to that of the input raster. Then use that object as <code>from</code> argument to project the input Raster to. 
 This is the preferred method because you have most control. For example you can assure that the resulting Raster object lines up with other Raster objects.</p>
 <p>Projection is performed using the PROJ.4 library accessed through the rgdal package.</p>
-<p>One of the best places to find PROJ.4 coordinate reference system descriptions is <a href='https://www.spatialreference.org'>https://www.spatialreference.org</a>.</p>
-<p>You can also consult this page: <a href='http://geotiff.maptools.org/proj_list/'>http://geotiff.maptools.org/proj_list/</a> to find the parameter options and names for projections.</p>
+
 <p>Also see <code><a href='http://rgdal.r-forge.r-project.org/reference/projInfo.html'>projInfo('proj')</a></code>, <code><a href='http://rgdal.r-forge.r-project.org/reference/projInfo.html'>projInfo('ellps')</a></code>, and <code><a href='http://rgdal.r-forge.r-project.org/reference/projInfo.html'>projInfo('datum')</a></code> for valid PROJ.4 values.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
