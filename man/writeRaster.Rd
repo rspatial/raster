@@ -43,7 +43,6 @@ writing a geotiff file you can use: \code{options=c("COMPRESS=NONE", "TFW=YES")}
 
 You can use options=c("PROFILE=BASELINE") to create a plain  tif with no GeoTIFF tags. 
 This can be useful when writing files to be read by applications intolerant of unrecognised tags. 
-(see \url{https://gdal.org/drivers/raster/gtiff.html})
 
 NetCDF files have the following additional, optional, arguments: \code{varname}, \code{varunit}, \code{longname}, \code{xname}, \code{yname}, \code{zname}, \code{zunit}
 

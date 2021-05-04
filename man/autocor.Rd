@@ -44,8 +44,6 @@ Moran, P.A.P., 1950. Notes on continuous stochastic phenomena. Biometrika 37:17-
 Geary, R.C., 1954. The contiguity ratio and statistical mapping. The Incorporated Statistician 5: 115-145
 
 Anselin, L., 1995. Local indicators of spatial association-LISA. Geographical Analysis 27:93-115
-
-\url{https://en.wikipedia.org/wiki/Indicators_of_spatial_association}
 }
 
 \examples{

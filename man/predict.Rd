@@ -46,9 +46,6 @@ Use \code{\link[raster]{interpolate}} if your model has 'x' and 'y' as implicit 
 RasterLayer or RasterBrick
 }
 
-\note{
-For more on the use of the predict function see this resource on \href{https://www.rspatial.org/sdm/}{species distribution modeling}.
-}
 
 \examples{
 # A simple model to predict the location of the R in the R-logo using 20 presence points 
