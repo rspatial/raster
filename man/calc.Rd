@@ -54,7 +54,7 @@ The intent of some functions can be ambiguous. Consider:
 In this case, the cell values are multiplied in a vectorized manner and a single layer is returned where the first cell has been multiplied with one, the second cell with two, the 11th cell with one again, and so on. But perhaps the intent was to create 10 new layers (\code{x*1, x*2, ...})? This can be achieved by using argument \code{forceapply=TRUE} 
 
 
-\code{calc(r, function(x) x * 1:10), forceapply=TRUE}
+\code{calc(r, function(x) x * 1:10, forceapply=TRUE)}
 
 }
 
