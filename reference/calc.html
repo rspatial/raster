@@ -180,7 +180,7 @@ See (overlay) to use functions that refer to specific layers, like (function(a,b
 <p><code>calc(r, function(x) x * 1:10)</code></p>
 <p>In this case, the cell values are multiplied in a vectorized manner and a single layer is returned where the first cell has been multiplied with one, the second cell with two, the 11th cell with one again, and so on. But perhaps the intent was to create 10 new layers (<code>x*1, x*2, ...</code>)? This can be achieved by using argument <code>forceapply=TRUE</code></p>
 
-<p><code>calc(r, function(x) x * 1:10), forceapply=TRUE</code></p>
+<p><code>calc(r, function(x) x * 1:10, forceapply=TRUE)</code></p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>For large objects <code>calc</code> will compute values chunk by chunk. This means that for the result of <code>fun</code> to be  correct it should not depend on having access to _all_ values at once. For example, to scale the values of a Raster* object by subtracting its mean value (for each layer), you would _not_ do, for Raster object <code>x</code>:</p>
