@@ -1,14 +1,21 @@
 # raster
 
 
-[![Travis build
-status](https://travis-ci.org/rspatial/raster.svg?branch=master)](https://travis-ci.org/rspatial/raster)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/raster)](https://cran.r-project.org/package=raster)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/raster)](http://www.r-pkg.org/pkg/raster)
 
 
 This is the source code for the R package "raster". Released versions are on [CRAN](https://cran.r-project.org/web/packages/raster/index.html).
+
+
+The easiest way to install the *development version* on Windows or MacOS, is to get it from the [R-universe](https://r-universe.dev/organizations/) repository, like this:
+
+```
+install.packages('raster', repos='https://rspatial.r-universe.dev')
+```
+
+### From source-code
 
 To install the development version you can do:
 
