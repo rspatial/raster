@@ -15,8 +15,8 @@ setMethod("as.character", signature(x="Raster"),
 		crs <- ifelse(is.na(crs), ", crs=''", paste0(", crs='", crs, "'"))
 		if (nlayers(x) < 2) {
 			paste0("raster(", 
-				"ncol=",ncol(x),
-				", nrow=",nrow(x),
+				"ncols=",ncol(x),
+				", nrows=",nrow(x),
 				", xmn=",e[1],
 				", xmx=",e[2],
 				", ymn=",e[3],
