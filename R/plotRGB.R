@@ -9,6 +9,7 @@
 setMethod("plotRGB", signature(x='RasterStackBrick'), 
 function(x, r=1, g=2, b=3, scale, maxpixels=500000, stretch=NULL, ext=NULL, interpolate=FALSE, colNA='white', alpha, bgalpha, addfun=NULL, zlim=NULL, zlimcol=NULL, axes=FALSE, xlab='', ylab='', asp=NULL, add=FALSE, margins=FALSE, ...) { 
 
+	x <- x[[c(r, g, b)]]
 	if (missing(scale)) {
 		scale <- 255
 		if (! inherits(x, 'RasterStack')) {
@@ -19,9 +20,9 @@ function(x, r=1, g=2, b=3, scale, maxpixels=500000, stretch=NULL, ext=NULL, inte
 	}
 	scale <- as.vector(scale)[1]
 	
-	r <- sampleRegular(raster(x,r), maxpixels, ext=ext, asRaster=TRUE, useGDAL=TRUE)
-	g <- sampleRegular(raster(x,g), maxpixels, ext=ext, asRaster=TRUE, useGDAL=TRUE)
-	b <- sampleRegular(raster(x,b), maxpixels, ext=ext, asRaster=TRUE, useGDAL=TRUE)
+	r <- sampleRegular(raster(x,1), maxpixels, ext=ext, asRaster=TRUE, useGDAL=TRUE)
+	g <- sampleRegular(raster(x,2), maxpixels, ext=ext, asRaster=TRUE, useGDAL=TRUE)
+	b <- sampleRegular(raster(x,3), maxpixels, ext=ext, asRaster=TRUE, useGDAL=TRUE)
 
 	RGB <- cbind(getValues(r), getValues(g), getValues(b))
 	
@@ -73,11 +74,11 @@ function(x, r=1, g=2, b=3, scale, maxpixels=500000, stretch=NULL, ext=NULL, inte
 	naind <- as.vector( attr(RGB, "na.action") )
 	if (!is.null(naind)) {
 		bg <- grDevices::col2rgb(colNA)
-		bg <- grDevices::rgb(bg[1], bg[2], bg[3], alpha=bgalpha, max=255)
+		bg <- grDevices::rgb(bg[1], bg[2], bg[3], alpha=bgalpha, maxColorValue=255)
 		z <- rep( bg, times=ncell(r))
-		z[-naind] <- grDevices::rgb(RGB[,1], RGB[,2], RGB[,3], alpha=alpha, max=scale)
+		z[-naind] <- grDevices::rgb(RGB[,1], RGB[,2], RGB[,3], alpha=alpha, maxColorValue=scale)
 	} else {
-		z <- grDevices::rgb(RGB[,1], RGB[,2], RGB[,3], alpha=alpha, max=scale)
+		z <- grDevices::rgb(RGB[,1], RGB[,2], RGB[,3], alpha=alpha, maxColorValue=scale)
 	}
 	
 	z <- matrix(z, nrow=nrow(r), ncol=ncol(r), byrow=T)
