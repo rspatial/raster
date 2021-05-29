@@ -4,8 +4,8 @@
 
 
 \alias{SpPoly}
-\alias{SpPolyPart}
 \alias{SpPolygons}
+\alias{SpPolyPart}
 \alias{SpExtent}
 
 \alias{SpPoly-class}

@@ -6,7 +6,7 @@
 
 
 setMethod('extract', signature(x='Raster', y='SpatialPolygons'), 
-function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cellnumbers=FALSE, small=TRUE, df=FALSE, layer, nl, factors=FALSE, sp=FALSE, ...){ 
+function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, normalizeWeights=TRUE, cellnumbers=FALSE, small=TRUE, df=FALSE, layer, nl, factors=FALSE, sp=FALSE, weights=FALSE, ...){ 
 
 	#px <-.getCRS(x, asText=FALSE)
 	px <-.getCRS(x)
@@ -26,8 +26,9 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 	
 	if (!is.null(fun)) {
 		cellnumbers <- FALSE
-	    if (weights) {
+	    if (weights || exact) {
 			if (!is.null(fun)) {
+				fun <- match.fun(fun)
 				test <- try(methods::slot(fun, 'generic') == 'mean', silent=TRUE)
 				if (!isTRUE(test)) {
 					warning('"fun" was changed to "mean"; other functions cannot be used when "weights=TRUE"' )
@@ -108,7 +109,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 		utils::flush.console()
 
 		.sendCall <- eval( parse( text="parallel:::sendCall") )
-		parallel::clusterExport(cl, c('rsbb', 'rr', 'weights', 'addres', 'cellnumbers', 'small'), envir=environment())
+		parallel::clusterExport(cl, c('rsbb', 'rr', 'weights', 'exact', 'addres', 'cellnumbers', 'small'), envir=environment())
 		
 		clFun <- function(i, pp) {
 			spbb <- bbox(pp)
@@ -127,24 +128,40 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 						weight <- xy[,3] #/ 100
 					}
 					xy <- xy[, -3, drop=FALSE]
+				} else if (exact) {
+					erc <- crop(x, rc)
+					xy <- exactextractr::exact_extract(erc, pp, include_cell=cellnumbers, progress=FALSE)[[1]]
 				} else {
 					rc <- .polygonsToRaster(pp, rc, silent=TRUE)
 					xy <- rasterToPoints(rc)[,-3,drop=FALSE]
 				}
 				
 				if (length(xy) > 0) { # catch very small polygons
-					r <- .xyValues(x, xy, layer=layer, nl=nl)
-					if (weights) {
+					if (exact) {
+						r <- xy[,1]
+						if (normalizeWeights) {
+							xy$coverage_fraction <- xy$coverage_fraction / sum(xy$coverage_fraction)
+						}
 						if (cellnumbers) {
 							cell <- cellFromXY(x, xy)
-							r <- cbind(cell, r, weight)
+							r <- cbind(cell, r, xy$coverage_fraction)
 						} else {				
-							r <- cbind(r, weight)
+							r <- cbind(r, xy$coverage_fraction)
 						}
-					} else if (cellnumbers) {
-						cell <- cellFromXY(x, xy)
-						r <- cbind(cell, r)						
-					} 
+					} else {
+						r <- .xyValues(x, xy, layer=layer, nl=nl)
+						if (weights) {
+							if (cellnumbers) {
+								cell <- cellFromXY(x, xy)
+								r <- cbind(cell, r, weight)
+							} else {				
+								r <- cbind(r, weight)
+							}
+						} else if (cellnumbers) {
+							cell <- cellFromXY(x, xy)
+							r <- cbind(cell, r)						
+						}
+					}
 				} else {
 					if (small) {
 						ppp <- pp@polygons[[1]]@Polygons
@@ -154,7 +171,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 						if (length(xy) > 0) {
 							cell <- unique(unlist(lapply(xy, function(z) cellFromXY(x, z)), use.names = FALSE))
 							value <- .cellValues(x, cell, layer=layer, nl=nl)
-							if (weights) {
+							if (weights | exact) {
 								weight=rep(1/NROW(value), NROW(value))
 								if (cellnumbers) {
 									r <- cbind(cell, value, weight)
@@ -189,7 +206,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 
 			if (doFun) {
 				if (!is.null(d$value$value)) {
-					if (nl > 1 & !weights) {
+					if (nl > 1 & !(weights | exact)) {
 						res[[d$value$tag]] <- apply(d$value$value, 2, fun, na.rm=na.rm)							
 					} else { 
 						res[[d$value$tag]] <- fun(d$value$value, na.rm=na.rm)
@@ -224,6 +241,9 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 						weight <- xy[,3] #/ 100			
 					}
 					xy <- xy[,-3,drop=FALSE]
+				} else if (exact) {
+					erc <- crop(x, rc)
+					xy <- exactextractr::exact_extract(erc, pp, include_cell=cellnumbers, progress=FALSE)[[1]]	
 				} else {
 					rc <- .polygonsToRaster(pp, rc, silent=TRUE)
 					xy <- rasterToPoints(rc)[,-3,drop=FALSE]
@@ -233,11 +253,16 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 					if (weights) {
 						value <- .xyValues(x, xy, layer=layer, nl=nl)
 						if (cellnumbers) {
-							cell <- cellFromXY(x, xy)
 							res[[i]] <- cbind(cell, value, weight)
 						} else {				
 							res[[i]] <- cbind(value, weight)
 						}
+					} else if (exact) {
+						if (normalizeWeights) {
+							xy$coverage_fraction <- xy$coverage_fraction / sum(xy$coverage_fraction)
+						}					
+						colnames(xy)[ncol(xy)] <- "weight"
+						res[[i]] <- as.matrix(xy)
 					} else if (cellnumbers) {
 						value <- .xyValues(x, xy, layer=layer, nl=nl)
 						cell <- cellFromXY(x, xy)
@@ -253,7 +278,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 					if (length(xy) > 0) {
 						cell <- unique(unlist(lapply(xy, function(z) cellFromXY(x, z))), use.names = FALSE)
 						value <- .cellValues(x, cell, layer=layer, nl=nl)
-						if (weights) {
+						if (weights | exact) {
 							weight <- rep(1/NROW(value), NROW(value))
 							if (cellnumbers) {
 								res[[i]] <- cbind(cell, value, weight)
@@ -269,7 +294,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 				} 
 				if (doFun) {
 					if (!is.null(res[[i]])) {
-						if (nl > 1 & !weights) {
+						if (nl > 1 & !(weights | exact)) {
 							res[[i]] <- apply(res[[i]], 2, fun, na.rm=na.rm)							
 						} else {
 							res[[i]] <- fun(res[[i]], na.rm=na.rm)
@@ -321,7 +346,7 @@ function(x, y, fun=NULL, na.rm=FALSE, weights=FALSE, normalizeWeights=TRUE, cell
 		} else {
 			nms <- c('ID', names(x)[lyrs])
 		}
-		if (weights & is.null(fun)) {
+		if ((weights|exact) & is.null(fun)) {
 			nms <- c(nms, 'weight')
 		}
 		colnames(res) <- nms
