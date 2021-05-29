@@ -132,9 +132,9 @@ If <code>y</code> represents lines, the <code>extract</code> method returns the 
    <span class='va'>nl</span>, factors<span class='op'>=</span><span class='cn'>FALSE</span>, along<span class='op'>=</span><span class='cn'>FALSE</span>, sp<span class='op'>=</span><span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for Raster,SpatialPolygons</span>
-<span class='fu'>extract</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, fun<span class='op'>=</span><span class='cn'>NULL</span>, na.rm<span class='op'>=</span><span class='cn'>FALSE</span>, exact<span class='op'>=</span><span class='cn'>FALSE</span>,  
+<span class='fu'>extract</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, fun<span class='op'>=</span><span class='cn'>NULL</span>, na.rm<span class='op'>=</span><span class='cn'>FALSE</span>, exact<span class='op'>=</span><span class='cn'>FALSE</span>, weights<span class='op'>=</span><span class='cn'>FALSE</span>,  
    normalizeWeights<span class='op'>=</span><span class='cn'>TRUE</span>, cellnumbers<span class='op'>=</span><span class='cn'>FALSE</span>, small<span class='op'>=</span><span class='cn'>TRUE</span>, df<span class='op'>=</span><span class='cn'>FALSE</span>, <span class='va'>layer</span>, <span class='va'>nl</span>, 
-   factors<span class='op'>=</span><span class='cn'>FALSE</span>, sp<span class='op'>=</span><span class='cn'>FALSE</span>, weights<span class='op'>=</span><span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span>
+   factors<span class='op'>=</span><span class='cn'>FALSE</span>, sp<span class='op'>=</span><span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span>
 
 
 <span class='co'># S4 method for SpatialPolygons,SpatialPoints</span>
@@ -181,7 +181,11 @@ If <code>y</code> represents lines, the <code>extract</code> method returns the 
     </tr>
     <tr>
       <th>exact</th>
-      <td><p>logical. If <code>TRUE</code> the function returns, for each polygon, a matrix with the cell values and the fraction of each cell that is covered by the polygon. The weights can be used for averaging; see examples. This option is particularly useful if the polygons are small relative to the cells size of the Raster* object</p></td>
+      <td><p>logical. If <code>TRUE</code> the fraction of each cell that is (partly) covered by the polygon is extracted, not only the cells of which the centers are covered. This option is particularly useful if the polygons are small relative to the cells size of the Raster* object</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>logical. If <code>TRUE</code> the fraction of a cell that is covered is returned or used by <code>fun</code>. These can be used as weights can be used for averaging; see examples. If <code>exact</code> is <code>FALSE</code>, this is the approximate fraction of each cell that is covered by the polygon, rounded to 1/100</p></td>
     </tr>
     <tr>
       <th>normalizeWeights</th>
@@ -206,10 +210,6 @@ If <code>y</code> represents lines, the <code>extract</code> method returns the 
     <tr>
       <th>sp</th>
       <td><p>boolean. Should the extracted values be added to the data.frame of the Spatial* object <code>y</code>? This only applies if <code>y</code> is a Spatial* object and, for SpatialLines and SpatialPolygons, if <code>fun</code> is not NULL. In this case the returned value is the expanded Spatial object</p></td>
-    </tr>
-    <tr>
-      <th>weights</th>
-      <td><p>logical. If <code>TRUE</code> and <code>normalizeWeights=FALSE</code>, the function returns, for each polygon, a matrix with the cell values and the approximate fraction of each cell that is covered by the polygon(rounded to 1/100) --- to be depracated, use "exact" instead</p></td>
     </tr>
     <tr>
       <th>...</th>
