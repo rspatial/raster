@@ -6,7 +6,7 @@
 
 
 setMethod('extract', signature(x='Raster', y='SpatialPolygons'), 
-function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, normalizeWeights=TRUE, cellnumbers=FALSE, small=TRUE, df=FALSE, layer, nl, factors=FALSE, sp=FALSE, weights=FALSE, ...){ 
+function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeights=TRUE, cellnumbers=FALSE, small=TRUE, df=FALSE, layer, nl, factors=FALSE, sp=FALSE, ...){ 
 
 	#px <-.getCRS(x, asText=FALSE)
 	px <-.getCRS(x)
@@ -133,21 +133,27 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, normalizeWeights=TRUE, cellnu
 					xy <- exactextractr::exact_extract(erc, pp, include_cell=cellnumbers, progress=FALSE)[[1]]
 				} else {
 					rc <- .polygonsToRaster(pp, rc, silent=TRUE)
-					xy <- rasterToPoints(rc)[,-3,drop=FALSE]
+					r <- rasterToPoints(rc)[,-3,drop=FALSE]
 				}
 				
 				if (length(xy) > 0) { # catch very small polygons
 					if (exact) {
-						r <- xy[,1]
-						if (normalizeWeights) {
-							xy$coverage_fraction <- xy$coverage_fraction / sum(xy$coverage_fraction)
+						if (weights) {
+							if (normalizeWeights) {
+								xy$coverage_fraction <- xy$coverage_fraction / sum(xy$coverage_fraction)
+							}				
+							colnames(xy)[ncol(xy)] <- "weight"
+						} else {
+							xy$coverage_fraction  <- NULL
 						}
 						if (cellnumbers) {
-							cell <- cellFromXY(x, xy)
-							r <- cbind(cell, r, xy$coverage_fraction)
-						} else {				
-							r <- cbind(r, xy$coverage_fraction)
+							nms <- colnames(xy)
+							# not good if there is a layer called cell
+							nms <- c("cell", nms[nms != "cell"])
+							xy <- xy[,nms]
 						}
+						r <- as.matrix(xy)
+
 					} else {
 						r <- .xyValues(x, xy, layer=layer, nl=nl)
 						if (weights) {
@@ -231,7 +237,10 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, normalizeWeights=TRUE, cellnu
 				# do nothing; res[[i]] <- NULL
 			} else {
 				rc <- crop(rr, extent(pp)+addres)
-				if (weights) {
+				if (exact) {
+					erc <- crop(x, rc)
+					xy <- exactextractr::exact_extract(erc, pp, include_cell=cellnumbers, progress=FALSE)[[1]]	
+				} else if (weights) {
 					rc <- .polygonsToRaster(pp, rc, getCover=TRUE, silent=TRUE)
 					rc[rc==0] <- NA
 					xy <- rasterToPoints(rc)
@@ -241,28 +250,40 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, normalizeWeights=TRUE, cellnu
 						weight <- xy[,3] #/ 100			
 					}
 					xy <- xy[,-3,drop=FALSE]
-				} else if (exact) {
-					erc <- crop(x, rc)
-					xy <- exactextractr::exact_extract(erc, pp, include_cell=cellnumbers, progress=FALSE)[[1]]	
 				} else {
 					rc <- .polygonsToRaster(pp, rc, silent=TRUE)
 					xy <- rasterToPoints(rc)[,-3,drop=FALSE]
 				}
 			
 				if (length(xy) > 0)  {  # catch holes or very small polygons
-					if (weights) {
+					if (exact) {
+						if (weights) {
+							if (normalizeWeights) {
+								xy$coverage_fraction <- xy$coverage_fraction / sum(xy$coverage_fraction)
+							}				
+							colnames(xy)[ncol(xy)] <- "weight"
+						} else {
+							xy$coverage_fraction  <- NULL
+						}
+						if (cellnumbers) {
+							nms <- colnames(xy)
+							# not good if there is a layer called cell
+							nms <- c("cell", nms[nms != "cell"])
+							xy <- xy[,nms]
+						}
+						if (ncol(xy) == 1) {
+							res[[i]] <- unlist(xy, use.names =FALSE)
+						} else {
+							res[[i]] <- as.matrix(xy)
+						}
+					} else if (weights) {
 						value <- .xyValues(x, xy, layer=layer, nl=nl)
 						if (cellnumbers) {
+							cell <- cellFromXY(x, xy)
 							res[[i]] <- cbind(cell, value, weight)
 						} else {				
 							res[[i]] <- cbind(value, weight)
 						}
-					} else if (exact) {
-						if (normalizeWeights) {
-							xy$coverage_fraction <- xy$coverage_fraction / sum(xy$coverage_fraction)
-						}					
-						colnames(xy)[ncol(xy)] <- "weight"
-						res[[i]] <- as.matrix(xy)
 					} else if (cellnumbers) {
 						value <- .xyValues(x, xy, layer=layer, nl=nl)
 						cell <- cellFromXY(x, xy)

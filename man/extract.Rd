@@ -33,9 +33,9 @@ It is also possible to extract values for point locations from SpatialPolygons.
 \S4method{extract}{Raster,SpatialLines}(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer,
    nl, factors=FALSE, along=FALSE, sp=FALSE, ...)
 
-\S4method{extract}{Raster,SpatialPolygons}(x, y, fun=NULL, na.rm=FALSE, exact=FALSE,  
+\S4method{extract}{Raster,SpatialPolygons}(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE,  
    normalizeWeights=TRUE, cellnumbers=FALSE, small=TRUE, df=FALSE, layer, nl, 
-   factors=FALSE, sp=FALSE, weights=FALSE, ...)
+   factors=FALSE, sp=FALSE, ...)
 
 
 \S4method{extract}{SpatialPolygons,SpatialPoints}(x, y, ...)
@@ -60,7 +60,9 @@ It is also possible to extract values for point locations from SpatialPolygons.
 
 \item{df}{logical. If \code{df=TRUE}, results will be returned as a data.frame. The first column is a sequential ID, the other column(s) are the extracted values}
 
-\item{exact}{logical. If \code{TRUE} the function returns, for each polygon, a matrix with the cell values and the fraction of each cell that is covered by the polygon. The weights can be used for averaging; see examples. This option is particularly useful if the polygons are small relative to the cells size of the Raster* object}
+\item{exact}{logical. If \code{TRUE} the fraction of each cell that is (partly) covered by the polygon is extracted, not only the cells of which the centers are covered. This option is particularly useful if the polygons are small relative to the cells size of the Raster* object}
+
+\item{weights}{logical. If \code{TRUE} the fraction of a cell that is covered is returned or used by \code{fun}. These can be used as weights can be used for averaging; see examples. If \code{exact} is \code{FALSE}, this is the approximate fraction of each cell that is covered by the polygon, rounded to 1/100 }
 
 \item{normalizeWeights}{logical. If \code{TRUE}, weights are normalized such that they add up to one for each polygon}
 
@@ -74,7 +76,6 @@ It is also possible to extract values for point locations from SpatialPolygons.
 
 \item{sp}{ boolean. Should the extracted values be added to the data.frame of the Spatial* object \code{y}? This only applies if \code{y} is a Spatial* object and, for SpatialLines and SpatialPolygons, if \code{fun} is not NULL. In this case the returned value is the expanded Spatial object}
 
-\item{weights}{logical. If \code{TRUE} and \code{normalizeWeights=FALSE}, the function returns, for each polygon, a matrix with the cell values and the approximate fraction of each cell that is covered by the polygon(rounded to 1/100) --- to be depracated, use "exact" instead}
 
 \item{...}{additional arguments (none implemented)}  
 }
