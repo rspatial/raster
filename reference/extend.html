@@ -122,7 +122,7 @@ This function has replaced function &quot;expand&quot; (to avoid a name conflict
     </div>
 
     <pre class="usage"><span class='co'># S4 method for Raster</span>
-<span class='fu'>extend</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, value<span class='op'>=</span><span class='cn'>NA</span>, filename<span class='op'>=</span><span class='st'>''</span>, <span class='va'>...</span><span class='op'>)</span> 
+<span class='fu'>extend</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, value<span class='op'>=</span><span class='cn'>NA</span>, snap<span class='op'>=</span><span class='st'>"near"</span>, filename<span class='op'>=</span><span class='st'>''</span>, <span class='va'>...</span><span class='op'>)</span> 
 
 <span class='co'># S4 method for Extent</span>
 <span class='fu'>extend</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -142,6 +142,10 @@ This function has replaced function &quot;expand&quot; (to avoid a name conflict
     <tr>
       <th>value</th>
       <td><p>value to assign to new cells</p></td>
+    </tr>
+    <tr>
+      <th>snap</th>
+      <td><p>Character. One of "near", "in", or "out", to determine in which direction the extent should be aligned. To the nearest border, inwards or outwards</p></td>
     </tr>
     <tr>
       <th>filename</th>
