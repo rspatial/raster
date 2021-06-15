@@ -28,7 +28,7 @@ function(x, y, ...) {
 
 
 setMethod('extend', signature(x='Raster'), 
-function(x, y, value=NA, filename='', ...) {
+function(x, y, value=NA, snap='near', filename='', ...) {
 
 	if (is.vector(y)) {
 		if (length(y) <= 2) {
@@ -48,7 +48,7 @@ function(x, y, value=NA, filename='', ...) {
 
 	filename <- trim(filename)
 	
-	y  <- alignExtent(y, x)
+	y  <- alignExtent(y, x, snap=snap)
 # only expanding here, not cropping
 	y <- union(y, extent(x))
 	

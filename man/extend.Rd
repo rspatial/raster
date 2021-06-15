@@ -16,7 +16,7 @@ This function has replaced function "expand" (to avoid a name conflict with the 
 }
 
 \usage{
-\S4method{extend}{Raster}(x, y, value=NA, filename='', ...) 
+\S4method{extend}{Raster}(x, y, value=NA, snap="near", filename='', ...) 
 
 \S4method{extend}{Extent}(x, y, ...) 
 }
@@ -27,6 +27,7 @@ This function has replaced function "expand" (to avoid a name conflict with the 
   
   If \code{x} is an Extent object, \code{y} should be a numeric vector of 1, 2, or 4 elements}
   \item{value}{value to assign to new cells}  
+  \item{snap}{Character. One of "near", "in", or "out", to determine in which direction the extent should be aligned. To the nearest border, inwards or outwards}  
   \item{filename}{Character (optional)}  
   \item{...}{Additional arguments as for \code{\link{writeRaster}}}  
 
