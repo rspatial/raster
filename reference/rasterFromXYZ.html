@@ -157,7 +157,7 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
 <span class='va'>xyz</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rasterToPoints.html'>rasterToPoints</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 
 <span class='va'>rst</span> <span class='op'>&lt;-</span> <span class='fu'>rasterFromXYZ</span><span class='op'>(</span><span class='va'>xyz</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in rasterFromXYZ(xyz): object 'y' not found</span></div><div class='input'>
+
 <span class='co'># equivalent to:</span>
 <span class='va'>rr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrow<span class='op'>=</span><span class='fl'>5</span>, ncol<span class='op'>=</span><span class='fl'>5</span>, xmn<span class='op'>=</span><span class='fl'>0</span>, xmx<span class='op'>=</span><span class='fl'>10</span>, ymn<span class='op'>=</span><span class='fl'>0</span>, ymx<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
 <span class='va'>cells</span> <span class='op'>&lt;-</span> <span class='fu'><a href='cellFrom.html'>cellFromXY</a></span><span class='op'>(</span><span class='va'>rr</span>, <span class='va'>xyz</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span>
@@ -166,7 +166,7 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
 <span class='co'># multiple layers</span>
 <span class='va'>xyzz</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>xyz</span>, a<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>nrow</a></span><span class='op'>(</span><span class='va'>xyz</span><span class='op'>)</span>, b<span class='op'>=</span><span class='fu'><a href='ncell.html'>nrow</a></span><span class='op'>(</span><span class='va'>xyz</span><span class='op'>)</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span>
 <span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>rasterFromXYZ</span><span class='op'>(</span><span class='va'>xyzz</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in rasterFromXYZ(xyzz): object 'y' not found</span></div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
