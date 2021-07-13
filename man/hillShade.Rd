@@ -11,7 +11,7 @@ A hill shade layer is often used as a backdrop on top of which another, semi-tra
 }
 
 \usage{
-hillShade(slope, aspect, angle=45, direction=0, filename='', normalize=FALSE, ...)  
+hillShade(slope, aspect, angle=45, direction=0, filename='', normalize=FALSE, ...)
 }
 
 \arguments{

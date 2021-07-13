@@ -22,4 +22,3 @@ hillShade <- function(slope, aspect, angle=45, direction=0, filename='', normali
 	x <- overlay(slope, aspect, fun=fun, filename=filename, ...)		
 	return(x)
 }
-

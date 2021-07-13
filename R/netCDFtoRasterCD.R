@@ -141,8 +141,11 @@
 	nc <- ncdf4::nc_open(filename, readunlim=FALSE, suppress_dimvals = TRUE)
 	on.exit( ncdf4::nc_close(nc) )		
 	conv <- ncdf4::ncatt_get(nc, 0, "Conventions")
-		
-	# assuming > "CF-1.0"
+	#grads <- FALSE
+	#if (grepl("GrADS", conv$value) {
+	#	grads <- TRUE
+	#} 
+	# else assuming > "CF-1.0"
 	
 	zvar <- .varName(nc, varname, warn=warn)
 	# datatype <- .getRasterDTypeFromCDF( nc$var[[zvar]]$prec )
