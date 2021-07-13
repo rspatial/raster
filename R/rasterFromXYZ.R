@@ -25,7 +25,7 @@ rasterFromXYZ <- function(xyz, res=c(NA, NA), crs="", digits=5) {
 	xyz <- xyz[(!is.na(xyz[,1])) & (!is.na(xyz[,2])), ]
 	
 	x <- sort(unique(xyz[,1]))
-	if (length(y) < 2) {
+	if (length(x) < 2) {
 		stop("more than one unique x value needed")
 	}
 	
