@@ -25,14 +25,12 @@ rasterFromXYZ <- function(xyz, res=c(NA, NA), crs="", digits=5) {
 	xyz <- xyz[(!is.na(xyz[,1])) & (!is.na(xyz[,2])), ]
 	
 	x <- sort(unique(xyz[,1]))
-	if (length(x) < 2) {
-		stop("more than one unique x value needed")
-	}
-	
-	
 	dx <- x[-1] - x[-length(x)]
 
 	if (is.na(res[1])) {
+		if (length(x) < 2) {
+			stop("more than one unique x value needed")
+		}
 		rx <- min(dx)
 		for (i in 1:5) {
 			rx <- rx / i
@@ -53,15 +51,15 @@ rasterFromXYZ <- function(xyz, res=c(NA, NA), crs="", digits=5) {
 	}
 	
 	y <- sort(unique(xyz[,2]))
-	if (length(y) < 2) {
-		stop("more than one unique y value needed")
-	}
 	dy <- y[-1] - y[-length(y)]
 	# probably a mistake to use the line below 
 	# Gareth Davies suggested that it be removed 
 	# dy <- round(dy, digits)
 	
 	if (is.na(res[2])) {
+		if (length(y) < 2) {
+			stop("more than one unique y value needed")
+		}
 		ry <- min(dy)
 		for (i in 1:5) {
 			ry <- ry / i
