@@ -302,9 +302,19 @@ ccodes <- function() {
   year <- year + 2000
   yrange <- paste(year-19, year, sep = "-")
   
-  #TODO check for combinations that aren't available
+  #Check for combinations that aren't available
+  if(model == "GFDL-ESM4") {
+    if(ssp == 245) {
+      warning('this combination of ssp and model is not available')
+      return(invisible(NULL))
+    }
+    if(ssp == 585 & var %in% c("tmin", "tmax", "bio", "bioc")) {
+      warning('this combination of ssp and model is not available')
+      return(invisible(NULL))
+    }
+  }
   
-  #creat download dir
+  #create download dir
   path <- paste0(path, '/cmip6/', res, '/')
   dir.create(path, recursive=TRUE, showWarnings=FALSE)
   
