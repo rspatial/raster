@@ -17,6 +17,8 @@ getData <- function(name='GADM', download=TRUE, path='', ...) {
 		.worldclim(..., download=download, path=path)
 	} else if (name=='CMIP5') {
 		.cmip5(..., download=download, path=path)
+	} else if (name=='CMIP6') {
+	  .cmip6(..., ddownload=download, path=path)
 	} else if (name=='ISO3') {
 		ccodes()[,c(2,1)]
 	} else if (name=='countries') {
@@ -264,6 +266,74 @@ ccodes <- function() {
 }
 
 #.cmip5(var='prec', model='BC', rcp=26, year=50, res=10, path=getwd())
+
+.cmip6 <- function(var, model, ssp, year, res, lon, lat, path, download=TRUE) {
+  if (!res %in% c(2.5, 5, 10)) {
+    stop('resolution should be one of: 2.5, 5, 10')
+  }
+  res <- paste0(res, "m")
+  models <- c(
+    "BCC-CSM2-MR",
+    "CNRM-CM6-1",
+    "CNRM-ESM2-1",
+    "CanESM5",
+    "GFDL-ESM4",
+    "IPSL-CM6A-LR",
+    "MIROC-ES2L",
+    "MIROC6",
+    "MRI-ESM2-0"
+  )
+  
+  stopifnot(model %in% models)
+  
+  ssps <- c(126, 245, 370, 585)
+  
+  stopifnot(ssp %in% ssps)
+  
+  var <- tolower(var[1])
+  vars <- c('tmin', 'tmax', 'prec', 'bio', 'bioc')
+  stopifnot(var %in% vars)
+  #for consistency with .cmip5:
+  if(var == "bio") var <- "bioc"
+  
+  
+  stopifnot(year %in% c(40, 60, 80, 100))
+  
+  year <- year + 2000
+  yrange <- paste(year-19, year, sep = "-")
+  
+  #TODO check for combinations that aren't available
+  
+  #creat download dir
+  path <- paste0(path, '/cmip6/', res, '/')
+  dir.create(path, recursive=TRUE, showWarnings=FALSE)
+  
+  baseurl <- "https://biogeo.ucdavis.edu/data/worldclim/v2.1/fut/"
+  zip <- paste0("wc2.1_", res, "_", var, "_", model, "_ssp", ssp, "_", yrange, ".zip")
+  theurl <- paste0(baseurl, res, "/", zip)
+  
+  zipfile <- paste(path, zip, sep='')
+  
+  if (!file.exists(zipfile)) {
+    if (download) {
+      .download(theurl, zipfile)
+      if (!file.exists(zipfile))	{ 
+        message("\n Could not download file -- perhaps it does not exist") 
+      }
+    } else {
+      message("File not available locally. Use 'download = TRUE'")
+    }
+  }	
+  #tif file is buried deep, so unzip to tempdir and move .tif to top level
+  utils::unzip(zipfile, exdir=tempdir())
+  tiffile <- list.files(path = tempdir(),
+                        pattern = extension(zip, ".tif"),
+                        recursive = TRUE,
+                        full.names = TRUE)
+  outfile <- paste(dirname(zipfile), basename(tiffile), sep ="/")
+  file.copy(from = tiffile, to = outfile)
+  raster(outfile)
+}
 
 
 .worldclim <- function(var, res, lon, lat, path, download=TRUE) {
