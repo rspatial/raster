@@ -14,7 +14,7 @@ ccodes()
 }
 
 \arguments{
-  \item{name}{Data set name, currently supported are 'GADM', 'countries', 'SRTM', 'alt', and 'worldclim'. See Details for more info}
+  \item{name}{Data set name, currently supported are 'GADM', 'countries', 'SRTM', 'alt', 'worldclim', and 'CMIP5'. See Details for more info}
   \item{download}{Logical. If \code{TRUE} data will be downloaded if not locally available}
   \item{path}{Character. Path name indicating where to store the data. Default is the current working directory }
   \item{...}{ Additional required (!) parameters. These are data set specific. See Details}   
@@ -45,7 +45,7 @@ If \code{name='worldclim'} you must also provide arguments \code{var}, and a res
 \code{getData('worldclim', var='bio', res=10)}
 
 
-To get (projected) future climate data (CMIP5), you must provide arguments \code{var} and \code{res} as above. Only resolutions 2.5, 5, and 10 are currently available. In addition, you need to provide \code{model}, \code{rcp} and \code{year}. For example,
+To get (projected) future climate data (CMIP5), you must provide arguments \code{var} and \code{res} as above. Only resolutions 0.5, 2.5, 5, and 10 are currently available. In addition, you need to provide \code{model}, \code{rcp}, and \code{year}. For example,
 
 \code{getData('CMIP5', var='tmin', res=10, rcp=85, model='AC', year=70)}
 
