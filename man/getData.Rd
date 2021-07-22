@@ -45,17 +45,27 @@ If \code{name='worldclim'} you must also provide arguments \code{var}, and a res
 \code{getData('worldclim', var='bio', res=10)}
 
 
-To get (projected) future climate data (CMIP5), you must provide arguments \code{var} and \code{res} as above. Only resolutions 0.5, 2.5, 5, and 10 are currently available. In addition, you need to provide \code{model}, \code{rcp}, and \code{year}. For example,
+To get (projected) future climate data (CMIP5 or CMIP6), you must provide arguments \code{var} and \code{res} as above. Only resolutions 2.5, 5, and 10 are currently available for CMIP6. For CMIP5, resolution 0.5 (30s) is also available. In addition, you need to provide \code{model}, \code{rcp} (CMIP5) or \code{ssp} (CMIP6), and \code{year}. For example,
 
 \code{getData('CMIP5', var='tmin', res=10, rcp=85, model='AC', year=70)}
 
-function (var, model, rcp, year, res, lon, lat, path, download = TRUE) 
+function (var, model, rcp, year, res, path, download = TRUE) 
 
 'model' should be one of "AC", "BC", "CC", "CE", "CN", "GF", "GD", "GS", "HD", "HG", "HE", "IN", "IP", "MI", "MR", "MC", "MP", "MG", or  "NO".
 
 'rcp' should be one of 26, 45, 60, or 85.
 
 'year' should be 50 or 70
+
+An example for CMIP6:
+
+\code{getData('CMIP6', var = 'prec', res = 5, ssp = 245, model = "GFDL-ESM4", year = 80)}
+
+'model' should be one of "BCC-CSM2-MR", "CNRM-CM6-1", "CNRM-ESM2-1", "CanESM5", "GFDL-ESM4", "IPSL-CM6A-LR", "MIROC-ES2L", "MIROC6", or "MRI-ESM2-0".
+
+'ssp' should be 126, 245, 370, or 585
+
+'year' should be 40, 60, 80, or 100
 
 Not all combinations are available. See www.worldclim.org for details.
 }
