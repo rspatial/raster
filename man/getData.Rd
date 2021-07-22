@@ -14,7 +14,7 @@ ccodes()
 }
 
 \arguments{
-  \item{name}{Data set name, currently supported are 'GADM', 'countries', 'SRTM', 'alt', 'worldclim', and 'CMIP5'. See Details for more info}
+  \item{name}{Data set name, currently supported are 'GADM', 'countries', 'SRTM', 'alt', 'worldclim', 'CMIP5' and 'CMIP6'. See Details for more info}
   \item{download}{Logical. If \code{TRUE} data will be downloaded if not locally available}
   \item{path}{Character. Path name indicating where to store the data. Default is the current working directory }
   \item{...}{ Additional required (!) parameters. These are data set specific. See Details}   
