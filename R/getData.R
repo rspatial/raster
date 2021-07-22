@@ -18,7 +18,7 @@ getData <- function(name='GADM', download=TRUE, path='', ...) {
 	} else if (name=='CMIP5') {
 		.cmip5(..., download=download, path=path)
 	} else if (name=='CMIP6') {
-	  .cmip6(..., ddownload=download, path=path)
+	  .cmip6(..., download=download, path=path)
 	} else if (name=='ISO3') {
 		ccodes()[,c(2,1)]
 	} else if (name=='countries') {
@@ -199,7 +199,7 @@ ccodes <- function() {
 }
 
 
-.cmip5 <- function(var, model, rcp, year, res, lon, lat, path, download=TRUE) {
+.cmip5 <- function(var, model, rcp, year, res, path, download=TRUE) {
 	if (!res %in% c(0.5, 2.5, 5, 10)) {
 		stop('resolution should be one of: 2.5, 5, 10')
 	}
@@ -267,7 +267,7 @@ ccodes <- function() {
 
 #.cmip5(var='prec', model='BC', rcp=26, year=50, res=10, path=getwd())
 
-.cmip6 <- function(var, model, ssp, year, res, lon, lat, path, download=TRUE) {
+.cmip6 <- function(var, model, ssp, year, res, path, download=TRUE) {
   if (!res %in% c(2.5, 5, 10)) {
     stop('resolution should be one of: 2.5, 5, 10')
   }
