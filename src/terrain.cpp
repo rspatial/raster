@@ -171,7 +171,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 			
 			for (size_t i=0; i<2; i++) {
 				yw[i] = yw[i] / (2 * dy);
-			}			
+			}
 			for (size_t i = ncol; i < (ncol * (nrow-1)-1); i++) {
 				if (i % ncol == 0) {
 					q = i / ncol;
@@ -230,6 +230,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 			
 			for (size_t i=0; i<6; i++) {
 				yw[i] = yw[i] / (8 * dy);
+				xw[i] = xwi[i] / (-8 * ddx[1]);
 			}
 						
 			for (size_t i = ncol+1; i < (ncol * (nrow-1)-1); i++) {
@@ -293,6 +294,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 			
 			for (size_t i=0; i<6; i++) {
 				yw[i] = yw[i] / (8 * dy);
+				xw[i] = xwi[i] / (-8 * ddx[1]);
 			}
 						
 			for (size_t i = ncol+1; i < (ncol * (nrow-1)-1); i++) {
