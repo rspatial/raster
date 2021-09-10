@@ -73,7 +73,7 @@ This approach (predict a fitted model to raster data) is commonly used in remote
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.4-13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.4-14</span>
       </span>
     </div>
 
@@ -272,7 +272,7 @@ This approach (predict a fitted model to raster data) is commonly used in remote
 </div><div class='img'><img src='predict-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># partial least square regression</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mevik.net/work/software/pls.html'>pls</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/khliland/pls'>pls</a></span><span class='op'>)</span>
 <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/pls/man/mvr.html'>plsr</a></span><span class='op'>(</span>formula<span class='op'>=</span><span class='va'>pa</span><span class='op'>~</span><span class='va'>.</span>, data<span class='op'>=</span><span class='va'>v</span><span class='op'>)</span>
 <span class='co'># this returns an array:</span>
 <span class='fu'>predict</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>v</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,<span class='op'>]</span><span class='op'>)</span>

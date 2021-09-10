@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dimensions of a Raster* object — dim • raster</title>
+<title>Coordinates of the Extent of a Raster object — Extreme coordinates • raster</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Dimensions of a Raster* object — dim" />
-<meta property="og:description" content="Get or set the number of rows, columns, and layers of a Raster* object. You cannot use this function to set the dimensions of a RasterStack object.
-When setting the dimensions, you can provide a row number, or a vector with the row and the column number (for a RasterLayer and a RasterBrick), or a row and column number and the number of layers (only for a RasterBrick)" />
+<meta property="og:title" content="Coordinates of the Extent of a Raster object — Extreme coordinates" />
+<meta property="og:description" content="These functions return or set the extreme coordinates of a Raster* object; and return them for Spatial* objects." />
 
 
 
@@ -109,47 +108,59 @@ When setting the dimensions, you can provide a row number, or a vector with the 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Dimensions of a Raster* object</h1>
+    <h1>Coordinates of the Extent of a Raster object</h1>
     
-    <div class="hidden name"><code>dimensions.Rd</code></div>
+    <div class="hidden name"><code>coords.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get or set the number of rows, columns, and layers of a Raster* object. You cannot use this function to set the dimensions of a RasterStack object.</p>
-<p>When setting the dimensions, you can provide a row number, or a vector with the row and the column number (for a RasterLayer and a RasterBrick), or a row and column number and the number of layers (only for a RasterBrick)</p>
+    <p>These functions return or set the extreme coordinates of a Raster* object; and return them for Spatial* objects.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for BasicRaster</span>
-<span class='fu'>dim</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>xmin</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='fu'>xmax</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='fu'>ymin</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='fu'>ymax</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='fu'>xmin</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>xmax</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>ymin</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+<span class='fu'>ymax</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Raster(* object</p></td>
+      <td><p>Raster* or Extent object</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>numeric. x or y coordinate</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments. None implemented</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Integer or Raster* object</p>
+    <p>numeric</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code> <a href='ncell.html'>ncell</a>, <a href='extent.html'>extent</a>, <a href='resolution.html'>res</a> </code></p></div>
+    <div class='dont-index'><p><code><a href='extent.html'>extent</a></code>,  <code>dimensions</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'>dim</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 180 360   1</div><div class='input'><span class='fu'>dim</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>18</span><span class='op'>)</span> 
-<span class='fu'>dim</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1]  18 360   1</div><div class='input'><span class='fu'>dim</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>18</span>, <span class='fl'>36</span><span class='op'>)</span> 
-<span class='fu'>dim</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 18 36  1</div><div class='input'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='brick.html'>brick</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='fu'>dim</span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 18 36  1</div><div class='input'><span class='fu'>dim</span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>10</span>, <span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'>dim</span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 10 10  5</div></pre>
+    <pre class="examples"><div class='input'>
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>xmn<span class='op'>=</span><span class='op'>-</span><span class='fl'>0.5</span>, xmx <span class='op'>=</span> <span class='fl'>9.5</span>, ncols<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='fu'>xmin</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -0.5</div><div class='input'><span class='fu'>xmax</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 9.5</div><div class='input'><span class='fu'>ymin</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] -90</div><div class='input'><span class='fu'>ymax</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 90</div><div class='input'><span class='fu'>xmin</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>180</span>
+<span class='fu'>xmax</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>180</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
