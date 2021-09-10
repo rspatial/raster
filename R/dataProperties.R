@@ -46,16 +46,20 @@ fromDisk <- function(x) {
 	}
 }
 	
-inMemory <- function(x) {
-	if (inherits( x, 'RasterStack' )) {
-		return( all( sapply( x@layers, function(x) x@data@inmemory )))
-	} else {
-		return( x@data@inmemory )
+
+setMethod("inMemory", signature(x="BasicRaster"), 
+	function(x) {
+		if (class(x) == 'BasicRaster') { return(TRUE) }
+		if (inherits( x, 'RasterStack' )) {
+			return( all( sapply( x@layers, function(x) x@data@inmemory )))
+		} else {
+			return( x@data@inmemory )
+		}
 	}
-}
+)
 
 setMethod("hasValues", signature(x="BasicRaster"), 
-	function(x, ...) {
+	function(x) {
 		if (class(x) == 'BasicRaster') { return(FALSE) }
 		if (inherits(x, 'RasterStack')) { 
 			if (nlayers(x) > 0) return(TRUE) else return(FALSE)

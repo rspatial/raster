@@ -1,5 +1,6 @@
 \name{Extreme coordinates}
 
+
 \alias{xmin}
 \alias{xmax}
 \alias{ymin}

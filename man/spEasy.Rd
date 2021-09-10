@@ -1,4 +1,4 @@
-\name{spPolygons}
+\name{spEasy}
 
 \alias{spLines}
 \alias{spPolygons}

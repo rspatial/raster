@@ -59,6 +59,8 @@ if (!isGeneric("geom")) { setGeneric("geom", function(x, ...) standardGeneric("g
 if (!isGeneric("gridDistance")) {setGeneric("gridDistance", function(x, ...) standardGeneric("gridDistance"))}	
 if (!isGeneric("head")) { setGeneric("head", function(x, ...) standardGeneric("head"))}	
 if (!isGeneric("hasValues")) { setGeneric("hasValues", function(x, ...) standardGeneric("hasValues"))}	
+if (!isGeneric("inMemory")) {setGeneric("inMemory", function(x, ...) standardGeneric("inMemory"))}
+
 #if (!isGeneric("ifel")) {setGeneric("ifel", function(test, yes, no, ...) standardGeneric("ifel"))}	
 if (!isGeneric("image")) {setGeneric("image", function(x,...) standardGeneric("image"))}	
 if (!isGeneric("init")) {setGeneric("init", function(x, ...) standardGeneric("init"))}	
