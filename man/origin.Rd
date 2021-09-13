@@ -19,7 +19,7 @@ origin(x) <- value
 
 \arguments{
   \item{x}{Raster* object}
-  \item{value}{numeric vector of lenght 1 or 2}
+  \item{value}{numeric vector of length 1 or 2}
   \item{...}{additional arguments. None implemented}  
 }
 

@@ -23,10 +23,6 @@ function(x, ...) {
 )
 
 
-if (!isGeneric("origin<-")) {
-	setGeneric("origin<-", function(x, value)
-		standardGeneric("origin<-"))
-}
 
 setMethod("origin<-", signature('BasicRaster'), 
 	function(x, value) {

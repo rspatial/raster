@@ -4,7 +4,7 @@ if (!isGeneric("hillShade")) {setGeneric("hillShade", function(x, ...) standardG
 if (!isGeneric("rectify")) {setGeneric("rectify", function(x, ...) standardGeneric("rectify"))}	
 if (!isGeneric("whiches.max")) {setGeneric("whiches.max", function(x, ...)standardGeneric("whiches.max"))}	
 if (!isGeneric("whicheses.min")) {setGeneric("whiches.min", function(x, ...)standardGeneric("whiches.min"))}	
-
+if (!isGeneric("origin<-")) {setGeneric("origin<-", function(x, value)	standardGeneric("origin<-"))}
 	
 if (!isGeneric("weighted.mean")) {setGeneric("weighted.mean", function(x, w, ...) standardGeneric("weighted.mean"))}	
 
