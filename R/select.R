@@ -87,10 +87,10 @@ setMethod('select', signature(x='Spatial'),
 			} else {
 				x <- as(x, 'SpatialPoints')			
 			}
-			i <- which(!is.na(over(x, e)))
+			i <- which(!is.na(sp::over(x, e)))
 			if (length(i) > 0) {
 				x <- x[i,]
-				gridded(x) <- TRUE
+				sp::gridded(x) <- TRUE
 				x <- as(x, cls)
 				if (draw) {
 					sp::plot(x, col=col, cex=size, add=TRUE)
@@ -106,7 +106,7 @@ setMethod('select', signature(x='Spatial'),
 			} else {
 				x <- as(x, 'SpatialPoints')			
 			}
-			i <- which(!is.na(over(x, e)))
+			i <- which(!is.na(sp::over(x, e)))
 			if (length(i) > 0) {
 				x <- x[i,]
 				x <- as(x, cls)
@@ -119,7 +119,7 @@ setMethod('select', signature(x='Spatial'),
 		
 		} else { # SpatialPoints
 		
-			i <- which(!is.na(over(x, e)))
+			i <- which(!is.na(sp::over(x, e)))
 			if (length(i) > 0) {
 				x <- x[i,]
 				if (draw) {

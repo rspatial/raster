@@ -96,8 +96,8 @@ rasterToPolygons <- function(x, fun=NULL, n=4, na.rm=TRUE, digits=12, dissolve=F
 	cr <- round(cr, digits=digits)
 	
 	sp <- lapply(1:nrow(cr), function(i) Polygons(list(Polygon( matrix( cr[i,], ncol=2 ) )), i))
-	sp <- SpatialPolygons(sp, proj4string=.getCRS((x)))
-	sp <- SpatialPolygonsDataFrame(sp, data.frame(xyv[,3:ncol(xyv),drop=FALSE]), match.ID=FALSE)
+	sp <- sp::SpatialPolygons(sp,  proj4string=.getCRS((x)))
+	sp <- sp::SpatialPolygonsDataFrame(sp, data.frame(xyv[,3:ncol(xyv),drop=FALSE]), match.ID=FALSE)
 	if (dissolve) {
 		if(! requireNamespace("rgeos") ) {
 			warning('package rgeos is not available. Cannot dissolve')

@@ -19,7 +19,7 @@
 	out <- as(data.frame(out), 'SpatialPolygons')
 	out@proj4string <- p@proj4string
 	if (.hasSlot(p, 'data')) {
-		out <- SpatialPolygonsDataFrame(out, p@data)
+		out <- sp::SpatialPolygonsDataFrame(out, p@data)
 	}
 	out
 }

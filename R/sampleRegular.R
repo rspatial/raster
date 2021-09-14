@@ -124,7 +124,7 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 					outras <- raster(x)
 				} else {
 					outras <- raster(ext) 
-					crs(outras) <- crs(x)
+					crs(outras) <- sp::CRS(x)
 				}
 				nrow(outras) <- nr
 				ncol(outras) <- nc
@@ -167,7 +167,7 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 				outras <- raster(extent(x))
 			} else {
 				outras <- raster(ext)
-				crs(outras) <- crs(x)
+				crs(outras) <- sp::CRS(x)
 			}
 			ncol(outras) <- nc
 			nrow(outras) <- nr
@@ -200,7 +200,7 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 				outras <- raster(x)
 			} else {
 				outras <- raster(ext) 
-				crs(outras) <- crs(x)
+				crs(outras) <- sp::CRS(x)
 			}
 			nrow(outras) <- nr
 			ncol(outras) <- nc
@@ -242,9 +242,9 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 
 		if (sp) {
 			if (hv) {
-				m <- SpatialPointsDataFrame(xyFromCell(x, cell), data.frame(m), proj4string=.getCRS(x))
+				m <- sp::SpatialPointsDataFrame(xyFromCell(x, cell), data.frame(m),  proj4string=.getCRS(x))
 			} else {
-				m <- SpatialPoints(xyFromCell(x, cell), proj4string=.getCRS(x))			
+				m <- sp::SpatialPoints(xyFromCell(x, cell),  proj4string=.getCRS(x))			
 			}
 		}
 		

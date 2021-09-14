@@ -71,13 +71,13 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 
 		prj <- x@proj4string
 		if (is.na(prj)) prj <- y@proj4string
-		x@proj4string <- CRS(as.character(NA))
-		y@proj4string <- CRS(as.character(NA))
+		x@proj4string <- sp::CRS(as.character(NA))
+		y@proj4string <- sp::CRS(as.character(NA))
 
 		if (!.hasSlot(x, "data")) {
 			d <- data.frame(erase_dissolve_ID=1:length(x))
 			rownames(d) <- row.names(x)
-			x <- SpatialPolygonsDataFrame(x, data=d)
+			x <- sp::SpatialPolygonsDataFrame(x, data=d)
 			dropframe <- TRUE
 		} else {
 			dropframe <- FALSE
@@ -101,7 +101,7 @@ setMethod(erase, signature(x='SpatialPolygons', y='SpatialPolygons'),
 		}
 		part2 <- .gDif(x[int1,], y[int2,])
 
-		part2 <- SpatialPolygonsDataFrame(part2, x@data[match(row.names(part2), rownames(x@data)), ,drop=FALSE])
+		part2 <- sp::SpatialPolygonsDataFrame(part2, x@data[match(row.names(part2), rownames(x@data)), ,drop=FALSE])
 		if (!is.null(part1)) {
 			part2 <- rbind(part1, part2)
 		}
@@ -126,14 +126,14 @@ setMethod(erase, signature(x='SpatialLines', y='SpatialPolygons'),
 		valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 		prj <- x@proj4string
 		if (is.na(prj)) prj <- y@proj4string
-		x@proj4string <- CRS(as.character(NA))
-		y@proj4string <- CRS(as.character(NA))
+		x@proj4string <- sp::CRS(as.character(NA))
+		y@proj4string <- sp::CRS(as.character(NA))
 
 		
 		if (!.hasSlot(x, 'data')) {
 			d <- data.frame(ID=1:length(x))
 			rownames(d) <- row.names(x)
-			x <- SpatialLinesDataFrame(x, data=d)
+			x <- sp::SpatialLinesDataFrame(x, data=d)
 			dropframe <- TRUE
 		} else {
 			dropframe <- FALSE
@@ -156,7 +156,7 @@ setMethod(erase, signature(x='SpatialLines', y='SpatialPolygons'),
 		}
 		part2 <- .gDif(x[int1,], y[int2,], 'lines')
 
-		part2 <- SpatialLinesDataFrame(part2, x@data[match(row.names(part2), rownames(x@data)), ,drop=FALSE], match.ID = FALSE)
+		part2 <- sp::SpatialLinesDataFrame(part2, x@data[match(row.names(part2), rownames(x@data)), ,drop=FALSE], match.ID = FALSE)
 		if (!is.null(part1)) {
 			part2 <- rbind(part1, part2)
 		}

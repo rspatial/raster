@@ -155,7 +155,7 @@ setMethod('brick', signature(x='Extent'),
 		if (nr < 1) { stop("nrows should be > 0") }
 		b <- methods::new("RasterBrick", extent=x, ncols=nc, nrows=nr)
 
-		prj <- CRS(as.character(NA), doCheckCRSArgs=FALSE)			
+		prj <- sp::CRS(as.character(NA), doCheckCRSArgs=FALSE)			
 		try(prj <- .getCRS(crs))
 		projection(b) <- prj
 		nl <- max(round(nl), 0)

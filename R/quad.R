@@ -30,7 +30,7 @@
 		# if (nc < 1) { stop("ncols should be > 0") }
 		# if (nr < 1) { stop("nrows should be > 0") }
 		# b <- methods::new("RasterQuadBrick", extent=bb, ncols=nc, nrows=nr)
-		# projection(b) <- crs
+		# projection(b) <- sp::CRS
 		# levels <- as.integer(max(round(levels), 0))
 		# steps <- as.integer(max(round(steps), 0))
 		# nl <- levels * steps

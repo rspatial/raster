@@ -78,7 +78,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		hd <- FALSE
 		if (!is.null(by)) {
 			if (length(by) == length(x@polygons)) {
-				x <- SpatialPolygonsDataFrame(x, data=data.frame(ID=by))
+				x <- sp::SpatialPolygonsDataFrame(x, data=data.frame(ID=by))
 				by <- 1
 			} else if (is.character(by)) {
 				stop('character argument for by not understood. It is not length(x) and x has no attributes')
@@ -106,10 +106,10 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 				nsubobs <- length(x@polygons[[i]]@Polygons)
 				p <- c(p, lapply(1:nsubobs, function(j) x@polygons[[i]]@Polygons[[j]]))
 			}
-			x <- SpatialPolygons(list(Polygons(p, '1')), proj4string=x@proj4string)
+			x <- sp::SpatialPolygons(list(Polygons(p, '1')),  proj4string=x@proj4string)
 		}
 		#if (hd) {
-		#	x <- SpatialPolygonsDataFrame(x, data=data.frame(ID=1))
+		#	x <- sp::SpatialPolygonsDataFrame(x, data=data.frame(ID=1))
 		#}
 		return(x)
 		
@@ -150,7 +150,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		
 		if (dissolve) {
 			if (rgeos::version_GEOS0() < "3.3.0") {
-				x <- lapply(1:nrow(id), function(y) spChFIDs(rgeos::gUnionCascaded(x[dc[dc$v==y,1],]), as.character(y)))
+				x <- lapply(1:nrow(id), function(y) sp::spChFIDs(rgeos::gUnionCascaded(x[dc[dc$v==y,1],]), as.character(y)))
 			} else {
 			
 				x <- lapply(1:nrow(id), 
@@ -158,7 +158,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 							z <- x[dc[dc$v==y, 1], ]
 							z <- try( rgeos::gUnaryUnion(z) )
 							if (! inherits(z, "try-error")) {
-								spChFIDs(z, as.character(y))
+								sp::spChFIDs(z, as.character(y))
 							}
 						}
 					)
@@ -173,14 +173,14 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 				d$part <- z[d$object] + d$part
 				d$object <- y
 				d <- as(d, "SpatialPolygons")
-				spChFIDs(d, as.character(y))
+				sp::spChFIDs(d, as.character(y))
 			})
 		}
 		
 		x <- do.call(rbind, x)
 		x@proj4string <- crs
 		rownames(dat) <- NULL
-		SpatialPolygonsDataFrame(x, dat, FALSE)
+		sp::SpatialPolygonsDataFrame(x, dat, FALSE)
 	}
 }
 )
@@ -202,7 +202,7 @@ function(x, by=NULL, sums=NULL, ...) {
 		hd <- FALSE
 		if (!is.null(by)) {
 			if (length(by) == length(x@lines)) {
-				x <- SpatialLinesDataFrame(x, data=data.frame(ID=by))
+				x <- sp::SpatialLinesDataFrame(x, data=data.frame(ID=by))
 				by <- 1
 			} else if (is.character(by)) {
 				stop('character argument for by not understood. It is not length(x) and x has no attributes')
@@ -218,7 +218,7 @@ function(x, by=NULL, sums=NULL, ...) {
 			nsubobs <- length(x@lines[[i]]@Lines)
 			p <- c(p, lapply(1:nsubobs, function(j) x@lines[[i]]@Lines[[j]]))
 		}
-		x <- SpatialLines(list(Lines(p, '1')), proj4string=proj4string(x))
+		x <- sp::SpatialLines(list(Lines(p, '1')),  proj4string= sp::proj4string(x))
 		return(x)
 		
 	} else {
@@ -254,12 +254,12 @@ function(x, by=NULL, sums=NULL, ...) {
 		if (hd) {
 			x <- as(x, 'SpatialLines')
 		}
-		x <- lapply(1:nrow(id), function(y) spChFIDs(aggregate(x[dc[dc$v==y,1],]), as.character(y)))
+		x <- lapply(1:nrow(id), function(y) sp::spChFIDs(aggregate(x[dc[dc$v==y,1],]), as.character(y)))
 		
 		x <- do.call(rbind, x)
 		crs(x) <- crs
 		rownames(dat) <- NULL
-		SpatialLinesDataFrame(x, dat, FALSE)
+		sp::SpatialLinesDataFrame(x, dat, FALSE)
 	}
 }
 )

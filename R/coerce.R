@@ -11,7 +11,7 @@ setAs("Raster", "GridTopology",
 	function(from) {
 		rs <- res(from)
 		orig <- bbox(from)[,1] + 0.5 * rs
-		GridTopology(orig, rs, dim(from)[2:1] )
+		sp::GridTopology(orig, rs, dim(from)[2:1] )
 	}
 )
 
@@ -30,9 +30,9 @@ setAs("Raster", "SpatialPixels",
 		sp <- rasterToPoints(from, fun=NULL, spatial=FALSE)
 		
 		r <- raster(from)
-		sp <- SpatialPoints(sp[,1:2,drop=FALSE], proj4string= .getCRS(r))
+		sp <- sp::SpatialPoints(sp[,1:2,drop=FALSE],  proj4string= .getCRS(r))
 		grd <- as(r, "GridTopology")
-		SpatialPixels(points=sp, grid=grd)
+		sp::SpatialPixels(points=sp, grid=grd)
 	}
 )
 
@@ -44,7 +44,7 @@ setAs("Raster", "SpatialPixelsDataFrame",
 		v <- rasterToPoints(from, fun=NULL, spatial=FALSE)
 
 		r <- raster(from)
-		sp <- SpatialPoints(v[,1:2,drop=FALSE], proj4string= .getCRS(r))
+		sp <- sp::SpatialPoints(v[,1:2,drop=FALSE],  proj4string= .getCRS(r))
 
 		grd <- as(r, "GridTopology")
 		
@@ -58,10 +58,10 @@ setAs("Raster", "SpatialPixelsDataFrame",
 					}
 				}
 			}
-			SpatialPixelsDataFrame(points=sp, data=v, grid=grd)
+			sp::SpatialPixelsDataFrame(points=sp, data=v, grid=grd)
 		} else {
 			warning("object has no values, returning a 'SpatialPixels' object")
-			SpatialPixels(points=sp, grid=grd)
+			sp::SpatialPixels(points=sp, grid=grd)
 		}
 	}
 )
@@ -74,7 +74,7 @@ setAs("Raster", "SpatialGrid",
 		}	
 		r <- raster(from)
 		grd <- as(r, "GridTopology")
-		SpatialGrid(grd, proj4string=.getCRS(r))
+		sp::SpatialGrid(grd,  proj4string=.getCRS(r))
 	}
 )
 
@@ -88,10 +88,10 @@ setAs("Raster", "SpatialGridDataFrame",
 		grd <- as(r, "GridTopology")
 
 		if (hasValues(from)) {
-			sp <- SpatialGridDataFrame(grd, proj4string=.getCRS(r), data=as.data.frame(from))
+			sp <- sp::SpatialGridDataFrame(grd,  proj4string=.getCRS(r), data=as.data.frame(from))
 		} else { 
 			warning("object has no values, returning a 'SpatialGrid' object")
-			sp  <- SpatialGrid(grd, proj4string=.getCRS(r))
+			sp  <- sp::SpatialGrid(grd,  proj4string=.getCRS(r))
 		}
 		sp
 	}
@@ -115,7 +115,7 @@ setAs("Raster", "SpatialPolygonsDataFrame",
 
 setAs("Raster", "SpatialPoints", 
 	function(from) { 
-		SpatialPoints(rasterToPoints(from, spatial=FALSE)[,1:2], proj4string=.getCRS(from))
+		sp::SpatialPoints(rasterToPoints(from, spatial=FALSE)[,1:2],  proj4string=.getCRS(from))
 	}
 )
 
@@ -129,14 +129,14 @@ setAs("Raster", "SpatialPointsDataFrame",
 setAs("Extent", "SpatialPolygons", 
 	function(from){ 
 		p <- rbind(c(from@xmin, from@ymin), c(from@xmin, from@ymax), c(from@xmax, from@ymax), c(from@xmax, from@ymin), c(from@xmin, from@ymin) )
-		SpatialPolygons(list(Polygons(list(Polygon(p)), "1"))) 
+		sp::SpatialPolygons(list(Polygons(list(Polygon(p)), "1"))) 
 	}
 )
 
 setAs("Extent", "SpatialLines", 
 	function(from){ 
 		p <- rbind(c(from@xmin, from@ymin), c(from@xmin, from@ymax), c(from@xmax, from@ymax), c(from@xmax, from@ymin), c(from@xmin, from@ymin) )
-		SpatialLines(list(Lines(list(Line(p)), "1"))) 
+		sp::SpatialLines(list(Lines(list(Line(p)), "1"))) 
 	}
 )
 
@@ -144,7 +144,7 @@ setAs("Extent", "SpatialLines",
 setAs("Extent", "SpatialPoints", 
 	function(from){ 
 		p <- cbind( x=c( from@xmin, from@xmin, from@xmax, from@xmax), y=c(from@ymin, from@ymax, from@ymin, from@ymax) )
-		SpatialPoints(p)
+		sp::SpatialPoints(p)
 	}
 )
 

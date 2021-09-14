@@ -80,7 +80,7 @@ setMethod("terrain", signature(x="RasterLayer"),
 			stopifnot(! is.na(projection(x)) )
 			lonlat <- isLonLat(out)
 			if (!lonlat & couldBeLonLat(out)) {
-				warning("assuming CRS is longitude/latitude")
+				warning("assuming crs is longitude/latitude")
 				lonlat <- TRUE
 			}
 

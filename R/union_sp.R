@@ -10,13 +10,13 @@ function(x, y) {
 
 	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 
-	x <- spChFIDs(x, as.character(1:length(x)))
-	y <- spChFIDs(y, as.character(1:length(y)))
+	x <- sp::spChFIDs(x, as.character(1:length(x)))
+	y <- sp::spChFIDs(y, as.character(1:length(y)))
 
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
-	x@proj4string <- CRS(as.character(NA))
-	y@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
+	y@proj4string <- sp::CRS(as.character(NA))
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
 	
@@ -67,7 +67,7 @@ function(x, y) {
 	}
 
 	prj <- x@proj4string
-	x@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
 	
 	#if (!rgeos::gIntersects(x)) {
 	# this is a useful test, but returned topologyerrors
@@ -78,8 +78,8 @@ function(x, y) {
 		x <- as(x, 'SpatialPolygons')
 	}
 	
-	x <- spChFIDs(x, as.character(1:length(x)))
-	x <- SpatialPolygonsDataFrame(x, data.frame(ID=1:n))
+	x <- sp::spChFIDs(x, as.character(1:length(x)))
+	x <- sp::SpatialPolygonsDataFrame(x, data.frame(ID=1:n))
 
 	u <- x[1,]
 	names(u) <- 'ID.1'

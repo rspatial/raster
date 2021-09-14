@@ -18,9 +18,9 @@ function(x, y, ...) {
 
 	yy <- list(y, ...)
 	for (y in yy) {
-		if (! identical(proj4string(x), proj4string(y)) ) {
+		if (! identical( sp::proj4string(x),  sp::proj4string(y)) ) {
 			if (!haswarned) {
-				warning('non identical CRS')
+				warning('non identical crs')
 				haswarned <- TRUE
 			}
 			y@proj4string <- x@proj4string

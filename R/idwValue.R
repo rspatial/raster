@@ -51,5 +51,5 @@
 #a[] = 1:ncell(a)
 #a[50:75]=NA
 #r = disaggregate(raster(a), 3)
-#r[] = .idwValue(a, coordinates(r))
+#r[] = .idwValue(a, sp::coordinates(r))
 #plot(r)

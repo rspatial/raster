@@ -180,7 +180,7 @@ function(x, size, na.rm=TRUE, ext=NULL, cells=FALSE, rowcol=FALSE, xy=FALSE, sp=
 				if (removeCells) {
 					x <- x[,-1,drop=FALSE]
 				}
-				x <- SpatialPointsDataFrame(XY, data=data.frame(x), proj4string=.getCRS((r)))
+				x <- sp::SpatialPointsDataFrame(XY, data=data.frame(x),  proj4string=.getCRS((r)))
 				
 			} else if (removeCells) {
 				x <- x[,-1,drop=FALSE]	

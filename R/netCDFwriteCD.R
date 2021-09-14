@@ -107,7 +107,7 @@
 	nc <- ncdf4::nc_create(filename, defs, force_v4=force_v4)
 	prj <- crs(x)
 	if (!is.na(prj)) {
-		ncdf4::ncatt_put(nc, "crs", "proj4", proj4string(prj), prec='text')
+		ncdf4::ncatt_put(nc, "crs", "proj4",  sp::proj4string(prj), prec='text')
 		ncdf4::ncatt_put(nc, varname, "grid_mapping", "crs")
 		ncdf4::ncatt_put(nc, varname, "proj4", as.character(prj), prec='text')
 	}

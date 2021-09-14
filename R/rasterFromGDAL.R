@@ -182,8 +182,8 @@
 		}
 	}
 	crs <- .getProj(prj, crs)
-	r@crs <- CRS(crs, TRUE) 
-	#r@crs <- CRS(crs, FALSE) 
+	r@crs <- sp::CRS(crs, TRUE) 
+	#r@crs <- sp::CRS(crs, FALSE) 
 	# F to avoid warnings about other than WGS84 datums or ellipsoids  
 	
 #  	r@history[[1]] <- mdata

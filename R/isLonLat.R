@@ -33,7 +33,7 @@
 		return(TRUE)
 	} else if (isTRUE(crsLL)) {
 		if (warnings) {
-			warning('raster has a longitude/latitude CRS, but coordinates do not match that')
+			warning('raster has a longitude/latitude crs, but coordinates do not match that')
 		}
 		return(TRUE)
 	} else {
@@ -72,7 +72,7 @@ setMethod('isLonLat', signature(x='BasicRaster'),
 #author:
 # ...
 	function(x, ...){
-		p4str <- proj4string(x)
+		p4str <-  sp::proj4string(x)
 		if (is.na(p4str) || nchar(p4str) == 0) {
 			return(FALSE)
 		} 

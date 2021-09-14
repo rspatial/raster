@@ -13,8 +13,8 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 	comp <- compareCRS(px,.getCRS(y), unknown=TRUE)
 	if (!comp) {
 		.requireRgdal()
-		warning('Transforming SpatialPolygons to the CRS of the Raster')
-		y <- spTransform(y, px)
+		warning('Transforming SpatialPolygons to the crs of the Raster')
+		y <- sp::spTranform(y, px)
 	}
 	
 	spbb <- bbox(y)
@@ -391,7 +391,7 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 		}
 		
 		if (!.hasSlot(y, 'data') ) {
-			y <- SpatialPolygonsDataFrame(y, res[, -1, drop=FALSE])
+			y <- sp::SpatialPolygonsDataFrame(y, res[, -1, drop=FALSE])
 		} else {
 			y@data <- cbind(y@data, res[, -1, drop=FALSE])
 		}

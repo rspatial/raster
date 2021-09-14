@@ -357,9 +357,9 @@
 					if ((nrow(intersection) %% 2 == 1) || ( sum(x[-length(x)] == x[-1]) > 0 )) {
 					# uneven number or duplicates
 					# e.g. single node intersection going out of polygon ....
-						spPnts <- SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
-						spPol <- SpatialPolygons(list(Polygons(list(mypoly), 1)))
-						over <- over(spPnts, spPol)
+						spPnts <- sp::SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
+						spPol <- sp::SpatialPolygons(list(Polygons(list(mypoly), 1)))
+						over <- sp::over(spPnts, spPol)
 						if ( subpol[i, 5] == 1 ) {
 							holes[!is.na(over)] <- holes[!is.na(over)] - 1
 						} else {
@@ -389,9 +389,9 @@
 							col1 <- leftColFromX(rstr, x1a)
 							col2 <- rightColFromX(rstr, x2a)
 							if (col1 > col2) { 
-								spPnts <- SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
-								spPol <- SpatialPolygons(list(Polygons(list(mypoly), 1)))
-								over <- over(spPnts, spPol)
+								spPnts <- sp::SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
+								spPol <- sp::SpatialPolygons(list(Polygons(list(mypoly), 1)))
+								over <- sp::over(spPnts, spPol)
 								if ( subpol[i, 5] == 1 ) {
 									holes[!is.na(over)] <- holes[!is.na(over)] - 1
 								} else {
@@ -544,9 +544,9 @@
 						#}
 						if ( sum(x[-length(x)] == x[-1]) > 0 ) {
 					# single node intersection going out of polygon ....
-							spPnts <- SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
-							spPol <- SpatialPolygons(list(Polygons(list(mypoly), 1)))
-							over <- over(spPnts, spPol)
+							spPnts <- sp::SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
+							spPol <- sp::SpatialPolygons(list(Polygons(list(mypoly), 1)))
+							over <- sp::over(spPnts, spPol)
 							if ( subpol[i, 5] == 1 ) {
 								holes[!is.na(over)] <- holes[!is.na(over)] - 1
 							} else {
@@ -654,7 +654,7 @@
 		} else {
 			rowcol[,1] <- r
 			sppoints <- xyFromCell(raster, cellFromRowCol(raster, rowcol[,1], rowcol[,2]), TRUE)
-			over <- over(sppoints, p)
+			over <- sp::over(sppoints, p)
 			vals <- putvals[over]
 		}
 		if (filename == "") {

@@ -104,7 +104,7 @@ function(x, y, ..., keepnames=FALSE) {
 		if (is.na(prj)) prj <- y@proj4string
 
 		x <- list(x, y, ...)
-		#p <- sapply(x, proj4string)
+		#p <- sapply(x,  sp::proj4string)
 		#if (!isTRUE(all(p==p[1]))) { }
 
 
@@ -112,7 +112,7 @@ function(x, y, ..., keepnames=FALSE) {
 			if (!inherits(x[[i]], "SpatialPolygons")) {
 				stop("all additional arguments must be SpatialPolygons")
 			}
-			x[[i]]@proj4string <- CRS(as.character(NA))
+			x[[i]]@proj4string <- sp::CRS(as.character(NA))
 		}	
 				
 		rwn <- lapply(x, row.names)
@@ -154,7 +154,7 @@ function(x, y, ..., keepnames=FALSE) {
 			x <- sapply(x, function(y) as(y, 'SpatialPolygons'))
 			x <- do.call( rbind, x)
 			rownames(dat) <- row.names(x)
-			x <- SpatialPolygonsDataFrame(x, dat) 
+			x <- sp::SpatialPolygonsDataFrame(x, dat) 
 			x@proj4string <- prj
 			return(x)
 		}
@@ -183,7 +183,7 @@ function(x, y, ..., keepnames=FALSE) {
 #		if (! dataFound ) { return( do.call(rbind, x) ) }
 		x <- sapply(x, function(x) as(x, 'SpatialPolygons'))
 		x <- do.call(rbind, x)
-		x <- SpatialPolygonsDataFrame(x, dat, match.ID=FALSE)
+		x <- sp::SpatialPolygonsDataFrame(x, dat, match.ID=FALSE)
 		x@proj4string <- prj
 		x
 }
@@ -204,7 +204,7 @@ setMethod('bind', signature(x='SpatialLines', y='SpatialLines'),
 			if (!inherits(x[[i]], "SpatialLines")) {
 				stop("all additional arguments must be SpatialLines")
 			}
-			x[[i]]@proj4string <- CRS(as.character(NA))
+			x[[i]]@proj4string <- sp::CRS(as.character(NA))
 		}	
 		
 		
@@ -247,7 +247,7 @@ setMethod('bind', signature(x='SpatialLines', y='SpatialLines'),
 			x <- sapply(x, function(y) as(y, 'SpatialLines'))
 			x <- do.call( rbind, x)
 			rownames(dat) <- row.names(x)
-			x <- SpatialLinesDataFrame(x, dat)
+			x <- sp::SpatialLinesDataFrame(x, dat)
 			x@proj4string <- prj
 			return(x)
 		}
@@ -276,7 +276,7 @@ setMethod('bind', signature(x='SpatialLines', y='SpatialLines'),
 #		if (! dataFound ) { return( do.call(rbind, x) ) }
 		x <- sapply(x, function(x) as(x, 'SpatialLines'))
 		x <- do.call(rbind, x)
-		x <- SpatialLinesDataFrame(x, dat, match.ID=FALSE)
+		x <- sp::SpatialLinesDataFrame(x, dat, match.ID=FALSE)
 		x@proj4string <- prj
 		x
 
@@ -353,7 +353,7 @@ setMethod('bind', signature(x='SpatialPoints', y='SpatialPoints'),
 #		if (! dataFound ) { return( do.call(rbind, x) ) }
 		x <- sapply(x, function(x) as(x, 'SpatialPoints'))
 		x <- do.call(rbind, x)
-		SpatialPointsDataFrame(x, dat)
+		sp::SpatialPointsDataFrame(x, dat)
 }
 )
 

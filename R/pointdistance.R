@@ -10,7 +10,7 @@
 	}
 	
 	if (inherits(p, 'SpatialPoints')) {
-		p <- coordinates(p)
+		p <- sp::coordinates(p)
 	} else if (is.data.frame(p)) {
 		p <- as.matrix(p)
 	} else if (is.vector(p)){

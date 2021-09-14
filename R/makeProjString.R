@@ -8,17 +8,17 @@
 .newCRS <- function(projs) {
 
 	if (is.null(projs)) {
-		prj <- CRS()
+		prj <- sp::CRS()
 	} else if (is.na(projs)) {
-		prj <- CRS()
+		prj <- sp::CRS()
 	} else if (nchar(projs) < 3) { 
-		prj <- CRS()
+		prj <- sp::CRS()
 	} else {
 		projs <- trim(projs)
-		prj <- try(CRS(projs), silent = TRUE)
+		prj <- try(sp::CRS(projs), silent = TRUE)
 		if (inherits(prj, "try-error")) { 
-			warning(paste(projs, 'is not a valid PROJ.4 CRS string')) 
-			prj <- CRS()
+			warning(paste(projs, 'is not a valid PROJ.4 crs string')) 
+			prj <- sp::CRS()
 		}
 	}
 	return(prj)

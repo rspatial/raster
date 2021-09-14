@@ -17,12 +17,12 @@ setMethod('KML', signature(x='Spatial'),
 		if (! is.na(projection(x))) {
 			if (! isLonLat(x) ) {
 				warning('transforming data to longitude/latitude')
-				spTransform(x, CRS('+proj=longlat +datum=WGS84'))
+				sp::spTranform(x, sp::CRS('+proj=longlat +datum=WGS84'))
 			}
 		}
 		
 		if (!.hasSlot(x, 'data') ) {
-			x <- addAttrToGeom(x, data.frame(id=1:length(x)), match.ID=FALSE)
+			x <- sp::addAttrToGeom(x, data.frame(id=1:length(x)), match.ID=FALSE)
 		}
 		
 		extension(filename) <- '.kml'

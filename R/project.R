@@ -52,7 +52,7 @@ setMethod('.project', signature(x='Spatial'),
 		if (!is.null(list(...)$CRSobj)) {
 			crs <- list(...)$CRSobj
 		}
-		spTransform(x, CRSobj=crs(crs), ...)
+		sp::spTranform(x, CRSobj=crs(crs), ...)
 	}
 )
 

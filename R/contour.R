@@ -38,8 +38,8 @@ rasterToContour <- function(x, maxpixels=100000, ...) {
     for (i in 1:m) {
         res[[i]] <- Lines(.contourLines2LineList(cL[cLstack[[i]]]), ID = IDs[i])
     }
-    SL <- SpatialLines(res, proj4string = .getCRS((x)))
-    SpatialLinesDataFrame(SL, data = df)
+    SL <- sp::SpatialLines(res,  proj4string= .getCRS((x)))
+    sp::SpatialLinesDataFrame(SL, data = df)
 	
 }
 

@@ -18,8 +18,8 @@ function(x, y) {
 	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
-	x@proj4string <- CRS(as.character(NA))
-	y@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
+	y@proj4string <- sp::CRS(as.character(NA))
 
 #	threshold <- get_RGEOS_polyThreshold()
 #	on.exit(set_RGEOS_polyThreshold(threshold))
@@ -30,8 +30,8 @@ function(x, y) {
 #	set_RGEOS_dropSlivers(TRUE)
     
 
-	x <- spChFIDs(x, as.character(1:length(x)))
-	y <- spChFIDs(y, as.character(1:length(y)))
+	x <- sp::spChFIDs(x, as.character(1:length(x)))
+	y <- sp::spChFIDs(y, as.character(1:length(y)))
 		
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
 	if (sum(subs)==0) {
@@ -83,8 +83,8 @@ function(x, y) {
 			dat[rows, ynames] <- y@data[idsy, ]
 		}
 		rownames(dat) <- 1:nrow(dat)
-		int <- spChFIDs(int, as.character(1:nrow(dat)))
-		int <- SpatialPolygonsDataFrame(int, dat)
+		int <- sp::spChFIDs(int, as.character(1:nrow(dat)))
+		int <- sp::SpatialPolygonsDataFrame(int, dat)
 	}
 	
 	if (length(int) > 0) {
@@ -129,8 +129,8 @@ function(x, y) {
 
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
-	x@proj4string <- CRS(as.character(NA))
-	y@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
+	y@proj4string <- sp::CRS(as.character(NA))
 
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -157,14 +157,14 @@ function(x, y) {
 	
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
-	x@proj4string <- CRS(as.character(NA))
-	y@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
+	y@proj4string <- sp::CRS(as.character(NA))
 
-	x <- spChFIDs(x, as.character(1:length(x)))
-	y <- spChFIDs(y, as.character(1:length(y)))
+	x <- sp::spChFIDs(x, as.character(1:length(x)))
+	y <- sp::spChFIDs(y, as.character(1:length(y)))
 		
-	if (! identical(proj4string(x), proj4string(y)) ) {
-		warning('non identical CRS')
+	if (! identical( sp::proj4string(x),  sp::proj4string(y)) ) {
+		warning('non identical crs')
 		y@proj4string <- x@proj4string
 	}	
 	
@@ -218,8 +218,8 @@ function(x, y) {
 			dat[rows, ynames] <- y@data[idsy, ]
 		}
 		rownames(dat) <- 1:nrow(dat)
-		int <- spChFIDs(int, as.character(1:nrow(dat)))
-		int <- SpatialLinesDataFrame(int, dat)
+		int <- sp::spChFIDs(int, as.character(1:nrow(dat)))
+		int <- sp::SpatialLinesDataFrame(int, dat)
 	}
 	
 	if (length(int) > 0) {
@@ -243,27 +243,27 @@ function(x, y) {
 
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
-	x@proj4string <- CRS(as.character(NA))
-	y@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
+	y@proj4string <- sp::CRS(as.character(NA))
 	
 	xdata <-.hasSlot(x, 'data')
 	ydata <-.hasSlot(y, 'data')
 
-	x <- spChFIDs(x, as.character(1:length(x)))
-	y <- spChFIDs(y, as.character(1:length(y)))
+	x <- sp::spChFIDs(x, as.character(1:length(x)))
+	y <- sp::spChFIDs(y, as.character(1:length(y)))
 
 	if (! any(c(xdata, ydata))) {
 		z <- rgeos::gIntersection(x, y, byid=TRUE)
 		if (is.null(z)) {
-			z <- SpatialPoints(cbind(0,0), proj4string=prj)
-			z <- SpatialPointsDataFrame(z,data.frame(x=0, y=0))
+			z <- sp::SpatialPoints(cbind(0,0),  proj4string=prj)
+			z <- sp::SpatialPointsDataFrame(z,data.frame(x=0, y=0))
 			return( z[-1, ] )
 		}
 		rn <- rownames(z@coords)
 		d <- data.frame(matrix(as.integer(unlist(strsplit(rn, ' '))), ncol=2, byrow=TRUE))
 		colnames(d) <- c('x', 'y')
 		rownames(z@coords) <- NULL
-		z <- SpatialPointsDataFrame(z, d)
+		z <- sp::SpatialPointsDataFrame(z, d)
 		z@proj4string <- prj
 		return(z)
 	}
@@ -271,7 +271,7 @@ function(x, y) {
 	z <- rgeos::gIntersection(y, x, byid=TRUE)
 	
 	if (is.null(z)) {
-		z <- SpatialPoints(cbind(0,0), proj4string=prj)
+		z <- sp::SpatialPoints(cbind(0,0),  proj4string=prj)
 		return( z[-1, ] )
 	}
 	
@@ -279,7 +279,7 @@ function(x, y) {
 		z <- z@pointobj
 	}
 	
-	s <- strsplit(spChFIDs(z), ' ')
+	s <- strsplit(sp::spChFIDs(z), ' ')
 	s <- matrix(as.integer(unlist(s)), ncol=2, byrow=TRUE)
 	
 	if (xdata & ydata) {
@@ -299,7 +299,7 @@ function(x, y) {
 	row.names(z) <- as.character(1:length(z))
 	z@proj4string <- prj
 	
-	SpatialPointsDataFrame(z, d)
+	sp::SpatialPointsDataFrame(z, d)
 }
 )
 
@@ -317,8 +317,8 @@ function(x, y) {
 
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
-	x@proj4string <- CRS(as.character(NA))
-	y@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
+	y@proj4string <- sp::CRS(as.character(NA))
 	
 	
 	i <- rgeos::gIntersects(x, y, byid=TRUE)
@@ -346,8 +346,8 @@ function(x, y) {
 		}
 		prj <- x@proj4string
 		if (is.na(prj)) prj <- y@proj4string
-		x@proj4string <- CRS(as.character(NA))
-		y@proj4string <- CRS(as.character(NA))
+		x@proj4string <- sp::CRS(as.character(NA))
+		y@proj4string <- sp::CRS(as.character(NA))
 
 		i <- rgeos::gIntersects(y, x, byid=TRUE)
 	
@@ -359,7 +359,7 @@ function(x, y) {
 		if (.hasSlot(y, 'data')) {
 			d <- y@data[j[,1], ]
 			if (!.hasSlot(x, 'data')) {
-				x <- SpatialPointsDataFrame(x, d)
+				x <- sp::SpatialPointsDataFrame(x, d)
 			} else {
 				x@data <- cbind(x@data, d)
 			}
@@ -369,7 +369,7 @@ function(x, y) {
 		
 	} else {
 		y <- extent(y)
-		xy <- coordinates(x)[,1:2,drop=FALSE]
+		xy <- sp::coordinates(x)[,1:2,drop=FALSE]
 		i <- xy[,1] >= y@xmin & xy[,1] <= y@xmax & xy[,2] >= y@ymin & xy[,2] <= y@ymax
 		x[i, ]
 	}

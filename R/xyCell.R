@@ -67,7 +67,7 @@ setMethod("xFromCol", signature(object="Raster", col="missing"),
 setMethod("cellFromXY", signature(object="BasicRaster", xy="ANY"), 
 	function(object, xy) {
 		if (inherits(xy, 'SpatialPoints')) {
-			xy <- coordinates(xy)[,1:2,drop=FALSE]
+			xy <- sp::coordinates(xy)[,1:2,drop=FALSE]
 			x <- xy[,1]
 			y <- xy[,2]
 		} else if (is.null(dim(xy))) { 
@@ -142,7 +142,7 @@ setMethod("xyFromCell", signature(object="BasicRaster", cell="ANY"),
 		}
 
 		if (spatial) {
-			xy <- SpatialPoints(stats::na.omit(xy), crs(object))
+			xy <- sp::SpatialPoints(stats::na.omit(xy), sp::CRS(object))
 		}
 		return(xy)
 	}

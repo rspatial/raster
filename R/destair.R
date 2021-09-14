@@ -39,7 +39,7 @@
 	crs(r) <- .getCRS(x)
 	
 	if (.hasSlot(x, 'data')) {
-		r <- SpatialPolygonsDataFrame(r, x@data)
+		r <- sp::SpatialPolygonsDataFrame(r, x@data)
 	}
 	
 	r

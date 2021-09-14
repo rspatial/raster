@@ -29,20 +29,20 @@ function(x, y, ..., df=FALSE, sp=FALSE){
 		if (!.requireRgdal()) {
 			warning('CRS of SpatialPoints and rater do not match')
 		} else {
-			warning('Transforming SpatialPoints to the CRS of the Raster')
-			y <- spTransform(y, px)
+			warning('Transforming SpatialPoints to the crs of the Raster')
+			y <- sp::spTranform(y, px)
 		}
 	}
 	if (sp) {
-		v <- .xyValues(x, coordinates(y)[,1:2,drop=FALSE], ..., df=TRUE)
+		v <- .xyValues(x, sp::coordinates(y)[,1:2,drop=FALSE], ..., df=TRUE)
 		if (!.hasSlot(y, 'data')) {
-			y <- SpatialPointsDataFrame(y,  v[, -1, drop=FALSE])
+			y <- sp::SpatialPointsDataFrame(y,  v[, -1, drop=FALSE])
 		} else {
 			y@data <- cbind(y@data, v[, -1, drop=FALSE])
 		}
 		return(y)
 	} else {
-		.xyValues(x, coordinates(y)[,1:2,drop=FALSE], ..., df=df)
+		.xyValues(x, sp::coordinates(y)[,1:2,drop=FALSE], ..., df=df)
 	}
 })
 

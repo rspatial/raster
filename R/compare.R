@@ -66,12 +66,12 @@ compareRaster <- function(x, ..., extent=TRUE, rowcol=TRUE, crs=TRUE, res=FALSE,
 			} else {
 				crs <- try (compareCRS(proj1, thisproj, unknown=TRUE), silent=TRUE)
 				if (inherits(crs, "try-error")) {
-					if (stopiffalse) { stop("invalid CRS") }
-					if (showwarning) { warning("invalid CRS") }
+					if (stopiffalse) { stop("invalid crs") }
+					if (showwarning) { warning("invalid crs") }
 				} else if (!crs) {
 					result <- FALSE
-					if (stopiffalse) { stop("different CRS") }
-					if (showwarning) { warning("different CRS") }
+					if (stopiffalse) { stop("different crs") }
+					if (showwarning) { warning("different crs") }
 				}
 			}
 		}

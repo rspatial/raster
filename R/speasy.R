@@ -10,11 +10,11 @@ spLines <- function(x, ..., attr=NULL, crs="") {
 	x <- c(list(x), list(...))
 	x <- rapply(x, Line, how='replace')
 	x <- lapply(1:length(x), function(i) Lines(x[[i]], as.character(i)))
-	x <- SpatialLines(x)
+	x <- sp::SpatialLines(x)
 
 	if (!is.null(attr)) {
 		if (nrow(attr) == length(x)) {
-			x <- SpatialLinesDataFrame(x, attr)
+			x <- sp::SpatialLinesDataFrame(x, attr)
 		} else {
 			msg <- paste('number of rows in attr (', nrow(attr), ') does not match the number of lines (', length(x), ')', sep='')
 			stop(msg)
@@ -40,10 +40,10 @@ spPolygons <- function(x, ..., attr=NULL, crs="") {
 				}
 			})
 	
-	x <- SpatialPolygons(x)
+	x <- sp::SpatialPolygons(x)
 	if (!is.null(attr)) {
 		if (nrow(attr) == length(x)) {
-			x <- SpatialPolygonsDataFrame(x, attr)
+			x <- sp::SpatialPolygonsDataFrame(x, attr)
 		} else {
 			msg <- paste('number of rows in attr (', nrow(attr), ') does not match the number of polygons (', length(x), ')', sep='')
 			stop(msg)

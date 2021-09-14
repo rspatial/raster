@@ -1,9 +1,9 @@
 
 
 .polygonLabelPosition <- function(x, cex=1) {
-	xy <- coordinates(x)
+	xy <- sp::coordinates(x)
 	# make sure that labels are inside of polygons
-	sx <- geometry(x)
+	sx <- sp::geometry(x)
 	k <- extract(sx, xy)
 	k <- which(k[,1] != k[,2])
 	if (length(k) > 0) {

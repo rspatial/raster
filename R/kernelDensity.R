@@ -10,7 +10,7 @@
     n <- rev(dim(r)[1:2])
     xy <- .pointsToMatrix(xy)
 	k <- raster( MASS::kde2d(xy[,1], xy[,2], h=bandwidth, n=n, lims=lims) )
-	# to avoid possible small changes due to floating point math and to transfer CRS
+	# to avoid possible small changes due to floating point math and to transfer crs
 	setValues(r, getValues(k)) 
 }
 

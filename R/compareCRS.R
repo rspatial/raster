@@ -49,7 +49,7 @@ compareCRS <- function(x, y, unknown=FALSE, verbatim=FALSE, verbose=FALSE) {
 			return(TRUE)
 		} else {
 			if (verbose) {
-				message('Unknown CRS')
+				message('Unknown crs')
 			}
 			return(FALSE) 
 		}

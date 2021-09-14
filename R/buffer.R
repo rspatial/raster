@@ -71,12 +71,12 @@ function(x, width=1, dissolve=TRUE, ...) {
 			lonlat = FALSE
 		}
 		
-		pb <- .pointBuffer(xy=coordinates(x)[,1:2,drop=FALSE], d=width, lonlat=lonlat, crs=crs(x), ...)
+		pb <- .pointBuffer(xy=sp::coordinates(x)[,1:2,drop=FALSE], d=width, lonlat=lonlat, crs=crs(x), ...)
 
 		if (dissolve) {
 			pb <- aggregate(pb)
 		} else if (.hasSlot(x, 'data')) {
-			pb <- SpatialPolygonsDataFrame(pb, x@data, match.ID=FALSE)
+			pb <- sp::SpatialPolygonsDataFrame(pb, x@data, match.ID=FALSE)
 		}
 		return(pb)		
 	}
@@ -84,7 +84,7 @@ function(x, width=1, dissolve=TRUE, ...) {
 	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	
 	prj <- x@proj4string
-	x@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
 	x <- rgeos::gBuffer(x, byid=!dissolve, width=width, ...)
 	x@proj4string <- prj
 	x

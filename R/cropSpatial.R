@@ -21,13 +21,13 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 
 		prj <- x@proj4string
 		if (is.na(prj)) prj <- y@proj4string
-		x@proj4string <- CRS(as.character(NA))
-		y@proj4string <- CRS(as.character(NA))
+		x@proj4string <- sp::CRS(as.character(NA))
+		y@proj4string <- sp::CRS(as.character(NA))
 
 		if (inherits(y, 'SpatialPolygons')) {
 			y <- rgeos::gUnaryUnion(y)
 			row.names(y) <- '1'
-			y <- geometry(y)
+			y <- sp::geometry(y)
 		}
 				
 		if (inherits(x, 'SpatialPolygons')) {
@@ -71,7 +71,7 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 			row.names(y) <- as.character(rnx[ids])
 			data <- x@data[ids, ,drop=FALSE]
 			rownames(data) <- rnx[ids]
-			return( SpatialPolygonsDataFrame(y, data) )
+			return( sp::SpatialPolygonsDataFrame(y, data) )
 		} else {
 			y <- rgeos::gIntersection(x, y, drop_lower_td=TRUE)
 			#if (inherits(y, "SpatialCollections")) {
@@ -100,7 +100,7 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 		data <- x@data[ids, ,drop=FALSE]
 		#rownames(data) <- rnx[ids]
 			
-		xy <- SpatialLinesDataFrame(xy, data, match.ID = FALSE)
+		xy <- sp::SpatialLinesDataFrame(xy, data, match.ID = FALSE)
 	} 
 	return(xy)
 }
@@ -109,7 +109,7 @@ setMethod('crop', signature(x='Spatial', y='ANY'),
 
 .cropSpatialPoints <- function(x, y, ...) {
 
-	i <- which(!is.na(over(x, y)))
+	i <- which(!is.na(sp::over(x, y)))
 	if (length(i) > 0) {
 		x <- x[i,]
 	} else {

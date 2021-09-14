@@ -26,8 +26,8 @@ projectExtent <- function(object, crs) {
 			projto <- pto
 		}
 	} else {
-		projfrom <- proj4string(pfrom)
-		projto <- proj4string(pto)
+		projfrom <-  sp::proj4string(pfrom)
+		projto <-  sp::proj4string(pto)
 	}
 
 #	rs <- res(object)
@@ -127,7 +127,7 @@ projectExtent <- function(object, crs) {
 		fromcrs <- wkt(fromcrs)
 		pXY <- rgdal::rawTransform(fromcrs, crs, nrow(xy), xy[,1], xy[,2], wkt=proj6)
 	} else {
-		fromcrs <- proj4string(fromcrs)	
+		fromcrs <-  sp::proj4string(fromcrs)	
 		pXY <- rgdal::rawTransform(fromcrs, crs, nrow(xy), xy[,1], xy[,2])
 	}
 
@@ -195,10 +195,10 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 			}
 			projfrom <- wkt(projfrom)
 		} else {
-			if (proj4string(projto) == proj4string(projfrom)) {
+			if ( sp::proj4string(projto) ==  sp::proj4string(projfrom)) {
 				warning("input and ouput crs are the same")
 			}
-			projfrom <- proj4string(projfrom)
+			projfrom <-  sp::proj4string(projfrom)
 		}
 		to <- projectExtent(from, projto)
 		to@crs <- projto
@@ -206,7 +206,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		if (use_proj6) {
 			projto <- wkt(projto)
 		} else {
-			projto <- proj4string(projto)		
+			projto <-  sp::proj4string(projto)		
 		}
 		if (missing(res)) {
 			res <- .computeRes(from, projto, use_proj6)
@@ -240,10 +240,10 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 			}
 			projfrom <- wkt(projfrom)
 		} else {
-			if (proj4string(projto) == proj4string(projfrom)) {
+			if ( sp::proj4string(projto) ==  sp::proj4string(projfrom)) {
 				warning("input and ouput crs are the same")
 			}
-			projfrom = proj4string(projfrom)
+			projfrom =  sp::proj4string(projfrom)
 		}
 		
 		e <- extent( projectExtent(from, projto) )
@@ -262,7 +262,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		if (use_proj6) {
 			projto <- wkt(projto)
 		} else {
-			projto <- proj4string(projto)
+			projto <-  sp::proj4string(projto)
 		}
 	}
 	
@@ -417,7 +417,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		
 		if (inMemory) {
 			
-			xy <- coordinates(to) 
+			xy <- sp::coordinates(to) 
 			xy <- subset(xy, xy[,1] > e@xmin & xy[,1] < e@xmax)
 			cells <- cellFromXY(to, xy)
 			if (use_proj6) {

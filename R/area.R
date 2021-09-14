@@ -25,7 +25,7 @@ setMethod('area', signature(x='SpatialPolygons'),
 	function(x, ...) {
 		if (couldBeLonLat(x)) {
 			if (!isLonLat(x)) {
-				warning('assuming that the CRS is longitude/latitude!')
+				warning('assuming that the crs is longitude/latitude!')
 			}
 			lonlat = TRUE
 		} else {

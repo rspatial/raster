@@ -49,7 +49,7 @@
 	if (.requireRgdal(FALSE)) {
 		cat("coordinate system string = {", wkt(r), "}\n", file = thefile, sep="")
 	} else {
-		cat("projection info =", proj4string(r), "\n", file = thefile) 
+		cat("projection info =",  sp::proj4string(r), "\n", file = thefile) 
 	}
 	cat("z plot range = {", minValue(r),", ", maxValue(r), "}\n", file = thefile) 
 	

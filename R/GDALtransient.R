@@ -117,12 +117,12 @@
 		if (!is.na(r@crs)) {
 			cmt <- attr(r@crs, "comment")
 			if (is.null(cmt)) {
-				r@crs <- CRS(r@crs@projargs)
+				r@crs <- sp::CRS(r@crs@projargs)
 			}
 		}
 		rgdal::GDALcall(transient, "SetProjectWkt", r@crs) 
 	} else {
-		prj <- proj4string(r)
+		prj <-  sp::proj4string(r)
 		rgdal::GDALcall(transient, "SetProject", prj) 
 	}
 	if (is.null(options)) {

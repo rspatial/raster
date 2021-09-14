@@ -57,11 +57,11 @@ setMethod('shapefile', signature(x='Spatial'),
 			
 			if (!.hasSlot(x, 'data')) {
 				if (inherits(x, 'SpatialPolygons')) {
-					x <- SpatialPolygonsDataFrame(x, data.frame(ID=1:length(x)), match.ID=FALSE)
+					x <- sp::SpatialPolygonsDataFrame(x, data.frame(ID=1:length(x)), match.ID=FALSE)
 				} else if (inherits(x, 'SpatialLines')) {
-					x <- SpatialLinesDataFrame(x, data.frame(ID=1:length(x)), match.ID=FALSE)
+					x <- sp::SpatialLinesDataFrame(x, data.frame(ID=1:length(x)), match.ID=FALSE)
 				} else if (inherits(x, 'SpatialPoints')) {
-					x <- SpatialPointsDataFrame(x, data.frame(ID=1:length(x)), match.ID=FALSE)
+					x <- sp::SpatialPointsDataFrame(x, data.frame(ID=1:length(x)), match.ID=FALSE)
 				} else {
 					stop('These data cannot be written to a shapefile')
 				}

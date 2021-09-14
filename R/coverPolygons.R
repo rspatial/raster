@@ -11,7 +11,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 	
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
-	x@proj4string <- CRS(as.character(NA))
+	x@proj4string <- sp::CRS(as.character(NA))
 	
 	yy <- list(y, ...)
 
@@ -30,7 +30,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 	}
 	
 	for (y in yy) {
-		y@proj4string <- CRS(as.character(NA))
+		y@proj4string <- sp::CRS(as.character(NA))
 		subs <- rgeos::gIntersects(x, y, byid=TRUE)
 		if (!any(subs)) {
 			next
@@ -51,14 +51,14 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 .coverIdentity <- function(x, yy) {
 
 	for (y in yy) {
-		y@proj4string <- CRS(as.character(NA))
+		y@proj4string <- sp::CRS(as.character(NA))
 		i <- rgeos::gIntersects(x, y)
 		if (!i) {
 			next
 		}
 	
-		x <- spChFIDs(x, as.character(1:length(x)))
-		y <- spChFIDs(y, as.character(1:length(y)))
+		x <- sp::spChFIDs(x, as.character(1:length(x)))
+		y <- sp::spChFIDs(y, as.character(1:length(y)))
 
 		if (.hasSlot(x, 'data')) {
 			xnames <- colnames(x@data)
@@ -73,7 +73,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 		if (is.null(xnames) & !is.null(ynames)) {
 			dat <- y@data[NULL, ,drop=FALSE]
 			dat[1:length(x), ] <- NA
-			x <- SpatialPolygonsDataFrame(x, dat)
+			x <- sp::SpatialPolygonsDataFrame(x, dat)
 			xnames <- ynames
 		}
 		
@@ -107,7 +107,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 			
 			dat <- x@data[NULL, ,drop=FALSE]
 			dat[rows, yinx] <- y@data[idsy, yinx]
-			int <- SpatialPolygonsDataFrame(int, dat, match.ID=FALSE)
+			int <- sp::SpatialPolygonsDataFrame(int, dat, match.ID=FALSE)
 		}
 		x <- erase(x, int)
 		if (is.null(x)) {

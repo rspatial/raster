@@ -54,7 +54,7 @@ setAs("data.frame", "SpatialPolygons",
 		} else {
 			stop("cannot process this data.frame")
 		}
-		SpatialPolygons(sp)
+		sp::SpatialPolygons(sp)
 	}
 )
 
@@ -66,7 +66,7 @@ setAs("data.frame", "SpatialPolygonsDataFrame",
 			d <- unique(from[, -c(2:6), drop=FALSE])
 			rownames(d) <- d$object
 			d <- d[, -1, drop=FALSE]
-			SpatialPolygonsDataFrame(x, d)
+			sp::SpatialPolygonsDataFrame(x, d)
 		} else {
 			x
 		}
@@ -92,7 +92,7 @@ setAs("data.frame", "SpatialLines",
 			}
 			sp[[i]] <- Lines(pp, as.character(i))
 		}
-		SpatialLines(sp)
+		sp::SpatialLines(sp)
 	}
 )
 
@@ -104,7 +104,7 @@ setAs("data.frame", "SpatialLinesDataFrame",
 			d <- unique(from[, -c(2:5), drop=FALSE])
 			rownames(d) <- d$object
 			d <- d[, -1, drop=FALSE]
-			SpatialLinesDataFrame(x, d)
+			sp::SpatialLinesDataFrame(x, d)
 		} else {
 			x
 		}

@@ -36,13 +36,13 @@
     res <- vector(mode = "list", length = n)
     for (i in 1:n) {
 		if (d[i] > 0) {
-			ires <- try (spsample(p[i, ], d[i], type=f), silent=TRUE  )
+			ires <- try (sp::spsample(p[i, ], d[i], type=f), silent=TRUE  )
 			if (inherits(ires, "try-error")) {
 				print(paste('error, ', d[i]))
 				ires <- NULL
 			}
 			if (!is.null(ires)) {
-				res[[i]] <- cbind(coordinates(ires), id=i)
+				res[[i]] <- cbind(sp::coordinates(ires), id=i)
 			}
 		}
     }
@@ -50,7 +50,7 @@
 	colnames(res)[1:2] <- c('x', 'y')
 	if (sp) {
 		res <- data.frame(res)
-		coordinates(res) <- ~ x+y 
+		sp::coordinates(res) <- ~ x+y 
 		crs(res) <- crs(p)
 	}
 	res
