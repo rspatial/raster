@@ -78,7 +78,7 @@ setAs("data.frame", "SpatialPolygonsDataFrame",
 
 setAs("data.frame", "SpatialLines",
 	function(from) {
-		if (colnames(from)[1] == "id") colnames(from)[1] <- "object"
+		colnames(from)[1] <- "object"
 		obs <- unique(from$object)
 		sp <- list()
 		for (i in 1:length(obs)) {
