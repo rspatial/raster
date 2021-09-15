@@ -23,7 +23,7 @@ rasterToContour <- function(x, maxpixels=100000, ...) {
 		res <- vector(mode="list", length=n)
 		for (i in 1:n) {
 			crds <- cbind(cL[[i]][[2]], cL[[i]][[3]])
-			res[[i]] <- Line(coords=crds)
+			res[[i]] <- sp::Line(coords=crds)
 		}
 		res
 	}
@@ -36,7 +36,7 @@ rasterToContour <- function(x, maxpixels=100000, ...) {
     IDs <- paste("C", 1:m, sep = "_")
     row.names(df) <- IDs
     for (i in 1:m) {
-        res[[i]] <- Lines(.contourLines2LineList(cL[cLstack[[i]]]), ID = IDs[i])
+        res[[i]] <- sp::Lines(.contourLines2LineList(cL[cLstack[[i]]]), ID = IDs[i])
     }
     SL <- sp::SpatialLines(res,  proj4string= .getCRS((x)))
     sp::SpatialLinesDataFrame(SL, data = df)

@@ -358,7 +358,7 @@
 					# uneven number or duplicates
 					# e.g. single node intersection going out of polygon ....
 						spPnts <- sp::SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
-						spPol <- sp::SpatialPolygons(list(Polygons(list(mypoly), 1)))
+						spPol <- sp::SpatialPolygons(list(sp::Polygons(list(mypoly), 1)))
 						over <- sp::over(spPnts, spPol)
 						if ( subpol[i, 5] == 1 ) {
 							holes[!is.na(over)] <- holes[!is.na(over)] - 1
@@ -390,7 +390,7 @@
 							col2 <- rightColFromX(rstr, x2a)
 							if (col1 > col2) { 
 								spPnts <- sp::SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
-								spPol <- sp::SpatialPolygons(list(Polygons(list(mypoly), 1)))
+								spPol <- sp::SpatialPolygons(list(sp::Polygons(list(mypoly), 1)))
 								over <- sp::over(spPnts, spPol)
 								if ( subpol[i, 5] == 1 ) {
 									holes[!is.na(over)] <- holes[!is.na(over)] - 1
@@ -477,14 +477,11 @@
 #plot( .polygonsToRaster(p, rstr) )
 
 
-...polygoncover <- function(p, x, filename, ...) {
-	d <- disaggregate(raster(x), 10)
-	r <- .polygonsToRaster(p, d, filename=filename, field=1, fun='first', background=0, mask=FALSE, update=FALSE, getCover=FALSE, silent=TRUE, ...)
-	aggregate(r, 10, sum)
-	
-	
-	
-} 
+#...polygoncover <- function(p, x, filename, ...) {
+#	d <- disaggregate(raster(x), 10)
+#	r <- .polygonsToRaster(p, d, filename=filename, field=1, fun='first', background=0, mask=FALSE, update=FALSE, getCover=FALSE, silent=TRUE, ...)
+#	aggregate(r, 10, sum)
+#} 
 
 .Old_polygoncover <- function(rstr, filename, polinfo, lxmin, lxmax, pollist, ...) {
 # percentage cover per grid cell
@@ -545,7 +542,7 @@
 						if ( sum(x[-length(x)] == x[-1]) > 0 ) {
 					# single node intersection going out of polygon ....
 							spPnts <- sp::SpatialPoints(xyFromCell(rstr, cellFromRowCol(rstr, rep(r, ncol(rstr)), 1:ncol(rstr))))
-							spPol <- sp::SpatialPolygons(list(Polygons(list(mypoly), 1)))
+							spPol <- sp::SpatialPolygons(list(sp::Polygons(list(mypoly), 1)))
 							over <- sp::over(spPnts, spPol)
 							if ( subpol[i, 5] == 1 ) {
 								holes[!is.na(over)] <- holes[!is.na(over)] - 1

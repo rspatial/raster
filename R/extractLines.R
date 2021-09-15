@@ -226,7 +226,7 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 				ppp <- pp[k:(k+1), ]
 				spbb <- bbox(as.matrix(ppp))
 				if (! (spbb[1,1] > rsbb[1,2] | spbb[1,2] < rsbb[1,1] | spbb[2,1] > rsbb[2,2] | spbb[2,2] < rsbb[2,1]) ) {
-					lns <- sp::SpatialLines(list(Lines(list(Line(ppp)), "1")))
+					lns <- sp::SpatialLines(list(sp::Lines(list(sp::Line(ppp)), "1")))
 					rc <- crop(rr, extent(lns) + addres)
 					rc <- .linesToRaster(lns, rc, silent=TRUE)
 					xy <- rasterToPoints(rc)[,-3,drop=FALSE]

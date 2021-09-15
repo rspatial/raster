@@ -106,7 +106,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 				nsubobs <- length(x@polygons[[i]]@Polygons)
 				p <- c(p, lapply(1:nsubobs, function(j) x@polygons[[i]]@Polygons[[j]]))
 			}
-			x <- sp::SpatialPolygons(list(Polygons(p, '1')),  proj4string=x@proj4string)
+			x <- sp::SpatialPolygons(list(sp::Polygons(p, '1')),  proj4string=x@proj4string)
 		}
 		#if (hd) {
 		#	x <- sp::SpatialPolygonsDataFrame(x, data=data.frame(ID=1))
@@ -218,7 +218,7 @@ function(x, by=NULL, sums=NULL, ...) {
 			nsubobs <- length(x@lines[[i]]@Lines)
 			p <- c(p, lapply(1:nsubobs, function(j) x@lines[[i]]@Lines[[j]]))
 		}
-		x <- sp::SpatialLines(list(Lines(p, '1')),  proj4string= sp::proj4string(x))
+		x <- sp::SpatialLines(list(sp::Lines(p, '1')),  proj4string= sp::proj4string(x))
 		return(x)
 		
 	} else {

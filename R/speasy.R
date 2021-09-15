@@ -8,8 +8,8 @@
 
 spLines <- function(x, ..., attr=NULL, crs="") {
 	x <- c(list(x), list(...))
-	x <- rapply(x, Line, how='replace')
-	x <- lapply(1:length(x), function(i) Lines(x[[i]], as.character(i)))
+	x <- rapply(x, sp::Line, how='replace')
+	x <- lapply(1:length(x), function(i) sp::Lines(x[[i]], as.character(i)))
 	x <- sp::SpatialLines(x)
 
 	if (!is.null(attr)) {
@@ -30,13 +30,13 @@ spLines <- function(x, ..., attr=NULL, crs="") {
 
 spPolygons <- function(x, ..., attr=NULL, crs="") {
 	x <- c(list(x), list(...))
-	x <- rapply(x, Polygon, how='replace')
+	x <- rapply(x, sp::Polygon, how='replace')
 
 	x <- lapply(1:length(x), function(i) {
 				if (length(x[[i]]) == 1) {
-					Polygons(x[i], as.character(i))
+					sp::Polygons(x[i], as.character(i))
 				} else {
-					Polygons(x[[i]], as.character(i))
+					sp::Polygons(x[[i]], as.character(i))
 				}
 			})
 	

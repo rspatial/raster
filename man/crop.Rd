@@ -3,6 +3,8 @@
 \alias{crop}
 \alias{crop,Raster-method}
 \alias{crop,Spatial-method}
+\alias{crop,Raster,ANY-method}
+\alias{crop,Spatial,ANY-method}
 
 \title{Crop}
 

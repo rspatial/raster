@@ -98,7 +98,7 @@ function(x, y) {
 			bad <- which(!j)
 			for (i in bad) {
 				# it could be that a part of a polygon is a sliver, but that other parts are OK
-				a <- disaggregate(int[i, ])
+				a <- sp::disaggregate(int[i, ])
 				if (length(a) > 1) {
 					jj <- which(rgeos::gIsValid(a, byid=TRUE, reason=FALSE))
 					a <- a[jj, ]

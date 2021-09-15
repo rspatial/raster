@@ -129,14 +129,14 @@ setAs("Raster", "SpatialPointsDataFrame",
 setAs("Extent", "SpatialPolygons", 
 	function(from){ 
 		p <- rbind(c(from@xmin, from@ymin), c(from@xmin, from@ymax), c(from@xmax, from@ymax), c(from@xmax, from@ymin), c(from@xmin, from@ymin) )
-		sp::SpatialPolygons(list(Polygons(list(Polygon(p)), "1"))) 
+		sp::SpatialPolygons(list(sp::Polygons(list(sp::Polygon(p)), "1"))) 
 	}
 )
 
 setAs("Extent", "SpatialLines", 
 	function(from){ 
 		p <- rbind(c(from@xmin, from@ymin), c(from@xmin, from@ymax), c(from@xmax, from@ymax), c(from@xmax, from@ymin), c(from@xmin, from@ymin) )
-		sp::SpatialLines(list(Lines(list(Line(p)), "1"))) 
+		sp::SpatialLines(list(sp::Lines(list(sp::Line(p)), "1"))) 
 	}
 )
 
