@@ -17,7 +17,7 @@ setMethod('KML', signature(x='Spatial'),
 		if (! is.na(projection(x))) {
 			if (! isLonLat(x) ) {
 				warning('transforming data to longitude/latitude')
-				sp::spTranform(x, sp::CRS('+proj=longlat +datum=WGS84'))
+				sp::spTransform(x, sp::CRS('+proj=longlat +datum=WGS84'))
 			}
 		}
 		

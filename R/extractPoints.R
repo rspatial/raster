@@ -30,7 +30,7 @@ function(x, y, ..., df=FALSE, sp=FALSE){
 			warning('CRS of SpatialPoints and rater do not match')
 		} else {
 			warning('Transforming SpatialPoints to the crs of the Raster')
-			y <- sp::spTranform(y, px)
+			y <- sp::spTransform(y, px)
 		}
 	}
 	if (sp) {

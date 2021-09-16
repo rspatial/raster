@@ -142,7 +142,7 @@ setMethod("xyFromCell", signature(object="BasicRaster", cell="ANY"),
 		}
 
 		if (spatial) {
-			xy <- sp::SpatialPoints(stats::na.omit(xy), sp::CRS(object))
+			xy <- sp::SpatialPoints(stats::na.omit(xy), crs(object))
 		}
 		return(xy)
 	}

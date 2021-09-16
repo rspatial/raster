@@ -14,7 +14,7 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 	if (!comp) {
 		.requireRgdal()
 		warning('Transforming SpatialPolygons to the crs of the Raster')
-		y <- sp::spTranform(y, px)
+		y <- sp::spTransform(y, px)
 	}
 	
 	spbb <- bbox(y)

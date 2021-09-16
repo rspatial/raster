@@ -124,7 +124,7 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 					outras <- raster(x)
 				} else {
 					outras <- raster(ext) 
-					crs(outras) <- sp::CRS(x)
+					crs(outras) <- crs(x)
 				}
 				nrow(outras) <- nr
 				ncol(outras) <- nc
@@ -167,7 +167,7 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 				outras <- raster(extent(x))
 			} else {
 				outras <- raster(ext)
-				crs(outras) <- sp::CRS(x)
+				crs(outras) <- crs(x)
 			}
 			ncol(outras) <- nc
 			nrow(outras) <- nr
@@ -200,7 +200,7 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 				outras <- raster(x)
 			} else {
 				outras <- raster(ext) 
-				crs(outras) <- sp::CRS(x)
+				crs(outras) <- crs(x)
 			}
 			nrow(outras) <- nr
 			ncol(outras) <- nc

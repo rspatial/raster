@@ -1,5 +1,5 @@
 import(methods, Rcpp)
-importFrom(sp, bbox, spplot, coordinates, wkt, plot, merge, disaggregate)
+importFrom(sp, spplot, coordinates, wkt, plot, bbox, merge, disaggregate)
 importFrom(stats, as.formula, update, approx, reshape, median)
 importFrom(utils, stack, unstack, download.file)
 importFrom(graphics, rect, filled.contour, abline, legend, title, strheight, strwidth, points)

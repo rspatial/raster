@@ -13,7 +13,7 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 	if (!comp) {
 		.requireRgdal()
 		warning('Transforming SpatialLines to the crs of the Raster object')
-		y <- sp::spTranform(y, px)
+		y <- sp::spTransform(y, px)
 	}
 	if (missing(layer)) {
 		layer <- 1
