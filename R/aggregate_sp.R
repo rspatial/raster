@@ -254,8 +254,7 @@ function(x, by=NULL, sums=NULL, ...) {
 		if (hd) {
 			x <- as(x, 'SpatialLines')
 		}
-		x <- lapply(1:nrow(id), function(y) sp::spChFIDs(aggregate(x[dc[dc$v==y,1],]), as.character(y)))
-		
+		x <- lapply(1:nrow(id), function(y) sp::spChFIDs(rgeos::gLineMerge(x[dc[dc$v==y,1],]), as.character(y)))	
 		x <- do.call(rbind, x)
 		crs(x) <- crs
 		rownames(dat) <- NULL
