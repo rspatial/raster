@@ -20,8 +20,8 @@ setMethod("bbox", signature(obj="Extent"),
 
 setMethod("bbox", signature(obj="Raster"), 
 	function(obj) {
-		obj <- extent(obj)
-		return( bbox(obj) )
+		e <- extent(obj)
+		return( bbox(e) )
 	}	
 )
 

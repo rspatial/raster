@@ -210,7 +210,7 @@
 	}
 
 # check if bbox of raster and lns overlap
-	spbb <- bbox(lns)
+	spbb <- sp::bbox(lns)
 	rsbb <- bbox(rstr)
 	if (spbb[1,1] > rsbb[1,2] | spbb[2,1] > rsbb[2,2]) {
 		stop('lines and raster have no overlapping areas')

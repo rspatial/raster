@@ -92,7 +92,7 @@ setMethod ('print' , 'Spatial',
 		cat('features    :' , nf, '\n')
 	}
 	
-	e <- bbox(x)
+	e <- sp::bbox(x)
 	if (nf > 0) {
 		cat('extent      : ' , e[1,1], ', ', e[1,2], ', ', e[2,1], ', ', e[2,2], '  (xmin, xmax, ymin, ymax)\n', sep="")
 	}

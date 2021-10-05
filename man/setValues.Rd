@@ -1,10 +1,10 @@
 \name{setValues}
 
 \alias{values<-}
-\alias{values<-,RasterLayer-method}
-\alias{values<-,RasterLayerSparse-method}
-\alias{values<-,RasterStack-method}
-\alias{values<-,RasterBrick-method}
+\alias{values<-,RasterLayer,ANY-method}
+\alias{values<-,RasterLayerSparse,ANY-method}
+\alias{values<-,RasterStack,ANY-method}
+\alias{values<-,RasterBrick,ANY-method}
 
 \alias{setValues}
 \alias{setValues,RasterLayer-method}

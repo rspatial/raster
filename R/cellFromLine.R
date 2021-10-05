@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 cellFromLine <- function(object, lns) {
-	spbb <- bbox(lns)
+	spbb <- sp::bbox(lns)
 	rsbb <- bbox(object)
 	addres <- 2 * max(res(object))
 	nlns <- length( lns@lines )
@@ -18,7 +18,7 @@ cellFromLine <- function(object, lns) {
 	rr <- raster(object)
 	for (i in 1:nlns) {
 		pp <- lns[i,]
-		spbb <- bbox(pp)
+		spbb <- sp::bbox(pp)
 		
 		if (! (spbb[1,1] > rsbb[1,2] | spbb[1,2] < rsbb[1,1] | spbb[2,1] > rsbb[2,2] | spbb[2,2] < rsbb[2,1]) ) {
 			rc <- crop(rr, extent(pp)+addres)

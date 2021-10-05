@@ -233,7 +233,7 @@
 	}
 
 # check if bbox of raster and p overlap
-	spbb <- bbox(p)
+	spbb <- sp::bbox(p)
 	rsbb <- bbox(rstr)
 	if (spbb[1,1] >= rsbb[1,2] | spbb[1,2] <= rsbb[1,1] | spbb[2,1] >= rsbb[2,2] | spbb[2,2] <= rsbb[2,1]) {
 		# instead of a warning
@@ -618,7 +618,7 @@
 	filename <- trim(filename)
 	raster <- raster(raster)
 	
-	spbb <- bbox(p)
+	spbb <- sp::bbox(p)
 	rsbb <- bbox(raster)
 	if (spbb[1,1] > rsbb[1,2] | spbb[2,1] > rsbb[2,2]) {
 		stop('polygon and raster have no overlapping areas')

@@ -6,7 +6,7 @@
 	pts <- data.frame(geom(as(x, 'SpatialPolygons')))
 	
 	if (keepExtent) {
-		bb <- bbox(x)
+		bb <- sp::bbox(x)
 		ptsx1 <- pts[,5] == bb[1,1] 
 		ptsx2 <- pts[,5] == bb[1,2] 
 		ptsy1 <- pts[,6] == bb[2,1] 

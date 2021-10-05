@@ -1,4 +1,6 @@
 
+if (!isGeneric("extent")) { setGeneric("extent", function(x, ...) standardGeneric("extent")) }	
+
 if (!isGeneric("hillShade")) {setGeneric("hillShade", function(x, ...) standardGeneric("hillShade"))}	
 
 if (!isGeneric("rectify")) {setGeneric("rectify", function(x, ...) standardGeneric("rectify"))}	

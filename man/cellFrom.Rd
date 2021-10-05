@@ -7,7 +7,7 @@
 \alias{rowFromY}
 \alias{rowFromY,BasicRaster,numeric-method}
 \alias{cellFromXY}
-\alias{cellFromXY,BasicRaster-method}
+\alias{cellFromXY,BasicRaster,ANY-method}
 
 \alias{cellFromRow}
 \alias{cellFromCol}

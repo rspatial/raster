@@ -39,7 +39,7 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 		return(.extractLinesAlong(x, y, cellnumbers=cellnumbers, df=df, layer, nl, factors=factors, ...))
 	}
 
-	spbb <- bbox(y)
+	spbb <- sp::bbox(y)
 	rsbb <- bbox(x)
 	addres <- 2 * max(res(x))
 	nlns <- length( y@lines )
@@ -72,7 +72,7 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 
 		parallel::clusterExport(cl, c('rsbb', 'rr', 'addres', 'cellnumbers'), envir=environment())
 		clFun <- function(i, pp) {
-			spbb <- bbox(pp)
+			spbb <- sp::bbox(pp)
 			if (! (spbb[1,1] > rsbb[1,2] | spbb[1,2] < rsbb[1,1] | spbb[2,1] > rsbb[2,2] | spbb[2,2] < rsbb[2,1]) ) {
 				rc <- crop(rr, extent(pp)+addres)
 				rc <- .linesToRaster(pp, rc, silent=TRUE)
@@ -113,7 +113,7 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 	
 		for (i in 1:nlns) {
 			pp <- y[i,]
-			spbb <- bbox(pp)
+			spbb <- sp::bbox(pp)
 			if (! (spbb[1,1] > rsbb[1,2] | spbb[1,2] < rsbb[1,1] | spbb[2,1] > rsbb[2,2] | spbb[2,2] < rsbb[2,1]) ) {
 				rc <- crop(rr, extent(pp)+addres)
 				rc <- .linesToRaster(pp, rc, silent=TRUE)
@@ -193,7 +193,7 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 
 .extractLinesAlong <- function(x, y, cellnumbers=FALSE, df=FALSE, layer, nl, factors=FALSE, ...){ 
 
-	spbb <- bbox(y)
+	spbb <- sp::bbox(y)
 	rsbb <- bbox(x)
 	addres <- 2 * max(res(x))
 	nlns <- length( y@lines )
@@ -224,7 +224,7 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 			pp <- yp[yp$part==j, c('x', 'y'), ]
 			for (k in 1:(nrow(pp)-1)) {
 				ppp <- pp[k:(k+1), ]
-				spbb <- bbox(as.matrix(ppp))
+				spbb <- sp::bbox(as.matrix(ppp))
 				if (! (spbb[1,1] > rsbb[1,2] | spbb[1,2] < rsbb[1,1] | spbb[2,1] > rsbb[2,2] | spbb[2,2] < rsbb[2,1]) ) {
 					lns <- sp::SpatialLines(list(sp::Lines(list(sp::Line(ppp)), "1")))
 					rc <- crop(rr, extent(lns) + addres)

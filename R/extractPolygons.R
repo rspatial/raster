@@ -17,7 +17,7 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 		y <- sp::spTransform(y, px)
 	}
 	
-	spbb <- bbox(y)
+	spbb <- sp::bbox(y)
 	rsbb <- bbox(x)
 	addres <- max(res(x))
 	npol <- length(y@polygons)
@@ -112,7 +112,7 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 		parallel::clusterExport(cl, c('rsbb', 'rr', 'weights', 'exact', 'addres', 'cellnumbers', 'small'), envir=environment())
 		
 		clFun <- function(i, pp) {
-			spbb <- bbox(pp)
+			spbb <- sp::bbox(pp)
 		
 			if (spbb[1,1] >= rsbb[1,2] | spbb[1,2] <= rsbb[1,1] | spbb[2,1] >= rsbb[2,2] | spbb[2,2] <= rsbb[2,1]) {
 				# do nothing; res[[i]] <- NULL
@@ -231,7 +231,7 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 	} else {
 		for (i in 1:npol) {
 			pp <- y[i,]
-			spbb <- bbox(pp)
+			spbb <- sp::bbox(pp)
 		
 			if (spbb[1,1] >= rsbb[1,2] | spbb[1,2] <= rsbb[1,1] | spbb[2,1] >= rsbb[2,2] | spbb[2,2] <= rsbb[2,1]) {
 				# do nothing; res[[i]] <- NULL

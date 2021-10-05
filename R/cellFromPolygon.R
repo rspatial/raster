@@ -6,7 +6,7 @@
 
 cellFromPolygon <- function(object, p, weights=FALSE) {
 
-	spbb <- bbox(p)
+	spbb <- sp::bbox(p)
 	rsbb <- bbox(object)
 	addres <- max(res(object))
 	npol <- length(p@polygons)
@@ -19,7 +19,7 @@ cellFromPolygon <- function(object, p, weights=FALSE) {
 	rr <- raster(object)
 	for (i in 1:npol) {
 		pp <- p[i,]
-		spbb <- bbox(pp)
+		spbb <- sp::bbox(pp)
 		
 		if (spbb[1,1] >= rsbb[1,2] | spbb[1,2] <= rsbb[1,1] | spbb[2,1] >= rsbb[2,2] | spbb[2,2] <= rsbb[2,1]) {
 			# do nothing; res[[i]] <- NULL

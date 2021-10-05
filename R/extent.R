@@ -5,7 +5,6 @@
 
 
 
-if (!isGeneric("extent")) { setGeneric("extent", function(x, ...) standardGeneric("extent")) }	
 
 setMethod('extent', signature(x='Extent'), 
 	function(x){ return(x) }
@@ -74,7 +73,7 @@ setMethod('extent', signature(x='BasicRaster'),
 
 setMethod('extent', signature(x='Spatial'), 
 	function(x){ 
-		bndbox <- bbox(x)
+		bndbox <- sp::bbox(x)
 		e <- methods::new('Extent')
 		e@xmin <- bndbox[1,1]
 		e@xmax <- bndbox[1,2]

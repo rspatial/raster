@@ -1,4 +1,7 @@
 
+--- 5-October-2021, version 3.5-1
+
+raster now imports terra (instead of the other way around) such that the two packages can be used together; and to allow replacing rgdal and rgeos functionality with functions from terra.
 
 --- 17-July-2020, version 3.3-13
 
