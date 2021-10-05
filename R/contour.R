@@ -63,8 +63,8 @@ filledContour <- function(x, y=1, maxpixels=100000, ...) {
 		} else {
 			asp <- 1
 		}		
-		filled.contour(x=X,y=Y,z=Z,asp=asp,...)
+		graphics::filled.contour(x=X,y=Y,z=Z,asp=asp,...)
 	} else {
-		filled.contour(x=X,y=Y,z=Z,...)
+		graphics::filled.contour(x=X,y=Y,z=Z,...)
 	}
 }

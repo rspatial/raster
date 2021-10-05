@@ -14,7 +14,7 @@ function(x, ext=drawExtent(), maxpixels=100000, layer=1, new=TRUE, useRaster=TRU
 		ext <- extent(ext)
 	}
 	if (new) { 
-		dev.new() 
+		grDevices::dev.new() 
 	}
 	if (nlayers(x) > 1) { 
 		x <- raster(x, layer) 
@@ -41,7 +41,7 @@ function(x, ext=drawExtent(), new=TRUE, ...) {
 		ext <- extent(ext)
 	}
 	if (new) { 
-		dev.new()
+		grDevices::dev.new()
 	}
 	sp::plot(x, xlim=c(ext@xmin, ext@xmax), ylim=c(ext@ymin, ext@ymax), ...)
 	return(invisible(ext))
@@ -58,7 +58,7 @@ function(x, ext=drawExtent(), new=TRUE, ...) {
 		ext <- extent(ext)
 	}
 	if (new) { 
-		dev.new()
+		grDevices::dev.new()
 	}
 	plot(0, xlim=c(ext@xmin, ext@xmax), ylim=c(ext@ymin, ext@ymax), type='n', ...)
 	return(invisible(ext))

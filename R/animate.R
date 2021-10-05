@@ -20,7 +20,7 @@ function(x, pause=0.25, main, zlim, maxpixels=50000, n=10, ...) {
 	reps <- 0
     while (reps < n) {
         plot(x[[i]], main = main[i], zlim=zlim, maxpixels=Inf, ...)
-        dev.flush()
+        grDevices::dev.flush()
         Sys.sleep(pause)
         i <- i + 1
         if (i > nl) {

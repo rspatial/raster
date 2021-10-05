@@ -79,14 +79,14 @@ function (x, filename, col=rev(terrain.colors(255)), colNA=NA, maxpixels=100000,
 	
 	
 
-	png(filename = imagefile, width=max(480, blur*ncol(x)), height=max(480,blur*nrow(x)), bg="transparent")
+	grDevices::png(filename = imagefile, width=max(480, blur*ncol(x)), height=max(480,blur*nrow(x)), bg="transparent")
 	if (!is.na(colNA)) {
 		graphics::par(mar=c(0,0,0,0), bg=colNA)
 	} else {
 		graphics::par(mar=c(0,0,0,0))	
 	}
 	image(x, col=col, axes=FALSE, useRaster=TRUE, maxpixels=maxpixels, ...)
-	dev.off()
+	grDevices::dev.off()
 
 	name <- names(x)[1]
 	if (name == "") { name <- 'x' }

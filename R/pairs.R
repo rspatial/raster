@@ -12,7 +12,7 @@ setMethod('pairs', signature(x='RasterStackBrick'),
 			nB <- length(breaks)
 			y <- h$counts
 			y <- y/max(y)
-			rect(breaks[-nB], 0, breaks[-1], y, col="green")
+			graphics::rect(breaks[-nB], 0, breaks[-1], y, col="green")
 		}
 		
 		panelcor <- function(x, y,...) {

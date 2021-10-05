@@ -102,7 +102,7 @@ setMethod('as.data.frame', signature(x='Raster'),
 				times <- names(x)
 				timevar <- 'layer'
 			} 
-			v <- reshape(v, direction='long', varying=nc, v.names='value', timevar=timevar, times=times)	
+			v <- stats::reshape(v, direction='long', varying=nc, v.names='value', timevar=timevar, times=times)	
 			v[ncol(v)] = NULL  # id column
 			rownames(v) <- NULL
 			#v$layer <- names(x)[v$layer]

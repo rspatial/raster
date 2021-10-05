@@ -99,7 +99,7 @@ function (x, filename, time=NULL, col=rev(terrain.colors(255)), colNA=NA, maxpix
 	
 	
 	for (i in 1:nl) {
-		png(filename = imagefile[i], width=max(480, blur*ncol(x)), height=max(480,blur*nrow(x)), bg="transparent")
+		grDevices::png(filename = imagefile[i], width=max(480, blur*ncol(x)), height=max(480,blur*nrow(x)), bg="transparent")
 		if (!is.na(colNA)) {
 			graphics::par(mar=c(0,0,0,0), bg=colNA)
 		} else {
@@ -107,7 +107,7 @@ function (x, filename, time=NULL, col=rev(terrain.colors(255)), colNA=NA, maxpix
 		}
 		
 		image(x[[i]], col=col, axes=FALSE, useRaster=TRUE, maxpixels=maxpixels, ...)
-		dev.off()
+		grDevices::dev.off()
 		a <- c("<GroundOverlay>", paste("\t<name>", name[i], "</name>", sep=''))
 		if (dotime) {
 			if (when) {

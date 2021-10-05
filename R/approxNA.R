@@ -43,13 +43,13 @@ function(x, filename="", method="linear", yleft, yright, rule=1, f=0, ties=mean,
 		i <- s < (nl-1) # at least two
 		if (length(i) > 0 ) {
 			if (ylr==0) {
-				x[i,] <- t(apply(x[i,,drop=FALSE], 1, function(x) approx(x=xout, y=x, xout=xout, method=method, rule=rule, f=f, ties=ties)$y ))
+				x[i,] <- t(apply(x[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, rule=rule, f=f, ties=ties)$y ))
 			} else if (ylr==1) {
-				x[i,] <- t(apply(x[i,,drop=FALSE], 1, function(x) approx(x=xout, y=x, xout=xout, method=method, yright=yright, rule=rule, f=f, ties=ties)$y ))			
+				x[i,] <- t(apply(x[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, yright=yright, rule=rule, f=f, ties=ties)$y ))			
 			} else if (ylr==2) {
-				x[i,] <- t(apply(x[i,,drop=FALSE], 1, function(x) approx(x=xout, y=x, xout=xout, method=method, yleft=yleft, rule=rule, f=f, ties=ties)$y ))						
+				x[i,] <- t(apply(x[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, yleft=yleft, rule=rule, f=f, ties=ties)$y ))						
 			} else {
-				x[i,] <- t(apply(x[i,,drop=FALSE], 1, function(x) approx(x=xout, y=x, xout=xout, method=method, yright=yright, yleft=yleft, rule=rule, f=f, ties=ties)$y ))
+				x[i,] <- t(apply(x[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, yright=yright, yleft=yleft, rule=rule, f=f, ties=ties)$y ))
 			}
 		} else {
 			warning('no NA values to approximate')
@@ -78,13 +78,13 @@ function(x, filename="", method="linear", yleft, yright, rule=1, f=0, ties=mean,
 		i <- (s < nl-1) # need at least two
 		if (length(i) > 0 ) {
 			if (ylr==0) {
-				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) approx(x=xout, y=x, xout=xout, method=method, rule=rule, f=f, ties=ties)$y ) )
+				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, rule=rule, f=f, ties=ties)$y ) )
 			} else if (ylr==1) {
-				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) approx(x=xout, y=x, xout=xout, method=method, yright=yright, rule=rule, f=f, ties=ties)$y ) )
+				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, yright=yright, rule=rule, f=f, ties=ties)$y ) )
 			} else if (ylr==2) {
-				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) approx(x=xout, y=x, xout=xout, method=method, yleft=yleft, rule=rule, f=f, ties=ties)$y ) )
+				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, yleft=yleft, rule=rule, f=f, ties=ties)$y ) )
 			} else {
-				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) approx(x=xout, y=x, xout=xout, method=method, yright=yright, yleft=yleft, rule=rule, f=f, ties=ties)$y ) )
+				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, yright=yright, yleft=yleft, rule=rule, f=f, ties=ties)$y ) )
 			}
 		}
 		out <- writeValues(out, v, tr$row[j])
