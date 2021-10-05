@@ -218,7 +218,7 @@ function(x, by=NULL, sums=NULL, ...) {
 			nsubobs <- length(x@lines[[i]]@Lines)
 			p <- c(p, lapply(1:nsubobs, function(j) x@lines[[i]]@Lines[[j]]))
 		}
-		x <- sp::SpatialLines(list(sp::Lines(p, '1')),  proj4string= sp::proj4string(x))
+		x <- sp::SpatialLines(list(sp::Lines(p, '1')), proj4string=crs(x))
 		return(x)
 		
 	} else {
@@ -254,7 +254,7 @@ function(x, by=NULL, sums=NULL, ...) {
 		if (hd) {
 			x <- as(x, 'SpatialLines')
 		}
-		x <- lapply(1:nrow(id), function(y) sp::spChFIDs(rgeos::gLineMerge(x[dc[dc$v==y,1],]), as.character(y)))	
+		x <- lapply(1:nrow(id), function(y) sp::spChFIDs(aggregate(x[dc[dc$v==y,1],]), as.character(y)))
 		x <- do.call(rbind, x)
 		crs(x) <- crs
 		rownames(dat) <- NULL
