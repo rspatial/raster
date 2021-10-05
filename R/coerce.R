@@ -10,10 +10,10 @@ setAs("SpatRaster", "Raster",
 		s <- sources(from)
 		nl <- nlyr(from)
 		e <- as.vector(ext(from))
-		prj <- .proj4(from)
+		prj <- crs(from)
 		if (nl == 1) {
 			if (s$source == "") {
-				r <- raster::raster(ncols=ncol(from), nrows=nrow(from), crs=prj,
+				r <- raster::raster(ncols=ncol(from), nrows=nrow(from), crs=crs(from),
 			          xmn=e[1], xmx=e[2], ymn=e[3], ymx=e[4])
 				if (hasValues(from)) {
 					raster::values(r) <- values(from)
