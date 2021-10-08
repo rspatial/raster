@@ -6,7 +6,13 @@
 
 
 getData <- function(name='GADM', download=TRUE, path='', ...) {
+
 	path <- .getDataPath(path)
+
+	tout <- getOption("timeout")
+	on.exit(options(timeout = tout))
+	options(timeout = max(600, tout))
+	
 	if (name=='GADM') {
 		.GADM(..., download=download, path=path)
 	} else if (name=='SRTM') {
