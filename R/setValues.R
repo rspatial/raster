@@ -3,14 +3,7 @@
 # Version 0.9
 # Licence GPL v3
 
-
-if (!isGeneric('setValues')) {
-	setGeneric('setValues', function(x, values, ...)
-		standardGeneric('setValues')) 
-}	
-
 	
-
 setMethod('setValues', signature(x='RasterLayer'), 
 function(x, values, ...) {
 
@@ -77,7 +70,7 @@ setMethod('setValues', signature(x='RasterStack'),
 	
 
 	
-setMethod('setValues', signature(x='RasterBrick'), 
+setMethod('setValues', signature(x='RasterBrick', values="ANY"), 
 	function(x, values, layer=-1, ...) {
 	
 	layer <- layer[1]

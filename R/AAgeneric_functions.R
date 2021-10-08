@@ -121,6 +121,7 @@ if (!isGeneric("text")) { setGeneric("text", function(x, ...) standardGeneric("t
 if (!isGeneric("trim")) { setGeneric("trim", function(x, ...) standardGeneric("trim"))}	
 if (!isGeneric("unique")) { setGeneric("unique", function(x, incomparables=FALSE, ...) standardGeneric("unique")) }	
 if (!isGeneric("union")) {setGeneric("union", function(x, y)standardGeneric("union"))}	
+if (!isGeneric("setValues")) {setGeneric("setValues", function(x, values, ...) standardGeneric("setValues"))}
 if (!isGeneric("values")) { setGeneric("values", function(x, ...) standardGeneric("values")) }	
 if (!isGeneric("values<-")) { setGeneric("values<-", function(x, value) standardGeneric("values<-"))}	
 if (!isGeneric("which.max")) {setGeneric("which.max", function(x)standardGeneric("which.max"))}	
