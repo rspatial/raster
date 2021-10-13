@@ -1,7 +1,7 @@
 Package: raster
 Type: Package
 Title: Geographic Data Analysis and Modeling
-Version: 3.5-2
+Version: 3.5-3
 Date: 2021-10-11
 Imports: Rcpp, methods, terra (>= 1.4.11)
 LinkingTo: Rcpp
