@@ -35,7 +35,7 @@ getData <- function(name='GADM', download=TRUE, path='', ...) {
 
 .download <- function(aurl, filename) {
 	fn <- paste(tempfile(), '.download', sep='')
-	res <- utils::download.file(url=aurl, destfile=fn, method="auto", quiet = FALSE, mode = "wb", cacheOK = TRUE)
+	res <- utils::download.file(url=aurl, destfile=fn, quiet = FALSE, mode = "wb", cacheOK = TRUE)
 	if (res == 0) {
 		w <- getOption('warn')
 		on.exit(options('warn' = w))
