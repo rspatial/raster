@@ -21,17 +21,17 @@ setMethod('quantile', signature(x='Raster'),
 				stop('ncells too large')
 			}
 		}
-		if (na.rm) {
-			v <- stats::na.omit(v)
-		}
+		#if (na.rm) {
+		#	v <- stats::na.omit(v)
+		#}
 		if (nlayers(x)==1) {
-			return(quantile(v, ...))
+			return(quantile(v, ..., na.rm=na.rm))
 		} else {
 			# t(apply(v, 2, quantile, na.rm=TRUE))
 
-			q <- stats::quantile(v[,1], ...)
+			q <- stats::quantile(v[,1], ..., na.rm=na.rm)
 			for (i in 2:nlayers(x)) {
-				q <- rbind(q, stats::quantile(v[,i], ...))
+				q <- rbind(q, stats::quantile(v[,i], ..., na.rm=na.rm))
 			}
 			rownames(q) <- names(x)
 			return(q)
