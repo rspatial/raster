@@ -146,64 +146,65 @@ When a function writes a file to disk, the file format is determined by the 'for
     <div class='dont-index'><p><code><a href='http://rgdal.r-forge.r-project.org/reference/GDALDriver-class.html'>GDALDriver-class</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>writeFormats</span><span class='op'>(</span><span class='op'>)</span> 
-</div><div class='output co'>#&gt;       name        long_name                                
-#&gt;  [1,] "raster"    "R-raster"                               
-#&gt;  [2,] "SAGA"      "SAGA GIS"                               
-#&gt;  [3,] "IDRISI"    "IDRISI"                                 
-#&gt;  [4,] "IDRISIold" "IDRISI (img/doc)"                       
-#&gt;  [5,] "BIL"       "Band by Line"                           
-#&gt;  [6,] "BSQ"       "Band Sequential"                        
-#&gt;  [7,] "BIP"       "Band by Pixel"                          
-#&gt;  [8,] "ascii"     "Arc ASCII"                              
-#&gt;  [9,] "CDF"       "NetCDF"                                 
-#&gt; [10,] "ADRG"      "ARC Digitized Raster Graphics"          
-#&gt; [11,] "BAG"       "Bathymetry Attributed Grid"             
-#&gt; [12,] "BMP"       "MS Windows Device Independent Bitmap"   
-#&gt; [13,] "BT"        "VTP .bt (Binary Terrain) 1.3 Format"    
-#&gt; [14,] "BYN"       "Natural Resources Canada's Geoid"       
-#&gt; [15,] "CTable2"   "CTable2 Datum Grid Shift"               
-#&gt; [16,] "EHdr"      "ESRI .hdr Labelled"                     
-#&gt; [17,] "ELAS"      "ELAS"                                   
-#&gt; [18,] "ENVI"      "ENVI .hdr Labelled"                     
-#&gt; [19,] "ERS"       "ERMapper .ers Labelled"                 
-#&gt; [20,] "GPKG"      "GeoPackage"                             
-#&gt; [21,] "GS7BG"     "Golden Software 7 Binary Grid (.grd)"   
-#&gt; [22,] "GSBG"      "Golden Software Binary Grid (.grd)"     
-#&gt; [23,] "GTiff"     "GeoTIFF"                                
-#&gt; [24,] "GTX"       "NOAA Vertical Datum .GTX"               
-#&gt; [25,] "HDF4Image" "HDF4 Dataset"                           
-#&gt; [26,] "HFA"       "Erdas Imagine Images (.img)"            
-#&gt; [27,] "IDA"       "Image Data and Analysis"                
-#&gt; [28,] "ILWIS"     "ILWIS Raster Map"                       
-#&gt; [29,] "INGR"      "Intergraph Raster"                      
-#&gt; [30,] "ISCE"      "ISCE raster"                            
-#&gt; [31,] "ISIS2"     "USGS Astrogeology ISIS cube (Version 2)"
-#&gt; [32,] "ISIS3"     "USGS Astrogeology ISIS cube (Version 3)"
-#&gt; [33,] "KRO"       "KOLOR Raw"                              
-#&gt; [34,] "LAN"       "Erdas .LAN/.GIS"                        
-#&gt; [35,] "Leveller"  "Leveller heightfield"                   
-#&gt; [36,] "MBTiles"   "MBTiles"                                
-#&gt; [37,] "MRF"       "Meta Raster Format"                     
-#&gt; [38,] "netCDF"    "Network Common Data Format"             
-#&gt; [39,] "NGW"       "NextGIS Web"                            
-#&gt; [40,] "NITF"      "National Imagery Transmission Format"   
-#&gt; [41,] "NTv2"      "NTv2 Datum Grid Shift"                  
-#&gt; [42,] "NWT_GRD"   "Northwood Numeric Grid Format .grd/.tab"
-#&gt; [43,] "PAux"      "PCI .aux Labelled"                      
-#&gt; [44,] "PCIDSK"    "PCIDSK Database File"                   
-#&gt; [45,] "PCRaster"  "PCRaster Raster File"                   
-#&gt; [46,] "PDF"       "Geospatial PDF"                         
-#&gt; [47,] "PDS4"      "NASA Planetary Data System 4"           
-#&gt; [48,] "PNM"       "Portable Pixmap Format (netpbm)"        
-#&gt; [49,] "RMF"       "Raster Matrix Format"                   
-#&gt; [50,] "ROI_PAC"   "ROI_PAC raster"                         
-#&gt; [51,] "RRASTER"   "R Raster"                               
-#&gt; [52,] "RST"       "Idrisi Raster A.1"                      
-#&gt; [53,] "SAGA"      "SAGA GIS Binary Grid (.sdat, .sg-grd-z)"
-#&gt; [54,] "SGI"       "SGI Image File Format 1.0"              
-#&gt; [55,] "Terragen"  "Terragen heightfield"                   
-#&gt; [56,] "VICAR"     "MIPL VICAR file"                        </div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>writeFormats</span><span class='op'>(</span><span class='op'>)</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       name        long_name                                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] "raster"    "R-raster"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] "SAGA"      "SAGA GIS"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] "IDRISI"    "IDRISI"                                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] "IDRISIold" "IDRISI (img/doc)"                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] "BIL"       "Band by Line"                           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] "BSQ"       "Band Sequential"                        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] "BIP"       "Band by Pixel"                          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] "ascii"     "Arc ASCII"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] "CDF"       "NetCDF"                                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] "ADRG"      "ARC Digitized Raster Graphics"          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] "BAG"       "Bathymetry Attributed Grid"             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] "BMP"       "MS Windows Device Independent Bitmap"   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] "BT"        "VTP .bt (Binary Terrain) 1.3 Format"    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] "BYN"       "Natural Resources Canada's Geoid"       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,] "CTable2"   "CTable2 Datum Grid Shift"               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,] "EHdr"      "ESRI .hdr Labelled"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17,] "ELAS"      "ELAS"                                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18,] "ENVI"      "ENVI .hdr Labelled"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19,] "ERS"       "ERMapper .ers Labelled"                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [20,] "GPKG"      "GeoPackage"                             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21,] "GS7BG"     "Golden Software 7 Binary Grid (.grd)"   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [22,] "GSBG"      "Golden Software Binary Grid (.grd)"     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [23,] "GTiff"     "GeoTIFF"                                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [24,] "GTX"       "NOAA Vertical Datum .GTX"               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25,] "HDF4Image" "HDF4 Dataset"                           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [26,] "HFA"       "Erdas Imagine Images (.img)"            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [27,] "IDA"       "Image Data and Analysis"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [28,] "ILWIS"     "ILWIS Raster Map"                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [29,] "INGR"      "Intergraph Raster"                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [30,] "ISCE"      "ISCE raster"                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [31,] "ISIS2"     "USGS Astrogeology ISIS cube (Version 2)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [32,] "ISIS3"     "USGS Astrogeology ISIS cube (Version 3)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [33,] "KRO"       "KOLOR Raw"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [34,] "LAN"       "Erdas .LAN/.GIS"                        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [35,] "Leveller"  "Leveller heightfield"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [36,] "MBTiles"   "MBTiles"                                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [37,] "MRF"       "Meta Raster Format"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [38,] "netCDF"    "Network Common Data Format"             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [39,] "NGW"       "NextGIS Web"                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [40,] "NITF"      "National Imagery Transmission Format"   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [41,] "NTv2"      "NTv2 Datum Grid Shift"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [42,] "NWT_GRD"   "Northwood Numeric Grid Format .grd/.tab"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [43,] "PAux"      "PCI .aux Labelled"                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [44,] "PCIDSK"    "PCIDSK Database File"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [45,] "PCRaster"  "PCRaster Raster File"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [46,] "PDF"       "Geospatial PDF"                         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [47,] "PDS4"      "NASA Planetary Data System 4"           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [48,] "PNM"       "Portable Pixmap Format (netpbm)"        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [49,] "RMF"       "Raster Matrix Format"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [50,] "ROI_PAC"   "ROI_PAC raster"                         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [51,] "RRASTER"   "R Raster"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [52,] "RST"       "Idrisi Raster A.1"                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [53,] "SAGA"      "SAGA GIS Binary Grid (.sdat, .sg-grd-z)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [54,] "SGI"       "SGI Image File Format 1.0"              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [55,] "Terragen"  "Terragen heightfield"                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [56,] "VICAR"     "MIPL VICAR file"                        </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

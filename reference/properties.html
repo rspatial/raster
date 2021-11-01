@@ -141,11 +141,14 @@ dataSize returns the number of bytes used for each value (pixel, grid cell)
     <p>varies</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>dataSize</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 4</div><div class='input'><span class='fu'>dataSigned</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='dataType.html'>dataType</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "FLT4S"</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>dataSize</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
+<span class='r-in'><span class='fu'>dataSigned</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-in'><span class='fu'><a href='dataType.html'>dataType</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "FLT4S"</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

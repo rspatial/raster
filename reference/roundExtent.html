@@ -120,7 +120,7 @@ See Math-methods for these (and many more) methods with Raster* objects." />
     <div class="ref-description">
     
 
-<p>use <code><a href='https://rdrr.io/r/base/Round.html'>round(x, digits=0)</a></code> to round the coordinates of an Extent object to the number of digits specified. This can be useful when dealing with a small imprecision in the data (e.g. 179.9999 instead of 180). <code>floor</code> and <code>ceiling</code> move the coordiantes to the outer or inner whole integer numbers.</p>
+<p>use <code>round(x, digits=0)</code> to round the coordinates of an Extent object to the number of digits specified. This can be useful when dealing with a small imprecision in the data (e.g. 179.9999 instead of 180). <code>floor</code> and <code>ceiling</code> move the coordiantes to the outer or inner whole integer numbers.</p>
 <p>It is also possible to use Arithmetic functions with Extent objects (but these work perhaps unexpectedly!)</p>
 <p>See <code><a href='Math-methods.html'>Math-methods</a></code> for these (and many more) methods with Raster* objects.</p>
     </div>
@@ -144,23 +144,26 @@ See Math-methods for these (and many more) methods with Raster* objects." />
     <div class='dont-index'><p><code><a href='Math-methods.html'>Math-methods</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.999999</span>,  <span class='fl'>10.000011</span>, <span class='op'>-</span><span class='fl'>60.4</span>, <span class='fl'>60</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : 1 
-#&gt; xmax       : 10 
-#&gt; ymin       : -60 
-#&gt; ymax       : 60 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : 1 
-#&gt; xmax       : 10 
-#&gt; ymin       : -60 
-#&gt; ymax       : 60 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>floor</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : 0 
-#&gt; xmax       : 11 
-#&gt; ymin       : -61 
-#&gt; ymax       : 60 </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.999999</span>,  <span class='fl'>10.000011</span>, <span class='op'>-</span><span class='fl'>60.4</span>, <span class='fl'>60</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : 1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : -60 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 60 </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : 1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : -60 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 60 </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>floor</a></span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 11 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : -61 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 60 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

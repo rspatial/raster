@@ -140,12 +140,14 @@
     <div class='dont-index'><p><code><a href='density.html'>density</a></code>, <code><a href='cellStats.html'>cellStats</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>100</span>, nrow<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='fl'>0</span>, <span class='fl'>50</span><span class='op'>)</span>
-<span class='fu'>quantile</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           0%          25%          50%          75%         100% 
-#&gt; -190.7832892  -33.8396457    0.6744588   34.3378072  168.8406643 </div><div class='input'><span class='fu'>quantile</span><span class='op'>(</span><span class='va'>r</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>0.75</span><span class='op'>)</span>, type<span class='op'>=</span><span class='fl'>7</span>,names <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -33.83965  34.33781</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>100</span>, nrow<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='fl'>0</span>, <span class='fl'>50</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>quantile</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           0%          25%          50%          75%         100% </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -190.7832892  -33.8396457    0.6744588   34.3378072  168.8406643 </span>
+<span class='r-in'><span class='fu'>quantile</span><span class='op'>(</span><span class='va'>r</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>0.75</span><span class='op'>)</span>, type<span class='op'>=</span><span class='fl'>7</span>,names <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -33.83965  34.33781</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

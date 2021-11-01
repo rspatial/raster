@@ -164,42 +164,44 @@
     <div class='dont-index'><p><code><a href='freq.html'>freq</a></code>, <code><a href='zonal.html'>zonal</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nc<span class='op'>=</span><span class='fl'>5</span>, nr<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>2</span>
-<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>3</span><span class='op'>)</span>
-<span class='fu'>crosstab</span><span class='op'>(</span><span class='va'>r</span>,<span class='va'>s</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        layer.2
-#&gt; layer.1 0 1 2 3
-#&gt;       0 3 2 2 0
-#&gt;       1 1 3 5 3
-#&gt;       2 0 3 3 0</div><div class='input'>
-<span class='va'>rs</span> <span class='op'>&lt;-</span> <span class='va'>r</span><span class='op'>/</span><span class='va'>s</span>
-<span class='va'>r</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
-<span class='va'>s</span><span class='op'>[</span><span class='fl'>20</span><span class='op'>:</span><span class='fl'>25</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>s</span>, <span class='va'>rs</span><span class='op'>)</span>
-<span class='fu'>crosstab</span><span class='op'>(</span><span class='va'>x</span>, useNA<span class='op'>=</span><span class='cn'>TRUE</span>, long<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    layer.1 layer.2 layer.3 Freq
-#&gt; 1        0       0       1    1
-#&gt; 2        0       0       3    1
-#&gt; 3        0       1       0    1
-#&gt; 4        0       2       0    2
-#&gt; 5        0      NA       0    1
-#&gt; 6        0      NA       2    1
-#&gt; 7        1       1       1    1
-#&gt; 8        1       2       0    3
-#&gt; 9        1       2       1    1
-#&gt; 10       1       3       0    1
-#&gt; 11       1      NA       0    1
-#&gt; 12       1      NA       1    1
-#&gt; 13       1      NA       3    1
-#&gt; 14       2       1       1    1
-#&gt; 15       2       1       3    1
-#&gt; 16       2       2       1    1
-#&gt; 17       2      NA       1    1
-#&gt; 18      NA       1       2    1
-#&gt; 19      NA       1       3    1
-#&gt; 20      NA       2       1    2
-#&gt; 21      NA       3       0    1</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nc<span class='op'>=</span><span class='fl'>5</span>, nr<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>2</span></span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>crosstab</span><span class='op'>(</span><span class='va'>r</span>,<span class='va'>s</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        layer.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> layer.1 0 1 2 3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       0 3 2 2 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       1 1 3 5 3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       2 0 3 3 0</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>rs</span> <span class='op'>&lt;-</span> <span class='va'>r</span><span class='op'>/</span><span class='va'>s</span></span>
+<span class='r-in'><span class='va'>r</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span></span>
+<span class='r-in'><span class='va'>s</span><span class='op'>[</span><span class='fl'>20</span><span class='op'>:</span><span class='fl'>25</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>s</span>, <span class='va'>rs</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>crosstab</span><span class='op'>(</span><span class='va'>x</span>, useNA<span class='op'>=</span><span class='cn'>TRUE</span>, long<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    layer.1 layer.2 layer.3 Freq</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1        0       0       1    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2        0       0       3    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3        0       1       0    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4        0       2       0    2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5        0      NA       0    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6        0      NA       2    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7        1       1       1    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8        1       2       0    3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9        1       2       1    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10       1       3       0    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11       1      NA       0    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12       1      NA       1    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13       1      NA       3    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14       2       1       1    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15       2       1       3    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16       2       2       1    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17       2      NA       1    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18      NA       1       2    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19      NA       1       3    1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20      NA       2       1    2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21      NA       3       0    1</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

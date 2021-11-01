@@ -179,38 +179,45 @@ The last cell number equals the number of cells of the Raster* object.</p>
     <div class='dont-index'><p><code><a href='cellFrom.html'>cellFromXY</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#using a new default raster (1 degree global)</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'>xFromCol</span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>120</span>, <span class='fl'>180</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -179.5  -60.5   -0.5</div><div class='input'><span class='fu'>yFromRow</span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>90</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.5</div><div class='input'><span class='fu'>xyFromCell</span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>10000</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         x    y
-#&gt; [1,] 99.5 62.5</div><div class='input'><span class='fu'>xyFromCell</span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>32581</span>, <span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           x     y
-#&gt; [1,]  179.5  90.5
-#&gt; [2,] -179.5  89.5
-#&gt; [3,]    0.5  -0.5
-#&gt; [4,]  179.5 -89.5
-#&gt; [5,] -179.5 -90.5</div><div class='input'>
-<span class='co'>#using a file from disk</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>r</span>
-</div><div class='output co'>#&gt; class      : RasterLayer 
-#&gt; dimensions : 115, 80, 9200  (nrow, ncol, ncell)
-#&gt; resolution : 40, 40  (x, y)
-#&gt; extent     : 178400, 181600, 329400, 334000  (xmin, xmax, ymin, ymax)
-#&gt; crs        : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs 
-#&gt; source     : test.grd 
-#&gt; names      : test 
-#&gt; values     : 138.7071, 1736.058  (min, max)
-#&gt; </div><div class='input'><span class='fu'><a href='cellFrom.html'>cellFromXY</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>180000</span>, <span class='fl'>330000</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 8041</div><div class='input'><span class='co'>#xy for corners of a raster:</span>
-<span class='fu'>xyFromCell</span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='ncell.html'>ncol</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>-</span><span class='fu'><a href='ncell.html'>ncol</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>1</span>, <span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           x      y
-#&gt; [1,] 178420 333980
-#&gt; [2,] 181580 333980
-#&gt; [3,] 178420 329420
-#&gt; [4,] 181580 329420</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>#using a new default raster (1 degree global)</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>xFromCol</span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>120</span>, <span class='fl'>180</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -179.5  -60.5   -0.5</span>
+<span class='r-in'><span class='fu'>yFromRow</span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>90</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.5</span>
+<span class='r-in'><span class='fu'>xyFromCell</span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>10000</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         x    y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] 99.5 62.5</span>
+<span class='r-in'><span class='fu'>xyFromCell</span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>32581</span>, <span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           x     y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]  179.5  90.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] -179.5  89.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,]    0.5  -0.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,]  179.5 -89.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,] -179.5 -90.5</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#using a file from disk</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : RasterLayer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dimensions : 115, 80, 9200  (nrow, ncol, ncell)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> resolution : 40, 40  (x, y)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> extent     : 178400, 181600, 329400, 334000  (xmin, xmax, ymin, ymax)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> crs        : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> source     : test.grd </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> names      : test </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> values     : 138.7071, 1736.058  (min, max)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='cellFrom.html'>cellFromXY</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>180000</span>, <span class='fl'>330000</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 8041</span>
+<span class='r-in'><span class='co'>#xy for corners of a raster:</span></span>
+<span class='r-in'><span class='fu'>xyFromCell</span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='ncell.html'>ncol</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>-</span><span class='fu'><a href='ncell.html'>ncol</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>1</span>, <span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           x      y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] 178420 333980</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 181580 333980</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] 178420 329420</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] 181580 329420</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

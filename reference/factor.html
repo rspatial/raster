@@ -194,121 +194,132 @@ as.factor and ratify create a layer with a RAT table. Function 'deratify' create
     <p>asFactor is deprecated and should not be used</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrow<span class='op'>=</span><span class='fl'>10</span>, ncol<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>10</span>
-<span class='fu'>is.factor</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'>as.factor</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='fu'>is.factor</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>levels</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-<span class='va'>x</span>
-</div><div class='output co'>#&gt;    ID
-#&gt; 1   0
-#&gt; 2   1
-#&gt; 3   2
-#&gt; 4   3
-#&gt; 5   4
-#&gt; 6   5
-#&gt; 7   6
-#&gt; 8   7
-#&gt; 9   8
-#&gt; 10  9
-#&gt; 11 10</div><div class='input'><span class='va'>x</span><span class='op'>$</span><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>10</span><span class='op'>:</span><span class='fl'>20</span><span class='op'>]</span>
-<span class='fu'>levels</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>x</span>
-<span class='fu'>levels</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [[1]]
-#&gt;    ID code
-#&gt; 1   0    j
-#&gt; 2   1    k
-#&gt; 3   2    l
-#&gt; 4   3    m
-#&gt; 5   4    n
-#&gt; 6   5    o
-#&gt; 7   6    p
-#&gt; 8   7    q
-#&gt; 9   8    r
-#&gt; 10  9    s
-#&gt; 11 10    t
-#&gt; </div><div class='input'><span class='va'>f</span>
-</div><div class='output co'>#&gt; class      : RasterLayer 
-#&gt; dimensions : 10, 10, 100  (nrow, ncol, ncell)
-#&gt; resolution : 36, 18  (x, y)
-#&gt; extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#&gt; crs        : +proj=longlat +datum=WGS84 +no_defs 
-#&gt; source     : memory
-#&gt; names      : layer 
-#&gt; values     : 0, 10  (min, max)
-#&gt; attributes :
-#&gt;        ID code
-#&gt;  from:  0    j
-#&gt;   to : 10    t
-#&gt; </div><div class='input'>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrow<span class='op'>=</span><span class='fl'>10</span>, ncol<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>=</span> <span class='fl'>1</span>
-<span class='va'>r</span><span class='op'>[</span><span class='fl'>51</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>2</span>
-<span class='va'>r</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>3</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>ratify</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-
-<span class='va'>rat</span> <span class='op'>&lt;-</span> <span class='fu'>levels</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-<span class='va'>rat</span><span class='op'>$</span><span class='va'>landcover</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Pine"</span>, <span class='st'>"Oak"</span>, <span class='st'>"Meadow"</span><span class='op'>)</span>
-<span class='va'>rat</span><span class='op'>$</span><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>,<span class='fl'>25</span>,<span class='fl'>30</span><span class='op'>)</span>
-<span class='fu'>levels</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>rat</span>
-<span class='va'>r</span>
-</div><div class='output co'>#&gt; class      : RasterLayer 
-#&gt; dimensions : 10, 10, 100  (nrow, ncol, ncell)
-#&gt; resolution : 36, 18  (x, y)
-#&gt; extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#&gt; crs        : +proj=longlat +datum=WGS84 +no_defs 
-#&gt; source     : memory
-#&gt; names      : layer 
-#&gt; values     : 1, 3  (min, max)
-#&gt; attributes :
-#&gt;  ID landcover code
-#&gt;   1      Pine   12
-#&gt;   2       Oak   25
-#&gt;   3    Meadow   30
-#&gt; </div><div class='input'>
-<span class='co'># extract values for some cells</span>
-<span class='va'>i</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extract.html'>extract</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>, <span class='fl'>25</span>,<span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>i</span>
-</div><div class='output co'>#&gt; [1] 1 1 3 2</div><div class='input'><span class='co'># get the attribute values for these cells</span>
-<span class='fu'>factorValues</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>i</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   landcover code
-#&gt; 1      Pine   12
-#&gt; 2      Pine   12
-#&gt; 3    Meadow   30
-#&gt; 4       Oak   25</div><div class='input'>
-<span class='co'># write to file:</span>
-<span class='co'># rr &lt;- writeRaster(r, rasterTmpFile(), overwrite=TRUE)</span>
-<span class='co'># rr</span>
-
-<span class='co'># create a single-layer factor </span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>deratify</span><span class='op'>(</span><span class='va'>r</span>, <span class='st'>"landcover"</span><span class='op'>)</span>
-<span class='va'>x</span>
-</div><div class='output co'>#&gt; class      : RasterLayer 
-#&gt; dimensions : 10, 10, 100  (nrow, ncol, ncell)
-#&gt; resolution : 36, 18  (x, y)
-#&gt; extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#&gt; crs        : +proj=longlat +datum=WGS84 +no_defs 
-#&gt; source     : memory
-#&gt; names      : landcover 
-#&gt; values     : 1, 3  (min, max)
-#&gt; attributes :
-#&gt;  ID landcover
-#&gt;   1      Pine
-#&gt;   2       Oak
-#&gt;   3    Meadow
-#&gt; </div><div class='input'><span class='fu'>is.factor</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>levels</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [[1]]
-#&gt;   ID landcover
-#&gt; 1  1      Pine
-#&gt; 2  2       Oak
-#&gt; 3  3    Meadow
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrow<span class='op'>=</span><span class='fl'>10</span>, ncol<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>10</span></span>
+<span class='r-in'><span class='fu'>is.factor</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] FALSE</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'>as.factor</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>is.factor</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>levels</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>x</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    ID</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1   0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2   1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 10</span>
+<span class='r-in'><span class='va'>x</span><span class='op'>$</span><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>10</span><span class='op'>:</span><span class='fl'>20</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'>levels</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>x</span></span>
+<span class='r-in'><span class='fu'>levels</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    ID code</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1   0    j</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2   1    k</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3   2    l</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   3    m</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5   4    n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6   5    o</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7   6    p</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8   7    q</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9   8    r</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10  9    s</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 10    t</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='va'>f</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : RasterLayer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dimensions : 10, 10, 100  (nrow, ncol, ncell)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> resolution : 36, 18  (x, y)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> source     : memory</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> names      : layer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> values     : 0, 10  (min, max)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attributes :</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        ID code</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  from:  0    j</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   to : 10    t</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrow<span class='op'>=</span><span class='fl'>10</span>, ncol<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>=</span> <span class='fl'>1</span></span>
+<span class='r-in'><span class='va'>r</span><span class='op'>[</span><span class='fl'>51</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>2</span></span>
+<span class='r-in'><span class='va'>r</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>3</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>ratify</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>rat</span> <span class='op'>&lt;-</span> <span class='fu'>levels</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>rat</span><span class='op'>$</span><span class='va'>landcover</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Pine"</span>, <span class='st'>"Oak"</span>, <span class='st'>"Meadow"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>rat</span><span class='op'>$</span><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>,<span class='fl'>25</span>,<span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>levels</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>rat</span></span>
+<span class='r-in'><span class='va'>r</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : RasterLayer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dimensions : 10, 10, 100  (nrow, ncol, ncell)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> resolution : 36, 18  (x, y)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> source     : memory</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> names      : layer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> values     : 1, 3  (min, max)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attributes :</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  ID landcover code</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1      Pine   12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2       Oak   25</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   3    Meadow   30</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># extract values for some cells</span></span>
+<span class='r-in'><span class='va'>i</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extract.html'>extract</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>, <span class='fl'>25</span>,<span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>i</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 1 3 2</span>
+<span class='r-in'><span class='co'># get the attribute values for these cells</span></span>
+<span class='r-in'><span class='fu'>factorValues</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>i</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   landcover code</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1      Pine   12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2      Pine   12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3    Meadow   30</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4       Oak   25</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># write to file:</span></span>
+<span class='r-in'><span class='co'># rr &lt;- writeRaster(r, rasterTmpFile(), overwrite=TRUE)</span></span>
+<span class='r-in'><span class='co'># rr</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># create a single-layer factor </span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>deratify</span><span class='op'>(</span><span class='va'>r</span>, <span class='st'>"landcover"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : RasterLayer </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dimensions : 10, 10, 100  (nrow, ncol, ncell)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> resolution : 36, 18  (x, y)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> source     : memory</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> names      : landcover </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> values     : 1, 3  (min, max)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attributes :</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  ID landcover</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1      Pine</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2       Oak</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   3    Meadow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>is.factor</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-in'><span class='fu'>levels</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ID landcover</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  1      Pine</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  2       Oak</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  3    Meadow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -164,12 +164,12 @@ If two <code>Spatial</code> vector type objects are provided, the distances betw
 <p>See the <code>gdistance</code> package for more advanced distances, and the <code>geosphere</code> package for great-circle distances (and more) between points in longitude/latitude coordinates.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>36</span>,nrow<span class='op'>=</span><span class='fl'>18</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
-<span class='va'>r</span><span class='op'>[</span><span class='fl'>500</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1</span>
-<span class='va'>dist</span> <span class='op'>&lt;-</span> <span class='fu'>distance</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> 
-<span class='co'>#plot(dist / 1000)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>36</span>,nrow<span class='op'>=</span><span class='fl'>18</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span></span>
+<span class='r-in'><span class='va'>r</span><span class='op'>[</span><span class='fl'>500</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>1</span></span>
+<span class='r-in'><span class='va'>dist</span> <span class='op'>&lt;-</span> <span class='fu'>distance</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> </span>
+<span class='r-in'><span class='co'>#plot(dist / 1000)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

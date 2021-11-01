@@ -168,42 +168,47 @@ This function has replaced function &quot;expand&quot; (to avoid a name conflict
     <div class='dont-index'><p><code><a href='crop.html'>crop</a></code>, <code><a href='merge.html'>merge</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>xmn<span class='op'>=</span><span class='op'>-</span><span class='fl'>150</span>, xmx<span class='op'>=</span><span class='op'>-</span><span class='fl'>120</span>, ymx<span class='op'>=</span><span class='fl'>60</span>, ymn<span class='op'>=</span><span class='fl'>30</span>, ncol<span class='op'>=</span><span class='fl'>36</span>, nrow<span class='op'>=</span><span class='fl'>18</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>180</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>90</span><span class='op'>)</span>
-<span class='va'>re</span> <span class='op'>&lt;-</span> <span class='fu'>extend</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>e</span><span class='op'>)</span>
-
-<span class='co'># extend with a number of rows and columns (at each side)</span>
-<span class='va'>re2</span> <span class='op'>&lt;-</span> <span class='fu'>extend</span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># Extent object</span>
-<span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='va'>e</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -150 
-#&gt; xmax       : -120 
-#&gt; ymin       : 30 
-#&gt; ymax       : 60 </div><div class='input'><span class='fu'>extend</span><span class='op'>(</span><span class='va'>e</span>, <span class='fl'>10</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -160 
-#&gt; xmax       : -110 
-#&gt; ymin       : 20 
-#&gt; ymax       : 70 </div><div class='input'><span class='fu'>extend</span><span class='op'>(</span><span class='va'>e</span>, <span class='fl'>10</span>, <span class='op'>-</span><span class='fl'>10</span>, <span class='fl'>0</span>, <span class='fl'>20</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -160 
-#&gt; xmax       : -110 
-#&gt; ymin       : 20 
-#&gt; ymax       : 70 </div><div class='input'><span class='va'>e</span> <span class='op'>+</span> <span class='fl'>10</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -155 
-#&gt; xmax       : -115 
-#&gt; ymin       : 25 
-#&gt; ymax       : 65 </div><div class='input'><span class='va'>e</span> <span class='op'>*</span> <span class='fl'>2</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -165 
-#&gt; xmax       : -105 
-#&gt; ymin       : 15 
-#&gt; ymax       : 75 </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>xmn<span class='op'>=</span><span class='op'>-</span><span class='fl'>150</span>, xmx<span class='op'>=</span><span class='op'>-</span><span class='fl'>120</span>, ymx<span class='op'>=</span><span class='fl'>60</span>, ymn<span class='op'>=</span><span class='fl'>30</span>, ncol<span class='op'>=</span><span class='fl'>36</span>, nrow<span class='op'>=</span><span class='fl'>18</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>180</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>90</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>re</span> <span class='op'>&lt;-</span> <span class='fu'>extend</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>e</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># extend with a number of rows and columns (at each side)</span></span>
+<span class='r-in'><span class='va'>re2</span> <span class='op'>&lt;-</span> <span class='fu'>extend</span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Extent object</span></span>
+<span class='r-in'><span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>e</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -150 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : -120 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 30 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 60 </span>
+<span class='r-in'><span class='fu'>extend</span><span class='op'>(</span><span class='va'>e</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -160 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : -110 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 70 </span>
+<span class='r-in'><span class='fu'>extend</span><span class='op'>(</span><span class='va'>e</span>, <span class='fl'>10</span>, <span class='op'>-</span><span class='fl'>10</span>, <span class='fl'>0</span>, <span class='fl'>20</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -160 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : -110 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 70 </span>
+<span class='r-in'><span class='va'>e</span> <span class='op'>+</span> <span class='fl'>10</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -155 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : -115 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 25 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 65 </span>
+<span class='r-in'><span class='va'>e</span> <span class='op'>*</span> <span class='fl'>2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -165 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : -105 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 15 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 75 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

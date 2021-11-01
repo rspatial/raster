@@ -138,7 +138,7 @@
     </tr>
     <tr>
       <th>labels</th>
-      <td><p>character. Optional. Vector of labels with <code><a href='https://rdrr.io/r/base/length.html'>length(x)</a></code> or a variable name from <code><a href='names.html'>names(x)</a></code></p></td>
+      <td><p>character. Optional. Vector of labels with <code>length(x)</code> or a variable name from <code>names(x)</code></p></td>
     </tr>
     <tr>
       <th>digits</th>
@@ -163,17 +163,20 @@
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/graphics/text.html'>text</a>, <a href='plot.html'>plot</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrows<span class='op'>=</span><span class='fl'>4</span>, ncols<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'>text</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='img'><img src='text-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'>text</span><span class='op'>(</span><span class='va'>r</span>, halo<span class='op'>=</span><span class='cn'>TRUE</span>, hc<span class='op'>=</span><span class='st'>'blue'</span>, col<span class='op'>=</span><span class='st'>'white'</span>, hw<span class='op'>=</span><span class='fl'>0.2</span><span class='op'>)</span>
-</div><div class='img'><img src='text-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>r</span>, col<span class='op'>=</span><span class='fu'>bpy.colors</span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'>text</span><span class='op'>(</span><span class='va'>r</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>&lt;</span><span class='fl'>5</span> <span class='op'>|</span> <span class='va'>x</span><span class='op'>&gt;</span><span class='fl'>12</span><span class='op'>}</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'red'</span>, <span class='st'>'white'</span><span class='op'>)</span>, vfont<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sans serif"</span>, <span class='st'>"bold"</span><span class='op'>)</span>, cex<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-</div><div class='img'><img src='text-3.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrows<span class='op'>=</span><span class='fl'>4</span>, ncols<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>text</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='text-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>text</span><span class='op'>(</span><span class='va'>r</span>, halo<span class='op'>=</span><span class='cn'>TRUE</span>, hc<span class='op'>=</span><span class='st'>'blue'</span>, col<span class='op'>=</span><span class='st'>'white'</span>, hw<span class='op'>=</span><span class='fl'>0.2</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='text-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>r</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/bpy.colors.html'>bpy.colors</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>text</span><span class='op'>(</span><span class='va'>r</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>&lt;</span><span class='fl'>5</span> <span class='op'>|</span> <span class='va'>x</span><span class='op'>&gt;</span><span class='fl'>12</span><span class='op'>}</span>, col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'red'</span>, <span class='st'>'white'</span><span class='op'>)</span>, vfont<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sans serif"</span>, <span class='st'>"bold"</span><span class='op'>)</span>, cex<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='text-3.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

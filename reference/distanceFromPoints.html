@@ -157,15 +157,16 @@ The distance unit is in meters if the coordinate reference system (crs) of the R
     <div class='dont-index'><p><code><a href='projection.html'>crs</a></code>, <code><a href='distance.html'>distance</a></code>,  <code><a href='gridDistance.html'>gridDistance</a></code>,  <code><a href='pointDistance.html'>pointDistance</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>36</span>,nrow<span class='op'>=</span><span class='fl'>18</span><span class='op'>)</span>
-<span class='va'>xy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span>
-<span class='va'>d1</span> <span class='op'>&lt;-</span> <span class='fu'>distanceFromPoints</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>xy</span><span class='op'>)</span> 
-<span class='fu'><a href='projection.html'>crs</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>=</span> <span class='st'>'+proj=utm +zone=12 +datum=WGS84'</span>
-<span class='va'>d2</span> <span class='op'>&lt;-</span> <span class='fu'>distanceFromPoints</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>xy</span><span class='op'>)</span> 
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>d1</span><span class='op'>)</span>
-<span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>d2</span><span class='op'>)</span>
-</div><div class='img'><img src='distanceFromPoints-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>36</span>,nrow<span class='op'>=</span><span class='fl'>18</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>xy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>d1</span> <span class='op'>&lt;-</span> <span class='fu'>distanceFromPoints</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>xy</span><span class='op'>)</span> </span>
+<span class='r-in'><span class='fu'><a href='projection.html'>crs</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>=</span> <span class='st'>'+proj=utm +zone=12 +datum=WGS84'</span></span>
+<span class='r-in'><span class='va'>d2</span> <span class='op'>&lt;-</span> <span class='fu'>distanceFromPoints</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>xy</span><span class='op'>)</span> </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>d1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='plot.html'>plot</a></span><span class='op'>(</span><span class='va'>d2</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='distanceFromPoints-1.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -121,7 +121,7 @@ Function tmpDir returns the location of the temporary files" />
     <p>Set, inspect, reset, save a number of global options used by the raster package.</p>
 <p>Most of these options are used when writing files to disk. They can be ignored by specific functions if the corresponding argument is provided as an argument to these functions.</p>
 <p>The default location is returned by <code>rasterTmpDir</code>. It is the same as that of the R temp directory but you can change it (for the current session) with <code>rasterOptions(tmpdir="path")</code>.</p>
-<p>To permanently set any of these options, you can add them to <code>&lt;your R installation&gt;/etc/Rprofile.site&gt;</code>. For example, to change the default directory used to save temporary files, add a line like this: <code><a href='https://rdrr.io/r/base/options.html'>options(rasterTmpDir='c:/temp/')</a></code> to that file. All temporary raster files in that folder that are older than 24 hrs are deleted when the raster package is loaded.</p>
+<p>To permanently set any of these options, you can add them to <code>&lt;your R installation&gt;/etc/Rprofile.site&gt;</code>. For example, to change the default directory used to save temporary files, add a line like this: <code>options(rasterTmpDir='c:/temp/')</code> to that file. All temporary raster files in that folder that are older than 24 hrs are deleted when the raster package is loaded.</p>
 <p>Function <code>tmpDir</code> returns the location of the temporary files</p>
     </div>
 
@@ -217,11 +217,11 @@ Function tmpDir returns the location of the temporary files" />
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/options.html'>options</a></code>, <code><a href='rasterTmpFile.html'>rasterTmpFile</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>rasterOptions</span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'>rasterOptions</span><span class='op'>(</span>chunksize<span class='op'>=</span><span class='fl'>2e+07</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'>rasterOptions</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>rasterOptions</span><span class='op'>(</span>chunksize<span class='op'>=</span><span class='fl'>2e+07</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

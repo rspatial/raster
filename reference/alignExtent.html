@@ -147,26 +147,29 @@
     <div class='dont-index'><p><code><a href='extent.html'>extent</a></code>, <code><a href='drawExtent.html'>drawExtent</a></code>, <code><a href='Extent-class.html'>Extent-class</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>10.1</span>, <span class='fl'>9.9</span>, <span class='op'>-</span><span class='fl'>20.1</span>, <span class='fl'>19.9</span><span class='op'>)</span>
-<span class='va'>ea</span> <span class='op'>&lt;-</span> <span class='fu'>alignExtent</span><span class='op'>(</span><span class='va'>e</span>, <span class='va'>r</span><span class='op'>)</span>
-<span class='va'>e</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -10.1 
-#&gt; xmax       : 9.9 
-#&gt; ymin       : -20.1 
-#&gt; ymax       : 19.9 </div><div class='input'><span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -180 
-#&gt; xmax       : 180 
-#&gt; ymin       : -90 
-#&gt; ymax       : 90 </div><div class='input'><span class='va'>ea</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -10 
-#&gt; xmax       : 10 
-#&gt; ymin       : -20 
-#&gt; ymax       : 20 </div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>10.1</span>, <span class='fl'>9.9</span>, <span class='op'>-</span><span class='fl'>20.1</span>, <span class='fl'>19.9</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ea</span> <span class='op'>&lt;-</span> <span class='fu'>alignExtent</span><span class='op'>(</span><span class='va'>e</span>, <span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>e</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -10.1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 9.9 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : -20.1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 19.9 </span>
+<span class='r-in'><span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -180 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 180 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : -90 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 90 </span>
+<span class='r-in'><span class='va'>ea</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : -20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 20 </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

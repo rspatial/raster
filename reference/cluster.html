@@ -200,59 +200,59 @@ Among other functions, it does _not_ work with merge, crop, mosaic, (dis)aggrega
     <p>Matteo Mattiuzzi and Robert J. Hijmans</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># set up the cluster object for parallel computing</span>
-<span class='fu'>beginCluster</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>sqrt</span>, verbose<span class='op'>=</span><span class='cn'>T</span><span class='op'>)</span>
-
-<span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='calc.html'>calc</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>sqrt</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>f1</span><span class='op'>)</span>
-
-<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>2</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>3</span><span class='op'>)</span>
-<span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>d</span>,<span class='va'>e</span>,<span class='va'>f</span><span class='op'>)</span> <span class='op'>(</span><span class='va'>d</span> <span class='op'>+</span> <span class='va'>e</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='va'>f</span> <span class='op'>*</span> <span class='va'>param</span><span class='op'>)</span>
-<span class='va'>param</span> <span class='op'>&lt;-</span> <span class='fl'>122</span>
-<span class='va'>ov</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>overlay</span>, args<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>f2</span><span class='op'>)</span>, export<span class='op'>=</span><span class='st'>'param'</span><span class='op'>)</span>
-
-<span class='va'>pts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>, <span class='fl'>45</span>,<span class='fl'>45</span><span class='op'>)</span>, ncol<span class='op'>=</span><span class='fl'>2</span>, byrow<span class='op'>=</span><span class='cn'>T</span><span class='op'>)</span>
-<span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>distanceFromPoints</span>, args<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>xy<span class='op'>=</span><span class='va'>pts</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.25</span>, <span class='fl'>1</span>,  <span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>2</span>,  <span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>m</span>, ncol<span class='op'>=</span><span class='fl'>3</span>, byrow<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>rc1</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>reclassify</span>, args<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>rcl<span class='op'>=</span><span class='va'>m</span>, right<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>, 
-               filename<span class='op'>=</span><span class='fu'><a href='rasterTmpFile.html'>rasterTmpFile</a></span><span class='op'>(</span><span class='op'>)</span>, datatype<span class='op'>=</span><span class='st'>'INT2S'</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='co'># equivalent to:</span>
-<span class='va'>rc2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='reclassify.html'>reclassify</a></span><span class='op'>(</span><span class='va'>r</span>, rcl<span class='op'>=</span><span class='va'>m</span>, right<span class='op'>=</span><span class='cn'>FALSE</span>, filename<span class='op'>=</span><span class='fu'><a href='rasterTmpFile.html'>rasterTmpFile</a></span><span class='op'>(</span><span class='op'>)</span>, datatype<span class='op'>=</span><span class='st'>'INT2S'</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-
-
-<span class='co'># example with the calc function</span>
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
-<span class='va'>f3</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>+</span><span class='va'>a</span>
-
-<span class='va'>z1</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>calc</span>, args<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>f3</span><span class='op'>)</span>, export<span class='op'>=</span><span class='st'>'a'</span><span class='op'>)</span>
-
-<span class='co'># for some raster functions that use another function as an argument </span>
-<span class='co'># you can write your own parallel function instead of using clusterR</span>
-<span class='co'># get cluster object created with beginCluster</span>
-<span class='va'>cl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Programming.html'>getCluster</a></span><span class='op'>(</span><span class='op'>)</span>  
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>parallel</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/parallel/clusterApply.html'>clusterExport</a></span><span class='op'>(</span><span class='va'>cl</span>, <span class='st'>"a"</span><span class='op'>)</span>
-<span class='va'>z2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='calc.html'>calc</a></span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span> <span class='fu'><a href='https://rdrr.io/r/parallel/clusterApply.html'>parApply</a></span><span class='op'>(</span><span class='va'>cl</span>, <span class='va'>x</span>, <span class='fl'>1</span>, <span class='va'>f3</span><span class='op'>)</span><span class='op'>}</span> <span class='op'>)</span>
-<span class='co'># set flag that cluster is available again</span>
-<span class='fu'><a href='Programming.html'>returnCluster</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='co'>#</span>
-
-<span class='co'># done with cluster object    </span>
-<span class='fu'>endCluster</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># set up the cluster object for parallel computing</span></span>
+<span class='r-in'><span class='fu'>beginCluster</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>sqrt</span>, verbose<span class='op'>=</span><span class='cn'>T</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='calc.html'>calc</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>sqrt</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>f1</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>2</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>d</span>,<span class='va'>e</span>,<span class='va'>f</span><span class='op'>)</span> <span class='op'>(</span><span class='va'>d</span> <span class='op'>+</span> <span class='va'>e</span><span class='op'>)</span> <span class='op'>/</span> <span class='op'>(</span><span class='va'>f</span> <span class='op'>*</span> <span class='va'>param</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>param</span> <span class='op'>&lt;-</span> <span class='fl'>122</span></span>
+<span class='r-in'><span class='va'>ov</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>overlay</span>, args<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>f2</span><span class='op'>)</span>, export<span class='op'>=</span><span class='st'>'param'</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>pts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>, <span class='fl'>45</span>,<span class='fl'>45</span><span class='op'>)</span>, ncol<span class='op'>=</span><span class='fl'>2</span>, byrow<span class='op'>=</span><span class='cn'>T</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>distanceFromPoints</span>, args<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>xy<span class='op'>=</span><span class='va'>pts</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.25</span>, <span class='fl'>1</span>,  <span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>2</span>,  <span class='fl'>0.5</span>, <span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>m</span>, ncol<span class='op'>=</span><span class='fl'>3</span>, byrow<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>rc1</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>reclassify</span>, args<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>rcl<span class='op'>=</span><span class='va'>m</span>, right<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>, </span>
+<span class='r-in'>               filename<span class='op'>=</span><span class='fu'><a href='rasterTmpFile.html'>rasterTmpFile</a></span><span class='op'>(</span><span class='op'>)</span>, datatype<span class='op'>=</span><span class='st'>'INT2S'</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># equivalent to:</span></span>
+<span class='r-in'><span class='va'>rc2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='reclassify.html'>reclassify</a></span><span class='op'>(</span><span class='va'>r</span>, rcl<span class='op'>=</span><span class='va'>m</span>, right<span class='op'>=</span><span class='cn'>FALSE</span>, filename<span class='op'>=</span><span class='fu'><a href='rasterTmpFile.html'>rasterTmpFile</a></span><span class='op'>(</span><span class='op'>)</span>, datatype<span class='op'>=</span><span class='st'>'INT2S'</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># example with the calc function</span></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>10</span></span>
+<span class='r-in'><span class='va'>f3</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>+</span><span class='va'>a</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>z1</span> <span class='op'>&lt;-</span> <span class='fu'>clusterR</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>calc</span>, args<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>fun<span class='op'>=</span><span class='va'>f3</span><span class='op'>)</span>, export<span class='op'>=</span><span class='st'>'a'</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># for some raster functions that use another function as an argument </span></span>
+<span class='r-in'><span class='co'># you can write your own parallel function instead of using clusterR</span></span>
+<span class='r-in'><span class='co'># get cluster object created with beginCluster</span></span>
+<span class='r-in'><span class='va'>cl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='Programming.html'>getCluster</a></span><span class='op'>(</span><span class='op'>)</span>  </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>parallel</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/parallel/clusterApply.html'>clusterExport</a></span><span class='op'>(</span><span class='va'>cl</span>, <span class='st'>"a"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='calc.html'>calc</a></span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span> <span class='fu'><a href='https://rdrr.io/r/parallel/clusterApply.html'>parApply</a></span><span class='op'>(</span><span class='va'>cl</span>, <span class='va'>x</span>, <span class='fl'>1</span>, <span class='va'>f3</span><span class='op'>)</span><span class='op'>}</span> <span class='op'>)</span></span>
+<span class='r-in'><span class='co'># set flag that cluster is available again</span></span>
+<span class='r-in'><span class='fu'><a href='Programming.html'>returnCluster</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'>#</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># done with cluster object    </span></span>
+<span class='r-in'><span class='fu'>endCluster</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -119,7 +119,7 @@ If a single mutli-layer object is provided, its layers are treated as individual
     <div class="ref-description">
     <p>Create a new Raster* object, based on two or more Raster* objects. (You can also use a single object, but perhaps <code><a href='calc.html'>calc</a></code> is what you are looking for in that case).</p>
 <p>You should supply a function <code>fun</code> to set the way that the RasterLayers are combined. The number of arguments in the function must match the number of Raster objects (or take any number). For example, if you combine two RasterLayers you could use multiply: <code>fun=function(x,y){return(x*y)}</code> percentage: <code>fun=function(x,y){return(100 * x / y)}</code>. If you combine three layers you could use <code>fun=function(x,y,z){return((x + y) * z)}</code></p>
-<p>Note that the function must work for vectors (not only for single numbers). That is, it must return the same number of elements as its input vectors. Alternatively, you can also supply a function such as <code>sum</code>, that takes <code>n</code> arguments (as <code>'...'</code>), and perhaps also has a <code>na.rm</code> argument, like in <code><a href='https://rdrr.io/r/base/sum.html'>sum(..., na.rm)</a></code>.</p>
+<p>Note that the function must work for vectors (not only for single numbers). That is, it must return the same number of elements as its input vectors. Alternatively, you can also supply a function such as <code>sum</code>, that takes <code>n</code> arguments (as <code>'...'</code>), and perhaps also has a <code>na.rm</code> argument, like in <code>sum(..., na.rm)</code>.</p>
 <p>If a single mutli-layer object is provided, its layers are treated as individual RasterLayer objects if the argument <code>unstack=TRUE</code> is used. If multiple objects are provided, they should have the same number of layers, or it should be possible to recycle them (e.g., 1, 3, and 9 layers, which would return a RasterBrick with 9 layers).</p>
     </div>
 
@@ -169,7 +169,7 @@ If a single mutli-layer object is provided, its layers are treated as individual
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Instead of the overlay function you can also use arithmetic functions such as <code>*, /, +, -</code> with Raster objects (see examples). In that case you cannot specify an output filename. Moreover, the overlay function should be more efficient when using large data files that cannot be loaded into memory, as the use of the complex arithmetic functions might lead to the creation of many temporary files.</p>
-<p>While you can supply functions such as <code>sum</code> or <code>mean</code>, it would be more direct to use the Raster* objects as arguments to those functions (e.g. <code><a href='https://rdrr.io/r/base/sum.html'>sum(r1,r2,r3)</a></code>)</p>
+<p>While you can supply functions such as <code>sum</code> or <code>mean</code>, it would be more direct to use the Raster* objects as arguments to those functions (e.g. <code>sum(r1,r2,r3)</code>)</p>
 <p>See <code><a href='rasterize.html'>rasterize</a></code> and <code><a href='extract.html'>extract</a></code> for "overlays" involving Raster* objects and polygons, lines, or points.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -179,44 +179,44 @@ If a single mutli-layer object is provided, its layers are treated as individual
     <div class='dont-index'><p><code> <a href='calc.html'>calc</a>,  <a href='Arith-methods.html'>Arith-methods</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>10</span>, nrow<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>r1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='initialize.html'>init</a></span><span class='op'>(</span><span class='va'>r</span>, fun<span class='op'>=</span><span class='va'>runif</span><span class='op'>)</span>
-<span class='va'>r2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='initialize.html'>init</a></span><span class='op'>(</span><span class='va'>r</span>, fun<span class='op'>=</span><span class='va'>runif</span><span class='op'>)</span>
-<span class='va'>r3</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span><span class='op'>)</span><span class='op'>{</span><span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span>
-
-<span class='co'># long version for multiplication</span>
-<span class='va'>r4</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span><span class='op'>)</span><span class='op'>{</span><span class='op'>(</span><span class='va'>x</span><span class='op'>*</span><span class='va'>y</span><span class='op'>)</span><span class='op'>}</span> <span class='op'>)</span>
-
-<span class='co'>#use the individual layers of a RasterStack to get a RasterLayer</span>
-<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span><span class='op'>)</span>
-<span class='va'>r5</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span><span class='op'>)</span> <span class='va'>x</span><span class='op'>*</span><span class='va'>y</span> <span class='op'>)</span>
-<span class='co'># equivalent to</span>
-<span class='va'>r5c</span> <span class='op'>&lt;-</span> <span class='fu'><a href='calc.html'>calc</a></span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>*</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>)</span>
-
-
-<span class='co'>#Combine RasterStack and RasterLayer objects (s2 has four layers. </span>
-<span class='co'># r1 (one layer) and s (two layers) are recycled) </span>
-<span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, <span class='va'>r3</span>, <span class='va'>r4</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>s</span>, <span class='va'>s2</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span>,<span class='va'>z</span><span class='op'>)</span><span class='op'>{</span><span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>*</span><span class='va'>y</span><span class='op'>*</span><span class='va'>z</span><span class='op'>)</span><span class='op'>}</span> <span class='op'>)</span>
-
-<span class='co'># use a single RasterLayer (same as calc function)</span>
-<span class='va'>r6</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, fun<span class='op'>=</span><span class='va'>sqrt</span><span class='op'>)</span>
-
-<span class='co'># multiplication with more than two layers </span>
-<span class='co'># (make sure the number of RasterLayers matches the arguments of 'fun')</span>
-<span class='va'>r7</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, <span class='va'>r3</span>, <span class='va'>r4</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>a</span>,<span class='va'>b</span>,<span class='va'>c</span>,<span class='va'>d</span><span class='op'>)</span><span class='op'>{</span><span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>*</span><span class='va'>b</span><span class='op'>+</span><span class='va'>c</span><span class='op'>*</span><span class='va'>d</span><span class='op'>)</span><span class='op'>}</span> <span class='op'>)</span>  
-<span class='co'># equivalent function, efficient if values can be loaded in memory</span>
-<span class='va'>r8</span> <span class='op'>&lt;-</span> <span class='va'>r1</span> <span class='op'>*</span> <span class='va'>r2</span> <span class='op'>+</span> <span class='va'>r3</span> <span class='op'>*</span> <span class='va'>r4</span>
-
-<span class='co'># Also works with multi-layer objects. </span>
-<span class='va'>s1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, <span class='va'>r3</span><span class='op'>)</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>s1</span>, <span class='va'>s1</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span><span class='op'>)</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span><span class='op'>+</span><span class='fl'>5</span><span class='op'>)</span>
-
-<span class='co'># in this case the first layer of the shorter object is recycled.</span>
-<span class='co'># i.e., s2 is treated as stack(r1, r3, r1)</span>
-<span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r3</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>s1</span>, <span class='va'>s2</span>, fun<span class='op'>=</span><span class='va'>sum</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>10</span>, nrow<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='initialize.html'>init</a></span><span class='op'>(</span><span class='va'>r</span>, fun<span class='op'>=</span><span class='va'>runif</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='initialize.html'>init</a></span><span class='op'>(</span><span class='va'>r</span>, fun<span class='op'>=</span><span class='va'>runif</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r3</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span><span class='op'>)</span><span class='op'>{</span><span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># long version for multiplication</span></span>
+<span class='r-in'><span class='va'>r4</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span><span class='op'>)</span><span class='op'>{</span><span class='op'>(</span><span class='va'>x</span><span class='op'>*</span><span class='va'>y</span><span class='op'>)</span><span class='op'>}</span> <span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#use the individual layers of a RasterStack to get a RasterLayer</span></span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r5</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span><span class='op'>)</span> <span class='va'>x</span><span class='op'>*</span><span class='va'>y</span> <span class='op'>)</span></span>
+<span class='r-in'><span class='co'># equivalent to</span></span>
+<span class='r-in'><span class='va'>r5c</span> <span class='op'>&lt;-</span> <span class='fu'><a href='calc.html'>calc</a></span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>*</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#Combine RasterStack and RasterLayer objects (s2 has four layers. </span></span>
+<span class='r-in'><span class='co'># r1 (one layer) and s (two layers) are recycled) </span></span>
+<span class='r-in'><span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, <span class='va'>r3</span>, <span class='va'>r4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>s</span>, <span class='va'>s2</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span>,<span class='va'>z</span><span class='op'>)</span><span class='op'>{</span><span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>*</span><span class='va'>y</span><span class='op'>*</span><span class='va'>z</span><span class='op'>)</span><span class='op'>}</span> <span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># use a single RasterLayer (same as calc function)</span></span>
+<span class='r-in'><span class='va'>r6</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, fun<span class='op'>=</span><span class='va'>sqrt</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># multiplication with more than two layers </span></span>
+<span class='r-in'><span class='co'># (make sure the number of RasterLayers matches the arguments of 'fun')</span></span>
+<span class='r-in'><span class='va'>r7</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, <span class='va'>r3</span>, <span class='va'>r4</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>a</span>,<span class='va'>b</span>,<span class='va'>c</span>,<span class='va'>d</span><span class='op'>)</span><span class='op'>{</span><span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>*</span><span class='va'>b</span><span class='op'>+</span><span class='va'>c</span><span class='op'>*</span><span class='va'>d</span><span class='op'>)</span><span class='op'>}</span> <span class='op'>)</span>  </span>
+<span class='r-in'><span class='co'># equivalent function, efficient if values can be loaded in memory</span></span>
+<span class='r-in'><span class='va'>r8</span> <span class='op'>&lt;-</span> <span class='va'>r1</span> <span class='op'>*</span> <span class='va'>r2</span> <span class='op'>+</span> <span class='va'>r3</span> <span class='op'>*</span> <span class='va'>r4</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Also works with multi-layer objects. </span></span>
+<span class='r-in'><span class='va'>s1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span>, <span class='va'>r3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>s1</span>, <span class='va'>s1</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>,<span class='va'>y</span><span class='op'>)</span><span class='va'>x</span><span class='op'>+</span><span class='va'>y</span><span class='op'>+</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># in this case the first layer of the shorter object is recycled.</span></span>
+<span class='r-in'><span class='co'># i.e., s2 is treated as stack(r1, r3, r1)</span></span>
+<span class='r-in'><span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'>overlay</span><span class='op'>(</span><span class='va'>s1</span>, <span class='va'>s2</span>, fun<span class='op'>=</span><span class='va'>sum</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

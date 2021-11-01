@@ -163,13 +163,14 @@ Changing the datatype of a Raster* object does not directly affect the way they 
     <p>Raster* object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>dataType</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "FLT4S"</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='st'>'new.grd'</span>, datatype<span class='op'>=</span><span class='st'>'INT2U'</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'>dataType</span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>dataType</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "FLT4S"</span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='st'>'new.grd'</span>, datatype<span class='op'>=</span><span class='st'>'INT2U'</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>dataType</span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

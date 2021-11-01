@@ -156,16 +156,22 @@
     <p>Robert J. Hijmans, inspired by Diethelm Wuertz' rollFun function in the fTrading package</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>movingFun</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='fl'>3</span>, <span class='va'>mean</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] NA  2  3  4  5  6  7  8  9 10 11 NA</div><div class='input'><span class='fu'>movingFun</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='fl'>3</span>, <span class='va'>mean</span>, <span class='st'>'to'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] NA NA  2  3  4  5  6  7  8  9 10 11</div><div class='input'><span class='fu'>movingFun</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='fl'>3</span>, <span class='va'>mean</span>, <span class='st'>'from'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1]  2  3  4  5  6  7  8  9 10 11 NA NA</div><div class='input'><span class='fu'>movingFun</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='fl'>3</span>, <span class='va'>mean</span>, circular<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1]  5  2  3  4  5  6  7  8  9 10 11  8</div><div class='input'>
-<span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>5</span>,<span class='fl'>6</span>,<span class='fl'>7</span>,<span class='fl'>7</span>,<span class='fl'>8</span>,<span class='fl'>9</span>,<span class='cn'>NA</span><span class='op'>)</span>
-<span class='fu'>movingFun</span><span class='op'>(</span><span class='va'>v</span>, n<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1]  NA  NA 1.8 2.4 2.8 3.2 3.4 3.6 4.0 4.4 4.8 5.4 6.0 6.6 7.4  NA  NA  NA</div><div class='input'><span class='fu'>movingFun</span><span class='op'>(</span><span class='va'>v</span>, n<span class='op'>=</span><span class='fl'>5</span>, na.rm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] 1.00 1.50 1.80 2.40 2.80 3.20 3.40 3.60 4.00 4.40 4.80 5.40 6.00 6.60 7.40
-#&gt; [16] 7.75 8.00 8.50</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>movingFun</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='fl'>3</span>, <span class='va'>mean</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] NA  2  3  4  5  6  7  8  9 10 11 NA</span>
+<span class='r-in'><span class='fu'>movingFun</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='fl'>3</span>, <span class='va'>mean</span>, <span class='st'>'to'</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] NA NA  2  3  4  5  6  7  8  9 10 11</span>
+<span class='r-in'><span class='fu'>movingFun</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='fl'>3</span>, <span class='va'>mean</span>, <span class='st'>'from'</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  2  3  4  5  6  7  8  9 10 11 NA NA</span>
+<span class='r-in'><span class='fu'>movingFun</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='fl'>3</span>, <span class='va'>mean</span>, circular<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  5  2  3  4  5  6  7  8  9 10 11  8</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='fl'>4</span>,<span class='fl'>5</span>,<span class='fl'>5</span>,<span class='fl'>6</span>,<span class='fl'>7</span>,<span class='fl'>7</span>,<span class='fl'>8</span>,<span class='fl'>9</span>,<span class='cn'>NA</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>movingFun</span><span class='op'>(</span><span class='va'>v</span>, n<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1]  NA  NA 1.8 2.4 2.8 3.2 3.4 3.6 4.0 4.4 4.8 5.4 6.0 6.6 7.4  NA  NA  NA</span>
+<span class='r-in'><span class='fu'>movingFun</span><span class='op'>(</span><span class='va'>v</span>, n<span class='op'>=</span><span class='fl'>5</span>, na.rm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 1.00 1.50 1.80 2.40 2.80 3.20 3.40 3.60 4.00 4.40 4.80 5.40 6.00 6.60 7.40</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16] 7.75 8.00 8.50</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

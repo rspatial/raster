@@ -171,28 +171,31 @@
     <div class='dont-index'><p><code><a href='getValues.html'>getValues</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>getValuesBlock</span><span class='op'>(</span><span class='va'>r</span>, row<span class='op'>=</span><span class='fl'>100</span>, nrows<span class='op'>=</span><span class='fl'>3</span>, col<span class='op'>=</span><span class='fl'>10</span>, ncols<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
-<span class='va'>b</span> 
-</div><div class='output co'>#&gt;  [1] 415.3237 402.8039 386.8084 363.9359 330.1638 421.1981 406.2414 385.8557
-#&gt;  [9] 355.2898 306.0941 431.7786 414.9258 392.2016 360.3550 314.3130</div><div class='input'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>b</span>, nrow<span class='op'>=</span><span class='fl'>3</span>, ncol<span class='op'>=</span><span class='fl'>5</span>, byrow<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>b</span>
-</div><div class='output co'>#&gt;          [,1]     [,2]     [,3]     [,4]     [,5]
-#&gt; [1,] 415.3237 402.8039 386.8084 363.9359 330.1638
-#&gt; [2,] 421.1981 406.2414 385.8557 355.2898 306.0941
-#&gt; [3,] 431.7786 414.9258 392.2016 360.3550 314.3130</div><div class='input'>
-<span class='va'>logo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='brick.html'>brick</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/rlogo.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>getValuesBlock</span><span class='op'>(</span><span class='va'>logo</span>, row<span class='op'>=</span><span class='fl'>35</span>, nrows<span class='op'>=</span><span class='fl'>3</span>, col<span class='op'>=</span><span class='fl'>50</span>, ncols<span class='op'>=</span><span class='fl'>3</span>, lyrs<span class='op'>=</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       green blue
-#&gt;  [1,]   168  220
-#&gt;  [2,]   176  231
-#&gt;  [3,]   175  226
-#&gt;  [4,]   167  219
-#&gt;  [5,]   176  230
-#&gt;  [6,]   175  226
-#&gt;  [7,]   167  219
-#&gt;  [8,]   176  230
-#&gt;  [9,]   175  224</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'>getValuesBlock</span><span class='op'>(</span><span class='va'>r</span>, row<span class='op'>=</span><span class='fl'>100</span>, nrows<span class='op'>=</span><span class='fl'>3</span>, col<span class='op'>=</span><span class='fl'>10</span>, ncols<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 415.3237 402.8039 386.8084 363.9359 330.1638 421.1981 406.2414 385.8557</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] 355.2898 306.0941 431.7786 414.9258 392.2016 360.3550 314.3130</span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>b</span>, nrow<span class='op'>=</span><span class='fl'>3</span>, ncol<span class='op'>=</span><span class='fl'>5</span>, byrow<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          [,1]     [,2]     [,3]     [,4]     [,5]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] 415.3237 402.8039 386.8084 363.9359 330.1638</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] 421.1981 406.2414 385.8557 355.2898 306.0941</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] 431.7786 414.9258 392.2016 360.3550 314.3130</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>logo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='brick.html'>brick</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/rlogo.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>getValuesBlock</span><span class='op'>(</span><span class='va'>logo</span>, row<span class='op'>=</span><span class='fl'>35</span>, nrows<span class='op'>=</span><span class='fl'>3</span>, col<span class='op'>=</span><span class='fl'>50</span>, ncols<span class='op'>=</span><span class='fl'>3</span>, lyrs<span class='op'>=</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       green blue</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,]   168  220</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,]   176  231</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,]   175  226</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,]   167  219</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,]   176  230</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,]   175  226</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,]   167  219</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,]   176  230</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,]   175  224</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

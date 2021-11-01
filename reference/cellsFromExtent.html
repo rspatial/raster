@@ -153,14 +153,14 @@ extentFromCells returns an Extent object from a Raster* object and cell numbers.
     <div class='dont-index'><p><code><a href='extent.html'>extent</a></code>, <code><a href='cellFrom.html'>cellFromXY</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>bb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span>
-<span class='va'>cells</span> <span class='op'>&lt;-</span> <span class='fu'>cellsFromExtent</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>bb</span><span class='op'>)</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='crop.html'>crop</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>bb</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>cells</span>
-
-<span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'>extentFromCells</span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>50</span><span class='op'>:</span><span class='fl'>55</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>bb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='extent.html'>extent</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cells</span> <span class='op'>&lt;-</span> <span class='fu'>cellsFromExtent</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>bb</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='crop.html'>crop</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>bb</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>cells</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>e</span> <span class='op'>&lt;-</span> <span class='fu'>extentFromCells</span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>50</span><span class='op'>:</span><span class='fl'>55</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

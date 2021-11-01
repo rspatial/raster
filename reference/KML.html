@@ -185,16 +185,16 @@ The function attempts to combine these into a single (and hence more convenient)
     <p>This function was adapted for the raster package by Robert J. Hijmans, with ideas from Tony Fischbach, and based on functions in the maptools package by Duncan Golicher, David Forrest and Roger Bivand.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Meuse data from the sp package</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rasterFromXYZ.html'>rasterFromXYZ</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span>
-<span class='fu'><a href='projection.html'>projection</a></span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>"+init=epsg:28992"</span>           
-<span class='co'># transform to longitude/latitude</span>
-<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='projectRaster.html'>projectRaster</a></span><span class='op'>(</span><span class='va'>b</span>, crs<span class='op'>=</span><span class='st'>"+proj=longlat +datum=WGS84"</span>, method<span class='op'>=</span><span class='st'>'ngb'</span><span class='op'>)</span>
-<span class='fu'>KML</span><span class='op'>(</span><span class='va'>p</span>, file<span class='op'>=</span><span class='st'>'meuse.kml'</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Meuse data from the sp package</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rasterFromXYZ.html'>rasterFromXYZ</a></span><span class='op'>(</span><span class='va'>meuse.grid</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='projection.html'>projection</a></span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>"+init=epsg:28992"</span>           </span>
+<span class='r-in'><span class='co'># transform to longitude/latitude</span></span>
+<span class='r-in'><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='projectRaster.html'>projectRaster</a></span><span class='op'>(</span><span class='va'>b</span>, crs<span class='op'>=</span><span class='st'>"+proj=longlat +datum=WGS84"</span>, method<span class='op'>=</span><span class='st'>'ngb'</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>KML</span><span class='op'>(</span><span class='va'>p</span>, file<span class='op'>=</span><span class='st'>'meuse.kml'</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

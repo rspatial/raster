@@ -177,19 +177,21 @@
     <div class='dont-index'><p><code><a href='sampleRegular.html'>sampleRegular</a>, <a href='sampleStratified.html'>sampleStratified</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span>
- <span class='fu'>sampleRandom</span><span class='op'>(</span><span class='va'>r</span>, size<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] 461.2969 318.2996 351.8303 392.7534 492.7690 243.2765 440.3402 345.6403
-#&gt;  [9] 515.7428 384.0551</div><div class='input'> <span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>)</span>
- <span class='fu'>sampleRandom</span><span class='op'>(</span><span class='va'>s</span>, size<span class='op'>=</span><span class='fl'>5</span>, cells<span class='op'>=</span><span class='cn'>TRUE</span>, sp<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class       : SpatialPointsDataFrame 
-#&gt; features    : 5 
-#&gt; extent      : 178700, 180980, 329740, 333020  (xmin, xmax, ymin, ymax)
-#&gt; crs         : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs 
-#&gt; variables   : 3
-#&gt; names       : cell,           test.1,           test.2 
-#&gt; min values  : 1984, 245.001937866211, 245.001937866211 
-#&gt; max values  : 8502, 433.913879394531, 433.913879394531 </div></pre>
+    <pre class="examples"><span class='r-in'> <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/test.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'> <span class='fu'>sampleRandom</span><span class='op'>(</span><span class='va'>r</span>, size<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 461.2969 318.2996 351.8303 392.7534 492.7690 243.2765 440.3402 345.6403</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] 515.7428 384.0551</span>
+<span class='r-in'> <span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'> <span class='fu'>sampleRandom</span><span class='op'>(</span><span class='va'>s</span>, size<span class='op'>=</span><span class='fl'>5</span>, cells<span class='op'>=</span><span class='cn'>TRUE</span>, sp<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class       : SpatialPointsDataFrame </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> features    : 5 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> extent      : 178700, 180980, 329740, 333020  (xmin, xmax, ymin, ymax)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> crs         : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> variables   : 3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> names       : cell,           test.1,           test.2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> min values  : 1984, 245.001937866211, 245.001937866211 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> max values  : 8502, 433.913879394531, 433.913879394531 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

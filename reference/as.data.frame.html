@@ -181,38 +181,41 @@ The methods for Spatial* objects allow for easy creation of a data.frame with th
     <p>data.frame</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>3</span>, nrow<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>r</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
-<span class='fu'>as.data.frame</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      layer
-#&gt; 1 1.000000
-#&gt; 2 1.414214
-#&gt; 3       NA
-#&gt; 4       NA
-#&gt; 5       NA
-#&gt; 6 2.449490
-#&gt; 7 2.645751
-#&gt; 8 2.828427
-#&gt; 9 3.000000</div><div class='input'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='fu'>as.data.frame</span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    layer.1  layer.2
-#&gt; 1 1.000000 2.000000
-#&gt; 2 1.414214 2.828427
-#&gt; 3       NA       NA
-#&gt; 4       NA       NA
-#&gt; 5       NA       NA
-#&gt; 6 2.449490 4.898979
-#&gt; 7 2.645751 5.291503
-#&gt; 8 2.828427 5.656854
-#&gt; 9 3.000000 6.000000</div><div class='input'><span class='fu'>as.data.frame</span><span class='op'>(</span><span class='va'>s</span>, na.rm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    layer.1  layer.2
-#&gt; 1 1.000000 2.000000
-#&gt; 2 1.414214 2.828427
-#&gt; 6 2.449490 4.898979
-#&gt; 7 2.645751 5.291503
-#&gt; 8 2.828427 5.656854
-#&gt; 9 3.000000 6.000000</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncol<span class='op'>=</span><span class='fl'>3</span>, nrow<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span></span>
+<span class='r-in'><span class='fu'>as.data.frame</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      layer</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 1.000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 1.414214</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 2.449490</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 2.645751</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8 2.828427</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9 3.000000</span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>as.data.frame</span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    layer.1  layer.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 1.000000 2.000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 1.414214 2.828427</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3       NA       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4       NA       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5       NA       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 2.449490 4.898979</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 2.645751 5.291503</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8 2.828427 5.656854</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9 3.000000 6.000000</span>
+<span class='r-in'><span class='fu'>as.data.frame</span><span class='op'>(</span><span class='va'>s</span>, na.rm<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    layer.1  layer.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 1.000000 2.000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 1.414214 2.828427</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 2.449490 4.898979</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 2.645751 5.291503</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8 2.828427 5.656854</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9 3.000000 6.000000</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

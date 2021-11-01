@@ -167,20 +167,20 @@
     <p>RasterLayer or RasterBrick</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>xmx<span class='op'>=</span><span class='op'>-</span><span class='fl'>150</span>, ymn<span class='op'>=</span><span class='fl'>60</span>, ncols<span class='op'>=</span><span class='fl'>30</span>, nrows<span class='op'>=</span><span class='fl'>30</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r1</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r1</span><span class='op'>)</span>
-<span class='va'>r2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>xmn<span class='op'>=</span><span class='op'>-</span><span class='fl'>100</span>, xmx<span class='op'>=</span><span class='op'>-</span><span class='fl'>50</span>, ymx<span class='op'>=</span><span class='fl'>50</span>, ymn<span class='op'>=</span><span class='fl'>30</span><span class='op'>)</span>
-<span class='fu'><a href='resolution.html'>res</a></span><span class='op'>(</span><span class='va'>r2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='resolution.html'>xres</a></span><span class='op'>(</span><span class='va'>r1</span><span class='op'>)</span>, <span class='fu'><a href='resolution.html'>yres</a></span><span class='op'>(</span><span class='va'>r1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r2</span><span class='op'>)</span>
-<span class='va'>rm</span> <span class='op'>&lt;-</span> <span class='fu'>merge</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span><span class='op'>)</span>
-
-<span class='co'># if you have many RasterLayer objects in a list</span>
-<span class='co'># you can use do.call:</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span><span class='op'>)</span>
-<span class='co'># add arguments such as filename</span>
-<span class='co'># x$filename &lt;- 'test.tif'</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span><span class='op'>(</span><span class='va'>merge</span>, <span class='va'>x</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>xmx<span class='op'>=</span><span class='op'>-</span><span class='fl'>150</span>, ymn<span class='op'>=</span><span class='fl'>60</span>, ncols<span class='op'>=</span><span class='fl'>30</span>, nrows<span class='op'>=</span><span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r1</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>xmn<span class='op'>=</span><span class='op'>-</span><span class='fl'>100</span>, xmx<span class='op'>=</span><span class='op'>-</span><span class='fl'>50</span>, ymx<span class='op'>=</span><span class='fl'>50</span>, ymn<span class='op'>=</span><span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='resolution.html'>res</a></span><span class='op'>(</span><span class='va'>r2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='resolution.html'>xres</a></span><span class='op'>(</span><span class='va'>r1</span><span class='op'>)</span>, <span class='fu'><a href='resolution.html'>yres</a></span><span class='op'>(</span><span class='va'>r1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r2</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>rm</span> <span class='op'>&lt;-</span> <span class='fu'>merge</span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># if you have many RasterLayer objects in a list</span></span>
+<span class='r-in'><span class='co'># you can use do.call:</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>r1</span>, <span class='va'>r2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># add arguments such as filename</span></span>
+<span class='r-in'><span class='co'># x$filename &lt;- 'test.tif'</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span><span class='op'>(</span><span class='va'>merge</span>, <span class='va'>x</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

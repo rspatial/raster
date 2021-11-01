@@ -166,42 +166,45 @@
     <div class='dont-index'><p><code><a href='cellStats.html'>cellStats</a></code>, <code><a href='https://rdrr.io/r/stats/cov.wt.html'>cov.wt</a></code>, <code><a href='weighted.mean.html'>weighted.mean</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='brick.html'>brick</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/rlogo.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>layerStats</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>'pearson'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $`pearson correlation coefficient`
-#&gt;             red     green      blue
-#&gt; red   1.0000000 0.9980961 0.9501633
-#&gt; green 0.9980961 1.0000000 0.9658011
-#&gt; blue  0.9501633 0.9658011 1.0000000
-#&gt; 
-#&gt; $mean
-#&gt;      red    green     blue 
-#&gt; 182.2855 185.3509 192.8046 
-#&gt; </div><div class='input'>
-<span class='fu'>layerStats</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>'cov'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $covariance
-#&gt;            red    green     blue
-#&gt; red   5564.371 5443.405 4993.165
-#&gt; green 5443.405 5345.403 4974.478
-#&gt; blue  4993.165 4974.478 4962.942
-#&gt; 
-#&gt; $mean
-#&gt;      red    green     blue 
-#&gt; 182.2855 185.3509 192.8046 
-#&gt; </div><div class='input'>
-<span class='co'># weigh by column number</span>
-<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='initialize.html'>init</a></span><span class='op'>(</span><span class='va'>b</span>, v<span class='op'>=</span><span class='st'>'col'</span><span class='op'>)</span>
-<span class='fu'>layerStats</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>'weighted.cov'</span>, w<span class='op'>=</span><span class='va'>w</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $`weigthed covariance`
-#&gt;            red    green     blue
-#&gt; red   5670.750 5536.351 5009.851
-#&gt; green 5536.351 5427.161 4987.092
-#&gt; blue  5009.851 4987.092 4937.007
-#&gt; 
-#&gt; $`weighted mean`
-#&gt;  layer.1  layer.2  layer.3 
-#&gt; 177.5983 181.3521 191.5236 
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='brick.html'>brick</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"external/rlogo.grd"</span>, package<span class='op'>=</span><span class='st'>"raster"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>layerStats</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>'pearson'</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`pearson correlation coefficient`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             red     green      blue</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> red   1.0000000 0.9980961 0.9501633</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> green 0.9980961 1.0000000 0.9658011</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> blue  0.9501633 0.9658011 1.0000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      red    green     blue </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 182.2855 185.3509 192.8046 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>layerStats</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>'cov'</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $covariance</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            red    green     blue</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> red   5564.371 5443.405 4993.165</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> green 5443.405 5345.403 4974.478</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> blue  4993.165 4974.478 4962.942</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      red    green     blue </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 182.2855 185.3509 192.8046 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># weigh by column number</span></span>
+<span class='r-in'><span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='initialize.html'>init</a></span><span class='op'>(</span><span class='va'>b</span>, v<span class='op'>=</span><span class='st'>'col'</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>layerStats</span><span class='op'>(</span><span class='va'>b</span>, <span class='st'>'weighted.cov'</span>, w<span class='op'>=</span><span class='va'>w</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`weigthed covariance`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            red    green     blue</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> red   5670.750 5536.351 5009.851</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> green 5536.351 5427.161 4987.092</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> blue  5009.851 4987.092 4937.007</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $`weighted mean`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  layer.1  layer.2  layer.3 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 177.5983 181.3521 191.5236 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

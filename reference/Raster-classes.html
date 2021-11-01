@@ -141,7 +141,7 @@ These classes are not further described here because users should not need to di
 <p><code>Raster*</code> objects can also be created from SpatialPixels* and SpatialGrid* objects from the sp package using <code>as</code>, or simply with the function <code><a href='raster.html'>raster</a></code>, <code><a href='brick.html'>brick</a></code>, or <code><a href='stack.html'>stack</a></code>. Vice versa, <code>Raster*</code> objects can be coerced into a sp type object with <code>as( , )</code>, e.g. <code>as(x, 'SpatialGridDataFrame')</code> .</p> 
 <p>Common generic methods implemented for these classes include:</p> 
 <p><code>summary</code>, <code>show</code>, <code>dim</code>, and <code>plot, ...</code></p> 
-<p><code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> is implemented for RasterLayer.</p> 
+<p><code>[</code> is implemented for RasterLayer.</p> 
 
 <p>The classes described above inherit from the <code>BasicRaster</code> class which inherits from <code>BasicRaster</code>. The <code>BasicRaster</code> class describes the main properties of a raster such as the number of columns and rows, and it contains an object of the <code>link[raster]{Extent-class}</code> to describe its spatial extent (coordinates). It also holds the 'coordinate reference system' in a slot of class  <code><a href='https://rdrr.io/pkg/sp/man/CRS-class.html'>CRS-class</a></code> defined in the <code>sp</code> package. A <code>BasicRaster</code> cannot contain any raster cell values and is therefore seldomly used.</p>
 <p>The <code>Raster*</code> class inherits from <code>BasicRaster</code>. It is a virtual class; which means that you cannot create an object of this class. It is used only to define methods for all the classes that inherit from it (<code>RasterLayer</code>, <code>RasterStack</code> and <code>RasterBrick</code>). Another virtual class is the <code>RasterStackBrick</code> class. It is formed by a class union of <code>RasterStack</code> and <code>RasterBrick</code>. You cannot make objects of it, but methods defined for objects of this class as arguments will accept objects of the <code>RasterLayer</code> and <code>RasterStack</code> as that argument.</p>
@@ -171,25 +171,26 @@ These classes are not further described here because users should not need to di
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>showClass</span><span class='op'>(</span><span class='st'>"RasterLayer"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Class "RasterLayer" [package "raster"]
-#&gt; 
-#&gt; Slots:
-#&gt;                                                                           
-#&gt; Name:              file             data           legend            title
-#&gt; Class:      .RasterFile .SingleLayerData    .RasterLegend        character
-#&gt;                                                                           
-#&gt; Name:            extent          rotated         rotation            ncols
-#&gt; Class:           Extent          logical        .Rotation          integer
-#&gt;                                                                           
-#&gt; Name:             nrows              crs          history                z
-#&gt; Class:          integer              CRS             list             list
-#&gt; 
-#&gt; Extends: 
-#&gt; Class "Raster", directly
-#&gt; Class "BasicRaster", by class "Raster", distance 2
-#&gt; 
-#&gt; Known Subclasses: "RasterLayerSparse"</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>showClass</span><span class='op'>(</span><span class='st'>"RasterLayer"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Class "RasterLayer" [package "raster"]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Slots:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Name:              file             data           legend            title</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Class:      .RasterFile .SingleLayerData    .RasterLegend        character</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Name:            extent          rotated         rotation            ncols</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Class:           Extent          logical        .Rotation          integer</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Name:             nrows              crs          history                z</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Class:          integer              CRS             list             list</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Extends: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Class "Raster", directly</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Class "BasicRaster", by class "Raster", distance 2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Known Subclasses: "RasterLayerSparse"</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

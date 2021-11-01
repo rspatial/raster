@@ -143,14 +143,18 @@
 <p>If <code>ext(filename)</code> is used without a <code>value</code> argument, it returns the file extension; otherwise it returns the filename (with new extensions set to <code>value</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='st'>"c:/temp folder/filename.exten sion"</span>
-<span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] ""</div><div class='input'><span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>".txt"</span>
-<span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] ".txt"</div><div class='input'><span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span>, <span class='st'>'.document'</span><span class='op'>)</span>
-<span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] ".document"</div><div class='input'><span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span>, maxchar<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] ""</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='st'>"c:/temp folder/filename.exten sion"</span></span>
+<span class='r-in'><span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+<span class='r-in'><span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>".txt"</span></span>
+<span class='r-in'><span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ".txt"</span>
+<span class='r-in'><span class='va'>fn</span> <span class='op'>&lt;-</span> <span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span>, <span class='st'>'.document'</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ".document"</span>
+<span class='r-in'><span class='fu'>extension</span><span class='op'>(</span><span class='va'>fn</span>, maxchar<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] ""</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

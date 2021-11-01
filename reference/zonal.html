@@ -117,7 +117,7 @@ If a function is used, it should accept a na.rm argument (or at least a ... argu
 
     <div class="ref-description">
     <p>Compute zonal statistics, that is summarized values of a Raster* object for each "zone" defined by a RasterLayer.</p>
-<p>If <code>stat</code> is a true <code>function</code>, <code>zonal</code> will fail (gracefully) for very large Raster objects, but it will in most cases work for functions that can be defined as by a character argument ('mean', 'sd', 'min', 'max', or 'sum'). In addition you can use 'count' to count the number of cells in each zone (only useful with <code>na.rm=TRUE</code>, otherwise <code><a href='freq.html'>freq(z)</a></code> would be more direct.</p>
+<p>If <code>stat</code> is a true <code>function</code>, <code>zonal</code> will fail (gracefully) for very large Raster objects, but it will in most cases work for functions that can be defined as by a character argument ('mean', 'sd', 'min', 'max', or 'sum'). In addition you can use 'count' to count the number of cells in each zone (only useful with <code>na.rm=TRUE</code>, otherwise <code>freq(z)</code> would be more direct.</p>
 <p>If a function is used, it should accept a <code>na.rm</code> argument (or at least a <code>...</code> argument)</p>
     </div>
 
@@ -164,32 +164,34 @@ If a function is used, it should accept a na.rm argument (or at least a ... argu
     <div class='dont-index'><p>See <code><a href='cellStats.html'>cellStats</a></code> for 'global' statistics (i.e., all of <code>x</code> is considered a single zone), and <code><a href='extract.html'>extract</a></code> for summarizing values for polygons</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncols<span class='op'>=</span><span class='fl'>10</span>, nrows<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-<span class='va'>z</span> <span class='op'>&lt;-</span> <span class='va'>r</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, each<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span>
-<span class='co'># for large files, use a character value rather than a function</span>
-<span class='fu'>zonal</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>z</span>, <span class='st'>'sum'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      zone      sum
-#&gt; [1,]    1 101.4994
-#&gt; [2,]    2 335.6783
-#&gt; [3,]    3 561.4774
-#&gt; [4,]    4 924.1274
-#&gt; [5,]    5 865.7947</div><div class='input'>
-<span class='co'># for smaller files you can also provide a function</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>zonal</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>z</span>, <span class='va'>mean</span><span class='op'>)</span>
-<span class='fu'>zonal</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>z</span>, <span class='va'>min</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-<span class='co'># multiple layers</span>
-<span class='fu'>zonal</span><span class='op'>(</span><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>10</span><span class='op'>)</span>, <span class='va'>z</span>, <span class='st'>'sum'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      zone  layer.1  layer.2
-#&gt; [1,]    1 101.4994 1014.994
-#&gt; [2,]    2 335.6783 3356.783
-#&gt; [3,]    3 561.4774 5614.774
-#&gt; [4,]    4 924.1274 9241.274
-#&gt; [5,]    5 865.7947 8657.947</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncols<span class='op'>=</span><span class='fl'>10</span>, nrows<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span> <span class='op'>&lt;-</span> <span class='va'>r</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, each<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># for large files, use a character value rather than a function</span></span>
+<span class='r-in'><span class='fu'>zonal</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>z</span>, <span class='st'>'sum'</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      zone      sum</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]    1 101.4994</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]    2 335.6783</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,]    3 561.4774</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,]    4 924.1274</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,]    5 865.7947</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># for smaller files you can also provide a function</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'>zonal</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>z</span>, <span class='va'>mean</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>zonal</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>z</span>, <span class='va'>min</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># multiple layers</span></span>
+<span class='r-in'><span class='fu'>zonal</span><span class='op'>(</span><span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>10</span><span class='op'>)</span>, <span class='va'>z</span>, <span class='st'>'sum'</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      zone  layer.1  layer.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,]    1 101.4994 1014.994</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,]    2 335.6783 3356.783</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,]    3 561.4774 5614.774</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,]    4 924.1274 9241.274</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,]    5 865.7947 8657.947</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -148,42 +148,48 @@ Extent object from a 2x2 matrix (first row: xmin, xmax; second row: ymin, ymax),
     <div class='dont-index'><p><code>extent</code>, <code><a href='drawExtent.html'>drawExtent</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'>extent</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -180 
-#&gt; xmax       : 180 
-#&gt; ymin       : -90 
-#&gt; ymax       : 90 </div><div class='input'><span class='fu'>extent</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>20</span>, <span class='fl'>0</span>, <span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : 0 
-#&gt; xmax       : 20 
-#&gt; ymin       : 0 
-#&gt; ymax       : 20 </div><div class='input'><span class='co'>#is equivalent to</span>
-<span class='fu'>extent</span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>20</span>, <span class='fl'>0</span>, <span class='fl'>20</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : 0 
-#&gt; xmax       : 20 
-#&gt; ymin       : 0 
-#&gt; ymax       : 20 </div><div class='input'><span class='fu'>extent</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>20</span>, <span class='fl'>20</span><span class='op'>)</span>, nrow<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : 0 
-#&gt; xmax       : 20 
-#&gt; ymin       : 0 
-#&gt; ymax       : 20 </div><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>,<span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>extent</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : 0 
-#&gt; xmax       : 2 
-#&gt; ymin       : -3 
-#&gt; ymax       : 5 </div><div class='input'>
-<span class='co'>#crop the extent by row and column numbers</span>
-<span class='fu'>extent</span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>1</span>, <span class='fl'>20</span>, <span class='fl'>10</span>, <span class='fl'>30</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; class      : Extent 
-#&gt; xmin       : -171 
-#&gt; xmax       : -150 
-#&gt; ymin       : 70 
-#&gt; ymax       : 90 </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>extent</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -180 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 180 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : -90 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 90 </span>
+<span class='r-in'><span class='fu'>extent</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>20</span>, <span class='fl'>0</span>, <span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 20 </span>
+<span class='r-in'><span class='co'>#is equivalent to</span></span>
+<span class='r-in'><span class='fu'>extent</span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>20</span>, <span class='fl'>0</span>, <span class='fl'>20</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 20 </span>
+<span class='r-in'><span class='fu'>extent</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>20</span>, <span class='fl'>20</span><span class='op'>)</span>, nrow<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 20 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 20 </span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>,<span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>extent</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : 0 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : 2 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : -3 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 5 </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#crop the extent by row and column numbers</span></span>
+<span class='r-in'><span class='fu'>extent</span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>1</span>, <span class='fl'>20</span>, <span class='fl'>10</span>, <span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> class      : Extent </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmin       : -171 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> xmax       : -150 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymin       : 70 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ymax       : 90 </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

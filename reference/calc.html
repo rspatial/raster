@@ -196,75 +196,75 @@ See (overlay) to use functions that refer to specific layers, like (function(a,b
     <p>Robert J. Hijmans and Matteo Mattiuzzi</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncols<span class='op'>=</span><span class='fl'>36</span>, nrows<span class='op'>=</span><span class='fl'>18</span><span class='op'>)</span>
-<span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-
-<span class='co'># multiply values with 10</span>
-<span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='va'>x</span> <span class='op'>*</span> <span class='fl'>10</span> <span class='op'>}</span>
-<span class='va'>rc1</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>fun</span><span class='op'>)</span>
-
-<span class='co'># set values below 100 to NA. </span>
-<span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='va'>x</span><span class='op'>[</span><span class='va'>x</span><span class='op'>&lt;</span><span class='fl'>100</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>; <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>}</span>
-<span class='va'>rc2</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>fun</span><span class='op'>)</span>
-
-<span class='co'># set NA values to -9999</span>
-<span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='va'>x</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>9999</span>; <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span> 
-<span class='va'>rc3</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>rc2</span>, <span class='va'>fun</span><span class='op'>)</span>
-
-<span class='co'># using a RasterStack as input</span>
-<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># return a RasterLayer</span>
-<span class='va'>rs1</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>sum</span><span class='op'>)</span>
-
-<span class='co'># return a RasterBrick</span>
-<span class='va'>rs2</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span> <span class='op'>*</span> <span class='fl'>10</span><span class='op'>}</span><span class='op'>)</span>
-<span class='co'># recycling by layer</span>
-<span class='va'>rs3</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span>
-
-<span class='co'># use overlay when you want to refer to individual layer in the function</span>
-<span class='co'># but it can be done with calc: </span>
-<span class='va'>rs4</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>+</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>*</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>}</span><span class='op'>)</span>
-
-<span class='co'>## </span>
-<span class='co'># Some regression examples</span>
-<span class='co'>## </span>
-
-<span class='co'># create data</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrow<span class='op'>=</span><span class='fl'>10</span>, ncol<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>s1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='va'>i</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='va'>i</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>s1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>s1</span><span class='op'>)</span>
-<span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>s2</span><span class='op'>)</span>
-
-<span class='co'># regression of values in one brick (or stack) with another</span>
-<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>s1</span>, <span class='va'>s2</span><span class='op'>)</span>
-<span class='co'># s1 and s2 have 12 layers; coefficients[2] is the slope</span>
-<span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span><span class='op'>]</span> <span class='op'>~</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>13</span><span class='op'>:</span><span class='fl'>24</span><span class='op'>]</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>}</span>
-<span class='va'>x1</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>fun</span><span class='op'>)</span>
-
-<span class='co'># regression of values in one brick (or stack) with 'time'</span>
-<span class='va'>time</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='nlayers.html'>nlayers</a></span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span>
-<span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>~</span> <span class='va'>time</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>}</span>
-<span class='va'>x2</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>fun</span><span class='op'>)</span>
-
-<span class='co'># get multiple layers, e.g. the slope _and_ intercept</span>
-<span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>~</span> <span class='va'>time</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span> <span class='op'>}</span>
-<span class='va'>x3</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>fun</span><span class='op'>)</span>
-
-
-<span class='co'>### A much (&gt; 100 times) faster approach is to directly use </span>
-<span class='co'>### linear algebra and pre-compute some constants</span>
-
-<span class='co'>## add 1 for a model with an intercept</span>
-<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>time</span><span class='op'>)</span>
-
-<span class='co'>## pre-computing constant part of least squares</span>
-<span class='va'>invXtX</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='fu'><a href='transpose.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='transpose.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
-
-<span class='co'>## much reduced regression model; [2] is to get the slope</span>
-<span class='va'>quickfun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span> <span class='op'>(</span><span class='va'>invXtX</span> <span class='op'>%*%</span> <span class='va'>y</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>
-<span class='va'>x4</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>quickfun</span><span class='op'>)</span> 
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>ncols<span class='op'>=</span><span class='fl'>36</span>, nrows<span class='op'>=</span><span class='fl'>18</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='getValues.html'>values</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># multiply values with 10</span></span>
+<span class='r-in'><span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='va'>x</span> <span class='op'>*</span> <span class='fl'>10</span> <span class='op'>}</span></span>
+<span class='r-in'><span class='va'>rc1</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>fun</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># set values below 100 to NA. </span></span>
+<span class='r-in'><span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='va'>x</span><span class='op'>[</span><span class='va'>x</span><span class='op'>&lt;</span><span class='fl'>100</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>; <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>}</span></span>
+<span class='r-in'><span class='va'>rc2</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>fun</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># set NA values to -9999</span></span>
+<span class='r-in'><span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='va'>x</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>9999</span>; <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>}</span> </span>
+<span class='r-in'><span class='va'>rc3</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>rc2</span>, <span class='va'>fun</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># using a RasterStack as input</span></span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>r</span><span class='op'>*</span><span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># return a RasterLayer</span></span>
+<span class='r-in'><span class='va'>rs1</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>sum</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># return a RasterBrick</span></span>
+<span class='r-in'><span class='va'>rs2</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span> <span class='op'>*</span> <span class='fl'>10</span><span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># recycling by layer</span></span>
+<span class='r-in'><span class='va'>rs3</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># use overlay when you want to refer to individual layer in the function</span></span>
+<span class='r-in'><span class='co'># but it can be done with calc: </span></span>
+<span class='r-in'><span class='va'>rs4</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, fun<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>{</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>+</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>*</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## </span></span>
+<span class='r-in'><span class='co'># Some regression examples</span></span>
+<span class='r-in'><span class='co'>## </span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># create data</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>nrow<span class='op'>=</span><span class='fl'>10</span>, ncol<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>s1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='va'>i</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>i</span><span class='op'>)</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>, <span class='va'>i</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>s1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>s1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>s2</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># regression of values in one brick (or stack) with another</span></span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='stack.html'>stack</a></span><span class='op'>(</span><span class='va'>s1</span>, <span class='va'>s2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># s1 and s2 have 12 layers; coefficients[2] is the slope</span></span>
+<span class='r-in'><span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span><span class='op'>]</span> <span class='op'>~</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>13</span><span class='op'>:</span><span class='fl'>24</span><span class='op'>]</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>}</span></span>
+<span class='r-in'><span class='va'>x1</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>fun</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># regression of values in one brick (or stack) with 'time'</span></span>
+<span class='r-in'><span class='va'>time</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='nlayers.html'>nlayers</a></span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>~</span> <span class='va'>time</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>}</span></span>
+<span class='r-in'><span class='va'>x2</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>fun</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># get multiple layers, e.g. the slope _and_ intercept</span></span>
+<span class='r-in'><span class='va'>fun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>~</span> <span class='va'>time</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span> <span class='op'>}</span></span>
+<span class='r-in'><span class='va'>x3</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>fun</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>### A much (&gt; 100 times) faster approach is to directly use </span></span>
+<span class='r-in'><span class='co'>### linear algebra and pre-compute some constants</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## add 1 for a model with an intercept</span></span>
+<span class='r-in'><span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='va'>time</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## pre-computing constant part of least squares</span></span>
+<span class='r-in'><span class='va'>invXtX</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/solve.html'>solve</a></span><span class='op'>(</span><span class='fu'><a href='transpose.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>X</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='fu'><a href='transpose.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## much reduced regression model; [2] is to get the slope</span></span>
+<span class='r-in'><span class='va'>quickfun</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span> <span class='op'>(</span><span class='va'>invXtX</span> <span class='op'><a href='https://rdrr.io/r/base/matmult.html'>%*%</a></span> <span class='va'>y</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>x4</span> <span class='op'>&lt;-</span> <span class='fu'>calc</span><span class='op'>(</span><span class='va'>s</span>, <span class='va'>quickfun</span><span class='op'>)</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
