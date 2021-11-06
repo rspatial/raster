@@ -83,6 +83,9 @@ function(x, padding=0, values=NA, filename="", ...) {
 	
 	if (nlayers(x) == 1 && canProcessInMemory(x)) {
 		x <- .memtrimlayer(x, padding=padding, values=values, ...) 
+		if (filename != "") {
+			x <- writeRaster(x, filename, ...)
+		} 
 		return(x)
 	}
 	
