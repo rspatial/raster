@@ -31,10 +31,10 @@ If \code{x} is a Raster* object, the Extent is aligned to \code{x}. Areas includ
 \note{values within the extent of a Raster* object can be set to NA with \link[raster]{mask}}
 
 \details{
-Objects from which an Extent can be extracted/created include RasterLayer, RasterStack, RasterBrick and objects of the Spatial* classes from the sp package. You can check this with the \code{\link[raster]{extent}} function. New Extent objects can be also be created with function \code{\link{extent}} and \code{\link{drawExtent}} by clicking twice on a plot.
+Objects from which an Extent can be extracted/created include RasterLayer, RasterStack, RasterBrick and objects of the Spatial* classes from the sp package. You can check this with the \code{\link[raster]{extent}} function. New Extent objects can also be created with function \code{\link{extent}} and \code{\link{drawExtent}} by clicking twice on a plot.
 
 To crop by row and column numbers you can create an extent like this (for Raster \code{x}, row 5 to 10, column 7 to 12)
-\code{crop(x, extent(x, 5, 10, 7, 15))}
+\code{crop(x, extent(x, 5, 10, 7, 12))}
 }
 
 \value{
