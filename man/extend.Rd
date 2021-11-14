@@ -10,7 +10,7 @@
 \description{
 Extend returns an Raster* object with a larger spatial extent. The output Raster object has the outer minimum and maximum coordinates of the input Raster and Extent arguments. Thus, all of the cells of the original raster are included. See \code{\link[raster]{crop}} if you (also) want to remove rows or columns. 
 
-There is also an extend method for Extent objects to enlarge (or reduce) an Extent. You can also use algebraic notation to do that (see examples)
+There is also an extend method for Extent objects to enlarge (or reduce) an Extent. You can also use algebraic notation to do that (see examples).
 
 This function has replaced function "expand" (to avoid a name conflict with the Matrix package).
 }
