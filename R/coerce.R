@@ -7,6 +7,7 @@
 ### from terra
 setAs("SpatRaster", "Raster", 
 	function(from) {
+		#raster::as(from, "Raster")
 		s <- sources(from)
 		nl <- nlyr(from)
 		e <- as.vector(ext(from))
