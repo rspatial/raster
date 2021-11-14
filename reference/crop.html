@@ -159,9 +159,9 @@ If <code>x</code> is a Raster* object, the Extent is aligned to <code>x</code>. 
     <p>values within the extent of a Raster* object can be set to NA with <a href='mask.html'>mask</a></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Objects from which an Extent can be extracted/created include RasterLayer, RasterStack, RasterBrick and objects of the Spatial* classes from the sp package. You can check this with the <code><a href='extent.html'>extent</a></code> function. New Extent objects can be also be created with function <code><a href='extent.html'>extent</a></code> and <code><a href='drawExtent.html'>drawExtent</a></code> by clicking twice on a plot.</p>
+    <p>Objects from which an Extent can be extracted/created include RasterLayer, RasterStack, RasterBrick and objects of the Spatial* classes from the sp package. You can check this with the <code><a href='extent.html'>extent</a></code> function. New Extent objects can also be created with function <code><a href='extent.html'>extent</a></code> and <code><a href='drawExtent.html'>drawExtent</a></code> by clicking twice on a plot.</p>
 <p>To crop by row and column numbers you can create an extent like this (for Raster <code>x</code>, row 5 to 10, column 7 to 12)
-<code>crop(x, extent(x, 5, 10, 7, 15))</code></p>
+<code>crop(x, extent(x, 5, 10, 7, 12))</code></p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>RasterLayer or RasterBrick object; or SpatialLines or SpatialPolygons object.</p>

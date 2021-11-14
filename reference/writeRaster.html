@@ -219,7 +219,7 @@ when writing to an ascii file or another file type that does not store the crs</
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-in'> </span>
 <span class='r-in'><span class='co'># write to netcdf </span></span>
-<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='http://cirrus.ucsd.edu/~pierce/ncdf'>ncdf4</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>  </span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='http://cirrus.ucsd.edu/~pierce/ncdf/'>ncdf4</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>  </span>
 <span class='r-in'> <span class='va'>rnc</span> <span class='op'>&lt;-</span> <span class='fu'>writeRaster</span><span class='op'>(</span><span class='va'>r</span>, filename<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"netCDF.nc"</span><span class='op'>)</span>, format<span class='op'>=</span><span class='st'>"CDF"</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>   </span>
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading required package: ncdf4</span>
