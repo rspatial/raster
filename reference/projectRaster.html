@@ -207,7 +207,26 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
 <span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span>xmn<span class='op'>=</span><span class='op'>-</span><span class='fl'>110</span>, xmx<span class='op'>=</span><span class='op'>-</span><span class='fl'>90</span>, ymn<span class='op'>=</span><span class='fl'>40</span>, ymx<span class='op'>=</span><span class='fl'>60</span>, ncols<span class='op'>=</span><span class='fl'>40</span>, nrows<span class='op'>=</span><span class='fl'>40</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='setValues.html'>setValues</a></span><span class='op'>(</span><span class='va'>r</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='ncell.html'>ncell</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'><a href='projection.html'>crs</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> CRS arguments: +proj=longlat +datum=WGS84 +no_defs </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Coordinate Reference System:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Deprecated Proj.4 representation: +proj=longlat +datum=WGS84 +no_defs </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> WKT2 2019 representation:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> GEOGCRS["unknown",</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     DATUM["World Geodetic System 1984",</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         ELLIPSOID["WGS 84",6378137,298.257223563,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             LENGTHUNIT["metre",1]],</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         ID["EPSG",6326]],</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     PRIMEM["Greenwich",0,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         ID["EPSG",8901]],</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     CS[ellipsoidal,2],</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         AXIS["longitude",east,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             ORDER[1],</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                 ID["EPSG",9122]]],</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         AXIS["latitude",north,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             ORDER[2],</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                 ID["EPSG",9122]]]] </span>
 <span class='r-in'><span class='co'># wkt(r)</span></span>
 <span class='r-in'><span class='co'># proj.4 projection description</span></span>
 <span class='r-in'><span class='va'>newproj</span> <span class='op'>&lt;-</span> <span class='st'>"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"</span></span>
