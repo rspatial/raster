@@ -8,13 +8,13 @@
 	
 setMethod('setMinMax', signature(x='RasterLayer'), 
 function(x, ...) {
-	w <- getOption('warn')
-	on.exit(options('warn' = w))
-	options('warn'=-1) 
+	#w <- getOption('warn')
+	#on.exit(options('warn' = w))
+	#options('warn'=-1) 
 	
 	if ( inMemory(x) ) {
-		x@data@min <- min(x@data@values, na.rm=TRUE)
-		x@data@max <- max(x@data@values, na.rm=TRUE)
+		x@data@min <- suppressWarnings(min(x@data@values, na.rm=TRUE))
+		x@data@max <- suppressWarnings(max(x@data@values, na.rm=TRUE))
 	} else {
 		if (! fromDisk(x)) {
 			stop('no values associated with this RasterLayer')
@@ -26,8 +26,8 @@ function(x, ...) {
 		x <- readStart(x)	
 		for (i in 1:tr$n) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i]) 
-			x@data@min <- min(x@data@min, min(v, na.rm=TRUE))
-			x@data@max <- max(x@data@max, max(v, na.rm=TRUE))
+			x@data@min <- suppressWarnings(min(x@data@min, min(v, na.rm=TRUE)))
+			x@data@max <- suppressWarnings(max(x@data@max, max(v, na.rm=TRUE)))
 		}
 		x <- readStop(x)
 	}
