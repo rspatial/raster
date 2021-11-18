@@ -248,7 +248,7 @@ If <code>y</code> represents lines, the <code>extract</code> method returns the 
 <span class='r-in'></span>
 <span class='r-in'><span class='va'>sp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/sp/man/SpatialPoints.html'>SpatialPoints</a></span><span class='op'>(</span><span class='va'>xy</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>extract</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>sp</span>, method<span class='op'>=</span><span class='st'>'bilinear'</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 607.5 535.5 463.5 391.5 319.5 247.5 175.5 103.5  31.5</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in options(warn = w):</span> object 'w' not found</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># examples with a buffer</span></span>
 <span class='r-in'><span class='fu'>extract</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>xy</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,<span class='op'>]</span>, buffer<span class='op'>=</span><span class='fl'>1000000</span><span class='op'>)</span></span>

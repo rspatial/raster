@@ -214,10 +214,6 @@
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Try help(fields) to get started.</span>
 <span class='r-in'><span class='va'>tps</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/fields/man/Tps.html'>Tps</a></span><span class='op'>(</span><span class='va'>xy</span>, <span class='va'>v</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Warning: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Grid searches over lambda (nugget and sill variances) with  minima at the endpoints: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   (GCV) Generalized Cross-Validation </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    minimum at  right endpoint  lambda  =  2.375093e-05 (eff. df= 46.55 )</span>
 <span class='r-in'><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='raster.html'>raster</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># use model to predict values at all locations</span></span>
@@ -241,18 +237,10 @@
 <span class='r-in'><span class='co'># add as another independent variable</span></span>
 <span class='r-in'><span class='va'>xyz</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://www.math.uzh.ch/pages/spam//reference/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>xy</span>, <span class='va'>z</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>tps2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/fields/man/Tps.html'>Tps</a></span><span class='op'>(</span><span class='va'>xyz</span>, <span class='va'>v</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Warning: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Grid searches over lambda (nugget and sill variances) with  minima at the endpoints: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   (GCV) Generalized Cross-Validation </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    minimum at  right endpoint  lambda  =  0.0002279721 (eff. df= 46.55 )</span>
 <span class='r-in'><span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'>interpolate</span><span class='op'>(</span><span class='va'>elevation</span>, <span class='va'>tps2</span>, xyOnly<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># as a linear coveriate</span></span>
 <span class='r-in'><span class='va'>tps3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/fields/man/Tps.html'>Tps</a></span><span class='op'>(</span><span class='va'>xy</span>, <span class='va'>v</span>, Z<span class='op'>=</span><span class='va'>z</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Warning: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Grid searches over lambda (nugget and sill variances) with  minima at the endpoints: </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   (GCV) Generalized Cross-Validation </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    minimum at  right endpoint  lambda  =  2.427486e-05 (eff. df= 46.54999 )</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Z is a separate argument in Krig.predict, so we need a new function</span></span>
 <span class='r-in'><span class='co'># Internally (in interpolate) a matrix is formed of x, y, and elev (Z)</span></span>
