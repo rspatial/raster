@@ -28,7 +28,6 @@
 	cells <- cellFromXY(r, xy4)
 
 	suppressWarnings(row1 <- rowFromCell(r, min(cells, na.rm=TRUE)))
-	options('warn' = w)
 	if (is.na(row1)) {
 		if (nls == 1) {
 			return(rep(NA, nrow(xyCoords)))
