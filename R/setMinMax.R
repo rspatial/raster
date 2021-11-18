@@ -13,8 +13,8 @@ function(x, ...) {
 	#options('warn'=-1) 
 	
 	if ( inMemory(x) ) {
-		x@data@min <- suppressWarnings(min(x@data@values, na.rm=TRUE))
-		x@data@max <- suppressWarnings(max(x@data@values, na.rm=TRUE))
+		suppressWarnings(x@data@min <- min(x@data@values, na.rm=TRUE))
+		suppressWarnings(x@data@max <- max(x@data@values, na.rm=TRUE))
 	} else {
 		if (! fromDisk(x)) {
 			stop('no values associated with this RasterLayer')

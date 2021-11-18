@@ -122,10 +122,8 @@ deratify <- function(x, att=NULL, layer=1, complete=FALSE, drop=TRUE, fun='mean'
 
 	if (drop) {
 		for (i in cc) {
-			w <- getOption('warn')
 			options('warn'=-1) 
-			v <- as.numeric(as.character(RAT[,i]))
-			options('warn' = w)
+			suppressWarnings(v <- as.numeric(as.character(RAT[,i])))
 			if (isTRUE(all(RAT[,i] == v))) {
 				RAT[,i] <- v
 			}

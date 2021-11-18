@@ -184,10 +184,7 @@ setMethod('predict', signature(object='Raster'),
 					# should keep track of this to return a factor type RasterLayer
 					factres <- TRUE
 					if (facttest) {
-						w <- getOption('warn')
-						options('warn'=-1) 
-						tst <- as.integer(as.character(levels(predv)))
-						options('warn'= w) 
+						suppressWarnings(tst <- as.integer(as.character(levels(predv))))
 						if (any(is.na(tst))) {
 							factaschar = FALSE
 						} else {

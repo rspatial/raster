@@ -7,10 +7,7 @@
 	
 	y <- getOption('rasterGDALLoaded')
 
-	w <- getOption('warn')
-	options('warn'=-1) 
-	x <- isTRUE( try( requireNamespace("rgdal", quietly=TRUE ) ) )
-	options('warn'= w) 
+	suppressWarnings(x <- isTRUE( try( requireNamespace("rgdal", quietly=TRUE ) ) ))
 	
 	if (! isTRUE(y) ) {
 		

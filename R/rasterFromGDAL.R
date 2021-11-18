@@ -41,11 +41,9 @@
 		}
 	}
 	
-	w <- getOption('warn')
-	on.exit(options('warn' = w))
-	options('warn'=-1) 
-	gdalinfo <- try ( rgdal::GDALinfo(filename, silent=silent, returnRAT=RAT, returnCategoryNames=RAT) )
-	options('warn'= w) 
+	suppressWarnings(
+		gdalinfo <- try ( rgdal::GDALinfo(filename, silent=silent, returnRAT=RAT, returnCategoryNames=RAT) )
+	) 
 
 	if ( inherits(gdalinfo, "try-error")) {
 		gdalinfo <- rgdal::GDALinfo(filename, silent=silent, returnRAT=FALSE, returnCategoryNames=FALSE)

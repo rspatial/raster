@@ -105,8 +105,6 @@
 	isCat <- FALSE
 	ratnames <- rattypes <- ratvalues <- NULL
 	catlevels <- matrix(NA)
-	w <- getOption('warn')
-	on.exit(options('warn' = w))
 	
 	#match(c("MINX", "MAXX", "MINY", "MAXY", "XMIN", "XMAX", "YMIN", "YMAX", "ROWS", "COLUMNS", "NROWS", "NCOLS"), toupper(ini[,2]))
 
@@ -125,13 +123,13 @@
 			} else if (ini[i,2] == "NROW") { nr <- as.integer(ini[i,3]) 
 			} else if (ini[i,2] == "NCOL") { nc <- as.integer(ini[i,3]) 
 			} else if (ini[i,2] == "RANGE_MIN") { 
-				options('warn'=-1) 
-				try ( minval <-  as.numeric(unlist(strsplit(ini[i,3], ":|:", fixed=TRUE), use.names=FALSE)), silent = TRUE ) 
-				options('warn' = w)
+				suppressWarnings(
+					try ( minval <-  as.numeric(unlist(strsplit(ini[i,3], ":|:", fixed=TRUE), use.names=FALSE)), silent = TRUE ) 
+				)
 			} else if (ini[i,2] == "RANGE_MAX") { 
-				options('warn'=-1) 
-				try ( maxval <-  as.numeric(unlist(strsplit(ini[i,3], ":|:", fixed=TRUE)), use.names=FALSE), silent = TRUE ) 
-				options('warn' = w)
+				suppressWarnings(
+					try ( maxval <-  as.numeric(unlist(strsplit(ini[i,3], ":|:", fixed=TRUE)), use.names=FALSE), silent = TRUE ) 
+				)
 			} else if (ini[i,2] == "VALUEUNIT") { try ( maxval <-  as.numeric(unlist(strsplit(ini[i,3], ":|:", fixed=TRUE)), use.names=FALSE), silent = TRUE) 
 			} else if (ini[i,2] == "CATEGORICAL") { try ( isCat <-  as.logical(unlist(strsplit(ini[i,3], ":|:", fixed=TRUE)), use.names=FALSE), silent = TRUE ) 
 					
@@ -174,13 +172,13 @@
 			} else if (ini[i,2] == "NROWS") { nr <- as.integer(ini[i,3]) 
 			} else if (ini[i,2] == "NCOLS") { nc <- as.integer(ini[i,3]) 
 			} else if (ini[i,2] == "MINVALUE") { 
-				options('warn'=-1) 
-				try ( minval <-  as.numeric(unlist(strsplit(ini[i,3], ':'), use.names=FALSE)), silent = TRUE ) 
-				options('warn' = w)
+				suppressWarnings(
+					try ( minval <-  as.numeric(unlist(strsplit(ini[i,3], ':'), use.names=FALSE)), silent = TRUE )
+				)
 			} else if (ini[i,2] == "MAXVALUE") { 
-				options('warn'=-1) 
-				try ( maxval <-  as.numeric(unlist(strsplit(ini[i,3], ':')), use.names=FALSE), silent = TRUE ) 
-				options('warn' = w)
+				suppressWarnings(
+					try ( maxval <-  as.numeric(unlist(strsplit(ini[i,3], ':')), use.names=FALSE), silent = TRUE ) 
+				)
 			} else if (ini[i,2] == "VALUEUNIT") { try ( maxval <-  as.numeric(unlist(strsplit(ini[i,3], ':')), use.names=FALSE), silent = TRUE) 
 			} else if (ini[i,2] == "CATEGORICAL") { try ( isCat <-  as.logical(unlist(strsplit(ini[i,3], ':')), use.names=FALSE), silent = TRUE ) 
 					

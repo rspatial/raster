@@ -28,11 +28,7 @@
 	
 	ini[,1] = toupper(ini[,1]) 
 	
-	w <- getOption('warn')
-	on.exit(options('warn' = w))
-	options('warn'=-1) 
-	test <- sum(as.numeric(ini[,1]), na.rm=TRUE) > 0
-	options('warn' = w)
+	suppressWarnings( test <- sum(as.numeric(ini[,1]), na.rm=TRUE) > 0 )
 	if (test) {
 		m <- 'The header of this file appears to be incorrect: there are numbers where there should be keywords'
 		if (offset != 6) {

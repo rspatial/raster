@@ -106,14 +106,11 @@
 		} 
 	}
 	
-	w <- getOption('warn')
-	options('warn'=-1) 
 	if (is.null(breaks)) {
-		zrange <- range(x, zlim, na.rm=TRUE)
+		suppressWarnings(zrange <- range(x, zlim, na.rm=TRUE))
 	} else {
-		zrange <- range(x, zlim, breaks, na.rm=TRUE)
+		suppressWarnings(zrange <- range(x, zlim, breaks, na.rm=TRUE))
 	}
-	options('warn'=w) 
 	if (! is.finite(zrange[1])) {
 		legend <- FALSE 
 	} else {

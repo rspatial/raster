@@ -144,11 +144,7 @@ setMethod("crs<-", signature("Spatial", "ANY"),
 			}
 		}
 	
-		w <- getOption("warn")
-		on.exit(options("warn" = w))
-		options("warn"=-1)
-
-		x@proj4string <- value
+		suppressWarnings(x@proj4string <- value)
 		x
 	}
 )

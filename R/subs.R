@@ -84,10 +84,7 @@ setMethod('subs', signature(x='Raster', y='data.frame'),
 		levs <- list()
 		for (i in 2:length(cls)) {
 			if (cls[i] == 'character') {
-				w <- getOption('warn')
-				options('warn'=-1) 
-				tmp <- as.numeric(y[,i])
-				options('warn'= w)
+				suppressWarnings(tmp <- as.numeric(y[,i]))
 				if (all(is.na(tmp) == is.na(y[,i]))) {
 					y[,i] <- tmp
 					cls[i] <- 'numeric'				
