@@ -4,6 +4,7 @@
 # Licence GPL v3
 
 
+
 ### from terra
 setAs("SpatRaster", "Raster", 
 	function(from) {
@@ -52,6 +53,93 @@ setAs("SpatRaster", "Raster",
 		return(r)
 	}
 )
+
+
+
+## to terra
+
+.fromRasterLayerBrick <- function(from) {
+	 
+	if (raster::fromDisk(from)) {
+		f <- raster::filename(from)
+		if (from@file@driver == "netcdf") {
+			v <- attr(from@data, "zvar")
+			r <- rast(f, v)	
+		} else {
+			r <- try(rast(f), silent=TRUE)
+			if (inherits(r, "try-error")) {
+				r <- rast(from + 0)
+				levs <- levels(from)[[1]]
+				if (!is.null(levs)) {
+					levels(r) <- levs
+				}
+			}
+			crs(r) <- raster::wkt(from)
+		}
+		if (from@file@NAchanged) {
+			NAflag(r) <- from@file@nodatavalue
+		}
+	} else {
+		crsobj <- from@crs
+		if (is.na(crsobj)) {
+			prj <- ""
+		} else {
+			crscom <- comment(crsobj)
+			if (is.null(crscom)) {
+				prj <- crsobj@projargs
+			} else {
+				prj <- crscom
+			}
+		}
+		r <- rast(	nrows=nrow(from), 
+					ncols=ncol(from),
+					nlyrs=raster::nlayers(from),
+					crs=prj,
+					extent=raster::extent(from))
+		if (raster::hasValues(from)) {
+			values(r) <- values(from)
+		}
+		levs <- levels(from)[[1]]
+		if (!is.null(levs)) {
+			levels(r) <- levs				
+		}
+	}
+	names(r)  <- names(from)
+	r
+}
+
+.fromRasterStack <- function(from) {
+	x <- from[[1]]
+	n <- raster::nbands(x)
+	nl <- raster::nlayers(from)
+	if ((n > 1) & (n == nl)) {
+		ff <- lapply(1:nl, function(i) { raster::filename(from[[i]]) })
+		if (length(unique(ff)) == 1) {
+			r <- rast(raster::filename(x))
+			return(r)
+		}
+	} 
+	s <- lapply(1:raster::nlayers(from), function(i) {
+		x <- from[[i]]
+		.fromRasterLayerBrick(x)[[raster::bandnr(x)]]
+	})
+	s <- do.call(c, s)
+	names(s) <- names(from)
+	s
+}
+
+
+setAs("Raster", "SpatRaster", 
+	function(from) {
+		if (inherits(from, "RasterLayer") || inherits(from, "RasterBrick")) { 
+			.fromRasterLayerBrick(from)
+		} else {
+			.fromRasterStack(from)
+		}
+	}
+)
+
+
 
 
 
