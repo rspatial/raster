@@ -7,31 +7,28 @@
 ### from terra
 setAs("SpatRaster", "Raster", 
 	function(from) {
-		#raster::as(from, "Raster")
-		s <- sources(from)
+		b <- sources(from, bands=TRUE)
 		nl <- nlyr(from)
 		e <- as.vector(ext(from))
 		prj <- crs(from)
 		if (nl == 1) {
-			if (s$source == "") {
+			if (b$source == "") {
 				r <- raster::raster(ncols=ncol(from), nrows=nrow(from), crs=crs(from),
 			          xmn=e[1], xmx=e[2], ymn=e[3], ymx=e[4])
 				if (hasValues(from)) {
 					raster::values(r) <- values(from)
 				}
 			} else {
-				b <- sources(from, TRUE)
-				r <- raster::raster(s$source, band=b$bands)
+				r <- raster::raster(b$source, band=b$bands)
 			}
 			names(r) <- names(from)
 		} else {
-			b <- sources(from, TRUE)
-			if ((nrow(s) == 1) & (s$source[1] != "")) {
-				r <- raster::brick(s$source)
+			if ((nrow(s) == 1) & (b$source[1] != "")) {
+				r <- raster::brick(b$source)
 				if (!((raster::nlayers(r) == nl) && (b$bands[1] == 1) && (all(diff(b$bands) == 1)))) {
-					r <- raster::stack(s$source, bands=b$bands)
+					r <- raster::stack(b$source, bands=b$bands)
 				}
-			} else if (all(s$source=="")) {
+			} else if (all(b$source=="")) {
 				r <- raster::brick(ncol=ncol(from), nrow=nrow(from), crs=prj,
 			          xmn=e[1], xmx=e[2], ymn=e[3], ymx=e[4], nl=nlyr(from))
 				if (hasValues(from)) {
@@ -42,11 +39,11 @@ setAs("SpatRaster", "Raster",
 			          xmn=e[1], xmx=e[2], ymn=e[3], ymx=e[4])
 				r <- list()
 				for (i in 1:nl) {
-					if (s$source[i] == "") {
+					if (b$source[i] == "") {
 						r[[i]] <- raster::setValues(x, values(from[[i]]))
 					} else {
 						bands <- b$bands[b$sid == i]
-						r[[i]] <- raster::stack(s$source[i], bands=bands)
+						r[[i]] <- raster::stack(b$source[i], bands=bands)
 					}
 				}
 				r <- raster::stack(r)
@@ -55,8 +52,6 @@ setAs("SpatRaster", "Raster",
 		return(r)
 	}
 )
-
-
 
 
 
