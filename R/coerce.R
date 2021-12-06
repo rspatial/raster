@@ -24,7 +24,7 @@ setAs("SpatRaster", "Raster",
 			}
 			names(r) <- names(from)
 		} else {
-			if ((nrow(s) == 1) & (b$source[1] != "")) {
+			if ((nrow(b) == 1) & (b$source[1] != "")) {
 				r <- raster::brick(b$source)
 				if (!((raster::nlayers(r) == nl) && (b$bands[1] == 1) && (all(diff(b$bands) == 1)))) {
 					r <- raster::stack(b$source, bands=b$bands)
