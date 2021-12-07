@@ -76,6 +76,7 @@ function(x, y, ..., df=FALSE, sp=FALSE){
 		res <- .bilinearValue(object, xy, layer=layer, n=nl) 
 		if (cellnumbers) {
 			warning("'cellnumbers' does not apply for bilinear values")
+			cellnumbers = FALSE
 		}
 
 	} else if (method=='simple') {
