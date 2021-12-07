@@ -58,7 +58,7 @@ extension <- function(filename, value=NULL, maxchar=10) {
 
 .getExtension <- function(f, format) {
 	if (.setfileext()) {
-		def <- .defaultExtension(format)
+		def <- .defaultExtension(format, f)
 		if (def != '') {
 			extension(f) <- def
 		}
@@ -68,10 +68,16 @@ extension <- function(filename, value=NULL, maxchar=10) {
 
 
 
-.defaultExtension <- function(format=.filetype()) {
+.defaultExtension <- function(format=.filetype(), filename="") {
 	format <- toupper(format)
 	if (format == 'RASTER') { return('.grd') 
-	} else if (format == 'GTIFF') { return('.tif') 
+	} else if (format == 'GTIFF') { 
+		e <- extension(filename)
+		if (tolower(e) %in% c(".tiff", ".tif")) {
+			return (e)
+		} else {
+			return('.tif')
+		}
 	} else if (format == 'CDF') { return('.nc')
 	} else if (format == 'KML') { return('.kml')
 	} else if (format == 'KMZ') { return('.kmz')
