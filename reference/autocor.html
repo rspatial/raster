@@ -92,14 +92,14 @@
 <span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">Moran</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8353565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7359093</span>
 <span class="r-in"><span class="co"># Rook's case</span></span>
 <span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">Moran</span><span class="op">(</span><span class="va">r</span>, <span class="va">f</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8929367</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3855863</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">Geary</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04739631</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04175389</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu">MoranLocal</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span class="r-in"></span>
