@@ -46,12 +46,14 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 						size_t p = 0;
 						for (int j = -wr; j <= wr; j++) {
 							for (int k = -wc; k <= wc; k++) {
-								double a = d[j * ncol + k + i];
-								if ( !std::isnan(a) ) {
-									val[i] += a * w[q];
-									p++;
+								if (!std::isnan(w[q])) {
+									double a = d[j * ncol + k + i];
+									if ( !std::isnan(a) ) {
+										val[i] += a * w[q];
+										p++;
+									}
+									q++;
 								}
-								q++;
 							}
 						}
 						if (p==0) {
@@ -85,10 +87,12 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 					val[i] = 0;
 					for (int j = -wr; j <= wr; j++) {
 						for (int k = -wc; k <= wc; k++) {
-							double a = d[j * ncol + k + i];
-							if ( !std::isnan(a) ) {
-								val[i] += a * w[q];
-								p++;
+							if (!std::isnan(w[q])) {				
+								double a = d[j * ncol + k + i];
+								if ( !std::isnan(a) ) {
+									val[i] += a * w[q];
+									p++;
+								}
 							}
 							q++;
 						}
@@ -130,8 +134,10 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 							for (int j = -wr; j <= wr; j++) {
 								bool jnot0 = j != 0;
 								for (int k = -wc; k <= wc; k++) {
-									if (jnot0 && (k != 0)) {
-										val[i] += d[j * ncol + k + i]  * w[q];
+									if (!std::isnan(w[q])) {	
+										if (jnot0 && (k != 0)) {
+											val[i] += d[j * ncol + k + i]  * w[q];
+										}
 										q++;
 									}
 								}
@@ -139,7 +145,9 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 						} else {
 							for (int j = -wr; j <= wr; j++) {
 								for (int k = -wc; k <= wc; k++) {
-									val[i] += d[j * ncol + k + i]  * w[q];
+									if (!std::isnan(w[q])) {
+										val[i] += d[j * ncol + k + i]  * w[q];
+									}
 									q++;
 								}
 							}
@@ -170,7 +178,9 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 					size_t q = 0;
 					for (int j = -wr; j <= wr; j++) {
 						for (int k = -wc; k <= wc; k++) {
-							val[i] += d[j * ncol + k + i]  * w[q];
+							if (!std::isnan(w[q])) {				
+								val[i] += d[j * ncol + k + i]  * w[q];
+							}
 							q++;
 						}
 					}

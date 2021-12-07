@@ -46,7 +46,9 @@ std::vector<double> do_focal_fun(std::vector<double> d, Rcpp::NumericMatrix w, s
 					size_t q = 0;
 					for (int j = -wr; j <= wr; j++) {
 						for (int k = -wc; k <= wc; k++) {
-							x[q] = d[j * ncol + k + i] * w[q];
+							if (!std::isnan(w[q])) {
+								x[q] = d[j * ncol + k + i] * w[q];
+							}
 							q++;
 						}
 					}
@@ -80,7 +82,9 @@ std::vector<double> do_focal_fun(std::vector<double> d, Rcpp::NumericMatrix w, s
 				size_t q = 0;
 				for (int j = -wr; j <= wr; j++) {
 					for (int k = -wc; k <= wc; k++) {
-						x[q] = d[j * ncol + k + i] * w[q];
+						if (!std::isnan(w[q])) {
+							x[q] = d[j * ncol + k + i] * w[q];
+						}
 						q++;
 					}
 				}
