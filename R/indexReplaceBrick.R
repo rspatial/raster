@@ -21,7 +21,9 @@ setMethod("$<-", "Raster",
 				return(x)
 			}
 		} else {
-			if (inherits(value, 'Raster')) {
+			if (inherits(value, 'RasterLayer')) {
+				x <- value
+			} else if (inherits(value, 'Raster')) {
 				x[[name]] <- value
 			} else {
 				r <- x[[name]]
@@ -57,15 +59,18 @@ function(x,i,j,...,drop=TRUE) {
 })
 
 
-setReplaceMethod("[[", c("RasterStackBrick", "character", "missing"),
+setReplaceMethod("[[", c("Raster", "character", "missing"),
 	function(x, i, j, value) {
+		if (inherits(value, 'Raster')) {
+			names(value) <- i
+		}
+		if (inherits(value, 'RasterLayer')) {
+			return(value) 
+		}
 		n <- which(i == names(x))[1]
 		if (is.na(n)) {
 			n <- nlayers(x) + 1
 		} 
-		if (inherits(value, 'Raster')) {
-			names(value) <- i
-		}
 		x[[n]] <- value
 		x
 	}
@@ -106,7 +111,7 @@ setReplaceMethod("[[", c("RasterStack", "numeric", "missing"),
 
 
 
-setReplaceMethod("[[", c("RasterBrick", "numeric", "missing"),
+setReplaceMethod("[[", c("Raster", "numeric", "missing"),
 	function(x, i, j, value) {
 		i <- round(i)
 
@@ -116,6 +121,9 @@ setReplaceMethod("[[", c("RasterBrick", "numeric", "missing"),
 		nl <- nlayers(x)
 		if (i > nl + 1) {
 			stop('index should be <= nlayers(x)+1')
+		}
+		if (inherits(x, "RasterLayer")) {
+			return(value)
 		}
 		
 		if (canProcessInMemory(x)) {
