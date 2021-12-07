@@ -18,7 +18,7 @@ std::vector<double> do_focal_fun(std::vector<double> d, Rcpp::NumericMatrix w, s
 	std::vector<double> x(wn);
 	
 	if ((wrows % 2 == 0) | (wcols % 2 == 0)){
-		Rcpp::Rcerr << "weights matrix must have uneven sides";
+		Rcpp::Rcerr << "weights matrix must have uneven sides\n";
 		return(ans);
 	}
 	int wr = wrows / 2;

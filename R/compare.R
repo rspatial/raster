@@ -4,10 +4,6 @@
 # Licence GPL v3
 
 
-if (!isGeneric("all.equal")) {
-	setGeneric("all.equal", function(target, current, ...)
-		standardGeneric("all.equal"))
-}	
 
 setMethod("all.equal", c("Raster", "Raster"),
 	function(target, current, values=TRUE, stopiffalse=FALSE, showwarning=TRUE, ...) { 
