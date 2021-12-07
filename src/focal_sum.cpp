@@ -111,7 +111,7 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 
 			// first rows
 			for (int i = 0; i < ncol*wr; i++) {  
-				val[i] = NAN;
+				val[i] = d[i];
 			}
 			
 			for (int i = ncol*wr; i < ncol * (nrow-wr); i++) {
@@ -151,7 +151,7 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 				}
 				// last rows
 				for (int i = ncol * (nrow-wr); i < n; i++) {  
-					val[i] = NAN;
+					val[i] = d[i];
 				}		
 			}
 			
