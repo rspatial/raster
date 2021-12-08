@@ -17,13 +17,13 @@ Calculate focal ("moving window") values for the neighborhood of focal cells usi
 \arguments{
 \item{x}{RasterLayer}
   
-\item{w}{matrix of weights (the moving window), e.g. a 3 by 3 matrix with values 1; see Details. The matrix does not need to be square, but the sides must be odd numbers. If you need even sides, you can add a column or row with weights of zero}
+\item{w}{matrix of weights (the moving window), e.g. a 3 by 3 matrix with values 1; see Details. The matrix does not need to be square, but the sides must be odd numbers. If you need even sides, you can add a column or row with weights of zero or \code{NA}}
   
 \item{fun}{function (optional). The function fun should take multiple numbers, and return a single number. For example mean, modal, min or max. It should also accept a \code{na.rm} argument (or ignore it, e.g. as one of the 'dots' arguments. For example, \code{length} will fail, but \code{function(x, ...){na.omit(length(x))}} works. }
 
 \item{filename}{character. Filename for a new raster (optional)}
  
-\item{na.rm}{logical. If \code{TRUE}, \code{NA} will be removed from focal computations. The result will only be \code{NA} if all focal cells are \code{NA}. Except for some special cases (weights of 1, functions like min, max, mean), using \code{na.rm=TRUE} is generally not a good idea in this function because it will unbalance the effect of the weights }
+\item{na.rm}{logical. If \code{TRUE}, \code{NA} will be removed from focal computations. The result will only be \code{NA} if all focal cells are \code{NA}. Except for some special cases (weights of 1, functions like min, max, mean), using \code{na.rm=TRUE} may not be a good idea in this function because it can unbalance the effect of the weights}
  
 \item{pad}{logical. If \code{TRUE}, additional 'virtual' rows and columns are padded to \code{x} such that there are no edge effects. This can be useful when a function needs to have access to the central cell of the filter}
   
@@ -49,6 +49,8 @@ Sobel filters: \code{fx=matrix(c(-1,-2,-1,0,0,0,1,2,1) / 4, nrow=3)}
 and \code{fy=matrix(c(1,0,-1,2,0,-2,1,0,-1)/4, nrow=3)}
 
 see the \code{\link{focalWeight}} function to create distance based circular, rectangular, or Gaussian filters.
+
+Note that there is a difference between 0 and NA in the weights matrix. A zero weight cell is included in the computation, whereas a NA weight cell is excluded. This does not matter for "sum", nor for "mean" (zeros are removed), but it affects many other functions such as "var" as you could be adding a lot of zeros that should not be there.
 }
 
 \value{

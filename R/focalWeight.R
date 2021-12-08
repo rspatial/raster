@@ -56,7 +56,11 @@ focalWeight <- function(x, d, type=c('circle', 'Gauss', 'rectangle')) {
 	type <- match.arg(type)
 	x <- res(x)
 	if (type == 'circle') {
-		.circular.weight(x, d[1])
+		w <- .circular.weight(x, d[1])
+		if (fillNA) {
+			w[w <= 0] <- NA 
+		}
+		w	
 	} else if (type == 'Gauss') {
 		if (!length(d) %in% 1:2) {
 			stop("If type=Gauss, d should be a vector of length 1 or 2")
