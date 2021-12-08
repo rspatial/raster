@@ -59,13 +59,13 @@
     <dl><dt>x</dt>
 <dd><p>RasterLayer</p></dd>
 <dt>w</dt>
-<dd><p>matrix of weights (the moving window), e.g. a 3 by 3 matrix with values 1; see Details. The matrix does not need to be square, but the sides must be odd numbers. If you need even sides, you can add a column or row with weights of zero</p></dd>
+<dd><p>matrix of weights (the moving window), e.g. a 3 by 3 matrix with values 1; see Details. The matrix does not need to be square, but the sides must be odd numbers. If you need even sides, you can add a column or row with weights of zero or <code>NA</code></p></dd>
 <dt>fun</dt>
 <dd><p>function (optional). The function fun should take multiple numbers, and return a single number. For example mean, modal, min or max. It should also accept a <code>na.rm</code> argument (or ignore it, e.g. as one of the 'dots' arguments. For example, <code>length</code> will fail, but <code>function(x, ...){na.omit(length(x))}</code> works.</p></dd>
 <dt>filename</dt>
 <dd><p>character. Filename for a new raster (optional)</p></dd>
 <dt>na.rm</dt>
-<dd><p>logical. If <code>TRUE</code>, <code>NA</code> will be removed from focal computations. The result will only be <code>NA</code> if all focal cells are <code>NA</code>. Except for some special cases (weights of 1, functions like min, max, mean), using <code>na.rm=TRUE</code> is generally not a good idea in this function because it will unbalance the effect of the weights</p></dd>
+<dd><p>logical. If <code>TRUE</code>, <code>NA</code> will be removed from focal computations. The result will only be <code>NA</code> if all focal cells are <code>NA</code>. Except for some special cases (weights of 1, functions like min, max, mean), using <code>na.rm=TRUE</code> may not be a good idea in this function because it can unbalance the effect of the weights</p></dd>
 <dt>pad</dt>
 <dd><p>logical. If <code>TRUE</code>, additional 'virtual' rows and columns are padded to <code>x</code> such that there are no edge effects. This can be useful when a function needs to have access to the central cell of the filter</p></dd>
 <dt>padValue</dt>
@@ -85,6 +85,7 @@
 <p>Sobel filters: <code>fx=matrix(c(-1,-2,-1,0,0,0,1,2,1) / 4, nrow=3)</code>
 and <code>fy=matrix(c(1,0,-1,2,0,-2,1,0,-1)/4, nrow=3)</code></p>
 <p>see the <code><a href="focalWeight.html">focalWeight</a></code> function to create distance based circular, rectangular, or Gaussian filters.</p>
+<p>Note that there is a difference between 0 and NA in the weights matrix. A zero weight cell is included in the computation, whereas a NA weight cell is excluded. This does not matter for "sum", nor for "mean" (zeros are removed), but it affects many other functions such as "var" as you could be adding a lot of zeros that should not be there.</p>
     </div>
     <div id="value">
     <h2>Value</h2>
