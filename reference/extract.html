@@ -190,14 +190,7 @@ If <code>y</code> represents lines, the <code>extract</code> method returns the 
 <span class="r-in"><span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="spEasy.html">spLines</a></span><span class="op">(</span><span class="va">cds1</span>, <span class="va">cds2</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">extract</span><span class="op">(</span><span class="va">r</span>, <span class="va">lines</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 126 127 161 162 163 164 196 197 200 201 231 232 237 266 267 273 274 302 310</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20] 311 338 346 381 382 414 417 450 451 452 453 487 488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 139 140 141 174 175 177 208 209 210 213 243 244 249 250 279 286 322 358 359</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20] 394 429 430 465 501 537</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(x, y, ...):</span> Cannot get an Extent object from argument y</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">###############################</span></span>
 <span class="r-in"><span class="co"># extract values with polygons</span></span>
@@ -207,9 +200,10 @@ If <code>y</code> represents lines, the <code>extract</code> method returns the 
 <span class="r-in"><span class="va">polys</span> <span class="op">&lt;-</span> <span class="fu"><a href="spEasy.html">spPolygons</a></span><span class="op">(</span><span class="va">cds1</span>, <span class="va">cds2</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">extract</span><span class="op">(</span><span class="va">r</span>, <span class="va">polys</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(x, y, ...):</span> Cannot get an Extent object from argument y</span>
 <span class="r-in"><span class="co"># mean for each polygon</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">v</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="kw">else</span> <span class="cn">NA</span> <span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 387.8158 329.3913</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in lapply(v, function(x) if (!is.null(x)) mean(x, na.rm = TRUE) else NA):</span> object 'v' not found</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># v &lt;- extract(r, polys, cellnumbers=TRUE)</span></span>
 <span class="r-in"></span>
