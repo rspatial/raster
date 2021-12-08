@@ -10,7 +10,7 @@
 	w <- matrix(ncol=nx, nrow=ny)
 	w[ceiling(ny/2), ceiling(nx/2)] <- 1
 	if ((nx != 1) || (ny != 1)) {
-		x <- raster(m, xmn=0, xmx=nx*rs[1], ymn=0, ymx=ny*rs[2], crs="+proj=utm +zone=1 +datum=WGS84")
+		x <- raster(w, xmn=0, xmx=nx*rs[1], ymn=0, ymx=ny*rs[2], crs="+proj=utm +zone=1 +datum=WGS84")
 		d <- as.matrix(distance(x)) <= d
 		w <- d / sum(d)
 	}
