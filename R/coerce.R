@@ -22,7 +22,6 @@ setAs("SpatRaster", "Raster",
 			} else {
 				r <- raster::raster(b$source, band=b$bands)
 			}
-			try(levels(r) <- cats(from), silent=TRUE)
 		} else {
 			if ((nrow(b) == 1) & (b$source[1] != "")) {
 				r <- raster::brick(b$source)
@@ -50,6 +49,8 @@ setAs("SpatRaster", "Raster",
 				r <- raster::stack(r)
 			}
 		}
+		try(levels(r) <- cats(from), silent=TRUE)
+		try(names(r) <- names(from))
 		return(r)
 	}
 )
