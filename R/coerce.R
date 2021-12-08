@@ -22,7 +22,7 @@ setAs("SpatRaster", "Raster",
 			} else {
 				r <- raster::raster(b$source, band=b$bands)
 			}
-			names(r) <- names(from)
+			try(levels(r) <- cats(from), silent=TRUE)
 		} else {
 			if ((nrow(b) == 1) & (b$source[1] != "")) {
 				r <- raster::brick(b$source)
