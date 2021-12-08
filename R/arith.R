@@ -368,8 +368,8 @@ setMethod("Arith", signature(e1='logical', e2='RasterStackBrick'),
 		return(extent(as.vector(e1) + e2))
 	}
 	e2 <- rep_len(e2, length.out=2)
-	#dx <- e2[1] / 2
-	#dy <- e2[2] / 2
+	dx <- e2[1]
+	dy <- e2[2]
 	e1@xmax <- e1@xmax + dx
 	e1@xmin <- e1@xmin - dx
 	e1@ymax <- e1@ymax + dy
