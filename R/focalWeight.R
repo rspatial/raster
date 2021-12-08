@@ -52,7 +52,7 @@
 
 
 
-focalWeight <- function(x, d, type=c('circle', 'Gauss', 'rectangle')) {
+focalWeight <- function(x, d, type=c('circle', 'Gauss', 'rectangle'), fillNA=FALSE) {
 	type <- match.arg(type)
 	x <- res(x)
 	if (type == 'circle') {
