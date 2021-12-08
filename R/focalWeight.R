@@ -4,18 +4,20 @@
 # Licence GPL v3
 
 
-.circular.weight <- function(rs, d) {
+.circular.weight <- function(rs, d, fillNA=FALSE) {
 	nx <- 1 + 2 * floor(d/rs[1])
 	ny <- 1 + 2 * floor(d/rs[2])
-	m <- matrix(ncol=nx, nrow=ny)
-	m[ceiling(ny/2), ceiling(nx/2)] <- 1
-	if (nx == 1 & ny == 1) {
-		return(m)
-	} else {
+	w <- matrix(ncol=nx, nrow=ny)
+	w[ceiling(ny/2), ceiling(nx/2)] <- 1
+	if ((nx != 1) || (ny != 1)) {
 		x <- raster(m, xmn=0, xmx=nx*rs[1], ymn=0, ymx=ny*rs[2], crs="+proj=utm +zone=1 +datum=WGS84")
 		d <- as.matrix(distance(x)) <= d
-		d / sum(d)
+		w <- d / sum(d)
 	}
+	if (fillNA) {
+		w[w <= 0] <- NA 
+	}
+	w		
 }
 
 
@@ -56,11 +58,7 @@ focalWeight <- function(x, d, type=c('circle', 'Gauss', 'rectangle'), fillNA=FAL
 	type <- match.arg(type)
 	x <- res(x)
 	if (type == 'circle') {
-		w <- .circular.weight(x, d[1])
-		if (fillNA) {
-			w[w <= 0] <- NA 
-		}
-		w	
+		.circular.weight(x, d[1], fillNA)
 	} else if (type == 'Gauss') {
 		if (!length(d) %in% 1:2) {
 			stop("If type=Gauss, d should be a vector of length 1 or 2")
