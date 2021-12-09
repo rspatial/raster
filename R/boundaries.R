@@ -85,19 +85,21 @@ function(x, type='inner', classes=FALSE, directions=8, asNA=FALSE, filename="", 
 		v <- as.integer(t(v[2:(nrow(v)-1), 2:(ncol(v)-1)]))
 		out <- writeValues(out, v, 1)
 		pbStep(pb, 1)
-		for (i in 2:(tr$n-1)) {
-			v <- getValues(x, row=tr$row[i]-1, nrows=tr$nrows[i]+2)
-			v <- matrix(v, ncol=tr$nrows[1]+2)
-			if (gll) {
-				v <- rbind(v[nrow(v),], v, v[1,])
-			} else {
-				v <- rbind(v[1,], v, v[nrow(v),])
+		if (tr$n > 2) {
+			for (i in 2:(tr$n-1)) {
+				v <- getValues(x, row=tr$row[i]-1, nrows=tr$nrows[i]+2)
+				v <- matrix(v, ncol=tr$nrows[1]+2)
+				if (gll) {
+					v <- rbind(v[nrow(v),], v, v[1,])
+				} else {
+					v <- rbind(v[1,], v, v[nrow(v),])
+				}
+				v <- .edge(round(v), as.integer(c(tr$nrows[i]+2, nc)), classes, type, directions)
+				v <- matrix(v, ncol=nc, byrow=TRUE)
+				v <- as.integer(t(v[2:(nrow(v)-1), 2:(ncol(v)-1)]))
+				out <- writeValues(out, v, tr$row[i])
+				pbStep(pb, i)
 			}
-			v <- .edge(round(v), as.integer(c(tr$nrows[i]+2, nc)), classes, type, directions)
-			v <- matrix(v, ncol=nc, byrow=TRUE)
-			v <- as.integer(t(v[2:(nrow(v)-1), 2:(ncol(v)-1)]))
-			out <- writeValues(out, v, tr$row[i])
-			pbStep(pb, i)
 		}
 		i <- tr$n
 		v <- getValues(x, row=tr$row[i]-1, nrows=tr$nrows[i]+1)
