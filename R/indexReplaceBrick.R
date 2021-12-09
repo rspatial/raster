@@ -59,13 +59,10 @@ function(x,i,j,...,drop=TRUE) {
 })
 
 
-setReplaceMethod("[[", c("Raster", "character", "missing"),
+setReplaceMethod("[[", c("RasterStackBrick", "character", "missing"),
 	function(x, i, j, value) {
 		if (inherits(value, 'Raster')) {
 			names(value) <- i
-		}
-		if (inherits(value, 'RasterLayer')) {
-			return(value) 
 		}
 		n <- which(i == names(x))[1]
 		if (is.na(n)) {
@@ -76,6 +73,24 @@ setReplaceMethod("[[", c("Raster", "character", "missing"),
 	}
 )
 
+setReplaceMethod("[[", c("RasterLayer", "character", "missing"),
+	function(x, i, j, value) {
+		stopifnot(i == names(x))
+		if (inherits(value, 'RasterLayer')) {
+			names(value) <- i
+			return(value) 
+		} else if (inherits(value, 'Raster')) {
+			if (nlayers(value) == 1) {
+				value <- value[[1]]
+				names(value) <- i
+				return(value)
+			} else {
+				stop("too many layers")
+			}
+		}
+		setValues(x, value)
+	}
+)
 
 setReplaceMethod("[[", c("RasterStack", "numeric", "missing"),
 	function(x, i, j, value) {

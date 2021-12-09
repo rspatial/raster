@@ -1,5 +1,8 @@
 
 
+
+if (!isGeneric("as.raster")) { setGeneric("as.raster", function(x, ...) standardGeneric("as.raster"))}	
+
 if (!isGeneric("all.equal")) { setGeneric("all.equal", function(target, current, ...) standardGeneric("all.equal"))}	
 if (!isGeneric("extent")) { setGeneric("extent", function(x, ...) standardGeneric("extent")) }	
 

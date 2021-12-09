@@ -7,13 +7,6 @@
 # Note: these functions create a _r_aster object (small r) (grDevices) for use with the rasterImage function
 # _NOT_ a Raster* object as defined in this package
 
-	
-if (!isGeneric("as.raster")) {
-	setGeneric("as.raster", function(x, ...)
-		standardGeneric("as.raster"))
-}	
-
-
 
 setMethod('as.raster', signature(x='RasterLayer'), 
 function(x, maxpixels=50000, col=rev(terrain.colors(255)), ...) {
