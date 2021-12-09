@@ -5,6 +5,7 @@
 
 setMethod("$", "Raster",  function(x, name) { x[[name]] } )
 
+
 setMethod("$<-", "Raster",  
 	function(x, name, value) { 
 		i <- which(name == names(x))[1]
@@ -21,10 +22,17 @@ setMethod("$<-", "Raster",
 				return(x)
 			}
 		} else {
-			if (inherits(value, 'RasterLayer')) {
-				x <- value
-			} else if (inherits(value, 'Raster')) {
-				x[[name]] <- value
+			if (inherits(value, 'Raster')) {
+				if (inherits(x, 'RasterLayer')) {
+					if (name == names(x)) {
+						x <- value
+					} else {
+						x <- stack(x)
+						x[[name]] <- value
+					}
+				} else {
+					x[[name]] <- value
+				}
 			} else {
 				r <- x[[name]]
 				r[] <- value
@@ -75,7 +83,12 @@ setReplaceMethod("[[", c("RasterStackBrick", "character", "missing"),
 
 setReplaceMethod("[[", c("RasterLayer", "character", "missing"),
 	function(x, i, j, value) {
-		stopifnot(i == names(x))
+		stopifnot(length(i) == 1)
+		if (i[1] != names(x)) {
+			x <- stack(x)
+			x[[i]] <- value
+			return(x)
+		}
 		if (inherits(value, 'RasterLayer')) {
 			names(value) <- i
 			return(value) 
