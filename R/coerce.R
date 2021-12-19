@@ -23,10 +23,12 @@ setAs("SpatRaster", "Raster",
 				r <- raster::raster(b$source, band=b$bands)
 			}
 		} else {
-			if ((nrow(b) == 1) & (b$source[1] != "")) {
-				r <- raster::brick(b$source)
-				if (!((raster::nlayers(r) == nl) && (b$bands[1] == 1) && (all(diff(b$bands) == 1)))) {
-					r <- raster::stack(b$source, bands=b$bands)
+			usid <- unique(b$sid)
+			if ((length(usid) == 1) & (b$source[1] != "")) {
+				if ((nl == nrow(b)) && (b$bands[1] == 1) && (all(diff(b$bands) == 1))) {
+					r <- raster::brick(b$source[1])
+				} else {
+					r <- raster::stack(b$source[1], bands=b$bands)
 				}
 			} else if (all(b$source=="")) {
 				r <- raster::brick(ncol=ncol(from), nrow=nrow(from), crs=prj,
