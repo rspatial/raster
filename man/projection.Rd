@@ -9,6 +9,8 @@
 \alias{projection}
 \alias{projection<-}
 \alias{proj4string}
+\alias{proj4string,BasicRaster-method}
+\alias{proj4string,CRS-method}
 \alias{proj4string<-}
 \alias{as.character,CRS-method}
 \alias{is.na,CRS-method}

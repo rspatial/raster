@@ -15,8 +15,8 @@ function(x, y) {
 
 	prj <- x@proj4string
 	if (is.na(prj)) prj <- y@proj4string
-	x@proj4string <- sp::CRS(as.character(NA))
-	y@proj4string <- sp::CRS(as.character(NA))
+	x@proj4string <- .CRS(as.character(NA))
+	y@proj4string <- .CRS(as.character(NA))
 	
 	subs <- rgeos::gIntersects(x, y, byid=TRUE)
 	
@@ -67,7 +67,7 @@ function(x, y) {
 	}
 
 	prj <- x@proj4string
-	x@proj4string <- sp::CRS(as.character(NA))
+	x@proj4string <- .CRS(as.character(NA))
 	
 	#if (!rgeos::gIntersects(x)) {
 	# this is a useful test, but returned topologyerrors

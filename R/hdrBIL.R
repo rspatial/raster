@@ -42,7 +42,7 @@
 	cat("----------------------------------------------------------------\n", file = thefile)
 	cat("CREATOR=R package:x\n", file = thefile)
 	cat("CREATED=", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n", file = thefile)
-	cat("Projection=",  sp::proj4string(x), "\n", file = thefile)
+	cat("Projection=", proj4string(x), "\n", file = thefile)
 	cat("MinValue=",  minValue(x), "\n", file = thefile)
 	cat("MaxValue=",  maxValue(x), "\n", file = thefile)
 

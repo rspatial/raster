@@ -104,9 +104,6 @@ function(x, y, ..., keepnames=FALSE) {
 		if (is.na(prj)) prj <- y@proj4string
 
 		x <- list(x, y, ...)
-		#p <- sapply(x,  sp::proj4string)
-		#if (!isTRUE(all(p==p[1]))) { }
-
 
 		for (i in 1:length(x)) {
 			if (!inherits(x[[i]], "SpatialPolygons")) {

@@ -122,7 +122,7 @@
 		}
 		rgdal::GDALcall(transient, "SetProjectWkt", r@crs) 
 	} else {
-		prj <-  sp::proj4string(r)
+		prj <- proj4string(r)
 		rgdal::GDALcall(transient, "SetProject", prj) 
 	}
 	if (is.null(options)) {

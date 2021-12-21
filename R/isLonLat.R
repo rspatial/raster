@@ -72,7 +72,7 @@ setMethod('isLonLat', signature(x='BasicRaster'),
 #author:
 # ...
 	function(x, ...){
-		p4str <-  sp::proj4string(x)
+		p4str <- proj4string(x)
 		if (is.na(p4str) || nchar(p4str) == 0) {
 			return(FALSE)
 		} 

@@ -22,7 +22,7 @@ setMethod ('show' , 'BasicRaster',
 		cat('dimensions : ', nrow(object), ', ', ncol(object), ', ', ncell(object),'  (nrow, ncol, ncell)\n', sep="" ) 
 		cat('resolution : ' , xres(object), ', ', yres(object), '  (x, y)\n', sep="")
 		cat('extent     : ' , object@extent@xmin, ', ', object@extent@xmax, ', ', object@extent@ymin, ', ', object@extent@ymax, '  (xmin, xmax, ymin, ymax)\n', sep="")
-		cat('crs        :' ,  sp::proj4string(object), '\n')
+		cat('crs        :' , proj4string(object), '\n')
 	}
 )
 
@@ -40,7 +40,7 @@ setMethod ('show' , 'RasterLayer',
 		cat('dimensions : ', nrow(object), ', ', ncol(object), ', ', ncell(object),'  (nrow, ncol, ncell)\n', sep="" ) 
 		cat('resolution : ' , xres(object), ', ', yres(object), '  (x, y)\n', sep="")
 		cat('extent     : ' , object@extent@xmin, ', ', object@extent@xmax, ', ', object@extent@ymin, ', ', object@extent@ymax, '  (xmin, xmax, ymin, ymax)\n', sep="")
-		cat('crs        :' ,  sp::proj4string(object), '\n')
+		cat('crs        :' , proj4string(object), '\n')
 		
 
 		if (hasValues(object)) {
@@ -135,7 +135,7 @@ setMethod ('show' , 'RasterBrick',
 		#cat ('ncell      :' , ncell(object), '\n')
 		cat ('resolution : ' , xres(object), ', ', yres(object), '  (x, y)\n', sep="")
 		cat ('extent     : ' , object@extent@xmin, ', ', object@extent@xmax, ', ', object@extent@ymin, ', ', object@extent@ymax, '  (xmin, xmax, ymin, ymax)\n', sep="")
-		cat ('crs        :' ,  sp::proj4string(object), '\n')
+		cat ('crs        :' , proj4string(object), '\n')
 
 		ln <- names(object)
 		if (nl > mnr) {
@@ -234,7 +234,7 @@ setMethod ('show' , 'RasterStack',
 			#cat ('ncell      :' , ncell(object), '\n')
 			cat ('resolution : ' , xres(object), ', ', yres(object), '  (x, y)\n', sep="")
 			cat ('extent     : ' , object@extent@xmin, ', ', object@extent@xmax, ', ', object@extent@ymin, ', ', object@extent@ymax, '  (xmin, xmax, ymin, ymax)\n', sep="")
-			cat ('crs        :' ,  sp::proj4string(object), '\n')
+			cat ('crs        :' , proj4string(object), '\n')
 			ln <- names(object)
 			if (nl > mnr) {
 				ln <- c(ln[1:mnr], '...')

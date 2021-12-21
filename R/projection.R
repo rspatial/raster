@@ -50,18 +50,18 @@ setMethod("wkt", signature(obj="Raster"),
 .makeCRS <- function(user="", prj="", wkt="") {
 	if (wkt != "") {
 		if (prj != "") {
-			sp::CRS(prj, SRS_string=wkt)
+			.CRS(prj, SRS_string=wkt)
 		} else {
-			sp::CRS(SRS_string=wkt)		
+			.CRS(SRS_string=wkt)		
 		}
 	} else if (user !="") {
 		if (substr(trim(user), 1 ,1) == "+") {
-			sp::CRS(user)
+			.CRS(user)
 		} else {
-			sp::CRS(SRS_string=user)
+			.CRS(SRS_string=user)
 		}
 	} else {
-		sp::CRS(prj)
+		.CRS(prj)
 	}
 }
 
@@ -73,7 +73,7 @@ setMethod("wkt", signature(obj="Raster"),
 	}
 
 	if (is.null(x)) {
-		x <- sp::CRS()
+		x <- .CRS()
 	} else if (methods::extends(class(x), "BasicRaster")) { 
 		x <- x@crs
 	} else if (methods::extends(class(x), "Spatial")) { 
@@ -88,30 +88,30 @@ setMethod("wkt", signature(obj="Raster"),
 		crs <- crs(x)
 		x <- .makeCRS(x[1], x[2])
 	} else if (is.na(x)) {
-		x <- sp::CRS()
+		x <- .CRS()
 	} else if (is.character(x)) {
 		x <- trimws(x)
 		if (x == "") {
-			x <- sp::CRS()
+			x <- .CRS()
 		} else if (substr(x, 1, 1) == "+") {
-			x <- sp::CRS(x)
+			x <- .CRS(x)
 		} else {
-			x <- sp::CRS(SRS_string = x)
+			x <- .CRS(SRS_string = x)
 		}
 		#if (trimws(x) == "") {
 		#	x <- return(CRS())
 		#} else {
 		#	wkt <- rgdal::showSRID(x)
-		#	x <- sp::CRS()
+		#	x <- .CRS()
 		#	x@projargs <- rgdal::showP4(wkt)
 		#	attr(x, "comment") <- wkt
 		#}
 	} else if (is.numeric(x)) {
 		x <- paste0("EPSG:", round(x))
-		x <- sp::CRS(SRS_string = x)	
+		x <- .CRS(SRS_string = x)	
 	} else {
-		x <- sp::CRS()
-	} # else if "is sp::CRS"
+		x <- .CRS()
+	} # else if "is .CRS"
 	x
 }
 
@@ -136,11 +136,11 @@ setMethod("crs<-", signature("Spatial", "ANY"),
 
 		if (!inherits(value, "CRS")) {
 			if (is.na(value)) {
-				value <- sp::CRS()
+				value <- .CRS()
 			} else if (is.character(value)) {
-				value <- sp::CRS(value)
+				value <- .CRS(value)
 			} else {
-				value <- sp::CRS(value)
+				value <- .CRS(value)
 			}
 		}
 	
@@ -164,7 +164,7 @@ setMethod("is.na", signature(x="CRS"),
 		if (nlayers(x) > 0) {
 			for (i in 1:nlayers(x)) {
 				x@layers[[i]]@crs <- value
-				#x@layers[[i]]@crs <- sp::CRS(value)
+				#x@layers[[i]]@crs <- .CRS(value)
 			}
 		}
 	} 
@@ -172,7 +172,6 @@ setMethod("is.na", signature(x="CRS"),
 		x@proj4string <- value
 	} else {
 		x@crs <- value
-		#x@crs <- sp::CRS(value)
 	}
 	return(x)
 }
@@ -196,7 +195,7 @@ projection <- function(x, asText=TRUE) {
 		if (asText) {
 			return(x)
 		} else {
-			return( sp::CRS(x) )
+			return( .CRS(x) )
 		}
 	} else if (!inherits(x, "CRS")) { 
 		return(as.logical(NA))
@@ -211,7 +210,7 @@ projection <- function(x, asText=TRUE) {
 			}
 		}
 	} else if (!inherits(x, "CRS")) { 
-		x <- sp::CRS(x)
+		x <- .CRS(x)
 	}
 	return(x)
 }

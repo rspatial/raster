@@ -4,6 +4,20 @@
 # Licence GPL v3
 
 
+.proj4string <- function(x) {
+	if (inherits(x, "Spatial")) {
+		suppressWarnings(sp::proj4string(x))
+	} else {
+		x@crs@projargs
+	}
+}
+
+
+.CRS <- function(...) {
+	suppressWarnings(sp::CRS(...))
+}
+
+
 if (!isGeneric(".project")) {
 	setGeneric(".project", function(x, ...)
 		standardGeneric(".project"))

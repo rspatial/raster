@@ -163,7 +163,7 @@ function(x, y) {
 	x <- sp::spChFIDs(x, as.character(1:length(x)))
 	y <- sp::spChFIDs(y, as.character(1:length(y)))
 		
-	if (! identical( sp::proj4string(x),  sp::proj4string(y)) ) {
+	if (! identical( .proj4string(x), .proj4string(y)) ) {
 		warning('non identical crs')
 		y@proj4string <- x@proj4string
 	}	

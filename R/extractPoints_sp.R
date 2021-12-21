@@ -9,7 +9,7 @@ function(x, y, ...){
 	
 	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	
-	if (! identical( sp::proj4string(x),  sp::proj4string(y)) ) {
+	if (! identical( .proj4string(x), .proj4string(y)) ) {
 		warning('non identical crs')
 		y@proj4string <- x@proj4string
 	}
