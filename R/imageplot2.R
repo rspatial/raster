@@ -74,7 +74,7 @@
 				fun <- log
 			}
 		} else {
-			fun - NULL
+			fun <- NULL
 		}
 	} else {
 		fun <- NULL
