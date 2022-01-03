@@ -18,7 +18,7 @@ The direction (azimuth) to or from the nearest cell that is not \code{NA}. The d
 \item{filename}{Character. Output filename (optional)}
 \item{degrees}{Logical. If \code{FALSE} (the default) the unit of direction is radians.}
 \item{from}{Logical. Default is \code{FALSE}. If \code{TRUE}, the direction from (instead of to)  the nearest cell that is not \code{NA} is returned}
-\item{doEdge}{Logical. If \code{TRUE}, the \code{\link{boundaries}} function is called first. This may be efficient in cases where you compute the distance to large blobs. Calling \code{boundaries} determines the edge cells that matter for distance computation}
+\item{doEdge}{Logical. If \code{TRUE}, the \code{\link{boundaries}} function is called first. This may be efficient in cases where you compute the distance to large blobs. Calling \code{boundaries} determines the edge cells that matter for direction computation}
 \item{...}{Additional arguments as for \code{\link{writeRaster}}}
 }
 

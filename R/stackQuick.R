@@ -83,12 +83,20 @@
 						r@data@names <- ln[i]
 						r@data@min <- mn[i]
 						r@data@max <- mx[i]
+						if (b@data@isfactor[i]) {
+							r@data@isfactor <- b@data@isfactor[i]
+							r@data@attributes <- b@data@attributes[[i]]
+						}
 						r
-						})
+					})
 			} else {
 				s@layers <- sapply(bands, function(i){
 						r@data@values <- b@data@values[,i]
 						r@data@names <- ln[i]
+						if (b@data@isfactor[i]) {
+							r@data@isfactor <- TRUE
+							r@data@attributes <- b@data@attributes[i]
+						}
 						r
 						})
 			}
@@ -109,15 +117,24 @@
 					r@data@names <- ln[i]
 					r@data@min <- mn[i]
 					r@data@max <- mx[i]
+					if (b@data@isfactor[i]) {
+						r@data@isfactor <- b@data@isfactor[i]
+						r@data@attributes <- b@data@attributes[i]
+					}
 					r
 					})
 		} else {
 			s@layers <- sapply(bands, function(i){
 					r@data@band <-  i
 					r@data@names <- ln[i]
+					if (b@data@isfactor[i]) {
+						r@data@isfactor <- b@data@isfactor[i]
+						r@data@attributes <- b@data@attributes[i]
+					}
 					r
 					})
 		}
 	}
 	s
 }
+

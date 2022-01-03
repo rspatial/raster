@@ -8,6 +8,8 @@ using namespace std;
 
 class SpExtent {
 	public:
+		virtual ~SpExtent(){}
+
 		double xmin, xmax, ymin, ymax;
 		SpExtent() {xmin = -180; xmax = 180; ymin = -90; ymax = 90;}
 		SpExtent(double _xmin, double _xmax, double _ymin, double _ymax) {xmin = _xmin; xmax = _xmax; ymin = _ymin; ymax = _ymax;}
@@ -35,6 +37,8 @@ class SpExtent {
 
 class SpPolyPart {
 	public:
+		virtual ~SpPolyPart(){}
+
 		std::vector<double> x, y; 
 		std::vector< std::vector<double>> xHole, yHole; 
 
@@ -61,6 +65,8 @@ class SpPolyPart {
 
 class SpPoly {
 	public:
+		virtual ~SpPoly(){}
+
 		std::vector<SpPolyPart> parts; 
 		SpExtent extent;
 
@@ -84,6 +90,7 @@ class SpPoly {
 
 class SpPolygons {
 	public:
+		virtual ~SpPolygons(){}
 		std::vector<SpPoly> polys; 
 		SpExtent extent;		
 		std::string crs;
@@ -127,6 +134,7 @@ class SpPolygons {
 
 class RasterSource {
 	public:
+		virtual ~RasterSource(){}
 		std::vector<bool> memory;
 		std::vector<string> filename;
 		std::vector<string> driver;
@@ -139,6 +147,7 @@ class RasterSource {
 
 class BlockSize {
 	public:
+		virtual ~BlockSize(){}
 		std::vector<unsigned> row;
 		std::vector<unsigned> nrows;
 		unsigned n;
@@ -162,6 +171,8 @@ class SpRaster {
 		BlockSize getBlockSize();
 		
 	public:
+		virtual ~SpRaster(){}
+
 		//double NA = std::numeric_limits<double>::quiet_NaN();
 		RasterSource source;
 	
