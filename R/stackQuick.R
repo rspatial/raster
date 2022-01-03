@@ -85,7 +85,7 @@
 						r@data@max <- mx[i]
 						if (b@data@isfactor[i]) {
 							r@data@isfactor <- b@data@isfactor[i]
-							r@data@attributes <- b@data@attributes[[i]]
+							r@data@attributes <- b@data@attributes[i]
 						}
 						r
 					})
