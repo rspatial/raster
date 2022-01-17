@@ -34,7 +34,7 @@ If \code{x} is a RasterStack/Brick, a RasterBrick will be returned if \code{na.r
 }
 
 \value{
-If \code{x} is a Raster* object: RasterLayer or RasterBrick. Cell values represent the size of the cell in km2, or the relative size if \code{weights=TRUE}. If the CRS is not longitude/latitude the values are in squared map units (typically meter)
+If \code{x} is a Raster* object: RasterLayer or RasterBrick. Cell values represent the size of the cell in km2, or the relative size if \code{weights=TRUE}. If the CRS is not longitude/latitude the values returned are the product of the cell resolution (typically in square meter)
 
 If \code{x} is a SpatialPolygons* object: area of each spatial object in squared meters if the CRS is longitude/latitude, or in squared map units (typically meter)
 }
