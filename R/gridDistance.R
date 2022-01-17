@@ -14,7 +14,7 @@ setMethod("gridDistance", signature("RasterLayer"),
 function(x, origin, omit=NULL, filename="", ...) {
 
 	if( !requireNamespace("igraph")) {
-		stop('you need to install the igraph0 package to be able to use this function')
+		stop('you need to install the igraph package to be able to use this function')
 	}
 	if (missing(origin)) {
 		stop("you must supply an 'origin' argument")
@@ -164,7 +164,7 @@ function(x, origin, omit=NULL, filename="", ...) {
 		}
 
 		if (lonlat) {
-			distance <- pointDistance(xyFromCell(x,adj[,1]+startCell), xyFromCell(x,adj[,2]+startCell), longlat=TRUE) 
+			distance <- pointDistance(xyFromCell(x,adj[,1]+startCell), xyFromCell(x,adj[,2]+startCell), lonlat=TRUE) 
 			igraph::E(distGraph)$weight <- c(distance, perCell)
 
 		} else {
