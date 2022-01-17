@@ -81,7 +81,8 @@ SpatialPolygons: Compute the area of the spatial features. Works for both planar
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>If <code>x</code> is a Raster* object: RasterLayer or RasterBrick. Cell values represent the size of the cell in km2, or the relative size if <code>weights=TRUE</code>If <code>x</code> is a SpatialPolygons* object: area if each spatial object in squared meters if the CRS is longitude/latitude, or in squared map units (typically meter)</p>
+    <p>If <code>x</code> is a Raster* object: RasterLayer or RasterBrick. Cell values represent the size of the cell in km2, or the relative size if <code>weights=TRUE</code>. If the CRS is not longitude/latitude the values are in squared map units (typically meter)
+If <code>x</code> is a SpatialPolygons* object: area of each spatial object in squared meters if the CRS is longitude/latitude, or in squared map units (typically meter)</p>
     </div>
 
     <div id="ref-examples">
@@ -109,7 +110,7 @@ SpatialPolygons: Compute the area of the spatial features. Works for both planar
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

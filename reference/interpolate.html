@@ -108,9 +108,7 @@
 <span class="r-in"><span class="co">#### Thin plate spline model</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dnychka/fieldsRPackage" class="external-link">fields</a></span><span class="op">)</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: spam</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: dotCall64</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: grid</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Spam version 2.7-0 (2021-06-25) is loaded.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Spam version 2.8-0 (2022-01-05) is loaded.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Type 'help( Spam)' or 'demo( spam)' for a short introduction </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> and overview of this package.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Help for individual functions is also obtained by adding the</span>
@@ -146,7 +144,7 @@
 <span class="r-in"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">elevation</span>, <span class="va">xy</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># add as another independent variable</span></span>
-<span class="r-in"><span class="va">xyz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam//reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xy</span>, <span class="va">z</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">xyz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xy</span>, <span class="va">z</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">tps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fields/man/Tps.html" class="external-link">Tps</a></span><span class="op">(</span><span class="va">xyz</span>, <span class="va">v</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">elevation</span>, <span class="va">tps2</span>, xyOnly<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -243,7 +241,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
