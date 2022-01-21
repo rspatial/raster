@@ -117,7 +117,7 @@
 					r@data@names <- ln[i]
 					r@data@min <- mn[i]
 					r@data@max <- mx[i]
-					if (b@data@isfactor[i]) {
+					if (isTRUE(b@data@isfactor[i])) {
 						r@data@isfactor <- b@data@isfactor[i]
 						r@data@attributes <- b@data@attributes[i]
 					}
