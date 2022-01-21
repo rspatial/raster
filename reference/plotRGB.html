@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-13</span>
       </span>
     </div>
 
@@ -116,11 +116,11 @@ zlimcol<span class="op">=</span><span class="cn">NULL</span>, axes<span class="o
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (b@data@isfactor[i]) {    r@data@isfactor &lt;- b@data@isfactor[i]    r@data@attributes &lt;- b@data@attributes[i]}:</span> missing value where TRUE/FALSE needed</span>
+<span class="r-plt img"><img src="plotRGB-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (b@data@isfactor[i]) {    r@data@isfactor &lt;- b@data@isfactor[i]    r@data@attributes &lt;- b@data@attributes[i]}:</span> missing value where TRUE/FALSE needed</span>
+<span class="r-plt img"><img src="plotRGB-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>, stretch<span class="op">=</span><span class="st">'hist'</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (b@data@isfactor[i]) {    r@data@isfactor &lt;- b@data@isfactor[i]    r@data@attributes &lt;- b@data@attributes[i]}:</span> missing value where TRUE/FALSE needed</span>
+<span class="r-plt img"><img src="plotRGB-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
