@@ -1,9 +1,9 @@
 Package: raster
 Type: Package
 Title: Geographic Data Analysis and Modeling
-Version: 3.5-13
+Version: 3.5-14
 Date: 2022-01-21
-Imports: Rcpp, methods, terra (>= 1.4-11)
+Imports: Rcpp, methods, terra (>= 1.5-12)
 LinkingTo: Rcpp
 Depends: sp (>= 1.4-5), R (>= 3.5.0)
 Suggests: rgdal (>= 1.5-23), rgeos (>= 0.5-3), ncdf4, igraph, tcltk, parallel, rasterVis, MASS, sf, tinytest, gstat, fields, exactextractr
