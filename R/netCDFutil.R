@@ -6,6 +6,14 @@
 
 .getCRSfromGridMap4 <- function(g) {
 
+	if (!is.null(g$epsg_code)) {
+		crs <- g$epsg_code
+		if (!grep("EPSG:", crs, ignore.case=TRUE)) {
+			crs <- paste0("epsg:", crs)
+		}
+		return(crs)
+	}
+
 	sp <- g$standard_parallel
 	if (length(sp) > 1) {
 		g$standard_parallel1 <- sp[1]
@@ -15,11 +23,7 @@
 
 	vals <- sapply(g, function(i) i[1]) 
 	vars <- names(vals)
-	if (any(vars == "epsg_code")) {
-		crs <- vals[vars=="epsg_code"] 
-		crs <- paste0("+init=epsg:", crs)
-		return(crs)
-	} else if (any(vars %in% c("proj4", "crs_wkt", "spatial_ref"))) {
+	if (any(vars %in% c("proj4", "crs_wkt", "spatial_ref"))) {
 		crs=vals[vars %in% c("proj4", "crs_wkt", "spatial_ref")][1]
 		return(crs)
 	}
