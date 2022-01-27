@@ -40,12 +40,17 @@ setAs("SpatRaster", "Raster",
 				x <- raster::raster(ncol=ncol(from), nrow=nrow(from), crs=prj,
 			          xmn=e[1], xmx=e[2], ymn=e[3], ymx=e[4])
 				r <- list()
-				for (i in 1:nl) {
+				for (i in usid) {
+					bi <- b[b$sid == usid[i], ,drop=FALSE]
 					if (b$source[i] == "") {
 						r[[i]] <- raster::setValues(x, values(from[[i]]))
 					} else {
-						bands <- b$bands[b$sid == i]
-						r[[i]] <- raster::stack(b$source[i], bands=bands)
+						bands <- bi$bands
+						if (length(bands) > 1) {
+							r[[i]] <- raster::stack(b$source[i], bands=bands)
+						} else {
+							r[[i]] <- raster::raster(b$source[i], band=bands)						
+						}
 					}
 				}
 				r <- raster::stack(r)
