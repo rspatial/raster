@@ -54,7 +54,7 @@ setMethod('summary', signature(object='RasterStackBrick'),
 			nas <- apply(is.na(object@data@values), 2, sum)
 			values <- rbind(sm, nas)
 
-		} else if (  fromDisk(object) ) {
+		} else if ( hasValues(object) ) {
 			
 			nc <- ncell(object)
 			if (nc > maxsamp) {

@@ -40,10 +40,11 @@ setAs("SpatRaster", "Raster",
 				x <- raster::raster(ncol=ncol(from), nrow=nrow(from), crs=prj,
 			          xmn=e[1], xmx=e[2], ymn=e[3], ymx=e[4])
 				r <- list()
+				b$layer <- 1:nrow(b)
 				for (i in usid) {
 					bi <- b[b$sid == usid[i], ,drop=FALSE]
-					if (b$source[i] == "") {
-						r[[i]] <- raster::setValues(x, values(from[[i]]))
+					if (bi$source[1] == "") {
+						r[[i]] <- raster::setValues(x, values(from[[ bi$layer ]]))
 					} else {
 						bands <- bi$bands
 						if (length(bands) > 1) {
@@ -146,9 +147,6 @@ setAs("Raster", "SpatRaster",
 		}
 	}
 )
-
-
-
 
 
 # To sp pixel/grid objects	
@@ -600,3 +598,5 @@ setAs("grf", "RasterLayer",
 	# }	
 	# b
 # }
+
+
