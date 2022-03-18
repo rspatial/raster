@@ -21,7 +21,7 @@
 	cat("projection=", proj4string(x), "\n", file = thefile, sep='')
 # update to add WKT2
         if (!is.null(comment(crs(x))))
-            cat("wkt=", gsub(" *", "", gsub("\\n", "", wkt(x))), "\n",
+            cat("wkt=", gsub("\\n", "", wkt(x)), "\n",
                 file = thefile, sep='')
 
 	cat("[data]", "\n", file = thefile, sep='')
