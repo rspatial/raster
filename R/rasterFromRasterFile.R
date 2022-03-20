@@ -94,6 +94,8 @@
 	band <- as.integer(band)
 	bandorder <- "BIL"
 	prj <- NA
+# update to add WKT2
+	wkt <- NA
 	minval <- NA
 	maxval <- NA
 	nodataval <- -Inf
@@ -151,13 +153,14 @@
 			} else if (ini[i,2] == "NLYR") { nbands <- as.integer(ini[i,3]) 
 			} else if (ini[i,2] == "BANDORDER") { bandorder <- ini[i,3] 
 			} else if (ini[i,2] == "CRS") { prj <- ini[i,3] 
+# update to add WKT2
+			} else if (ini[i,2] == "WKT") { wkt <- ini[i,3] 
 			} else if (ini[i,2] == "NAMES") { layernames <- ini[i,3] 
 			} else if (ini[i,2] == "ZVALUES") { zvalues <- ini[i,3] 
 			} else if (ini[i,2] == "ZCLASS") { zclass <- ini[i,3] } 
 		}  
 
 	} else {
-	
 		for (i in 1:length(ini[,1])) {
 			if (ini[i,2] == "MINX") { xn <- as.numeric(ini[i,3]) 
 			} else if (ini[i,2] == "MAXX") { xx <- as.numeric(ini[i,3]) 
@@ -201,6 +204,8 @@
 			} else if (ini[i,2] == "NBANDS") { nbands <- as.integer(ini[i,3]) 
 			} else if (ini[i,2] == "BANDORDER") { bandorder <- ini[i,3] 
 			} else if (ini[i,2] == "PROJECTION") { prj <- ini[i,3] 
+# update to add WKT2
+			} else if (ini[i,2] == "WKT") { wkt <- ini[i,3] 
 			} else if (ini[i,2] == "LAYERNAME") { layernames <- ini[i,3] 
 			} else if (ini[i,2] == "ZVALUES") { zvalues <- ini[i,3] 
 			} else if (ini[i,2] == "ZCLASS") { zclass <- ini[i,3] } 
@@ -215,7 +220,12 @@
 	}
 	
 
-	prj <- .getProj(prj, crs)
+# update to add WKT2
+        if (!is.na(wkt)) {
+            prj <- .makeCRS(prj=prj, wkt=wkt)
+        } else {
+	    prj <- .getProj(prj, crs)
+        }
 	
 	if (band < 1) {
 		stop("band must be 1 or larger")
