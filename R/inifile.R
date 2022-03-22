@@ -30,13 +30,21 @@
 }
 
 	
-readIniFile <- function(filename, token='=', commenttoken=';', aslist=FALSE, case) {
+readIniFile <- function(filename, token='=', commenttoken=';', wkttoken = "#", aslist=FALSE, case) {
 
     stopifnot(file.exists(filename))
 	
 	Lines <- trim(readLines(filename,  warn = FALSE))
 	
-	ini <- lapply(Lines, function(s){ .strSplitOnFirstToken(s, token=commenttoken) } ) 
+	ini <- lapply(Lines, function(s){ 
+            if (strsplit(s, "=")[[1]][1] != "wkt") {
+                res <- .strSplitOnFirstToken(s, token=commenttoken)
+            } else {
+# if WKT2 do not split, no comment permitted
+                res <- .strSplitOnFirstToken(s, token=wkttoken)
+            } 
+            res 
+        } ) 
 	Lines <- matrix(unlist(ini), ncol=2, byrow=TRUE)[,1]
 	ini <- lapply(Lines, function(s){ .strSplitOnFirstToken(s, token=token) }) 
 	
