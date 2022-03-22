@@ -30,7 +30,7 @@
 }
 
 	
-readIniFile <- function(filename, token='=', commenttoken=';', wkttoken = "#", aslist=FALSE, case) {
+readIniFile <- function(filename, token='=', commenttoken=';', aslist=FALSE, case) {
 
     stopifnot(file.exists(filename))
 	
@@ -41,7 +41,7 @@ readIniFile <- function(filename, token='=', commenttoken=';', wkttoken = "#", a
                 res <- .strSplitOnFirstToken(s, token=commenttoken)
             } else {
 # if WKT2 do not split, no comment permitted
-                res <- .strSplitOnFirstToken(s, token=wkttoken)
+                res <- c(trim(s), NA)
             } 
             res 
         } ) 

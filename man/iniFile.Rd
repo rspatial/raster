@@ -9,14 +9,13 @@ This function reads  \code{'.ini'}  files. These are text file databases that ar
 }
 
 \usage{
-readIniFile(filename, token='=', commenttoken=';', wkttoken = "#", aslist=FALSE, case)
+readIniFile(filename, token='=', commenttoken=';', aslist=FALSE, case)
 }
 
 \arguments{
   \item{filename}{Character. Filename of the .ini file}
   \item{token}{Character. The character that separates the "name" (variable name) from the "value"}
   \item{commenttoken}{Character. This token and everything that follows on the same line is considered a 'comment' that is not for machine consumption and is ignored in processing} 
-  \item{wkttoken}{Character. Used when key is \dQuote{wkt}}
   \item{aslist}{Logical. Should the values be returned as a list}
   \item{case}{Optional. Function that operates on the text, such as \code{\link{toupper}} or  \code{\link{tolower}} }
 }
