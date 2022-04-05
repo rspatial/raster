@@ -11,19 +11,6 @@
 	cat("creator=R package 'raster'", "\n", file = thefile, sep='')
 	cat("created=", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n", file = thefile, sep='')
 
-	cat("[georeference]", "\n", file = thefile, sep='')
-	cat("nrows=",  nrow(x), "\n", file = thefile, sep='')
-	cat("ncols=",  ncol(x), "\n", file = thefile, sep='')
-	cat("xmin=", as.character(xmin(x)), "\n", file = thefile, sep='')
-	cat("ymin=", as.character(ymin(x)), "\n", file = thefile, sep='')
-	cat("xmax=", as.character(xmax(x)), "\n", file = thefile, sep='')
-	cat("ymax=", as.character(ymax(x)), "\n", file = thefile, sep='')
-	cat("projection=", proj4string(x), "\n", file = thefile, sep='')
-# update to add WKT2
-        if (!is.null(comment(crs(x))))
-            cat("wkt=", gsub("\\n", "", wkt(x)), "\n",
-                file = thefile, sep='')
-
 	cat("[data]", "\n", file = thefile, sep='')
 	cat("datatype=",  x@file@datanotation, "\n", file = thefile, sep='')
 	cat("byteorder=", x@file@byteorder, "\n", file = thefile, sep='')
@@ -100,6 +87,20 @@
 		cat("[metadata]", "\n", file = thefile, sep='')
 		cat(name_type_value, file = thefile, sep='')		
 	}
+
+	cat("[georeference]", "\n", file = thefile, sep='')
+	cat("nrows=",  nrow(x), "\n", file = thefile, sep='')
+	cat("ncols=",  ncol(x), "\n", file = thefile, sep='')
+	cat("xmin=", as.character(xmin(x)), "\n", file = thefile, sep='')
+	cat("ymin=", as.character(ymin(x)), "\n", file = thefile, sep='')
+	cat("xmax=", as.character(xmax(x)), "\n", file = thefile, sep='')
+	cat("ymax=", as.character(ymax(x)), "\n", file = thefile, sep='')
+	cat("projection=", proj4string(x), "\n", file = thefile, sep='')
+# update to add WKT2
+        if (!is.null(comment(crs(x))))
+            cat("wkt=", gsub("\\n", "", wkt(x)), "\n",
+                file = thefile, sep='')
+
 	close(thefile)
 	return(TRUE)
 }
