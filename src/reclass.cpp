@@ -51,7 +51,7 @@ Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, b
 				} else {
 					val[i] = d[i];
 					for (size_t j=0; j<a; j++) {
-						if ((d[i] >= rcl[j]) & (d[i] <= rcl[j+a])) {
+						if ((d[i] >= rcl[j]) && (d[i] <= rcl[j+a])) {
 							val[i] = rcl[j+b];
 							break;
 						}
@@ -83,7 +83,7 @@ Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, b
 					} else {
 						val[i] = d[i];
 						for (size_t j=0; j<a; j++) {
-							if ((d[i] > rcl[j]) & (d[i] <= rcl[j+a])) {
+							if ((d[i] > rcl[j]) && (d[i] <= rcl[j+a])) {
 								val[i] = rcl[j+b];
 								break;
 							}
@@ -99,7 +99,7 @@ Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, b
 					} else {
 						val[i] = d[i];
 						for (size_t j=0; j<a; j++) {
-							if ((d[i] > rcl[j]) & (d[i] <= rcl[j+a])) {
+							if ((d[i] > rcl[j]) && (d[i] <= rcl[j+a])) {
 								val[i] = rcl[j+b];
 								break;
 							}
@@ -129,7 +129,7 @@ Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, b
 					} else {
 						val[i] = d[i];
 						for (size_t j=0; j<a; j++) {
-							if ((d[i] >= rcl[j]) & (d[i] < rcl[j+a])) {
+							if ((d[i] >= rcl[j]) && (d[i] < rcl[j+a])) {
 								val[i] = rcl[j+b];
 								break;
 							}
@@ -145,7 +145,7 @@ Rcpp::NumericVector reclassify(Rcpp::NumericVector d, Rcpp::NumericMatrix rcl, b
 					} else {
 						val[i] = d[i];
 						for (size_t j=0; j<a; j++) {	
-							if ((d[i] >= rcl[j]) & (d[i] < rcl[j+a])) {
+							if ((d[i] >= rcl[j]) && (d[i] < rcl[j+a])) {
 								val[i] = rcl[j+b];
 								break;
 							}

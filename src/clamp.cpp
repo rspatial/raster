@@ -20,7 +20,7 @@ Rcpp::NumericVector do_clamp(std::vector<double> d, std::vector<double> r, bool 
 		}		
 	} else {
 		for (size_t i=0; i<n; i++) {
-			if ( (d[i] < r[0]) | (d[i] > r[1])) {
+			if ( (d[i] < r[0]) || (d[i] > r[1])) {
 				val[i] = NAN;
 			} else {
 				val[i] = d[i];
