@@ -69,8 +69,8 @@ setAs("SpatRaster", "Raster",
 
 .fromRasterLayerBrick <- function(from) {
 	 
-	if (raster::fromDisk(from)) {
-		f <- raster::filename(from)
+	if (fromDisk(from)) {
+		f <- filename(from)
 		if (from@file@driver == "netcdf") {
 			v <- attr(from@data, "zvar")
 			r <- rast(f, v)	
@@ -84,6 +84,9 @@ setAs("SpatRaster", "Raster",
 				}
 			}
 			crs(r) <- raster::wkt(from)
+			if (nbands(from) != nlayers(from)) {
+				r <- r[[bandnr(from)]]
+			}
 		}
 		if (from@file@NAchanged) {
 			NAflag(r) <- from@file@nodatavalue
@@ -102,10 +105,10 @@ setAs("SpatRaster", "Raster",
 		}
 		r <- rast(	nrows=nrow(from), 
 					ncols=ncol(from),
-					nlyrs=raster::nlayers(from),
+					nlyrs=nlayers(from),
 					crs=prj,
-					extent=raster::extent(from))
-		if (raster::hasValues(from)) {
+					extent=extent(from))
+		if (hasValues(from)) {
 			values(r) <- values(from)
 		}
 		levs <- levels(from)[[1]]
@@ -118,19 +121,23 @@ setAs("SpatRaster", "Raster",
 }
 
 .fromRasterStack <- function(from) {
-	x <- from[[1]]
-	n <- raster::nbands(x)
-	nl <- raster::nlayers(from)
-	if ((n > 1) & (n == nl)) {
-		ff <- lapply(1:nl, function(i) { raster::filename(from[[i]]) })
-		if (length(unique(ff)) == 1) {
-			r <- rast(raster::filename(x))
-			return(r)
+	nl <- nlayers(from)
+	ff <- sapply(1:nl, function(i) { filename(from[[i]]) })
+	uff <- unique(ff)
+	if (length(uff) == 1) {
+		if (uff == "") {
+			return(.fromRasterLayerBrick(from))
+		} else {
+			n <- nbands(from[[1]])
+			bnr <- sapply(1:nl, function(i) { bandnr(from[[i]]) })
+			if ((n == nl) && all(bnr == 1:n)) {
+				return( rast(uff) )
+			}
 		}
 	} 
-	s <- lapply(1:raster::nlayers(from), function(i) {
+	s <- lapply(1:nlayers(from), function(i) {
 		x <- from[[i]]
-		.fromRasterLayerBrick(x)[[raster::bandnr(x)]]
+		.fromRasterLayerBrick(x)
 	})
 	s <- do.call(c, s)
 	names(s) <- names(from)
