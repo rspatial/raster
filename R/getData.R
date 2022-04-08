@@ -7,6 +7,12 @@
 
 getData <- function(name='GADM', download=TRUE, path='', ...) {
 
+	w <- getOption('rasterGetDataWarningGiven')
+	if (is.null(w)) {
+		warning("getData will be removed in a future version of raster\n. You can use access these data, and more, with functions from the geodata package instead")
+		options(rasterGetDataWarningGiven=TRUE)
+	}
+	
 	path <- .getDataPath(path)
 
 	tout <- getOption("timeout")
