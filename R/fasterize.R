@@ -46,7 +46,7 @@
 
 
 .fasterize <- function(p, r, values, background = NA, filename="", ...) {
-	if (class(p) != "Rcpp_SpPolygons") p <- .makeSpPolygons(p)
+	if (!inherits(p, "Rcpp_SpPolygons")) p <- .makeSpPolygons(p)
 	if (missing(values)) values <- 1:p$size()
 	out <- raster(r)
 	if (canProcessInMemory(out, 4)) { 

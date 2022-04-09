@@ -6,7 +6,7 @@
 
 
 .csTextFun <- function(fun) {
-	if (class(fun)[1] != 'character') {
+	if (inherits(fun, 'character')) {
 		if (is.primitive(fun)) {
 			test <- try(deparse(fun)[[1]], silent=TRUE)
 			if (test == '.Primitive(\"sum\")') { fun <- 'sum' 
@@ -59,7 +59,7 @@ setMethod('cellStats', signature(x='RasterStackBrick'),
 				x <- matrix(x, ncol=1)
 			}
 
-			if (class(stat) == 'character') {
+			if (inherits(stat, 'character')) {
 				if (stat == "mean" ) {
 					return( colMeans(x, na.rm=na.rm) )
 			
@@ -125,7 +125,7 @@ setMethod('cellStats', signature(x='RasterStackBrick'),
 			return(apply(x, 2, stat, na.rm=na.rm, ...))
 		}
 		
-		if (class(stat) != 'character') {
+		if (!inherits(stat, 'character')) {
 			stop('cannot use this function for large files')
 		}
 		
@@ -285,7 +285,7 @@ setMethod('cellStats', signature(x='RasterLayer'),
 		if (inMemory(x) ) {
 			x <- getValues(x)
 
-			if (class(stat) == 'character') {
+			if (inherits(stat, 'character')) {
 				if (stat == "mean" ) {
 					return( mean(x, na.rm=na.rm) )
 				} else if (stat == "sum" ) {
@@ -341,7 +341,7 @@ setMethod('cellStats', signature(x='RasterLayer'),
 		}
 		
 		
-		if (class(stat) != 'character') {
+		if (inherits(stat, 'character')) {
 			stop('cannot use this function for large files')
 		}
 		

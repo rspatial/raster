@@ -34,7 +34,7 @@ function(x, y, ..., fun, tolerance=0.05, filename="") {
 	out <- setExtent(out, bb, keepres=TRUE, snap=FALSE)
 
 	fun <- .makeTextFun(fun)
-	if (class(fun)[1] == 'character') { 
+	if (inherits(fun, 'character')) { 
 		rowcalc <- TRUE 
 		fun <- .getRowFun(fun)
 	} else { 

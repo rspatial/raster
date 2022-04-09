@@ -624,11 +624,11 @@
 		stop('polygon and raster have no overlapping areas')
 	}
 
-	if (class(p) == 'SpatialPolygons' | field == 0) {
+	if (inherits(p, 'SpatialPolygons') || (field == 0)) {
 		putvals <- 1:length(p@polygons)
 	} else {
 		putvals <- as.vector(p@data[,field])
-		if (class(putvals) == 'character') {
+		if (inherits(putvals, 'character')) {
 			stop('selected field is charater type')
 		}
 	}

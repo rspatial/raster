@@ -58,10 +58,10 @@ setExtent <- function(x, ext, keepres=FALSE, snap=FALSE) {
 			return(newobj)
 		}
 		
-	} else if (class(x) != "BasicRaster") {
+	} #else if (inherits(x, "Raster")) {
 		x@extent <- bb
 		return(x)
-	}
+	#}
 	
 }
 

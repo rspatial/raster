@@ -173,7 +173,7 @@ setMethod('brick', signature(x='SpatialGrid'),
 		crs(b) <- x@proj4string
 		dim(b) <- c(x@grid@cells.dim[2], x@grid@cells.dim[1])	
 				
-		if (class(x) == 'SpatialGridDataFrame') {
+		if (inherits(x, 'SpatialGridDataFrame')) {
 			
 			x <- x@data
 			

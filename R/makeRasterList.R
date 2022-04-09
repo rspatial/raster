@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 .addToList <- function(x, r, compare, giveError, unstack) {
-	if (class(r) == 'character') {
+	if (inherits(r, 'character')) {
 		r <- raster(r)
 		# or r <- unstack(stack(r, -1)) ???
 		if (compare & length(x)>0) { 
@@ -36,7 +36,7 @@
 	arg <- list(...)
 	x <- list()
 	for (i in seq(along.with=arg)) {
-		if (class(arg[[i]]) == 'list') {
+		if (inherits(arg[[i]], 'list')) {
 			for (j in seq(along.with=arg[[i]])) {
 				x <- .addToList(x, arg[[i]][[j]], compare=compare, giveError=giveError, unstack=unstack) 
 			}

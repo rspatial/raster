@@ -7,7 +7,7 @@
 
 
 .makeTextFun <- function(fun) {
-	if (class(fun)[1] != 'character') {
+	if (inherits(fun, 'character')) {
 		if (is.primitive(fun)) {
 			test <- try(deparse(fun)[[1]], silent=TRUE)
 			if (test == '.Primitive(\"sum\")') { fun <- 'sum' 
@@ -183,7 +183,7 @@ function(x, fun, filename='', na.rm, forcefun=FALSE, forceapply=FALSE, ...) {
 	}
 
 	fun <- .makeTextFun(fun)
-	if (class(fun)[1] == 'character') { 
+	if (inherits(fun, 'character')) { 
 		doapply <- FALSE
 		fun <- .getRowFun(fun)
 	} 

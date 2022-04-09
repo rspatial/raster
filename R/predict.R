@@ -161,7 +161,7 @@ setMethod('predict', signature(object='Raster'),
 	
 				predv <- fun(model, blockvals, ...)
 		
-				if (class(predv)[1] == 'list') {
+				if (inherits(predv, 'list')) {
 					predv <- unlist(predv, use.names = FALSE)
 					if (length(predv) != nrow(blockvals)) {
 						predv <- matrix(predv, nrow=nrow(blockvals))

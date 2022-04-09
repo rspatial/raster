@@ -104,7 +104,7 @@ function(x, width=0, filename='', doEdge=FALSE, ...) {
 		pts <- try(  rasterToPoints(x)[,1:2, drop=FALSE] )
 	}
 	
-	if (class(pts)[1] == "try-error") {
+	if (inherits(pts, "try-error")) {
 		d <- .distanceRows(x, filename=filename, ...) 
 		d <- reclassify(d, rbind(c(-1,width, 1), c(width, Inf, NA)))
 		return(d)

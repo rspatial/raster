@@ -183,7 +183,7 @@
 		cells <- as.numeric(v[,1])
 		v <- as.matrix(v)[,-1,drop=FALSE]
 		
-		if(class(v[1]) == "list") {
+		if(inherits(v[1], "list")) {
 			v <- t(apply(v, 1, function(x) x[[1]]))  # Reshape the data if more than one value is returned by 'fun'
 		}
 

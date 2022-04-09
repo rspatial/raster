@@ -35,10 +35,10 @@ pbCreate <- function(nsteps, progress, style=3, label='Progress', ...) {
 
 pbStep <- function(pb, step=NULL, label='') {
 	pbclass <- class(pb)
-	if (pbclass=="txtProgressBar") {
+	if (inherits(pbclass, "txtProgressBar")) {
 		if (is.null(step)) { step = pb$getVal() + 1 }
 		utils::setTxtProgressBar(pb, step)
-	} else if (pbclass=="tkProgressBar") {
+	} else if (inherits(pbclass,"tkProgressBar")) {
 		if (is.null(step)) { step = pb$getVal() + 1 }
 		tcltk::setTkProgressBar(pb, step, label=paste(label, step))	
 	#} else if (pbclass=="winProgressBar") {
@@ -49,10 +49,10 @@ pbStep <- function(pb, step=NULL, label='') {
 
 pbClose <- function(pb, timer) {
 	pbclass <- class(pb)
-	if (pbclass=="txtProgressBar") {
+	if (inherits(pbclass, "txtProgressBar")) {
 		cat("\n\r")
 		close(pb)
-	} else if (pbclass=="tkProgressBar") {
+	} else if (inherits(pbclass, "tkProgressBar")) {
 		close(pb)
 	}
 	if (missing(timer)) {

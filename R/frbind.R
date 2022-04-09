@@ -26,7 +26,7 @@
 		
 		e <- cnx[(cnx %in% cnd)]	
 		for (j in e) {
-			if (class(x[,j]) != class(dd[,j])) {
+			if (all(class(x[,j]) != class(dd[,j]))) {
 				x[,j] <- as.character(x[,j])
 				dd[,j] <- as.character(dd[,j])
 			}

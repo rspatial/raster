@@ -26,7 +26,7 @@
 	if (dtype == "integer") { 
 		raster@data@values <- as.integer(raster@data@values) 
 	}
-	if (class(raster@data@values)=='integer') {
+	if (inherits(raster@data@values, 'integer')) {
 		dataType(raster) <- 'INT4S'
 	}	
 	raster <- setMinMax(raster)

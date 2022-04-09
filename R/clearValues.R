@@ -20,7 +20,7 @@
 
 
 clearValues <- function(x) {
-	if (class(x) == "BasicRaster" ) {
+	if (inherits(x, "BasicRaster")) {
 		return(x)
 	} else if (inherits(x, "RasterLayer" )) {
 		x <- .clearRaster(x)

@@ -19,9 +19,9 @@ setMethod("trim", signature(x="character"),
 setMethod("trim", signature(x="data.frame"), 
 	function(x, ...) {
 		for (i in 1:ncol(x)) {
-			if (class(x[,i]) == "character") {
+			if (inherits(x[,i], "character")) {
 				x[,i] <- trim(x[,i])
-			} else if (class(x[,i]) == "factor") {
+			} else if (inherits(x[,i], "factor")) {
 				x[,i] <- as.factor(trim(as.character(x[,i])))
 			}	
 		}

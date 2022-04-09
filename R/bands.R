@@ -19,11 +19,10 @@ function(x) {
 
 
 nbands <- function(x) {
-	cx = class(x)
 	if (inherits(x, "RasterLayer") | inherits(x, "RasterBrick")) {
 		return(x@file@nbands)
 	} else {
-		stop(paste("not implemented for", class(x), "objects"))
+		stop(paste("not implemented for", paste(class(x), collapse=", "), "objects"))
 	}	
 }
 
