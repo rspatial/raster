@@ -92,7 +92,7 @@ function(x, fact, fun='mean', expand=TRUE, na.rm=TRUE, filename="", ...)  {
 	}	
 
 	fun <- .makeTextFun(fun)
-	if (inherits(class, 'character')) { 
+	if (inherits(fun, 'character')) { 
 		op <- as.integer(match(fun, c('sum', 'mean', 'min', 'max')) - 1)
 	} else {
 		op <- NA

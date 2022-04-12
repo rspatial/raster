@@ -43,7 +43,7 @@ stackApply <- function(x, indices, fun, filename='', na.rm=TRUE, ...) {
 
 	rowcalc <- FALSE
 	fun <- .makeTextFun(fun)
-	if (is(fun, 'character')) { 
+	if (inherits(fun, 'character')) { 
 		rowcalc <- TRUE 
 		fun <- .getRowFun(fun)
 	} 
