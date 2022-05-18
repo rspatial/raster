@@ -49,6 +49,16 @@ canProcessInMemory <- function(x, n=4, verbose=FALSE) {
 	
 	n <- n * nlayers(x)
 	memneed <- nc * n * 8
+	if (memneed < .minmemory()) {
+		if (verbose) {
+			gb <- 1073741824
+			cat("            GB")
+			cat(paste("\n   needed :", round(memneed / gb, 2)))
+			cat("below minmemory threshold")
+		}
+		return(TRUE)
+	}
+	
 	maxmem <- .maxmemory()
 	memavail <- .availableRAM(maxmem)
 	if (verbose) {
