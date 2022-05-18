@@ -20,7 +20,7 @@ Function \code{tmpDir} returns the location of the temporary files
 
 \usage{
 rasterOptions(format, overwrite, datatype, tmpdir, tmptime, progress,
-     timer, chunksize, maxmemory, minmemory, memfrac, todisk, setfileext, 
+     timer, chunksize, minmemory, maxmemory, memfrac, todisk, setfileext, 
 	 tolerance, standardnames, depracatedwarnings, addheader, default=FALSE)
 
 
