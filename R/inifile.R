@@ -35,15 +35,15 @@ readIniFile <- function(filename, token='=', commenttoken=';', aslist=FALSE, cas
     stopifnot(file.exists(filename))
 	
 	Lines <- trim(readLines(filename,  warn = FALSE))
-	
+	Lines <- Lines[Lines != ""]
 	ini <- lapply(Lines, function(s){ 
-            if (strsplit(s, "=")[[1]][1] != "wkt") {
-                res <- .strSplitOnFirstToken(s, token=commenttoken)
-            } else {
-# if WKT2 do not split, no comment permitted
-                res <- c(trim(s), NA)
-            } 
-            res 
+			ss <- isTRUE(strsplit(s, "=")[[1]][1] == "wkt")
+			if (ss) { # if WKT2 do not split, no comment permitted
+				res <- c(trim(s), NA)
+			} else {
+				res <- .strSplitOnFirstToken(s, token=commenttoken)
+			} 
+        res 
         } ) 
 	Lines <- matrix(unlist(ini), ncol=2, byrow=TRUE)[,1]
 	ini <- lapply(Lines, function(s){ .strSplitOnFirstToken(s, token=token) }) 
