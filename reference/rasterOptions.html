@@ -59,8 +59,8 @@ Function tmpDir returns the location of the temporary files"><!-- mathjax --><sc
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasterOptions</span><span class="op">(</span><span class="va">format</span>, <span class="va">overwrite</span>, <span class="va">datatype</span>, <span class="va">tmpdir</span>, <span class="va">tmptime</span>, <span class="va">progress</span>,
-     <span class="va">timer</span>, <span class="va">chunksize</span>, <span class="va">maxmemory</span>, <span class="va">memfrac</span>, <span class="va">todisk</span>, <span class="va">setfileext</span>, <span class="va">tolerance</span>,
-     <span class="va">standardnames</span>, <span class="va">depracatedwarnings</span>, <span class="va">addheader</span>, default<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+     <span class="va">timer</span>, <span class="va">chunksize</span>, <span class="va">maxmemory</span>, <span class="va">minmemory</span>, <span class="va">memfrac</span>, <span class="va">todisk</span>, <span class="va">setfileext</span>, 
+   <span class="va">tolerance</span>, <span class="va">standardnames</span>, <span class="va">depracatedwarnings</span>, <span class="va">addheader</span>, default<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
 
 
 <span class="fu">tmpDir</span><span class="op">(</span>create<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -85,7 +85,9 @@ Function tmpDir returns the location of the temporary files"><!-- mathjax --><sc
 <dt>chunksize</dt>
 <dd><p>integer. Maximum number of bytes to read/write in a single chunk while processing (chunk by chunk) disk based Raster* objects</p></dd>
 <dt>maxmemory</dt>
-<dd><p>numeric. Maximum number of bytes to read into memory. If a process is expected to require more than this value, <code><a href="programming.html">canProcessInMemory</a></code> will return <code>FALSE</code></p></dd>
+<dd><p>numeric. Maximum number of bytes to read into memory. If a process is expected to require more than this value, <code><a href="programming.html">canProcessInMemory</a></code> will return <code>FALSE</code>. It cannot be set to a value smaller than 10000</p></dd>
+<dt>minmemory</dt>
+<dd><p>numeric. Minimum number of bytes that are guaranteed to be fit into memory. If a process is expected to require more than this value, RAM available will be estimated. It cannot be set to a value smaller than 10000</p></dd>
 <dt>memfrac</dt>
 <dd><p>numeric. Fraction of available RAM that may be used by a process</p></dd>
 <dt>todisk</dt>
