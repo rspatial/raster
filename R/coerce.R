@@ -14,7 +14,7 @@ setAs("SpatRaster", "Raster",
 		prj <- crs(from)
 		if (nl == 1) {
 			if (b$source == "") {
-				r <- raster::raster(ncols=ncol(from), nrows=nrow(from), crs=crs(from),
+				r <- raster::raster(ncols=ncol(from), nrows=nrow(from), crs=prj,
 			          xmn=e[1], xmx=e[2], ymn=e[3], ymx=e[4])
 				if (hasValues(from)) {
 					raster::values(r) <- values(from)
@@ -59,6 +59,8 @@ setAs("SpatRaster", "Raster",
 		}
 		try(levels(r) <- cats(from), silent=TRUE)
 		try(names(r) <- names(from))
+		crs(r) <- crs(from)
+		extent(r) <- ext(from)
 		return(r)
 	}
 )
@@ -116,7 +118,6 @@ setAs("SpatRaster", "Raster",
 			levels(r) <- levs				
 		}
 	}
-	names(r)  <- names(from)
 	r
 }
 
@@ -139,19 +140,22 @@ setAs("SpatRaster", "Raster",
 		x <- from[[i]]
 		.fromRasterLayerBrick(x)
 	})
-	s <- do.call(c, s)
-	names(s) <- names(from)
-	s
+	do.call(c, s)
 }
 
 
 setAs("Raster", "SpatRaster", 
 	function(from) {
 		if (inherits(from, "RasterLayer") || inherits(from, "RasterBrick")) { 
-			.fromRasterLayerBrick(from)
+			x <- .fromRasterLayerBrick(from)
 		} else {
-			.fromRasterStack(from)
+			x <- .fromRasterStack(from)
 		}
+		# they may have been changed for file based objects
+		crs(x) <- wkt(from)
+		names(x) <- names(from)
+		ext(x) <- as.vector(extent(from))
+		x
 	}
 )
 
