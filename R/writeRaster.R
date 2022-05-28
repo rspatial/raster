@@ -114,7 +114,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 			
 			filename <- .fullFilename(filename, expand=TRUE)
 			filetype <- .filetype(format, filename=filename[1])
-			filename <- .getExtension(filename, filetype)
+			filename <- sapply(filename, function(f) .getExtension(f, filetype))
 				   
 		} else {
 		
