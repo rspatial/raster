@@ -60,7 +60,7 @@ setAs("SpatRaster", "Raster",
 		try(levels(r) <- cats(from), silent=TRUE)
 		try(names(r) <- names(from))
 		crs(r) <- crs(from)
-		extent(r) <- ext(from)
+		extent(r) <- as.vector(ext(from))
 		return(r)
 	}
 )
