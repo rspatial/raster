@@ -85,7 +85,11 @@ setAs("SpatRaster", "Raster",
 					levels(r) <- levs
 				}
 			}
-			crs(r) <- raster::wkt(from)
+			prj <- comment(from@crs)
+			if (is.null(prj)) {
+				prj <- from@crs@projargs
+			}
+			crs(r) <- prj
 			if (nbands(from) != nlayers(from)) {
 				r <- r[[bandnr(from)]]
 			}
@@ -94,15 +98,12 @@ setAs("SpatRaster", "Raster",
 			NAflag(r) <- from@file@nodatavalue
 		}
 	} else {
-		crsobj <- from@crs
-		if (is.na(crsobj)) {
+		if (is.na(from@crs)) {
 			prj <- ""
 		} else {
-			crscom <- comment(crsobj)
-			if (is.null(crscom)) {
-				prj <- crsobj@projargs
-			} else {
-				prj <- crscom
+			prj <- comment(from@crs)
+			if (is.null(prj)) {
+				prj <- from@crs@projargs
 			}
 		}
 		r <- rast(	nrows=nrow(from), 
@@ -152,7 +153,15 @@ setAs("Raster", "SpatRaster",
 			x <- .fromRasterStack(from)
 		}
 		# they may have been changed for file based objects
-		crs(x) <- wkt(from)
+		if (is.na(from@crs)) {
+			prj <- ""
+		} else {
+			prj <- comment(from@crs)
+			if (is.null(prj)) {
+				prj <- from@crs@projargs
+			}
+		}
+		crs(x) <- prj
 		names(x) <- names(from)
 		ext(x) <- as.vector(extent(from))
 		x
