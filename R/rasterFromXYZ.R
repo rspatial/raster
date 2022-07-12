@@ -6,7 +6,7 @@
 
 rasterFromXYZ <- function(xyz, res=c(NA, NA), crs="", digits=5) {
 
-	if (length(res) == 1) res = c(res, res)
+	res = rep_len(res, 2)
 
 	if (inherits(xyz, 'SpatialPoints')) {
 		if (inherits(xyz, 'SpatialPointsDataFrame')) {
@@ -85,19 +85,24 @@ rasterFromXYZ <- function(xyz, res=c(NA, NA), crs="", digits=5) {
 	maxy <- max(y) + 0.5 * ry
 	
 	d <- dim(xyz)
+	nl <- 1
 	if (d[2] <= 3) {
 		r <- raster(xmn=minx, xmx=maxx, ymn=miny, ymx=maxy, crs=crs)
 	} else {
-		r <- brick(xmn=minx, xmx=maxx, ymn=miny, ymx=maxy, crs=crs, nl=d[2]-2)	
+		nl <- d[2]-2
+		r <- brick(xmn=minx, xmx=maxx, ymn=miny, ymx=maxy, crs=crs, nl=nl)
 	}
 
 	res(r) <- c(rx, ry)
-	cells <- cellFromXY(r, xyz[,1:2])
 	if (d[2] > 2) {
 		names(r) <- ln[-c(1:2)]
-		r[cells] <- xyz[,3:d[2]]
-	} 	
-	return(r)
+		vals <- matrix(NA, nrow=ncell(r), ncol=nl)
+		cells <- cellFromXY(r, xyz[,1:2])
+		vals[cells,] <- as.vector(xyz[,3:d[2]])
+		setValues(r, vals)
+	} else {
+		r
+	}
 }	
 	
 
