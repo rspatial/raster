@@ -1,6 +1,7 @@
 
 
 
+
 if (!isGeneric("as.raster")) { setGeneric("as.raster", function(x, ...) standardGeneric("as.raster"))}	
 
 if (!isGeneric("all.equal")) { setGeneric("all.equal", function(target, current, ...) standardGeneric("all.equal"))}	
@@ -138,6 +139,7 @@ if (!isGeneric("writeStop")) { setGeneric("writeStop", function(x)	standardGener
 if (!isGeneric("writeValues")) { setGeneric("writeValues", function(x, v, ...) standardGeneric("writeValues")) }
 if (!isGeneric("wkt")) { setGeneric("wkt", function(obj) standardGeneric("wkt")) }
 
+if (!isGeneric('symdif')) {setGeneric('symdif', function(x, y, ...) standardGeneric('symdif'))}	
 
 
 if (!isGeneric("xres")) { setGeneric("xres", function(x) standardGeneric("xres")) }

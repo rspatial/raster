@@ -48,7 +48,7 @@
 
 setMethod('aggregate', signature(x='SpatialPolygons'), 
 function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
-	
+		
 	if (!is.null(vars)) {
 		if (is.null(by)) {
 			by <- vars
@@ -67,12 +67,14 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		}
 	}
 	
-	if (dissolve) {
-		if (!requireNamespace("rgeos")) {
-			warning('Cannot dissolve because the rgeos package is not available')
-			dissolve <- FALSE
-		}
-	}
+#	if (dissolve) {
+#		if (!requireNamespace("rgeos")) {
+#			warning('Cannot dissolve because the rgeos package is not available')
+#			dissolve <- FALSE
+#		}
+#	}
+	
+	# warning("this method will be removed. You can use 'terra::aggregate<SpatVector,SpatVector>' instead")
 	
 	if (!.hasSlot(x, 'data') ) {
 		hd <- FALSE
@@ -89,28 +91,34 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 	}
 	
 	if (isTRUE(is.null(by))) {
-		if (dissolve) {
-			gval <- rgeos::get_RGEOS_CheckValidity()
-			if (gval != 2) {
-				on.exit(rgeos::set_RGEOS_CheckValidity(gval))
-				rgeos::set_RGEOS_CheckValidity(2L)
-			}
-			if (rgeos::version_GEOS() < "3.3.0") {
-				x <- rgeos::gUnionCascaded(x)
-			} else {
-				x <- rgeos::gUnaryUnion(x)
-			}
-		} else {
-			p <- list()
-			for (i in 1:length(x)) {
-				nsubobs <- length(x@polygons[[i]]@Polygons)
-				p <- c(p, lapply(1:nsubobs, function(j) x@polygons[[i]]@Polygons[[j]]))
-			}
-			x <- sp::SpatialPolygons(list(sp::Polygons(p, '1')),  proj4string=x@proj4string)
-		}
+#		if (dissolve) {
+#			gval <- rgeos::get_RGEOS_CheckValidity()
+#			if (gval != 2) {
+#				on.exit(rgeos::set_RGEOS_CheckValidity(gval))
+#				rgeos::set_RGEOS_CheckValidity(2L)
+#			}
+#			if (rgeos::version_GEOS() < "3.3.0") {
+#				x <- rgeos::gUnionCascaded(x)
+#			} else {
+#				x <- rgeos::gUnaryUnion(x)
+#			}
+#		} else {
+#			p <- list()
+#			for (i in 1:length(x)) {
+#				nsubobs <- length(x@polygons[[i]]@Polygons)
+#				p <- c(p, lapply(1:nsubobs, function(j) x@polygons[[i]]@Polygons[[j]]))
+#			}
+#			x <- sp::SpatialPolygons(list(sp::Polygons(p, '1')),  proj4string=x@proj4string)
+#		}
 		#if (hd) {
 		#	x <- sp::SpatialPolygonsDataFrame(x, data=data.frame(ID=1))
 		#}
+
+		x <- vect(x)
+		x <- aggregate(x, dissolve=dissolve)
+		x <- as(x, "Spatial")
+		x <- as(x, "SpatialPolygons")
+
 		return(x)
 		
 	} else {
@@ -124,6 +132,9 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		dc <- apply(dat, 1, function(y) paste(as.character(y), collapse='_'))
 		dc <- data.frame(oid=1:length(dc), v=as.integer(as.factor(dc)))
 		id <- dc[!duplicated(dc$v), , drop=FALSE]
+
+		xv <- vect(x)
+		values(xv) <- dc[,2,drop=FALSE]
 
 		if (nrow(id) == nrow(dat)) {
 			# nothing to aggregate
@@ -147,37 +158,43 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		if (hd) {
 			x <- as(x, 'SpatialPolygons')
 		}
+
+		xv <- aggregate(xv, "v", dissolve=dissolve)
+		xv$agg_n <- NULL
+		x <- as(xv, "Spatial")
+		x <- as(x, "SpatialPolygons")
 		
-		if (dissolve) {
-			if (rgeos::version_GEOS0() < "3.3.0") {
-				x <- lapply(1:nrow(id), function(y) sp::spChFIDs(rgeos::gUnionCascaded(x[dc[dc$v==y,1],]), as.character(y)))
-			} else {
-			
-				x <- lapply(1:nrow(id), 
-						function(y) {
-							z <- x[dc[dc$v==y, 1], ]
-							z <- try( rgeos::gUnaryUnion(z) )
-							if (! inherits(z, "try-error")) {
-								sp::spChFIDs(z, as.character(y))
-							}
-						}
-					)
-			}	
-		} else {
+#		if (dissolve) {
+#
+
+#			if (rgeos::version_GEOS0() < "3.3.0") {
+#				x <- lapply(1:nrow(id), function(y) sp::spChFIDs(rgeos::gUnionCascaded(x[dc[dc$v==y,1],]), as.character(y)))
+#			} else {			
+#				x <- lapply(1:nrow(id), 
+#						function(y) {
+#							z <- x[dc[dc$v==y, 1], ]
+#							z <- try( rgeos::gUnaryUnion(z) )
+#							if (! inherits(z, "try-error")) {
+#								sp::spChFIDs(z, as.character(y))
+#							}
+#						}
+#					)
+#			}	
+#		} else {
 			#x <- lapply(1:nrow(id), function(y) {
 			#spChFIDs(aggregate(x[dc[dc$v==y,1],], dissolve=FALSE), as.character(y)))
-			x <- lapply(1:nrow(id), function(y) {
-				d <- data.frame(geom(x[dc[dc$v==y,1],]))
-				pmx = tapply(d[,"part"], d[,"object"], max)
-				z <- as.vector(cumsum(pmx) - 1)
-				d$part <- z[d$object] + d$part
-				d$object <- y
-				d <- as(d, "SpatialPolygons")
-				sp::spChFIDs(d, as.character(y))
-			})
-		}
+#			x <- lapply(1:nrow(id), function(y) {
+#				d <- data.frame(geom(x[dc[dc$v==y,1],]))
+#				pmx = tapply(d[,"part"], d[,"object"], max)
+#				z <- as.vector(cumsum(pmx) - 1)
+#				d$part <- z[d$object] + d$part
+#				d$object <- y
+#				d <- as(d, "SpatialPolygons")
+#				sp::spChFIDs(d, as.character(y))
+#			})
+#		}
 		
-		x <- do.call(rbind, x)
+#		x <- do.call(rbind, x)
 		x@proj4string <- crs
 		rownames(dat) <- NULL
 		sp::SpatialPolygonsDataFrame(x, dat, FALSE)
@@ -197,6 +214,9 @@ function(x, by=NULL, sums=NULL, ...) {
 			return( spAgg(x, by, ...) )			
 		}
 	}
+
+
+	# warning("this method will be removed. You can use 'terra::aggregate<SpatVector,SpatVector>' instead")
 	
 	if (!.hasSlot(x, 'data') ) {
 		hd <- FALSE
@@ -213,13 +233,18 @@ function(x, by=NULL, sums=NULL, ...) {
 	}
 	
 	if (isTRUE(is.null(by))) {
-		p <- list()
-		for (i in 1:length(x)) {
-			nsubobs <- length(x@lines[[i]]@Lines)
-			p <- c(p, lapply(1:nsubobs, function(j) x@lines[[i]]@Lines[[j]]))
-		}
-		x <- sp::SpatialLines(list(sp::Lines(p, '1')), proj4string=crs(x))
-		return(x)
+		x <- vect(x)
+		values(x) <- id
+		x <- aggregate(x)
+		x <- as(x, "Spatial")
+
+	#	p <- list()
+	#	for (i in 1:length(x)) {
+	#		nsubobs <- length(x@lines[[i]]@Lines)
+	#		p <- c(p, lapply(1:nsubobs, function(j) x@lines[[i]]@Lines[[j]]))
+	#	}
+	#	x <- sp::SpatialLines(list(sp::Lines(p, '1')), proj4string=crs(x))
+	#	return(x)
 		
 	} else {
 		
@@ -254,8 +279,15 @@ function(x, by=NULL, sums=NULL, ...) {
 		if (hd) {
 			x <- as(x, 'SpatialLines')
 		}
-		x <- lapply(1:nrow(id), function(y) sp::spChFIDs(aggregate(x[dc[dc$v==y,1],]), as.character(y)))
-		x <- do.call(rbind, x)
+
+		x <- vect(x)
+		values(x) <- id
+		x <- aggregate(x)
+		x <- as(x, "Spatial")
+		x <- as(x, "SpatialLines")
+
+#		x <- lapply(1:nrow(id), function(y) sp::spChFIDs(aggregate(x[dc[dc$v==y,1],]), as.character(y)))
+#		x <- do.call(rbind, x)
 		crs(x) <- crs
 		rownames(dat) <- NULL
 		sp::SpatialLinesDataFrame(x, dat, FALSE)

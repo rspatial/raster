@@ -59,14 +59,13 @@ e2 <- extent(0, 20, -40, 5)
 union(e1, e2)
 
 #SpatialPolygons
-if (require(rgdal) & require(rgeos)) {
-	p <- shapefile(system.file("external/lux.shp", package="raster"))
-	p0 <- aggregate(p)
-	b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
-	crs(b) <- crs(p)
-	u <- union(p0, b)
-	plot(u, col=2:4)
-}
+p <- shapefile(system.file("external/lux.shp", package="raster"))
+p0 <- aggregate(p)
+b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
+crs(b) <- crs(p)
+u <- union(p0, b)
+plot(u, col=2:4)
+
 }
 
 

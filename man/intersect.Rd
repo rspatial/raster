@@ -26,10 +26,11 @@ It depends on the classes of the \code{x} and \code{y} what is returned.
 
 If \code{x} is a Raster* object the extent of \code{y} is used, irrespective of the class of \code{y}, and a Raster* is returned. This is equivalent to \code{\link{crop}}. 
 
-If \code{x} is a Spatial* object, a new Spatial* object is returned. If \code{x} or \code{y} has a data.frame, these are also returned (after merging if necessary) as part of a Spatial*DataFrame, and this is how \code{intersect} is different from \code{rgeos::gIntersection} on which it depends. 
+If \code{x} is a Spatial* object, a new Spatial* object is returned. If \code{x} or \code{y} has a data.frame, these are also returned (after merging if necessary) as part of a Spatial*DataFrame. 
 
-Intersecting SpatialPoints* with SpatialPoints* uses the extent (bounding box) of \code{y} to get the intersection. Intersecting of SpatialPoints* and SpatialLines* is not supported because of numerical inaccuracies with that. You can use \code{\link{buffer}}, to create SpatialPoygons* from SpatialLines* and use that in intersect. Or try \code{\link[rgeos:topo-bin-gIntersection]{gIntersection}}. 
+Intersecting SpatialPoints* with SpatialPoints* uses the extent (bounding box) of \code{y} to get the intersection. Intersecting of SpatialPoints* and SpatialLines* is not supported because of numerical inaccuracies with that. You can use \code{\link{buffer}}, to create SpatialPoygons* from SpatialLines* and use that in intersect.
 }
+
 
 \usage{
 \S4method{intersect}{Extent,ANY}(x, y)
@@ -78,15 +79,14 @@ e2 <- extent(0, 20, -40, 5)
 intersect(e1, e2)
 
 #SpatialPolygons
-if (require(rgdal) & require(rgeos)) {
-	p <- shapefile(system.file("external/lux.shp", package="raster"))
-	b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
-	projection(b) <- projection(p)
-	i <- intersect(p, b)
-	plot(p)
-	plot(b, add=TRUE, col='red')
-	plot(i, add=TRUE, col='blue', lwd=2)
-}
+p <- shapefile(system.file("external/lux.shp", package="raster"))
+b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
+projection(b) <- projection(p)
+i <- intersect(p, b)
+plot(p)
+plot(b, add=TRUE, col='red')
+plot(i, add=TRUE, col='blue', lwd=2)
+
 }
 
 

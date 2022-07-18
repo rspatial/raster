@@ -34,14 +34,13 @@ Spatial*
 
 
 \examples{
-if (require(rgdal) & require(rgeos)) {
 # erase parts of polygons with other polygons
-	p <- shapefile(system.file("external/lux.shp", package="raster"))
-	b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
-	crs(b) <- crs(p)
-	e <- erase(p, b)
-	plot(e)
-	
+p <- shapefile(system.file("external/lux.shp", package="raster"))
+b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
+crs(b) <- crs(p)
+e <- erase(p, b)
+plot(e)
+
 	
 # erase parts of lines with polygons	
 	r <- raster(extent(p) +c(-.1,.1,-.1,.1), crs=crs(p))
@@ -54,7 +53,6 @@ if (require(rgdal) & require(rgeos)) {
 	plot(p)
 	lines(lines, col='blue', lwd=4, lty=3)
 	lines(e2, col='red', lwd=2)
-}
 }
 
 \keyword{methods}

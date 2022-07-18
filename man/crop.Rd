@@ -60,10 +60,8 @@ crs(b) <- crs(r)
 rb <- crop(r, b)
 
 # crop a SpatialPolygon* object with another one
-if (require(rgdal) & require(rgeos)) {
-  p <- shapefile(system.file("external/lux.shp", package="raster"))
-  pb <- crop(p, b)
-}
+p <- shapefile(system.file("external/lux.shp", package="raster"))
+pb <- crop(p, b)
 }
 
 \keyword{spatial}

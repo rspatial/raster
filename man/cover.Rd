@@ -47,15 +47,14 @@ r3 <- cover(r2, r1)
 
 
 #SpatialPolygons
-if (require(rgdal) & require(rgeos)) {
-	p <- shapefile(system.file("external/lux.shp", package="raster"))
-	b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
-	crs(b) <- crs(p)
-	b <- SpatialPolygonsDataFrame(b, data.frame(ID_1=9))
+p <- shapefile(system.file("external/lux.shp", package="raster"))
+b <- as(extent(6, 6.4, 49.75, 50), 'SpatialPolygons')
+crs(b) <- crs(p)
+b <- SpatialPolygonsDataFrame(b, data.frame(ID_1=9))
 	
-	cv1 <- cover(p, b)
-	cv2 <- cover(p, b, identity=TRUE)
-}
+cv1 <- cover(p, b)
+cv2 <- cover(p, b, identity=TRUE)
+
 }
 
 

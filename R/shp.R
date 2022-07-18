@@ -12,23 +12,23 @@ if (!isGeneric("shapefile")) {
 
 setMethod('shapefile', signature(x='character'), 
 	function(x, stringsAsFactors=FALSE, verbose=FALSE, warnPRJ=TRUE, ...) {
-		.requireRgdal() 
 		x <- normalizePath(x, winslash = "/", mustWork = FALSE)
-		stopifnot(file.exists(extension(x, '.shp')))
+		shp <- extension(x, '.shp')
+		stopifnot(file.exists(x))
 		stopifnot(file.exists(extension(x, '.shx')))
 		stopifnot(file.exists(extension(x, '.dbf')))
 		if (warnPRJ & !file.exists(extension(x, '.prj'))) {
 			warning('.prj file is missing')
 		}
-		fn <- extension(basename(x), '')
-		rgdal::readOGR(dirname(x), fn, stringsAsFactors=stringsAsFactors, verbose=verbose, ...) 		
+		v <- vect(x)
+		as(v, "Spatial")
+		#rgdal::readOGR(dirname(x), fn, stringsAsFactors=stringsAsFactors, verbose=verbose, ...) 		
 	}
 )
 
 
 setMethod('shapefile', signature(x='Spatial'), 
 	function(x, filename='', overwrite=FALSE, ...) {
-		.requireRgdal() 
 		stopifnot(filename != '')
 		filename <- normalizePath(filename, winslash = "/", mustWork = FALSE)
 		
@@ -67,7 +67,9 @@ setMethod('shapefile', signature(x='Spatial'),
 				}
 			}
 		}
-		rgdal::writeOGR(x, filename, layer, driver='ESRI Shapefile', overwrite_layer=overwrite, ...)
+		x <- vect(x)
+		writeVector(x, filename, filetype='ESRI Shapefile', layer=layer, overwrite=overwrite)
+		#rgdal::writeOGR(x, filename, layer, driver='ESRI Shapefile', overwrite_layer=overwrite, ...)
 		#extension(filename) <- '.cpg'
 		#writeLines(encoding, filename, sep="")
 	}

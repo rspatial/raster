@@ -109,7 +109,7 @@
 
 .rasterizeLineLength <- function(x, r, background=NA, filename="", ...) {
 
-	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
+#	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
 	r <- raster(r)
 
 	if (canProcessInMemory(r, n=8)) {
@@ -117,7 +117,8 @@
 		
 		rp <- rasterToPolygons(r)
 		rp <- intersect(x, rp)
-		lengths <- rgeos::gLength(rp, byid=TRUE) / 1000
+#		lengths <- rgeos::gLength(rp, byid=TRUE) / 1000
+		lengths <- perim(vect(rp)) / 1000
 		
 		n <- tapply(lengths, data.frame(rp)[, names(r)], sum)
 		
@@ -140,7 +141,9 @@
 			y[] <- 1:ncell(y)
 			rp <- rasterToPolygons(y, na.rm=FALSE)
 			rp <- intersect(x, rp)
-			lengths <- rgeos::gLength(rp, byid=TRUE) / 1000
+			#lengths <- rgeos::gLength(rp, byid=TRUE) / 1000
+			lengths <- perim(vect(rp)) / 1000
+
 			n <- tapply(lengths, data.frame(rp)[, names(y)], sum)
 			v <- rep(background, ncell(y))
 			v[as.integer(names(n))] <- n 

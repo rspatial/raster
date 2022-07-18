@@ -45,11 +45,9 @@ If \code{x} is a SpatialPolygons* object: area of each spatial object in squared
 r <- raster(nrow=18, ncol=36)
 a <- area(r)
 
-if (require(rgdal) & require(rgeos)) {
-	p <- shapefile(system.file("external/lux.shp", package="raster"))
-	p$area <- round(area(p) / 10000000,1)
-	p$area
-}
+p <- shapefile(system.file("external/lux.shp", package="raster"))
+p$area <- round(area(p) / 10000000,1)
+p$area
 }
 
 \keyword{methods}

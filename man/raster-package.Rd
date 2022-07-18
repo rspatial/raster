@@ -295,7 +295,7 @@ Cell numbers start at 1 in the upper-left corner. They increase within rows, fro
 }	
 
 \section{XIV. Manipulation of SpatialPolygons* and other vector type Spatial* objects}{
-Some of these functions are in the \code{sp} package. The name in \bold{bold} is the equivalent command in ArcGIS. These functions build on the geometry ("spatial features") manipulation functions in package \code{rgeos}. These functions are extended here by also providing automated attribute data handling.
+Some of these functions are in the \code{sp} package. The name in \bold{bold} is the equivalent command in ArcGIS. 
 
 \tabular{ll}{
   \code{\link{bind}} \tab \bold{append} combine Spatial* objects of the same (vector) type \cr

@@ -37,8 +37,6 @@ Spatial*DataFrame (reading). Nothing is returned when writing a shapefile.
 }
 
 \examples{
-if (require(rgdal)) {
-
 filename <- system.file("external/lux.shp", package="raster")
 filename
 p <- shapefile(filename)
@@ -47,7 +45,7 @@ p <- shapefile(filename)
 shapefile(p, 'copy.shp')
 }
 }
-}
+
 
 \keyword{spatial}
 

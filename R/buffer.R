@@ -60,34 +60,52 @@
 setMethod('buffer', signature(x='Spatial'), 
 function(x, width=1, dissolve=TRUE, ...) {
 
-	if (inherits(x, 'SpatialPoints')) {
-		
-		if (.couldBeLonLat(x)) {
-			if (!isLonLat(x)) {
-				warning('crs unknown, assuming lonlat')
-			}
-			lonlat=TRUE
-		} else {
-			lonlat = FALSE
-		}
-		
-		pb <- .pointBuffer(xy=sp::coordinates(x)[,1:2,drop=FALSE], d=width, lonlat=lonlat, crs=crs(x), ...)
+	# warning("this method will be removed. You can use 'terra::buffer<SpatVector>' instead")
 
-		if (dissolve) {
-			pb <- aggregate(pb)
-		} else if (.hasSlot(x, 'data')) {
-			pb <- sp::SpatialPolygonsDataFrame(pb, x@data, match.ID=FALSE)
+	if (is.na(projection(x))) {
+		if (.couldBeLonLat(x)) {
+			crs(x) <- "+proj=lonlat"
+		} else {
+			 crs(x) <- "+proj=utm +zone=1"
 		}
-		return(pb)		
 	}
 	
-	valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
+	x <- vect(x)
+	b <- buffer(x, width)
+	if (dissolve) {
+		b <- aggregate(b)
+	}
+	return(as(b, "Spatial"))
+
+
+	# if (inherits(x, 'SpatialPoints')) {
+		
+		# if (.couldBeLonLat(x)) {
+			# if (!isLonLat(x)) {
+				# warning('crs unknown, assuming lonlat')
+			# }
+			# lonlat=TRUE
+		# } else {
+			# lonlat = FALSE
+		# }
+		
+		# pb <- .pointBuffer(xy=sp::coordinates(x)[,1:2,drop=FALSE], d=width, lonlat=lonlat, crs=crs(x), ...)
+
+		# if (dissolve) {
+			# pb <- aggregate(pb)
+		# } else if (.hasSlot(x, 'data')) {
+			# pb <- sp::SpatialPolygonsDataFrame(pb, x@data, match.ID=FALSE)
+		# }
+		# return(pb)		
+	# }
 	
-	prj <- x@proj4string
-	x@proj4string <- sp::CRS(as.character(NA))
-	x <- rgeos::gBuffer(x, byid=!dissolve, width=width, ...)
-	x@proj4string <- prj
-	x
+	# valgeos <- .checkGEOS(); on.exit(rgeos::set_RGEOS_CheckValidity(valgeos))
+	
+	# prj <- x@proj4string
+	# x@proj4string <- sp::CRS(as.character(NA))
+	# x <- rgeos::gBuffer(x, byid=!dissolve, width=width, ...)
+	# x@proj4string <- prj
+	# x
 }
 )
 

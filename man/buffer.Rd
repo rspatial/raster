@@ -12,7 +12,6 @@ Calculate a buffer around all cells that are not \code{NA} or around SpatialPoin
  
 Note that the distance unit of the buffer \code{width} parameter is meters if the RasterLayer is not projected (\code{+proj=longlat}), and in map units (typically also meters) when it is projected.
 
-Except for SpatialLines and SpatialPolygons that are currently handled by rgeos, and can only deal with planar coordinate reference systems.
 }
 
 \usage{

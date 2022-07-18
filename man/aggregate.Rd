@@ -40,7 +40,7 @@ Aggregate a SpatialPolygon* object, optionally by combining polygons that have t
 
   \item{sums}{list with function(s) and variable(s) to summarize. This should be a list of lists in which each element of the main lists has two items. The first item is function (e.g. mean), the second element is a vector of column names (or indices) that need to summarize with that function. Be careful with character and factor variables (you can use, e.g. 'first' \code{function(x)x[1]} or 'last' \code{function(x)x[length(x)]} or \code{modal} for these variables}
   \item{vars}{deprecated. Same as \code{by}}  
-  \item{dissolve}{logical. If \code{TRUE} borders between touching or overlapping polygons are removed (requires package rgeos)}  
+  \item{dissolve}{logical. If \code{TRUE} borders between touching or overlapping polygons are removed}  
 }
 
 
@@ -75,14 +75,13 @@ s <- stack(r, r*2)
 x <- aggregate(s,2)
 
 #SpatialPolygons
-if (require(rgdal) & require(rgeos)) {
-	p <- shapefile(system.file("external/lux.shp", package="raster"))
-	p
-	pa0 <- aggregate(p)
-	pa0
-	pa1 <- aggregate(p, by='NAME_1', sums=list(list(mean, 'ID_2')))
-	pa1
-}
+p <- shapefile(system.file("external/lux.shp", package="raster"))
+p
+pa0 <- aggregate(p)
+pa0
+pa1 <- aggregate(p, by='NAME_1', sums=list(list(mean, 'ID_2')))
+pa1
+
 }
 
 \keyword{methods}
