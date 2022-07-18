@@ -27,7 +27,7 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 
 	x <- vect(x)
 	for (y in yy) {
-		x <- cover(x, vect(y), identity=identity, expand=FALSE)
+		x <- cover(x, vect(y), identity=identity)
 	}
 		
 	# if (identity) {
