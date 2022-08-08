@@ -1,6 +1,7 @@
 \name{blockSize}
 
 \alias{blockSize}
+\alias{blockSize,Raster-method}
 
 \title{Block size for writing files}
 
@@ -9,7 +10,7 @@ This function can be used to suggest chunk sizes (always a number of entire rows
 }
 
 \usage{
-blockSize(x, chunksize, n=nlayers(x), minblocks=4, minrows=1)
+\S4method{blockSize}{Raster}(x, chunksize, n=nlayers(x), minblocks=4, minrows=1)
 }
 
 \arguments{
