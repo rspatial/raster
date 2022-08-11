@@ -82,10 +82,10 @@ setMethod("wkt", signature(obj="Raster"),
 		x <- sf::st_crs(x)
 		x <- as(x, "CRS") # passes on WKT comment
 	} else if (inherits(x, "SpatRaster")) { 
-		crs <- crs(x)
+		x <- crs(x)
 		x <- .makeCRS(x[1], x[2])
 	} else if (inherits(x, "SpatVector")) { 
-		crs <- crs(x)
+		x <- crs(x)
 		x <- .makeCRS(x[1], x[2])
 	} else if (is.na(x)) {
 		x <- .CRS()

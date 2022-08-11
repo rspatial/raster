@@ -66,6 +66,8 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 			return( spAgg(x, by, ..., dissolve=dissolve) )
 		}
 	}
+
+	crs <- projection(x) #x@proj4string
 	
 #	if (dissolve) {
 #		if (!requireNamespace("rgeos")) {
@@ -128,7 +130,6 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		v <- .getVars(by, cn)
 		
 		dat <- dat[,v, drop=FALSE]
-		crs <- x@proj4string
 		dc <- apply(dat, 1, function(y) paste(as.character(y), collapse='_'))
 		dc <- data.frame(oid=1:length(dc), v=as.integer(as.factor(dc)))
 		id <- dc[!duplicated(dc$v), , drop=FALSE]
@@ -155,9 +156,9 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		}
 
 		
-		if (hd) {
-			x <- as(x, 'SpatialPolygons')
-		}
+		#if (hd) {
+		#	x <- as(x, 'SpatialPolygons')
+		#}
 
 		xv <- aggregate(xv, "v", dissolve=dissolve)
 		xv$agg_n <- NULL
@@ -195,7 +196,8 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 #		}
 		
 #		x <- do.call(rbind, x)
-		x@proj4string <- crs
+#		x@proj4string <- crs
+		projection(x) <- crs
 		rownames(dat) <- NULL
 		sp::SpatialPolygonsDataFrame(x, dat, FALSE)
 	}
