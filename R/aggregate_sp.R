@@ -67,7 +67,8 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		}
 	}
 
-	crs <- projection(x) #x@proj4string
+	prj <- x@proj4string
+	projection(x) <- NA
 	
 #	if (dissolve) {
 #		if (!requireNamespace("rgeos")) {
@@ -120,7 +121,7 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		x <- aggregate(x, dissolve=dissolve)
 		x <- as(x, "Spatial")
 		x <- as(x, "SpatialPolygons")
-
+		x@proj4string <- prj
 		return(x)
 		
 	} else {
@@ -197,9 +198,10 @@ function(x, by=NULL, sums=NULL, dissolve=TRUE, vars=NULL, ...) {
 		
 #		x <- do.call(rbind, x)
 #		x@proj4string <- crs
-		projection(x) <- crs
 		rownames(dat) <- NULL
-		sp::SpatialPolygonsDataFrame(x, dat, FALSE)
+		x <- sp::SpatialPolygonsDataFrame(x, dat, FALSE)
+		x@proj4string <- prj
+		x
 	}
 }
 )
