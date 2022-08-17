@@ -6,6 +6,8 @@
 
 .getGDALtransient <- function(r, filename, options, NAflag, ...)  {
 
+	require(rgdal)
+
 	.GDALnodatavalue <- function(x){
 		if (x == 'Float32') return(-3.4E38)
 		if (x == 'Float64') return(-1.7E308)

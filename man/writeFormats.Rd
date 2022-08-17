@@ -27,7 +27,7 @@ Supported formats include:
     \tab \code{SAGA}      \tab SAGA GIS    \tab .sdat                \tab  No \cr
     \tab \code{IDRISI}    \tab IDRISI      \tab .rst                 \tab  No \cr
     \tab \code{CDF}       \tab netCDF (requires ncdf4) \tab .nc    \tab  Yes \cr
-    \tab \code{GTiff}     \tab GeoTiff (requires rgdal) \tab .tif    \tab  Yes  \cr
+    \tab \code{GTiff}     \tab GeoTiff \tab .tif    \tab  Yes  \cr
     \tab \code{ENVI}      \tab ENVI .hdr Labelled       \tab .envi   \tab Yes  \cr
     \tab \code{EHdr}      \tab ESRI .hdr Labelled       \tab  .bil   \tab Yes  \cr
     \tab \code{HFA}       \tab Erdas Imagine Images (.img)  \tab .img \tab Yes  \cr
@@ -35,8 +35,6 @@ Supported formats include:
 }
 
 
-
-\seealso{ \code{\link[rgdal]{GDALDriver-class}} }  
 
 \examples{ 
 writeFormats() 

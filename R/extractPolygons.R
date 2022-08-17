@@ -12,7 +12,7 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 	px <-.getCRS(x)
 	comp <- compareCRS(px,.getCRS(y), unknown=TRUE)
 	if (!comp) {
-		.requireRgdal()
+		#.requireRgdal()
 		warning('Transforming SpatialPolygons to the crs of the Raster')
 		y <- sp::spTransform(y, px)
 	}

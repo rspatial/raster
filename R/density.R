@@ -9,7 +9,7 @@ setMethod('density', signature(x='Raster'),
 	function(x, layer, maxpixels=100000, plot=TRUE, main, ...) {
 
 		if (nlayers(x)==1) {
-			d <- sampleRegular(x, maxpixels, useGDAL=TRUE)
+			d <- sampleRegular(x, maxpixels) #, useGDAL=TRUE)
 			x <- density(stats::na.omit(d))
 			if (plot) {
 				if (missing(main)) {

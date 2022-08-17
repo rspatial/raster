@@ -38,8 +38,8 @@ setMethod('readStart', signature(x='RasterStack'),
 	fn <- trim(x@file@name)
 	driver <- .driver(x)
 	if (driver == "gdal") {
-		attr(x@file, "con") <- rgdal::GDAL.open(fn, silent=silent)
-		x@file@open <- TRUE
+#		attr(x@file, "con") <- rgdal::GDAL.open(fn, silent=silent)
+#		x@file@open <- TRUE
 	} else 	if (.isNativeDriver(driver))  {
 		# R has a max of 128 connections
 		if (length(getAllConnections()) < con.check) {
@@ -83,7 +83,7 @@ setMethod('readStop', signature(x='RasterStack'),
 .closeConnection <- function(x) {
 	driver <- .driver(x)
 	if (driver == "gdal") {
-		try( rgdal::closeDataset(x@file@con), silent = TRUE )
+		#try( rgdal::closeDataset(x@file@con), silent = TRUE )
 	} else if (.isNativeDriver(driver))  {
 		try( close(x@file@con), silent = TRUE )
 	} else if (driver == 'netcdf') {

@@ -34,7 +34,7 @@ setMethod('.project', signature(x='Raster'),
 setMethod('.project', signature(x='SpatialGrid'), 
 	function(x, ...)  {
 		y <- brick(x)
-		.requireRgdal()
+		#.requireRgdal()
 		dots <- list(...)
 		if (!is.null(dots$CRSobj) & is.null(dots$crs)) {
 			y <- projectRaster(y, crs=dots$CRSobj, ...)
@@ -48,7 +48,7 @@ setMethod('.project', signature(x='SpatialGrid'),
 setMethod('.project', signature(x='SpatialPixels'), 
 	function(x, ...)  {
 		y <- brick(x)
-		.requireRgdal()
+		#.requireRgdal()
 		dots <- list(...)
 		if (!is.null(dots$CRSobj) & is.null(dots$crs)) {
 			y <- projectRaster(y, crs=dots$CRSobj, ...)
@@ -62,11 +62,13 @@ setMethod('.project', signature(x='SpatialPixels'),
 
 setMethod('.project', signature(x='Spatial'), 
 	function(x, crs, ...)  {
-		.requireRgdal()
+		#.requireRgdal()
 		if (!is.null(list(...)$CRSobj)) {
 			crs <- list(...)$CRSobj
 		}
-		sp::spTransform(x, CRSobj=crs(crs), ...)
+		v <- project(x, projection(crs))
+		as(v, "Spatial")
+		#sp::spTransform(x, CRSobj=crs(crs), ...)
 	}
 )
 

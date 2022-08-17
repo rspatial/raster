@@ -11,7 +11,7 @@ function(x, y, fun=NULL, na.rm=FALSE, cellnumbers=FALSE, df=FALSE, layer, nl, fa
 	px <-.getCRS(x)
 	comp <- compareCRS(px,.getCRS(y), unknown=TRUE)
 	if (!comp) {
-		.requireRgdal()
+		#.requireRgdal()
 		warning('Transforming SpatialLines to the crs of the Raster object')
 		y <- sp::spTransform(y, px)
 	}

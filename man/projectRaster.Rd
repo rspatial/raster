@@ -47,7 +47,7 @@ There are two approaches you can follow to project the values of a Raster object
 2) Create a template Raster with the CRS you want to project to. You can use an existing object, or use \code{projectExtent} for this or an existing Raster* object. Also set the number of rows and columns (or the resolution), and perhaps adjust the extent. The resolution of the output raster should normally be similar to that of the input raster. Then use that object as \code{from} argument to project the input Raster to. 
 This is the preferred method because you have most control. For example you can assure that the resulting Raster object lines up with other Raster objects.
 
-Projection is performed using the PROJ.4 library accessed through the rgdal package. 
+Projection is performed using the PROJ library. 
 
 
 Also see \code{projInfo('proj')}, \code{projInfo('ellps')}, and \code{projInfo('datum')} for valid PROJ.4 values. 
@@ -72,8 +72,9 @@ RasterLayer or RasterBrick object.
 
 
 \seealso{
-\code{\link{resample}}, \code{\link[rgdal]{CRS-class}}, \code{\link[rgdal]{projInfo}}, \code{\link[sp]{spTransform}}
+\code{\link{resample}}
 }
+
 
 \examples{
 # create a new (not projected) RasterLayer with cellnumbers as values
@@ -83,9 +84,6 @@ crs(r)
 # wkt(r)
 # proj.4 projection description
 newproj <- "+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"
-
-# we need the rgdal package for this
-if (require(rgdal)) {
 
 #simplest approach
 pr1 <- projectRaster(r, crs=newproj)
@@ -112,8 +110,6 @@ inv <- projectRaster(pr, r, method='bilinear')
 dif <- r - inv
 # small difference
 plot(dif)
-}
-
 }
 }
 

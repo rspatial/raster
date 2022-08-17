@@ -45,7 +45,7 @@
     }  
 	
 	if (filetype=='PACKED BINARY') {
-		stop('cannot natively read packed binary files, read via rgdal?')
+		stop('cannot natively read packed binary files')
 	}
 	
 	# attempt could be made to decipher some of the idrisi crs descriptions

@@ -29,7 +29,7 @@ This (hopefully) allows for reading the binary data (.gri), perhaps after changi
 
 
 
-\seealso{ \code{\link[raster]{writeRaster}}, \code{\link[rgdal:readGDAL]{writeGDAL}} }
+\seealso{ \code{\link[raster]{writeRaster}}}
 
 \examples{ 
 \dontrun{

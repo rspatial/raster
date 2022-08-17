@@ -5,7 +5,7 @@
 
 
 .writeHdrPRJ <- function(x, ESRI=TRUE) {
-	if (.requireRgdal()) {
+#	if (.requireRgdal()) {
 
 		p4s <- wkt(x)
 		if (! inherits(p4s, "try-error")) {
@@ -16,9 +16,9 @@
 			return(FALSE)
 		}
 		return(invisible(TRUE))
-	} else {
-		return(FALSE)
-	}
+#	} else {
+#		return(FALSE)
+#	}
 }
 
 	

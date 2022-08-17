@@ -14,16 +14,21 @@
 
 
 .gdalWriteFormats <- function() {
-	.requireRgdal()
-	gd <- rgdal::gdalDrivers()
-	gd <- as.matrix( gd[gd[,3] == T, ] )
+#	.requireRgdal()
+#	gd <- rgdal::gdalDrivers()
+#	gd <- as.matrix( gd[gd[,3] == T, ] )
+	gd <- gdal(drivers=TRUE)
+	gd$b <- TRUE
+	gd <- gd[(gd$type=="raster") & (gd$can=="read/write"), c(1, 5, 6, 6, 2)]
+	names(gd) <- c("name", "long_name", "create", "copy", "isRaster")
+	
 	i <- which(gd[,1] %in% c('VRT', 'MEM', 'MFF', 'MFF2'))
 	gd[-i,]
 }
 
 
 .isSupportedGDALFormat <- function(dname) {
-	.requireRgdal()
+#	.requireRgdal()
 	gd <- .gdalWriteFormats()
 	res <- dname %in% gd[,1]
 	if (!res) { stop(paste(dname, "is not a supported file format. See writeFormats()" ) ) }
@@ -69,7 +74,7 @@
 		type <- 'Int' 
 		if (size == 64) {
 			size <- 32
-			warning('8 byte integer values not supported by rgdal, changed to 4 byte integer values')
+			warning('8 byte integer values not supported by GDAL, changed to 4 byte integer values')
 		}
 		if (! dataSigned(dtype) ) {
 			if (size == 8) {

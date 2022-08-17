@@ -5,7 +5,7 @@
 
 
 setMethod('sampleRegular', signature(x='Raster'), 
-function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, useGDAL=FALSE, ...) {
+function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, ...) {
 
 	stopifnot(hasValues(x) | isTRUE(xy))
 	
@@ -63,97 +63,99 @@ function( x, size, ext=NULL, cells=FALSE, xy=FALSE, asRaster=FALSE, sp=FALSE, us
 	}
 	
 	hv <- hasValues(x)
-	if (fromDisk(x) & useGDAL & hv) {
 
-		if ( any(rotated | .driver(x, FALSE) != 'gdal') ) { 
 
-			useGDAL <- FALSE 
+	# if (fromDisk(x) & useGDAL & hv) {
+
+		# if ( any(rotated | .driver(x, FALSE) != 'gdal') ) { 
+
+			# useGDAL <- FALSE 
 			
-		} else {
+		# } else {
 		
-			offs <- c(firstrow,firstcol)-1
-			reg <- c(nrow(rcut), ncol(rcut))-1
+			# offs <- c(firstrow,firstcol)-1
+			# reg <- c(nrow(rcut), ncol(rcut))-1
 			
-			if ( nl > 1 ) {
+			# if ( nl > 1 ) {
 				
-				v <- matrix(NA, ncol=nl, nrow=prod(nr, nc))
+				# v <- matrix(NA, ncol=nl, nrow=prod(nr, nc))
 				
-				for (i in 1:nl) {
-					xx <- x[[i]]
-					con <- rgdal::GDAL.open(xx@file@name, silent=TRUE)
-					band <- bandnr(xx)
-					vv <- rgdal::getRasterData(con, band=band, offset=offs, region.dim=reg, output.dim=c(nr, nc)) 
-					rgdal::closeDataset(con)
-					if (xx@data@gain != 1 | xx@data@offset != 0) {
-						vv <- vv * xx@data@gain + xx@data@offset
-					}
-					if (xx@file@nodatavalue < 0) {
-						vv[vv <= xx@file@nodatavalue] <- NA
-					} else {
-						vv[vv == xx@file@nodatavalue] <- NA
-					}
-					v[, i] <- vv
-				}
+				# for (i in 1:nl) {
+					# xx <- x[[i]]
+					# con <- rgdal::GDAL.open(xx@file@name, silent=TRUE)
+					# band <- bandnr(xx)
+					# vv <- rgdal::getRasterData(con, band=band, offset=offs, region.dim=reg, output.dim=c(nr, nc)) 
+					# rgdal::closeDataset(con)
+					# if (xx@data@gain != 1 | xx@data@offset != 0) {
+						# vv <- vv * xx@data@gain + xx@data@offset
+					# }
+					# if (xx@file@nodatavalue < 0) {
+						# vv[vv <= xx@file@nodatavalue] <- NA
+					# } else {
+						# vv[vv == xx@file@nodatavalue] <- NA
+					# }
+					# v[, i] <- vv
+				# }
 				
-			} else {
+			# } else {
 			
-				band <- bandnr(x)
-				con <- rgdal::GDAL.open(x@file@name, silent=TRUE)
-				v <- rgdal::getRasterData(con, band=band, offset=offs, region.dim=reg, output.dim=c(nr, nc)) 
-				rgdal::closeDataset(con)
+				# band <- bandnr(x)
+				# con <- rgdal::GDAL.open(x@file@name, silent=TRUE)
+				# v <- rgdal::getRasterData(con, band=band, offset=offs, region.dim=reg, output.dim=c(nr, nc)) 
+				# rgdal::closeDataset(con)
 
-				v <- matrix(v, ncol=1)
-				colnames(v) <- names(x)
+				# v <- matrix(v, ncol=1)
+				# colnames(v) <- names(x)
 		
-				if (x@data@gain != 1 | x@data@offset != 0) {
-					v <- v * x@data@gain + x@data@offset
-				}
+				# if (x@data@gain != 1 | x@data@offset != 0) {
+					# v <- v * x@data@gain + x@data@offset
+				# }
 				
-				if (.naChanged(x)) {
-					if (x@file@nodatavalue < 0) {
-						v[v <= x@file@nodatavalue] <- NA
-					} else {
-						v[v == x@file@nodatavalue] <- NA
-					}
-				}
+				# if (.naChanged(x)) {
+					# if (x@file@nodatavalue < 0) {
+						# v[v <= x@file@nodatavalue] <- NA
+					# } else {
+						# v[v == x@file@nodatavalue] <- NA
+					# }
+				# }
 				
-			}
+			# }
 	
-			if (asRaster) {
-				if (is.null(ext))  {
-					outras <- raster(x)
-				} else {
-					outras <- raster(ext) 
-					crs(outras) <- crs(x)
-				}
-				nrow(outras) <- nr
-				ncol(outras) <- nc
-				if (nl > 1) {
-					outras <- brick(outras, nl=nl)
-					outras <- setValues(outras, v)
-				} else {
-					outras <- setValues(outras, as.vector(v))
-				}
-				names(outras) <- names(x)
-				if (any(is.factor(x))) {
-					levels(outras) <- levels(x)
-				}
-				return(outras)
+			# if (asRaster) {
+				# if (is.null(ext))  {
+					# outras <- raster(x)
+				# } else {
+					# outras <- raster(ext) 
+					# crs(outras) <- crs(x)
+				# }
+				# nrow(outras) <- nr
+				# ncol(outras) <- nc
+				# if (nl > 1) {
+					# outras <- brick(outras, nl=nl)
+					# outras <- setValues(outras, v)
+				# } else {
+					# outras <- setValues(outras, as.vector(v))
+				# }
+				# names(outras) <- names(x)
+				# if (any(is.factor(x))) {
+					# levels(outras) <- levels(x)
+				# }
+				# return(outras)
 				
-			} else {
-				if (cells) {
-					warning("'cells=TRUE' is ignored when 'useGDAL=TRUE'")
-				}
-				if (xy) {
-					warning("'xy=TRUE' is ignored when 'useGDAL=TRUE'")
-				}
-				if (sp) {
-					warning("'sp=TRUE' is ignored when 'useGDAL=TRUE'")
-				}
-				return( v )
-			}
-		}
-	}
+			# } else {
+				# if (cells) {
+					# warning("'cells=TRUE' is ignored when 'useGDAL=TRUE'")
+				# }
+				# if (xy) {
+					# warning("'xy=TRUE' is ignored when 'useGDAL=TRUE'")
+				# }
+				# if (sp) {
+					# warning("'sp=TRUE' is ignored when 'useGDAL=TRUE'")
+				# }
+				# return( v )
+			# }
+		# }
+	# }
 	
 	if (allx) {
 		cell <- 1:ncell(rcut)

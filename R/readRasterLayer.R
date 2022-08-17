@@ -138,33 +138,41 @@
 #		} else {
 #			result <- as.vector(t(bm[startrow:(startrow+nrows-1), startcol:(startcol+ncols-1)]))
 #		}
+		if (object@data@gain != 1 | object@data@offset != 0) {
+			result <- result * object@data@gain + object@data@offset
+		}
 		
 #use GDAL  		
 	} else { 
-		offs <- c((startrow-1), (startcol-1)) 
-		reg <- c(nrows, ncols)
-		if ( object@file@open ) {
-			result <- rgdal::getRasterData(object@file@con, offset=offs, region.dim=reg, band=object@data@band)
-		} else {
-			con <- rgdal::GDAL.open(object@file@name, silent=TRUE)
-			result <- rgdal::getRasterData(con, offset=offs, region.dim=reg, band=object@data@band)
-			rgdal::closeDataset(con)
-		}
-		result <- as.vector(result)
+		
+		#offs <- c((startrow-1), (startcol-1)) 
+		#reg <- c(nrows, ncols)
+		#if ( object@file@open ) {
+		#	result <- rgdal::getRasterData(object@file@con, offset=offs, region.dim=reg, band=object@data@band)
+		#} else {
+		#	con <- rgdal::GDAL.open(object@file@name, silent=TRUE)
+		#	result <- rgdal::getRasterData(con, offset=offs, region.dim=reg, band=object@data@band)
+		#	rgdal::closeDataset(con)
+		#}
+		#result <- as.vector(result)
 		
 		# if  NAvalue() has been used.....
-		if (object@file@nodatavalue < 0) {
-			result[result <= object@file@nodatavalue ] <- NA 			
-		} else {
-			result[result == object@file@nodatavalue ] <- NA 					
-		}
+		#if (object@file@nodatavalue < 0) {
+		#	result[result <= object@file@nodatavalue ] <- NA 			
+		#} else {
+		#	result[result == object@file@nodatavalue ] <- NA 					
+		#}
 		
+		object <- rast(object)
+		readStart(object)
+		result <- readValues(object, startrow, nrows, startcol, ncols, mat=FALSE, dataframe=FALSE)
+		readStop(object)
+
+		#if (object@data@gain != 1 | object@data@offset != 0) {
+		#	result <- result * object@data@gain + object@data@offset
+		#}
 	} 
 	
-	if (object@data@gain != 1 | object@data@offset != 0) {
-		result <- result * object@data@gain + object@data@offset
-	}
-
 	return(result)
 }
 

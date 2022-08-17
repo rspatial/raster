@@ -1,4 +1,5 @@
 
+if (!isGeneric("stack")) { setGeneric("stack", function(x, ...)	standardGeneric("stack"))}
 
 if (!isGeneric("as.raster")) { setGeneric("as.raster", function(x, ...) standardGeneric("as.raster"))}	
 

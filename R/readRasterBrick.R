@@ -173,28 +173,33 @@
  
 	} else {
 	#use GDAL  			
-        offs <- c((startrow - 1), (startcol - 1))
-        reg <- c(nrows, ncols)
-        con <- rgdal::GDAL.open(object@file@name, silent = TRUE)
+    #    offs <- c((startrow - 1), (startcol - 1))
+    #    reg <- c(nrows, ncols)
+    #   con <- rgdal::GDAL.open(object@file@name, silent = TRUE)
 
-#		result <- rgdal::getRasterData(con, offset=offs, region.dim=reg)
-#		result <- do.call(cbind, lapply(1:nlayers(object), function(i) as.vector(result[,,i])))
-# just as fast, it seems:
-        result <- matrix(nrow = ncols * nrows, ncol = nlayers(object))
-        for (b in 1:object@data@nlayers) {
-            result[, b] <- rgdal::getRasterData(con, offset = offs, 
-                region.dim = reg, band = b)
-        }
+##		result <- rgdal::getRasterData(con, offset=offs, region.dim=reg)
+##		result <- do.call(cbind, lapply(1:nlayers(object), function(i) as.vector(result[,,i])))
+## just as fast, it seems:
+    #    result <- matrix(nrow = ncols * nrows, ncol = nlayers(object))
+    #    for (b in 1:object@data@nlayers) {
+    #        result[, b] <- rgdal::getRasterData(con, offset = offs, 
+    #            region.dim = reg, band = b)
+    #    }
 
-        rgdal::closeDataset(con)
-        result[result == object@file@nodatavalue] <- NA
+    #    rgdal::closeDataset(con)
+    #    result[result == object@file@nodatavalue] <- NA
+		
+		object <- rast(object)
+		readStart(object)
+		result <- readValues(object, startrow, nrows, startcol, ncols, mat=TRUE, dataframe=FALSE)
+		readStop(object)
 		
 	}
-
-	if (object@data@gain != 1 | object@data@offset != 0) {
-		result <- result * object@data@gain + object@data@offset
+	if (inherits(object, "Raster")) {
+		if (object@data@gain != 1 | object@data@offset != 0) {
+			result <- result * object@data@gain + object@data@offset
+		}
 	}
-
 	colnames(result) <- names(object)
 	return(result)
 }

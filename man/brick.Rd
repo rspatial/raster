@@ -48,7 +48,7 @@ A RasterBrick can be created from RasterLayer objects, from a RasterStack, or fr
 
 
 \arguments{
-\item{x}{character (filename, see Details); Raster* object; missing; array; SpatialGrid*; SpatialPixels*; Extent; or list of Raster* objects. Supported file types are the 'native' raster package format and those that can be read via rgdal (see \code{\link[rgdal]{readGDAL}}), and NetCDF files (see details)}
+\item{x}{character (filename, see Details); Raster* object; missing; array; SpatialGrid*; SpatialPixels*; Extent; or list of Raster* objects. Supported file types are the 'native' raster package format and those that can be read via GDAL, and NetCDF files (see details)}
 \item{...}{see Details}
 \item{values}{logical. If \code{TRUE}, the cell values of '\code{x}' are copied to the RasterBrick object that is returned}
 \item{nl}{integer > 0. How many layers should the RasterBrick have?}
@@ -70,7 +70,7 @@ If there is a \code{filename} argument, the additional arguments are as for \cod
 
 If \code{x} represents a filename there is the following additional argument:
 
-\code{native}: logical. If \code{TRUE} (not the default), reading and writing of IDRISI, BIL, BSQ, BIP, and Arc ASCII files is done with native (raster package) drivers, rather then via rgdal.
+\code{native}: logical. If \code{TRUE} (not the default), reading and writing of IDRISI, BIL, BSQ, BIP, and Arc ASCII files is done with native (raster package) drivers, rather then via GDAL.
 
 In addition, if \code{x} is a \bold{NetCDF} filename there are the following additional arguments:
  

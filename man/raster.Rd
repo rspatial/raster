@@ -64,7 +64,7 @@ For an overview of the functions in the raster package have a look here: \code{\
 }
 
 \arguments{
-\item{x}{filename (character), Extent, Raster*, sf, SpatialPixels*, SpatialGrid*, object, 'image', matrix, im, or missing. Supported file types are the 'native' raster package format and those that can be read via \code{rgdal} (see \code{\link[rgdal]{readGDAL}}}
+\item{x}{filename (character), Extent, Raster*, sf, SpatialPixels*, SpatialGrid*, object, 'image', matrix, im, or missing. Supported file types are the 'native' raster package format and those that can be read by GDAL}
 \item{band}{integer. The layer to use in a multi-layer file}
 \item{...}{Additional arguments, see Details }  
 \item{layer}{integer. The layer (variable) to use in a multi-layer file, or the layer to extract from a RasterStack/Brick or SpatialPixelsDataFrame or SpatialGridDataFrame. An empty RasterLayer (no associated values) is returned if \code{layer=0}}
@@ -88,7 +88,7 @@ If \code{x} is a filename, the following additional variables are recognized:
 
 \code{sub}: positive integer. Subdataset number for a file with subdatasets
 
-\code{native}: logical.  Default is \code{FALSE} except when package \code{rgdal} is missing. If \code{TRUE}, reading and writing of IDRISI, BIL, BSQ, BIP, SAGA, and Arc ASCII files is done with native (raster package) drivers, rather then via rgdal. 'raster' and netcdf format files are always read with native drivers. 
+\code{native}: logical.  Default is \code{FALSE}. If \code{TRUE}, reading and writing of IDRISI, BIL, BSQ, BIP, SAGA, and Arc ASCII files is done with native (raster package) drivers, rather then via GDAL. 'raster' and netcdf format files are always read with native drivers. 
 
 \code{RAT}: logical. The default is \code{TRUE}, in which case a raster attribute table is created for files that have one
 

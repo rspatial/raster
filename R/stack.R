@@ -3,12 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 
-if (!isGeneric("stack")) {
-	setGeneric("stack", function(x, ...)
-		standardGeneric("stack"))
-}
-
-
 
 setMethod("stack", signature(x='missing'), 
 function(x) {

@@ -21,7 +21,7 @@
 	tmp = rasterTmpFile()
 	extension(tmp) = '.tif'
 	
-	.requireRgdal()
+	#.requireRgdal()
 	r <- writeStart(r, filename=tmp, format='GTiff')
 	
 	pb <- pbCreate(tr$n, progress=progress)			

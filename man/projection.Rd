@@ -53,9 +53,9 @@ For compatibility with \code{sp} you can use \code{proj4string} instead of \code
 \code{wkt} returns the "well-known-text" representation of the crs.  
 }
 
-\seealso{ \code{\link[raster]{projectRaster}, \link[rgdal]{CRS-class}, \link[sp]{spTransform}, \link[rgdal]{projInfo}}}
+\seealso{ \code{\link[raster]{projectRaster}, \link[sp]{spTransform}, \link[rgdal]{projInfo}}}
 
-\details{ projections are done by with the PROJ.4 library exposed by rgdal }
+\details{ projections are done by with the PROJ library }
 
 
 

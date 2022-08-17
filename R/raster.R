@@ -225,6 +225,7 @@ setMethod('raster', signature(x='RasterBrick'),
 
 				r@file@blockrows <- x@file@blockrows
 				r@file@blockcols <- x@file@blockcols
+				r@file@nbands <- nlayers(x)
 				
 				r@data@offset <- x@data@offset
 				r@data@gain <- x@data@gain

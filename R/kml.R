@@ -13,18 +13,31 @@ if (!isGeneric("KML")) {
 
 setMethod('KML', signature(x='Spatial'), 
 	function (x, filename, zip='', overwrite=FALSE, ...) {
-		.requireRgdal()
-		if (! is.na(projection(x))) {
-			if (! isLonLat(x) ) {
+#		.requireRgdal()
+	#	if (! is.na(projection(x))) {
+	#		if (! isLonLat(x) ) {
+	#			warning('transforming data to longitude/latitude')
+	### this did not catch the output!
+	#			sp::spTransform(x, sp::CRS('+proj=longlat +datum=WGS84'))
+	#		}
+	#	}
+		
+	#	if (!.hasSlot(x, 'data') ) {
+	#		x <- sp::addAttrToGeom(x, data.frame(id=1:length(x)), match.ID=FALSE)
+	#	}
+
+
+		x <- vect(x)
+		if (ncol(x) == 0) {
+			x$id <- 1:nrow(x)
+		}
+		p <- crs(x)
+		if (p != "") {
+			if (!is.lonlat(x) ) {
 				warning('transforming data to longitude/latitude')
-				sp::spTransform(x, sp::CRS('+proj=longlat +datum=WGS84'))
-			}
+				x <- sp::spTransform(x, sp::CRS('+proj=longlat +datum=WGS84'))
+			}		
 		}
-		
-		if (!.hasSlot(x, 'data') ) {
-			x <- sp::addAttrToGeom(x, data.frame(id=1:length(x)), match.ID=FALSE)
-		}
-		
 		extension(filename) <- '.kml'
 		if (file.exists(filename)) {
 			if (overwrite) {
@@ -37,7 +50,9 @@ setMethod('KML', signature(x='Spatial'),
 		if (is.null(name)) {
 			name <- deparse(substitute(x))
 		}
-		rgdal::writeOGR(x, filename, name, 'KML', ...)
+		
+		writeVector(x, filename, name, ...)
+		#rgdal::writeOGR(x, filename, name, 'KML', ...)
 		.zipKML(filename, '', zip, overwrite=overwrite) 
 	}
 )

@@ -26,12 +26,12 @@ function(x, y, ..., df=FALSE, sp=FALSE){
 	px <-.getCRS(x)
 	comp <- compareCRS(px,.getCRS(y), unknown=TRUE)
 	if (!comp) {
-		if (!.requireRgdal()) {
-			warning('CRS of SpatialPoints and rater do not match')
-		} else {
+		#if (!.requireRgdal()) {
+		#	warning('CRS of SpatialPoints and rater do not match')
+		#} else {
 			warning('Transforming SpatialPoints to the crs of the Raster')
 			y <- sp::spTransform(y, px)
-		}
+		#}
 	}
 	if (sp) {
 		v <- .xyValues(x, sp::coordinates(y)[,1:2,drop=FALSE], ..., df=TRUE)

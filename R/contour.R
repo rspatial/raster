@@ -6,7 +6,7 @@
 
 setMethod("contour", signature(x='RasterLayer'), 
 	function(x, maxpixels=100000, ...)  {
-		x <- sampleRegular(x, maxpixels, asRaster=TRUE, useGDAL=TRUE)
+		x <- sampleRegular(x, maxpixels, asRaster=TRUE) #, useGDAL=TRUE)
 		contour(x=xFromCol(x,1:ncol(x)), y=yFromRow(x, nrow(x):1), z=t((getValues(x, format='matrix'))[nrow(x):1,]), ...)
 	}
 )
@@ -14,7 +14,7 @@ setMethod("contour", signature(x='RasterLayer'),
 
 
 rasterToContour <- function(x, maxpixels=100000, ...) {
-	x <- sampleRegular(x, size=maxpixels, asRaster=TRUE, useGDAL=TRUE)
+	x <- sampleRegular(x, size=maxpixels, asRaster=TRUE) #, useGDAL=TRUE)
 	cL <- grDevices::contourLines(x=xFromCol(x,1:ncol(x)), y=yFromRow(x, nrow(x):1), z=t((getValues(x, format='matrix'))[nrow(x):1,]), ...)
 	
 # The below was taken from ContourLines2SLDF(maptools), by Roger Bivand & Edzer Pebesma 
@@ -49,7 +49,7 @@ filledContour <- function(x, y=1, maxpixels=100000, ...) {
 		y <- min(max(1, y), nlayers(x))
 		x <- raster(x, y) 
 	}
-	x <- sampleRegular(x, maxpixels, asRaster=TRUE, useGDAL=TRUE)
+	x <- sampleRegular(x, maxpixels, asRaster=TRUE) #, useGDAL=TRUE)
 	X <- xFromCol(x, 1:ncol(x))
 	Y <- yFromRow(x, nrow(x):1)
 	Z <- t( matrix( getValues(x), ncol=x@ncols, byrow=TRUE)[nrow(x):1,] )

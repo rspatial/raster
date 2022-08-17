@@ -62,7 +62,6 @@ when writing to an ascii file or another file type that does not store the crs
 \details{
 See \code{writeFormats} for supported file types ("formats", "drivers").
 
-The rgdal package is needed, except for these file formats: 'raster', 'BIL', 'BIP', 'BSQ', 'SAGA', 'ascii', 'IDRISI', and 'CDF'. Some of these formats can be used with or without rgdal (idrisi, SAGA, ascii).  You need the 'ncdf4' library for the 'CDF' format. 
 
 In multi-layer files (i.e. files saved from RasterStack or RasterBrick objects), in the native 'raster' format, the band-order can be set to BIL ('Bands Interleaved by Line'), BIP ('Bands Interleaved by Pixels') or BSQ ('Bands SeQuential'). Note that bandorder is not the same as filetype here. 
 
@@ -105,11 +104,10 @@ b <- brick(r, sqrt(r))
 bf <- writeRaster(b, filename=file.path(tmp, "multi.grd"), bandorder='BIL', overwrite=TRUE)
 
 # write to a new geotiff file (depends on rgdal)
-if (require(rgdal)) {
-  rf <- writeRaster(r, filename=file.path(tmp, "test.tif"), format="GTiff", overwrite=TRUE)
-  bf <- writeRaster(b, filename=file.path(tmp, "multi.tif"), 
+rf <- writeRaster(r, filename=file.path(tmp, "test.tif"), format="GTiff", overwrite=TRUE)
+bf <- writeRaster(b, filename=file.path(tmp, "multi.tif"), 
 						options="INTERLEAVE=BAND", overwrite=TRUE)
-}
+
  
 # write to netcdf 
 if (require(ncdf4)) {	

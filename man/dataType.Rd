@@ -7,7 +7,7 @@
 
 \description{
 Get the datatype of a RasterLayer object. The datatype determines the interpretation of values written to disk. 
-Changing the datatype of a Raster* object does not directly affect the way they are stored in memory. For native file formats (.grd/.gri files) it does affect how values are read from file. This is not the case for file formats that are read via rgdal (such as .tif and .img files) or netcdf.
+Changing the datatype of a Raster* object does not directly affect the way they are stored in memory. For native file formats (.grd/.gri files) it does affect how values are read from file. This is not the case for file formats that are read via GDAL (such as .tif and .img files) or netcdf.
 
 If you change the datatype of a RasterLayer and then read values from a native format file these may be completely wrong, so only do this for debugging or when the information in the header file was wrong. To set the datatype of a new file, you can give a 'datatype' argument to the functions that write values to disk (e.g. \code{\link{writeRaster}}). 
 }

@@ -10,7 +10,7 @@
 	ini <- readIniFile(hdrfname, token=' ')
 	
 	if (ini[1,1] == "ENVI") {
-		stop("This file has an ENVI header; I cannot read that natively, only via rgdal")
+		stop("This file has an ENVI header; I cannot read that natively, only via GDAL")
 	}
 
 	ini[,2] = toupper(ini[,2]) 
