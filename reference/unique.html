@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,25 +50,30 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer,missing</span>
-<span class="fu">unique</span><span class="op">(</span><span class="va">x</span>, incomparables<span class="op">=</span><span class="cn">FALSE</span>, na.last<span class="op">=</span><span class="cn">NA</span>, progress<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span> 
-
-<span class="co"># S4 method for RasterStackBrick,missing</span>
-<span class="fu">unique</span><span class="op">(</span><span class="va">x</span>, incomparables<span class="op">=</span><span class="cn">FALSE</span>, na.last<span class="op">=</span><span class="cn">NA</span>, progress<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer,missing</span></span>
+<span><span class="fu">unique</span><span class="op">(</span><span class="va">x</span>, incomparables<span class="op">=</span><span class="cn">FALSE</span>, na.last<span class="op">=</span><span class="cn">NA</span>, progress<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick,missing</span></span>
+<span><span class="fu">unique</span><span class="op">(</span><span class="va">x</span>, incomparables<span class="op">=</span><span class="cn">FALSE</span>, na.last<span class="op">=</span><span class="cn">NA</span>, progress<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster object</p></dd>
-<dt>incomparables</dt>
+
+  <dt>incomparables</dt>
 <dd><p>must be missing. The default value <code>FALSE</code> is used. See <code><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></code></p></dd>
-<dt>na.last</dt>
+
+  <dt>na.last</dt>
 <dd><p>logical. for controlling the treatment of <code>NA</code>s. If <code>TRUE</code>, missing values in the data are put last; if <code>FALSE</code>, they are put first; if <code>NA</code>, they are removed.</p></dd>
-<dt>progress</dt>
+
+  <dt>progress</dt>
 <dd><p>character. Use "text" or "window" for a progress indicator</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments. as in <code><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></code></p></dd>
+  
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -76,16 +81,18 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>vector or matrix</p>
+    
+
+<p>vector or matrix</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">unique</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">unique</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  0  1  2  3  4  5  6  7  8  9 10</span>
-<span class="r-in"><span class="fu">unique</span><span class="op">(</span><span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">r</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">unique</span><span class="op">(</span><span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">r</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       layer.1 layer.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]      10       5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]       8       4</span>
@@ -112,7 +119,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

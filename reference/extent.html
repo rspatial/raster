@@ -19,7 +19,7 @@ bbox returns a sp package like 'bbox' object (a matrix)"><!-- mathjax --><script
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -54,20 +54,24 @@ Extent object from a 2x2 matrix (first row: xmin, xmax; second row: ymin, ymax),
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">extent</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extent</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* or Extent object, a matrix, a bbox, or a vector of four numbers</p></dd>
+ 
 <dt>...</dt>
 <dd><p>Additional arguments. When x is a single number representing 'xmin', you can pass three additional numbers (xmax, ymin, ymax)</p>
 <p>When <code>x</code> is a Raster* object, you can pass four additional arguments to crop the extent: <code>r1, r2, c1, c2</code>, representing the first and last row and column number</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Extent object</p>
+    
+
+<p>Extent object</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -80,42 +84,42 @@ Extent object from a 2x2 matrix (first row: xmin, xmax; second row: ymin, ymax),
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">extent</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">extent</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : Extent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmin       : -180 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmax       : 180 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymin       : -90 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymax       : 90 </span>
-<span class="r-in"><span class="fu">extent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">extent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : Extent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmin       : 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmax       : 20 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymin       : 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymax       : 20 </span>
-<span class="r-in"><span class="co">#is equivalent to</span></span>
-<span class="r-in"><span class="fu">extent</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">#is equivalent to</span></span></span>
+<span class="r-in"><span><span class="fu">extent</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : Extent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmin       : 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmax       : 20 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymin       : 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymax       : 20 </span>
-<span class="r-in"><span class="fu">extent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">extent</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : Extent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmin       : 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmax       : 20 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymin       : 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymax       : 20 </span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">extent</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">extent</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : Extent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmin       : 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmax       : 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymin       : -3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymax       : 5 </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#crop the extent by row and column numbers</span></span>
-<span class="r-in"><span class="fu">extent</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span>, <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#crop the extent by row and column numbers</span></span></span>
+<span class="r-in"><span><span class="fu">extent</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span>, <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">30</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : Extent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmin       : -171 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmax       : -150 </span>
@@ -135,7 +139,7 @@ Extent object from a 2x2 matrix (first row: xmin, xmax; second row: ymin, ymax),
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

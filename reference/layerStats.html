@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,27 +50,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">layerStats</span><span class="op">(</span><span class="va">x</span>, <span class="va">stat</span>, <span class="va">w</span>, asSample<span class="op">=</span><span class="cn">TRUE</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layerStats</span><span class="op">(</span><span class="va">x</span>, <span class="va">stat</span>, <span class="va">w</span>, asSample<span class="op">=</span><span class="cn">TRUE</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterStack or RasterBrick for which to compute a statistic</p></dd>
-<dt>stat</dt>
+
+
+  <dt>stat</dt>
 <dd><p>Character. The statistic to compute: either 'cov' (covariance), 'weighted.cov' (weighted covariance), or 'pearson' (correlation coefficient)</p></dd>
-<dt>w</dt>
+
+
+  <dt>w</dt>
 <dd><p>RasterLayer with the weights (should have the same extent, resolution and number of layers as <code>x</code>) to compute the weighted covariance</p></dd>
-<dt>asSample</dt>
+
+
+  <dt>asSample</dt>
 <dd><p>Logical. If <code>TRUE</code>, the statistic for a sample (denominator is <code>n-1</code>) is computed, rather than for the population (denominator is <code>n</code>)</p></dd>
-<dt>na.rm</dt>
+
+    
+  <dt>na.rm</dt>
 <dd><p>Logical. Should missing values be removed?</p></dd>
-<dt>...</dt>
+
+  
+  <dt>...</dt>
 <dd><p>Additional arguments (none implemetned)</p></dd>
+ 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>List with two items: the correlation or (weighted) covariance matrix, and the (weighted) means.</p>
+    
+
+<p>List with two items: the correlation or (weighted) covariance matrix, and the (weighted) means.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -88,8 +101,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">layerStats</span><span class="op">(</span><span class="va">b</span>, <span class="st">'pearson'</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">layerStats</span><span class="op">(</span><span class="va">b</span>, <span class="st">'pearson'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`pearson correlation coefficient`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             red     green      blue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> red   1.0000000 0.9980961 0.9501633</span>
@@ -100,8 +113,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>      red    green     blue </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 182.2855 185.3509 192.8046 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">layerStats</span><span class="op">(</span><span class="va">b</span>, <span class="st">'cov'</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">layerStats</span><span class="op">(</span><span class="va">b</span>, <span class="st">'cov'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $covariance</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            red    green     blue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> red   5564.371 5443.405 4993.165</span>
@@ -112,10 +125,10 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>      red    green     blue </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 182.2855 185.3509 192.8046 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># weigh by column number</span></span>
-<span class="r-in"><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">b</span>, v<span class="op">=</span><span class="st">'col'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">layerStats</span><span class="op">(</span><span class="va">b</span>, <span class="st">'weighted.cov'</span>, w<span class="op">=</span><span class="va">w</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># weigh by column number</span></span></span>
+<span class="r-in"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">b</span>, v<span class="op">=</span><span class="st">'col'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">layerStats</span><span class="op">(</span><span class="va">b</span>, <span class="st">'weighted.cov'</span>, w<span class="op">=</span><span class="va">w</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`weigthed covariance`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            red    green     blue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> red   5670.750 5536.351 5009.851</span>
@@ -140,7 +153,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

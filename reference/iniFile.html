@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,21 +50,26 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">readIniFile</span><span class="op">(</span><span class="va">filename</span>, token<span class="op">=</span><span class="st">'='</span>, commenttoken<span class="op">=</span><span class="st">';'</span>, aslist<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">case</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">readIniFile</span><span class="op">(</span><span class="va">filename</span>, token<span class="op">=</span><span class="st">'='</span>, commenttoken<span class="op">=</span><span class="st">';'</span>, aslist<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">case</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>filename</dt>
 <dd><p>Character. Filename of the .ini file</p></dd>
-<dt>token</dt>
+
+  <dt>token</dt>
 <dd><p>Character. The character that separates the "name" (variable name) from the "value"</p></dd>
-<dt>commenttoken</dt>
+
+  <dt>commenttoken</dt>
 <dd><p>Character. This token and everything that follows on the same line is considered a 'comment' that is not for machine consumption and is ignored in processing</p></dd>
-<dt>aslist</dt>
+ 
+  <dt>aslist</dt>
 <dd><p>Logical. Should the values be returned as a list</p></dd>
-<dt>case</dt>
+
+  <dt>case</dt>
 <dd><p>Optional. Function that operates on the text, such as <code><a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a></code> or  <code><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></code></p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -72,7 +77,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A n*3 matrix of characters with columns: section, name, value; or a list if <code>aslist=TRUE</code>.</p>
+    
+
+<p>A n*3 matrix of characters with columns: section, name, value; or a list if <code>aslist=TRUE</code>.</p>
     </div>
 
   </div>
@@ -87,7 +94,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

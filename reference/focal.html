@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,30 +50,47 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">focal</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span>, <span class="va">fun</span>, filename<span class="op">=</span><span class="st">''</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, pad<span class="op">=</span><span class="cn">FALSE</span>, padValue<span class="op">=</span><span class="cn">NA</span>, NAonly<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">focal</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span>, <span class="va">fun</span>, filename<span class="op">=</span><span class="st">''</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, pad<span class="op">=</span><span class="cn">FALSE</span>, padValue<span class="op">=</span><span class="cn">NA</span>, NAonly<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterLayer</p></dd>
+
+  
 <dt>w</dt>
 <dd><p>matrix of weights (the moving window), e.g. a 3 by 3 matrix with values 1; see Details. The matrix does not need to be square, but the sides must be odd numbers. If you need even sides, you can add a column or row with weights of zero or <code>NA</code></p></dd>
+
+  
 <dt>fun</dt>
 <dd><p>function (optional). The function fun should take multiple numbers, and return a single number. For example mean, modal, min or max. It should also accept a <code>na.rm</code> argument (or ignore it, e.g. as one of the 'dots' arguments. For example, <code>length</code> will fail, but <code>function(x, ...){na.omit(length(x))}</code> works.</p></dd>
+
+
 <dt>filename</dt>
 <dd><p>character. Filename for a new raster (optional)</p></dd>
+
+ 
 <dt>na.rm</dt>
 <dd><p>logical. If <code>TRUE</code>, <code>NA</code> will be removed from focal computations. The result will only be <code>NA</code> if all focal cells are <code>NA</code>. Except for some special cases (weights of 1, functions like min, max, mean), using <code>na.rm=TRUE</code> may not be a good idea in this function because it can unbalance the effect of the weights</p></dd>
+
+ 
 <dt>pad</dt>
 <dd><p>logical. If <code>TRUE</code>, additional 'virtual' rows and columns are padded to <code>x</code> such that there are no edge effects. This can be useful when a function needs to have access to the central cell of the filter</p></dd>
+
+  
 <dt>padValue</dt>
 <dd><p>numeric. The value of the cells of the padded rows and columns</p></dd>
+
+ 
 <dt>NAonly</dt>
 <dd><p>logical. If <code>TRUE</code>, only cell values that are <code>NA</code> are replaced with the computed focal values</p></dd>
+
+ 
 <dt>...</dt>
 <dd><p>Additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -89,7 +106,9 @@ and <code>fy=matrix(c(1,0,-1,2,0,-2,1,0,-1)/4, nrow=3)</code></p>
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer</p>
+    
+
+<p>RasterLayer</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -98,78 +117,78 @@ and <code>fy=matrix(c(1,0,-1,2,0,-2,1,0,-1)/4, nrow=3)</code></p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">36</span>, nrows<span class="op">=</span><span class="fl">18</span>, xmn<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># 3x3 mean filter</span></span>
-<span class="r-in"><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">9</span>,nrow<span class="op">=</span><span class="fl">3</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># 5x5 mean filter</span></span>
-<span class="r-in"><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">25</span>,nrow<span class="op">=</span><span class="fl">5</span>,ncol<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Gaussian filter</span></span>
-<span class="r-in"><span class="va">gf</span> <span class="op">&lt;-</span> <span class="fu"><a href="focalWeight.html">focalWeight</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">2</span>, <span class="st">"Gauss"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">rg</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="va">gf</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># The max value for the lower-rigth corner of a 3x3 matrix around a focal cell</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">f</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">36</span>, nrows<span class="op">=</span><span class="fl">18</span>, xmn<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 3x3 mean filter</span></span></span>
+<span class="r-in"><span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">9</span>,nrow<span class="op">=</span><span class="fl">3</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 5x5 mean filter</span></span></span>
+<span class="r-in"><span><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">25</span>,nrow<span class="op">=</span><span class="fl">5</span>,ncol<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Gaussian filter</span></span></span>
+<span class="r-in"><span><span class="va">gf</span> <span class="op">&lt;-</span> <span class="fu"><a href="focalWeight.html">focalWeight</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">2</span>, <span class="st">"Gauss"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rg</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="va">gf</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># The max value for the lower-rigth corner of a 3x3 matrix around a focal cell</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">f</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0    0    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    0    1    1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    0    1    1</span>
-<span class="r-in"><span class="va">rm</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="va">f</span>, fun<span class="op">=</span><span class="va">max</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># global lon/lat data: no 'edge effect' for the columns</span></span>
-<span class="r-in"><span class="fu"><a href="coords.html">xmin</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">180</span></span>
-<span class="r-in"><span class="va">r3g</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">9</span>,nrow<span class="op">=</span><span class="fl">3</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## focal can be used to create a cellular automaton</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Conway's Game of Life </span></span>
-<span class="r-in"><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, nr<span class="op">=</span><span class="fl">3</span>,nc<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gameOfLife</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">f</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">x</span>, w<span class="op">=</span><span class="va">w</span>, pad<span class="op">=</span><span class="cn">TRUE</span>, padValue<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in">  <span class="co"># cells with less than two or more than three live neighbours die</span></span>
-<span class="r-in">  <span class="va">x</span><span class="op">[</span><span class="va">f</span><span class="op">&lt;</span><span class="fl">2</span> <span class="op">|</span> <span class="va">f</span><span class="op">&gt;</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span class="r-in">  <span class="co"># cells with three live neighbours become alive</span></span>
-<span class="r-in">  <span class="va">x</span><span class="op">[</span><span class="va">f</span><span class="op">==</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in">  <span class="va">x</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># simulation function</span></span>
-<span class="r-in"><span class="va">sim</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="va">n</span><span class="op">=</span><span class="fl">100</span>, <span class="va">pause</span><span class="op">=</span><span class="fl">0.25</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">fun</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">x</span>, legend<span class="op">=</span><span class="cn">FALSE</span>, asp<span class="op">=</span><span class="cn">NA</span>, main<span class="op">=</span><span class="va">i</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.flush.html" class="external-link">dev.flush</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="va">pause</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Gosper glider gun</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nc<span class="op">=</span><span class="fl">48</span>, nr<span class="op">=</span><span class="fl">34</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">41</span>, <span class="fl">74</span>, <span class="fl">75</span>, <span class="fl">380</span>, <span class="fl">381</span>, <span class="fl">382</span>, <span class="fl">413</span>, <span class="fl">417</span>, <span class="fl">446</span>, <span class="fl">452</span>, <span class="fl">480</span>, </span>
-<span class="r-in">  <span class="fl">486</span>, <span class="fl">517</span>, <span class="fl">549</span>, <span class="fl">553</span>, <span class="fl">584</span>, <span class="fl">585</span>, <span class="fl">586</span>, <span class="fl">619</span>, <span class="fl">718</span>, <span class="fl">719</span>, <span class="fl">720</span>, <span class="fl">752</span>, </span>
-<span class="r-in">  <span class="fl">753</span>, <span class="fl">754</span>, <span class="fl">785</span>, <span class="fl">789</span>, <span class="fl">852</span>, <span class="fl">853</span>, <span class="fl">857</span>, <span class="fl">858</span>, <span class="fl">1194</span>, <span class="fl">1195</span>, <span class="fl">1228</span>, <span class="fl">1229</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">init</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># run the model</span></span>
-<span class="r-in"><span class="fu">sim</span><span class="op">(</span><span class="va">init</span>, <span class="va">gameOfLife</span>, n<span class="op">=</span><span class="fl">150</span>, pause<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Implementation of Sobel edge-detection filter</span></span>
-<span class="r-in"><span class="co">## for RasterLayer r</span></span>
-<span class="r-in"><span class="va">sobel</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">fy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">1</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">fx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="op">-</span><span class="fl">2</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span> , nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, <span class="va">fx</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">ry</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, <span class="va">fy</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">rx</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">ry</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span><span class="va">rm</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="va">f</span>, fun<span class="op">=</span><span class="va">max</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># global lon/lat data: no 'edge effect' for the columns</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="coords.html">xmin</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">180</span></span></span>
+<span class="r-in"><span><span class="va">r3g</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">9</span>,nrow<span class="op">=</span><span class="fl">3</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## focal can be used to create a cellular automaton</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Conway's Game of Life </span></span></span>
+<span class="r-in"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, nr<span class="op">=</span><span class="fl">3</span>,nc<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gameOfLife</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">f</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">x</span>, w<span class="op">=</span><span class="va">w</span>, pad<span class="op">=</span><span class="cn">TRUE</span>, padValue<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># cells with less than two or more than three live neighbours die</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">[</span><span class="va">f</span><span class="op">&lt;</span><span class="fl">2</span> <span class="op">|</span> <span class="va">f</span><span class="op">&gt;</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span>  <span class="co"># cells with three live neighbours become alive</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">[</span><span class="va">f</span><span class="op">==</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># simulation function</span></span></span>
+<span class="r-in"><span><span class="va">sim</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="va">n</span><span class="op">=</span><span class="fl">100</span>, <span class="va">pause</span><span class="op">=</span><span class="fl">0.25</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">fun</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">x</span>, legend<span class="op">=</span><span class="cn">FALSE</span>, asp<span class="op">=</span><span class="cn">NA</span>, main<span class="op">=</span><span class="va">i</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.flush.html" class="external-link">dev.flush</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="va">pause</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Gosper glider gun</span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nc<span class="op">=</span><span class="fl">48</span>, nr<span class="op">=</span><span class="fl">34</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">41</span>, <span class="fl">74</span>, <span class="fl">75</span>, <span class="fl">380</span>, <span class="fl">381</span>, <span class="fl">382</span>, <span class="fl">413</span>, <span class="fl">417</span>, <span class="fl">446</span>, <span class="fl">452</span>, <span class="fl">480</span>, </span></span>
+<span class="r-in"><span>  <span class="fl">486</span>, <span class="fl">517</span>, <span class="fl">549</span>, <span class="fl">553</span>, <span class="fl">584</span>, <span class="fl">585</span>, <span class="fl">586</span>, <span class="fl">619</span>, <span class="fl">718</span>, <span class="fl">719</span>, <span class="fl">720</span>, <span class="fl">752</span>, </span></span>
+<span class="r-in"><span>  <span class="fl">753</span>, <span class="fl">754</span>, <span class="fl">785</span>, <span class="fl">789</span>, <span class="fl">852</span>, <span class="fl">853</span>, <span class="fl">857</span>, <span class="fl">858</span>, <span class="fl">1194</span>, <span class="fl">1195</span>, <span class="fl">1228</span>, <span class="fl">1229</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">init</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># run the model</span></span></span>
+<span class="r-in"><span><span class="fu">sim</span><span class="op">(</span><span class="va">init</span>, <span class="va">gameOfLife</span>, n<span class="op">=</span><span class="fl">150</span>, pause<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Implementation of Sobel edge-detection filter</span></span></span>
+<span class="r-in"><span><span class="co">## for RasterLayer r</span></span></span>
+<span class="r-in"><span><span class="va">sobel</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">fy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="op">-</span><span class="fl">1</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">fx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="op">-</span><span class="fl">2</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span> , nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, <span class="va">fx</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ry</span> <span class="op">&lt;-</span> <span class="fu">focal</span><span class="op">(</span><span class="va">r</span>, <span class="va">fy</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">rx</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">ry</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -184,7 +203,7 @@ and <code>fy=matrix(c(1,0,-1,2,0,-2,1,0,-1)/4, nrow=3)</code></p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

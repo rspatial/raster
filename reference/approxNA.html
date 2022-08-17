@@ -18,7 +18,7 @@ For estimation based on neighbouring cells see focal"><!-- mathjax --><script sr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,39 +52,52 @@ For estimation based on neighbouring cells see focal"><!-- mathjax --><script sr
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterStackBrick</span>
-<span class="fu">approxNA</span><span class="op">(</span><span class="va">x</span>, filename<span class="op">=</span><span class="st">""</span>, method<span class="op">=</span><span class="st">"linear"</span>, <span class="va">yleft</span>, <span class="va">yright</span>,
-            rule<span class="op">=</span><span class="fl">1</span>, f<span class="op">=</span><span class="fl">0</span>, ties<span class="op">=</span><span class="va">mean</span>, z<span class="op">=</span><span class="cn">NULL</span>, NArule<span class="op">=</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterStackBrick</span></span>
+<span><span class="fu">approxNA</span><span class="op">(</span><span class="va">x</span>, filename<span class="op">=</span><span class="st">""</span>, method<span class="op">=</span><span class="st">"linear"</span>, <span class="va">yleft</span>, <span class="va">yright</span>,</span>
+<span>            rule<span class="op">=</span><span class="fl">1</span>, f<span class="op">=</span><span class="fl">0</span>, ties<span class="op">=</span><span class="va">mean</span>, z<span class="op">=</span><span class="cn">NULL</span>, NArule<span class="op">=</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterStack or RasterBrick object</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Output filename (optional)</p></dd>
-<dt>method</dt>
+
+  <dt>method</dt>
 <dd><p>specifies the interpolation method to be used. Choices are "linear" or "constant" (step function; see the example in <code><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approx</a></code></p></dd>
-<dt>yleft</dt>
+
+  <dt>yleft</dt>
 <dd><p>the value to be returned before a non-<code>NA</code> value is encountered. The default is defined by the value of rule given below</p></dd>
-<dt>yright</dt>
+
+  <dt>yright</dt>
 <dd><p>the value to be returned after the last non-<code>NA</code> value is encountered. The default is defined by the value of rule given below</p></dd>
-<dt>rule</dt>
+
+  <dt>rule</dt>
 <dd><p>an integer (of length 1 or 2) describing how interpolation is to take place at for the first and last cells (before or after any non-<code>NA</code> values are encountered). If rule is 1 then NAs are returned for such points and if it is 2, the value at the closest data extreme is used. Use, e.g., <code>rule = 2:1</code>, if the left and right side extrapolation should differ</p></dd>
-<dt>f</dt>
+
+  <dt>f</dt>
 <dd><p>for method = "constant" a number between 0 and 1 inclusive, indicating a compromise between left- and right-continuous step functions. If y0 and y1 are the values to the left and right of the point then the value is <code>y0*(1-f)+y1*f</code> so that <code>f = 0)</code> is right-continuous and <code>f = 1</code> is left-continuous</p></dd>
-<dt>ties</dt>
+
+  <dt>ties</dt>
 <dd><p>Handling of tied 'z' values. Either a function with a single vector argument returning a single number result or the string "ordered"</p></dd>
-<dt>z</dt>
+
+  <dt>z</dt>
 <dd><p>numeric vector to indicate the distance between layers (e.g., time, depth). The default is 1:nlayers(x)</p></dd>
-<dt>NArule</dt>
+  
+  <dt>NArule</dt>
 <dd><p>single integer used to determine what to do when only a single layer with a non-<code>NA</code> value is encountered (and linear interpolation is not possible). The default value of 1 indicates that all layers will get this value for that cell; all other values do not change the cell values</p></dd>
-<dt>...</dt>
+  
+  <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterBrick</p>
+    
+
+<p>RasterBrick</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -93,22 +106,22 @@ For estimation based on neighbouring cells see focal"><!-- mathjax --><script sr
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">5</span>, nrows<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r4</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="cn">NA</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r6</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r1</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
-<span class="r-in"><span class="va">r2</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
-<span class="r-in"><span class="va">r3</span><span class="op">[</span><span class="fl">8</span><span class="op">:</span><span class="fl">25</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r1</span>,<span class="va">r2</span>,<span class="va">r3</span>,<span class="va">r4</span>,<span class="va">r5</span>,<span class="va">r6</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
-<span class="r-in"><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu">approxNA</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">approxNA</span><span class="op">(</span><span class="va">s</span>, rule<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu">approxNA</span><span class="op">(</span><span class="va">s</span>, rule<span class="op">=</span><span class="fl">2</span>, z<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">14</span>,<span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">5</span>, nrows<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r4</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r6</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r1</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-in"><span><span class="va">r2</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-in"><span><span class="va">r3</span><span class="op">[</span><span class="fl">8</span><span class="op">:</span><span class="fl">25</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r1</span>,<span class="va">r2</span>,<span class="va">r3</span>,<span class="va">r4</span>,<span class="va">r5</span>,<span class="va">r6</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-in"><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu">approxNA</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">approxNA</span><span class="op">(</span><span class="va">s</span>, rule<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu">approxNA</span><span class="op">(</span><span class="va">s</span>, rule<span class="op">=</span><span class="fl">2</span>, z<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">14</span>,<span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -123,7 +136,7 @@ For estimation based on neighbouring cells see focal"><!-- mathjax --><script sr
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

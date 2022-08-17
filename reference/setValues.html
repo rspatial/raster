@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,35 +50,41 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">setValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">values</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterBrick</span>
-<span class="fu">setValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">values</span>, layer<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStack</span>
-<span class="fu">setValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">values</span>, layer<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterLayerSparse</span>
-<span class="fu">setValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">values</span>, index<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">setValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">values</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterBrick</span></span>
+<span><span class="fu">setValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">values</span>, layer<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStack</span></span>
+<span><span class="fu">setValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">values</span>, layer<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterLayerSparse</span></span>
+<span><span class="fu">setValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">values</span>, index<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code>Raster*</code></p></dd>
-<dt>values</dt>
+
+  <dt>values</dt>
 <dd><p>Cell values to associate with the Raster* object. There should be values for all cells</p></dd>
-<dt>value</dt>
+
+  <dt>value</dt>
 <dd><p>Cell values to associate with the Raster* object. There should be values for all cells</p></dd>
-<dt>layer</dt>
+
+  <dt>layer</dt>
 <dd><p>Layer number (only relevant for RasterBrick and RasterStack objects). If missing, the values of all layers is set</p></dd>
-<dt>index</dt>
+  
+  <dt>index</dt>
 <dd><p>Cell numbers corresponding to the values</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Additional arguments (none implemented)</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -86,7 +92,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>a Raster* object</p>
+    
+
+<p>a Raster* object</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -95,11 +103,11 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">vals</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">setValues</span><span class="op">(</span><span class="va">r</span>, <span class="va">vals</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># equivalent to</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">vals</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">vals</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">setValues</span><span class="op">(</span><span class="va">r</span>, <span class="va">vals</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># equivalent to</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">vals</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -114,7 +122,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

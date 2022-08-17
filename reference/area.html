@@ -18,7 +18,7 @@ SpatialPolygons: Compute the area of the spatial features. Works for both planar
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,28 +52,33 @@ SpatialPolygons: Compute the area of the spatial features. Works for both planar
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">area</span><span class="op">(</span><span class="va">x</span>, filename<span class="op">=</span><span class="st">""</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, weights<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStackBrick</span>
-<span class="fu">area</span><span class="op">(</span><span class="va">x</span>, filename<span class="op">=</span><span class="st">""</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, weights<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPolygons</span>
-<span class="fu">area</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">area</span><span class="op">(</span><span class="va">x</span>, filename<span class="op">=</span><span class="st">""</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, weights<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick</span></span>
+<span><span class="fu">area</span><span class="op">(</span><span class="va">x</span>, filename<span class="op">=</span><span class="st">""</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, weights<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPolygons</span></span>
+<span><span class="fu">area</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* or SpatialPolygons object</p></dd>
+
 <dt>filename</dt>
 <dd><p>character. Filename for the output Raster object (optional)</p></dd>
+
 <dt>na.rm</dt>
 <dd><p>logical. If <code>TRUE</code>, cells that are <code>NA</code> are ignored</p></dd>
+
 <dt>weights</dt>
 <dd><p>logical. If <code>TRUE</code>, the area of each cells is divided by the total area of all cells that are not <code>NA</code></p></dd>
+
 <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+  
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -81,22 +86,23 @@ SpatialPolygons: Compute the area of the spatial features. Works for both planar
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>If <code>x</code> is a Raster* object: RasterLayer or RasterBrick. Cell values represent the size of the cell in km2, or the relative size if <code>weights=TRUE</code>. If the CRS is not longitude/latitude the values returned are the product of the cell resolution (typically in square meter).
-If <code>x</code> is a SpatialPolygons* object: area of each spatial object in squared meters if the CRS is longitude/latitude, or in squared map units (typically meter)</p>
+    
+
+<p>If <code>x</code> is a Raster* object: RasterLayer or RasterBrick. Cell values represent the size of the cell in km2, or the relative size if <code>weights=TRUE</code>. If the CRS is not longitude/latitude the values returned are the product of the cell resolution (typically in square meter).</p>
+
+
+<p>If <code>x</code> is a SpatialPolygons* object: area of each spatial object in squared meters if the CRS is longitude/latitude, or in squared map units (typically meter)</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">18</span>, ncol<span class="op">=</span><span class="fl">36</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">area</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://rgdal.r-forge.r-project.org" class="external-link">rgdal</a></span><span class="op">)</span> <span class="op">&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/rgeos/" class="external-link">rgeos</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.shp"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">p</span><span class="op">$</span><span class="va">area</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu">area</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10000000</span>,<span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">p</span><span class="op">$</span><span class="va">area</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rgdal</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>there is no package called ‘rgdal’</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">18</span>, ncol<span class="op">=</span><span class="fl">36</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">area</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.shp"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span><span class="op">$</span><span class="va">area</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu">area</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10000000</span>,<span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span><span class="op">$</span><span class="va">area</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 31.2 21.9 25.9  7.6 26.3 18.8 12.9 21.0 18.6 25.1 23.7 23.3</span>
 </code></pre></div>
     </div>
   </div>
@@ -111,7 +117,7 @@ If <code>x</code> is a SpatialPolygons* object: area of each spatial object in s
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

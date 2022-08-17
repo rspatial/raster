@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,30 +50,41 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">boundaries</span><span class="op">(</span><span class="va">x</span>, type<span class="op">=</span><span class="st">'inner'</span>, classes<span class="op">=</span><span class="cn">FALSE</span>, directions<span class="op">=</span><span class="fl">8</span>, asNA<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">boundaries</span><span class="op">(</span><span class="va">x</span>, type<span class="op">=</span><span class="st">'inner'</span>, classes<span class="op">=</span><span class="cn">FALSE</span>, directions<span class="op">=</span><span class="fl">8</span>, asNA<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterLayer object</p></dd>
+
 <dt>type</dt>
 <dd><p>character. 'inner' or 'outer'</p></dd>
+
 <dt>classes</dt>
 <dd><p>character. Logical. If <code>TRUE</code> all different values are (after rounding) distinguished, as well as <code>NA</code>. If <code>FALSE</code> (the default) only edges between <code>NA</code> and non-<code>NA</code> cells are considered</p></dd>
+
 <dt>directions</dt>
 <dd><p>integer. Which cells are considered adjacent? Should be 8 (Queen's case) or 4 (Rook's case)</p></dd>
+
 <dt>asNA</dt>
 <dd><p>logical. If <code>TRUE</code>, non-edges are returned as <code>NA</code> instead of zero</p></dd>
+
 <dt>filename</dt>
 <dd><p>character. Filename for the output RasterLayer (optional)</p></dd>
+
 <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+ 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer. Cell values are either 1 (a border) or 0 (not a border), or <code>NA</code></p>
+    
+
+<p>RasterLayer. Cell values are either 1 (a border) or 0 (not a border), or <code>NA</code></p>
+
+
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -82,14 +93,14 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">18</span>, ncol<span class="op">=</span><span class="fl">36</span>, xmn<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">150</span><span class="op">:</span><span class="fl">250</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">251</span><span class="op">:</span><span class="fl">450</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span> <span class="fu">boundaries</span><span class="op">(</span><span class="va">r</span>, type<span class="op">=</span><span class="st">'inner'</span><span class="op">)</span> <span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">18</span>, ncol<span class="op">=</span><span class="fl">36</span>, xmn<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">150</span><span class="op">:</span><span class="fl">250</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">251</span><span class="op">:</span><span class="fl">450</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span> <span class="fu">boundaries</span><span class="op">(</span><span class="va">r</span>, type<span class="op">=</span><span class="st">'inner'</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-plt img"><img src="boundaries-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span> <span class="fu">boundaries</span><span class="op">(</span><span class="va">r</span>, type<span class="op">=</span><span class="st">'outer'</span><span class="op">)</span> <span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span> <span class="fu">boundaries</span><span class="op">(</span><span class="va">r</span>, type<span class="op">=</span><span class="st">'outer'</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-plt img"><img src="boundaries-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span> <span class="fu">boundaries</span><span class="op">(</span><span class="va">r</span>, classes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span> <span class="fu">boundaries</span><span class="op">(</span><span class="va">r</span>, classes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-plt img"><img src="boundaries-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -105,7 +116,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

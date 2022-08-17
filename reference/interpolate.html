@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,41 +50,55 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">interpolate</span><span class="op">(</span><span class="va">object</span>, <span class="va">model</span>, filename<span class="op">=</span><span class="st">""</span>, fun<span class="op">=</span><span class="va">predict</span>, xyOnly<span class="op">=</span><span class="cn">TRUE</span>,
-   xyNames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>, <span class="st">'y'</span><span class="op">)</span>, ext<span class="op">=</span><span class="cn">NULL</span>, const<span class="op">=</span><span class="cn">NULL</span>, index<span class="op">=</span><span class="fl">1</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, debug.level<span class="op">=</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">interpolate</span><span class="op">(</span><span class="va">object</span>, <span class="va">model</span>, filename<span class="op">=</span><span class="st">""</span>, fun<span class="op">=</span><span class="va">predict</span>, xyOnly<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>   xyNames<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>, <span class="st">'y'</span><span class="op">)</span>, ext<span class="op">=</span><span class="cn">NULL</span>, const<span class="op">=</span><span class="cn">NULL</span>, index<span class="op">=</span><span class="fl">1</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, debug.level<span class="op">=</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Raster* object</p></dd>
+
 <dt>model</dt>
 <dd><p>model object</p></dd>
+
 <dt>filename</dt>
 <dd><p>character. Output filename (optional)</p></dd>
+
 <dt>fun</dt>
 <dd><p>function. Default value is 'predict', but can be replaced with e.g. 'predict.se' (depending on the class of the model object)</p></dd>
+
 <dt>xyOnly</dt>
 <dd><p>logical. If <code>TRUE</code>, values of the Raster* object are not considered as co-variables; and only x and y (longitude and latitude) are used. This should match the model</p></dd>
+
 <dt>xyNames</dt>
 <dd><p>character. variable names that the model uses for the spatial coordinates. E.g., <code>c('longitude', 'latitude')</code></p></dd>
+
 <dt>ext</dt>
 <dd><p>Extent object to limit the prediction to a sub-region of <code>x</code></p></dd>
+
 <dt>const</dt>
 <dd><p>data.frame. Can be used to add a constant for which there is no Raster object for model predictions. This is particulary useful if the constant is a character-like factor value</p></dd>
+
 <dt>index</dt>
 <dd><p>integer. To select the column if 'predict.model' returns a matrix with multiple columns</p></dd>
+
 <dt>na.rm</dt>
 <dd><p>logical. Remove cells with NA values in the predictors before solving the model (and return <code>NA</code> for those cells). In most cases this will not affect the output. This option prevents errors with models that cannot handle <code>NA</code> values</p></dd>
+
 <dt>debug.level</dt>
 <dd><p>for gstat models only. See ?</p></dd>
+
 <dt>...</dt>
 <dd><p>additional arguments passed to the predict.'model' function</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Raster* object</p>
+    
+
+<p>Raster* object</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -93,22 +107,22 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## Thin plate spline interpolation with x and y only</span></span>
-<span class="r-in"><span class="co"># some example data</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ra</span> <span class="op">&lt;-</span> <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="xyFromCell.html">xyFromCell</a></span><span class="op">(</span><span class="va">ra</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">ra</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="getValues.html">getValues</a></span><span class="op">(</span><span class="va">ra</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># remove NAs</span></span>
-<span class="r-in"><span class="va">i</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">xy</span> <span class="op">&lt;-</span> <span class="va">xy</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span></span>
-<span class="r-in"><span class="va">v</span> <span class="op">&lt;-</span> <span class="va">v</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#### Thin plate spline model</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dnychka/fieldsRPackage" class="external-link">fields</a></span><span class="op">)</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## Thin plate spline interpolation with x and y only</span></span></span>
+<span class="r-in"><span><span class="co"># some example data</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ra</span> <span class="op">&lt;-</span> <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="xyFromCell.html">xyFromCell</a></span><span class="op">(</span><span class="va">ra</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">ra</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="getValues.html">getValues</a></span><span class="op">(</span><span class="va">ra</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># remove NAs</span></span></span>
+<span class="r-in"><span><span class="va">i</span> <span class="op">&lt;-</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="va">xy</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="va">v</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#### Thin plate spline model</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dnychka/fieldsRPackage" class="external-link">fields</a></span><span class="op">)</span> </span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: spam</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Spam version 2.8-0 (2022-01-05) is loaded.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Spam version 2.9-1 (2022-08-07) is loaded.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Type 'help( Spam)' or 'demo( spam)' for a short introduction </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> and overview of this package.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Help for individual functions is also obtained by adding the</span>
@@ -122,86 +136,86 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: viridisLite</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Try help(fields) to get started.</span>
-<span class="r-in"><span class="va">tps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fields/man/Tps.html" class="external-link">Tps</a></span><span class="op">(</span><span class="va">xy</span>, <span class="va">v</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># use model to predict values at all locations</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">p</span>, <span class="va">tps</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="mask.html">mask</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">tps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fields/man/Tps.html" class="external-link">Tps</a></span><span class="op">(</span><span class="va">xy</span>, <span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># use model to predict values at all locations</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">p</span>, <span class="va">tps</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="mask.html">mask</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="interpolate-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co">## change the fun from predict to fields::predictSE to get the TPS standard error</span></span>
-<span class="r-in"><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">p</span>, <span class="va">tps</span>, fun<span class="op">=</span><span class="va">predictSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="mask.html">mask</a></span><span class="op">(</span><span class="va">se</span>, <span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">## change the fun from predict to fields::predictSE to get the TPS standard error</span></span></span>
+<span class="r-in"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">p</span>, <span class="va">tps</span>, fun<span class="op">=</span><span class="va">predictSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="mask.html">mask</a></span><span class="op">(</span><span class="va">se</span>, <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="interpolate-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## another variable; let's call it elevation</span></span>
-<span class="r-in"><span class="va">elevation</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">r</span>, <span class="st">'x'</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">r</span>, <span class="st">'y'</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fl">100000000</span></span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">elevation</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'elev'</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">elevation</span>, <span class="va">xy</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># add as another independent variable</span></span>
-<span class="r-in"><span class="va">xyz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xy</span>, <span class="va">z</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">tps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fields/man/Tps.html" class="external-link">Tps</a></span><span class="op">(</span><span class="va">xyz</span>, <span class="va">v</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">elevation</span>, <span class="va">tps2</span>, xyOnly<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># as a linear coveriate</span></span>
-<span class="r-in"><span class="va">tps3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fields/man/Tps.html" class="external-link">Tps</a></span><span class="op">(</span><span class="va">xy</span>, <span class="va">v</span>, Z<span class="op">=</span><span class="va">z</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Z is a separate argument in Krig.predict, so we need a new function</span></span>
-<span class="r-in"><span class="co"># Internally (in interpolate) a matrix is formed of x, y, and elev (Z)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">model</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">   <span class="fu"><a href="predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, Z<span class="op">=</span><span class="va">x</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span>, <span class="va">...</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">elevation</span>, <span class="va">tps3</span>, xyOnly<span class="op">=</span><span class="cn">FALSE</span>, fun<span class="op">=</span><span class="va">pfun</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#### gstat examples</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/gstat/" class="external-link">gstat</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">meuse</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## inverse distance weighted (IDW)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">meuse</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"zinc"</span>, formula <span class="op">=</span> <span class="va">zinc</span><span class="op">~</span><span class="fl">1</span>, locations <span class="op">=</span> <span class="op">~</span><span class="va">x</span><span class="op">+</span><span class="va">y</span>, data<span class="op">=</span><span class="va">meuse</span>, </span>
-<span class="r-in">            nmax<span class="op">=</span><span class="fl">7</span>, set<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>idp <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">r</span>, <span class="va">mg</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## another variable; let's call it elevation</span></span></span>
+<span class="r-in"><span><span class="va">elevation</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">r</span>, <span class="st">'x'</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">r</span>, <span class="st">'y'</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fl">100000000</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">elevation</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'elev'</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">elevation</span>, <span class="va">xy</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># add as another independent variable</span></span></span>
+<span class="r-in"><span><span class="va">xyz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xy</span>, <span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fields/man/Tps.html" class="external-link">Tps</a></span><span class="op">(</span><span class="va">xyz</span>, <span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">elevation</span>, <span class="va">tps2</span>, xyOnly<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># as a linear coveriate</span></span></span>
+<span class="r-in"><span><span class="va">tps3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fields/man/Tps.html" class="external-link">Tps</a></span><span class="op">(</span><span class="va">xy</span>, <span class="va">v</span>, Z<span class="op">=</span><span class="va">z</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Z is a separate argument in Krig.predict, so we need a new function</span></span></span>
+<span class="r-in"><span><span class="co"># Internally (in interpolate) a matrix is formed of x, y, and elev (Z)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">model</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, Z<span class="op">=</span><span class="va">x</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span>, <span class="va">...</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">elevation</span>, <span class="va">tps3</span>, xyOnly<span class="op">=</span><span class="cn">FALSE</span>, fun<span class="op">=</span><span class="va">pfun</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#### gstat examples</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/gstat/" class="external-link">gstat</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">meuse</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## inverse distance weighted (IDW)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">meuse</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"zinc"</span>, formula <span class="op">=</span> <span class="va">zinc</span><span class="op">~</span><span class="fl">1</span>, locations <span class="op">=</span> <span class="op">~</span><span class="va">x</span><span class="op">+</span><span class="va">y</span>, data<span class="op">=</span><span class="va">meuse</span>, </span></span>
+<span class="r-in"><span>            nmax<span class="op">=</span><span class="fl">7</span>, set<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>idp <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">r</span>, <span class="va">mg</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [inverse distance weighted interpolation]</span>
-<span class="r-in"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="mask.html">mask</a></span><span class="op">(</span><span class="va">z</span>, <span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## kriging</span></span>
-<span class="r-in"><span class="fu"><a href="xyFromCell.html">coordinates</a></span><span class="op">(</span><span class="va">meuse</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">~</span><span class="va">x</span><span class="op">+</span><span class="va">y</span></span>
-<span class="r-in"><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">meuse</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## ordinary kriging</span></span>
-<span class="r-in"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/variogram.html" class="external-link">variogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/fit.variogram.html" class="external-link">fit.variogram</a></span><span class="op">(</span><span class="va">v</span>, <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/vgm.html" class="external-link">vgm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"Sph"</span>, <span class="fl">300</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gOK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="st">"log.zinc"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span>, model<span class="op">=</span><span class="va">m</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">OK</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">r</span>, <span class="va">gOK</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="mask.html">mask</a></span><span class="op">(</span><span class="va">z</span>, <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## kriging</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="xyFromCell.html">coordinates</a></span><span class="op">(</span><span class="va">meuse</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">~</span><span class="va">x</span><span class="op">+</span><span class="va">y</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">meuse</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## ordinary kriging</span></span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/variogram.html" class="external-link">variogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/fit.variogram.html" class="external-link">fit.variogram</a></span><span class="op">(</span><span class="va">v</span>, <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/vgm.html" class="external-link">vgm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"Sph"</span>, <span class="fl">300</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gOK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="st">"log.zinc"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span>, model<span class="op">=</span><span class="va">m</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">OK</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">r</span>, <span class="va">gOK</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [using ordinary kriging]</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># examples below provided by Maurizio Marchi</span></span>
-<span class="r-in"><span class="co">## universial kriging</span></span>
-<span class="r-in"><span class="va">vu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/variogram.html" class="external-link">variogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="va">elev</span>, <span class="va">meuse</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/fit.variogram.html" class="external-link">fit.variogram</a></span><span class="op">(</span><span class="va">vu</span>, <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/vgm.html" class="external-link">vgm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"Sph"</span>, <span class="fl">300</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gUK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="st">"log.zinc"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="va">elev</span>, <span class="va">meuse</span>, model<span class="op">=</span><span class="va">mu</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'elev'</span></span>
-<span class="r-in"><span class="va">UK</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">r</span>, <span class="va">gUK</span>, xyOnly<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># examples below provided by Maurizio Marchi</span></span></span>
+<span class="r-in"><span><span class="co">## universial kriging</span></span></span>
+<span class="r-in"><span><span class="va">vu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/variogram.html" class="external-link">variogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="va">elev</span>, <span class="va">meuse</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/fit.variogram.html" class="external-link">fit.variogram</a></span><span class="op">(</span><span class="va">vu</span>, <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/vgm.html" class="external-link">vgm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"Sph"</span>, <span class="fl">300</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gUK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="st">"log.zinc"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="va">elev</span>, <span class="va">meuse</span>, model<span class="op">=</span><span class="va">mu</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'elev'</span></span></span>
+<span class="r-in"><span><span class="va">UK</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">r</span>, <span class="va">gUK</span>, xyOnly<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [using universal kriging]</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## co-kriging</span></span>
-<span class="r-in"><span class="va">gCoK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="st">'log.zinc'</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gCoK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="va">gCoK</span>, <span class="st">'elev'</span>, <span class="va">elev</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gCoK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="va">gCoK</span>, <span class="st">'cadmium'</span>, <span class="va">cadmium</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gCoK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="va">gCoK</span>, <span class="st">'copper'</span>, <span class="va">copper</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">coV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/variogram.html" class="external-link">variogram</a></span><span class="op">(</span><span class="va">gCoK</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">coV</span>, type<span class="op">=</span><span class="st">'b'</span>, main<span class="op">=</span><span class="st">'Co-variogram'</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## co-kriging</span></span></span>
+<span class="r-in"><span><span class="va">gCoK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="st">'log.zinc'</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">zinc</span><span class="op">)</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gCoK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="va">gCoK</span>, <span class="st">'elev'</span>, <span class="va">elev</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gCoK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="va">gCoK</span>, <span class="st">'cadmium'</span>, <span class="va">cadmium</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gCoK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/gstat.html" class="external-link">gstat</a></span><span class="op">(</span><span class="va">gCoK</span>, <span class="st">'copper'</span>, <span class="va">copper</span><span class="op">~</span><span class="fl">1</span>, <span class="va">meuse</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">coV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/variogram.html" class="external-link">variogram</a></span><span class="op">(</span><span class="va">gCoK</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">coV</span>, type<span class="op">=</span><span class="st">'b'</span>, main<span class="op">=</span><span class="st">'Co-variogram'</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="interpolate-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="va">coV.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/fit.lmc.html" class="external-link">fit.lmc</a></span><span class="op">(</span><span class="va">coV</span>, <span class="va">gCoK</span>, <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/vgm.html" class="external-link">vgm</a></span><span class="op">(</span>model<span class="op">=</span><span class="st">'Sph'</span>, range<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">coV.fit</span></span>
+<span class="r-in"><span><span class="va">coV.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/fit.lmc.html" class="external-link">fit.lmc</a></span><span class="op">(</span><span class="va">coV</span>, <span class="va">gCoK</span>, <span class="fu"><a href="https://rdrr.io/pkg/gstat/man/vgm.html" class="external-link">vgm</a></span><span class="op">(</span>model<span class="op">=</span><span class="st">'Sph'</span>, range<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">coV.fit</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> data:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> log.zinc : formula = log(zinc)`~`1 ; data dim = 155 x 12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> elev : formula = elev`~`1 ; data dim = 155 x 12</span>
@@ -219,14 +233,14 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> log.zinc.copper    Sph  20.4199742  1000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> elev.copper        Sph -22.4955673  1000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cadmium.copper     Sph 111.1393673  1000</span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">coV</span>, <span class="va">coV.fit</span>, main<span class="op">=</span><span class="st">'Fitted Co-variogram'</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">coV</span>, <span class="va">coV.fit</span>, main<span class="op">=</span><span class="st">'Fitted Co-variogram'</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="interpolate-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="va">coK</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">r</span>, <span class="va">coV.fit</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">coK</span> <span class="op">&lt;-</span> <span class="fu">interpolate</span><span class="op">(</span><span class="va">r</span>, <span class="va">coV.fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Intrinsic Correlation found. Good.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [using ordinary cokriging]</span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">coK</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">coK</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="interpolate-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -241,7 +255,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

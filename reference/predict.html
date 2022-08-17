@@ -18,7 +18,7 @@ This approach (predict a fitted model to raster data) is commonly used in remote
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,186 +52,203 @@ This approach (predict a fitted model to raster data) is commonly used in remote
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">predict</span><span class="op">(</span><span class="va">object</span>, <span class="va">model</span>, filename<span class="op">=</span><span class="st">""</span>, fun<span class="op">=</span><span class="va">predict</span>, ext<span class="op">=</span><span class="cn">NULL</span>, 
-   const<span class="op">=</span><span class="cn">NULL</span>, index<span class="op">=</span><span class="fl">1</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, inf.rm<span class="op">=</span><span class="cn">FALSE</span>, factors<span class="op">=</span><span class="cn">NULL</span>, 
-   <span class="va">format</span>, <span class="va">datatype</span>, overwrite<span class="op">=</span><span class="cn">FALSE</span>, progress<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">predict</span><span class="op">(</span><span class="va">object</span>, <span class="va">model</span>, filename<span class="op">=</span><span class="st">""</span>, fun<span class="op">=</span><span class="va">predict</span>, ext<span class="op">=</span><span class="cn">NULL</span>, </span>
+<span>   const<span class="op">=</span><span class="cn">NULL</span>, index<span class="op">=</span><span class="fl">1</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, inf.rm<span class="op">=</span><span class="cn">FALSE</span>, factors<span class="op">=</span><span class="cn">NULL</span>, </span>
+<span>   <span class="va">format</span>, <span class="va">datatype</span>, overwrite<span class="op">=</span><span class="cn">FALSE</span>, progress<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Raster* object. Typically a multi-layer type (RasterStack or RasterBrick)</p></dd>
-<dt>model</dt>
+
+  <dt>model</dt>
 <dd><p>fitted model of any class that has a 'predict' method (or for which you can supply a similar method as <code>fun</code> argument. E.g. glm, gam, or randomForest</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Optional output filename</p></dd>
-<dt>fun</dt>
+
+  <dt>fun</dt>
 <dd><p>function. Default value is 'predict', but can be replaced with e.g. predict.se (depending on the type of model), or your own custom function.</p></dd>
-<dt>ext</dt>
+
+  <dt>ext</dt>
 <dd><p>Extent object to limit the prediction to a sub-region of <code>x</code></p></dd>
-<dt>const</dt>
+
+  <dt>const</dt>
 <dd><p>data.frame. Can be used to add a constant for which there is no Raster object for model predictions. Particularly useful if the constant is a character-like factor value for which it is currently not possible to make a RasterLayer</p></dd>
-<dt>index</dt>
+
+  <dt>index</dt>
 <dd><p>integer. To select the column(s) to use if predict.'model' returns a matrix with multiple columns</p></dd>
-<dt>na.rm</dt>
+
+  <dt>na.rm</dt>
 <dd><p>logical. Remove cells with <code>NA</code> values in the predictors before solving the model (and return a <code>NA</code> value for those cells). This option prevents errors with models that cannot handle <code>NA</code> values. In most other cases this will not affect the output. An exception is when predicting with a boosted regression trees model because these return predicted values even if some (or all!) variables are <code>NA</code></p></dd>
-<dt>inf.rm</dt>
+
+  <dt>inf.rm</dt>
 <dd><p>logical. Remove cells with values that are not finite (some models will fail with -Inf/Inf values). This option is ignored when <code>na.rm=FALSE</code></p></dd>
-<dt>factors</dt>
+
+ <dt>factors</dt>
 <dd><p>list with levels for factor variables. The list elements should be named with names that correspond to names in <code>object</code> such that they can be matched. This argument may be omitted for standard models such as 'glm' as the predict function will extract the levels from the <code>model</code> object, but it is necessary in some other cases (e.g. cforest models from the party package)</p></dd>
-<dt>format</dt>
+
+ <dt>format</dt>
 <dd><p>character. Output file type. See <a href="writeRaster.html">writeRaster</a> (optional)</p></dd>
-<dt>datatype</dt>
+
+ <dt>datatype</dt>
 <dd><p>character. Output data type. See <a href="dataType.html">dataType</a> (optional)</p></dd>
-<dt>overwrite</dt>
+
+ <dt>overwrite</dt>
 <dd><p>logical. If TRUE, "filename" will be overwritten if it exists</p></dd>
-<dt>progress</dt>
+
+ <dt>progress</dt>
 <dd><p>character. "text", "window", or "" (the default, no progress bar)</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments to pass to the predict.'model' function</p></dd>
-</dl></div>
+
+ </dl></div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Use <code><a href="interpolate.html">interpolate</a></code> if your model has 'x' and 'y' as implicit independent variables (e.g., in kriging).</p></div>
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer or RasterBrick</p>
+    
+
+<p>RasterLayer or RasterBrick</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># A simple model to predict the location of the R in the R-logo using 20 presence points </span></span>
-<span class="r-in"><span class="co"># and 50 (random) pseudo-absence points. This type of model is often used to predict</span></span>
-<span class="r-in"><span class="co"># species distributions. See the dismo package for more of that.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># create a RasterStack or RasterBrick with with a set of predictor layers</span></span>
-<span class="r-in"><span class="va">logo</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">logo</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># A simple model to predict the location of the R in the R-logo using 20 presence points </span></span></span>
+<span class="r-in"><span><span class="co"># and 50 (random) pseudo-absence points. This type of model is often used to predict</span></span></span>
+<span class="r-in"><span><span class="co"># species distributions. See the dismo package for more of that.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create a RasterStack or RasterBrick with with a set of predictor layers</span></span></span>
+<span class="r-in"><span><span class="va">logo</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">logo</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "red"   "green" "blue" </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># the predictor variables</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plotRGB.html">plotRGB</a></span><span class="op">(</span><span class="va">logo</span>, main<span class="op">=</span><span class="st">'logo'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">1</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">255</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, maxColorValue<span class="op">=</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">2</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">:</span><span class="fl">255</span>,<span class="fl">0</span><span class="op">)</span>, maxColorValue<span class="op">=</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">3</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">:</span><span class="fl">255</span><span class="op">)</span>, maxColorValue<span class="op">=</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># known presence and absence points</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">48</span>, <span class="fl">48</span>, <span class="fl">48</span>, <span class="fl">53</span>, <span class="fl">50</span>, <span class="fl">46</span>, <span class="fl">54</span>, <span class="fl">70</span>, <span class="fl">84</span>, <span class="fl">85</span>, <span class="fl">74</span>, <span class="fl">84</span>, <span class="fl">95</span>, <span class="fl">85</span>, </span>
-<span class="r-in">   <span class="fl">66</span>, <span class="fl">42</span>, <span class="fl">26</span>, <span class="fl">4</span>, <span class="fl">19</span>, <span class="fl">17</span>, <span class="fl">7</span>, <span class="fl">14</span>, <span class="fl">26</span>, <span class="fl">29</span>, <span class="fl">39</span>, <span class="fl">45</span>, <span class="fl">51</span>, <span class="fl">56</span>, <span class="fl">46</span>, <span class="fl">38</span>, <span class="fl">31</span>, </span>
-<span class="r-in">   <span class="fl">22</span>, <span class="fl">34</span>, <span class="fl">60</span>, <span class="fl">70</span>, <span class="fl">73</span>, <span class="fl">63</span>, <span class="fl">46</span>, <span class="fl">43</span>, <span class="fl">28</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">33</span>, <span class="fl">64</span>, <span class="fl">85</span>, <span class="fl">92</span>, <span class="fl">94</span>, <span class="fl">59</span>, <span class="fl">27</span>, <span class="fl">30</span>, <span class="fl">64</span>, <span class="fl">60</span>, <span class="fl">33</span>, <span class="fl">31</span>, <span class="fl">9</span>,</span>
-<span class="r-in">   <span class="fl">99</span>, <span class="fl">67</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">30</span>, <span class="fl">8</span>, <span class="fl">37</span>, <span class="fl">42</span>, <span class="fl">27</span>, <span class="fl">19</span>, <span class="fl">69</span>, <span class="fl">60</span>, <span class="fl">73</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">21</span>,</span>
-<span class="r-in">   <span class="fl">37</span>, <span class="fl">52</span>, <span class="fl">70</span>, <span class="fl">74</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="fl">4</span>, <span class="fl">17</span>, <span class="fl">47</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># extract values for points</span></span>
-<span class="r-in"><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">p</span><span class="op">)</span>, <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>pa<span class="op">=</span><span class="va">xy</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">logo</span>, <span class="va">xy</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#build a model, here an example with glm </span></span>
-<span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span>formula<span class="op">=</span><span class="va">pa</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#predict to a raster</span></span>
-<span class="r-in"><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">model</span>, progress<span class="op">=</span><span class="st">'text'</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># the predictor variables</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plotRGB.html">plotRGB</a></span><span class="op">(</span><span class="va">logo</span>, main<span class="op">=</span><span class="st">'logo'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">1</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">255</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, maxColorValue<span class="op">=</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">2</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">:</span><span class="fl">255</span>,<span class="fl">0</span><span class="op">)</span>, maxColorValue<span class="op">=</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">3</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">:</span><span class="fl">255</span><span class="op">)</span>, maxColorValue<span class="op">=</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># known presence and absence points</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">48</span>, <span class="fl">48</span>, <span class="fl">48</span>, <span class="fl">53</span>, <span class="fl">50</span>, <span class="fl">46</span>, <span class="fl">54</span>, <span class="fl">70</span>, <span class="fl">84</span>, <span class="fl">85</span>, <span class="fl">74</span>, <span class="fl">84</span>, <span class="fl">95</span>, <span class="fl">85</span>, </span></span>
+<span class="r-in"><span>   <span class="fl">66</span>, <span class="fl">42</span>, <span class="fl">26</span>, <span class="fl">4</span>, <span class="fl">19</span>, <span class="fl">17</span>, <span class="fl">7</span>, <span class="fl">14</span>, <span class="fl">26</span>, <span class="fl">29</span>, <span class="fl">39</span>, <span class="fl">45</span>, <span class="fl">51</span>, <span class="fl">56</span>, <span class="fl">46</span>, <span class="fl">38</span>, <span class="fl">31</span>, </span></span>
+<span class="r-in"><span>   <span class="fl">22</span>, <span class="fl">34</span>, <span class="fl">60</span>, <span class="fl">70</span>, <span class="fl">73</span>, <span class="fl">63</span>, <span class="fl">46</span>, <span class="fl">43</span>, <span class="fl">28</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">33</span>, <span class="fl">64</span>, <span class="fl">85</span>, <span class="fl">92</span>, <span class="fl">94</span>, <span class="fl">59</span>, <span class="fl">27</span>, <span class="fl">30</span>, <span class="fl">64</span>, <span class="fl">60</span>, <span class="fl">33</span>, <span class="fl">31</span>, <span class="fl">9</span>,</span></span>
+<span class="r-in"><span>   <span class="fl">99</span>, <span class="fl">67</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">30</span>, <span class="fl">8</span>, <span class="fl">37</span>, <span class="fl">42</span>, <span class="fl">27</span>, <span class="fl">19</span>, <span class="fl">69</span>, <span class="fl">60</span>, <span class="fl">73</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">21</span>,</span></span>
+<span class="r-in"><span>   <span class="fl">37</span>, <span class="fl">52</span>, <span class="fl">70</span>, <span class="fl">74</span>, <span class="fl">9</span>, <span class="fl">13</span>, <span class="fl">4</span>, <span class="fl">17</span>, <span class="fl">47</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># extract values for points</span></span></span>
+<span class="r-in"><span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">p</span><span class="op">)</span>, <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>pa<span class="op">=</span><span class="va">xy</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">logo</span>, <span class="va">xy</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#build a model, here an example with glm </span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span>formula<span class="op">=</span><span class="va">pa</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#predict to a raster</span></span></span>
+<span class="r-in"><span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">model</span>, progress<span class="op">=</span><span class="st">'text'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">p</span>, bg<span class="op">=</span><span class="st">'blue'</span>, pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">a</span>, bg<span class="op">=</span><span class="st">'red'</span>, pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">p</span>, bg<span class="op">=</span><span class="st">'blue'</span>, pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">a</span>, bg<span class="op">=</span><span class="st">'red'</span>, pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># use a modified function to get a RasterBrick with p and se</span></span>
-<span class="r-in"><span class="co"># from the glm model. The values returned by 'predict' are in a list,</span></span>
-<span class="r-in"><span class="co"># and this list needs to be transformed to a matrix</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">predfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, se.fit<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>p<span class="op">=</span><span class="fu"><a href="as.matrix.html">as.vector</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>, se<span class="op">=</span><span class="fu"><a href="as.matrix.html">as.vector</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">se.fit</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># predfun returns two variables, so use index=1:2</span></span>
-<span class="r-in"><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">model</span>, fun<span class="op">=</span><span class="va">predfun</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># You can use multiple cores to speed up the predict function</span></span>
-<span class="r-in"><span class="co"># by calling it via the clusterR function (you may need to install the snow package)</span></span>
-<span class="r-in"><span class="fu"><a href="cluster.html">beginCluster</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r1c</span> <span class="op">&lt;-</span> <span class="fu"><a href="cluster.html">clusterR</a></span><span class="op">(</span><span class="va">logo</span>, <span class="va">predict</span>, args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r2c</span> <span class="op">&lt;-</span> <span class="fu"><a href="cluster.html">clusterR</a></span><span class="op">(</span><span class="va">logo</span>, <span class="va">predict</span>, args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>model<span class="op">=</span><span class="va">model</span>, fun<span class="op">=</span><span class="va">predfun</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># principal components of a RasterBrick</span></span>
-<span class="r-in"><span class="co"># here using sampling to simulate an object too large</span></span>
-<span class="r-in"><span class="co"># to feed all its values to prcomp</span></span>
-<span class="r-in"><span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampleRandom.html">sampleRandom</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">sr</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># note the use of the 'index' argument</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">pca</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># use a modified function to get a RasterBrick with p and se</span></span></span>
+<span class="r-in"><span><span class="co"># from the glm model. The values returned by 'predict' are in a list,</span></span></span>
+<span class="r-in"><span><span class="co"># and this list needs to be transformed to a matrix</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">predfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, se.fit<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>p<span class="op">=</span><span class="fu"><a href="as.matrix.html">as.vector</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span>, se<span class="op">=</span><span class="fu"><a href="as.matrix.html">as.vector</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">se.fit</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># predfun returns two variables, so use index=1:2</span></span></span>
+<span class="r-in"><span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">model</span>, fun<span class="op">=</span><span class="va">predfun</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># You can use multiple cores to speed up the predict function</span></span></span>
+<span class="r-in"><span><span class="co"># by calling it via the clusterR function (you may need to install the snow package)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="cluster.html">beginCluster</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r1c</span> <span class="op">&lt;-</span> <span class="fu"><a href="cluster.html">clusterR</a></span><span class="op">(</span><span class="va">logo</span>, <span class="va">predict</span>, args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r2c</span> <span class="op">&lt;-</span> <span class="fu"><a href="cluster.html">clusterR</a></span><span class="op">(</span><span class="va">logo</span>, <span class="va">predict</span>, args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>model<span class="op">=</span><span class="va">model</span>, fun<span class="op">=</span><span class="va">predfun</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># principal components of a RasterBrick</span></span></span>
+<span class="r-in"><span><span class="co"># here using sampling to simulate an object too large</span></span></span>
+<span class="r-in"><span><span class="co"># to feed all its values to prcomp</span></span></span>
+<span class="r-in"><span><span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampleRandom.html">sampleRandom</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">sr</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># note the use of the 'index' argument</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">pca</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="predict-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># partial least square regression</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/khliland/pls" class="external-link">pls</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pls/man/mvr.html" class="external-link">plsr</a></span><span class="op">(</span>formula<span class="op">=</span><span class="va">pa</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># this returns an array:</span></span>
-<span class="r-in"><span class="fu">predict</span><span class="op">(</span><span class="va">model</span>, <span class="va">v</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># write a function to turn that into a matrix</span></span>
-<span class="r-in"><span class="va">pfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">   <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">x</span>, <span class="va">data</span><span class="op">)</span></span>
-<span class="r-in">   <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="dimensions.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
-<span class="r-in">   <span class="fu"><a href="dimensions.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/prod.html" class="external-link">prod</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="va">d</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in">   <span class="va">y</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pp</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">model</span>, fun<span class="op">=</span><span class="va">pfun</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Random Forest</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/" class="external-link">randomForest</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">rfmod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html" class="external-link">randomForest</a></span><span class="op">(</span><span class="va">pa</span> <span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## note the additional argument "type='response'" that is </span></span>
-<span class="r-in"><span class="co">## passed to predict.randomForest</span></span>
-<span class="r-in"><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">rfmod</span>, type<span class="op">=</span><span class="st">'response'</span>, progress<span class="op">=</span><span class="st">'window'</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## get a RasterBrick with class membership probabilities</span></span>
-<span class="r-in"><span class="va">vv</span> <span class="op">&lt;-</span> <span class="va">v</span></span>
-<span class="r-in"><span class="va">vv</span><span class="op">$</span><span class="va">pa</span> <span class="op">&lt;-</span> <span class="fu"><a href="factor.html">as.factor</a></span><span class="op">(</span><span class="va">vv</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">rfmod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html" class="external-link">randomForest</a></span><span class="op">(</span><span class="va">pa</span> <span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">vv</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r4</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">rfmod2</span>, type<span class="op">=</span><span class="st">'prob'</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="spplot.html">spplot</a></span><span class="op">(</span><span class="va">r4</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># cforest (other Random Forest implementation) example with factors argument</span></span>
-<span class="r-in"><span class="va">v</span><span class="op">$</span><span class="va">red</span> <span class="op">&lt;-</span> <span class="fu"><a href="factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">red</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">logo</span><span class="op">$</span><span class="va">red</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">logo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://party.R-forge.R-project.org" class="external-link">party</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">pa</span><span class="op">~</span><span class="va">.</span>, control<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">3</span><span class="op">)</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="factor.html">levels</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">red</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'red'</span></span>
-<span class="r-in"><span class="co"># the second argument in party:::predict.RandomForest</span></span>
-<span class="r-in"><span class="co"># is "OOB", and not "newdata" or similar. We need to write a wrapper</span></span>
-<span class="r-in"><span class="co"># predict function to deal with this   </span></span>
-<span class="r-in"><span class="va">predfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">m</span>, <span class="va">d</span>, <span class="va">...</span><span class="op">)</span> <span class="fu">predict</span><span class="op">(</span><span class="va">m</span>, newdata<span class="op">=</span><span class="va">d</span>, <span class="va">...</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pc</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">m</span>, OOB<span class="op">=</span><span class="cn">TRUE</span>, factors<span class="op">=</span><span class="va">f</span>, fun<span class="op">=</span><span class="va">predfun</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># knn example, using calc instead of predict</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">class</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">train</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="calc.html">calc</a></span><span class="op">(</span><span class="va">logo</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="as.character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/class/man/knn.html" class="external-link">knn</a></span><span class="op">(</span><span class="va">train</span>, <span class="va">x</span>, <span class="va">cl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># partial least square regression</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/khliland/pls" class="external-link">pls</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pls/man/mvr.html" class="external-link">plsr</a></span><span class="op">(</span>formula<span class="op">=</span><span class="va">pa</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># this returns an array:</span></span></span>
+<span class="r-in"><span><span class="fu">predict</span><span class="op">(</span><span class="va">model</span>, <span class="va">v</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># write a function to turn that into a matrix</span></span></span>
+<span class="r-in"><span><span class="va">pfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">data</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>   <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">x</span>, <span class="va">data</span><span class="op">)</span></span></span>
+<span class="r-in"><span>   <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="dimensions.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="dimensions.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/prod.html" class="external-link">prod</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="va">d</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>   <span class="va">y</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pp</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">model</span>, fun<span class="op">=</span><span class="va">pfun</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Random Forest</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stat.berkeley.edu/~breiman/RandomForests/" class="external-link">randomForest</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rfmod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html" class="external-link">randomForest</a></span><span class="op">(</span><span class="va">pa</span> <span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## note the additional argument "type='response'" that is </span></span></span>
+<span class="r-in"><span><span class="co">## passed to predict.randomForest</span></span></span>
+<span class="r-in"><span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">rfmod</span>, type<span class="op">=</span><span class="st">'response'</span>, progress<span class="op">=</span><span class="st">'window'</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## get a RasterBrick with class membership probabilities</span></span></span>
+<span class="r-in"><span><span class="va">vv</span> <span class="op">&lt;-</span> <span class="va">v</span></span></span>
+<span class="r-in"><span><span class="va">vv</span><span class="op">$</span><span class="va">pa</span> <span class="op">&lt;-</span> <span class="fu"><a href="factor.html">as.factor</a></span><span class="op">(</span><span class="va">vv</span><span class="op">$</span><span class="va">pa</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rfmod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html" class="external-link">randomForest</a></span><span class="op">(</span><span class="va">pa</span> <span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">vv</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r4</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">rfmod2</span>, type<span class="op">=</span><span class="st">'prob'</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="spplot.html">spplot</a></span><span class="op">(</span><span class="va">r4</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># cforest (other Random Forest implementation) example with factors argument</span></span></span>
+<span class="r-in"><span><span class="va">v</span><span class="op">$</span><span class="va">red</span> <span class="op">&lt;-</span> <span class="fu"><a href="factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">red</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">logo</span><span class="op">$</span><span class="va">red</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">logo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://party.R-forge.R-project.org" class="external-link">party</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">pa</span><span class="op">~</span><span class="va">.</span>, control<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/cforest_control.html" class="external-link">cforest_unbiased</a></span><span class="op">(</span>mtry<span class="op">=</span><span class="fl">3</span><span class="op">)</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="factor.html">levels</a></span><span class="op">(</span><span class="va">v</span><span class="op">$</span><span class="va">red</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">'red'</span></span></span>
+<span class="r-in"><span><span class="co"># the second argument in party:::predict.RandomForest</span></span></span>
+<span class="r-in"><span><span class="co"># is "OOB", and not "newdata" or similar. We need to write a wrapper</span></span></span>
+<span class="r-in"><span><span class="co"># predict function to deal with this   </span></span></span>
+<span class="r-in"><span><span class="va">predfun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">m</span>, <span class="va">d</span>, <span class="va">...</span><span class="op">)</span> <span class="fu">predict</span><span class="op">(</span><span class="va">m</span>, newdata<span class="op">=</span><span class="va">d</span>, <span class="va">...</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pc</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">m</span>, OOB<span class="op">=</span><span class="cn">TRUE</span>, factors<span class="op">=</span><span class="va">f</span>, fun<span class="op">=</span><span class="va">predfun</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># knn example, using calc instead of predict</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">class</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">train</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="calc.html">calc</a></span><span class="op">(</span><span class="va">logo</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="as.character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/class/man/knn.html" class="external-link">knn</a></span><span class="op">(</span><span class="va">train</span>, <span class="va">x</span>, <span class="va">cl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -246,7 +263,7 @@ This approach (predict a fitted model to raster data) is commonly used in remote
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

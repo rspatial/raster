@@ -18,7 +18,7 @@ values is a shorthand version of getValues (for all rows)."><!-- mathjax --><scr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,25 +52,31 @@ values is a shorthand version of getValues (for all rows)."><!-- mathjax --><scr
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">getValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">row</span>, <span class="va">nrows</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">values</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">getValues</span><span class="op">(</span><span class="va">x</span>, <span class="va">row</span>, <span class="va">nrows</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">values</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>row</dt>
+
+ <dt>row</dt>
 <dd><p>Numeric. Row number, should be between 1 and nrow(x), or missing in which case all values are returned</p></dd>
-<dt>nrows</dt>
+
+ <dt>nrows</dt>
 <dd><p>Numeric. Number of rows. Should be an integer &gt; 0, or missing</p></dd>
-<dt>...</dt>
+
+ <dt>...</dt>
 <dd><p>Additional arguments. When x is a <code>RasterLayer</code>: <code>format</code> to specify the output format. Either "matrix" or, the default "", in which case a vector is returned</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>vector or matrix of raster values</p>
+    
+
+<p>vector or matrix of raster values</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -79,8 +85,8 @@ values is a shorthand version of getValues (for all rows)."><!-- mathjax --><scr
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterLayer </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 115, 80, 9200  (nrow, ncol, ncell)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 40, 40  (x, y)</span>
@@ -90,12 +96,12 @@ values is a shorthand version of getValues (for all rows)."><!-- mathjax --><scr
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> values     : 138.7071, 1736.058  (min, max)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">getValues</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">getValues</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9200</span>
-<span class="r-in"><span class="fu"><a href="headtail.html">head</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="headtail.html">head</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA NA NA NA NA NA</span>
-<span class="r-in"><span class="fu">getValues</span><span class="op">(</span><span class="va">r</span>, row<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">getValues</span><span class="op">(</span><span class="va">r</span>, row<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]       NA       NA       NA       NA       NA       NA       NA       NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9]       NA       NA       NA       NA       NA       NA       NA       NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [17]       NA       NA       NA       NA       NA       NA       NA       NA</span>
@@ -120,7 +126,7 @@ values is a shorthand version of getValues (for all rows)."><!-- mathjax --><scr
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,26 +50,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">rowSums</span><span class="op">(</span><span class="va">x</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, dims<span class="op">=</span><span class="fl">1L</span>,<span class="va">...</span><span class="op">)</span> 
-<span class="co"># S4 method for Raster</span>
-<span class="fu">colSums</span><span class="op">(</span><span class="va">x</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, dims<span class="op">=</span><span class="fl">1L</span>,<span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">rowSums</span><span class="op">(</span><span class="va">x</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, dims<span class="op">=</span><span class="fl">1L</span>,<span class="va">...</span><span class="op">)</span> </span>
+<span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">colSums</span><span class="op">(</span><span class="va">x</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, dims<span class="op">=</span><span class="fl">1L</span>,<span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>na.rm</dt>
+
+  <dt>na.rm</dt>
 <dd><p>logical. If <code>TRUE</code>, <code>NA</code> values are ignored</p></dd>
-<dt>dims</dt>
+
+  <dt>dims</dt>
 <dd><p>this argument is ignored</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments (none implemented)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>vector (if <code>x</code> is a RasterLayer) or matrix</p>
+    
+
+<p>vector (if <code>x</code> is a RasterLayer) or matrix</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -78,18 +84,18 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">2</span>, nrows<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
-<span class="r-in"><span class="fu"><a href="as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">2</span>, nrows<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    1    2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    3    4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    5    6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    7    8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    9   10</span>
-<span class="r-in"><span class="fu">rowSums</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">rowSums</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  3  7 11 15 19</span>
-<span class="r-in"><span class="fu">colSums</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">colSums</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 25 30</span>
 </code></pre></div>
     </div>
@@ -105,7 +111,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

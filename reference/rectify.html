@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,28 +50,36 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">rectify</span><span class="op">(</span><span class="va">x</span>, <span class="va">ext</span>, <span class="va">res</span>, method<span class="op">=</span><span class="st">'ngb'</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">rectify</span><span class="op">(</span><span class="va">x</span>, <span class="va">ext</span>, <span class="va">res</span>, method<span class="op">=</span><span class="st">'ngb'</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object to be rectified</p></dd>
-<dt>ext</dt>
+
+  <dt>ext</dt>
 <dd><p>Optional. Extent object or object from which an Extent object can be extracted</p></dd>
-<dt>res</dt>
+
+  <dt>res</dt>
 <dd><p>Optional. Single or two numbers to set the resolution</p></dd>
-<dt>method</dt>
+
+  <dt>method</dt>
 <dd><p>Method used to compute values for the new RasterLayer, should be "bilinear" for bilinear interpolation, or "ngb" for nearest neighbor</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>Character. Output filename</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+  
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer or RasterBrick object</p>
+    
+
+<p>RasterLayer or RasterBrick object</p>
     </div>
 
   </div>
@@ -86,7 +94,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

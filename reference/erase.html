@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,25 +50,30 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for SpatialPolygons,SpatialPolygons</span>
-<span class="fu">erase</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialLines,SpatialPolygons</span>
-<span class="fu">erase</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for SpatialPolygons,SpatialPolygons</span></span>
+<span><span class="fu">erase</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialLines,SpatialPolygons</span></span>
+<span><span class="fu">erase</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>SpatialPolygons or SpatialLines object</p></dd>
-<dt>y</dt>
+
+  <dt>y</dt>
 <dd><p>SpatialPolygons object</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Additional arguments (none)</p></dd>
+  
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Spatial*</p>
+    
+
+<p>Spatial*</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -77,29 +82,27 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://rgdal.r-forge.r-project.org" class="external-link">rgdal</a></span><span class="op">)</span> <span class="op">&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/rgeos/" class="external-link">rgeos</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># erase parts of polygons with other polygons</span></span>
-<span class="r-in">  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.shp"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6.4</span>, <span class="fl">49.75</span>, <span class="fl">50</span><span class="op">)</span>, <span class="st">'SpatialPolygons'</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">erase</span><span class="op">(</span><span class="va">p</span>, <span class="va">b</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># erase parts of lines with polygons  </span></span>
-<span class="r-in">  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.1</span>,<span class="fl">.1</span>,<span class="op">-</span><span class="fl">.1</span>,<span class="fl">.1</span><span class="op">)</span>, crs<span class="op">=</span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="xyFromCell.html">xyFromCell</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="cellFrom.html">cellFromCol</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="xyFromCell.html">xyFromCell</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="cellFrom.html">cellFromCol</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">spLines</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">start</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span>, <span class="va">end</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">lines</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  <span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">erase</span><span class="op">(</span><span class="va">lines</span>, <span class="va">p</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">lines</span>, col<span class="op">=</span><span class="st">'blue'</span>, lwd<span class="op">=</span><span class="fl">4</span>, lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">e2</span>, col<span class="op">=</span><span class="st">'red'</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rgdal</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>there is no package called ‘rgdal’</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># erase parts of polygons with other polygons</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.shp"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">as</span><span class="op">(</span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6.4</span>, <span class="fl">49.75</span>, <span class="fl">50</span><span class="op">)</span>, <span class="st">'SpatialPolygons'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu">erase</span><span class="op">(</span><span class="va">p</span>, <span class="va">b</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="erase-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># erase parts of lines with polygons  </span></span></span>
+<span class="r-in"><span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.1</span>,<span class="fl">.1</span>,<span class="op">-</span><span class="fl">.1</span>,<span class="fl">.1</span><span class="op">)</span>, crs<span class="op">=</span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="xyFromCell.html">xyFromCell</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="cellFrom.html">cellFromCol</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="xyFromCell.html">xyFromCell</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="cellFrom.html">cellFromCol</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">spLines</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">start</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span>, <span class="va">end</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">lines</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span>  <span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">erase</span><span class="op">(</span><span class="va">lines</span>, <span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">lines</span>, col<span class="op">=</span><span class="st">'blue'</span>, lwd<span class="op">=</span><span class="fl">4</span>, lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">e2</span>, col<span class="op">=</span><span class="st">'red'</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="erase-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -114,7 +117,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

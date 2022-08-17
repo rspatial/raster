@@ -19,7 +19,7 @@ Below is a list of some of the most important functions grouped by theme. See th
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -140,7 +140,7 @@ Below is a list of some of the most important functions grouped by theme. See th
 <p></p><table class="table table"><tr><td><b>Basic</b></td><td><code><a href="setValues.html">setValues</a></code></td></tr><tr><td>Put new values in a Raster* object</td><td><code><a href="writeRaster.html">writeRaster</a></code></td></tr><tr><td>Write all values of Raster* object to disk</td><td><code><a href="KML.html">KML</a></code></td></tr><tr><td>Save raster as KML file</td><td>.</td></tr><tr><td><b>Advanced</b></td><td><code><a href="blockSize.html">blockSize</a></code></td></tr><tr><td>Get suggested block size for reading and writing</td><td><code><a href="writeValues.html">writeStart</a></code></td></tr><tr><td>Open a file for writing</td><td><code><a href="writeValues.html">writeValues</a></code></td></tr><tr><td>Write some values</td><td><code><a href="writeValues.html">writeStop</a></code></td></tr><tr><td>Close the file after writing</td><td><code><a href="update.html">update</a></code></td></tr><tr><td>Change the values of an existing file</td><td>---------------------------</td></tr><tr><td>------------------------------------------------------------------------------------------</td><td></td></tr></table></div>
     <div id="xiv-manipulation-of-spatialpolygons-and-other-vector-type-spatial-objects">
     <h2>XIV. Manipulation of SpatialPolygons* and other vector type Spatial* objects</h2>
-    <p>Some of these functions are in the <code>sp</code> package. The name in <b>bold</b> is the equivalent command in ArcGIS. These functions build on the geometry ("spatial features") manipulation functions in package <code>rgeos</code>. These functions are extended here by also providing automated attribute data handling.</p>
+    <p>Some of these functions are in the <code>sp</code> package. The name in <b>bold</b> is the equivalent command in ArcGIS.</p>
 <table class="table table"><tr><td><code><a href="bind.html">bind</a></code></td><td><b>append</b> combine Spatial* objects of the same (vector) type</td></tr><tr><td><code><a href="erase.html">erase</a></code> or "-"</td><td><b>erase</b> parts of a SpatialPolygons* object</td></tr><tr><td><code><a href="intersect.html">intersect</a></code> or "*"</td><td><b>intersect</b> SpatialPolygons* objects</td></tr><tr><td><code><a href="union.html">union</a></code> or "+"</td><td><b>union</b> SpatialPolygons* objects</td></tr><tr><td><code><a href="cover.html">cover</a></code></td><td><b>update</b> and <b>identity</b> for a SpatialPolygons and another one</td></tr><tr><td><code><a href="symdif.html">symdif</a></code></td><td><b>symmetrical difference</b> of two SpatialPolygons* objects</td></tr><tr><td><code><a href="aggregate.html">aggregate</a></code></td><td><b>dissolve</b> smaller polygons into larger ones</td></tr><tr><td><code><a href="https://rdrr.io/pkg/sp/man/disaggregate.html" class="external-link">disaggregate</a></code></td><td><b>explode</b>: turn polygon parts into separate polygons (in the <code>sp</code> package)</td></tr><tr><td><code><a href="crop.html">crop</a></code></td><td><b>clip</b> a Spatial* object using a rectangle (Extent object)</td></tr><tr><td><code><a href="select.html">select</a></code></td><td><b>select</b> - interactively select spatial features</td></tr><tr><td><code><a href="click.html">click</a></code></td><td><b>identify</b> attributes by clicking on a map</td></tr><tr><td><code><a href="https://rdrr.io/pkg/sp/man/merge.html" class="external-link">merge</a></code></td><td><b>Join table</b> (in the <code>sp</code> package)</td></tr><tr><td><code><a href="https://rdrr.io/pkg/sp/man/over.html" class="external-link">over</a></code></td><td>spatial queries between Spatial* objects</td></tr><tr><td><code><a href="extract.html">extract</a></code></td><td>spatial queries between Spatial* and Raster* objects</td></tr><tr><td><code><a href="as.data.frame.html">as.data.frame</a></code></td><td>coerce coordinates of <code>SpatialLines</code> or <code>SpatialPolygons</code> into a data.frame</td></tr><tr><td>---------------------------</td><td>------------------------------------------------------------------------------------------</td></tr></table></div>
     <div id="xv-extent-objects">
     <h2>XV. Extent objects</h2>
@@ -178,7 +178,7 @@ Below is a list of some of the most important functions grouped by theme. See th
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

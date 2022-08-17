@@ -18,7 +18,7 @@ Before using resample, you may want to consider using these other functions inst
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,26 +52,33 @@ Before using resample, you may want to consider using these other functions inst
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster,Raster</span>
-<span class="fu">resample</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, method<span class="op">=</span><span class="st">"bilinear"</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster,Raster</span></span>
+<span><span class="fu">resample</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, method<span class="op">=</span><span class="st">"bilinear"</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object to be resampled</p></dd>
-<dt>y</dt>
+
+  <dt>y</dt>
 <dd><p>Raster* object with parameters that <code>x</code> should be resampled to</p></dd>
-<dt>method</dt>
+
+  <dt>method</dt>
 <dd><p>method used to compute values for the new RasterLayer, should be <code>"bilinear"</code> for bilinear interpolation, or <code>"ngb"</code> for using the nearest neighbor</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Output filename (optional)</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+  
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer or RasterBrick object</p>
+    
+
+<p>RasterLayer or RasterBrick object</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -84,13 +91,13 @@ Before using resample, you may want to consider using these other functions inst
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">3</span>, ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">10</span>, ncol<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">resample</span><span class="op">(</span><span class="va">r</span>, <span class="va">s</span>, method<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">#par(mfrow=c(1,2))</span></span>
-<span class="r-in"><span class="co">#plot(r)</span></span>
-<span class="r-in"><span class="co">#plot(s)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">3</span>, ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">10</span>, ncol<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">resample</span><span class="op">(</span><span class="va">r</span>, <span class="va">s</span>, method<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#par(mfrow=c(1,2))</span></span></span>
+<span class="r-in"><span><span class="co">#plot(r)</span></span></span>
+<span class="r-in"><span><span class="co">#plot(s)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -105,7 +112,7 @@ Before using resample, you may want to consider using these other functions inst
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

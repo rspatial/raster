@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,24 +50,30 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">barplot</span><span class="op">(</span><span class="va">height</span>, maxpixels<span class="op">=</span><span class="fl">1000000</span>, digits<span class="op">=</span><span class="fl">0</span>, breaks<span class="op">=</span><span class="cn">NULL</span>, col<span class="op">=</span><span class="va">rainbow</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">barplot</span><span class="op">(</span><span class="va">height</span>, maxpixels<span class="op">=</span><span class="fl">1000000</span>, digits<span class="op">=</span><span class="fl">0</span>, breaks<span class="op">=</span><span class="cn">NULL</span>, col<span class="op">=</span><span class="va">rainbow</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>height</dt>
 <dd><p>RasterLayer</p></dd>
-<dt>maxpixels</dt>
+
+  <dt>maxpixels</dt>
 <dd><p>integer. To regularly subsample very large objects</p></dd>
-<dt>digits</dt>
+
+  <dt>digits</dt>
 <dd><p>integer used to determine how to <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></code> the values before tabulating. Set to <code>NULL</code> or to a large number if you do not want any rounding</p></dd>
-<dt>breaks</dt>
+
+  <dt>breaks</dt>
 <dd><p>breaks used to group the data as in <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></code></p></dd>
-<dt>col</dt>
+
+  <dt>col</dt>
 <dd><p>a color generating function such as <code><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></code>, or a vector of colors</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments for plotting as in <code><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></code></p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -75,21 +81,25 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A numeric vector (or matrix, when <code>beside = TRUE</code>) of the coordinates of the bar midpoints, useful for adding to the graph. See <code><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></code></p>
+    
+
+<p>A numeric vector (or matrix, when <code>beside = TRUE</code>) of the coordinates of the bar midpoints, useful for adding to the graph. See <code><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></code></p>
+
+
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">barplot</span><span class="op">(</span><span class="va">r</span>, digits<span class="op">=</span><span class="op">-</span><span class="fl">2</span>, las<span class="op">=</span><span class="fl">2</span>, ylab<span class="op">=</span><span class="st">'Frequency'</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">barplot</span><span class="op">(</span><span class="va">r</span>, digits<span class="op">=</span><span class="op">-</span><span class="fl">2</span>, las<span class="op">=</span><span class="fl">2</span>, ylab<span class="op">=</span><span class="st">'Frequency'</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="barplot-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">.5</span>, <span class="fl">.5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">barplot</span><span class="op">(</span><span class="va">r</span>, breaks<span class="op">=</span><span class="fl">10</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'red'</span>, <span class="st">'blue'</span><span class="op">)</span>, horiz<span class="op">=</span><span class="cn">TRUE</span>, digits<span class="op">=</span><span class="cn">NULL</span>, las<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">.5</span>, <span class="fl">.5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">barplot</span><span class="op">(</span><span class="va">r</span>, breaks<span class="op">=</span><span class="fl">10</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'red'</span>, <span class="st">'blue'</span><span class="op">)</span>, horiz<span class="op">=</span><span class="cn">TRUE</span>, digits<span class="op">=</span><span class="cn">NULL</span>, las<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="barplot-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -104,7 +114,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

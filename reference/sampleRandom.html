@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,33 +50,43 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">sampleRandom</span><span class="op">(</span><span class="va">x</span>, <span class="va">size</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, ext<span class="op">=</span><span class="cn">NULL</span>, 
-    cells<span class="op">=</span><span class="cn">FALSE</span>, rowcol<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, sp<span class="op">=</span><span class="cn">FALSE</span>, asRaster<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">sampleRandom</span><span class="op">(</span><span class="va">x</span>, <span class="va">size</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, ext<span class="op">=</span><span class="cn">NULL</span>, </span>
+<span>    cells<span class="op">=</span><span class="cn">FALSE</span>, rowcol<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, sp<span class="op">=</span><span class="cn">FALSE</span>, asRaster<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>size</dt>
+
+  <dt>size</dt>
 <dd><p>positive integer giving the number of items to choose</p></dd>
-<dt>na.rm</dt>
+ 
+  <dt>na.rm</dt>
 <dd><p>logical. If <code>TRUE</code> (the default), <code>NA</code> values are removed from random sample</p></dd>
-<dt>ext</dt>
+
+  <dt>ext</dt>
 <dd><p>Extent object. To limit regular sampling to the area within the extent</p></dd>
-<dt>cells</dt>
+
+  <dt>cells</dt>
 <dd><p>logical. If <code>TRUE</code>, sampled cell numbers are also returned</p></dd>
-<dt>rowcol</dt>
+
+  <dt>rowcol</dt>
 <dd><p>logical. If <code>TRUE</code>, sampled row and column numbers are also returned</p></dd>
-<dt>xy</dt>
+
+  <dt>xy</dt>
 <dd><p>logical. If <code>TRUE</code>, coordinates of sampled cells are also returned</p></dd>
-<dt>sp</dt>
+
+  <dt>sp</dt>
 <dd><p>logical. If <code>TRUE</code>, a SpatialPointsDataFrame is returned</p></dd>
-<dt>asRaster</dt>
+
+  <dt>asRaster</dt>
 <dd><p>logical. If <code>TRUE</code>, a Raster* object is returned with random cells with values, all other cells with <code>NA</code></p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Additional arguments as in <code><a href="writeRaster.html">writeRaster</a></code>. Only relevant when <code>asRaster=TRUE</code></p></dd>
+ 
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -84,7 +94,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector, matrix (if <code>cells=TRUE</code> or <code>x</code> is a multi-layered object), or a SpatialPointsDataFrame (if <code>sp=TRUE</code> )</p>
+    
+
+<p>A vector, matrix (if <code>cells=TRUE</code> or <code>x</code> is a multi-layered object), or a SpatialPointsDataFrame (if <code>sp=TRUE</code> )</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -93,12 +105,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"> <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu">sampleRandom</span><span class="op">(</span><span class="va">r</span>, size<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu">sampleRandom</span><span class="op">(</span><span class="va">r</span>, size<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 461.2969 318.2996 351.8303 392.7534 492.7690 243.2765 440.3402 345.6403</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 515.7428 384.0551</span>
-<span class="r-in"> <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu">sampleRandom</span><span class="op">(</span><span class="va">s</span>, size<span class="op">=</span><span class="fl">5</span>, cells<span class="op">=</span><span class="cn">TRUE</span>, sp<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span> <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu">sampleRandom</span><span class="op">(</span><span class="va">s</span>, size<span class="op">=</span><span class="fl">5</span>, cells<span class="op">=</span><span class="cn">TRUE</span>, sp<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        coordinates cell   test.1   test.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 (178700, 330180) 7608 418.1480 418.1480</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 (179260, 329740) 8502 433.9139 433.9139</span>
@@ -119,7 +131,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

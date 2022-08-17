@@ -18,7 +18,7 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,23 +52,29 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasterFromXYZ</span><span class="op">(</span><span class="va">xyz</span>, res<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="cn">NA</span><span class="op">)</span>, crs<span class="op">=</span><span class="st">""</span>, digits<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasterFromXYZ</span><span class="op">(</span><span class="va">xyz</span>, res<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="cn">NA</span><span class="op">)</span>, crs<span class="op">=</span><span class="st">""</span>, digits<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>xyz</dt>
 <dd><p>matrix or data.frame with at least three columns: x and y coordinates, and values (z). There may be several 'z' variables (columns)</p></dd>
+
 <dt>res</dt>
 <dd><p>numeric. The x and y cell resolution (optional)</p></dd>
+
 <dt>crs</dt>
 <dd><p>CRS object or a character string describing a projection and datum in PROJ.4 format</p></dd>
+
 <dt>digits</dt>
 <dd><p>numeric, indicating the requested precision for detecting whether points are on a regular grid (a low number of digits is a low precision)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer or RasterBrick</p>
+    
+
+<p>RasterLayer or RasterBrick</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -77,22 +83,22 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">5</span>, ncol<span class="op">=</span><span class="fl">5</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">10</span>, ymn<span class="op">=</span><span class="fl">0</span>, ymx<span class="op">=</span><span class="fl">10</span>, crs<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="va">r</span> <span class="op">&lt;</span> <span class="fl">15</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
-<span class="r-in"><span class="va">xyz</span> <span class="op">&lt;-</span> <span class="fu"><a href="rasterToPoints.html">rasterToPoints</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">rst</span> <span class="op">&lt;-</span> <span class="fu">rasterFromXYZ</span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># equivalent to:</span></span>
-<span class="r-in"><span class="va">rr</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">5</span>, ncol<span class="op">=</span><span class="fl">5</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">10</span>, ymn<span class="op">=</span><span class="fl">0</span>, ymx<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="cellFrom.html">cellFromXY</a></span><span class="op">(</span><span class="va">rr</span>, <span class="va">xyz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">rr</span><span class="op">[</span><span class="va">cells</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">xyz</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># multiple layers</span></span>
-<span class="r-in"><span class="va">xyzz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xyz</span>, a<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span>, b<span class="op">=</span><span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">rasterFromXYZ</span><span class="op">(</span><span class="va">xyzz</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">5</span>, ncol<span class="op">=</span><span class="fl">5</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">10</span>, ymn<span class="op">=</span><span class="fl">0</span>, ymx<span class="op">=</span><span class="fl">10</span>, crs<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="va">r</span> <span class="op">&lt;</span> <span class="fl">15</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-in"><span><span class="va">xyz</span> <span class="op">&lt;-</span> <span class="fu"><a href="rasterToPoints.html">rasterToPoints</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">rst</span> <span class="op">&lt;-</span> <span class="fu">rasterFromXYZ</span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># equivalent to:</span></span></span>
+<span class="r-in"><span><span class="va">rr</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">5</span>, ncol<span class="op">=</span><span class="fl">5</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">10</span>, ymn<span class="op">=</span><span class="fl">0</span>, ymx<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="cellFrom.html">cellFromXY</a></span><span class="op">(</span><span class="va">rr</span>, <span class="va">xyz</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rr</span><span class="op">[</span><span class="va">cells</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">xyz</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># multiple layers</span></span></span>
+<span class="r-in"><span><span class="va">xyzz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xyz</span>, a<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span>, b<span class="op">=</span><span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">rasterFromXYZ</span><span class="op">(</span><span class="va">xyzz</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -107,7 +113,7 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

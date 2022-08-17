@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,32 +50,39 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer,RasterLayer</span>
-<span class="fu">corLocal</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, ngb<span class="op">=</span><span class="fl">5</span>, 
-     method<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pearson"</span>, <span class="st">"kendall"</span>, <span class="st">"spearman"</span><span class="op">)</span>, test<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span>
-
-
-<span class="co"># S4 method for RasterStackBrick,RasterStackBrick</span>
-<span class="fu">corLocal</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>,  
-     method<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pearson"</span>, <span class="st">"kendall"</span>, <span class="st">"spearman"</span><span class="op">)</span>, test<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer,RasterLayer</span></span>
+<span><span class="fu">corLocal</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, ngb<span class="op">=</span><span class="fl">5</span>, </span>
+<span>     method<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pearson"</span>, <span class="st">"kendall"</span>, <span class="st">"spearman"</span><span class="op">)</span>, test<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick,RasterStackBrick</span></span>
+<span><span class="fu">corLocal</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>,  </span>
+<span>     method<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pearson"</span>, <span class="st">"kendall"</span>, <span class="st">"spearman"</span><span class="op">)</span>, test<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterLayer or RasterStack/RasterBrick</p></dd>
-<dt>y</dt>
+
+  <dt>y</dt>
 <dd><p>object of the same class as <code>x</code>, and with the same number of layers</p></dd>
-<dt>ngb</dt>
+
+  <dt>ngb</dt>
 <dd><p>neighborhood size. Either a single integer or a vector of two integers c(nrow, ncol)</p></dd>
-<dt>method</dt>
+
+  <dt>method</dt>
 <dd><p>character indicating which correlation coefficient is to be used. One of <code>"pearson"</code>, <code>"kendall"</code>, or <code>"spearman"</code></p></dd>
-<dt>test</dt>
+
+  <dt>test</dt>
 <dd><p>logical. If <code>TRUE</code>, return a p-value</p></dd>
-<dt>filename</dt>
+ 
+  <dt>filename</dt>
 <dd><p>character. Output filename (optional)</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+
 </dl></div>
     <div id="note">
     <h2>Note</h2>
@@ -83,7 +90,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer</p>
+    
+
+<p>RasterLayer</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -92,33 +101,33 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">b</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="flip.html">flip</a></span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="st">'y'</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">corLocal</span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, test<span class="op">=</span><span class="cn">TRUE</span> <span class="op">)</span></span>
-<span class="r-in"><span class="co"># plot(x)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># only cells where the p-value &lt; 0.1</span></span>
-<span class="r-in"><span class="va">xm</span> <span class="op">&lt;-</span> <span class="fu"><a href="mask.html">mask</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">x</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0.1</span>, maskvalue<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">xm</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">b</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="flip.html">flip</a></span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="st">'y'</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">corLocal</span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, test<span class="op">=</span><span class="cn">TRUE</span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># plot(x)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># only cells where the p-value &lt; 0.1</span></span></span>
+<span class="r-in"><span><span class="va">xm</span> <span class="op">&lt;-</span> <span class="fu"><a href="mask.html">mask</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">x</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0.1</span>, maskvalue<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">xm</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="corLocal-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># for global correlation, use the cor function</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">x</span>, method<span class="op">=</span><span class="st">"spearman"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># for global correlation, use the cor function</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">x</span>, method<span class="op">=</span><span class="st">"spearman"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             red     green      blue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> red   1.0000000 0.5090865 0.9423498</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> green 0.5090865 1.0000000 0.4608823</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> blue  0.9423498 0.4608823 1.0000000</span>
-<span class="r-in"> </span>
-<span class="r-in"><span class="co"># use sampleRegular for large datasets</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampleRegular.html">sampleRegular</a></span><span class="op">(</span><span class="va">b</span>, <span class="fl">1000</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">x</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span><span class="co"># use sampleRegular for large datasets</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampleRegular.html">sampleRegular</a></span><span class="op">(</span><span class="va">b</span>, <span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">x</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Pearson's product-moment correlation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -131,9 +140,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>       cor </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.3786866 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># RasterStack or Brick objects</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">corLocal</span><span class="op">(</span><span class="va">b</span>, <span class="fu"><a href="flip.html">flip</a></span><span class="op">(</span><span class="va">b</span>, <span class="st">'y'</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># RasterStack or Brick objects</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">corLocal</span><span class="op">(</span><span class="va">b</span>, <span class="fu"><a href="flip.html">flip</a></span><span class="op">(</span><span class="va">b</span>, <span class="st">'y'</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -148,7 +157,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

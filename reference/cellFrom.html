@@ -19,7 +19,7 @@ The last cell number equals the number of cells of the Raster* object."><!-- mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -54,46 +54,59 @@ The last cell number equals the number of cells of the Raster* object.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cellFromRowCol</span><span class="op">(</span><span class="va">object</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">cellFromRowColCombine</span><span class="op">(</span><span class="va">object</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">cellFromRow</span><span class="op">(</span><span class="va">object</span>, <span class="va">rownr</span><span class="op">)</span>
-<span class="fu">cellFromCol</span><span class="op">(</span><span class="va">object</span>, <span class="va">colnr</span><span class="op">)</span>
-<span class="fu">colFromX</span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span><span class="op">)</span>
-<span class="fu">rowFromY</span><span class="op">(</span><span class="va">object</span>, <span class="va">y</span><span class="op">)</span>
-<span class="fu">cellFromXY</span><span class="op">(</span><span class="va">object</span>, <span class="va">xy</span><span class="op">)</span>
-<span class="fu">cellFromLine</span><span class="op">(</span><span class="va">object</span>, <span class="va">lns</span><span class="op">)</span>
-<span class="fu">cellFromPolygon</span><span class="op">(</span><span class="va">object</span>, <span class="va">p</span>, weights<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu">fourCellsFromXY</span><span class="op">(</span><span class="va">object</span>, <span class="va">xy</span>, duplicates<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cellFromRowCol</span><span class="op">(</span><span class="va">object</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">cellFromRowColCombine</span><span class="op">(</span><span class="va">object</span>, <span class="va">row</span>, <span class="va">col</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">cellFromRow</span><span class="op">(</span><span class="va">object</span>, <span class="va">rownr</span><span class="op">)</span></span>
+<span><span class="fu">cellFromCol</span><span class="op">(</span><span class="va">object</span>, <span class="va">colnr</span><span class="op">)</span></span>
+<span><span class="fu">colFromX</span><span class="op">(</span><span class="va">object</span>, <span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">rowFromY</span><span class="op">(</span><span class="va">object</span>, <span class="va">y</span><span class="op">)</span></span>
+<span><span class="fu">cellFromXY</span><span class="op">(</span><span class="va">object</span>, <span class="va">xy</span><span class="op">)</span></span>
+<span><span class="fu">cellFromLine</span><span class="op">(</span><span class="va">object</span>, <span class="va">lns</span><span class="op">)</span></span>
+<span><span class="fu">cellFromPolygon</span><span class="op">(</span><span class="va">object</span>, <span class="va">p</span>, weights<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">fourCellsFromXY</span><span class="op">(</span><span class="va">object</span>, <span class="va">xy</span>, duplicates<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Raster* object (or a SpatialPixels* or SpatialGrid* object)</p></dd>
-<dt>colnr</dt>
+
+  <dt>colnr</dt>
 <dd><p>column number; or vector of column numbers</p></dd>
-<dt>rownr</dt>
+
+  <dt>rownr</dt>
 <dd><p>row number; or vector of row numbers</p></dd>
-<dt>col</dt>
+
+  <dt>col</dt>
 <dd><p>column number; or vector of column numbers</p></dd>
-<dt>row</dt>
+
+  <dt>row</dt>
 <dd><p>row number; or vector of row numbers</p></dd>
-<dt>x</dt>
+
+  <dt>x</dt>
 <dd><p>x coordinate(s)</p></dd>
-<dt>y</dt>
+
+  <dt>y</dt>
 <dd><p>y coordinate(s)</p></dd>
-<dt>xy</dt>
+
+  <dt>xy</dt>
 <dd><p>matrix of x and y coordinates, or a SpatialPoints or SpatialPointsDataFrame object</p></dd>
-<dt>lns</dt>
+
+  <dt>lns</dt>
 <dd><p>SpatialLines object</p></dd>
-<dt>p</dt>
+
+  <dt>p</dt>
 <dd><p>SpatialPolygons object</p></dd>
-<dt>weights</dt>
+
+  <dt>weights</dt>
 <dd><p>Logical. If <code>TRUE</code>, the fraction of each cell that is covered is also returned</p></dd>
-<dt>duplicates</dt>
+
+  <dt>duplicates</dt>
 <dd><p>Logical. If <code>TRUE</code>, the same cell number can be returned twice (if the point in the middle of a division between two cells) or four times (if a point is in the center of a cell)</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments (none implemented)</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -103,7 +116,9 @@ The last cell number equals the number of cells of the Raster* object.</p>
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>vector of row, column or cell numbers. <code>cellFromLine</code> and <code>cellFromPolygon</code> return a list, <code>fourCellsFromXY</code> returns a matrix.</p>
+    
+
+<p>vector of row, column or cell numbers. <code>cellFromLine</code> and <code>cellFromPolygon</code> return a list, <code>fourCellsFromXY</code> returns a matrix.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -112,33 +127,33 @@ The last cell number equals the number of cells of the Raster* object.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">10</span>, nrows<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">cellFromRowCol</span><span class="op">(</span><span class="va">r</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">10</span>, nrows<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">cellFromRowCol</span><span class="op">(</span><span class="va">r</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 45</span>
-<span class="r-in"><span class="fu">cellFromRowCol</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">cellFromRowCol</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 12</span>
-<span class="r-in"><span class="fu">cellFromRowColCombine</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">cellFromRowColCombine</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2 11 12 21 22</span>
-<span class="r-in"><span class="fu">cellFromCol</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">cellFromCol</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1 11 21 31 41 51 61 71 81 91</span>
-<span class="r-in"><span class="fu">cellFromRow</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">cellFromRow</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  3  4  5  6  7  8  9 10</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">colFromX</span><span class="op">(</span><span class="va">r</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">colFromX</span><span class="op">(</span><span class="va">r</span>, <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6</span>
-<span class="r-in"><span class="fu">rowFromY</span><span class="op">(</span><span class="va">r</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">rowFromY</span><span class="op">(</span><span class="va">r</span>, <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
-<span class="r-in"><span class="fu">cellFromXY</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">88</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">cellFromXY</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">88</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 46  6</span>
-<span class="r-in"><span class="fu">fourCellsFromXY</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">88</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">fourCellsFromXY</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">88</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   46   36   35   45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    6   16   15    5</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">cds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">180</span>,<span class="op">-</span><span class="fl">20</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">160</span>,<span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">60</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">160</span>,<span class="op">-</span><span class="fl">60</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">180</span>,<span class="op">-</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">cds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">60</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">120</span>,<span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">120</span>,<span class="op">-</span><span class="fl">55</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPolygons.html" class="external-link">SpatialPolygons</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPolygons.html" class="external-link">Polygons</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPolygons.html" class="external-link">Polygon</a></span><span class="op">(</span><span class="va">cds1</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPolygons.html" class="external-link">Polygons</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPolygons.html" class="external-link">Polygon</a></span><span class="op">(</span><span class="va">cds2</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">cellFromPolygon</span><span class="op">(</span><span class="va">r</span>, <span class="va">pols</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">cds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">180</span>,<span class="op">-</span><span class="fl">20</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">160</span>,<span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">60</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">160</span>,<span class="op">-</span><span class="fl">60</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">180</span>,<span class="op">-</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">60</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">120</span>,<span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">120</span>,<span class="op">-</span><span class="fl">55</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pols</span> <span class="op">&lt;-</span> <span class="fu">SpatialPolygons</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">Polygons</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">Polygon</span><span class="op">(</span><span class="va">cds1</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu">Polygons</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">Polygon</span><span class="op">(</span><span class="va">cds2</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">cellFromPolygon</span><span class="op">(</span><span class="va">r</span>, <span class="va">pols</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 51 52 53 61 62 71</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -159,7 +174,7 @@ The last cell number equals the number of cells of the Raster* object.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

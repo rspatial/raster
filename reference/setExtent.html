@@ -18,7 +18,7 @@ coordinates one by one."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,27 +52,34 @@ coordinates one by one.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">setExtent</span><span class="op">(</span><span class="va">x</span>, <span class="va">ext</span>, keepres<span class="op">=</span><span class="cn">FALSE</span>, snap<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">setExtent</span><span class="op">(</span><span class="va">x</span>, <span class="va">ext</span>, keepres<span class="op">=</span><span class="cn">FALSE</span>, snap<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A Raster* object</p></dd>
-<dt>ext</dt>
+
+  <dt>ext</dt>
 <dd><p>An object of class Extent (which you can create with <code><a href="extent.html">extent</a></code>, or an object that has an extent (e.g. a Raster* or Spatial* object) )</p></dd>
-<dt>keepres</dt>
+   
+  <dt>keepres</dt>
 <dd><p>logical. If <code>TRUE</code>, the resolution of the cells will stay the same after adjusting the bounding box (by adjusting the number of rows and columns). 
   If <code>FALSE</code>, the number of rows and columns will stay the same, and the resolution will be adjusted.</p></dd>
-<dt>snap</dt>
+
+  <dt>snap</dt>
 <dd><p>logical. If <code>TRUE</code>, the extent is adjusted so that the cells of the input and output RasterLayer are aligned</p></dd>
-<dt>value</dt>
+
+  <dt>value</dt>
 <dd><p>An object of class Extent (which you can create with <code><a href="extent.html">extent</a></code> )</p></dd>
+  
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a Raster* object</p>
+    
+
+<p>a Raster* object</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -81,11 +88,11 @@ coordinates one by one.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">bb</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="op">-</span><span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">bb</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">setExtent</span><span class="op">(</span><span class="va">r</span>, <span class="va">bb</span>, keepres<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">bb</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="op">-</span><span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">bb</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">setExtent</span><span class="op">(</span><span class="va">r</span>, <span class="va">bb</span>, keepres<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -100,7 +107,7 @@ coordinates one by one.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

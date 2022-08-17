@@ -21,7 +21,7 @@ Function tmpDir returns the location of the temporary files"><!-- mathjax --><sc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -58,58 +58,79 @@ Function tmpDir returns the location of the temporary files"><!-- mathjax --><sc
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasterOptions</span><span class="op">(</span><span class="va">format</span>, <span class="va">overwrite</span>, <span class="va">datatype</span>, <span class="va">tmpdir</span>, <span class="va">tmptime</span>, <span class="va">progress</span>,
-     <span class="va">timer</span>, <span class="va">chunksize</span>, <span class="va">minmemory</span>, <span class="va">maxmemory</span>, <span class="va">memfrac</span>, <span class="va">todisk</span>, <span class="va">setfileext</span>, 
-   <span class="va">tolerance</span>, <span class="va">standardnames</span>, <span class="va">depracatedwarnings</span>, <span class="va">addheader</span>, default<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-
-
-<span class="fu">tmpDir</span><span class="op">(</span>create<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasterOptions</span><span class="op">(</span><span class="va">format</span>, <span class="va">overwrite</span>, <span class="va">datatype</span>, <span class="va">tmpdir</span>, <span class="va">tmptime</span>, <span class="va">progress</span>,</span>
+<span>     <span class="va">timer</span>, <span class="va">chunksize</span>, <span class="va">minmemory</span>, <span class="va">maxmemory</span>, <span class="va">memfrac</span>, <span class="va">todisk</span>, <span class="va">setfileext</span>, </span>
+<span>   <span class="va">tolerance</span>, <span class="va">standardnames</span>, <span class="va">depracatedwarnings</span>, <span class="va">addheader</span>, default<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu">tmpDir</span><span class="op">(</span>create<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>format</dt>
 <dd><p>character. The default file format to use. See <code><a href="writeFormats.html">writeFormats</a></code></p></dd>
+
 <dt>overwrite</dt>
 <dd><p>logical. The default value for overwriting existing files. If <code>TRUE</code>, existing files will be overwritten</p></dd>
+
 <dt>datatype</dt>
 <dd><p>character. The default data type to use. See <a href="dataType.html">dataType</a></p></dd>
+
 <dt>tmpdir</dt>
 <dd><p>character. The default location for writing temporary files; See <code><a href="rasterTmpFile.html">rasterTmpFile</a></code></p></dd>
+
 <dt>tmptime</dt>
 <dd><p>number &gt; 1. The number of hours after which a temporary file will be deleted. As files are deleted when loading the raster package, this option is only useful if you  save this option so that it is loaded when starting a new session</p></dd>
+
 <dt>progress</dt>
 <dd><p>character. Valid values are "text",  "window" and "" (the default in most functions, no progress bar)</p></dd>
+
 <dt>timer</dt>
 <dd><p>Logical. If <code>TRUE</code>, the time it took to complete the function is printed</p></dd>
+
 <dt>chunksize</dt>
 <dd><p>integer. Maximum number of bytes to read/write in a single chunk while processing (chunk by chunk) disk based Raster* objects</p></dd>
+
 <dt>maxmemory</dt>
 <dd><p>numeric. Maximum number of bytes to read into memory. If a process is expected to require more than this value, <code><a href="programming.html">canProcessInMemory</a></code> will return <code>FALSE</code>. It cannot be set to a value smaller than 10000</p></dd>
+
 <dt>minmemory</dt>
 <dd><p>numeric. Minimum number of bytes that are guaranteed to be fit into memory. If a process is expected to require more than this value, RAM available will be estimated. It cannot be set to a value smaller than 10000</p></dd>
+
 <dt>memfrac</dt>
 <dd><p>numeric. Fraction of available RAM that may be used by a process</p></dd>
+
 <dt>todisk</dt>
 <dd><p>logical. For debugging only. Default is <code>FALSE</code> and should normally not be changed. If <code>TRUE</code>, results are always written to disk, even if no filename is supplied (a temporary filename is used)</p></dd>
+
 <dt>setfileext</dt>
 <dd><p>logical. Default is <code>TRUE</code>. If <code>TRUE</code>, the file extension will be changed when writing (if known for the file type). E.g. GTiff files will be saved with the .tif extension</p></dd>
+
 <dt>tolerance</dt>
 <dd><p>numeric. The tolerance used when comparing the origin and resolution of Raster* objects. Expressed as the fraction of a single cell. This should be a number between 0 and 0.5</p></dd>
+
 <dt>standardnames</dt>
 <dd><p>logical. Default is <code>TRUE</code>. Should <code><a href="names.html">names</a></code> be standardized to be syntactically valid names (using <code><a href="https://rdrr.io/r/base/make.names.html" class="external-link">make.names</a></code>)</p></dd>
+
 <dt>depracatedwarnings</dt>
 <dd><p>logical. If <code>TRUE</code> (the default) a warning is generated when a depracated (obsolete) function is used</p></dd>
+
 <dt>addheader</dt>
 <dd><p>character. If not equal to <code>''</code> (the default) an additional header file is written when a raster format file (grd/gri) is written. Supported formats are as in <code><a href="hdrFiles.html">hdr</a></code></p></dd>
+
 <dt>default</dt>
 <dd><p>logical. If <code>TRUE</code>, all options are set to their default values</p></dd>
+
 <dt>create</dt>
 <dd><p>logical. If <code>TRUE</code>, the temporary files directory is created if it does not exist</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list of the current options (invisibly). If no arguments are provided the options are printed.</p>
+    
+
+<p>list of the current options (invisibly). If no arguments are provided the options are printed.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -118,10 +139,10 @@ Function tmpDir returns the location of the temporary files"><!-- mathjax --><sc
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">rasterOptions</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">rasterOptions</span><span class="op">(</span>chunksize<span class="op">=</span><span class="fl">2e+07</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">rasterOptions</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">rasterOptions</span><span class="op">(</span>chunksize<span class="op">=</span><span class="fl">2e+07</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -136,7 +157,7 @@ Function tmpDir returns the location of the temporary files"><!-- mathjax --><sc
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

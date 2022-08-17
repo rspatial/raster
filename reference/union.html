@@ -20,7 +20,7 @@ Union for SpatialLines and SpatialPoints simply combines the two data sets; with
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -56,32 +56,36 @@ Union for SpatialLines and SpatialPoints simply combines the two data sets; with
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Extent,Extent</span>
-<span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPolygons,SpatialPolygons</span>
-<span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPolygons,missing</span>
-<span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialLines,SpatialLines</span>
-<span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPoints,SpatialPoints</span>
-<span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Extent,Extent</span></span>
+<span><span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPolygons,SpatialPolygons</span></span>
+<span><span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPolygons,missing</span></span>
+<span><span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialLines,SpatialLines</span></span>
+<span><span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPoints,SpatialPoints</span></span>
+<span><span class="fu">union</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Extent or SpatialPolygons* object</p></dd>
-<dt>y</dt>
+
+  <dt>y</dt>
 <dd><p>Same as <code>x</code> or missing</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Extent or SpatialPolygons object</p>
+    
+
+<p>Extent or SpatialPolygons object</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -92,25 +96,24 @@ and <code><a href="Arith-methods.html">+,SpatialPolygons,SpatialPolygons-method<
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">e1</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="op">-</span><span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="op">-</span><span class="fl">40</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">union</span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">e1</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="op">-</span><span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="op">-</span><span class="fl">40</span>, <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">union</span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : Extent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmin       : -10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> xmax       : 20 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymin       : -40 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ymax       : 20 </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#SpatialPolygons</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://rgdal.r-forge.r-project.org" class="external-link">rgdal</a></span><span class="op">)</span> <span class="op">&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/rgeos/" class="external-link">rgeos</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.shp"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6.4</span>, <span class="fl">49.75</span>, <span class="fl">50</span><span class="op">)</span>, <span class="st">'SpatialPolygons'</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">u</span> <span class="op">&lt;-</span> <span class="fu">union</span><span class="op">(</span><span class="va">p0</span>, <span class="va">b</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">u</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rgdal</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#SpatialPolygons</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.shp"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6.4</span>, <span class="fl">49.75</span>, <span class="fl">50</span><span class="op">)</span>, <span class="st">'SpatialPolygons'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">u</span> <span class="op">&lt;-</span> <span class="fu">union</span><span class="op">(</span><span class="va">p0</span>, <span class="va">b</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">u</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="union-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -125,7 +128,7 @@ and <code><a href="Arith-methods.html">+,SpatialPolygons,SpatialPolygons-method<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

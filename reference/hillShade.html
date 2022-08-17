@@ -18,7 +18,7 @@ A hill shade layer is often used as a backdrop on top of which another, semi-tra
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,25 +52,32 @@ A hill shade layer is often used as a backdrop on top of which another, semi-tra
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hillShade</span><span class="op">(</span><span class="va">slope</span>, <span class="va">aspect</span>, angle<span class="op">=</span><span class="fl">45</span>, direction<span class="op">=</span><span class="fl">0</span>, filename<span class="op">=</span><span class="st">''</span>, normalize<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hillShade</span><span class="op">(</span><span class="va">slope</span>, <span class="va">aspect</span>, angle<span class="op">=</span><span class="fl">45</span>, direction<span class="op">=</span><span class="fl">0</span>, filename<span class="op">=</span><span class="st">''</span>, normalize<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>slope</dt>
 <dd><p>RasterLayer object with slope values (in radians)</p></dd>
-<dt>aspect</dt>
+
+  <dt>aspect</dt>
 <dd><p>RasterLayer object with aspect values (in radians)</p></dd>
-<dt>angle</dt>
+
+  <dt>angle</dt>
 <dd><p>The the elevation angle of the light source (sun), in degrees</p></dd>
-<dt>direction</dt>
+
+  <dt>direction</dt>
 <dd><p>The direction (azimuth) angle of the light source (sun), in degrees</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>Character. Optional filename</p></dd>
-<dt>normalize</dt>
+
+  <dt>normalize</dt>
 <dd><p>Logical. If <code>TRUE</code>, values below zero are set to zero and the results are multiplied with 255</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Standard additional arguments for writing RasterLayer files</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -87,14 +94,14 @@ A hill shade layer is often used as a backdrop on top of which another, semi-tra
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">alt</span> <span class="op">&lt;-</span> <span class="fu"><a href="getData.html">getData</a></span><span class="op">(</span><span class="st">'alt'</span>, country<span class="op">=</span><span class="st">'CHE'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu"><a href="terrain.html">terrain</a></span><span class="op">(</span><span class="va">alt</span>, opt<span class="op">=</span><span class="st">'slope'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">aspect</span> <span class="op">&lt;-</span> <span class="fu"><a href="terrain.html">terrain</a></span><span class="op">(</span><span class="va">alt</span>, opt<span class="op">=</span><span class="st">'aspect'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">hill</span> <span class="op">&lt;-</span> <span class="fu">hillShade</span><span class="op">(</span><span class="va">slope</span>, <span class="va">aspect</span>, <span class="fl">40</span>, <span class="fl">270</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">hill</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span>, legend<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">'Switzerland'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">alt</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">25</span>, alpha<span class="op">=</span><span class="fl">0.35</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">alt</span> <span class="op">&lt;-</span> <span class="fu"><a href="getData.html">getData</a></span><span class="op">(</span><span class="st">'alt'</span>, country<span class="op">=</span><span class="st">'CHE'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu"><a href="terrain.html">terrain</a></span><span class="op">(</span><span class="va">alt</span>, opt<span class="op">=</span><span class="st">'slope'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">aspect</span> <span class="op">&lt;-</span> <span class="fu"><a href="terrain.html">terrain</a></span><span class="op">(</span><span class="va">alt</span>, opt<span class="op">=</span><span class="st">'aspect'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hill</span> <span class="op">&lt;-</span> <span class="fu">hillShade</span><span class="op">(</span><span class="va">slope</span>, <span class="va">aspect</span>, <span class="fl">40</span>, <span class="fl">270</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">hill</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">100</span><span class="op">/</span><span class="fl">100</span><span class="op">)</span>, legend<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">'Switzerland'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">alt</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">25</span>, alpha<span class="op">=</span><span class="fl">0.35</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -109,7 +116,7 @@ A hill shade layer is often used as a backdrop on top of which another, semi-tra
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

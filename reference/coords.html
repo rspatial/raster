@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,49 +50,54 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">xmin</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu">xmax</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu">ymin</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu">ymax</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">xmin</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">xmax</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">ymin</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">ymax</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">xmin</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">xmax</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">ymin</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">ymax</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">xmin</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">xmax</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">ymin</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">ymax</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* or Extent object</p></dd>
-<dt>value</dt>
+
+  <dt>value</dt>
 <dd><p>numeric. x or y coordinate</p></dd>
-<dt>...</dt>
+  
+  <dt>...</dt>
 <dd><p>additional arguments. None implemented</p></dd>
+  
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>numeric</p>
+    
+
+<p>numeric</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><code><a href="extent.html">extent</a></code>,  <code><a href="https://rdrr.io/pkg/sp/man/dimensions.html" class="external-link">dimensions</a></code></p></div>
+    <div class="dont-index"><p><code><a href="extent.html">extent</a></code>,  <code>dimensions</code></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>xmn<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span>, xmx <span class="op">=</span> <span class="fl">9.5</span>, ncols<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">xmin</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>xmn<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span>, xmx <span class="op">=</span> <span class="fl">9.5</span>, ncols<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">xmin</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.5</span>
-<span class="r-in"><span class="fu">xmax</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">xmax</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9.5</span>
-<span class="r-in"><span class="fu">ymin</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ymin</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -90</span>
-<span class="r-in"><span class="fu">ymax</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ymax</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 90</span>
-<span class="r-in"><span class="fu">xmin</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">180</span></span>
-<span class="r-in"><span class="fu">xmax</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">180</span></span>
+<span class="r-in"><span><span class="fu">xmin</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">180</span></span></span>
+<span class="r-in"><span><span class="fu">xmax</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">180</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -107,7 +112,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

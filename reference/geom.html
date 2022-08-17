@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,34 +50,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for SpatialPolygons</span>
-<span class="fu">geom</span><span class="op">(</span><span class="va">x</span>, sepNA<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S4 method for SpatialLines</span>
-<span class="fu">geom</span><span class="op">(</span><span class="va">x</span>, sepNA<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S4 method for SpatialPoints</span>
-<span class="fu">geom</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S4 method for data.frame</span>
-<span class="fu">geom</span><span class="op">(</span><span class="va">x</span>, <span class="va">d</span>, <span class="va">gt</span>, <span class="va">crs</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for SpatialPolygons</span></span>
+<span><span class="fu">geom</span><span class="op">(</span><span class="va">x</span>, sepNA<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S4 method for SpatialLines</span></span>
+<span><span class="fu">geom</span><span class="op">(</span><span class="va">x</span>, sepNA<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S4 method for SpatialPoints</span></span>
+<span><span class="fu">geom</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S4 method for data.frame</span></span>
+<span><span class="fu">geom</span><span class="op">(</span><span class="va">x</span>, <span class="va">d</span>, <span class="va">gt</span>, <span class="va">crs</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>SpatialPolygons*, SpatialLines*, or SpatialPoints* object; or a data.frame</p></dd>
-<dt>sepNA</dt>
+
+  <dt>sepNA</dt>
 <dd><p>logical. If <code>TRUE</code>, geometries are separated by a row with <code>NA</code> values</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments, none implemented</p></dd>
-<dt>d</dt>
+
+  <dt>d</dt>
 <dd><p>data.frame that matches the number of objects in data.frame <code>x</code></p></dd>
-<dt>gt</dt>
+
+  <dt>gt</dt>
 <dd><p>character. geometry type. Must be one of "polygons", "lines", "points"</p></dd>
-<dt>crs</dt>
+
+  <dt>crs</dt>
 <dd><p>character. PROJ.4 crs string</p></dd>
+  
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Matrix with 6, (5 SpatialLines), or 3 (SpatialPoints) columns. object (sequential object number) part (sequential part number within the object; not for SpatialPoints), cump (cumulative part number; not for SpatialPoints), hole (is this a hole or not; only for SpatialPolygons), x (x coordinate or longitude), y (y coordinate or latitude)</p>
+    
+
+<p>Matrix with 6, (5 SpatialLines), or 3 (SpatialPoints) columns. object (sequential object number) part (sequential part number within the object; not for SpatialPoints), cump (cumulative part number; not for SpatialPoints), hole (is this a hole or not; only for SpatialPolygons), x (x coordinate or longitude), y (y coordinate or latitude)</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -86,9 +94,9 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.rds"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">geom</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="headtail.html">head</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.rds"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">geom</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="headtail.html">head</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      object part cump hole        x        y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]      1    1    1    0 6.026519 50.17767</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]      1    1    1    0 6.031361 50.16563</span>
@@ -96,12 +104,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,]      1    1    1    0 6.042747 50.16157</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,]      1    1    1    0 6.043894 50.16116</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,]      1    1    1    0 6.048243 50.16008</span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># and back to a SpatialPolygonsDataFrame  </span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"SpatialPolygons"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">sp</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">spdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sp/man/SpatialPolygons.html" class="external-link">SpatialPolygonsDataFrame</a></span><span class="op">(</span><span class="va">sp</span>, <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>, match.ID<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># and back to a SpatialPolygonsDataFrame  </span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu">as</span><span class="op">(</span><span class="va">x</span>, <span class="st">"SpatialPolygons"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">sp</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">spdf</span> <span class="op">&lt;-</span> <span class="fu">SpatialPolygonsDataFrame</span><span class="op">(</span><span class="va">sp</span>, <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>, match.ID<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -116,7 +124,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

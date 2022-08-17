@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,44 +50,54 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">click</span><span class="op">(</span><span class="va">x</span>, n<span class="op">=</span><span class="cn">Inf</span>, id<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, cell<span class="op">=</span><span class="cn">FALSE</span>, type<span class="op">=</span><span class="st">"n"</span>, show<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialGrid</span>
-<span class="fu">click</span><span class="op">(</span><span class="va">x</span>, n<span class="op">=</span><span class="fl">1</span>, id<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, cell<span class="op">=</span><span class="cn">FALSE</span>, type<span class="op">=</span><span class="st">"n"</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPolygons</span>
-<span class="fu">click</span><span class="op">(</span><span class="va">x</span>, n<span class="op">=</span><span class="fl">1</span>, id<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, type<span class="op">=</span><span class="st">"n"</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialLines</span>
-<span class="fu">click</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPoints</span>
-<span class="fu">click</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">click</span><span class="op">(</span><span class="va">x</span>, n<span class="op">=</span><span class="cn">Inf</span>, id<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, cell<span class="op">=</span><span class="cn">FALSE</span>, type<span class="op">=</span><span class="st">"n"</span>, show<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialGrid</span></span>
+<span><span class="fu">click</span><span class="op">(</span><span class="va">x</span>, n<span class="op">=</span><span class="fl">1</span>, id<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, cell<span class="op">=</span><span class="cn">FALSE</span>, type<span class="op">=</span><span class="st">"n"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPolygons</span></span>
+<span><span class="fu">click</span><span class="op">(</span><span class="va">x</span>, n<span class="op">=</span><span class="fl">1</span>, id<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, type<span class="op">=</span><span class="st">"n"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialLines</span></span>
+<span><span class="fu">click</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPoints</span></span>
+<span><span class="fu">click</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster*, or Spatial* object (or missing)</p></dd>
-<dt>n</dt>
+
+  <dt>n</dt>
 <dd><p>number of clicks on the map</p></dd>
-<dt>id</dt>
+
+  <dt>id</dt>
 <dd><p>Logical. If <code>TRUE</code>, a numeric ID is shown on the map that corresponds to the row number of the output</p></dd>
-<dt>xy</dt>
+
+  <dt>xy</dt>
 <dd><p>Logical. If <code>TRUE</code>, xy coordinates are included in the output</p></dd>
-<dt>cell</dt>
+
+  <dt>cell</dt>
 <dd><p>Logical. If <code>TRUE</code>, cell numbers are included in the output</p></dd>
-<dt>type</dt>
+
+  <dt>type</dt>
 <dd><p>One of "n", "p", "l" or "o". If "p" or "o" the points are plotted; if "l" or "o" they are joined by lines. See ?locator</p></dd>
-<dt>show</dt>
+
+  <dt>show</dt>
 <dd><p>logical. Print the values after each click?</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional graphics parameters used if type != "n" for plotting the locations. See ?locator</p></dd>
-</dl></div>
+   
+ </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The value(s) of <code>x</code> at the point(s) clicked on (or touched by the box drawn).</p>
+    
+
+<p>The value(s) of <code>x</code> at the point(s) clicked on (or touched by the box drawn).</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -101,12 +111,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"> <span class="fu">click</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"> <span class="co"># now click on the plot (map)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu">click</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="co"># now click on the plot (map)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -121,7 +131,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

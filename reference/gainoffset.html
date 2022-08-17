@@ -20,7 +20,7 @@ Note that setting gain and/or offset are intended to be used with values that ar
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -56,36 +56,40 @@ Note that setting gain and/or offset are intended to be used with values that ar
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gain</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu">gain</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span>
-<span class="fu">offs</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu">offs</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gain</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">gain</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span>
+<span><span class="fu">offs</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">offs</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>value</dt>
+
+  <dt>value</dt>
 <dd><p>Single numeric value</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Raster* object or numeric value(s)</p>
+    
+
+<p>Raster* object or numeric value(s)</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">gain</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">gain</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"><span class="fu">offs</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">offs</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">1505</span><span class="op">:</span><span class="fl">1510</span><span class="op">]</span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">1505</span><span class="op">:</span><span class="fl">1510</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 447.7600 439.2610 435.7418 390.6812 364.3720 372.6429</span>
-<span class="r-in"><span class="fu">gain</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span class="r-in"><span class="fu">offs</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">1505</span><span class="op">:</span><span class="fl">1510</span><span class="op">]</span></span>
+<span class="r-in"><span><span class="fu">gain</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="fu">offs</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">1505</span><span class="op">:</span><span class="fl">1510</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4482.600 4397.610 4362.418 3911.812 3648.720 3731.429</span>
 </code></pre></div>
     </div>
@@ -101,7 +105,7 @@ Note that setting gain and/or offset are intended to be used with values that ar
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ When writing a file to disk, the file format is determined by the 'format=' argu
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,21 +52,24 @@ When writing a file to disk, the file format is determined by the 'format=' argu
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer,character</span>
-<span class="fu">writeRaster</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, <span class="va">format</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStackBrick,character</span>
-<span class="fu">writeRaster</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, <span class="va">format</span>, <span class="va">bylayer</span>, suffix<span class="op">=</span><span class="st">'numbers'</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer,character</span></span>
+<span><span class="fu">writeRaster</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, <span class="va">format</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick,character</span></span>
+<span><span class="fu">writeRaster</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, <span class="va">format</span>, <span class="va">bylayer</span>, suffix<span class="op">=</span><span class="st">'numbers'</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
+
 <dt>filename</dt>
 <dd><p>Output filename</p></dd>
+
 <dt>format</dt>
 <dd><p>Character. Output file type. See <code><a href="writeFormats.html">writeFormats</a></code>. If this argument is not provided, it is attempted to infer it from the filename extension. If that fails, the default format is used. The default format is 'raster', but this can be changed using <code><a href="rasterOptions.html">rasterOptions</a></code></p></dd>
+
 <dt>...</dt>
 <dd><p>Additional arguments:</p>  		
 <p><code>datatype</code>Character. Output data type (e.g. 'INT2S' or 'FLT4S'). 
@@ -85,21 +88,29 @@ This can be useful when writing files to be read by applications intolerant of u
 <p><code>prj</code>: Logical. If <code>TRUE</code>, the crs is written to a .prj file. This can be useful 
 when writing to an ascii file or another file type that does not store the crs</p>
 <p><code>setStatistics</code>: logical. If <code>TRUE</code> (the default) the min and max cell values are written to file (if the format permits it)</p></dd>
+
+
+
 <dt>bylayer</dt>
 <dd><p>if <code>TRUE</code>, write a separate file for each layer. You can provide a vector of filenames that matches the number of layers. Or you can provide a single filename that will get a unique suffix (see below)</p></dd>
+
+
 <dt>suffix</dt>
 <dd><p>'numbers' or 'names' to determine the suffix that each file gets when <code>bylayer=TRUE</code>; either a number between <code>1</code> and <code>nlayers(x)</code> or <code>names(x)</code></p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>See <code>writeFormats</code> for supported file types ("formats", "drivers").</p>
-<p>The rgdal package is needed, except for these file formats: 'raster', 'BIL', 'BIP', 'BSQ', 'SAGA', 'ascii', 'IDRISI', and 'CDF'. Some of these formats can be used with or without rgdal (idrisi, SAGA, ascii).  You need the 'ncdf4' library for the 'CDF' format.</p>
+
 <p>In multi-layer files (i.e. files saved from RasterStack or RasterBrick objects), in the native 'raster' format, the band-order can be set to BIL ('Bands Interleaved by Line'), BIP ('Bands Interleaved by Pixels') or BSQ ('Bands SeQuential'). Note that bandorder is not the same as filetype here.</p>
 <p>Supported file types include:</p>
 <table class="table table"><tr><td></td><td><b>File type</b></td><td><b>Long name</b></td><td><b>default extension</b></td><td><b>Multiband support</b></td></tr><tr><td></td><td><code>raster</code></td><td>'Native' raster package format</td><td>.grd</td><td>Yes</td></tr><tr><td></td><td><code>ascii</code></td><td>ESRI Ascii</td><td>.asc</td><td>No</td></tr><tr><td></td><td><code>SAGA</code></td><td>SAGA GIS</td><td>.sdat</td><td>No</td></tr><tr><td></td><td><code>IDRISI</code></td><td>IDRISI</td><td>.rst</td><td>No</td></tr><tr><td></td><td><code>CDF</code></td><td>netCDF (requires ncdf4)</td><td>.nc</td><td>Yes</td></tr><tr><td></td><td><code>GTiff</code></td><td>GeoTiff (requires rgdal)</td><td>.tif</td><td>Yes</td></tr><tr><td></td><td><code>ENVI</code></td><td>ENVI .hdr Labelled</td><td>.envi</td><td>Yes</td></tr><tr><td></td><td><code>EHdr</code></td><td>ESRI .hdr Labelled</td><td>.bil</td><td>Yes</td></tr><tr><td></td><td><code>HFA</code></td><td>Erdas Imagine Images (.img)</td><td>.img</td><td>Yes</td></tr></table></div>
     <div id="value">
     <h2>Value</h2>
-    <p>This function is used for the side-effect of writing values to a file.</p>
+    
+
+<p>This function is used for the side-effect of writing values to a file.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -108,31 +119,46 @@ when writing to an ascii file or another file type that does not store the crs</
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># take a small part</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="crop.html">crop</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="fl">179880</span>, <span class="fl">180800</span>, <span class="fl">329880</span>, <span class="fl">330840</span><span class="op">)</span> <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># write to an integer binary file</span></span>
-<span class="r-in"><span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"allint.grd"</span><span class="op">)</span>, datatype<span class="op">=</span><span class="st">'INT4S'</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># make a brick and save multi-layer file</span></span>
-<span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">b</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"multi.grd"</span><span class="op">)</span>, bandorder<span class="op">=</span><span class="st">'BIL'</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># write to a new geotiff file (depends on rgdal)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://rgdal.r-forge.r-project.org" class="external-link">rgdal</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"test.tif"</span><span class="op">)</span>, format<span class="op">=</span><span class="st">"GTiff"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">b</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"multi.tif"</span><span class="op">)</span>, </span>
-<span class="r-in">            options<span class="op">=</span><span class="st">"INTERLEAVE=BAND"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># take a small part</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="crop.html">crop</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="fl">179880</span>, <span class="fl">180800</span>, <span class="fl">329880</span>, <span class="fl">330840</span><span class="op">)</span> <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># write to an integer binary file</span></span></span>
+<span class="r-in"><span><span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"allint.grd"</span><span class="op">)</span>, datatype<span class="op">=</span><span class="st">'INT4S'</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># make a brick and save multi-layer file</span></span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">b</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"multi.grd"</span><span class="op">)</span>, bandorder<span class="op">=</span><span class="st">'BIL'</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># write to a new geotiff file (depends on rgdal)</span></span></span>
+<span class="r-in"><span><span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"test.tif"</span><span class="op">)</span>, format<span class="op">=</span><span class="st">"GTiff"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rgdal</span>
-<span class="r-in"> </span>
-<span class="r-in"><span class="co"># write to netcdf </span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://cirrus.ucsd.edu/~pierce/ncdf/" class="external-link">ncdf4</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>  </span>
-<span class="r-in"> <span class="va">rnc</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"netCDF.nc"</span><span class="op">)</span>, format<span class="op">=</span><span class="st">"CDF"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>   </span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Please note that rgdal will be retired by the end of 2023,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> plan transition to sf/stars/terra functions using GDAL and PROJ</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> at your earliest convenience.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> rgdal: version: 1.5-32, (SVN revision 1176)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Geospatial Data Abstraction Library extensions to R successfully loaded</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loaded GDAL runtime: GDAL 3.5.1, released 2022/06/30</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Path to GDAL shared files: /usr/local/Cellar/gdal/3.5.1_2/share/gdal</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  GDAL does not use iconv for recoding strings.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> GDAL binary built with GEOS: TRUE </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loaded PROJ runtime: Rel. 9.0.1, June 15th, 2022, [PJ_VERSION: 901]</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Path to PROJ shared files: /Users/runner/Library/Application Support/proj:/usr/local/opt/proj/share/proj:/usr/local/Cellar/proj/9.0.1/share/proj</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> PROJ CDN enabled: FALSE</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Linking to sp version:1.5-0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> To mute warnings of possible GDAL/OSR exportToProj4() degradation,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> use options("rgdal_show_exportToProj4_warnings"="none") before loading sp or rgdal.</span>
+<span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">b</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"multi.tif"</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>            options<span class="op">=</span><span class="st">"INTERLEAVE=BAND"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span><span class="co"># write to netcdf </span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://cirrus.ucsd.edu/~pierce/ncdf/" class="external-link">ncdf4</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>  </span></span>
+<span class="r-in"><span> <span class="va">rnc</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"netCDF.nc"</span><span class="op">)</span>, format<span class="op">=</span><span class="st">"CDF"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>   </span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: ncdf4</span>
 </code></pre></div>
     </div>
@@ -148,7 +174,7 @@ when writing to an ascii file or another file type that does not store the crs</
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

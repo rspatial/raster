@@ -28,7 +28,7 @@ x-y is the same as erase(x, y)"><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -79,7 +79,9 @@ You can use <code><a href="https://rdrr.io/r/base/options.html" class="external-
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>A Raster* object, and in some cases the side effect of a new file on disk.</p>
+    
+
+<p>A Raster* object, and in some cases the side effect of a new file on disk.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -88,28 +90,28 @@ You can use <code><a href="https://rdrr.io/r/base/options.html" class="external-
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">10</span>, nrows<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r1</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span> <span class="op">)</span></span>
-<span class="r-in"><span class="va">r3</span> <span class="op">&lt;-</span> <span class="va">r1</span> <span class="op">+</span> <span class="va">r2</span></span>
-<span class="r-in"><span class="va">r2</span> <span class="op">&lt;-</span> <span class="va">r1</span> <span class="op">/</span> <span class="fl">10</span></span>
-<span class="r-in"><span class="va">r3</span> <span class="op">&lt;-</span> <span class="va">r1</span> <span class="op">*</span> <span class="op">(</span><span class="va">r2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">r1</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="va">r2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># recycling by row</span></span>
-<span class="r-in"><span class="va">r4</span> <span class="op">&lt;-</span> <span class="va">r1</span> <span class="op">*</span> <span class="fl">0</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># multi-layer object mutiplication, no recycling</span></span>
-<span class="r-in"><span class="va">b1</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="va">r1</span>, <span class="va">r2</span>, <span class="va">r3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b2</span> <span class="op">&lt;-</span> <span class="va">b1</span> <span class="op">*</span> <span class="fl">10</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># recycling by layer</span></span>
-<span class="r-in"><span class="va">b3</span> <span class="op">&lt;-</span> <span class="va">b1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># addition of the cell-values of two RasterBrick objects</span></span>
-<span class="r-in"><span class="va">b3</span> <span class="op">&lt;-</span> <span class="va">b2</span> <span class="op">+</span> <span class="va">b1</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># summing two RasterBricks and one RasterLayer. The RasterLayer is 'recycled'</span></span>
-<span class="r-in"><span class="va">b3</span> <span class="op">&lt;-</span> <span class="va">b1</span> <span class="op">+</span> <span class="va">b2</span> <span class="op">+</span> <span class="va">r1</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">10</span>, nrows<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r1</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="va">r1</span> <span class="op">+</span> <span class="va">r2</span></span></span>
+<span class="r-in"><span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="va">r1</span> <span class="op">/</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="va">r1</span> <span class="op">*</span> <span class="op">(</span><span class="va">r2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">r1</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="va">r2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># recycling by row</span></span></span>
+<span class="r-in"><span><span class="va">r4</span> <span class="op">&lt;-</span> <span class="va">r1</span> <span class="op">*</span> <span class="fl">0</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># multi-layer object mutiplication, no recycling</span></span></span>
+<span class="r-in"><span><span class="va">b1</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="va">r1</span>, <span class="va">r2</span>, <span class="va">r3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b2</span> <span class="op">&lt;-</span> <span class="va">b1</span> <span class="op">*</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># recycling by layer</span></span></span>
+<span class="r-in"><span><span class="va">b3</span> <span class="op">&lt;-</span> <span class="va">b1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># addition of the cell-values of two RasterBrick objects</span></span></span>
+<span class="r-in"><span><span class="va">b3</span> <span class="op">&lt;-</span> <span class="va">b2</span> <span class="op">+</span> <span class="va">b1</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># summing two RasterBricks and one RasterLayer. The RasterLayer is 'recycled'</span></span></span>
+<span class="r-in"><span><span class="va">b3</span> <span class="op">&lt;-</span> <span class="va">b1</span> <span class="op">+</span> <span class="va">b2</span> <span class="op">+</span> <span class="va">r1</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -124,7 +126,7 @@ You can use <code><a href="https://rdrr.io/r/base/options.html" class="external-
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

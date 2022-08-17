@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,22 +50,27 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">clump</span><span class="op">(</span><span class="va">x</span>, filename<span class="op">=</span><span class="st">""</span>, directions<span class="op">=</span><span class="fl">8</span>, gaps<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">clump</span><span class="op">(</span><span class="va">x</span>, filename<span class="op">=</span><span class="st">""</span>, directions<span class="op">=</span><span class="fl">8</span>, gaps<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterLayer</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>Character. Filename for the output RasterLayer (optional)</p></dd>
-<dt>directions</dt>
+  
+  <dt>directions</dt>
 <dd><p>Integer. Which cells are considered adjacent? Should be 8 (Queen's case) or 4 (Rook's case)</p></dd>
-<dt>gaps</dt>
+
+  <dt>gaps</dt>
 <dd><p>Logical. If <code>TRUE</code> (the default), there may be 'gaps' in the chunk numbers (e.g. you may have clumps with IDs 1, 2, 3 and 5, but not 4). If it is <code>FALSE</code>, these numbers will be recoded from 1 to n (4 in this example)</p></dd>
-<dt>...</dt>
+  
+  <dt>...</dt>
 <dd><p>Additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+  
 </dl></div>
     <div id="note">
     <h2>Note</h2>
@@ -73,7 +78,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer</p>
+    
+
+<p>RasterLayer</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -82,12 +89,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">12</span>, nrows<span class="op">=</span><span class="fl">12</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">0.7</span> <span class="op">)</span></span>
-<span class="r-in"><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu">clump</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">12</span>, nrows<span class="op">=</span><span class="fl">12</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">0.7</span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu">clump</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> </span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: igraph</span>
-<span class="r-in"><span class="fu"><a href="freq.html">freq</a></span><span class="op">(</span><span class="va">rc</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="freq.html">freq</a></span><span class="op">(</span><span class="va">rc</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       value count</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]     1     1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]     2    12</span>
@@ -102,7 +109,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    11     1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    12     1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13,]    NA   104</span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">rc</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">rc</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="clump-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -118,7 +125,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

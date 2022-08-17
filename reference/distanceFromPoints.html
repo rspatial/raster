@@ -18,7 +18,7 @@ The distance unit is in meters if the coordinate reference system (crs) of the R
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,19 +52,23 @@ The distance unit is in meters if the coordinate reference system (crs) of the R
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">distanceFromPoints</span><span class="op">(</span><span class="va">object</span>, <span class="va">xy</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">distanceFromPoints</span><span class="op">(</span><span class="va">object</span>, <span class="va">xy</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Raster object</p></dd>
+
 <dt>xy</dt>
 <dd><p>matrix of x and y coordinates, or a SpatialPoints* object.</p></dd>
+
 <dt>filename</dt>
 <dd><p>character. Optional filename for the output RasterLayer</p></dd>
+
 <dt>...</dt>
 <dd><p>Additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+  
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -86,14 +90,14 @@ The distance unit is in meters if the coordinate reference system (crs) of the R
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">36</span>,nrow<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu">distanceFromPoints</span><span class="op">(</span><span class="va">r</span>, <span class="va">xy</span><span class="op">)</span> </span>
-<span class="r-in"><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">=</span> <span class="st">'+proj=utm +zone=12 +datum=WGS84'</span></span>
-<span class="r-in"><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu">distanceFromPoints</span><span class="op">(</span><span class="va">r</span>, <span class="va">xy</span><span class="op">)</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">d2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">36</span>,nrow<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu">distanceFromPoints</span><span class="op">(</span><span class="va">r</span>, <span class="va">xy</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">=</span> <span class="st">'+proj=utm +zone=12 +datum=WGS84'</span></span></span>
+<span class="r-in"><span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu">distanceFromPoints</span><span class="op">(</span><span class="va">r</span>, <span class="va">xy</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">d2</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="distanceFromPoints-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -109,7 +113,7 @@ The distance unit is in meters if the coordinate reference system (crs) of the R
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

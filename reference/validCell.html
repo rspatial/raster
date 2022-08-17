@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,34 +50,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">validCell</span><span class="op">(</span><span class="va">object</span>, <span class="va">cell</span><span class="op">)</span> 
-<span class="fu">validCol</span><span class="op">(</span><span class="va">object</span>, <span class="va">colnr</span><span class="op">)</span> 
-<span class="fu">validRow</span><span class="op">(</span><span class="va">object</span>, <span class="va">rownr</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">validCell</span><span class="op">(</span><span class="va">object</span>, <span class="va">cell</span><span class="op">)</span> </span>
+<span><span class="fu">validCol</span><span class="op">(</span><span class="va">object</span>, <span class="va">colnr</span><span class="op">)</span> </span>
+<span><span class="fu">validRow</span><span class="op">(</span><span class="va">object</span>, <span class="va">rownr</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Raster* object (or a SpatialPixels* or SpatialGrid* object)</p></dd>
-<dt>cell</dt>
+
+  <dt>cell</dt>
 <dd><p>cell number(s)</p></dd>
-<dt>colnr</dt>
+
+  <dt>colnr</dt>
 <dd><p>column number; or vector of column numbers</p></dd>
-<dt>rownr</dt>
+
+  <dt>rownr</dt>
 <dd><p>row number; or vector of row numbers</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>logical value</p>
+    
+
+<p>logical value</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">#using a new default raster (1 degree global)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">validCell</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#using a new default raster (1 degree global)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">validCell</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE FALSE  TRUE</span>
-<span class="r-in"><span class="fu">validRow</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">10000</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">validRow</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">10000</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE  TRUE  TRUE FALSE</span>
 </code></pre></div>
     </div>
@@ -93,7 +99,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

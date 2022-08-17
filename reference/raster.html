@@ -19,7 +19,7 @@ For an overview of the functions in the raster package have a look here: raster-
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -54,83 +54,100 @@ For an overview of the functions in the raster package have a look here: raster-
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for character</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, band<span class="op">=</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterLayer</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> 
-
-<span class="co"># S4 method for RasterStack</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, layer<span class="op">=</span><span class="fl">0</span><span class="op">)</span> 
-
-<span class="co"># S4 method for RasterBrick</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, layer<span class="op">=</span><span class="fl">0</span><span class="op">)</span> 
-
-<span class="co"># S4 method for missing</span>
-<span class="fu">raster</span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">180</span>, ncols<span class="op">=</span><span class="fl">360</span>, xmn<span class="op">=</span><span class="op">-</span><span class="fl">180</span>, xmx<span class="op">=</span><span class="fl">180</span>, ymn<span class="op">=</span><span class="op">-</span><span class="fl">90</span>, ymx<span class="op">=</span><span class="fl">90</span>, 
-    <span class="va">crs</span>, <span class="va">ext</span>, <span class="va">resolution</span>, vals<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
-
-<span class="co"># S4 method for Extent</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, nrows<span class="op">=</span><span class="fl">10</span>, ncols<span class="op">=</span><span class="fl">10</span>, crs<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for matrix</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">1</span>, ymn<span class="op">=</span><span class="fl">0</span>, ymx<span class="op">=</span><span class="fl">1</span>, crs<span class="op">=</span><span class="st">""</span>, template<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
-
-<span class="co"># S4 method for Spatial</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, <span class="va">origin</span>, <span class="va">...</span><span class="op">)</span> 
-
-<span class="co"># S4 method for SpatialGrid</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, layer<span class="op">=</span><span class="fl">1</span>, values<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPixels</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, layer<span class="op">=</span><span class="fl">1</span>, values<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co"># S4 method for sf</span>
-<span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, <span class="va">origin</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for character</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, band<span class="op">=</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># S4 method for RasterStack</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, layer<span class="op">=</span><span class="fl">0</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># S4 method for RasterBrick</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, layer<span class="op">=</span><span class="fl">0</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># S4 method for missing</span></span>
+<span><span class="fu">raster</span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">180</span>, ncols<span class="op">=</span><span class="fl">360</span>, xmn<span class="op">=</span><span class="op">-</span><span class="fl">180</span>, xmx<span class="op">=</span><span class="fl">180</span>, ymn<span class="op">=</span><span class="op">-</span><span class="fl">90</span>, ymx<span class="op">=</span><span class="fl">90</span>, </span>
+<span>    <span class="va">crs</span>, <span class="va">ext</span>, <span class="va">resolution</span>, vals<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Extent</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, nrows<span class="op">=</span><span class="fl">10</span>, ncols<span class="op">=</span><span class="fl">10</span>, crs<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for matrix</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">1</span>, ymn<span class="op">=</span><span class="fl">0</span>, ymx<span class="op">=</span><span class="fl">1</span>, crs<span class="op">=</span><span class="st">""</span>, template<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Spatial</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, <span class="va">origin</span>, <span class="va">...</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># S4 method for SpatialGrid</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, layer<span class="op">=</span><span class="fl">1</span>, values<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPixels</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, layer<span class="op">=</span><span class="fl">1</span>, values<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for sf</span></span>
+<span><span class="fu">raster</span><span class="op">(</span><span class="va">x</span>, <span class="va">origin</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
-<dd><p>filename (character), Extent, Raster*, sf, SpatialPixels*, SpatialGrid*, object, 'image', matrix, im, or missing. Supported file types are the 'native' raster package format and those that can be read via <code>rgdal</code> (see <code>readGDAL</code></p></dd>
+<dd><p>filename (character), Extent, Raster*, sf, SpatialPixels*, SpatialGrid*, object, 'image', matrix, im, or missing. Supported file types are the 'native' raster package format and those that can be read by GDAL</p></dd>
+
 <dt>band</dt>
 <dd><p>integer. The layer to use in a multi-layer file</p></dd>
+
 <dt>...</dt>
 <dd><p>Additional arguments, see Details</p></dd>
+  
 <dt>layer</dt>
 <dd><p>integer. The layer (variable) to use in a multi-layer file, or the layer to extract from a RasterStack/Brick or SpatialPixelsDataFrame or SpatialGridDataFrame. An empty RasterLayer (no associated values) is returned if <code>layer=0</code></p></dd>
+
 <dt>values</dt>
 <dd><p>logical. If <code>TRUE</code>, the cell values of '<code>x</code>' are copied to the RasterLayer object that is returned</p></dd>
+
 <dt>nrows</dt>
 <dd><p>integer &gt; 0. Number of rows</p></dd>
+
 <dt>ncols</dt>
 <dd><p>integer &gt; 0. Number of columns</p></dd>
+
 <dt>xmn</dt>
 <dd><p>minimum x coordinate (left border)</p></dd>
+
 <dt>xmx</dt>
 <dd><p>maximum x coordinate (right border)</p></dd>
+
 <dt>ymn</dt>
 <dd><p>minimum y coordinate (bottom border)</p></dd>
+
 <dt>ymx</dt>
 <dd><p>maximum y coordinate (top border)</p></dd>
+
 <dt>ext</dt>
 <dd><p>object of class Extent. If present, the arguments xmn, xmx, ymn and ynx are ignored</p></dd>
+
 <dt>crs</dt>
 <dd><p>character or object of class CRS. PROJ.4 type description of a Coordinate Reference System (map projection). If this argument is missing, and the x coordinates are within -360 .. 360 and the y coordinates are within -90 .. 90, "+proj=longlat +datum=WGS84" is used. Also see under Details if <code>x</code> is a character (filename)</p></dd>
+
 <dt>resolution</dt>
 <dd><p>numeric vector of length 1 or 2 to set the resolution (see <code><a href="resolution.html">res</a></code>). If this argument is used, arguments <code>ncols</code> and <code>nrows</code> are ignored</p></dd>
+
 <dt>vals</dt>
 <dd><p>optional. Values for the new RasterLayer. Accepted formats are as for <code><a href="setValues.html">setValues</a></code></p></dd>
+
 <dt>origin</dt>
 <dd><p>minimum y coordinate (bottom border)</p></dd>
+
 <dt>template</dt>
 <dd><p>Raster* or Extent object used to set the extent (and CRS in case of a Raster* object). If not <code>NULL</code>, arguments <code>xmn</code>, <code>xmx</code>, <code>ymn</code>, <code>ymx</code> and <code>crs</code> (unless <code>template</code> is an Extent object) are ignored</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>If <code>x</code> is a filename, the following additional variables are recognized:</p>
 <p><code>sub</code>: positive integer. Subdataset number for a file with subdatasets</p>
-<p><code>native</code>: logical.  Default is <code>FALSE</code> except when package <code>rgdal</code> is missing. If <code>TRUE</code>, reading and writing of IDRISI, BIL, BSQ, BIP, SAGA, and Arc ASCII files is done with native (raster package) drivers, rather then via rgdal. 'raster' and netcdf format files are always read with native drivers.</p>
+<p><code>native</code>: logical.  Default is <code>FALSE</code>. If <code>TRUE</code>, reading and writing of IDRISI, BIL, BSQ, BIP, SAGA, and Arc ASCII files is done with native (raster package) drivers, rather then via GDAL. 'raster' and netcdf format files are always read with native drivers.</p>
 <p><code>RAT</code>: logical. The default is <code>TRUE</code>, in which case a raster attribute table is created for files that have one</p>
 <p><code>offset</code>: integer. To indicate the number of header rows on non-standard ascii files (rarely useful; use with caution)</p>
 <p><code>crs</code>: character. PROJ.4 string to set the CRS. Ignored when the file provides a CRS description that can be interpreted.</p>
@@ -145,7 +162,9 @@ For an overview of the functions in the raster package have a look here: raster-
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer</p>
+    
+
+<p>RasterLayer</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -154,31 +173,31 @@ For an overview of the functions in the raster package have a look here: raster-
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create a RasterLayer object from a file</span></span>
-<span class="r-in"><span class="co">#   N.B.: For your own files, omit the 'system.file' and 'package="raster"' bits</span></span>
-<span class="r-in"><span class="co">#   these are just to get the path to files installed with the package</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">f</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create a RasterLayer object from a file</span></span></span>
+<span class="r-in"><span><span class="co">#   N.B.: For your own files, omit the 'system.file' and 'package="raster"' bits</span></span></span>
+<span class="r-in"><span><span class="co">#   these are just to get the path to files installed with the package</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">f</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/Users/runner/work/_temp/Library/raster/external/test.grd"</span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">logo</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#from scratch</span></span>
-<span class="r-in"><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">108</span>, ncols<span class="op">=</span><span class="fl">21</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#from an Extent object</span></span>
-<span class="r-in"><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#from another Raster* object</span></span>
-<span class="r-in"><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span>, <span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r4</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">s</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">logo</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#from scratch</span></span></span>
+<span class="r-in"><span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">108</span>, ncols<span class="op">=</span><span class="fl">21</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#from an Extent object</span></span></span>
+<span class="r-in"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#from another Raster* object</span></span></span>
+<span class="r-in"><span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span>, <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r4</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">s</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -193,7 +212,7 @@ For an overview of the functions in the raster package have a look here: raster-
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -20,7 +20,7 @@ be adjusted (e.g. by setting its resolution) and used as a template 'to' in proj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -56,10 +56,10 @@ be adjusted (e.g. by setting its resolution) and used as a template <code>'to'</
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">projectRaster</span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span>, <span class="va">res</span>, <span class="va">crs</span>, method<span class="op">=</span><span class="st">"bilinear"</span>, 
-             alignOnly<span class="op">=</span><span class="cn">FALSE</span>, over<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span> 
-
-<span class="fu">projectExtent</span><span class="op">(</span><span class="va">object</span>, <span class="va">crs</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">projectRaster</span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span>, <span class="va">res</span>, <span class="va">crs</span>, method<span class="op">=</span><span class="st">"bilinear"</span>, </span>
+<span>             alignOnly<span class="op">=</span><span class="cn">FALSE</span>, over<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu">projectExtent</span><span class="op">(</span><span class="va">object</span>, <span class="va">crs</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="note">
@@ -70,24 +70,35 @@ be adjusted (e.g. by setting its resolution) and used as a template <code>'to'</
     <h2>Arguments</h2>
     <dl><dt>from</dt>
 <dd><p>Raster* object</p></dd>
-<dt>to</dt>
+
+  <dt>to</dt>
 <dd><p>Raster* object with the parameters to which 'from' should be projected</p></dd>
-<dt>res</dt>
+
+  <dt>res</dt>
 <dd><p>single or (vector of) two numerics. To, optionally, set the output resolution if 'to' is missing</p></dd>
-<dt>crs</dt>
+
+  <dt>crs</dt>
 <dd><p>character or object of class 'CRS'. PROJ.4 description of the coordinate reference system. In projectRaster this is used to set the output CRS if 'to' is missing, or if 'to' has no valid CRS</p></dd>
-<dt>method</dt>
+
+  <dt>method</dt>
 <dd><p>method used to compute values for the new RasterLayer. Either 'ngb' (nearest neighbor), which is useful for categorical variables, or 'bilinear' (bilinear interpolation; the default value), which is appropriate for continuous variables.</p></dd>
-<dt>alignOnly</dt>
+
+  <dt>alignOnly</dt>
 <dd><p>logical. Use <code>to</code> or other parameters only to align the output (i.e. same origin and resolution), but use the projected extent from <code>from</code></p></dd>
-<dt>over</dt>
+
+  <dt>over</dt>
 <dd><p>logical. If <code>TRUE</code> wrapping around the date-line is turned off. This can be desirable for global data (to avoid mapping the same areas twice) but it is not desireable in other cases</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Output filename</p></dd>
-<dt>...</dt>
+  
+  <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
-<dt>object</dt>
+  
+  <dt>object</dt>
 <dd><p>Raster* object</p></dd>
+
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -95,7 +106,7 @@ be adjusted (e.g. by setting its resolution) and used as a template <code>'to'</
 <p>1) Provide a <code>crs</code> argument, and, optionally, a <code>res</code> argument, but do not provide a <code>to</code> argument.</p>
 <p>2) Create a template Raster with the CRS you want to project to. You can use an existing object, or use <code>projectExtent</code> for this or an existing Raster* object. Also set the number of rows and columns (or the resolution), and perhaps adjust the extent. The resolution of the output raster should normally be similar to that of the input raster. Then use that object as <code>from</code> argument to project the input Raster to. 
 This is the preferred method because you have most control. For example you can assure that the resulting Raster object lines up with other Raster objects.</p>
-<p>Projection is performed using the PROJ.4 library accessed through the rgdal package.</p>
+<p>Projection is performed using the PROJ library.</p>
 
 <p>Also see <code>projInfo('proj')</code>, <code>projInfo('ellps')</code>, and <code>projInfo('datum')</code> for valid PROJ.4 values.</p>
     </div>
@@ -109,7 +120,9 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer or RasterBrick object.</p>
+    
+
+<p>RasterLayer or RasterBrick object.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -117,53 +130,65 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><code><a href="resample.html">resample</a></code>, <code>CRS-class</code>, <code>projInfo</code>, <code><a href="https://rdrr.io/pkg/sp/man/spTransform.html" class="external-link">spTransform</a></code></p></div>
+    <div class="dont-index"><p><code><a href="resample.html">resample</a></code></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># create a new (not projected) RasterLayer with cellnumbers as values</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>xmn<span class="op">=</span><span class="op">-</span><span class="fl">110</span>, xmx<span class="op">=</span><span class="op">-</span><span class="fl">90</span>, ymn<span class="op">=</span><span class="fl">40</span>, ymx<span class="op">=</span><span class="fl">60</span>, ncols<span class="op">=</span><span class="fl">40</span>, nrows<span class="op">=</span><span class="fl">40</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># create a new (not projected) RasterLayer with cellnumbers as values</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>xmn<span class="op">=</span><span class="op">-</span><span class="fl">110</span>, xmx<span class="op">=</span><span class="op">-</span><span class="fl">90</span>, ymn<span class="op">=</span><span class="fl">40</span>, ymx<span class="op">=</span><span class="fl">60</span>, ncols<span class="op">=</span><span class="fl">40</span>, nrows<span class="op">=</span><span class="fl">40</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate Reference System:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Deprecated Proj.4 representation: +proj=longlat +datum=WGS84 </span>
-<span class="r-in"><span class="co"># wkt(r)</span></span>
-<span class="r-in"><span class="co"># proj.4 projection description</span></span>
-<span class="r-in"><span class="va">newproj</span> <span class="op">&lt;-</span> <span class="st">"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># we need the rgdal package for this</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://rgdal.r-forge.r-project.org" class="external-link">rgdal</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#simplest approach</span></span>
-<span class="r-in"><span class="va">pr1</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># alternatively also set the resolution</span></span>
-<span class="r-in"><span class="va">pr2</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span>, res<span class="op">=</span><span class="fl">20000</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># inverse projection, back to the properties of 'r'</span></span>
-<span class="r-in"><span class="va">inv</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">pr2</span>, <span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># to have more control, provide an existing Raster object, here we create one</span></span>
-<span class="r-in"><span class="co"># using projectExtent (no values are transferred)</span></span>
-<span class="r-in"><span class="va">pr3</span> <span class="op">&lt;-</span> <span class="fu">projectExtent</span><span class="op">(</span><span class="va">r</span>, <span class="va">newproj</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Adjust the cell size </span></span>
-<span class="r-in"><span class="fu"><a href="resolution.html">res</a></span><span class="op">(</span><span class="va">pr3</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">200000</span></span>
-<span class="r-in"><span class="co"># now project</span></span>
-<span class="r-in"><span class="va">pr3</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, <span class="va">pr3</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># using a higher resolution</span></span>
-<span class="r-in"><span class="fu"><a href="resolution.html">res</a></span><span class="op">(</span><span class="va">pr1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
-<span class="r-in"><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, <span class="va">pr1</span>, method<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">inv</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">pr</span>, <span class="va">r</span>, method<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dif</span> <span class="op">&lt;-</span> <span class="va">r</span> <span class="op">-</span> <span class="va">inv</span></span>
-<span class="r-in"><span class="co"># small difference</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">dif</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rgdal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Deprecated Proj.4 representation: +proj=longlat +datum=WGS84 +no_defs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WKT2 2019 representation:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GEOGCRS["unknown",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     DATUM["World Geodetic System 1984",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ELLIPSOID["WGS 84",6378137,298.257223563,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             LENGTHUNIT["metre",1]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ID["EPSG",6326]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     PRIMEM["Greenwich",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ID["EPSG",8901]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     CS[ellipsoidal,2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         AXIS["longitude",east,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ORDER[1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",9122]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         AXIS["latitude",north,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ORDER[2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",9122]]]] </span>
+<span class="r-in"><span><span class="co"># wkt(r)</span></span></span>
+<span class="r-in"><span><span class="co"># proj.4 projection description</span></span></span>
+<span class="r-in"><span><span class="va">newproj</span> <span class="op">&lt;-</span> <span class="st">"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#simplest approach</span></span></span>
+<span class="r-in"><span><span class="va">pr1</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># alternatively also set the resolution</span></span></span>
+<span class="r-in"><span><span class="va">pr2</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span>, res<span class="op">=</span><span class="fl">20000</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># inverse projection, back to the properties of 'r'</span></span></span>
+<span class="r-in"><span><span class="va">inv</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">pr2</span>, <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># to have more control, provide an existing Raster object, here we create one</span></span></span>
+<span class="r-in"><span><span class="co"># using projectExtent (no values are transferred)</span></span></span>
+<span class="r-in"><span><span class="va">pr3</span> <span class="op">&lt;-</span> <span class="fu">projectExtent</span><span class="op">(</span><span class="va">r</span>, <span class="va">newproj</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Adjust the cell size </span></span></span>
+<span class="r-in"><span><span class="fu"><a href="resolution.html">res</a></span><span class="op">(</span><span class="va">pr3</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">200000</span></span></span>
+<span class="r-in"><span><span class="co"># now project</span></span></span>
+<span class="r-in"><span><span class="va">pr3</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, <span class="va">pr3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># using a higher resolution</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="resolution.html">res</a></span><span class="op">(</span><span class="va">pr1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span></span>
+<span class="r-in"><span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, <span class="va">pr1</span>, method<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">inv</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">pr</span>, <span class="va">r</span>, method<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dif</span> <span class="op">&lt;-</span> <span class="va">r</span> <span class="op">-</span> <span class="va">inv</span></span></span>
+<span class="r-in"><span><span class="co"># small difference</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">dif</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -178,7 +203,7 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

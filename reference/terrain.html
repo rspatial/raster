@@ -19,7 +19,7 @@ Compute slope, aspect and other terrain characteristics from a raster with eleva
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -54,24 +54,30 @@ Compute slope, aspect and other terrain characteristics from a raster with eleva
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">terrain</span><span class="op">(</span><span class="va">x</span>, opt<span class="op">=</span><span class="st">"slope"</span>, unit<span class="op">=</span><span class="st">"radians"</span>, neighbors<span class="op">=</span><span class="fl">8</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">terrain</span><span class="op">(</span><span class="va">x</span>, opt<span class="op">=</span><span class="st">"slope"</span>, unit<span class="op">=</span><span class="st">"radians"</span>, neighbors<span class="op">=</span><span class="fl">8</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterLayer object with elevation values. Values should have the same unit as the map units, or in meters when the crs is longitude/latitude</p></dd>
-<dt>opt</dt>
+
+  <dt>opt</dt>
 <dd><p>Character vector containing one or more of these options: slope, aspect, TPI, TRI, roughness, flowdir (see Details)</p></dd>
-<dt>unit</dt>
+
+  <dt>unit</dt>
 <dd><p>Character. 'degrees', 'radians' or 'tangent'. Only relevant for slope and aspect. If 'tangent' is selected that is used for slope, but for aspect 'degrees' is used (as 'tangent' has no meaning for aspect)</p></dd>
-<dt>neighbors</dt>
+
+  <dt>neighbors</dt>
 <dd><p>Integer. Indicating how many neighboring cells to use to compute slope for any cell. Either 8 (queen case) or 4 (rook case). Only used for slope and aspect, see Details</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>Character. Output filename (optional)</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Standard additional arguments for writing Raster* objects to file</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -102,21 +108,21 @@ If slope = 0, aspect is set to 0.5*pi radians (or 90 degrees if unit='degrees').
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">elevation</span> <span class="op">&lt;-</span> <span class="fu"><a href="getData.html">getData</a></span><span class="op">(</span><span class="st">'alt'</span>, country<span class="op">=</span><span class="st">'CHE'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">terrain</span><span class="op">(</span><span class="va">elevation</span>, opt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'slope'</span>, <span class="st">'aspect'</span><span class="op">)</span>, unit<span class="op">=</span><span class="st">'degrees'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># TPI for different neighborhood size:</span></span>
-<span class="r-in"><span class="va">tpiw</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span><span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="va">w</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, nc<span class="op">=</span><span class="va">w</span>, nr<span class="op">=</span><span class="va">w</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling</a></span><span class="op">(</span><span class="fl">0.5</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span class="r-in">  <span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="focal.html">focal</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">m</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">x</span> <span class="op">-</span> <span class="va">f</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">tpi5</span> <span class="op">&lt;-</span> <span class="fu">tpiw</span><span class="op">(</span><span class="va">elevation</span>, w<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">elevation</span> <span class="op">&lt;-</span> <span class="fu"><a href="getData.html">getData</a></span><span class="op">(</span><span class="st">'alt'</span>, country<span class="op">=</span><span class="st">'CHE'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">terrain</span><span class="op">(</span><span class="va">elevation</span>, opt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'slope'</span>, <span class="st">'aspect'</span><span class="op">)</span>, unit<span class="op">=</span><span class="st">'degrees'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># TPI for different neighborhood size:</span></span></span>
+<span class="r-in"><span><span class="va">tpiw</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span><span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="va">w</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, nc<span class="op">=</span><span class="va">w</span>, nr<span class="op">=</span><span class="va">w</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling</a></span><span class="op">(</span><span class="fl">0.5</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span>  <span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="focal.html">focal</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">m</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">-</span> <span class="va">f</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">tpi5</span> <span class="op">&lt;-</span> <span class="fu">tpiw</span><span class="op">(</span><span class="va">elevation</span>, w<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -131,7 +137,7 @@ If slope = 0, aspect is set to 0.5*pi radians (or 90 degrees if unit='degrees').
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

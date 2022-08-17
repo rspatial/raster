@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,58 +50,80 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterStackBrick</span>
-<span class="fu">plotRGB</span><span class="op">(</span><span class="va">x</span>, r<span class="op">=</span><span class="fl">1</span>, g<span class="op">=</span><span class="fl">2</span>, b<span class="op">=</span><span class="fl">3</span>, <span class="va">scale</span>, maxpixels<span class="op">=</span><span class="fl">500000</span>, stretch<span class="op">=</span><span class="cn">NULL</span>, 
-ext<span class="op">=</span><span class="cn">NULL</span>, interpolate<span class="op">=</span><span class="cn">FALSE</span>, colNA<span class="op">=</span><span class="st">'white'</span>, <span class="va">alpha</span>, <span class="va">bgalpha</span>, addfun<span class="op">=</span><span class="cn">NULL</span>, zlim<span class="op">=</span><span class="cn">NULL</span>, 
-zlimcol<span class="op">=</span><span class="cn">NULL</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, xlab<span class="op">=</span><span class="st">''</span>, ylab<span class="op">=</span><span class="st">''</span>, asp<span class="op">=</span><span class="cn">NULL</span>, add<span class="op">=</span><span class="cn">FALSE</span>, margins<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterStackBrick</span></span>
+<span><span class="fu">plotRGB</span><span class="op">(</span><span class="va">x</span>, r<span class="op">=</span><span class="fl">1</span>, g<span class="op">=</span><span class="fl">2</span>, b<span class="op">=</span><span class="fl">3</span>, <span class="va">scale</span>, maxpixels<span class="op">=</span><span class="fl">500000</span>, stretch<span class="op">=</span><span class="cn">NULL</span>, </span>
+<span>ext<span class="op">=</span><span class="cn">NULL</span>, interpolate<span class="op">=</span><span class="cn">FALSE</span>, colNA<span class="op">=</span><span class="st">'white'</span>, <span class="va">alpha</span>, <span class="va">bgalpha</span>, addfun<span class="op">=</span><span class="cn">NULL</span>, zlim<span class="op">=</span><span class="cn">NULL</span>, </span>
+<span>zlimcol<span class="op">=</span><span class="cn">NULL</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, xlab<span class="op">=</span><span class="st">''</span>, ylab<span class="op">=</span><span class="st">''</span>, asp<span class="op">=</span><span class="cn">NULL</span>, add<span class="op">=</span><span class="cn">FALSE</span>, margins<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterBrick or RasterStack</p></dd>
-<dt>r</dt>
+
+  <dt>r</dt>
 <dd><p>integer. Index of the Red channel, between 1 and nlayers(x)</p></dd>
-<dt>g</dt>
+
+  <dt>g</dt>
 <dd><p>integer. Index of the Green channel, between 1 and nlayers(x)</p></dd>
-<dt>b</dt>
+
+  <dt>b</dt>
 <dd><p>integer. Index of the Blue channel, between 1 and nlayers(x)</p></dd>
-<dt>scale</dt>
+
+  <dt>scale</dt>
 <dd><p>integer. Maximum (possible) value in the three channels. Defaults to 255 or to the maximum value of <code>x</code> if that is known and larger than 255</p></dd>
-<dt>maxpixels</dt>
+
+  <dt>maxpixels</dt>
 <dd><p>integer &gt; 0. Maximum number of pixels to use</p></dd>
-<dt>stretch</dt>
+
+  <dt>stretch</dt>
 <dd><p>character. Option to stretch the values to increase the contrast of the image: "lin" or "hist"</p></dd>
-<dt>ext</dt>
+
+  <dt>ext</dt>
 <dd><p>An <code><a href="Extent-class.html">Extent</a></code> object to zoom in to a region of interest (see <code><a href="drawExtent.html">drawExtent</a></code>)</p></dd>
-<dt>interpolate</dt>
+
+  <dt>interpolate</dt>
 <dd><p>logical. If <code>TRUE</code>, interpolate the image when drawing</p></dd>
-<dt>colNA</dt>
+
+  <dt>colNA</dt>
 <dd><p>color for the background (<code>NA</code> values)</p></dd>
-<dt>alpha</dt>
+
+  <dt>alpha</dt>
 <dd><p>transparency. Integer between 0 (transparent) and 255 (opaque)</p></dd>
-<dt>bgalpha</dt>
+
+  <dt>bgalpha</dt>
 <dd><p>Background transparency. Integer between 0 (transparent) and 255 (opaque)</p></dd>
-<dt>addfun</dt>
+
+  <dt>addfun</dt>
 <dd><p>Function to add additional items such as points or polygons to the plot (map). See <code><a href="plot.html">plot</a></code></p></dd>
-<dt>zlim</dt>
+
+  <dt>zlim</dt>
 <dd><p>numeric vector of length 2. Range of values to plot (optional)</p></dd>
-<dt>zlimcol</dt>
+
+  <dt>zlimcol</dt>
 <dd><p>If <code>NULL</code> the values outside the range of zlim get the color of the extremes of the range. If zlimcol has any other value, the values outside the zlim range get the color of <code>NA</code> values (see colNA)</p></dd>
-<dt>axes</dt>
+
+  <dt>axes</dt>
 <dd><p>logical. If <code>TRUE</code> axes are drawn (and arguments such as <code>main="title"</code> will be honored)</p></dd>
-<dt>xlab</dt>
+
+  <dt>xlab</dt>
 <dd><p>character. Label of x-axis</p></dd>
-<dt>ylab</dt>
+
+  <dt>ylab</dt>
 <dd><p>character. Label of y-axis</p></dd>
-<dt>asp</dt>
+
+  <dt>asp</dt>
 <dd><p>numeric. Aspect (ratio of x and y. If NULL, and appropriate value is computed to match data for the longitude/latitude coordinate reference system, and 1 for planar coordinate reference systems</p></dd>
-<dt>add</dt>
+
+  <dt>add</dt>
 <dd><p>logical. If <code>TRUE</code> add values to current plot</p></dd>
-<dt>margins</dt>
+
+  <dt>margins</dt>
 <dd><p>logical. If <code>TRUE</code> standard whitespace margins are used. If <code>FALSE</code>, graphics::par(plt=c(0,1,0,1)) is used</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>graphical parameters as in <code><a href="plot.html">plot</a></code> or <code><a href="https://rdrr.io/r/graphics/rasterImage.html" class="external-link">rasterImage</a></code></p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -114,12 +136,12 @@ zlimcol<span class="op">=</span><span class="cn">NULL</span>, axes<span class="o
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plotRGB-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plotRGB-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>, stretch<span class="op">=</span><span class="st">'hist'</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">plotRGB</span><span class="op">(</span><span class="va">b</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>, stretch<span class="op">=</span><span class="st">'hist'</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plotRGB-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -135,7 +157,7 @@ zlimcol<span class="op">=</span><span class="cn">NULL</span>, axes<span class="o
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

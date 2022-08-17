@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,26 +50,33 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster,data.frame</span>
-<span class="fu">subs</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, by<span class="op">=</span><span class="fl">1</span>, which<span class="op">=</span><span class="fl">2</span>, subsWithNA<span class="op">=</span><span class="cn">TRUE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster,data.frame</span></span>
+<span><span class="fu">subs</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, by<span class="op">=</span><span class="fl">1</span>, which<span class="op">=</span><span class="fl">2</span>, subsWithNA<span class="op">=</span><span class="cn">TRUE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>y</dt>
+
+  <dt>y</dt>
 <dd><p>data.frame</p></dd>
-<dt>by</dt>
+
+  <dt>by</dt>
 <dd><p>column number(s) or name(s) identifying the key (ID) to match rows in data.frame <code>y</code> to values of the Raster object</p></dd>
-<dt>which</dt>
+
+  <dt>which</dt>
 <dd><p>column number or name that has the new (replacement) values</p></dd>
-<dt>subsWithNA</dt>
+
+  <dt>subsWithNA</dt>
 <dd><p>logical. If <code>TRUE</code> values that are not matched become NA. If <code>FALSE</code>, they retain their original value (which could also be <code>NA</code>). This latter option is handy when you want to replace only one or a few values. It cannot be used when <code>x</code> has multiple layers</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Optional output filename</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+  
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -78,7 +85,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>Raster object</p>
+    
+
+<p>Raster object</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -87,19 +96,19 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">8</span>, v<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">11</span>,<span class="fl">12</span><span class="op">:</span><span class="fl">14</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">r</span>, <span class="va">df</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">r</span>, <span class="va">df</span>, subsWithNA<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df</span><span class="op">$</span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">v</span> <span class="op">*</span> <span class="fl">10</span></span>
-<span class="r-in"><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">r</span>, <span class="va">df</span>, which<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'first'</span>, <span class="st">'second'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x4</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">s</span>, <span class="va">df</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x5</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">s</span>, <span class="va">df</span>, which<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">8</span>, v<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">11</span>,<span class="fl">12</span><span class="op">:</span><span class="fl">14</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">r</span>, <span class="va">df</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">r</span>, <span class="va">df</span>, subsWithNA<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df</span><span class="op">$</span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">v</span> <span class="op">*</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">r</span>, <span class="va">df</span>, which<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'first'</span>, <span class="st">'second'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x4</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">s</span>, <span class="va">df</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x5</span> <span class="op">&lt;-</span> <span class="fu">subs</span><span class="op">(</span><span class="va">s</span>, <span class="va">df</span>, which<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -114,7 +123,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

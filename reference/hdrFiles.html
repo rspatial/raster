@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,19 +50,23 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hdr</span><span class="op">(</span><span class="va">x</span>, <span class="va">format</span>, extension<span class="op">=</span><span class="st">'.wld'</span>, filename<span class="op">=</span><span class="st">''</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hdr</span><span class="op">(</span><span class="va">x</span>, <span class="va">format</span>, extension<span class="op">=</span><span class="st">'.wld'</span>, filename<span class="op">=</span><span class="st">''</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterLayer or RasterBrick object associated with a binary values file on disk</p></dd>
-<dt>format</dt>
+
+  <dt>format</dt>
 <dd><p>Type of header file: 'VRT', 'BIL', 'ENVI', 'ErdasRaw', 'IDRISI', 'SAGA', 'RASTER', 'WORLDFILE', 'PRJ'</p></dd>
-<dt>extension</dt>
+
+  <dt>extension</dt>
 <dd><p>File extension, only used with an ESRI worldfile (<code>format='WORLDFILE'</code>)</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Need to be provided if <code>x</code> is not associated with a file</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -73,16 +77,16 @@ This (hopefully) allows for reading the binary data (.gri), perhaps after changi
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><code><a href="writeRaster.html">writeRaster</a></code>, <code>writeGDAL</code></p></div>
+    <div class="dont-index"><p><code><a href="writeRaster.html">writeRaster</a></code></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="writeRaster.html">writeRaster</a></span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="st">'export.grd'</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">hdr</span><span class="op">(</span><span class="va">r</span>, format<span class="op">=</span><span class="st">"ENVI"</span><span class="op">)</span> </span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="writeRaster.html">writeRaster</a></span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="st">'export.grd'</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">hdr</span><span class="op">(</span><span class="va">r</span>, format<span class="op">=</span><span class="st">"ENVI"</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -97,7 +101,7 @@ This (hopefully) allows for reading the binary data (.gri), perhaps after changi
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

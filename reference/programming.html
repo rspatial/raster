@@ -20,7 +20,7 @@ pbCreate creates a progress bar, pbStep sets the progress, and pbClose closes it
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -56,63 +56,80 @@ pbCreate creates a progress bar, pbStep sets the progress, and pbClose closes it
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">canProcessInMemory</span><span class="op">(</span><span class="va">x</span>, n<span class="op">=</span><span class="fl">4</span>, verbose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu">pbCreate</span><span class="op">(</span><span class="va">nsteps</span>, <span class="va">progress</span>, style<span class="op">=</span><span class="fl">3</span>, label<span class="op">=</span><span class="st">'Progress'</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">pbStep</span><span class="op">(</span><span class="va">pb</span>, step<span class="op">=</span><span class="cn">NULL</span>, label<span class="op">=</span><span class="st">''</span><span class="op">)</span>
-<span class="fu">pbClose</span><span class="op">(</span><span class="va">pb</span>, <span class="va">timer</span><span class="op">)</span>
-<span class="fu">readStart</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">readStop</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu">getCluster</span><span class="op">(</span><span class="op">)</span>
-<span class="fu">returnCluster</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">canProcessInMemory</span><span class="op">(</span><span class="va">x</span>, n<span class="op">=</span><span class="fl">4</span>, verbose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">pbCreate</span><span class="op">(</span><span class="va">nsteps</span>, <span class="va">progress</span>, style<span class="op">=</span><span class="fl">3</span>, label<span class="op">=</span><span class="st">'Progress'</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">pbStep</span><span class="op">(</span><span class="va">pb</span>, step<span class="op">=</span><span class="cn">NULL</span>, label<span class="op">=</span><span class="st">''</span><span class="op">)</span></span>
+<span><span class="fu">pbClose</span><span class="op">(</span><span class="va">pb</span>, <span class="va">timer</span><span class="op">)</span></span>
+<span><span class="fu">readStart</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">readStop</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">getCluster</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">returnCluster</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterLayer or RasterBrick object (for connections) or RasterStack object (canProcessInMemory)</p></dd>
-<dt>n</dt>
+
+  <dt>n</dt>
 <dd><p>integer. The number of copies of the Raster* object cell values that a function needs to be able to have in memory</p></dd>
-<dt>verbose</dt>
+  
+  <dt>verbose</dt>
 <dd><p>logical. If <code>TRUE</code> the amount of memory needed and available is printed</p></dd>
-<dt>nsteps</dt>
+
+  <dt>nsteps</dt>
 <dd><p>integer. Number of steps the progress bar will make from start to end (e.g. nrow(raster))</p></dd>
-<dt>progress</dt>
+
+  <dt>progress</dt>
 <dd><p>character. 'text', 'window', or ''</p></dd>
-<dt>style</dt>
+
+  <dt>style</dt>
 <dd><p>style for text progress bar. See <code><a href="https://rdrr.io/r/utils/txtProgressBar.html" class="external-link">txtProgressBar</a></code></p></dd>
-<dt>label</dt>
+
+  <dt>label</dt>
 <dd><p>character. Label for the window type progress bar</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments (None implemented, except for 'silent=TRUE' for readStart for files read with gdal, and other arguments passed to gdal.open)</p></dd>
-<dt>pb</dt>
+
+  <dt>pb</dt>
 <dd><p>progress bar object created with pbCreate</p></dd>
-<dt>step</dt>
+
+  <dt>step</dt>
 <dd><p>which step is this ( 1 &lt;= step &lt;= nsteps ). If step is <code>NULL</code>, a single step is taken</p></dd>
-<dt>timer</dt>
+
+  <dt>timer</dt>
 <dd><p>logical. If <code>TRUE</code>, time to completion will be printed. If missing, the value will be taken from the rasterOptions</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>canProcessInMemory: logical
-closeConnection: RasterLayer or RasterBrick object
-getCluster: snow cluster object</p>
+    
+
+<p>canProcessInMemory: logical</p>
+
+
+<p>closeConnection: RasterLayer or RasterBrick object</p>
+
+
+<p>getCluster: snow cluster object</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">100</span>, ncol<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">canProcessInMemory</span><span class="op">(</span><span class="va">r</span>, <span class="fl">4</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">100</span>, ncol<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">canProcessInMemory</span><span class="op">(</span><span class="va">r</span>, <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">50000</span>, ncol<span class="op">=</span><span class="fl">50000</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">canProcessInMemory</span><span class="op">(</span><span class="va">r</span>, <span class="fl">2</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">50000</span>, ncol<span class="op">=</span><span class="fl">50000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">canProcessInMemory</span><span class="op">(</span><span class="va">r</span>, <span class="fl">2</span>, verbose<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             GB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> available : 10.78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       60% : 6.47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> available : 10.71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       60% : 6.43</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    needed : 37.25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   allowed : 4.66  (if available)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
-<span class="r-in"><span class="fu"><a href="rasterOptions.html">rasterOptions</a></span><span class="op">(</span>maxmem<span class="op">=</span><span class="cn">Inf</span>, memfrac<span class="op">=</span><span class="fl">.8</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="rasterOptions.html">rasterOptions</a></span><span class="op">(</span>default<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="rasterOptions.html">rasterOptions</a></span><span class="op">(</span>maxmem<span class="op">=</span><span class="cn">Inf</span>, memfrac<span class="op">=</span><span class="fl">.8</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="rasterOptions.html">rasterOptions</a></span><span class="op">(</span>default<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -127,7 +144,7 @@ getCluster: snow cluster object</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ In you want the index of all the layers that have the min or max value, use whic
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -54,23 +54,29 @@ In you want the index of all the layers that have the min or max value, use whic
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">which.min</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu">which.max</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu">whiches.min</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">whiches.max</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">which.min</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">which.max</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">whiches.min</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">whiches.max</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments (none implemented)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>(which.*): vector of cell numbers (if <code>x</code> is a RasterLayer). If <code>x</code> is a RasterStack or RasterBrick, a RasterLayer giving the number of the first layer with the minimum or maximum value for a cell.
-(whiches.*). An integer in which each digit represents a layer. For example, 35 means "layers 3 and 5"</p>
+    
+
+<p>(which.*): vector of cell numbers (if <code>x</code> is a RasterLayer). If <code>x</code> is a RasterStack or RasterBrick, a RasterLayer giving the number of the first layer with the minimum or maximum value for a cell.</p>
+
+
+<p>(whiches.*). An integer in which each digit represents a layer. For example, 35 means "layers 3 and 5"</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -83,18 +89,18 @@ In you want the index of all the layers that have the min or max value, use whic
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">which.min</span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">i</span> <span class="op">&lt;-</span> <span class="fu">which.min</span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="xyFromCell.html">xyFromCell</a></span><span class="op">(</span><span class="va">b</span>, <span class="va">i</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">xy</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">which.min</span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">i</span> <span class="op">&lt;-</span> <span class="fu">which.min</span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="xyFromCell.html">xyFromCell</a></span><span class="op">(</span><span class="va">b</span>, <span class="va">i</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">xy</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="which.minmax-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">whiches.min</span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="freq.html">freq</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">whiches.min</span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="freq.html">freq</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      value count</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     1  2771</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     2   245</span>
@@ -103,7 +109,7 @@ In you want the index of all the layers that have the min or max value, use whic
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    13     1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,]    23    11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,]   123  1615</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -118,7 +124,7 @@ In you want the index of all the layers that have the min or max value, use whic
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

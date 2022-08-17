@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,29 +50,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterStackBrick,vector</span>
-<span class="fu">weighted.mean</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStackBrick,RasterStackBrick</span>
-<span class="fu">weighted.mean</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>,filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterStackBrick,vector</span></span>
+<span><span class="fu">weighted.mean</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick,RasterStackBrick</span></span>
+<span><span class="fu">weighted.mean</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span>, na.rm<span class="op">=</span><span class="cn">FALSE</span>,filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterStack or RasterBrick</p></dd>
-<dt>w</dt>
+
+
+  <dt>w</dt>
 <dd><p>A vector of weights (one number for each layer), or for spatially variable weights, a RasterStack or RasterBrick with weights (should have the same extent, resolution and number of layers as x)</p></dd>
-<dt>na.rm</dt>
+
+
+  <dt>na.rm</dt>
 <dd><p>Logical. Should missing values be removed?</p></dd>
-<dt>filename</dt>
+
+
+  <dt>filename</dt>
 <dd><p>Character. Output filename (optional)</p></dd>
-<dt>...</dt>
+
+  
+  <dt>...</dt>
 <dd><p>Additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer</p>
+    
+
+<p>RasterLayer</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -81,20 +92,20 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># give least weight to first layer, most to last layer</span></span>
-<span class="r-in"><span class="va">wm1</span> <span class="op">&lt;-</span> <span class="fu">weighted.mean</span><span class="op">(</span><span class="va">b</span>, w<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># spatially varying weights</span></span>
-<span class="r-in"><span class="co"># weigh by column number</span></span>
-<span class="r-in"><span class="va">w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">b</span>, v<span class="op">=</span><span class="st">'col'</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># weigh by row number</span></span>
-<span class="r-in"><span class="va">w2</span> <span class="op">&lt;-</span> <span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">b</span>, v<span class="op">=</span><span class="st">'row'</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">w1</span>, <span class="va">w2</span>, <span class="va">w2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">wm2</span> <span class="op">&lt;-</span> <span class="fu">weighted.mean</span><span class="op">(</span><span class="va">b</span>, w<span class="op">=</span><span class="va">w</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># give least weight to first layer, most to last layer</span></span></span>
+<span class="r-in"><span><span class="va">wm1</span> <span class="op">&lt;-</span> <span class="fu">weighted.mean</span><span class="op">(</span><span class="va">b</span>, w<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># spatially varying weights</span></span></span>
+<span class="r-in"><span><span class="co"># weigh by column number</span></span></span>
+<span class="r-in"><span><span class="va">w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">b</span>, v<span class="op">=</span><span class="st">'col'</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># weigh by row number</span></span></span>
+<span class="r-in"><span><span class="va">w2</span> <span class="op">&lt;-</span> <span class="fu"><a href="init.html">init</a></span><span class="op">(</span><span class="va">b</span>, v<span class="op">=</span><span class="st">'row'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">w1</span>, <span class="va">w2</span>, <span class="va">w2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">wm2</span> <span class="op">&lt;-</span> <span class="fu">weighted.mean</span><span class="op">(</span><span class="va">b</span>, w<span class="op">=</span><span class="va">w</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -109,7 +120,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

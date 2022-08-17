@@ -20,7 +20,7 @@ The methods for Spatial* objects allow for easy creation of a data.frame with th
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -56,51 +56,62 @@ The methods for Spatial* objects allow for easy creation of a data.frame with th
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">as.data.frame</span><span class="op">(</span><span class="va">x</span>, row.names<span class="op">=</span><span class="cn">NULL</span>, optional<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, 
-              na.rm<span class="op">=</span><span class="cn">FALSE</span>, long<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPolygons</span>
-<span class="fu">as.data.frame</span><span class="op">(</span><span class="va">x</span>, row.names<span class="op">=</span><span class="cn">NULL</span>, optional<span class="op">=</span><span class="cn">FALSE</span>,
-              xy<span class="op">=</span><span class="cn">FALSE</span>, centroids<span class="op">=</span><span class="cn">TRUE</span>, sepNA<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialLines</span>
-<span class="fu">as.data.frame</span><span class="op">(</span><span class="va">x</span>, row.names<span class="op">=</span><span class="cn">NULL</span>, optional<span class="op">=</span><span class="cn">FALSE</span>, 
-              xy<span class="op">=</span><span class="cn">FALSE</span>, sepNA<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">x</span>, row.names<span class="op">=</span><span class="cn">NULL</span>, optional<span class="op">=</span><span class="cn">FALSE</span>, xy<span class="op">=</span><span class="cn">FALSE</span>, </span>
+<span>              na.rm<span class="op">=</span><span class="cn">FALSE</span>, long<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPolygons</span></span>
+<span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">x</span>, row.names<span class="op">=</span><span class="cn">NULL</span>, optional<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>              xy<span class="op">=</span><span class="cn">FALSE</span>, centroids<span class="op">=</span><span class="cn">TRUE</span>, sepNA<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialLines</span></span>
+<span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">x</span>, row.names<span class="op">=</span><span class="cn">NULL</span>, optional<span class="op">=</span><span class="cn">FALSE</span>, </span>
+<span>              xy<span class="op">=</span><span class="cn">FALSE</span>, sepNA<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>row.names</dt>
+
+ <dt>row.names</dt>
 <dd><p><code>NULL</code> or a character vector giving the row names for the data frame. Missing values are not allowed</p></dd>
-<dt>optional</dt>
+ 
+ <dt>optional</dt>
 <dd><p>logical. If <code>TRUE</code>, setting row names and converting column names (to syntactic names: see make.names) is optional</p></dd>
-<dt>xy</dt>
+
+ <dt>xy</dt>
 <dd><p>logical. If <code>TRUE</code>, also return the spatial coordinates</p></dd>
-<dt>na.rm</dt>
+
+ <dt>na.rm</dt>
 <dd><p>logical. If <code>TRUE</code>, remove rows with NA values. This can be particularly useful for very large datasets with many NA values</p></dd>
-<dt>long</dt>
+
+ <dt>long</dt>
 <dd><p>logical. If <code>TRUE</code>, values are <code><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a>d</code> from a wide to a long format</p></dd>
-<dt>centroids</dt>
+
+ <dt>centroids</dt>
 <dd><p>logical. If <code>TRUE</code> return the centroids instead of all spatial coordinates (only relevant if <code>xy=TRUE</code>)</p></dd>
-<dt>sepNA</dt>
+
+ <dt>sepNA</dt>
 <dd><p>logical. If <code>TRUE</code> the parts of the spatial objects are separated by lines that are <code>NA</code> (only if <code>xy=TRUE</code> and, for polygons, if <code>centroids=FALSE</code></p></dd>
-<dt>...</dt>
+
+ <dt>...</dt>
 <dd><p>Additional arguments (none)</p></dd>
+ 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>data.frame</p>
+    
+
+<p>data.frame</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">3</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
-<span class="r-in"><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">3</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-in"><span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      layer</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.414214</span>
@@ -111,8 +122,8 @@ The methods for Spatial* objects allow for easy creation of a data.frame with th
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7 2.645751</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8 2.828427</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9 3.000000</span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    layer.1  layer.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.000000 2.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.414214 2.828427</span>
@@ -123,7 +134,7 @@ The methods for Spatial* objects allow for easy creation of a data.frame with th
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7 2.645751 5.291503</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8 2.828427 5.656854</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9 3.000000 6.000000</span>
-<span class="r-in"><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">s</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">s</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    layer.1  layer.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.000000 2.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.414214 2.828427</span>
@@ -145,7 +156,7 @@ The methods for Spatial* objects allow for easy creation of a data.frame with th
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

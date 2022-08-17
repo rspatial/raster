@@ -21,7 +21,7 @@ Aggregate a SpatialPolygon* object, optionally by combining polygons that have t
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -58,37 +58,50 @@ Aggregation groups rectangular areas to create larger cells. The value for the r
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">aggregate</span><span class="op">(</span><span class="va">x</span>, <span class="va">fact</span>, fun<span class="op">=</span><span class="va">mean</span>, expand<span class="op">=</span><span class="cn">TRUE</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPolygons</span>
-<span class="fu">aggregate</span><span class="op">(</span><span class="va">x</span>, <span class="va">by</span>, <span class="va">sums</span>, dissolve<span class="op">=</span><span class="cn">TRUE</span>, vars<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">aggregate</span><span class="op">(</span><span class="va">x</span>, <span class="va">fact</span>, fun<span class="op">=</span><span class="va">mean</span>, expand<span class="op">=</span><span class="cn">TRUE</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPolygons</span></span>
+<span><span class="fu">aggregate</span><span class="op">(</span><span class="va">x</span>, <span class="va">by</span>, <span class="va">sums</span>, dissolve<span class="op">=</span><span class="cn">TRUE</span>, vars<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object or SpatialPolygons* object</p></dd>
-<dt>fact</dt>
+
+  <dt>fact</dt>
 <dd><p>postive integer. Aggregation factor expressed as number of cells in each direction (horizontally and vertically). Or two integers (horizontal and vertical aggregation factor) or three integers (when also aggregating over layers). See Details</p></dd>
-<dt>fun</dt>
+  
+  <dt>fun</dt>
 <dd><p>function used to aggregate values</p></dd>
-<dt>expand</dt>
+  
+  <dt>expand</dt>
 <dd><p>logical. If <code>TRUE</code> the output Raster* object will be larger than the input Raster* object if a division of the number of columns or rows with <code>factor</code> is not an integer</p></dd>
-<dt>na.rm</dt>
+
+  <dt>na.rm</dt>
 <dd><p>logical. If <code>TRUE</code>, NA cells are removed from calculations</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Output filename (optional)</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>if <code>x</code> is a Raster* object, additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
-<dt>by</dt>
+
+  
+  <dt>by</dt>
 <dd><p>character or integer. The variables (column names or numbers) that should be used to aggregate (dissolve) the SpatialPolygons by only maintaining unique combinations of these variables. The default setting is to use no variables and aggregate all polygons. You can also supply a vector with a length of length(x)</p></dd>
-<dt>sums</dt>
+
+
+  <dt>sums</dt>
 <dd><p>list with function(s) and variable(s) to summarize. This should be a list of lists in which each element of the main lists has two items. The first item is function (e.g. mean), the second element is a vector of column names (or indices) that need to summarize with that function. Be careful with character and factor variables (you can use, e.g. 'first' <code>function(x)x[1]</code> or 'last' <code>function(x)x[length(x)]</code> or <code>modal</code> for these variables</p></dd>
-<dt>vars</dt>
+
+  <dt>vars</dt>
 <dd><p>deprecated. Same as <code>by</code></p></dd>
-<dt>dissolve</dt>
-<dd><p>logical. If <code>TRUE</code> borders between touching or overlapping polygons are removed (requires package rgeos)</p></dd>
+  
+  <dt>dissolve</dt>
+<dd><p>logical. If <code>TRUE</code> borders between touching or overlapping polygons are removed</p></dd>
+  
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -99,7 +112,9 @@ It should also accept a <code>na.rm</code> argument (or ignore it as one of the 
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer or RasterBrick, or a SpatialPolygons* object</p>
+    
+
+<p>RasterLayer or RasterBrick, or a SpatialPolygons* object</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -112,37 +127,46 @@ It should also accept a <code>na.rm</code> argument (or ignore it as one of the 
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># a new aggregated raster, no values</span></span>
-<span class="r-in"><span class="va">ra</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">r</span>, fact<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># a new aggregated raster, max of the values</span></span>
-<span class="r-in"><span class="va">ra</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">r</span>, fact<span class="op">=</span><span class="fl">10</span>, fun<span class="op">=</span><span class="va">max</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># multiple layers</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">s</span>,<span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#SpatialPolygons</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://rgdal.r-forge.r-project.org" class="external-link">rgdal</a></span><span class="op">)</span> <span class="op">&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/rgeos/" class="external-link">rgeos</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.shp"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">p</span></span>
-<span class="r-in">  <span class="va">pa0</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">pa0</span></span>
-<span class="r-in">  <span class="va">pa1</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">p</span>, by<span class="op">=</span><span class="st">'NAME_1'</span>, sums<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mean</span>, <span class="st">'ID_2'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">pa1</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rgdal</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>there is no package called ‘rgdal’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rgeos</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> rgeos version: 0.5-9, (SVN revision 684)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  GEOS runtime version: 3.10.2-CAPI-1.16.0 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  Please note that rgeos will be retired by the end of 2023,</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> plan transition to sf functions using GEOS at your earliest convenience.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  GEOS using OverlayNG</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  Linking to sp version: 1.4-7 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  Polygon checking: TRUE </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># a new aggregated raster, no values</span></span></span>
+<span class="r-in"><span><span class="va">ra</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">r</span>, fact<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># a new aggregated raster, max of the values</span></span></span>
+<span class="r-in"><span><span class="va">ra</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">r</span>, fact<span class="op">=</span><span class="fl">10</span>, fun<span class="op">=</span><span class="va">max</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># multiple layers</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">s</span>,<span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#SpatialPolygons</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/lux.shp"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatialPolygonsDataFrame </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> features    : 12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs         : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> variables   : 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names       : ID_1,     NAME_1, ID_2,   NAME_2, AREA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values  :    1,   Diekirch,    1, Capellen,   76 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values  :    3, Luxembourg,   12,    Wiltz,  312 </span>
+<span class="r-in"><span><span class="va">pa0</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pa0</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatialPolygons </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> features    : 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs         : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class="r-in"><span><span class="va">pa1</span> <span class="op">&lt;-</span> <span class="fu">aggregate</span><span class="op">(</span><span class="va">p</span>, by<span class="op">=</span><span class="st">'NAME_1'</span>, sums<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">mean</span>, <span class="st">'ID_2'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pa1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatialPolygonsDataFrame </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> features    : 3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : 5.74414, 6.528252, 49.44781, 50.18162  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs         : +proj=longlat +datum=WGS84 +no_defs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> variables   : 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names       :     NAME_1, ID_2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values  :   Diekirch,    3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values  : Luxembourg,  9.5 </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -157,7 +181,7 @@ It should also accept a <code>na.rm</code> argument (or ignore it as one of the 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

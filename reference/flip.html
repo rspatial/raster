@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,27 +50,33 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">flip</span><span class="op">(</span><span class="va">x</span>, direction<span class="op">=</span><span class="st">'y'</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStackBrick</span>
-<span class="fu">flip</span><span class="op">(</span><span class="va">x</span>, direction<span class="op">=</span><span class="st">'y'</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">flip</span><span class="op">(</span><span class="va">x</span>, direction<span class="op">=</span><span class="st">'y'</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick</span></span>
+<span><span class="fu">flip</span><span class="op">(</span><span class="va">x</span>, direction<span class="op">=</span><span class="st">'y'</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>direction</dt>
+
+  <dt>direction</dt>
 <dd><p>Character. 'y' or 'x'; or 1 (=x) or 2 (=y)</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Output filename (optional)</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>if <code>x</code> is a Raster* object, additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterLayer or RasterBrick</p>
+    
+
+<p>RasterLayer or RasterBrick</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -79,12 +85,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">18</span>, ncol<span class="op">=</span><span class="fl">36</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.matrix.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="transpose.html">t</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu">flip</span><span class="op">(</span><span class="va">r</span>, direction<span class="op">=</span><span class="st">'x'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.matrix.html">as.vector</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ry</span> <span class="op">&lt;-</span> <span class="fu">flip</span><span class="op">(</span><span class="va">r</span>, direction<span class="op">=</span><span class="st">'y'</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">18</span>, ncol<span class="op">=</span><span class="fl">36</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.matrix.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="transpose.html">t</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu">flip</span><span class="op">(</span><span class="va">r</span>, direction<span class="op">=</span><span class="st">'x'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.matrix.html">as.vector</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ry</span> <span class="op">&lt;-</span> <span class="fu">flip</span><span class="op">(</span><span class="va">r</span>, direction<span class="op">=</span><span class="st">'y'</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -99,7 +105,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

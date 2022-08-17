@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,37 +50,46 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">zoom</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> 
-<span class="co"># S4 method for Raster</span>
-<span class="fu">zoom</span><span class="op">(</span><span class="va">x</span>, ext<span class="op">=</span><span class="fu"><a href="drawExtent.html">drawExtent</a></span><span class="op">(</span><span class="op">)</span>, maxpixels<span class="op">=</span><span class="fl">100000</span>, layer<span class="op">=</span><span class="fl">1</span>, new<span class="op">=</span><span class="cn">TRUE</span>, useRaster<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for Spatial</span>
-<span class="fu">zoom</span><span class="op">(</span><span class="va">x</span>, ext<span class="op">=</span><span class="fu"><a href="drawExtent.html">drawExtent</a></span><span class="op">(</span><span class="op">)</span>, new<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for missing</span>
-<span class="fu">zoom</span><span class="op">(</span><span class="va">x</span>, ext<span class="op">=</span><span class="fu"><a href="drawExtent.html">drawExtent</a></span><span class="op">(</span><span class="op">)</span>, new<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">zoom</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> </span>
+<span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">zoom</span><span class="op">(</span><span class="va">x</span>, ext<span class="op">=</span><span class="fu"><a href="drawExtent.html">drawExtent</a></span><span class="op">(</span><span class="op">)</span>, maxpixels<span class="op">=</span><span class="fl">100000</span>, layer<span class="op">=</span><span class="fl">1</span>, new<span class="op">=</span><span class="cn">TRUE</span>, useRaster<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Spatial</span></span>
+<span><span class="fu">zoom</span><span class="op">(</span><span class="va">x</span>, ext<span class="op">=</span><span class="fu"><a href="drawExtent.html">drawExtent</a></span><span class="op">(</span><span class="op">)</span>, new<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for missing</span></span>
+<span><span class="fu">zoom</span><span class="op">(</span><span class="va">x</span>, ext<span class="op">=</span><span class="fu"><a href="drawExtent.html">drawExtent</a></span><span class="op">(</span><span class="op">)</span>, new<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* or Spatial* (vector type) object</p></dd>
+
 <dt>ext</dt>
 <dd><p>Extent object, or other object from which an extent can be extracted</p></dd>
+
 <dt>maxpixels</dt>
 <dd><p>Maximum number of pixels used for the map</p></dd>
+
 <dt>layer</dt>
 <dd><p>Positive integer to select the layer to be used if x is a mutilayer Raster object</p></dd>
+
 <dt>new</dt>
 <dd><p>Logical. If <code>TRUE</code>, the zoomed in map will appear on a new device (window)</p></dd>
+
 <dt>useRaster</dt>
 <dd><p>Logical. If <code>TRUE</code>, a bitmap raster is used to plot the image instead of polygons</p></dd>
+
 <dt>...</dt>
 <dd><p>additional paramters for base plot</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Extent object (invisibly)</p>
+    
+
+<p>Extent object (invisibly)</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -99,7 +108,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

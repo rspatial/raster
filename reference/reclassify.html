@@ -18,7 +18,7 @@ Reclassification is done with matrix rcl, in the row order of the reclassify tab
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,30 +52,43 @@ Reclassification is done with matrix rcl, in the row order of the reclassify tab
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">reclassify</span><span class="op">(</span><span class="va">x</span>, <span class="va">rcl</span>, filename<span class="op">=</span><span class="st">''</span>, include.lowest<span class="op">=</span><span class="cn">FALSE</span>, right<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">reclassify</span><span class="op">(</span><span class="va">x</span>, <span class="va">rcl</span>, filename<span class="op">=</span><span class="st">''</span>, include.lowest<span class="op">=</span><span class="cn">FALSE</span>, right<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>rcl</dt>
+
+  
+  <dt>rcl</dt>
 <dd><p>matrix for reclassification. This matrix can have 3 or 2 columns.</p>  
 <p>In a <code>3-column matrix</code> the first two columns are "from" - "to" for the input values, and the third column "becomes" has the new value for that range. (You can also supply a vector that can be coerced into a n*3 matrix (with <code>byrow=TRUE</code>)).</p>  
 <p>A <code>2-column matrix</code> represents ("is", "becomes") which can be useful for integer values. In that case, the <code>right</code> argument is automatically set to <code>NA</code></p></dd>
-<dt>filename</dt>
+
+
+ <dt>filename</dt>
 <dd><p>character. Output filename (optional)</p></dd>
-<dt>include.lowest</dt>
+
+  
+ <dt>include.lowest</dt>
 <dd><p>logical, indicating if a value equal to the lowest value in rcl (or highest value in the second column, for right = FALSE) should be included. The default is <code>FALSE</code></p></dd>
-<dt>right</dt>
+
+ 
+ <dt>right</dt>
 <dd><p>logical, indicating if the intervals should be closed on the right (and open on the left) or vice versa. The default is <code>TRUE</code>. A special case is to use right=NA. In this case both the left and right intervals are open</p></dd>
-<dt>...</dt>
+
+
+ <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+  
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Raster* object</p>
+    
+
+<p>Raster* object</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -84,20 +97,20 @@ Reclassification is done with matrix rcl, in the row order of the reclassify tab
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">36</span>, nrows<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> </span>
-<span class="r-in"><span class="co"># reclassify the values into three groups </span></span>
-<span class="r-in"><span class="co"># all values &gt; 0 and &lt;= 0.25 become 1, etc.</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">1</span>,  <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">2</span>,  <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">rclmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">m</span>, ncol<span class="op">=</span><span class="fl">3</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu">reclassify</span><span class="op">(</span><span class="va">r</span>, <span class="va">rclmat</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># for values &gt;= 0 (instead of &gt; 0), do</span></span>
-<span class="r-in"><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu">reclassify</span><span class="op">(</span><span class="va">r</span>, <span class="va">rclmat</span>, include.lowest<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># equivalent to</span></span>
-<span class="r-in"><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu">reclassify</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,<span class="fl">0.25</span>,<span class="fl">1</span>, <span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">2</span>, <span class="fl">0.5</span>,<span class="cn">Inf</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncols<span class="op">=</span><span class="fl">36</span>, nrows<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="co"># reclassify the values into three groups </span></span></span>
+<span class="r-in"><span><span class="co"># all values &gt; 0 and &lt;= 0.25 become 1, etc.</span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.25</span>, <span class="fl">1</span>,  <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">2</span>,  <span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rclmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">m</span>, ncol<span class="op">=</span><span class="fl">3</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu">reclassify</span><span class="op">(</span><span class="va">r</span>, <span class="va">rclmat</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># for values &gt;= 0 (instead of &gt; 0), do</span></span></span>
+<span class="r-in"><span><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu">reclassify</span><span class="op">(</span><span class="va">r</span>, <span class="va">rclmat</span>, include.lowest<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># equivalent to</span></span></span>
+<span class="r-in"><span><span class="va">rc</span> <span class="op">&lt;-</span> <span class="fu">reclassify</span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,<span class="fl">0.25</span>,<span class="fl">1</span>, <span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">2</span>, <span class="fl">0.5</span>,<span class="cn">Inf</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -112,7 +125,7 @@ Reclassification is done with matrix rcl, in the row order of the reclassify tab
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

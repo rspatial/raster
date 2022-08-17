@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,25 +50,30 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">persp</span><span class="op">(</span><span class="va">x</span>,  maxpixels<span class="op">=</span><span class="fl">1e+05</span>, ext<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStackBrick</span>
-<span class="fu">persp</span><span class="op">(</span><span class="va">x</span>, y<span class="op">=</span><span class="fl">1</span>, maxpixels<span class="op">=</span><span class="fl">10000</span>, ext<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">persp</span><span class="op">(</span><span class="va">x</span>,  maxpixels<span class="op">=</span><span class="fl">1e+05</span>, ext<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick</span></span>
+<span><span class="fu">persp</span><span class="op">(</span><span class="va">x</span>, y<span class="op">=</span><span class="fl">1</span>, maxpixels<span class="op">=</span><span class="fl">10000</span>, ext<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>y</dt>
+
+  <dt>y</dt>
 <dd><p>integer <code>&gt; 0 &amp; &lt;= nlayers(x)</code> to select the layer of <code>x</code> if <code>x</code> is a RasterLayer or RasterBrick</p></dd>
-<dt>maxpixels</dt>
+
+  <dt>maxpixels</dt>
 <dd><p>integer &gt; 0. Maximum number of cells to use for the plot. If <code>maxpixels &lt; ncell(x)</code>, <code>sampleRegular</code> is used before plotting</p></dd>
-<dt>ext</dt>
+
+  <dt>ext</dt>
 <dd><p>Extent. Can be used to zoom in to a region (see also <code><a href="zoom.html">zoom</a></code> and <code><a href="crop.html">crop</a>(x, <a href="drawExtent.html">drawExtent</a>())</code></p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Any argument that can be passed to <code><a href="https://rdrr.io/r/graphics/persp.html" class="external-link">persp</a></code> (graphics package)</p></dd>
+  
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -77,8 +82,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">persp</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">persp</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="persp-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -94,7 +99,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

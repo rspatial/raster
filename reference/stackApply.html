@@ -20,7 +20,7 @@ See calc if you want to use a more efficient function that returns multiple laye
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -56,27 +56,36 @@ For example, if you have a RasterStack with 6 layers, you can use <code>indices=
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">stackApply</span><span class="op">(</span><span class="va">x</span>, <span class="va">indices</span>, <span class="va">fun</span>, filename<span class="op">=</span><span class="st">''</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">stackApply</span><span class="op">(</span><span class="va">x</span>, <span class="va">indices</span>, <span class="va">fun</span>, filename<span class="op">=</span><span class="st">''</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>indices</dt>
+
+  <dt>indices</dt>
 <dd><p>integer. Vector of length <code>nlayers(x)</code> (shorter vectors are recycled) containing all integer values between 1 and the number of layers of the output Raster*</p></dd>
-<dt>fun</dt>
+
+  <dt>fun</dt>
 <dd><p>function that returns a single value, e.g. <code>mean</code> or <code>min</code>, and that takes a <code>na.rm</code> argument (or can pass through arguments via <code>...</code>)</p></dd>
-<dt>na.rm</dt>
+
+  <dt>na.rm</dt>
 <dd><p>logical. If <code>TRUE</code>, <code>NA</code> cells are removed from calculations</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Optional output filename</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+  
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A new Raster* object, and in some cases the side effect of a new file on disk.</p>
+    
+
+<p>A new Raster* object, and in some cases the side effect of a new file on disk.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -85,29 +94,29 @@ For example, if you have a RasterStack with 6 layers, you can use <code>indices=
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="va">r</span>,<span class="va">r</span>,<span class="va">r</span>,<span class="va">r</span>,<span class="va">r</span>,<span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="va">s</span> <span class="op">*</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span></span>
-<span class="r-in"><span class="va">b1</span> <span class="op">&lt;-</span> <span class="fu">stackApply</span><span class="op">(</span><span class="va">s</span>, indices<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, fun<span class="op">=</span><span class="va">sum</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b1</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="va">r</span>,<span class="va">r</span>,<span class="va">r</span>,<span class="va">r</span>,<span class="va">r</span>,<span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="va">s</span> <span class="op">*</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span></span></span>
+<span class="r-in"><span><span class="va">b1</span> <span class="op">&lt;-</span> <span class="fu">stackApply</span><span class="op">(</span><span class="va">s</span>, indices<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, fun<span class="op">=</span><span class="va">sum</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterBrick </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 10, 10, 100, 2  (nrow, ncol, ncell, nlayers)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 36, 18  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : index_1, index_2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min values :       6,      15 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max values :     600,    1500 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="va">b2</span> <span class="op">&lt;-</span> <span class="fu">stackApply</span><span class="op">(</span><span class="va">s</span>, indices<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, fun<span class="op">=</span><span class="va">sum</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b2</span></span>
+<span class="r-in"><span><span class="va">b2</span> <span class="op">&lt;-</span> <span class="fu">stackApply</span><span class="op">(</span><span class="va">s</span>, indices<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, fun<span class="op">=</span><span class="va">sum</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterBrick </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 10, 10, 100, 3  (nrow, ncol, ncell, nlayers)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 36, 18  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : index_1, index_2, index_3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min values :       5,       7,       9 </span>
@@ -127,7 +136,7 @@ For example, if you have a RasterStack with 6 layers, you can use <code>indices=
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

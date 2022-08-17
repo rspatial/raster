@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,31 +50,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for BasicRaster</span>
-<span class="fu">adjacent</span><span class="op">(</span><span class="va">x</span>, <span class="va">cells</span>, directions<span class="op">=</span><span class="fl">4</span>, pairs<span class="op">=</span><span class="cn">TRUE</span>, target<span class="op">=</span><span class="cn">NULL</span>, sorted<span class="op">=</span><span class="cn">FALSE</span>, 
-         include<span class="op">=</span><span class="cn">FALSE</span>, id<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for BasicRaster</span></span>
+<span><span class="fu">adjacent</span><span class="op">(</span><span class="va">x</span>, <span class="va">cells</span>, directions<span class="op">=</span><span class="fl">4</span>, pairs<span class="op">=</span><span class="cn">TRUE</span>, target<span class="op">=</span><span class="cn">NULL</span>, sorted<span class="op">=</span><span class="cn">FALSE</span>, </span>
+<span>         include<span class="op">=</span><span class="cn">FALSE</span>, id<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>cells</dt>
+
+  <dt>cells</dt>
 <dd><p>vector of cell numbers for which adjacent cells should be found. Cell numbers start with 1 in the upper-left corner and increase from left to right and from top to bottom</p></dd>
-<dt>directions</dt>
+
+  <dt>directions</dt>
 <dd><p>the number of directions in which cells should be connected: 4 (rook's case), 8 (queen's case), 16 (knight and one-cell queen moves), or 'bishop' to connect cells with one-cell diagonal moves. Or a neighborhood matrix (see Details)</p></dd>
-<dt>pairs</dt>
+
+  <dt>pairs</dt>
 <dd><p>logical. If <code>TRUE</code>, a matrix of pairs of adjacent cells is returned. If <code>FALSE</code>, a vector of cells adjacent to <code>cells</code> is returned</p></dd>
-<dt>target</dt>
+
+  <dt>target</dt>
 <dd><p>optional vector of target cell numbers that should be considered. All other adjacent cells are ignored</p></dd>
-<dt>sorted</dt>
+
+  <dt>sorted</dt>
 <dd><p>logical. Should the results be sorted?</p></dd>
-<dt>include</dt>
+
+  <dt>include</dt>
 <dd><p>logical. Should the focal cells be included in the result?</p></dd>
-<dt>id</dt>
+
+  <dt>id</dt>
 <dd><p>logical. Should the id of the cells be included in the result? (numbered from 1 to length(cells)</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments. None implemented</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -82,7 +91,9 @@
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>matrix or vector with adjacent cells.</p>
+    
+
+<p>matrix or vector with adjacent cells.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -91,8 +102,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">10</span>, ncols<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">adjacent</span><span class="op">(</span><span class="va">r</span>, cells<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">55</span><span class="op">)</span>, directions<span class="op">=</span><span class="fl">8</span>, pairs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">10</span>, ncols<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">adjacent</span><span class="op">(</span><span class="va">r</span>, cells<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">55</span><span class="op">)</span>, directions<span class="op">=</span><span class="fl">8</span>, pairs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       from to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]   55 44</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    1 10</span>
@@ -107,9 +118,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11,]   55 45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    1 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13,]   55 65</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">adjacent</span><span class="op">(</span><span class="va">r</span>, cell <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">55</span>,<span class="fl">90</span><span class="op">)</span>, directions<span class="op">=</span><span class="fl">4</span>, sorted<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span>
-<span class="r-in"><span class="va">a</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">adjacent</span><span class="op">(</span><span class="va">r</span>, cell <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">55</span>,<span class="fl">90</span><span class="op">)</span>, directions<span class="op">=</span><span class="fl">4</span>, sorted<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="va">a</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       from  to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]    1   2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    1  10</span>
@@ -122,18 +133,18 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]   90  81</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10,]   90  89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11,]   90 100</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">55</span>,<span class="fl">90</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="va">a</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">55</span>,<span class="fl">90</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="va">a</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="adjacent-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># same result as above</span></span>
-<span class="r-in"><span class="va">rook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="cn">NA</span>, </span>
-<span class="r-in">                  <span class="fl">1</span>, <span class="fl">0</span>,  <span class="fl">1</span>, </span>
-<span class="r-in">                 <span class="cn">NA</span>, <span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">3</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">adjacent</span><span class="op">(</span><span class="va">r</span>, cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">55</span>,<span class="fl">90</span><span class="op">)</span>, directions<span class="op">=</span><span class="va">rook</span>, sorted<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># same result as above</span></span></span>
+<span class="r-in"><span><span class="va">rook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="cn">NA</span>, </span></span>
+<span class="r-in"><span>                  <span class="fl">1</span>, <span class="fl">0</span>,  <span class="fl">1</span>, </span></span>
+<span class="r-in"><span>                 <span class="cn">NA</span>, <span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">3</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">adjacent</span><span class="op">(</span><span class="va">r</span>, cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">55</span>,<span class="fl">90</span><span class="op">)</span>, directions<span class="op">=</span><span class="va">rook</span>, sorted<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       from  to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]    1   2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    1  10</span>
@@ -146,16 +157,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]   90  81</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10,]   90  89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11,]   90 100</span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Count the number of times that a cell with a certain value</span></span>
-<span class="r-in"><span class="co"># occurs next to a cell with a certain value</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">adjacent</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>, <span class="fl">4</span>, pairs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="va">a</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">r</span><span class="op">[</span><span class="va">a</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">tb</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Count the number of times that a cell with a certain value</span></span></span>
+<span class="r-in"><span><span class="co"># occurs next to a cell with a certain value</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">10</span>, nrow<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">adjacent</span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>, <span class="fl">4</span>, pairs<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">r</span><span class="op">[</span><span class="va">a</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">r</span><span class="op">[</span><span class="va">a</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tb</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      0  1  2  3  4  5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0  2  4  7  4 10  0</span>
@@ -164,9 +175,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   3  4  7 15 14 13  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   4 10 19 35 13 20  5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   5  0  6  8  3  5  0</span>
-<span class="r-in"><span class="co"># make a matrix out of the 'table' object</span></span>
-<span class="r-in"><span class="va">tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">tb</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">tb</span>, xmn<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span>, xmx<span class="op">=</span><span class="fl">5.5</span>, ymn<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span>, ymx<span class="op">=</span><span class="fl">5.5</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># make a matrix out of the 'table' object</span></span></span>
+<span class="r-in"><span><span class="va">tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">tb</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">tb</span>, xmn<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span>, xmx<span class="op">=</span><span class="fl">5.5</span>, ymn<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span>, ymx<span class="op">=</span><span class="fl">5.5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="adjacent-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -182,7 +193,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

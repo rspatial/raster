@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,38 +50,48 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">x</span>, row<span class="op">=</span><span class="fl">1</span>, nrows<span class="op">=</span><span class="fl">1</span>, col<span class="op">=</span><span class="fl">1</span>, ncols<span class="op">=</span><span class="op">(</span><span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="va">col</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>, format<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterBrick</span>
-<span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">x</span>, row<span class="op">=</span><span class="fl">1</span>, nrows<span class="op">=</span><span class="fl">1</span>, col<span class="op">=</span><span class="fl">1</span>, ncols<span class="op">=</span><span class="op">(</span><span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="va">col</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>, <span class="va">lyrs</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStack</span>
-<span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">x</span>, row<span class="op">=</span><span class="fl">1</span>, nrows<span class="op">=</span><span class="fl">1</span>, col<span class="op">=</span><span class="fl">1</span>, ncols<span class="op">=</span><span class="op">(</span><span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="va">col</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>, <span class="va">lyrs</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">x</span>, row<span class="op">=</span><span class="fl">1</span>, nrows<span class="op">=</span><span class="fl">1</span>, col<span class="op">=</span><span class="fl">1</span>, ncols<span class="op">=</span><span class="op">(</span><span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="va">col</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>, format<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterBrick</span></span>
+<span><span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">x</span>, row<span class="op">=</span><span class="fl">1</span>, nrows<span class="op">=</span><span class="fl">1</span>, col<span class="op">=</span><span class="fl">1</span>, ncols<span class="op">=</span><span class="op">(</span><span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="va">col</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>, <span class="va">lyrs</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStack</span></span>
+<span><span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">x</span>, row<span class="op">=</span><span class="fl">1</span>, nrows<span class="op">=</span><span class="fl">1</span>, col<span class="op">=</span><span class="fl">1</span>, ncols<span class="op">=</span><span class="op">(</span><span class="fu"><a href="ncell.html">ncol</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="va">col</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>, <span class="va">lyrs</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>row</dt>
+
+ <dt>row</dt>
 <dd><p>positive integer. Row number to start from, should be between 1 and nrow(x)</p></dd>
-<dt>nrows</dt>
+
+ <dt>nrows</dt>
 <dd><p>positive integer. How many rows? Default is 1</p></dd>
-<dt>col</dt>
+
+ <dt>col</dt>
 <dd><p>positive integer. Column number to start from, should be between 1 and ncol(x)</p></dd>
-<dt>ncols</dt>
+
+ <dt>ncols</dt>
 <dd><p>positive integer. How many columns? Default is the number of columns left after the start column</p></dd>
-<dt>format</dt>
+
+ <dt>format</dt>
 <dd><p>character. When <code>x</code> is a <code>RasterLayer</code>, if <code>format='matrix'</code> or <code>format='m'</code>, a matrix is returned instead of a vector. If <code>format='matrix'</code>, it is a nrow x ncol matrix. If <code>format='m'</code> it is a 1 column matrix (the benefit is that the type of output is now the same for all Raster objects)</p></dd>
-<dt>lyrs</dt>
+
+ <dt>lyrs</dt>
 <dd><p>integer (vector). Which layers? Default is all layers (<code>1:nlayers(x)</code>)</p></dd>
-<dt>...</dt>
+
+ <dt>...</dt>
 <dd><p>additional arguments (none implemented)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>matrix or vector (if <code>(x=RasterLayer)</code>, unless <code>format='matrix'</code>)</p>
+    
+
+<p>matrix or vector (if <code>(x=RasterLayer)</code>, unless <code>format='matrix'</code>)</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -90,20 +100,20 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">r</span>, row<span class="op">=</span><span class="fl">100</span>, nrows<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="fl">10</span>, ncols<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">r</span>, row<span class="op">=</span><span class="fl">100</span>, nrows<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="fl">10</span>, ncols<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 415.3237 402.8039 386.8084 363.9359 330.1638 421.1981 406.2414 385.8557</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 355.2898 306.0941 431.7786 414.9258 392.2016 360.3550 314.3130</span>
-<span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">b</span>, nrow<span class="op">=</span><span class="fl">3</span>, ncol<span class="op">=</span><span class="fl">5</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">b</span>, nrow<span class="op">=</span><span class="fl">3</span>, ncol<span class="op">=</span><span class="fl">5</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          [,1]     [,2]     [,3]     [,4]     [,5]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 415.3237 402.8039 386.8084 363.9359 330.1638</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 421.1981 406.2414 385.8557 355.2898 306.0941</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 431.7786 414.9258 392.2016 360.3550 314.3130</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">logo</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">logo</span>, row<span class="op">=</span><span class="fl">35</span>, nrows<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="fl">50</span>, ncols<span class="op">=</span><span class="fl">3</span>, lyrs<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">logo</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">getValuesBlock</span><span class="op">(</span><span class="va">logo</span>, row<span class="op">=</span><span class="fl">35</span>, nrows<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="fl">50</span>, ncols<span class="op">=</span><span class="fl">3</span>, lyrs<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       green blue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]   168  220</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]   176  231</span>
@@ -128,7 +138,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

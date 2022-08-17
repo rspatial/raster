@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,47 +50,51 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>...</dt>
+
+ <dt>...</dt>
 <dd><p>additional Raster* objects</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list</p>
+    
+
+<p>list</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">3</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">3</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterLayer </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 3, 3, 9  (nrow, ncol, ncell)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 120, 60  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : layer </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> values     : 1, 9  (min, max)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>,<span class="va">r</span><span class="op">*</span><span class="fl">2</span>,<span class="va">r</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">s</span>, <span class="va">r</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>,<span class="va">r</span><span class="op">*</span><span class="fl">2</span>,<span class="va">r</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">s</span>, <span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterLayer </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 3, 3, 9  (nrow, ncol, ncell)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 120, 60  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : layer.1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> values     : 1, 9  (min, max)</span>
@@ -101,7 +105,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 3, 3, 9  (nrow, ncol, ncell)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 120, 60  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : layer.2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> values     : 2, 18  (min, max)</span>
@@ -112,7 +116,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 3, 3, 9  (nrow, ncol, ncell)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 120, 60  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : layer.3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> values     : 3, 27  (min, max)</span>
@@ -123,7 +127,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 3, 3, 9  (nrow, ncol, ncell)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 120, 60  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : layer </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> values     : 1, 9  (min, max)</span>
@@ -143,7 +147,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

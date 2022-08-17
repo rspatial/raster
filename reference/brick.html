@@ -18,7 +18,7 @@ A RasterBrick can be created from RasterLayer objects, from a RasterStack, or fr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,69 +52,82 @@ A RasterBrick can be created from RasterLayer objects, from a RasterStack, or fr
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for character</span>
-<span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStack</span>
-<span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, values<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">nl</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span> 
-
-<span class="co"># S4 method for RasterBrick</span>
-<span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, <span class="va">nl</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterLayer</span>
-<span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, values<span class="op">=</span><span class="cn">TRUE</span>, nl<span class="op">=</span><span class="fl">1</span>, filename<span class="op">=</span><span class="st">''</span><span class="op">)</span> 
-
-<span class="co"># S4 method for missing</span>
-<span class="fu">brick</span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">180</span>, ncols<span class="op">=</span><span class="fl">360</span>, xmn<span class="op">=</span><span class="op">-</span><span class="fl">180</span>, xmx<span class="op">=</span><span class="fl">180</span>, ymn<span class="op">=</span><span class="op">-</span><span class="fl">90</span>, ymx<span class="op">=</span><span class="fl">90</span>, nl<span class="op">=</span><span class="fl">1</span>, <span class="va">crs</span><span class="op">)</span>
-
-<span class="co"># S4 method for Extent</span>
-<span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, nrows<span class="op">=</span><span class="fl">10</span>, ncols<span class="op">=</span><span class="fl">10</span>, crs<span class="op">=</span><span class="st">""</span>, nl<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-
-<span class="co"># S4 method for array</span>
-<span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">1</span>, ymn<span class="op">=</span><span class="fl">0</span>, ymx<span class="op">=</span><span class="fl">1</span>, crs<span class="op">=</span><span class="st">""</span>, transpose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialGrid</span>
-<span class="fu">brick</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S4 method for SpatialPixels</span>
-<span class="fu">brick</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for character</span></span>
+<span><span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStack</span></span>
+<span><span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, values<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">nl</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># S4 method for RasterBrick</span></span>
+<span><span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, <span class="va">nl</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, values<span class="op">=</span><span class="cn">TRUE</span>, nl<span class="op">=</span><span class="fl">1</span>, filename<span class="op">=</span><span class="st">''</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># S4 method for missing</span></span>
+<span><span class="fu">brick</span><span class="op">(</span>nrows<span class="op">=</span><span class="fl">180</span>, ncols<span class="op">=</span><span class="fl">360</span>, xmn<span class="op">=</span><span class="op">-</span><span class="fl">180</span>, xmx<span class="op">=</span><span class="fl">180</span>, ymn<span class="op">=</span><span class="op">-</span><span class="fl">90</span>, ymx<span class="op">=</span><span class="fl">90</span>, nl<span class="op">=</span><span class="fl">1</span>, <span class="va">crs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Extent</span></span>
+<span><span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, nrows<span class="op">=</span><span class="fl">10</span>, ncols<span class="op">=</span><span class="fl">10</span>, crs<span class="op">=</span><span class="st">""</span>, nl<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for array</span></span>
+<span><span class="fu">brick</span><span class="op">(</span><span class="va">x</span>, xmn<span class="op">=</span><span class="fl">0</span>, xmx<span class="op">=</span><span class="fl">1</span>, ymn<span class="op">=</span><span class="fl">0</span>, ymx<span class="op">=</span><span class="fl">1</span>, crs<span class="op">=</span><span class="st">""</span>, transpose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialGrid</span></span>
+<span><span class="fu">brick</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SpatialPixels</span></span>
+<span><span class="fu">brick</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
-<dd><p>character (filename, see Details); Raster* object; missing; array; SpatialGrid*; SpatialPixels*; Extent; or list of Raster* objects. Supported file types are the 'native' raster package format and those that can be read via rgdal (see <code>readGDAL</code>), and NetCDF files (see details)</p></dd>
+<dd><p>character (filename, see Details); Raster* object; missing; array; SpatialGrid*; SpatialPixels*; Extent; or list of Raster* objects. Supported file types are the 'native' raster package format and those that can be read via GDAL, and NetCDF files (see details)</p></dd>
+
 <dt>...</dt>
 <dd><p>see Details</p></dd>
+
 <dt>values</dt>
 <dd><p>logical. If <code>TRUE</code>, the cell values of '<code>x</code>' are copied to the RasterBrick object that is returned</p></dd>
+
 <dt>nl</dt>
 <dd><p>integer &gt; 0. How many layers should the RasterBrick have?</p></dd>
+
 <dt>filename</dt>
 <dd><p>character. Filename if you want the RasterBrick to be saved on disk</p></dd>
+
 <dt>nrows</dt>
 <dd><p>integer &gt; 0. Number of rows</p></dd>
+
 <dt>ncols</dt>
 <dd><p>integer &gt; 0. Number of columns</p></dd>
+
 <dt>xmn</dt>
 <dd><p>minimum x coordinate (left border)</p></dd>
+
 <dt>xmx</dt>
 <dd><p>maximum x coordinate (right border)</p></dd>
+
 <dt>ymn</dt>
 <dd><p>minimum y coordinate (bottom border)</p></dd>
+
 <dt>ymx</dt>
 <dd><p>maximum y coordinate (top border)</p></dd>
+
 <dt>crs</dt>
 <dd><p>character or object of class CRS. PROJ4 type description of a Coordinate Reference System (map projection). If this argument is missing, and the x coordinates are within -360 .. 360 and the y coordinates are within -90 .. 90, "+proj=longlat +datum=WGS84" is used</p></dd>
+
 <dt>transpose</dt>
 <dd><p>if <code>TRUE</code>, the values in the array are transposed</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>If <code>x</code> is a RasterLayer, the additional arguments can be used to pass additional Raster* objects.</p>
 <p>If there is a <code>filename</code> argument, the additional arguments are as for <code><a href="writeRaster.html">writeRaster</a></code>.</p>
 <p>If <code>x</code> represents a filename there is the following additional argument:</p>
-<p><code>native</code>: logical. If <code>TRUE</code> (not the default), reading and writing of IDRISI, BIL, BSQ, BIP, and Arc ASCII files is done with native (raster package) drivers, rather then via rgdal.</p>
+<p><code>native</code>: logical. If <code>TRUE</code> (not the default), reading and writing of IDRISI, BIL, BSQ, BIP, and Arc ASCII files is done with native (raster package) drivers, rather then via GDAL.</p>
 <p>In addition, if <code>x</code> is a <b>NetCDF</b> filename there are the following additional arguments:</p> 
 <p><code>varname</code>: character. The variable name (e.g. 'altitude' or 'precipitation'. If not supplied and the file has multiple
 variables are a guess will be made (and reported))</p>
@@ -125,7 +138,9 @@ variables are a guess will be made (and reported))</p>
     </div>
     <div id="value">
     <h2>Value</h2>
-    <p>RasterBrick</p>
+    
+
+<p>RasterBrick</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -134,23 +149,23 @@ variables are a guess will be made (and reported))</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">brick</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">brick</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterBrick </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 77, 101, 7777, 3  (nrow, ncol, ncell, nlayers)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 1, 1  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : 0, 101, 0, 77  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=merc +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : rlogo.grd </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : red, green, blue </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min values :   0,     0,    0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max values : 255,   255,  255 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
-<span class="r-in"><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "red"   "green" "blue" </span>
-<span class="r-in"><span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">b</span>, <span class="fl">870</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">b</span>, <span class="fl">870</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      red green blue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 149   149  137</span>
 </code></pre></div>
@@ -167,7 +182,7 @@ variables are a guess will be made (and reported))</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

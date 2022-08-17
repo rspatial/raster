@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,28 +50,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">blockSize</span><span class="op">(</span><span class="va">x</span>, <span class="va">chunksize</span>, n<span class="op">=</span><span class="fu"><a href="nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, minblocks<span class="op">=</span><span class="fl">4</span>, minrows<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">blockSize</span><span class="op">(</span><span class="va">x</span>, <span class="va">chunksize</span>, n<span class="op">=</span><span class="fu"><a href="nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, minblocks<span class="op">=</span><span class="fl">4</span>, minrows<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>chunksize</dt>
+
+  <dt>chunksize</dt>
 <dd><p>Integer, normally missing. Can be used to set the block size; unit is number of cells. Block size is then computed in units of number of rows (always &gt;= 1)</p></dd>
-<dt>n</dt>
+
+  <dt>n</dt>
 <dd><p>Integer. number of layers to consider. The function divides chunksize by n to determine blocksize</p></dd>
-<dt>minblocks</dt>
+
+  <dt>minblocks</dt>
 <dd><p>Integer. Minimum number of blocks</p></dd>
-<dt>minrows</dt>
+
+  <dt>minrows</dt>
 <dd><p>Integer. Minimum number of rows in each block</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list with three elements: 
-<code>rows</code>, the suggested row numbers at which to start the blocks for reading and writing, 
-<code>nrows</code>, the number of rows in each block, and,
-<code>n</code>, the total number of blocks</p>
+    
+
+<p>A list with three elements:</p>
+
+
+<p><code>rows</code>, the suggested row numbers at which to start the blocks for reading and writing,</p>
+
+
+<p><code>nrows</code>, the number of rows in each block, and,</p>
+
+
+<p><code>n</code>, the total number of blocks</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -80,8 +94,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">blockSize</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">blockSize</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $row</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 30 59 88</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -105,7 +119,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

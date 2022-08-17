@@ -18,7 +18,7 @@ Or remove the whitespace before or after a string of characters (or a matrix, or
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -52,30 +52,38 @@ Or remove the whitespace before or after a string of characters (or a matrix, or
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">trim</span><span class="op">(</span><span class="va">x</span>, padding<span class="op">=</span><span class="fl">0</span>, values<span class="op">=</span><span class="cn">NA</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S4 method for character</span>
-<span class="fu">trim</span><span class="op">(</span><span class="va">x</span>, internal<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">trim</span><span class="op">(</span><span class="va">x</span>, padding<span class="op">=</span><span class="fl">0</span>, values<span class="op">=</span><span class="cn">NA</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S4 method for character</span></span>
+<span><span class="fu">trim</span><span class="op">(</span><span class="va">x</span>, internal<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object or a character string</p></dd>
-<dt>values</dt>
+
+  <dt>values</dt>
 <dd><p>numeric. Value(s) based on which a Raster* should be trimmed</p></dd>
-<dt>padding</dt>
+
+  <dt>padding</dt>
 <dd><p>integer. Number of outer rows/columns to keep</p></dd>
-<dt>filename</dt>
+
+  <dt>filename</dt>
 <dd><p>character. Optional output filename</p></dd>
-<dt>internal</dt>
+
+  <dt>internal</dt>
 <dd><p>logical. If <code>TRUE</code>, sequential internal spaces are replaced by a single space</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>If <code>x</code> is a Raster* object: additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A RasterLayer or RasterBrick object (if <code>x</code> is a Raster* object) or a character string (if <code>x</code> is a character string).</p>
+    
+
+<p>A RasterLayer or RasterBrick object (if <code>x</code> is a Raster* object) or a character string (if <code>x</code> is a character string).</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -84,14 +92,14 @@ Or remove the whitespace before or after a string of characters (or a matrix, or
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">18</span>,nrow<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">39</span><span class="op">:</span><span class="fl">49</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">113</span><span class="op">:</span><span class="fl">155</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">200</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">6</span></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">trim</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">trim</span><span class="op">(</span><span class="st">"    hi folks    !   "</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">18</span>,nrow<span class="op">=</span><span class="fl">18</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">39</span><span class="op">:</span><span class="fl">49</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">113</span><span class="op">:</span><span class="fl">155</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">200</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">6</span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">trim</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">trim</span><span class="op">(</span><span class="st">"    hi folks    !   "</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "hi folks    !"</span>
 </code></pre></div>
     </div>
@@ -107,7 +115,7 @@ Or remove the whitespace before or after a string of characters (or a matrix, or
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

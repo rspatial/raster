@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,25 +50,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pointDistance</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">lonlat</span>, allpairs<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pointDistance</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">lonlat</span>, allpairs<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>p1</dt>
 <dd><p>x and y coordinate of first (set of) point(s), either as c(x, y), matrix(ncol=2), or SpatialPoints*.</p></dd>
+
 <dt>p2</dt>
 <dd><p>x and y coordinate of second (set of) second point(s) (like for <code>p1</code>). If this argument is missing, a distance matrix is computed for <code>p1</code></p></dd>
+
 <dt>lonlat</dt>
 <dd><p>logical. If <code>TRUE</code>, coordinates should be in degrees; else they should represent planar ('Euclidean') space (e.g. units of meters)</p></dd>
+
 <dt>allpairs</dt>
 <dd><p>logical. Only relevant if the number of points in <code>x</code> and <code>y</code> is the same. If <code>FALSE</code> the distance between each point in <code>x</code> with the corresponding point in <code>y</code> is returned. If <code>TRUE</code> a full distance matrix is returned</p></dd>
+
 <dt>...</dt>
 <dd><p>Additional arguments. None implemented</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A single value, or a vector, or matrix of values giving the distance in meters (lonlat=TRUE) or map-units (for instance, meters in the case of UTM)
+    
+
+<p>A single value, or a vector, or matrix of values giving the distance in meters (lonlat=TRUE) or map-units (for instance, meters in the case of UTM)
 If <code>p2</code> is missing, a distance matrix is returned</p>
     </div>
     <div id="see-also">
@@ -83,22 +90,22 @@ The <code>geosphere</code> package has many additional distance functions and ot
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">55</span>,<span class="fl">31</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">7</span>,<span class="fl">20</span>,<span class="fl">22</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">8</span>,<span class="fl">65</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="op">-</span><span class="fl">90</span>,<span class="fl">20</span>,<span class="fl">32</span><span class="op">)</span><span class="op">)</span>   </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">pointDistance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, lonlat<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">55</span>,<span class="fl">31</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">7</span>,<span class="fl">20</span>,<span class="fl">22</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">8</span>,<span class="fl">65</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="op">-</span><span class="fl">90</span>,<span class="fl">20</span>,<span class="fl">32</span><span class="op">)</span><span class="op">)</span>   </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">pointDistance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, lonlat<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.414214</span>
-<span class="r-in"><span class="fu">pointDistance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, lonlat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pointDistance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, lonlat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 156899.6</span>
-<span class="r-in"><span class="fu">pointDistance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="va">a</span>, lonlat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pointDistance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="va">a</span>, lonlat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  349889.7  952593.2 6383965.5 4151286.9</span>
-<span class="r-in"><span class="fu">pointDistance</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, lonlat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pointDistance</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, lonlat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  5216833 10776024  4901277  3534636</span>
-<span class="r-in">   </span>
-<span class="r-in"><span class="co">#Make a distance matrix </span></span>
-<span class="r-in"><span class="va">dst</span> <span class="op">&lt;-</span> <span class="fu">pointDistance</span><span class="op">(</span><span class="va">a</span>, lonlat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># coerce to dist object</span></span>
-<span class="r-in"><span class="va">dst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></span><span class="op">(</span><span class="va">dst</span><span class="op">)</span></span>
+<span class="r-in"><span>   </span></span>
+<span class="r-in"><span><span class="co">#Make a distance matrix </span></span></span>
+<span class="r-in"><span><span class="va">dst</span> <span class="op">&lt;-</span> <span class="fu">pointDistance</span><span class="op">(</span><span class="va">a</span>, lonlat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># coerce to dist object</span></span></span>
+<span class="r-in"><span><span class="va">dst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></span><span class="op">(</span><span class="va">dst</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -113,7 +120,7 @@ The <code>geosphere</code> package has many additional distance functions and ot
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

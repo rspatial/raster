@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,37 +50,50 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for Raster</span>
-<span class="fu">stretch</span><span class="op">(</span><span class="va">x</span>, minv<span class="op">=</span><span class="fl">0</span>, maxv<span class="op">=</span><span class="fl">255</span>, minq<span class="op">=</span><span class="fl">0</span>, maxq<span class="op">=</span><span class="fl">1</span>, smin<span class="op">=</span><span class="cn">NA</span>, smax<span class="op">=</span><span class="cn">NA</span>,
-          samplesize<span class="op">=</span><span class="fl">1000000</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">stretch</span><span class="op">(</span><span class="va">x</span>, minv<span class="op">=</span><span class="fl">0</span>, maxv<span class="op">=</span><span class="fl">255</span>, minq<span class="op">=</span><span class="fl">0</span>, maxq<span class="op">=</span><span class="fl">1</span>, smin<span class="op">=</span><span class="cn">NA</span>, smax<span class="op">=</span><span class="cn">NA</span>,</span>
+<span>          samplesize<span class="op">=</span><span class="fl">1000000</span>, filename<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster object</p></dd>
+ 
 <dt>minv</dt>
 <dd><p>numeric &gt;= 0 and smaller than maxv. lower bound of stretched value</p></dd>
+
 <dt>maxv</dt>
 <dd><p>numeric &lt;= 255 and larger than maxv. upper bound of stretched value</p></dd>
+
 <dt>minq</dt>
 <dd><p>numeric &gt;= 0 and smaller than maxq. lower quantile bound of original value. Ignored if smin is supplied</p></dd>
+
 <dt>maxq</dt>
 <dd><p>numeric &lt;= 1 and larger than minq. upper quantile bound of original value. Ignored if smax is supplied</p></dd>
+
 <dt>smin</dt>
 <dd><p>numeric &lt; smax. user supplied lower value for the layers, to be used instead of a quantile computed by the function itself</p></dd>
+
 <dt>smax</dt>
 <dd><p>numeric &gt; smin. user supplied upper value for the layers, to be used instead of a quantile computed by the function itself</p></dd>
+
+
 <dt>samplesize</dt>
 <dd><p>numeric &gt; 1. If samplesize &lt; ncell(x), a regular sample of samplesize is taken from x to compute the quantiles (to speed things up)</p></dd>
+
 <dt>filename</dt>
 <dd><p>character. Filename for the output Raster object (optional)</p></dd>
+
 <dt>...</dt>
 <dd><p>additional arguments as for <code><a href="writeRaster.html">writeRaster</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Raster</p>
+    
+
+<p>Raster</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -89,25 +102,25 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nc<span class="op">=</span><span class="fl">10</span>, nr<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">stretch</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nc<span class="op">=</span><span class="fl">10</span>, nr<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">stretch</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterLayer </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 10, 10, 100  (nrow, ncol, ncell)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 36, 18  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : layer </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> values     : 0, 255  (min, max)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">stretch</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">stretch</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterBrick </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 10, 10, 100, 2  (nrow, ncol, ncell, nlayers)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 36, 18  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=longlat +datum=WGS84 +no_defs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> source     : memory</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> names      : layer.1, layer.2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min values :       0,       0 </span>
@@ -127,7 +140,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -21,7 +21,7 @@ as.matrix and as.vector can also be used to obtain the coordinates from an Exten
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -58,43 +58,47 @@ as.matrix and as.vector can also be used to obtain the coordinates from an Exten
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">as.matrix</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">as.array</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for Extent</span>
-<span class="fu">as.vector</span><span class="op">(</span><span class="va">x</span>, mode<span class="op">=</span><span class="st">'any'</span><span class="op">)</span>
-
-<span class="co"># S4 method for Raster</span>
-<span class="fu">as.vector</span><span class="op">(</span><span class="va">x</span>, mode<span class="op">=</span><span class="st">'any'</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as.matrix</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">as.array</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Extent</span></span>
+<span><span class="fu">as.vector</span><span class="op">(</span><span class="va">x</span>, mode<span class="op">=</span><span class="st">'any'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Raster</span></span>
+<span><span class="fu">as.vector</span><span class="op">(</span><span class="va">x</span>, mode<span class="op">=</span><span class="st">'any'</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* or (for <code>as.matrix</code> and <code>as.vector</code>) Extent object</p></dd>
-<dt>mode</dt>
+
+ <dt>mode</dt>
 <dd><p>Character string giving an atomic mode (such as "numeric" or "character") or "list", or "any". Note: this argument is currently ignored!</p></dd>
-<dt>...</dt>
+
+ <dt>...</dt>
 <dd><p>additional arguments:</p> 
 <p><code>maxpixels</code> Integer. To regularly subsample very large objects</p>	
 <p><code>transpose</code> Logical. Transpose the data? (for as.array only)</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>matrix, array, or vector</p>
+    
+
+<p>matrix, array, or vector</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">3</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">as.matrix</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">3</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">as.matrix</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    1    2    3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    4    5    6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    7    8    9</span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>,<span class="va">r</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">as.array</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>,<span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">as.array</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> , , 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3]</span>
@@ -109,7 +113,7 @@ as.matrix and as.vector can also be used to obtain the coordinates from an Exten
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    4    5    6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    7    8    9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">as.vector</span><span class="op">(</span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">as.vector</span><span class="op">(</span><span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -180  180  -90   90</span>
 </code></pre></div>
     </div>
@@ -125,7 +129,7 @@ as.matrix and as.vector can also be used to obtain the coordinates from an Exten
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

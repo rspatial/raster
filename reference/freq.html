@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,33 +50,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">freq</span><span class="op">(</span><span class="va">x</span>, digits<span class="op">=</span><span class="fl">0</span>, value<span class="op">=</span><span class="cn">NULL</span>, useNA<span class="op">=</span><span class="st">'ifany'</span>, progress<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStackBrick</span>
-<span class="fu">freq</span><span class="op">(</span><span class="va">x</span>, digits<span class="op">=</span><span class="fl">0</span>, value<span class="op">=</span><span class="cn">NULL</span>, useNA<span class="op">=</span><span class="st">'ifany'</span>, merge<span class="op">=</span><span class="cn">FALSE</span>, progress<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">freq</span><span class="op">(</span><span class="va">x</span>, digits<span class="op">=</span><span class="fl">0</span>, value<span class="op">=</span><span class="cn">NULL</span>, useNA<span class="op">=</span><span class="st">'ifany'</span>, progress<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick</span></span>
+<span><span class="fu">freq</span><span class="op">(</span><span class="va">x</span>, digits<span class="op">=</span><span class="fl">0</span>, value<span class="op">=</span><span class="cn">NULL</span>, useNA<span class="op">=</span><span class="st">'ifany'</span>, merge<span class="op">=</span><span class="cn">FALSE</span>, progress<span class="op">=</span><span class="st">''</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>RasterLayer</p></dd>
-<dt>digits</dt>
+
+  <dt>digits</dt>
 <dd><p>non-negative integer for rounding the cell values. Argument is passed to <code>round</code></p></dd>
-<dt>value</dt>
+
+  <dt>value</dt>
 <dd><p>numeric, logical or NA. An optional single value to only count the number of cells with that value</p></dd>
-<dt>useNA</dt>
+
+  <dt>useNA</dt>
 <dd><p>character. What to do with NA values? Options are "no", "ifany", "always". See to <code><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></code></p></dd>
-<dt>progress</dt>
+
+  <dt>progress</dt>
 <dd><p>character to specify a progress bar. Choose from 'text', 'window', or '' (the default, no progress bar)</p></dd>
-<dt>merge</dt>
+
+  <dt>merge</dt>
 <dd><p>logical. If <code>TRUE</code> the list will be merged into a single data.frame</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments (none implemented)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>matrix (RasterLayer). List of matrices (one for each layer) or data.frame (if <code>merge=TRUE</code>) (RasterStack or RasterBrick)</p>
+    
+
+<p>matrix (RasterLayer). List of matrices (one for each layer) or data.frame (if <code>merge=TRUE</code>) (RasterStack or RasterBrick)</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -85,11 +94,11 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">18</span>, ncol<span class="op">=</span><span class="fl">36</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">r</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
-<span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="va">r</span> <span class="op">*</span> <span class="va">r</span> <span class="op">*</span> <span class="va">r</span> <span class="op">*</span> <span class="fl">5</span></span>
-<span class="r-in"><span class="fu">freq</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">18</span>, ncol<span class="op">=</span><span class="fl">36</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="getValues.html">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="va">r</span> <span class="op">*</span> <span class="va">r</span> <span class="op">*</span> <span class="va">r</span> <span class="op">*</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span><span class="fu">freq</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      value count</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0   326</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     1   102</span>
@@ -98,12 +107,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,]     4    53</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,]     5    21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,]    NA     5</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">freq</span><span class="op">(</span><span class="va">r</span>, value<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">freq</span><span class="op">(</span><span class="va">r</span>, value<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 87</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span>, <span class="va">r</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">freq</span><span class="op">(</span><span class="va">s</span>, merge<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span>, <span class="va">r</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">freq</span><span class="op">(</span><span class="va">s</span>, merge<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    value layer.1 layer.2 layer.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1      0     326     261     224</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2      1     102     109     102</span>
@@ -136,7 +145,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

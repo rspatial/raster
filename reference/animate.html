@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -50,30 +50,39 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterStackBrick</span>
-<span class="fu">animate</span><span class="op">(</span><span class="va">x</span>, pause<span class="op">=</span><span class="fl">0.25</span>, <span class="va">main</span>, <span class="va">zlim</span>, maxpixels<span class="op">=</span><span class="fl">50000</span>, n<span class="op">=</span><span class="fl">10</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterStackBrick</span></span>
+<span><span class="fu">animate</span><span class="op">(</span><span class="va">x</span>, pause<span class="op">=</span><span class="fl">0.25</span>, <span class="va">main</span>, <span class="va">zlim</span>, maxpixels<span class="op">=</span><span class="fl">50000</span>, n<span class="op">=</span><span class="fl">10</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
-<dt>pause</dt>
+
+  <dt>pause</dt>
 <dd><p>numeric. How long should be the pause be between layers?</p></dd>
-<dt>main</dt>
+  
+  <dt>main</dt>
 <dd><p>title for each layer. If not supplied the z-value is used if available. Otherwise the names are used.</p></dd>
-<dt>zlim</dt>
+  
+  <dt>zlim</dt>
 <dd><p>numeric vector of lenght 2. Range of values to plot</p></dd>
-<dt>maxpixels</dt>
+
+  <dt>maxpixels</dt>
 <dd><p>integer &gt; 0. Maximum number of cells to use for the plot. If <code>maxpixels &lt; ncell(x)</code>, <code>sampleRegular</code> is used before plotting</p></dd>
-<dt>n</dt>
+
+  <dt>n</dt>
 <dd><p>integer &gt; 0. Number of loops</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Additional arguments passed to <code><a href="plot.html">plot</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>None</p>
+    
+
+<p>None</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -82,8 +91,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">animate</span><span class="op">(</span><span class="va">b</span>, n<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">animate</span><span class="op">(</span><span class="va">b</span>, n<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="animate-1.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="animate-2.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="animate-3.png" alt="" width="700" height="433"></span>
@@ -101,7 +110,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

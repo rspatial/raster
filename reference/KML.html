@@ -19,7 +19,7 @@ See package plotKML for more advanced functionality"><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
       </span>
     </div>
 
@@ -54,44 +54,56 @@ The function attempts to combine these into a single (and hence more convenient)
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for RasterLayer</span>
-<span class="fu">KML</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span>, 
-     colNA<span class="op">=</span><span class="cn">NA</span>, maxpixels<span class="op">=</span><span class="fl">100000</span>, blur<span class="op">=</span><span class="fl">1</span>, zip<span class="op">=</span><span class="st">''</span>, overwrite<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for RasterStackBrick</span>
-<span class="fu">KML</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, time<span class="op">=</span><span class="cn">NULL</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span>, 
-     colNA<span class="op">=</span><span class="cn">NA</span>, maxpixels<span class="op">=</span><span class="fl">100000</span>, blur<span class="op">=</span><span class="fl">1</span>, zip<span class="op">=</span><span class="st">''</span>, overwrite<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for Spatial</span>
-<span class="fu">KML</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, zip<span class="op">=</span><span class="st">''</span>, overwrite<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for RasterLayer</span></span>
+<span><span class="fu">KML</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>     colNA<span class="op">=</span><span class="cn">NA</span>, maxpixels<span class="op">=</span><span class="fl">100000</span>, blur<span class="op">=</span><span class="fl">1</span>, zip<span class="op">=</span><span class="st">''</span>, overwrite<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for RasterStackBrick</span></span>
+<span><span class="fu">KML</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, time<span class="op">=</span><span class="cn">NULL</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors</a></span><span class="op">(</span><span class="fl">255</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>     colNA<span class="op">=</span><span class="cn">NA</span>, maxpixels<span class="op">=</span><span class="fl">100000</span>, blur<span class="op">=</span><span class="fl">1</span>, zip<span class="op">=</span><span class="st">''</span>, overwrite<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for Spatial</span></span>
+<span><span class="fu">KML</span><span class="op">(</span><span class="va">x</span>, <span class="va">filename</span>, zip<span class="op">=</span><span class="st">''</span>, overwrite<span class="op">=</span><span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Raster* object</p></dd>
+
 <dt>filename</dt>
 <dd><p>output filename</p></dd>
+
 <dt>time</dt>
 <dd><p>character vector with time lables for multilayer objects. The length of this vector should be nlayers(x) to indicate "when" or nlayers(x)+1 to indicate "begin-end"</p></dd>
+
 <dt>col</dt>
 <dd><p>color scheme to be used (see <a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a>)</p></dd>
+
 <dt>colNA</dt>
 <dd><p>The color to use for the background (default is transparent)</p></dd>
+
 <dt>maxpixels</dt>
 <dd><p>maximum number of pixels. If ncell(raster) &gt; maxpixels, sampleRegular is used to reduce the number of pixels</p></dd>
+
 <dt>blur</dt>
 <dd><p>Integer (default=1). Higher values help avoid blurring of isolated pixels (at the expense of a png file that is blur^2 times larger)</p></dd>
+
 <dt>zip</dt>
 <dd><p>If there is no zip program on your path (on windows), you can supply the full path to a zip.exe here, in order to make a KMZ file</p></dd>
+
 <dt>overwrite</dt>
 <dd><p>logical. If <code>TRUE</code>, overwrite the file if it exists</p></dd>
+
 <dt>...</dt>
 <dd><p>If <code>x</code> is a Raster* object, additional arguments that can be passed to <a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>None. Used for the side-effect files written to disk.</p>
+    
+
+<p>None. Used for the side-effect files written to disk.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -100,15 +112,15 @@ The function attempts to combine these into a single (and hence more convenient)
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Meuse data from the sp package</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">meuse.grid</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="rasterFromXYZ.html">rasterFromXYZ</a></span><span class="op">(</span><span class="va">meuse.grid</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="projection.html">projection</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"+init=epsg:28992"</span>           </span>
-<span class="r-in"><span class="co"># transform to longitude/latitude</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="projectRaster.html">projectRaster</a></span><span class="op">(</span><span class="va">b</span>, crs<span class="op">=</span><span class="st">"+proj=longlat +datum=WGS84"</span>, method<span class="op">=</span><span class="st">'ngb'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">KML</span><span class="op">(</span><span class="va">p</span>, file<span class="op">=</span><span class="st">'meuse.kml'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Meuse data from the sp package</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">meuse.grid</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="rasterFromXYZ.html">rasterFromXYZ</a></span><span class="op">(</span><span class="va">meuse.grid</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="projection.html">projection</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"+init=epsg:28992"</span>           </span></span>
+<span class="r-in"><span><span class="co"># transform to longitude/latitude</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="projectRaster.html">projectRaster</a></span><span class="op">(</span><span class="va">b</span>, crs<span class="op">=</span><span class="st">"+proj=longlat +datum=WGS84"</span>, method<span class="op">=</span><span class="st">'ngb'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">KML</span><span class="op">(</span><span class="va">p</span>, file<span class="op">=</span><span class="st">'meuse.kml'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -123,7 +135,7 @@ The function attempts to combine these into a single (and hence more convenient)
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
