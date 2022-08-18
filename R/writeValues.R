@@ -48,10 +48,12 @@ setMethod("writeValues", signature(x="RasterLayer", v="vector"),
 		driver <- x@file@driver
 		
 		if ( driver == "gdal" ) {
-			off <- c(start-1, 0)
-			v[is.na(v)] <- x@file@nodatavalue
-			v <- matrix(v, nrow=x@ncols)
-			gd <- rgdal::putRasterData(x@file@transient, v, band=1, offset=off) 	
+			r <- attr(x@file, "transient")
+			writeValues(r, v, start, length(v) / ncol(x))
+#			off <- c(start-1, 0)
+#			v[is.na(v)] <- x@file@nodatavalue
+#			v <- matrix(v, nrow=x@ncols)
+#			gd <- rgdal::putRasterData(x@file@transient, v, band=1, offset=off) 	
 
 		} else if ( driver %in% .nativeDrivers() ) {
 			if (x@file@dtype == "FLT" ) { 
@@ -194,16 +196,20 @@ setMethod("writeValues", signature(x="RasterBrick", v="matrix"),
 			
 		} else { # rgdal
 		
-			off <- c(start-1, 0)
-			if (x@file@datanotation == "INT1U") {
-				v[v < 0] <- NA
-			}
+			#off <- c(start-1, 0)
+			#if (x@file@datanotation == "INT1U") {
+			#	v[v < 0] <- NA
+			#}
 
-			v[is.na(v)] <- x@file@nodatavalue
-			for (i in 1:nlayers(x)) {
-				vv <- matrix(v[,i], nrow=ncol(x))
-				gd <- rgdal::putRasterData(x@file@transient, vv, band=i, offset=off) 	
-			}
+			#v[is.na(v)] <- x@file@nodatavalue
+			#for (i in 1:nlayers(x)) {
+			#	vv <- matrix(v[,i], nrow=ncol(x))
+			#	gd <- rgdal::putRasterData(x@file@transient, vv, band=i, offset=off) 	
+			#}
+			
+			r <- attr(x@file, "transient")
+			writeValues(r, v, start, nrow(v) / ncol(x))
+			
 		}
 		return(x)
 	}	
@@ -211,8 +217,9 @@ setMethod("writeValues", signature(x="RasterBrick", v="matrix"),
 
 
 .getTransientRows <- function(x, r, n=1) {
-	reg = c(n, ncol(x))
-	off = c(r-1,0)
-	as.vector((rgdal::getRasterData(x@file@transient, region.dim=reg, offset=off)))
+	stop()
+#	reg = c(n, ncol(x))
+#	off = c(r-1,0)
+#	as.vector((rgdal::getRasterData(x@file@transient, region.dim=reg, offset=off)))
 }
 

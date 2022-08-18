@@ -27,7 +27,7 @@ function(x, filename, options=NULL, format, prj=FALSE, ...) {
 #	} else if ( filetype == "big.matrix" ) { 
 #		x <- .startBigMatrixWriting(x, filename, ...)
 	} else {
-		x <- .startGDALwriting(x, filename, options=options, format=filetype, ...)
+		x <- .startGDALwriting(x, filename, gdal=options, filetype=filetype, ...)
 	}		
 	
 	if (prj) {
@@ -61,7 +61,7 @@ function(x, filename, options=NULL, format, prj=FALSE, ...) {
 #	} else if ( filetype == "big.matrix" ) { 
 #		x <- .startBigMatrixWriting(x, filename, ...)
 	} else {
-		x <- .startGDALwriting(x, filename, options=options, format=filetype, ...) 
+		x <- .startGDALwriting(x, filename, gdal=options, filetype=format, ...) 
 	}
 	
 	if (prj) {

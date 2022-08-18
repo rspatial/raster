@@ -4,22 +4,22 @@
 # Licence GPL v3
 
 
-.gdFixGeoref <- function(mdata) {
-	gdversion <- getOption('rasterGDALVersion')
-	test <- gdversion < '1.8.0'	
-	if (test) {
-		if (! is.null(mdata) ) {
-			for (i in 1:length(mdata)) {
-				if (mdata[i] == "AREA_OR_POINT=Area") {
-					return(FALSE)
-				} else if (mdata[i] == "AREA_OR_POINT=Point") {
-					return(TRUE)
-				}
-			}
-		}
-	}
-	return(FALSE)
-}
+# .gdFixGeoref <- function(mdata) {
+	# gdversion <- getOption('rasterGDALVersion')
+	# test <- gdversion < '1.8.0'	
+	# if (test) {
+		# if (! is.null(mdata) ) {
+			# for (i in 1:length(mdata)) {
+				# if (mdata[i] == "AREA_OR_POINT=Area") {
+					# return(FALSE)
+				# } else if (mdata[i] == "AREA_OR_POINT=Point") {
+					# return(TRUE)
+				# }
+			# }
+		# }
+	# }
+	# return(FALSE)
+# }
 
 
 

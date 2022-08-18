@@ -33,14 +33,14 @@ function(x, filename, format, ...) {
 	verylarge <- ncell(x) > 1000000000
 	
 	# to simplify we could treat all cases as !inMemory
-	if (! inMemory(x) | verylarge ) {
+	if ((!inMemory(x)) | verylarge ) {
 		if ( toupper(x@file@name) == toupper(filename) ) {
 			stop('filenames of source and target should be different')
 		}
 		tr <- blockSize(x)
 		pb <- pbCreate(tr$n, ...)			
 		# use x to keep layer name
-		r <- writeStart(x, filename=filename, format=filetype, ...)
+		r <- writeStart(x, filename=filename, filetype=filetype, ...)
 		for (i in 1:tr$n) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 			r <- writeValues(r, v, tr$row[i])
@@ -83,7 +83,7 @@ function(x, filename, format, ...) {
 		return( .stopWriteCDF(x) )
 		
 	} else { 
-		x <- .writeGDALall(x, filename=filename, format=filetype, ...)
+		x <- .writeGDALall(x, filename=filename, filetype=filetype, ...)
 	}
 	return(invisible(x))
 }	
@@ -210,7 +210,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 			b <- .writeValuesBrickCDF(b, values(x))	
 			x <- .stopWriteCDF(b) 
 		} else {
-			x <- .writeGDALall(x, filename=filename, format=filetype, ...) 
+			x <- .writeGDALall(x, filename=filename, filetype=filetype, ...) 
 		}
 		
 		return(invisible(x))

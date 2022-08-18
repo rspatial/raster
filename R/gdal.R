@@ -3,9 +3,6 @@
 # Version 1.0
 # Licence GPL v3
 
-.requireRgdal <- function(stopIfAbsent=TRUE) {
-	TRUE
-}
 
 # .requireRgdal <- function(stopIfAbsent=TRUE) {
 	

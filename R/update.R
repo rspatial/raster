@@ -365,63 +365,67 @@ function(object, v, cell, band, ...) {
 
 
 .updateGDAL <- function(object, v, cell, band, setminmax) {
-	gdal <- methods::new("GDALDataset", filename(object))
-	on.exit( rgdal::GDAL.close(gdal) )
-
-	dr <- rgdal::getDriverName(rgdal::getDriver(gdal))
-	if (! dr %in% .gdalWriteFormats()[,1]) {
-		stop('cannot update this file format (GDAL driver)')
-	}
-		
-	if (is.matrix(v)) {
-
-		startrow <- rowFromCell(object, cell) - 1
-		startcol <- colFromCell(object, cell) - 1
-		rgdal::putRasterData(gdal, t(v), band=band, offset= c(startrow, startcol) )
-
-	} else {
-		if (length(cell) == 1) {
-			cell <- cell:(cell+length(v)-1)
-			rows <- rowFromCell(object, cell) - 1
-			cols <- colFromCell(object, cell) - 1
-			rows <- unique(rows)
-			cols <- unique(cols)
-			nr <- length(rows)
-			if (nr == 1) {
-				rgdal::putRasterData(gdal, v, band=band, offset=c(rows, cols[1]))
-			} else {
-				offset <- c(rows[1], cols[1])
-				nc <- object@ncols - cols[1]
-				rgdal::putRasterData(gdal, v[1:nc], band=band, offset=offset)
-				v <- v[-(1:nc)]
-				if (nr > 2) {
-					nrows <- nr-2
-					n <- nrows * object@ncols
-					rgdal::putRasterData(gdal, t(matrix(v[1:n], ncol=object@ncols, byrow=TRUE)), band=band, offset=c(rows[2], 0))
-					v <- v[-(1:n)]
-				}
-				if (length(v) > 0) {
-					rgdal::putRasterData(gdal, v, band=band, offset=c(rows[nr], 0))
-				}
-			} 
-		} else {
-			rows <- rowFromCell(object, cell) - 1
-			cols <- colFromCell(object, cell) - 1
-			for (i in 1:length(cell)) {
-				rgdal::putRasterData(gdal, v[i], band=band, offset=c(rows[i], cols[i]))
-			} 
-		}
-			
-	}
-
-	if (setminmax) {	
-		b <- methods::new("GDALRasterBand", gdal, band)
-		statistics <- c(object@data@min, object@data@max, NA, NA)
-		rgdal::GDALcall(b, "SetStatistics", statistics)	
-	}
-
-	return(object)
+	stop("no longer supported")
 }
+
+# .updateGDAL <- function(object, v, cell, band, setminmax) {
+	# gdal <- methods::new("GDALDataset", filename(object))
+	# on.exit( rgdal::GDAL.close(gdal) )
+
+	# dr <- rgdal::getDriverName(rgdal::getDriver(gdal))
+	# if (! dr %in% .gdalWriteFormats()[,1]) {
+		# stop('cannot update this file format (GDAL driver)')
+	# }
+		
+	# if (is.matrix(v)) {
+
+		# startrow <- rowFromCell(object, cell) - 1
+		# startcol <- colFromCell(object, cell) - 1
+		# rgdal::putRasterData(gdal, t(v), band=band, offset= c(startrow, startcol) )
+
+	# } else {
+		# if (length(cell) == 1) {
+			# cell <- cell:(cell+length(v)-1)
+			# rows <- rowFromCell(object, cell) - 1
+			# cols <- colFromCell(object, cell) - 1
+			# rows <- unique(rows)
+			# cols <- unique(cols)
+			# nr <- length(rows)
+			# if (nr == 1) {
+				# rgdal::putRasterData(gdal, v, band=band, offset=c(rows, cols[1]))
+			# } else {
+				# offset <- c(rows[1], cols[1])
+				# nc <- object@ncols - cols[1]
+				# rgdal::putRasterData(gdal, v[1:nc], band=band, offset=offset)
+				# v <- v[-(1:nc)]
+				# if (nr > 2) {
+					# nrows <- nr-2
+					# n <- nrows * object@ncols
+					# rgdal::putRasterData(gdal, t(matrix(v[1:n], ncol=object@ncols, byrow=TRUE)), band=band, offset=c(rows[2], 0))
+					# v <- v[-(1:n)]
+				# }
+				# if (length(v) > 0) {
+					# rgdal::putRasterData(gdal, v, band=band, offset=c(rows[nr], 0))
+				# }
+			# } 
+		# } else {
+			# rows <- rowFromCell(object, cell) - 1
+			# cols <- colFromCell(object, cell) - 1
+			# for (i in 1:length(cell)) {
+				# rgdal::putRasterData(gdal, v[i], band=band, offset=c(rows[i], cols[i]))
+			# } 
+		# }
+			
+	# }
+
+	# if (setminmax) {	
+		# b <- methods::new("GDALRasterBand", gdal, band)
+		# statistics <- c(object@data@min, object@data@max, NA, NA)
+		# rgdal::GDALcall(b, "SetStatistics", statistics)	
+	# }
+
+	# return(object)
+# }
 
 
 .checkData <- function(object, v, cell, dtype) {
@@ -556,14 +560,14 @@ function(object, v, cell, band, ...) {
 
 
 
-.updateGDALminmax <- function(object, minv, maxv) {
-	gdal <- methods::new("GDALDataset", filename(object))
-	on.exit( rgdal::GDAL.close(gdal) )
+# .updateGDALminmax <- function(object, minv, maxv) {
+	# gdal <- methods::new("GDALDataset", filename(object))
+	# on.exit( rgdal::GDAL.close(gdal) )
 
-	for (band in 1:nlayers(object)) {
-		b <- methods::new("GDALRasterBand", gdal, band)
-		statistics <- c(minv[band], maxv[band], NA, NA)
-		rgdal::GDALcall(b, "SetStatistics", statistics)	
-	}
-	return(object)
-}
+	# for (band in 1:nlayers(object)) {
+		# b <- methods::new("GDALRasterBand", gdal, band)
+		# statistics <- c(minv[band], maxv[band], NA, NA)
+		# rgdal::GDALcall(b, "SetStatistics", statistics)	
+	# }
+	# return(object)
+# }

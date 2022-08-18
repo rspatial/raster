@@ -70,11 +70,11 @@
         }
 
 
-	if(!native) {
-		if (! .requireRgdal(FALSE) )  {
-			native <- TRUE
-		}
-	}
+#	if(!native) {
+#		if (! .requireRgdal(FALSE) )  {
+#			native <- TRUE
+#		}
+#	}
 	if (native) {
 		if ( fileext == ".ASC" ) {
 			return ( .rasterFromASCIIFile(x, ...) )
