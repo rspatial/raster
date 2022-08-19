@@ -1,4 +1,12 @@
 
+--- version 3.6-0
+
+raster no longer uses rgdal
+
+--- 14-August-2022, version 3.5-29
+
+raster no longer uses rgeos
+
 --- 5-October-2021, version 3.5-1
 
 raster now imports terra (instead of the other way around) such that the two packages can be used together; and to allow replacing rgdal and rgeos functionality with functions from terra.

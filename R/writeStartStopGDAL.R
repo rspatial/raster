@@ -3,7 +3,7 @@
 # Version 0.9
 # Licence GPL v3
 
-.startGDALwriting <- function(x, filename, gdal=NULL, setStatistics=TRUE, overwrite=FALSE, ...) {
+.startGDALwriting <- function(x, filename, gdal=NULL, setStatistics=TRUE, overwrite=FALSE, filetype="GTIff", ...) {
 
 	#temp <- .getGDALtransient(x, filename=filename, options=options, ...)
 	#attr(x@file, "transient") <- temp[[1]]
@@ -20,7 +20,21 @@
 	x@data@fromdisk <- TRUE
 	x@file@name <- filename
 	
-	ops <- list(gdal=gdal, ...)
+	ct <- colortable(x)
+	if (length(ct) > 0 ) {
+		hasCT <- TRUE
+		if (is.null(list(...)$datatype)) {
+			datatype <- 'INT1U'
+		} else {
+			datatype <- .datatype(...)
+		}
+	} else {
+		hasCT <- FALSE
+		datatype <- .datatype(...)
+	}
+	
+	
+	ops <- list(gdal=gdal, filetype=filetype, datatype=datatype)
 	r <- as(raster(x), "SpatRaster")
 	nlyr(r) <- nlayers(x)
 	writeStart(r, filename, overwrite=overwrite, wopt=ops) 	
