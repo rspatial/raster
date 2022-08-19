@@ -21,7 +21,7 @@
 	x@file@name <- filename
 	
 	ops <- list(gdal=gdal, ...)
-	r <- rast(r)
+	r <- rast(x)
 	writeStart(r, filename, overwrite=overwrite, wopt=ops) 	
 	attr(x@file, "transient") <- r
 	return(x)
