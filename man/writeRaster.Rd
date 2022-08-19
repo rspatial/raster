@@ -74,7 +74,7 @@ Supported file types include:
     \tab \code{SAGA}      \tab SAGA GIS    \tab .sdat                \tab  No \cr
     \tab \code{IDRISI}    \tab IDRISI      \tab .rst                 \tab  No \cr
     \tab \code{CDF}       \tab netCDF (requires ncdf4) \tab .nc    \tab  Yes \cr
-    \tab \code{GTiff}     \tab GeoTiff (requires rgdal) \tab .tif    \tab  Yes  \cr
+    \tab \code{GTiff}     \tab GeoTiff \tab .tif    \tab  Yes  \cr
     \tab \code{ENVI}      \tab ENVI .hdr Labelled       \tab .envi   \tab Yes  \cr
     \tab \code{EHdr}      \tab ESRI .hdr Labelled       \tab  .bil   \tab Yes  \cr
     \tab \code{HFA}       \tab Erdas Imagine Images (.img)  \tab .img \tab Yes  \cr
@@ -103,7 +103,7 @@ rf <- writeRaster(r, filename=file.path(tmp, "allint.grd"), datatype='INT4S', ov
 b <- brick(r, sqrt(r))
 bf <- writeRaster(b, filename=file.path(tmp, "multi.grd"), bandorder='BIL', overwrite=TRUE)
 
-# write to a new geotiff file (depends on rgdal)
+# write to a new geotiff file
 rf <- writeRaster(r, filename=file.path(tmp, "test.tif"), format="GTiff", overwrite=TRUE)
 bf <- writeRaster(b, filename=file.path(tmp, "multi.tif"), 
 						options="INTERLEAVE=BAND", overwrite=TRUE)

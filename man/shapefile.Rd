@@ -29,7 +29,7 @@ A shapefile should consist of at least four files: .shp (the geometry), .dbf (th
   \item{verbose}{logical. If \code{TRUE}, information about the file is printed}
   \item{warnPRJ}{logical. If \code{TRUE}, a warning is given if there is no .prj file}
   \item{stringsAsFactors}{logical. If \code{TRUE}, strings are converted to factors}
-  \item{...}{Additional arguments passed to rgdal functions readOGR or writeOGR}
+  \item{...}{Additional arguments (none)}
 }
 
 \value{
