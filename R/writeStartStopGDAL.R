@@ -21,7 +21,8 @@
 	x@file@name <- filename
 	
 	ops <- list(gdal=gdal, ...)
-	r <- rast(x)
+	r <- as(raster(x), "SpatRaster")
+	nlyr(r) <- nlayers(x)
 	writeStart(r, filename, overwrite=overwrite, wopt=ops) 	
 	attr(x@file, "transient") <- r
 	return(x)
@@ -32,7 +33,12 @@
 	
 	x <- attr(x@file, "transient")
 	x <- writeStop(x)
-	as(x, "Raster")
+	f <- sources(x)
+	if (nlyr(x) == 1) {
+		return(raster(f))
+	} else {
+		return(brick(f))	
+	}
 
 	# statistics <- cbind(x@data@min, x@data@max)	
 	# if (substr(x@file@datanotation, 1, 1) != 'F') {
