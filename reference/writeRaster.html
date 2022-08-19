@@ -18,7 +18,7 @@ When writing a file to disk, the file format is determined by the 'format=' argu
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.5-30</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-0</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@ when writing to an ascii file or another file type that does not store the crs</
 
 <p>In multi-layer files (i.e. files saved from RasterStack or RasterBrick objects), in the native 'raster' format, the band-order can be set to BIL ('Bands Interleaved by Line'), BIP ('Bands Interleaved by Pixels') or BSQ ('Bands SeQuential'). Note that bandorder is not the same as filetype here.</p>
 <p>Supported file types include:</p>
-<table class="table table"><tr><td></td><td><b>File type</b></td><td><b>Long name</b></td><td><b>default extension</b></td><td><b>Multiband support</b></td></tr><tr><td></td><td><code>raster</code></td><td>'Native' raster package format</td><td>.grd</td><td>Yes</td></tr><tr><td></td><td><code>ascii</code></td><td>ESRI Ascii</td><td>.asc</td><td>No</td></tr><tr><td></td><td><code>SAGA</code></td><td>SAGA GIS</td><td>.sdat</td><td>No</td></tr><tr><td></td><td><code>IDRISI</code></td><td>IDRISI</td><td>.rst</td><td>No</td></tr><tr><td></td><td><code>CDF</code></td><td>netCDF (requires ncdf4)</td><td>.nc</td><td>Yes</td></tr><tr><td></td><td><code>GTiff</code></td><td>GeoTiff (requires rgdal)</td><td>.tif</td><td>Yes</td></tr><tr><td></td><td><code>ENVI</code></td><td>ENVI .hdr Labelled</td><td>.envi</td><td>Yes</td></tr><tr><td></td><td><code>EHdr</code></td><td>ESRI .hdr Labelled</td><td>.bil</td><td>Yes</td></tr><tr><td></td><td><code>HFA</code></td><td>Erdas Imagine Images (.img)</td><td>.img</td><td>Yes</td></tr></table></div>
+<table class="table table"><tr><td></td><td><b>File type</b></td><td><b>Long name</b></td><td><b>default extension</b></td><td><b>Multiband support</b></td></tr><tr><td></td><td><code>raster</code></td><td>'Native' raster package format</td><td>.grd</td><td>Yes</td></tr><tr><td></td><td><code>ascii</code></td><td>ESRI Ascii</td><td>.asc</td><td>No</td></tr><tr><td></td><td><code>SAGA</code></td><td>SAGA GIS</td><td>.sdat</td><td>No</td></tr><tr><td></td><td><code>IDRISI</code></td><td>IDRISI</td><td>.rst</td><td>No</td></tr><tr><td></td><td><code>CDF</code></td><td>netCDF (requires ncdf4)</td><td>.nc</td><td>Yes</td></tr><tr><td></td><td><code>GTiff</code></td><td>GeoTiff</td><td>.tif</td><td>Yes</td></tr><tr><td></td><td><code>ENVI</code></td><td>ENVI .hdr Labelled</td><td>.envi</td><td>Yes</td></tr><tr><td></td><td><code>EHdr</code></td><td>ESRI .hdr Labelled</td><td>.bil</td><td>Yes</td></tr><tr><td></td><td><code>HFA</code></td><td>Erdas Imagine Images (.img)</td><td>.img</td><td>Yes</td></tr></table></div>
     <div id="value">
     <h2>Value</h2>
     
@@ -132,27 +132,12 @@ when writing to an ascii file or another file type that does not store the crs</
 <span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="va">r</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">b</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"multi.grd"</span><span class="op">)</span>, bandorder<span class="op">=</span><span class="st">'BIL'</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># write to a new geotiff file (depends on rgdal)</span></span></span>
+<span class="r-in"><span><span class="co"># write to a new geotiff file</span></span></span>
 <span class="r-in"><span><span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"test.tif"</span><span class="op">)</span>, format<span class="op">=</span><span class="st">"GTiff"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rgdal</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Please note that rgdal will be retired by the end of 2023,</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> plan transition to sf/stars/terra functions using GDAL and PROJ</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> at your earliest convenience.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> rgdal: version: 1.5-32, (SVN revision 1176)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Geospatial Data Abstraction Library extensions to R successfully loaded</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loaded GDAL runtime: GDAL 3.5.1, released 2022/06/30</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Path to GDAL shared files: /usr/local/Cellar/gdal/3.5.1_2/share/gdal</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  GDAL does not use iconv for recoding strings.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> GDAL binary built with GEOS: TRUE </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loaded PROJ runtime: Rel. 9.0.1, June 15th, 2022, [PJ_VERSION: 901]</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Path to PROJ shared files: /Users/runner/Library/Application Support/proj:/usr/local/opt/proj/share/proj:/usr/local/Cellar/proj/9.0.1/share/proj</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> PROJ CDN enabled: FALSE</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Linking to sp version:1.5-0</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> To mute warnings of possible GDAL/OSR exportToProj4() degradation,</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> use options("rgdal_show_exportToProj4_warnings"="none") before loading sp or rgdal.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'rast': object 'r' not found</span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">b</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"multi.tif"</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>            options<span class="op">=</span><span class="st">"INTERLEAVE=BAND"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'rast': object 'r' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span><span class="co"># write to netcdf </span></span></span>
