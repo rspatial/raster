@@ -85,8 +85,8 @@ setMethod("wkt", signature(obj="Raster"),
 		x <- crs(x)
 		x <- .makeCRS(x[1], x[2])
 	} else if (inherits(x, "SpatVector")) { 
-		x <- crs(x)
-		x <- .makeCRS(x[1], x[2])
+		x <- crs(x, proj=TRUE)
+		x <- .makeCRS(x)
 	} else if (is.na(x)) {
 		x <- .CRS()
 	} else if (is.character(x)) {
