@@ -41,8 +41,7 @@ function(x, filename='', directions=8, gaps=TRUE, ...) {
 		}
 	}
 
-	datatype <- list(...)$datatype
-	
+	datatype <- list(...)$datatype	
 	out <- raster(x)
 	
 	if (canProcessInMemory(out, 3)) {
@@ -71,9 +70,7 @@ function(x, filename='', directions=8, gaps=TRUE, ...) {
 	rcl <- matrix(nrow=0, ncol=2)
 	
 	for (i in 1:tr$n) {
-	
 		ext[4] <- yFromRow(out, tr$row[i]) + 0.5 * yres(out)
-		
 		endrow <- tr$row[i] + tr$nrows[i] - 1 
 		ext[3] <- yFromRow(out, endrow) - 1.5 * yres(out) # one additional row for overlap
 		xc <- crop(x, extent(ext))

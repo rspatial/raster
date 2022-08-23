@@ -141,7 +141,6 @@ function(x, y, classes=NULL, filename='', ...) {
 	} 
 	#  else 
 
-	
 	out <- writeStart(out, filename=filename, ...)
 	tr <- blockSize(out)
 	pb <- pbCreate(tr$n, label='layerize', ...)

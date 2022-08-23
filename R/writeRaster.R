@@ -40,7 +40,7 @@ function(x, filename, format, ...) {
 		tr <- blockSize(x)
 		pb <- pbCreate(tr$n, ...)			
 		# use x to keep layer name
-		r <- writeStart(x, filename=filename, filetype=filetype, ...)
+		r <- writeStart(x, filename=filename, format=filetype, ...)
 		for (i in 1:tr$n) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 			r <- writeValues(r, v, tr$row[i])
@@ -147,7 +147,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		if (inherits(x, 'RasterBrick')) {
 			x <- stack(x)
 		}
-		layers <- lapply(1:nl, function(i) writeRaster(x[[i]], filename=filename[i], format=filetype, ...))	
+		layers <- lapply(1:nl, function(i) writeRaster(x[[i]], filename=filename[i], format=format, ...))	
 		return(invisible(stack(layers)))
 	}
 	
@@ -210,7 +210,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 			b <- .writeValuesBrickCDF(b, values(x))	
 			x <- .stopWriteCDF(b) 
 		} else {
-			x <- .writeGDALall(x, filename=filename, filetype=filetype, ...) 
+			x <- .writeGDALall(x, filename=filename, format=filetype, ...) 
 		}
 		
 		return(invisible(x))

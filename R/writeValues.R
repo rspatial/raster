@@ -207,9 +207,8 @@ setMethod("writeValues", signature(x="RasterBrick", v="matrix"),
 			#	gd <- rgdal::putRasterData(x@file@transient, vv, band=i, offset=off) 	
 			#}
 			
-			r <- attr(x@file, "transient")
-			writeValues(r, v, start, nrow(v) / ncol(x))
-			
+			r <- attr(x@file, "transient")	
+			writeValues(r, as.vector(t(v)), start=start, nrows=nrow(v)/ncol(x))
 		}
 		return(x)
 	}	

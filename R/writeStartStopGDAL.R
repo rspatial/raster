@@ -3,7 +3,7 @@
 # Version 0.9
 # Licence GPL v3
 
-.startGDALwriting <- function(x, filename, gdal=NULL, setStatistics=TRUE, overwrite=FALSE, filetype="GTIff", ...) {
+.startGDALwriting <- function(x, filename, gdal=NULL, setStatistics=TRUE, overwrite=FALSE, format, ...) {
 
 	#temp <- .getGDALtransient(x, filename=filename, options=options, ...)
 	#attr(x@file, "transient") <- temp[[1]]
@@ -34,7 +34,7 @@
 	}
 	
 	
-	ops <- list(gdal=gdal, filetype=filetype, datatype=datatype)
+	ops <- list(gdal=gdal, filetype=format, datatype=datatype, progress=0, progressbar=FALSE)
 	r <- as(raster(x), "SpatRaster")
 	nlyr(r) <- nlayers(x)
 	writeStart(r, filename, overwrite=overwrite, wopt=ops) 	

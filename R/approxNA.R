@@ -70,9 +70,9 @@ function(x, filename="", method="linear", yleft, yright, rule=1, f=0, ties=mean,
 		s <- .rowSums(is.na(v), nrow(v), nl)
 
 		if (isTRUE(NArule==1)) {
-			j <- s == (nl-1) # one non-NA only
-			if (length(j) > 0 ) {
-				v[j, ] <- apply(v[j,,drop=FALSE ], 1, max, na.rm=TRUE)
+			k <- s == (nl-1) # one non-NA only
+			if (length(k) > 0 ) {
+				v[k, ] <- apply(v[k,,drop=FALSE ], 1, max, na.rm=TRUE)
 			}
 		}
 		i <- (s < nl-1) # need at least two
@@ -87,7 +87,7 @@ function(x, filename="", method="linear", yleft, yright, rule=1, f=0, ties=mean,
 				v[i,] <- t( apply(v[i,,drop=FALSE], 1, function(x) stats::approx(x=xout, y=x, xout=xout, method=method, yright=yright, yleft=yleft, rule=rule, f=f, ties=ties)$y ) )
 			}
 		}
-		out <- writeValues(out, v, tr$row[j])
+		out <- writeValues(out, v, start=tr$row[j])
 		pbStep(pb)
 	}
 	
