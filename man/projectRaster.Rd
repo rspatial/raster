@@ -1,6 +1,7 @@
 \name{projectRaster}
 
 \alias{projectRaster}
+\alias{projectRaster,Raster-method}
 \alias{projectExtent}
 
 \title{Project a Raster object}
@@ -19,7 +20,7 @@ If the resolution of the output is much larger than that of the input, you shoul
 }
 
 \usage{
-projectRaster(from, to, res, crs, method="bilinear", 
+\S4method{projectRaster}{Raster}(from, to, res, crs, method="bilinear", 
              alignOnly=FALSE, over=FALSE, filename="", ...) 
 
 projectExtent(object, crs)

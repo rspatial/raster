@@ -155,8 +155,10 @@ projectExtent <- function(object, crs) {
 	crop(rx, p)
 }
 
+if (!isGeneric("projectRaster")) {setGeneric("projectRaster", function(from, ...) standardGeneric("projectRaster"))}
 
-projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, filename="", ...)  {
+setMethod('projectRaster', signature(from='Raster'), 
+function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, filename="", ...)  {
 
 #	.requireRgdal()
 #	use_proj6 <- .useproj6()
@@ -442,4 +444,4 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		}
 	}
 }
-
+)
