@@ -49,8 +49,9 @@
 	if (is.na(NAflag)) {
 		NAflag <- .rasterNodatavalue(datatype)
 	}
-	
+		
 	ops <- list(gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE)
+	if (!isTRUE(setStatistics)) ops$statistics = 6
 	r <- as(raster(x), "SpatRaster")
 	nlyr(r) <- nlayers(x)
 	writeStart(r, filename, overwrite=overwrite, wopt=ops) 	
