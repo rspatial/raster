@@ -20,7 +20,7 @@ be adjusted (e.g. by setting its resolution) and used as a template 'to' in proj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-1</span>
       </span>
     </div>
 
@@ -141,37 +141,22 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate Reference System:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Deprecated Proj.4 representation: +proj=longlat +datum=WGS84 +no_defs </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WKT2 2019 representation:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GEOGCRS["unknown",</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     DATUM["World Geodetic System 1984",</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         ELLIPSOID["WGS 84",6378137,298.257223563,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             LENGTHUNIT["metre",1]],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         ID["EPSG",6326]],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     PRIMEM["Greenwich",0,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         ANGLEUNIT["degree",0.0174532925199433],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         ID["EPSG",8901]],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     CS[ellipsoidal,2],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         AXIS["longitude",east,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             ORDER[1],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",9122]]],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         AXIS["latitude",north,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             ORDER[2],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",9122]]]] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Deprecated Proj.4 representation: +proj=longlat +datum=WGS84 </span>
 <span class="r-in"><span><span class="co"># wkt(r)</span></span></span>
 <span class="r-in"><span><span class="co"># proj.4 projection description</span></span></span>
 <span class="r-in"><span><span class="va">newproj</span> <span class="op">&lt;-</span> <span class="st">"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#simplest approach</span></span></span>
 <span class="r-in"><span><span class="va">pr1</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [project] output crs is not valid</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># alternatively also set the resolution</span></span></span>
 <span class="r-in"><span><span class="va">pr2</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span>, res<span class="op">=</span><span class="fl">20000</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(from, ...):</span> trying to get slot "projargs" from an object of a basic class ("NULL") with no slots</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># inverse projection, back to the properties of 'r'</span></span></span>
 <span class="r-in"><span><span class="va">inv</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">pr2</span>, <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'from' in selecting a method for function 'projectRaster': object 'pr2' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># to have more control, provide an existing Raster object, here we create one</span></span></span>
 <span class="r-in"><span><span class="co"># using projectExtent (no values are transferred)</span></span></span>
@@ -180,6 +165,7 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
 <span class="r-in"><span><span class="fu"><a href="resolution.html">res</a></span><span class="op">(</span><span class="va">pr3</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">200000</span></span></span>
 <span class="r-in"><span><span class="co"># now project</span></span></span>
 <span class="r-in"><span><span class="va">pr3</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, <span class="va">pr3</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [project] input crs is not valid</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># using a higher resolution</span></span></span>
