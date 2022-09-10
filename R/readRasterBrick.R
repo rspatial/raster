@@ -192,6 +192,7 @@
 		object <- rast(object)
 		readStart(object)
 		result <- readValues(object, startrow, nrows, startcol, ncols, mat=TRUE, dataframe=FALSE)
+		result[is.nan(result)] <- NA
 		readStop(object)
 		
 	}

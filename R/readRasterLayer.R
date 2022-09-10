@@ -166,6 +166,7 @@
 		object <- rast(object)
 		readStart(object)
 		result <- readValues(object, startrow, nrows, startcol, ncols, mat=FALSE, dataframe=FALSE)
+		result[is.nan(result)] <- NA
 		readStop(object)
 
 		#if (object@data@gain != 1 | object@data@offset != 0) {

@@ -3,7 +3,20 @@
 # Version 0.9
 # Licence GPL v3
 
-.startGDALwriting <- function(x, filename, gdal=NULL, setStatistics=TRUE, overwrite=FALSE, format, ...) {
+
+.rasterNodatavalue <- function(x){
+	if (x == 'FLT4S') return(-3.4E38)
+	if (x == 'FLT8S') return(-1.7E308)
+	if (x == 'INT4S') return(-2147483647)
+	if (x == 'INT2S') return(-32768)
+	if (x == 'INT1S') return(-128)
+	if (x == 'INT1U') return(255)
+	if (x == 'INT2U') return(65535)
+	if (x == 'INT4U') return(2147483647) #(4294967295) <- not supported as integer in R
+	NA
+}
+
+.startGDALwriting <- function(x, filename, gdal=NULL, setStatistics=TRUE, overwrite=FALSE, NAflag=NA, format="", datatype=NA, ...) {
 
 	#temp <- .getGDALtransient(x, filename=filename, options=options, ...)
 	#attr(x@file, "transient") <- temp[[1]]
@@ -23,18 +36,21 @@
 	ct <- colortable(x)
 	if (length(ct) > 0 ) {
 		hasCT <- TRUE
-		if (is.null(list(...)$datatype)) {
+		if (is.na(datatype)) {
 			datatype <- 'INT1U'
 		} else {
-			datatype <- .datatype(...)
+			datatype <- .datatype(datatype)
 		}
 	} else {
 		hasCT <- FALSE
-		datatype <- .datatype(...)
+		datatype <- .datatype(datatype)
 	}
 	
+	if (is.na(NAflag)) {
+		NAflag <- .rasterNodatavalue(datatype)
+	}
 	
-	ops <- list(gdal=gdal, filetype=format, datatype=datatype, progress=0, progressbar=FALSE)
+	ops <- list(gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE)
 	r <- as(raster(x), "SpatRaster")
 	nlyr(r) <- nlayers(x)
 	writeStart(r, filename, overwrite=overwrite, wopt=ops) 	

@@ -4,7 +4,7 @@
 # Licence GPL v3
 
 
-.writeGDALall <- function(x, filename, overwrite=FALSE, options=NULL, setStatistics=TRUE, format, ...) {
+.writeGDALall <- function(x, filename, options=NULL, setStatistics=TRUE, ...) {
 
 	stat <- cbind(NA, NA)
 	if (nlayers(x) > 1) {
@@ -23,8 +23,9 @@
 #			stat <- cbind(mean(x, na.rm=TRUE), stats::sd(x, na.rm=TRUE))
 #		}
 	}
-	filetype <- .filetype(format=format, filename=filename)
-	y <- .startGDALwriting(y, filename, gdal=options, overwrite=overwrite, format=filetype)
+##	filetype <- .filetype(format=format, filename=filename)
+##	y <- .startGDALwriting(y, filename, gdal=options, overwrite=overwrite, format=filetype, ...)
+	y <- .startGDALwriting(y, filename, gdal=options, ...)
 	x <- writeValues(y, x, start=1)
 	.stopGDALwriting(x, stat)
 }

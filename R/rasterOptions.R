@@ -473,22 +473,23 @@ tmpDir <- function(create=TRUE) {
 }
 
 
-.datatype <- function(..., datatype, dataType) {
+.datatype <- function(datatype=NULL, ...) {
 
-	if (missing(datatype) && !missing(dataType)) { 
-		warning('argument "datatype" misspelled as "dataType"')
-		datatype <- dataType
-	} else if (missing(datatype)) { 
-		datatype <- getOption('rasterDatatype')
-		if (is.null(datatype)) {
-			return('FLT4S') 
-		} 
+#	if (missing(datatype) && !missing(dataType)) { 
+#		warning('argument "datatype" misspelled as "dataType"')
+#		datatype <- dataType
+	def <- getOption('rasterDatatype')	
+	if (is.null(def)) def <- "FLT4S"
+	if (missing(datatype)) { 
+		datatype <- def
+	} else if (is.na(datatype) || is.null(datatype)) {
+		datatype <- def
 	} 
 	if (! datatype %in% c('LOG1S', 'INT1S', 'INT2S', 'INT4S', 'INT1U', 'INT2U', 'INT4U', 'FLT4S', 'FLT8S')) {
 		warning(datatype, ' is an invalid datatype value, changed to "FLT4S"')
 		datatype <- 'FLT4S'
 	}
-	return(datatype)
+	datatype
 }
 
 .getFormat <- function(filename) {
