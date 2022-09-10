@@ -104,7 +104,7 @@ setAs("SpatRaster", "Raster",
 		if (from@file@NAchanged) {
 			NAflag(r) <- from@file@nodatavalue
 		}
-		scoff(r) <- cbind(gain(r), offs(r))
+		scoff(r) <- cbind(gain(from), offs(from))
 		
 	} else {
 		if (is.na(from@crs)) {

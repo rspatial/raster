@@ -9,9 +9,9 @@
 	if (inherits(x, 'RasterStack')) {
 		x@layers <- lapply( x@layers, 
 			function(z) {
-				if (fromDisk(x)) {
+				if (fromDisk(z)) {
 					z@data@gain <- value
-				} else {
+				} else if (hasValues(z)) {
 					z <- z * value
 				}
 				return(z)
@@ -20,7 +20,7 @@
 	} else {
 		if (fromDisk(x)) {
 			x@data@gain <- value
-		} else {
+		} else if (hasValues(x)) {
 			x <- x * value
 		}
 	}
@@ -44,10 +44,9 @@ gain <- function(x) {
 	
 		x@layers <- lapply( x@layers, 
 			function(z) { 
-		
 				if (fromDisk(z)) {
 					z@data@offset <- value
-				} else {
+				} else if (hasValues(z)) {				
 					z <- z + value
 				}
 				return(z) 
@@ -56,8 +55,8 @@ gain <- function(x) {
 			
 	} else {
 		if (fromDisk(x)) {
-			x@data@offset <- value	
-		} else {
+			x@data@offset <- value
+		} else if (hasValues(x)) {
 			x <- x + value
 		}
 	}
