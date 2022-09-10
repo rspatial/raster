@@ -5,7 +5,6 @@ Version: 3.6-1
 Date: 2022-09-10
 Imports: Rcpp, methods, terra (>= 1.6-16)
 LinkingTo: Rcpp
-Remotes: rspatial/terra
 Depends: sp (>= 1.4-5), R (>= 3.5.0)
 Suggests: ncdf4, igraph, tcltk, parallel, rasterVis, MASS, sf, tinytest, gstat, fields, exactextractr
 SystemRequirements: C++11
