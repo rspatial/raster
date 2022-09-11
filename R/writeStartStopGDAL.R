@@ -29,9 +29,6 @@
 	#x@data@haveminmax <- FALSE	
 	#x@file@datanotation <- .getRasterDType(temp[[4]])
 
-	x@file@driver <- 'gdal'
-	x@data@fromdisk <- TRUE
-	x@file@name <- filename
 	
 	ct <- colortable(x)
 	if (length(ct) > 0 ) {
@@ -50,12 +47,24 @@
 		NAflag <- .rasterNodatavalue(datatype)
 	}
 		
-	ops <- list(gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE)
-	if (!isTRUE(setStatistics)) ops$statistics = 6
-	r <- as(raster(x), "SpatRaster")
-	nlyr(r) <- nlayers(x)
-	writeStart(r, filename, overwrite=overwrite, wopt=ops) 	
+
+	nlx <- nlayers(x)
+	x <- raster(x)
+	if (nlx > 1) {
+		x <- brick(x, nl=nlx)
+	}
+	r <- as(x, "SpatRaster")
+	
+#	if (!isTRUE(setStatistics)) ops$statistics = 6
+
+	writeStart(r, filename, overwrite=overwrite, gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE) 	
 	attr(x@file, "transient") <- r
+
+	x@file@datanotation <- datatype
+	x@file@driver <- 'gdal'
+	x@data@fromdisk <- TRUE
+	x@file@name <- filename
+
 	return(x)
 }
 
