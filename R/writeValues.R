@@ -208,7 +208,7 @@ setMethod("writeValues", signature(x="RasterBrick", v="matrix"),
 			#}
 			
 			r <- attr(x@file, "transient")	
-			writeValues(r, as.vector(t(v)), start=start, nrows=nrow(v)/ncol(x))
+			writeValues(r, as.vector(v), start=start, nrows=nrow(v)/ncol(x))
 		}
 		return(x)
 	}	
