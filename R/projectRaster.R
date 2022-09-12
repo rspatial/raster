@@ -169,17 +169,6 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 		stop("input projection is NA") 
 	}
 
-	if (missing(res)) res = NULL
-	if (missing(to)) {
-		if (missing(crs)) {
-			stop("both 'to' and 'crs' arguments are missing.")
-		}
-		projto <- .getCRS(crs)		
-		p = project(rast(from), projto, res=res, method=method, filename=filename, gdal=FALSE, ...)
-	} else {
-		p = project(rast(from), rast(to), method=method, filename=filename, gdal=FALSE, ...)
-	}
-	return(as(p, "Raster"))
 
 	lonlat <- isLonLat(projfrom)
 	if (missing(to)) {
@@ -188,8 +177,7 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 		}
 		projto <- .getCRS(crs)
 		
-		return(project(rast(from), crs, res=res, method=method, filename=filename, gdal=FALSE, ...))
-		
+	
 #		if (use_proj6) {
 #			if (is.null(wkt(projto))) {
 #				use_proj6 = FALSE
@@ -277,6 +265,7 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 	methods::validObject(to)
 	methods::validObject(.getCRS((to)))
 
+
 	#if (identical(projfrom, projto)) {
 	#	warning('projections of "from" and "to" are the same')
 	#}	
@@ -319,6 +308,12 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 		#warning("'from' has no cell values")
 		return(to)
 	}
+
+	p = project(rast(from), rast(to), method=method, filename=filename, gdal=FALSE, ...)
+	return(as(p, "Raster"))
+
+
+
 	
 	if (canProcessInMemory(to, n=nl*4)) {
 		inMemory <- TRUE
