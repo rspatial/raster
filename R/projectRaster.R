@@ -160,26 +160,36 @@ if (!isGeneric("projectRaster")) {setGeneric("projectRaster", function(from, ...
 setMethod('projectRaster', signature(from='Raster'), 
 function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, filename="", ...)  {
 
+
 #	.requireRgdal()
 #	use_proj6 <- .useproj6()
 
-	projfrom <- .getCRS(from)
+	projfrom <- raster:::.getCRS(from)
 	if (is.na(projfrom)) { 
 		stop("input projection is NA") 
 	}
-#	if (use_proj6) {
-#		if (is.null(wkt(projfrom))) {
-#			use_proj6 = FALSE
-#		}
-#	}
-	
+
+	if (missing(res)) res = NULL
+	if (missing(to)) {
+		if (missing(crs)) {
+			stop("both 'to' and 'crs' arguments are missing.")
+		}
+		projto <- .getCRS(crs)		
+		p = project(rast(from), projto, res=res, method=method, filename=filename, gdal=FALSE, ...)
+	} else {
+		p = project(rast(from), rast(to), method=method, filename=filename, gdal=FALSE, ...)
+	}
+	return(as(p, "Raster"))
+
 	lonlat <- isLonLat(projfrom)
-	
 	if (missing(to)) {
 		if (missing(crs)) {
 			stop("both 'to' and 'crs' arguments are missing.")
 		}
 		projto <- .getCRS(crs)
+		
+		return(project(rast(from), crs, res=res, method=method, filename=filename, gdal=FALSE, ...))
+		
 #		if (use_proj6) {
 #			if (is.null(wkt(projto))) {
 #				use_proj6 = FALSE
@@ -412,7 +422,7 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 			xy <- sp::coordinates(to) 
 			xy <- subset(xy, xy[,1] > e@xmin & xy[,1] < e@xmax)
 			cells <- cellFromXY(to, xy)
-			xy <- project(xy, projto_int, projfrom)			
+			xy <- terra::project(xy, projto_int, projfrom)			
 			to[cells] <- .xyValues(from, xy, method=method)
 			
 			if (filename != '') {

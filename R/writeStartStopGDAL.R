@@ -48,13 +48,15 @@
 	}
 		
 
-	nlx <- nlayers(x)
-	x <- raster(x)
-	if (nlx > 1) {
-		x <- brick(x, nl=nlx)
+	if (nlayers(x) > 1) {
+		r <- brick(x, values=FALSE)
+	} else {
+		r <- raster(x)
 	}
-	r <- as(x, "SpatRaster")
-	
+	r <- as(r, "SpatRaster")
+#	names(r) <- names(x)
+#	nms <- paste0(extension(basename(filename), ""), "_")
+#	names(r) <- paste0(nms, 1:nlyr(r))
 #	if (!isTRUE(setStatistics)) ops$statistics = 6
 
 	writeStart(r, filename, overwrite=overwrite, gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE) 	
