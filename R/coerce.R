@@ -125,6 +125,9 @@ setAs("SpatRaster", "Raster",
 		}
 		levs <- levels(from)[[1]]
 		if (!is.null(levs)) {
+			if (ncol(levs) == 1) {
+				levs <- cbind(value=1:nrow(levs), levs)
+			}
 			levels(r) <- levs				
 		}
 	}

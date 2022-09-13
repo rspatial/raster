@@ -299,7 +299,10 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 	}
 
 	if (method=='ngb') { 
-		method <- 'simple' # for extract (.xyValues)
+		#method <- 'simple' # for extract (.xyValues)
+
+		method = "near"
+
 	} 
 
 
@@ -308,11 +311,11 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 		#warning("'from' has no cell values")
 		return(to)
 	}
-
-	p = project(rast(from), rast(to), method=method, filename=filename, gdal=FALSE, ...)
+	
+	opt <- list(...)
+	opt$progress = NULL
+	p = project(rast(from), rast(to), method=method, filename=filename, gdal=FALSE, wopt=opt)
 	return(as(p, "Raster"))
-
-
 
 	
 	if (canProcessInMemory(to, n=nl*4)) {
