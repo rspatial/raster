@@ -79,9 +79,8 @@ RasterLayer or RasterBrick object.
 
 \examples{
 # create a new (not projected) RasterLayer with cellnumbers as values
-r <- raster(xmn=-110, xmx=-90, ymn=40, ymx=60, ncols=40, nrows=40)
+r <- raster(xmn=-110, xmx=-90, ymn=40, ymx=60, ncols=40, nrows=40, crs="+proj=longlat")
 r <- setValues(r, 1:ncell(r))
-crs(r)
 # wkt(r)
 # proj.4 projection description
 newproj <- "+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"
@@ -103,15 +102,6 @@ res(pr3) <- 200000
 # now project
 pr3 <- projectRaster(r, pr3)
 
-\dontrun{
-# using a higher resolution
-res(pr1) <- 10000
-pr <- projectRaster(r, pr1, method='bilinear')
-inv <- projectRaster(pr, r, method='bilinear')
-dif <- r - inv
-# small difference
-plot(dif)
-}
 }
 
 \keyword{spatial}
