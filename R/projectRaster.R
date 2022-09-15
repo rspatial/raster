@@ -3,6 +3,13 @@
 # Version 1.0
 # Licence GPL v3
 
+.strCRS <- function(object) {
+	p <- .getCRS(object)
+	p <- suppressWarnings(wkt(p))
+	if (is.null(p)) p <- projection(p)
+	p
+}
+
 
 projectExtent <- function(object, crs) {
 #	.requireRgdal()
@@ -15,23 +22,8 @@ projectExtent <- function(object, crs) {
 	dm[1] <- max(10, dm[1])
 	dm[2] <- max(10, dm[2])
 	dim(object) <- dm
-	pfrom <- .getCRS(object)
-	pto <- .getCRS(crs)
-#	if (use_proj6) {
-		projfrom <- suppressWarnings(wkt(pfrom))
-		projto <- suppressWarnings(wkt(pto))
-		if (is.null(projfrom)){
-#			use_proj6 = FALSE
-			projfrom <- projection(pfrom)
-		}
-		if (is.null(projto)) {
-			projto <- projection(pto)
-		}
-#	} else {
-#		projfrom <- proj4string(pfrom)
-#		projto <-  proj4string(pto)
-#	}
-
+	pfrom <- .strCRS(object)
+	pto <- .strCRS(crs)
 #	rs <- res(object)
 #	xmn <- object@extent@xmin - 0.5 * rs[1]
 #	xmx <- object@extent@xmax + 0.5 * rs[1]
@@ -117,17 +109,10 @@ projectExtent <- function(object, crs) {
 	y1 <- y - 0.5 * res[2]
 	y2 <- y + 0.5 * res[2]
 	xy <- cbind(c(x1, x2, x, x), c(y, y, y1, y2))
-	fromcrs <- .getCRS(obj)
-#	if (proj6) {
-#		fromcrs <- wkt(fromcrs)
-#		pXY <- rgdal::rawTransform(fromcrs, crs, nrow(xy), xy[,1], xy[,2], wkt=proj6)
-#	} else {
-#		fromcrs <-  proj4string(fromcrs)	
-#		pXY <- rgdal::rawTransform(fromcrs, crs, nrow(xy), xy[,1], xy[,2])
-#	}
+	
+	fromcrs <- .strCRS(obj)
 	pXY <- project(xy, fromcrs, crs)
 
-	
 #	pXY <- cbind(pXY[[1]], pXY[[2]])
 #	out <- c((pXY[2,1] - pXY[1,1]), (pXY[4,2] - pXY[3,2]))
 	outex <- extent(pXY)
@@ -175,35 +160,13 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 		if (missing(crs)) {
 			stop("both 'to' and 'crs' arguments are missing.")
 		}
-		projto <- .getCRS(crs)
-		
+		projto <- .strCRS(crs)
+		projfrom <- .strCRS(projfrom)
 	
-#		if (use_proj6) {
-#			if (is.null(wkt(projto))) {
-#				use_proj6 = FALSE
-#			}
-#		}
-		#compareCRS(projfrom, projto)
-#		if (use_proj6) {
-#			if (rgdal::compare_CRS(projto, projfrom)["strict"]) {
-#				warning("input and ouput crs are the same")
-#				#return(from) 
-#			}
-#			projfrom <- wkt(projfrom)
-#		} else {
-			if ( proj4string(projto) == proj4string(projfrom)) {
-				warning("input and ouput crs are the same")
-			}
-			projfrom <-  proj4string(projfrom)
 #		}
 		to <- projectExtent(from, projto)
-		to@crs <- projto
+		crs(to) <- projto
 
-#		if (use_proj6) {
-			suppressWarnings(projto <- wkt(projto))
-#		} else {
-#			projto <-  proj4string(projto)		
-#		}
 		if (missing(res)) {
 			res <- .computeRes(from, projto)
 		}
@@ -226,21 +189,11 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 		to <- extend(to, e)
 	} else {
 	
-		projto <-.getCRS(to)
+		projto <-.strCRS(to)
 		if (is.na(projto)) { 
 			stop("output projection is NA") 
 		} 
-#		if (use_proj6) {
-#			if (rgdal::compare_CRS(projto, projfrom)["strict"]) {
-#				warning("input and ouput crs are the same")
-#			}
-#			projfrom <- wkt(projfrom)
-#		} else {
-			if ( proj4string(projto) ==  proj4string(projfrom)) {
-				warning("input and ouput crs are the same")
-			}
-			projfrom =  proj4string(projfrom)
-#		}
+		projfrom <-.strCRS(projfrom)
 		
 		e <- extent( projectExtent(from, projto) )
 		add <- min(10, min(dim(to)[1:2])/10) * max(raster::res(to))
@@ -255,35 +208,15 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 			e@ymax <- min(90, e@ymax)
 		}
 
-#		if (use_proj6) {
-			suppressWarnings(projto <- wkt(projto))
-#		} else {
-#			projto <- proj4string(projto)
-#		}
 	}
 	
-	methods::validObject(to)
-	methods::validObject(.getCRS((to)))
-
-
-	#if (identical(projfrom, projto)) {
-	#	warning('projections of "from" and "to" are the same')
-	#}	
-#	if ((!use_proj6) & lonlat & over) {
-#		projto_int <- paste(projto, "+over")
-#	} else {
-		projto_int <- projto	
-#	}
+	projto_int <- projto	
 
 	if (alignOnly) {
 		to <- .getAlignedRaster(from, to)
 		return (to)
 	}
 	
-#	pbb <- projectExtent(to,.getCRS(from))
-#	bb <- intersect(extent(pbb), extent(from))
-#	methods::validObject(bb)
-
 	if (!method %in% c('bilinear', 'ngb')) { 
 		stop('invalid method') 
 	}
