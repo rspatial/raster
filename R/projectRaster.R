@@ -24,16 +24,7 @@ projectExtent <- function(object, crs) {
 	dim(object) <- dm
 	pfrom <- .strCRS(object)
 	pto <- .strCRS(crs)
-#	rs <- res(object)
-#	xmn <- object@extent@xmin - 0.5 * rs[1]
-#	xmx <- object@extent@xmax + 0.5 * rs[1]
-#	ymn <- object@extent@ymin - 0.5 * rs[2]
-#	ymx <- object@extent@ymax + 0.5 * rs[2]
-#	xha <- (xmn + xmx) / 2
-#	yha <- (ymn + ymx) / 2
-#	xy <- matrix(c(xmn, ymx, xha, ymx, xmx, ymx, xmn, yha, xha, yha, xmx, yha, xmn, ymn, xha, ymn, xmx, ymn), ncol=2, byrow=T)
-	
-	
+
 	rows <- unique(c(seq(1,nrow(object), by=max(1, round(nrow(object)/50))), nrow(object)))
 	cols <- unique(c(seq(1,ncol(object), by=max(1, round(ncol(object)/50))), ncol(object)))
 	
@@ -68,14 +59,8 @@ projectExtent <- function(object, crs) {
 		xy <- rbind(xy1, xy2, xy3, xy4)
 	}
 	
-#	if (use_proj6) {
-#		res <- rgdal::rawTransform( projfrom, projto, nrow(xy), xy[,1], xy[,2], wkt=use_proj6)	
-#	} else {
-#		res <- rgdal::rawTransform( projfrom, projto, nrow(xy), xy[,1], xy[,2])		
-#	}
-
-	xy <- terra::vect(xy, crs=projfrom)
-	xy <- crds(terra::project(xy, projto))
+	xy <- terra::vect(xy, crs=pfrom)
+	xy <- crds(terra::project(xy, pto))
 	xy <- subset(xy, !(is.infinite(xy[,1]) | is.infinite(xy[,2])) )
 	x <- xy[,1]
 	y <- xy[,2]
