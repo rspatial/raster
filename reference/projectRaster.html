@@ -147,11 +147,11 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#simplest approach</span></span></span>
 <span class="r-in"><span><span class="va">pr1</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in terra::vect(xy, crs = projfrom):</span> object 'projfrom' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'crds': [project] input crs is not valid</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># alternatively also set the resolution</span></span></span>
 <span class="r-in"><span><span class="va">pr2</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span>, res<span class="op">=</span><span class="fl">20000</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in terra::vect(xy, crs = projfrom):</span> object 'projfrom' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'crds': [project] input crs is not valid</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># inverse projection, back to the properties of 'r'</span></span></span>
 <span class="r-in"><span><span class="va">inv</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">pr2</span>, <span class="va">r</span><span class="op">)</span></span></span>
@@ -160,7 +160,7 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
 <span class="r-in"><span><span class="co"># to have more control, provide an existing Raster object, here we create one</span></span></span>
 <span class="r-in"><span><span class="co"># using projectExtent (no values are transferred)</span></span></span>
 <span class="r-in"><span><span class="va">pr3</span> <span class="op">&lt;-</span> <span class="fu">projectExtent</span><span class="op">(</span><span class="va">r</span>, <span class="va">newproj</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in terra::vect(xy, crs = projfrom):</span> object 'projfrom' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'crds': [project] input crs is not valid</span>
 <span class="r-in"><span><span class="co"># Adjust the cell size </span></span></span>
 <span class="r-in"><span><span class="fu"><a href="resolution.html">res</a></span><span class="op">(</span><span class="va">pr3</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">200000</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in res(pr3) &lt;- 2e+05:</span> object 'pr3' not found</span>
