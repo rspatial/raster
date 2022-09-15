@@ -20,7 +20,7 @@ be adjusted (e.g. by setting its resolution) and used as a template 'to' in proj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-2</span>
       </span>
     </div>
 
@@ -137,22 +137,21 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># create a new (not projected) RasterLayer with cellnumbers as values</span></span></span>
-<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>xmn<span class="op">=</span><span class="op">-</span><span class="fl">110</span>, xmx<span class="op">=</span><span class="op">-</span><span class="fl">90</span>, ymn<span class="op">=</span><span class="fl">40</span>, ymx<span class="op">=</span><span class="fl">60</span>, ncols<span class="op">=</span><span class="fl">40</span>, nrows<span class="op">=</span><span class="fl">40</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span>xmn<span class="op">=</span><span class="op">-</span><span class="fl">110</span>, xmx<span class="op">=</span><span class="op">-</span><span class="fl">90</span>, ymn<span class="op">=</span><span class="fl">40</span>, ymx<span class="op">=</span><span class="fl">60</span>, ncols<span class="op">=</span><span class="fl">40</span>, nrows<span class="op">=</span><span class="fl">40</span>, crs<span class="op">=</span><span class="st">"+proj=longlat"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="setValues.html">setValues</a></span><span class="op">(</span><span class="va">r</span>, <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="projection.html">crs</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate Reference System:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Deprecated Proj.4 representation: +proj=longlat +datum=WGS84 </span>
-<span class="r-in"><span><span class="co"># wkt(r)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="projection.html">projection</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "+proj=longlat"</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># proj.4 projection description</span></span></span>
 <span class="r-in"><span><span class="va">newproj</span> <span class="op">&lt;-</span> <span class="st">"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#simplest approach</span></span></span>
 <span class="r-in"><span><span class="va">pr1</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [project] output crs is not valid</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in terra::vect(xy, crs = projfrom):</span> object 'projfrom' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># alternatively also set the resolution</span></span></span>
 <span class="r-in"><span><span class="va">pr2</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, crs<span class="op">=</span><span class="va">newproj</span>, res<span class="op">=</span><span class="fl">20000</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .local(from, ...):</span> trying to get slot "projargs" from an object of a basic class ("NULL") with no slots</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in terra::vect(xy, crs = projfrom):</span> object 'projfrom' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># inverse projection, back to the properties of 'r'</span></span></span>
 <span class="r-in"><span><span class="va">inv</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">pr2</span>, <span class="va">r</span><span class="op">)</span></span></span>
@@ -161,20 +160,14 @@ With such data you may need to adjust the returned object. E.g. do <code>ymax(ob
 <span class="r-in"><span><span class="co"># to have more control, provide an existing Raster object, here we create one</span></span></span>
 <span class="r-in"><span><span class="co"># using projectExtent (no values are transferred)</span></span></span>
 <span class="r-in"><span><span class="va">pr3</span> <span class="op">&lt;-</span> <span class="fu">projectExtent</span><span class="op">(</span><span class="va">r</span>, <span class="va">newproj</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in terra::vect(xy, crs = projfrom):</span> object 'projfrom' not found</span>
 <span class="r-in"><span><span class="co"># Adjust the cell size </span></span></span>
 <span class="r-in"><span><span class="fu"><a href="resolution.html">res</a></span><span class="op">(</span><span class="va">pr3</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">200000</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in res(pr3) &lt;- 2e+05:</span> object 'pr3' not found</span>
 <span class="r-in"><span><span class="co"># now project</span></span></span>
 <span class="r-in"><span><span class="va">pr3</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, <span class="va">pr3</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in methods::extends(class(x), "CRS"):</span> object 'pr3' not found</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># using a higher resolution</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="resolution.html">res</a></span><span class="op">(</span><span class="va">pr1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span></span>
-<span class="r-in"><span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">r</span>, <span class="va">pr1</span>, method<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">inv</span> <span class="op">&lt;-</span> <span class="fu">projectRaster</span><span class="op">(</span><span class="va">pr</span>, <span class="va">r</span>, method<span class="op">=</span><span class="st">'bilinear'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">dif</span> <span class="op">&lt;-</span> <span class="va">r</span> <span class="op">-</span> <span class="va">inv</span></span></span>
-<span class="r-in"><span><span class="co"># small difference</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">dif</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
