@@ -3,12 +3,12 @@
 # Version 1.0
 # Licence GPL v3
 
-.strCRS <- function(object) {
-	p <- .getCRS(object)
-	p <- suppressWarnings(wkt(p))
-	if (is.null(p)) p <- projection(p)
-	p
-}
+#.strCRS <- function(object) {
+#	p <- .getCRS(object)
+#	p <- suppressWarnings(wkt(p))
+#	if (is.null(p)) p <- projection(p)
+#	p
+#}
 
 
 projectExtent <- function(object, crs) {
@@ -22,8 +22,8 @@ projectExtent <- function(object, crs) {
 	dm[1] <- max(10, dm[1])
 	dm[2] <- max(10, dm[2])
 	dim(object) <- dm
-	pfrom <- .strCRS(object)
-	pto <- .strCRS(crs)
+	pfrom <- projection(object)
+	pto <- crs
 
 	rows <- unique(c(seq(1,nrow(object), by=max(1, round(nrow(object)/50))), nrow(object)))
 	cols <- unique(c(seq(1,ncol(object), by=max(1, round(ncol(object)/50))), ncol(object)))
@@ -95,8 +95,8 @@ projectExtent <- function(object, crs) {
 	y2 <- y + 0.5 * res[2]
 	xy <- cbind(c(x1, x2, x, x), c(y, y, y1, y2))
 	
-	fromcrs <- .strCRS(obj)
-	pXY <- project(xy, fromcrs, crs)
+	v <- vect(xy, crs=projection(obj))
+	pXY <- crds(project(v, crs))
 
 #	pXY <- cbind(pXY[[1]], pXY[[2]])
 #	out <- c((pXY[2,1] - pXY[1,1]), (pXY[4,2] - pXY[3,2]))
@@ -119,7 +119,7 @@ projectExtent <- function(object, crs) {
 .getAlignedRaster <- function(x,y) {
 	x <- raster(x)
 	y <- raster(y)
-	p <- projectRaster(x, crs=.getCRS(y))
+	p <- projectRaster(x, crs=projection(y))
 	m <- merge(extent(y), extent(p))
 	rx <- extend(y, m)
 	crop(rx, p)
@@ -134,7 +134,7 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 #	.requireRgdal()
 #	use_proj6 <- .useproj6()
 
-	projfrom <- raster:::.getCRS(from)
+	projfrom <- projection(from)
 	if (is.na(projfrom)) { 
 		stop("input projection is NA") 
 	}
@@ -145,8 +145,8 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 		if (missing(crs)) {
 			stop("both 'to' and 'crs' arguments are missing.")
 		}
-		projto <- .strCRS(crs)
-		projfrom <- .strCRS(projfrom)
+		projto <- crs
+		projfrom <- projection(projfrom)
 	
 #		}
 		to <- projectExtent(from, projto)
@@ -174,11 +174,11 @@ function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, fil
 		to <- extend(to, e)
 	} else {
 	
-		projto <-.strCRS(to)
+		projto <- projection(to)
 		if (is.na(projto)) { 
 			stop("output projection is NA") 
 		} 
-		projfrom <-.strCRS(projfrom)
+		#projfrom <-.strCRS(projfrom)
 		
 		e <- extent( projectExtent(from, projto) )
 		add <- min(10, min(dim(to)[1:2])/10) * max(raster::res(to))
