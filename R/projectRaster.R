@@ -186,10 +186,10 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		}
 		#compareCRS(projfrom, projto)
 		if (use_proj6) {
-			if (rgdal::compare_CRS(projto, projfrom)["strict"]) {
-				warning("input and ouput crs are the same")
-				#return(from) 
-			}
+		#	if (rgdal::compare_CRS(projto, projfrom)["strict"]) {
+		#		warning("input and ouput crs are the same")
+		#		#return(from) 
+		#	}
 			projfrom <- wkt(projfrom)
 		} else {
 			if (proj4string(projto) == proj4string(projfrom)) {
@@ -232,9 +232,9 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 			stop("output projection is NA") 
 		} 
 		if (use_proj6) {
-			if (rgdal::compare_CRS(projto, projfrom)["strict"]) {
-				warning("input and ouput crs are the same")
-			}
+		#	if (rgdal::compare_CRS(projto, projfrom)["strict"]) {
+		#		warning("input and ouput crs are the same")
+		#	}
 			projfrom <- wkt(projfrom)
 		} else {
 			if (proj4string(projto) == proj4string(projfrom)) {
