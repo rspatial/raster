@@ -78,6 +78,7 @@ RasterLayer or RasterBrick object.
 
 
 \examples{
+
 # create a new (not projected) RasterLayer with cellnumbers as values
 r <- raster(xmn=-110, xmx=-90, ymn=40, ymx=60, ncols=40, nrows=40, crs="+proj=longlat")
 r <- setValues(r, 1:ncell(r))
