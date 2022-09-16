@@ -63,6 +63,7 @@ setAs("SpatRaster", "Raster",
 		try(names(r) <- names(from))
 		crs(r) <- crs(from)
 		extent(r) <- as.vector(ext(from))
+		projection(r) <- projection(from)
 		if (hasValues(from)) {
 			so <- scoff(from)
 			gain(r) <- so[,1]
