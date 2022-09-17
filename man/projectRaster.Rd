@@ -1,7 +1,6 @@
 \name{projectRaster}
 
 \alias{projectRaster}
-\alias{projectRaster,Raster-method}
 \alias{projectExtent}
 
 \title{Project a Raster object}
@@ -20,7 +19,7 @@ If the resolution of the output is much larger than that of the input, you shoul
 }
 
 \usage{
-\S4method{projectRaster}{Raster}(from, to, res, crs, method="bilinear", 
+projectRaster(from, to, res, crs, method="bilinear", 
              alignOnly=FALSE, over=FALSE, filename="", ...) 
 
 projectExtent(object, crs)
@@ -33,7 +32,7 @@ projectExtent(object, crs)
   \item{crs}{character or object of class 'CRS'. PROJ.4 description of the coordinate reference system. In projectRaster this is used to set the output CRS if 'to' is missing, or if 'to' has no valid CRS}
   \item{method}{method used to compute values for the new RasterLayer. Either 'ngb' (nearest neighbor), which is useful for categorical variables, or 'bilinear' (bilinear interpolation; the default value), which is appropriate for continuous variables.}
   \item{alignOnly}{logical. Use \code{to} or other parameters only to align the output (i.e. same origin and resolution), but use the projected extent from \code{from}}
-  \item{over}{logical. If \code{TRUE} wrapping around the date-line is turned off. This can be desirable for global data (to avoid mapping the same areas twice) but it is not desireable in other cases}
+  \item{over}{logical. If \code{TRUE} wrapping around the date-line is turned off. This can be desirable for global data (to avoid mapping the same areas twice) but it is not desirable in other cases}
   \item{filename}{character. Output filename}  
   \item{...}{additional arguments as for \code{\link{writeRaster}}}  
   \item{object}{Raster* object}
