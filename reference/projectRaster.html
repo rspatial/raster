@@ -20,7 +20,7 @@ be adjusted (e.g. by setting its resolution) and used as a template 'to' in proj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-3</span>
       </span>
     </div>
 
@@ -56,8 +56,7 @@ be adjusted (e.g. by setting its resolution) and used as a template <code>'to'</
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Raster</span></span>
-<span><span class="fu">projectRaster</span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span>, <span class="va">res</span>, <span class="va">crs</span>, method<span class="op">=</span><span class="st">"bilinear"</span>, </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">projectRaster</span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span>, <span class="va">res</span>, <span class="va">crs</span>, method<span class="op">=</span><span class="st">"bilinear"</span>, </span>
 <span>             alignOnly<span class="op">=</span><span class="cn">FALSE</span>, over<span class="op">=</span><span class="cn">FALSE</span>, filename<span class="op">=</span><span class="st">""</span>, <span class="va">...</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="fu">projectExtent</span><span class="op">(</span><span class="va">object</span>, <span class="va">crs</span><span class="op">)</span></span></code></pre></div>
@@ -88,7 +87,7 @@ be adjusted (e.g. by setting its resolution) and used as a template <code>'to'</
 <dd><p>logical. Use <code>to</code> or other parameters only to align the output (i.e. same origin and resolution), but use the projected extent from <code>from</code></p></dd>
 
   <dt>over</dt>
-<dd><p>logical. If <code>TRUE</code> wrapping around the date-line is turned off. This can be desirable for global data (to avoid mapping the same areas twice) but it is not desireable in other cases</p></dd>
+<dd><p>logical. If <code>TRUE</code> wrapping around the date-line is turned off. This can be desirable for global data (to avoid mapping the same areas twice) but it is not desirable in other cases</p></dd>
 
   <dt>filename</dt>
 <dd><p>character. Output filename</p></dd>
