@@ -69,6 +69,7 @@ setAs("SpatRaster", "Raster",
 			gain(r) <- so[,1]
 			offs(r) <- so[,2]
 		}
+		g <- gc()
 		r
 	}
 )
@@ -132,6 +133,7 @@ setAs("SpatRaster", "Raster",
 			levels(r) <- levs				
 		}
 	}
+	g <- gc()
 	r
 }
 
@@ -154,7 +156,9 @@ setAs("SpatRaster", "Raster",
 		x <- from[[i]]
 		.fromRasterLayerBrick(x)
 	})
-	do.call(c, s)
+	out <- do.call(c, s)
+	g <- gc()
+	out
 }
 
 
