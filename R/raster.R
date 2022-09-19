@@ -474,6 +474,8 @@ setMethod('raster', signature(x='GridTopology'),
 
 setMethod('raster', signature(x='SpatRaster'),
 	function(x) {
-		as(x[[1]], "Raster")
+		r <- as(x[[1]], "Raster")
+		g <- gc()
+		r
 	}
 )
