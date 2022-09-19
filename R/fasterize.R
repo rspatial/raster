@@ -70,6 +70,7 @@
 		} 
 		out <- writeStop(out)
 		pbClose(pb)
+		g <- gc()
 		return(out)
 	}
 }
