@@ -14,7 +14,7 @@ setClass ("RasterLayerSparse",
 
 setMethod('raster', signature(x='RasterLayerSparse'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.getCRS(x))
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.getSRS(x))
 		if (length(stats::na.omit(x@data@values)) > 0) {
 			v <- rep(NA, ncell(r))
 			v[x@index] <- x@data@values

@@ -9,8 +9,8 @@ setMethod('extract', signature(x='Raster', y='SpatialPolygons'),
 function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeights=TRUE, cellnumbers=FALSE, small=TRUE, df=FALSE, layer, nl, factors=FALSE, sp=FALSE, ...){ 
 
 	#px <-.getCRS(x, asText=FALSE)
-	px <-.getCRS(x)
-	comp <- compareCRS(px,.getCRS(y), unknown=TRUE)
+	px <-.getSRS(x)
+	comp <- compareCRS(px, .getSRS(y), unknown=TRUE)
 	if (!comp) {
 		#.requireRgdal()
 		warning('Transforming SpatialPolygons to the crs of the Raster')

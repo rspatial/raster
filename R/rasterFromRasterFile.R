@@ -222,9 +222,7 @@
 
 # update to add WKT2
         if (!is.na(wkt)) {
-            prj <- .makeCRS(prj=prj, wkt=wkt)
-        } else {
-	    prj <- .getProj(prj, crs)
+            prj <- wkt
         }
 	
 	if (band < 1) {

@@ -229,7 +229,7 @@
 	rstr <- raster(rstr)
 	
 	if (!is.na(projection(p))) {
-		projection(rstr) <-.getCRS(p)
+		projection(rstr) <- .getSRS(p)
 	}
 
 # check if bbox of raster and p overlap
@@ -496,7 +496,7 @@
 	nc <- ncol(bigraster) * f
 	rv1 <- rep(0, nc)
 	holes1 <- rep(0, nc)
-	prj <-.getCRS(bigraster)
+	prj <- .getSRS(bigraster)
 	hr <- 0.5 * yres(bigraster)
 
 	vv <- matrix(ncol=f, nrow=nc)

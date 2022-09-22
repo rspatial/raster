@@ -8,7 +8,7 @@
 setMethod("wkt", signature(obj="ANY"), 
 	function(obj) {
 		if (!inherits(obj, "CRS")) {
-			obj <- obj@crs
+			obj <- obj@srs
 		} else if (inherits(obj, c("sf", "sfc"))) {
 			obj <- sf::st_crs(obj)
 			obj <- as(obj, "CRS") # passes on WKT comment
@@ -27,13 +27,14 @@ setMethod("wkt", signature(obj="ANY"),
 
 setMethod("wkt", signature(obj="Raster"), 
 	function(obj) {
-		w <- comment(obj@crs)
-		if (is.null(w)) {
-			warning("no wkt comment")
-			return("")
-		} else {
-			return(w)
-		}
+		#w <- comment(obj@crs)
+		#if (is.null(w)) {
+		#	warning("no wkt comment")
+		#	return("")
+		#} else {
+		#	return(w)
+		#}
+		crs(terra::rast(crs=crs(obj, asText=TRUE)))
 	}
 )
 
@@ -65,6 +66,51 @@ setMethod("wkt", signature(obj="Raster"),
 	}
 }
 
+.getSRS <- function(x) {
+	if (methods::extends(class(x), "CRS")) { 
+		x@projargs
+	} else if (is.null(x)) {
+		""
+	} else if (methods::extends(class(x), "BasicRaster")) { 
+		x@srs
+	} else if (methods::extends(class(x), "Spatial")) { 
+		x@proj4string
+	} else if (inherits(x, c("sf", "sfc"))) {
+		sf::st_crs(x)
+	} else if (inherits(x, "SpatRaster")) { 
+		crs(x, proj=TRUE)
+	} else if (inherits(x, "SpatVector")) { 
+		crs(x, proj=TRUE)
+	} else if (is.na(x)) {
+		""
+	} else if (is.character(x)) {
+		x <- trimws(x)
+		r <- ""
+		try(r <- crs(rast(crs=trimws(x)), proj=TRUE))
+		r
+		
+#		if (x == "") {
+#			x <- .CRS()
+#		} else if (substr(x, 1, 1) == "+") {
+#			x <- .CRS(x)
+#		} else {
+#			x <- .CRS(SRS_string = x)
+#		}
+		#if (trimws(x) == "") {
+		#	x <- return(CRS())
+		#} else {
+		#	wkt <- rgdal::showSRID(x)
+		#	x <- .CRS()
+		#	x@projargs <- rgdal::showP4(wkt)
+		#	attr(x, "comment") <- wkt
+		#}
+	} else if (is.numeric(x)) {
+		.getSRS(paste0("EPSG:", round(x)))
+	} else {
+		""
+	} # else if "is .CRS"
+}	
+
 
 .getCRS <- function(x) {
 
@@ -75,7 +121,7 @@ setMethod("wkt", signature(obj="Raster"),
 	if (is.null(x)) {
 		x <- .CRS()
 	} else if (methods::extends(class(x), "BasicRaster")) { 
-		x <- x@crs
+		x <- x@srs
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- x@proj4string
 	} else if (inherits(x, c("sf", "sfc"))) {
@@ -109,9 +155,11 @@ setMethod("wkt", signature(obj="Raster"),
 	} else if (is.numeric(x)) {
 		x <- paste0("EPSG:", round(x))
 		x <- .CRS(SRS_string = x)	
-	} else {
-		x <- .CRS()
-	} # else if "is .CRS"
+	}
+	
+	if (!inherits(x, "CRS")) { 
+		x <- .CRS(x)
+	}
 	x
 }
 
@@ -158,20 +206,22 @@ setMethod("is.na", signature(x="CRS"),
 
 "projection<-" <- function(x, value) {
 
-	value <- .getCRS(value)
+#	value <- .getCRS(value)
+	value <- .getSRS(value)
 	
 	if (inherits(x, "RasterStack")) {
 		if (nlayers(x) > 0) {
 			for (i in 1:nlayers(x)) {
-				x@layers[[i]]@crs <- value
-				#x@layers[[i]]@crs <- .CRS(value)
+				x@layers[[i]]@srs <- value
+	#			x@layers[[i]]@crs <- value
 			}
 		}
 	} 
 	if (inherits(x, "Spatial")) {
-		x@proj4string <- value
+		x@proj4string <- .CRS(value)
 	} else {
-		x@crs <- value
+#		x@crs <- value
+		x@srs <- value
 	}
 	return(x)
 }
@@ -181,7 +231,7 @@ setMethod("is.na", signature(x="CRS"),
 projection <- function(x, asText=TRUE) {
 
 	if (methods::extends(class(x), "BasicRaster")) { 
-		x <- x@crs 
+		x <- x@srs 
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- x@proj4string
 	} else if (inherits(x, c("sf", "sfc"))) {
@@ -219,7 +269,9 @@ projection <- function(x, asText=TRUE) {
 
 setMethod("proj4string", signature("BasicRaster"), 
 	function(obj) {
-		obj@crs@projargs
+		#obj@crs@projargs
+		x <- rast(crs=obj@srs)
+		x@ptr$get_crs("proj4")
 	}
 )	
 

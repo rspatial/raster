@@ -4,9 +4,6 @@
 # Licence GPL v3
 
 
-.useproj6 <- function() {
-	FALSE
-}
 
 .rawTransform <- function(projfrom, projto, xy, wkt="") {
 	xy <- terra::vect(xy, crs=projfrom)
@@ -15,7 +12,6 @@
 }
 
 projectExtent <- function(object, crs) {
-	use_proj6 <- .useproj6()
 	
 	object <- raster(object)
 	dm <- oldm <- dim(object)
@@ -24,20 +20,8 @@ projectExtent <- function(object, crs) {
 	dm[1] <- max(10, dm[1])
 	dm[2] <- max(10, dm[2])
 	dim(object) <- dm
-	pfrom <- .getCRS(object)
-	pto <- .getCRS(crs)
-	if (use_proj6) {
-		projfrom <- wkt(pfrom)
-		projto <- wkt(pto)
-		if (is.null(projfrom) || is.null(projto)) {
-			use_proj6 = FALSE
-			projfrom <- pfrom
-			projto <- pto
-		}
-	} else {
-		projfrom <- proj4string(pfrom)
-		projto <- proj4string(pto)
-	}
+	projfrom <- .getSRS(object)
+	projto <- .getSRS(crs)
 
 #	rs <- res(object)
 #	xmn <- object@extent@xmin - 0.5 * rs[1]
@@ -113,7 +97,7 @@ projectExtent <- function(object, crs) {
 }
 
 
-.computeRes <- function(obj, crs, proj6) {
+.computeRes <- function(obj, crs) {
 
 	x <- xmin(obj) + 0.5 * (xmax(obj) - xmin(obj))
 	y <- ymin(obj) + 0.5 * (ymax(obj) - ymin(obj))
@@ -123,12 +107,7 @@ projectExtent <- function(object, crs) {
 	y1 <- y - 0.5 * res[2]
 	y2 <- y + 0.5 * res[2]
 	xy <- cbind(c(x1, x2, x, x), c(y, y, y1, y2))
-	fromcrs <- .getCRS(obj)
-	if (proj6) {
-		fromcrs <- wkt(fromcrs)
-	} else {
-		fromcrs <- proj4string(fromcrs)	
-	}
+	fromcrs <- .getSRS(obj)
 	pXY <- .rawTransform(fromcrs, crs, xy)
 	
 #	out <- c((pXY[2,1] - pXY[1,1]), (pXY[4,2] - pXY[3,2]))
@@ -151,7 +130,7 @@ projectExtent <- function(object, crs) {
 .getAlignedRaster <- function(x,y) {
 	x <- raster(x)
 	y <- raster(y)
-	p <- projectRaster(x, crs=.getCRS(y))
+	p <- projectRaster(x, crs=.getSRS(y))
 	m <- merge(extent(y), extent(p))
 	rx <- extend(y, m)
 	crop(rx, p)
@@ -160,16 +139,9 @@ projectExtent <- function(object, crs) {
 
 projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE, over=FALSE, filename="", ...)  {
 
-	use_proj6 <- .useproj6()
-
-	projfrom <- .getCRS(from)
+	projfrom <- .getSRS(from)
 	if (is.na(projfrom)) { 
 		stop("input projection is NA") 
-	}
-	if (use_proj6) {
-		if (is.null(wkt(projfrom))) {
-			use_proj6 = FALSE
-		}
 	}
 	
 	lonlat <- isLonLat(projfrom)
@@ -178,35 +150,17 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		if (missing(crs)) {
 			stop("both 'to' and 'crs' arguments are missing.")
 		}
-		projto <- .getCRS(crs)
-		if (use_proj6) {
-			if (is.null(wkt(projto))) {
-				use_proj6 = FALSE
-			}
-		}
-		#compareCRS(projfrom, projto)
-		if (use_proj6) {
-		#	if (rgdal::compare_CRS(projto, projfrom)["strict"]) {
-		#		warning("input and ouput crs are the same")
-		#		#return(from) 
-		#	}
-			projfrom <- wkt(projfrom)
-		} else {
-			if (proj4string(projto) == proj4string(projfrom)) {
-				warning("input and ouput crs are the same")
-			}
-			projfrom <- proj4string(projfrom)
+		projto <- .getSRS(crs)
+		projfrom <- .getSRS(projfrom)
+		if (isTRUE(projto == projfrom)) {
+			warning("input and ouput crs are the same")
 		}
 		to <- projectExtent(from, projto)
-		to@crs <- projto
+		to@srs <- projto
 
-		if (use_proj6) {
-			projto <- wkt(projto)
-		} else {
-			projto <- proj4string(projto)		
-		}
+		projto <- .getSRS(projto)		
 		if (missing(res)) {
-			res <- .computeRes(from, projto, use_proj6)
+			res <- .computeRes(from, projto)
 		}
 		res(to) <- res
 
@@ -225,23 +179,14 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 			e@ymax <- min(90, e@ymax)
 		}
 		to <- extend(to, e)
+		
 	} else {
 	
-		projto <-.getCRS(to)
+		projto <-.getSRS(to)
 		if (is.na(projto)) { 
 			stop("output projection is NA") 
 		} 
-		if (use_proj6) {
-		#	if (rgdal::compare_CRS(projto, projfrom)["strict"]) {
-		#		warning("input and ouput crs are the same")
-		#	}
-			projfrom <- wkt(projfrom)
-		} else {
-			if (proj4string(projto) == proj4string(projfrom)) {
-				warning("input and ouput crs are the same")
-			}
-			projfrom = proj4string(projfrom)
-		}
+		projfrom = .getSRS(projfrom)
 		
 		e <- extent( projectExtent(from, projto) )
 		add <- min(10, min(dim(to)[1:2])/10) * max(raster::res(to))
@@ -255,21 +200,15 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 			e@ymin <- max(-90, e@ymin)
 			e@ymax <- min(90, e@ymax)
 		}
-
-		if (use_proj6) {
-			projto <- wkt(projto)
-		} else {
-			projto <- proj4string(projto)
-		}
 	}
 	
 	methods::validObject(to)
-	methods::validObject(.getCRS((to)))
+	methods::validObject(.getSRS((to)))
 
 	#if (identical(projfrom, projto)) {
 	#	warning('projections of "from" and "to" are the same')
 	#}	
-	if ((!use_proj6) & lonlat & over) {
+	if (lonlat & over) {
 		projto_int <- paste(projto, "+over")
 	} else {
 		projto_int <- projto	
@@ -280,7 +219,7 @@ projectRaster <- function(from, to, res, crs, method="bilinear", alignOnly=FALSE
 		return (to)
 	}
 	
-#	pbb <- projectExtent(to,.getCRS(from))
+#	pbb <- projectExtent(to,.getSRS(from))
 #	bb <- intersect(extent(pbb), extent(from))
 #	methods::validObject(bb)
 
