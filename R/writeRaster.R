@@ -227,8 +227,9 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		}
 		tr <- blockSize(b)
 		pb <- pbCreate(tr$n, ...)
-		x <- readStart(x, ...)
 		b <- writeStart(b, filename=filename, format=filetype, ...)
+		x <- readStart(x, ...)
+
 		for (i in 1:tr$n) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 			b <- writeValues(b, v, tr$row[i])
