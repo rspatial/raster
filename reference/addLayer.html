@@ -81,21 +81,17 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">file</span>, <span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'describe': object 'f' not found</span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'describe': object 'f' not found</span>
 <span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">addLayer</span><span class="op">(</span><span class="va">s</span>, <span class="va">r</span><span class="op">/</span><span class="fl">2</span>, <span class="va">r</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'addLayer': object 's' not found</span>
 <span class="r-in"><span><span class="va">s</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterStack </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 115, 80, 9200, 5  (nrow, ncol, ncell, nlayers)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 40, 40  (x, y)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> extent     : 178400, 181600, 329400, 334000  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> names      :  test.1.1,  test.2.1,    test.3,  test.1.2,  test.2.2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min values : 138.70707, 138.70707, 138.70707,  69.35354, 277.41415 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max values :  1736.058,  1736.058,  1736.058,   868.029,  3472.116 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 's' not found</span>
 <span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">dropLayer</span><span class="op">(</span><span class="va">s</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'dropLayer': object 's' not found</span>
 <span class="r-in"><span><span class="fu"><a href="nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'nlayers': object 's' not found</span>
 </code></pre></div>
     </div>
   </div>

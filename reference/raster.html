@@ -181,8 +181,10 @@ For an overview of the functions in the raster package have a look here: raster-
 <span class="r-in"><span><span class="va">f</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/Users/runner/work/_temp/Library/raster/external/test.grd"</span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'describe': object 'f' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">logo</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'describe': object 'f' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#from scratch</span></span></span>
@@ -190,13 +192,19 @@ For an overview of the functions in the raster package have a look here: raster-
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#from an Extent object</span></span></span>
 <span class="r-in"><span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="extent.html">extent</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'extent': object 'r' not found</span>
 <span class="r-in"><span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">e</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'raster': object 'e' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#from another Raster* object</span></span></span>
 <span class="r-in"><span><span class="va">r3</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'raster': object 'r' not found</span>
 <span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="stack.html">stack</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r</span>, <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'stack': object 'r' not found</span>
 <span class="r-in"><span><span class="va">r4</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'raster': object 's' not found</span>
 <span class="r-in"><span><span class="va">r5</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="op">(</span><span class="va">s</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'raster': object 's' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
