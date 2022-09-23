@@ -98,7 +98,7 @@ setAs("SpatRaster", "Raster",
 #			if (is.null(prj)) {
 #				prj <- from@crs@projargs
 #			}
-			crs(r) <- from@srs
+			crs(r) <- .getSRS(from)
 			if (nbands(from) != nlayers(from)) {
 				r <- r[[bandnr(from)]]
 			}
@@ -109,15 +109,7 @@ setAs("SpatRaster", "Raster",
 		scoff(r) <- cbind(gain(from), offs(from))
 		
 	} else {
-		if (is.na(from@srs)) {
-			prj <- ""
-		} else {
-#			prj <- comment(from@crs)
-#			if (is.null(prj)) {
-#				prj <- from@srs@projargs
-#			}
-			prj <- from@srs
-		}
+		prj <- .getSRS(from)
 		r <- rast(	nrows=nrow(from), 
 					ncols=ncol(from),
 					nlyrs=nlayers(from),

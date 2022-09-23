@@ -8,7 +8,7 @@
 	if (inherits(x, "Spatial")) {
 		suppressWarnings(sp::proj4string(x))
 	} else {
-		x@srs
+		.getSRS(x)
 	}
 }
 

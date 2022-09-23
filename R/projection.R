@@ -7,13 +7,12 @@
 # to be removed when released sp has this for crs
 setMethod("wkt", signature(obj="ANY"), 
 	function(obj) {
-		if (!inherits(obj, "CRS")) {
-			obj <- obj@srs
-		} else if (inherits(obj, c("sf", "sfc"))) {
+		if (inherits(obj, c("sf", "sfc"))) {
 			obj <- sf::st_crs(obj)
 			obj <- as(obj, "CRS") # passes on WKT comment
+		} else if (!inherits(obj, "CRS")) {
+			obj <- .getSRS(obj)
 		}
-		
 		w <- comment(obj)
 		if (is.null(w)) {
 			warning("no wkt comment")
@@ -68,13 +67,34 @@ setMethod("wkt", signature(obj="Raster"),
 
 .getSRS <- function(x) {
 	if (methods::extends(class(x), "CRS")) { 
-		x@projargs
+		a <- attr(x, "comment")
+		if (is.null(a)) {
+			x@projargs
+		} else {
+			a
+		}
+
 	} else if (is.null(x)) {
 		""
 	} else if (methods::extends(class(x), "BasicRaster")) { 
-		x@srs
+		if (.hasSlot(x, "srs")) {
+			x@srs
+		} else {
+			a <- attr(x@crs, "comment")
+			if (is.null(a)) {
+				x@crs@projargs
+			} else {
+				a
+			}
+		}
 	} else if (methods::extends(class(x), "Spatial")) { 
-		x@proj4string
+		x <- x@proj4string
+		a <- attr(x, "comment")
+		if (is.null(a)) {
+			x@projargs
+		} else {
+			a
+		}
 	} else if (inherits(x, c("sf", "sfc"))) {
 		sf::st_crs(x)
 	} else if (inherits(x, "SpatRaster")) { 
@@ -121,7 +141,17 @@ setMethod("wkt", signature(obj="Raster"),
 	if (is.null(x)) {
 		x <- .CRS()
 	} else if (methods::extends(class(x), "BasicRaster")) { 
-		x <- x@srs
+		if (.hasSlot(x, "srs")) {
+			x <- x@srs
+		} else {
+			x <- x@crs
+			a <- attr(x, "comment")
+			if (is.null(a)) {
+				x@projargs
+			} else {
+				a
+			}
+		}
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- x@proj4string
 	} else if (inherits(x, c("sf", "sfc"))) {
@@ -231,7 +261,16 @@ setMethod("is.na", signature(x="CRS"),
 projection <- function(x, asText=TRUE) {
 
 	if (methods::extends(class(x), "BasicRaster")) { 
-		x <- x@srs 
+		if (.hasSlot(x, "srs")) {
+			x <- x@srs 
+		} else {
+			a <- attr(x@crs, "comment")
+			if (is.null(a)) {
+				x <- x@crs@projargs
+			} else {
+				x <- a
+			}
+		}
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- x@proj4string
 	} else if (inherits(x, c("sf", "sfc"))) {
@@ -270,7 +309,7 @@ projection <- function(x, asText=TRUE) {
 setMethod("proj4string", signature("BasicRaster"), 
 	function(obj) {
 		#obj@crs@projargs
-		x <- rast(crs=obj@srs)
+		x <- rast(crs=.getSRS(obj))
 		x@ptr$get_crs("proj4")
 	}
 )	

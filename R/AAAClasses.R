@@ -46,6 +46,17 @@ setClass(".Rotation",
 )
 
 
+setMethod("initialize", "BasicRaster",
+	function(.Object, crs="", ...) {
+		.Object <- callNextMethod(.Object, ...)
+		if (!isTRUE(crs == "")) {
+			.Object@srs <- .getSRS(crs)
+		}
+		.Object
+	}
+)
+
+
 setClass ("BasicRaster",
 	representation (
 		title = "character",

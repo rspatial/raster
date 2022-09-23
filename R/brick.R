@@ -37,7 +37,7 @@ setMethod('brick', signature(x='RasterLayer'),
 		}
 		
 		if (!values) {
-			b <- brick(x@extent, nrows=nrow(x), ncols=ncol(x), crs=x@srs, nl=nl)
+			b <- brick(x@extent, nrows=nrow(x), ncols=ncol(x), crs=.getSRS(x), nl=nl)
 			if (rotated(x)) {
 				b@rotated <- TRUE
 				b@rotation <- x@rotation
@@ -67,7 +67,7 @@ setMethod('brick', signature(x='RasterStack'),
 	function(x, values=TRUE, nl, filename='', ...){
 	
 		e <- x@extent
-		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=x@srs)
+		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=.getSRS(x))
 		if (rotated(x)) {
 			b@rotated <- TRUE
 			b@rotation <- x@rotation
@@ -133,7 +133,7 @@ setMethod('brick', signature(x='RasterBrick'),
 			nl <- nlayers(x) 
 		}
 		e <- x@extent
-		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=x@srs)
+		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=.getSRS(x))
 		b@data@nlayers <- as.integer(nl)
 		b@data@min <- rep(Inf, nl)
 		b@data@max <- rep(-Inf, nl)
