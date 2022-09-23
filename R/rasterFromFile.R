@@ -24,7 +24,7 @@
 
 
 	if (fileext %in% c(".GRD", ".GRI")) {
-		if (grepl("RRASTER", terra::describe(f)[1])) {
+		if (grepl("RRASTER", terra::describe(x)[1])) {
 			grifile <- .setFileExtensionValues(x, 'raster')
 			grdfile <- .setFileExtensionHeader(x, 'raster')
 			if ( file.exists( grdfile) & file.exists( grifile)) {
