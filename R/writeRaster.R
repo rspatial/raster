@@ -83,7 +83,7 @@ function(x, filename, format, ...) {
 		return( .stopWriteCDF(x) )
 		
 	} else { 
-		x <- .writeGDALall(x, filename=filename, filetype=filetype, ...)
+		x <- .writeGDALall(x, filename=filename, format=filetype, ...)
 	}
 	return(invisible(x))
 }	
