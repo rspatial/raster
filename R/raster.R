@@ -28,7 +28,7 @@ setMethod('raster', signature(x='missing'),
 #			r <- methods::new('RasterLayer', extent=ext, nrows=nrows, ncols=ncols, crs=prj)
 			r <- methods::new('RasterLayer', extent=ext, nrows=nrows, ncols=ncols, srs=prj)
 		} else {
-			r <- methods::new('RasterLayer', extent=ext, crs=prj)
+			r <- methods::new('RasterLayer', extent=ext, srs=prj)
 			res(r) <- resolution
 		}
 		if (!is.null(vals)) {
