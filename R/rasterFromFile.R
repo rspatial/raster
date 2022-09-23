@@ -22,14 +22,16 @@
 
 	fileext <- toupper(extension(x))
 
+
 	if (fileext %in% c(".GRD", ".GRI")) {
-		grifile <- .setFileExtensionValues(x, 'raster')
-		grdfile <- .setFileExtensionHeader(x, 'raster')
-		if ( file.exists( grdfile) & file.exists( grifile)) {
-			return ( .rasterFromRasterFile(grdfile, band=band, objecttype, ...) )
+		if (grepl("RRASTER", terra::describe(f)[1])) {
+			grifile <- .setFileExtensionValues(x, 'raster')
+			grdfile <- .setFileExtensionHeader(x, 'raster')
+			if ( file.exists( grdfile) & file.exists( grifile)) {
+				return ( .rasterFromRasterFile(grdfile, band=band, objecttype, ...) )
+			}
 		}
 	}
-
 
 	if (! file.exists(x) ) {
 		if (extension(x) == '') {
