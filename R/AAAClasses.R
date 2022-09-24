@@ -47,10 +47,13 @@ setClass(".Rotation",
 
 
 setMethod("initialize", "BasicRaster",
-	function(.Object, crs="", ...) {
+	function(.Object, crs=NA, ...) {
 		.Object <- callNextMethod(.Object, ...)
-		if (!isTRUE(crs == "")) {
-			.Object@srs <- .getSRS(crs)
+		if (!is.na(crs)) {
+			if (.hasSlot(.Object, "srs")) {
+				.Object@srs <- .getSRS(crs)
+			}
+			.Object@crs <- crs
 		}
 		.Object
 	}
@@ -65,7 +68,9 @@ setClass ("BasicRaster",
 		rotation = ".Rotation",
 		ncols ="integer",
 		nrows ="integer",
-		#crs = "CRS",
+		# to be removed 
+		crs = "CRS",
+		# use this instead
 		srs = "character",
 		history = "list",
 		#meta = "list",
