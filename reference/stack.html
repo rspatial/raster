@@ -106,21 +106,25 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># file with one layer</span></span></span>
 <span class="r-in"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/test.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">stack</span><span class="op">(</span><span class="va">fn</span>, <span class="va">fn</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'describe': object 'f' not found</span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'describe': object 'f' not found</span>
 <span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">stack</span><span class="op">(</span><span class="va">r</span>, <span class="va">fn</span><span class="op">)</span> </span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'stack': object 'r' not found</span>
 <span class="r-in"><span><span class="fu"><a href="nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'nlayers': object 's' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># file with three layers</span></span></span>
 <span class="r-in"><span><span class="va">slogo</span> <span class="op">&lt;-</span> <span class="fu">stack</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span> </span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'describe': object 'f' not found</span>
 <span class="r-in"><span><span class="fu"><a href="nlayers.html">nlayers</a></span><span class="op">(</span><span class="va">slogo</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'nlayers': object 'slogo' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-in"><span><span class="va">slogo</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'slogo' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class      : RasterStack </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions : 77, 101, 7777, 3  (nrow, ncol, ncell, nlayers)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution : 1, 1  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent     : 0, 101, 0, 77  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> crs        : +proj=merc +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names      : red, green, blue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values :   0,     0,    0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values : 255,   255,  255 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </div>

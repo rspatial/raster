@@ -125,9 +125,8 @@ This approach (predict a fitted model to raster data) is commonly used in remote
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create a RasterStack or RasterBrick with with a set of predictor layers</span></span></span>
 <span class="r-in"><span><span class="va">logo</span> <span class="op">&lt;-</span> <span class="fu"><a href="brick.html">brick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"external/rlogo.grd"</span>, package<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'describe': object 'f' not found</span>
 <span class="r-in"><span><span class="fu"><a href="names.html">names</a></span><span class="op">(</span><span class="va">logo</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'logo' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "red"   "green" "blue" </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># the predictor variables</span></span></span>
@@ -151,22 +150,18 @@ This approach (predict a fitted model to raster data) is commonly used in remote
 <span class="r-in"><span><span class="co"># extract values for points</span></span></span>
 <span class="r-in"><span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">p</span><span class="op">)</span>, <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">a</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>pa<span class="op">=</span><span class="va">xy</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="fu"><a href="extract.html">extract</a></span><span class="op">(</span><span class="va">logo</span>, <span class="va">xy</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'extract': object 'logo' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#build a model, here an example with glm </span></span></span>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span>formula<span class="op">=</span><span class="va">pa</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">v</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in is.data.frame(data):</span> object 'v' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#predict to a raster</span></span></span>
 <span class="r-in"><span><span class="va">r1</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">model</span>, progress<span class="op">=</span><span class="st">'text'</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'object' in selecting a method for function 'predict': object 'logo' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">r1</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': object 'r1' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">p</span>, bg<span class="op">=</span><span class="st">'blue'</span>, pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot.xy(xy.coords(x, y), type = type, ...):</span> plot.new has not been called yet</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="va">a</span>, bg<span class="op">=</span><span class="st">'red'</span>, pch<span class="op">=</span><span class="fl">21</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot.xy(xy.coords(x, y), type = type, ...):</span> plot.new has not been called yet</span>
+<span class="r-plt img"><img src="predict-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># use a modified function to get a RasterBrick with p and se</span></span></span>
 <span class="r-in"><span><span class="co"># from the glm model. The values returned by 'predict' are in a list,</span></span></span>
@@ -179,7 +174,6 @@ This approach (predict a fitted model to raster data) is commonly used in remote
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># predfun returns two variables, so use index=1:2</span></span></span>
 <span class="r-in"><span><span class="va">r2</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">model</span>, fun<span class="op">=</span><span class="va">predfun</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'object' in selecting a method for function 'predict': object 'logo' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
@@ -194,15 +188,12 @@ This approach (predict a fitted model to raster data) is commonly used in remote
 <span class="r-in"><span><span class="co"># here using sampling to simulate an object too large</span></span></span>
 <span class="r-in"><span><span class="co"># to feed all its values to prcomp</span></span></span>
 <span class="r-in"><span><span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampleRandom.html">sampleRandom</a></span><span class="op">(</span><span class="va">logo</span>, <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'sampleRandom': object 'logo' not found</span>
 <span class="r-in"><span><span class="va">pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">sr</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in prcomp(sr):</span> object 'sr' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># note the use of the 'index' argument</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">predict</span><span class="op">(</span><span class="va">logo</span>, <span class="va">pca</span>, index<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'object' in selecting a method for function 'predict': object 'logo' not found</span>
 <span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': object 'x' not found</span>
+<span class="r-plt img"><img src="predict-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># partial least square regression</span></span></span>
