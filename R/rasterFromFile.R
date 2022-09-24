@@ -23,11 +23,10 @@
 	fileext <- toupper(extension(x))
 
 
-	if ( ((fileext == ".GRD") && (grepl("RRASTER", terra::describe(x)[1]))) 
-			|| (fileext == ".GRI"))  {
+	if ((fileext == ".GRD") || (fileext == ".GRI"))  {
 		grifile <- .setFileExtensionValues(x, 'raster')
 		grdfile <- .setFileExtensionHeader(x, 'raster')
-		if ( file.exists( grdfile) & file.exists( grifile)) {
+		if ( file.exists( grdfile) && file.exists( grifile)) {
 			return ( .rasterFromRasterFile(grdfile, band=band, objecttype, ...) )
 		}
 	}
