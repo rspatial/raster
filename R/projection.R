@@ -333,12 +333,15 @@ projection <- function(x, asText=TRUE) {
 
 setMethod("proj4string", signature("BasicRaster"), 
 	function(obj) {
+		x <- ""
 		if (!is.na(obj@crs)) {
 			x <- obj@crs@projargs
 		} else if (.hasSlot(obj, "srs")) {
 			x <- obj@srs
-			if (x == "") x <- as.character(NA)
 		} 
+		if (x == "") {
+			x <- as.character(NA)
+		}
 		x
 	}
 )	
