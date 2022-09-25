@@ -47,22 +47,11 @@ setMethod("wkt", signature(obj="Raster"),
 }
 
 
-.makeCRS <- function(user="", prj="", wkt="") {
-	if (wkt != "") {
-		if (prj != "") {
-			.CRS(prj, SRS_string=wkt)
-		} else {
-			.CRS(SRS_string=wkt)		
-		}
-	} else if (user !="") {
-		if (substr(trim(user), 1 ,1) == "+") {
-			.CRS(user)
-		} else {
-			.CRS(SRS_string=user)
-		}
-	} else {
-		.CRS(prj)
-	}
+
+
+.makeCRS <- function(x="") {
+	wkt <- crs(rast(crs=x))
+	sp::CRS(SRS_string=wkt)
 }
 
 .getSRS <- function(x) {
@@ -78,7 +67,16 @@ setMethod("wkt", signature(obj="Raster"),
 		""
 	} else if (methods::extends(class(x), "BasicRaster")) { 
 		if (.hasSlot(x, "srs")) {
-			x@srs
+			if (x@srs != "") {
+				x@srs
+			} else {
+				a <- attr(x@crs, "comment")
+				if (is.null(a)) {
+					x@crs@projargs
+				} else {
+					a
+				}
+			}
 		} else {
 			a <- attr(x@crs, "comment")
 			if (is.null(a)) {
@@ -104,10 +102,10 @@ setMethod("wkt", signature(obj="Raster"),
 	} else if (is.na(x)) {
 		""
 	} else if (is.character(x)) {
-		x <- trimws(x)
-		r <- ""
-		try(r <- crs(rast(crs=trimws(x)), proj=TRUE))
-		r
+		trimws(x)
+		#r <- ""
+		#try(r <- crs(rast(crs=trimws(x)), proj=TRUE))
+		#r
 		
 #		if (x == "") {
 #			x <- .CRS()
@@ -141,16 +139,13 @@ setMethod("wkt", signature(obj="Raster"),
 	if (is.null(x)) {
 		x <- .CRS()
 	} else if (methods::extends(class(x), "BasicRaster")) { 
+		if (!is.na(x@crs)) {
+			return(x@crs)
+		} 
 		if (.hasSlot(x, "srs")) {
 			x <- x@srs
 		} else {
-			x <- x@crs
-			a <- attr(x, "comment")
-			if (is.null(a)) {
-				x@projargs
-			} else {
-				a
-			}
+			x <- as.character(NA)
 		}
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- x@proj4string
@@ -158,11 +153,9 @@ setMethod("wkt", signature(obj="Raster"),
 		x <- sf::st_crs(x)
 		x <- as(x, "CRS") # passes on WKT comment
 	} else if (inherits(x, "SpatRaster")) { 
-		x <- crs(x)
-		x <- .makeCRS(x[1], x[2])
+		x <- .makeCRS(crs(x))
 	} else if (inherits(x, "SpatVector")) { 
-		x <- crs(x, proj=TRUE)
-		x <- .makeCRS(x)
+		x <- .makeCRS(crs(x))
 	} else if (is.na(x)) {
 		x <- .CRS()
 	} else if (is.character(x)) {
@@ -237,21 +230,31 @@ setMethod("is.na", signature(x="CRS"),
 "projection<-" <- function(x, value) {
 
 #	value <- .getCRS(value)
-	value <- .getSRS(value)
+	if (inherits(value, "CRS")) {
+		cvalue <- value
+		svalue <- .getSRS(value)
+	} else {
+		svalue <- .getSRS(value)
+		cvalue <- .makeCRS(svalue)
+	}
 	
 	if (inherits(x, "RasterStack")) {
 		if (nlayers(x) > 0) {
 			for (i in 1:nlayers(x)) {
-				x@layers[[i]]@srs <- value
-	#			x@layers[[i]]@crs <- value
+				x@layers[[i]]@crs <- cvalue
+				if (.hasSlot(x, "srs")) {
+					x@layers[[i]]@srs <- svalue
+				}
 			}
 		}
 	} 
 	if (inherits(x, "Spatial")) {
-		x@proj4string <- .CRS(value)
+		x@proj4string <- cvalue
 	} else {
-#		x@crs <- value
-		x@srs <- value
+		x@crs <- cvalue
+		if (.hasSlot(x, "srs")) {
+			x@srs <- svalue
+		}
 	}
 	return(x)
 }
@@ -261,14 +264,36 @@ setMethod("is.na", signature(x="CRS"),
 projection <- function(x, asText=TRUE) {
 
 	if (methods::extends(class(x), "BasicRaster")) { 
-		if (.hasSlot(x, "srs")) {
+		hassrs <- .hasSlot(x, "srs")
+		hascrs <- .hasSlot(x, "crs")
+		
+		if (hassrs & hascrs) {
+			if (x@srs != "") {
+				x <- x@srs
+			} else {
+				if (asText) {
+					a <- attr(x@crs, "comment")
+					if (is.null(a)) {
+						x <- x@crs@projargs
+					} else {
+						x <- a
+					}
+				} else {
+					return(x@crs)
+				}
+			}
+		} else if (hassrs) {
 			x <- x@srs 
 		} else {
-			a <- attr(x@crs, "comment")
-			if (is.null(a)) {
-				x <- x@crs@projargs
+			if (asText) {
+				a <- attr(x@crs, "comment")
+				if (is.null(a)) {
+					x <- x@crs@projargs
+				} else {
+					x <- a
+				}
 			} else {
-				x <- a
+				return(x@crs)
 			}
 		}
 	} else if (methods::extends(class(x), "Spatial")) { 
@@ -308,9 +333,13 @@ projection <- function(x, asText=TRUE) {
 
 setMethod("proj4string", signature("BasicRaster"), 
 	function(obj) {
-		#obj@crs@projargs
-		x <- rast(crs=.getSRS(obj))
-		x@ptr$get_crs("proj4")
+		if (!is.na(obj@crs)) {
+			x <- obj@crs@projargs
+		} else if (.hasSlot(obj, "srs")) {
+			x <- obj@srs
+			if (x == "") x <- as.character(NA)
+		} 
+		x
 	}
 )	
 

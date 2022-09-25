@@ -93,7 +93,11 @@ function(x, bands=NULL, native=FALSE, RAT=TRUE, ...) {
 				s@nrows <- x[[1]]@nrows
 				s@ncols <- x[[1]]@ncols
 				s@extent <- x[[1]]@extent
-				crs(s) <- x[[1]]@srs
+				if (.hasSlot(x[[1]], "srs")) {
+					crs(s) <- x[[1]]@srs
+				} else {
+					crs(s) <- x[[1]]@crs
+				}
 				return(s)
 			}
 			warning('RasterLayer objects without cell values were removed')
@@ -106,7 +110,11 @@ function(x, bands=NULL, native=FALSE, RAT=TRUE, ...) {
 		s@nrows <- x[[1]]@nrows
 		s@ncols <- x[[1]]@ncols
 		s@extent <- x[[1]]@extent
-		crs(s) <- x[[1]]@srs
+		if (.hasSlot(x[[1]], "srs")) {
+			crs(s) <- x[[1]]@srs
+		} else {
+			crs(s) <- x[[1]]@crs
+		}
 		s@layers <- x
 		if (namesFromList) {
 			names(s) <- lstnames

@@ -142,7 +142,13 @@ setMethod('raster', signature(x='character'),
 
 setMethod('raster', signature(x='BasicRaster'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.getSRS(x))
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols)
+		r@crs <- x@crs
+		if (.hasSlot(x, "srs")) {
+			r@srs <- x@srs
+		} else {
+			r@srs <- .getSRS(x@crs)
+		}
 		if (rotated(x)) {
 			r@rotated <- TRUE
 			r@rotation <- x@rotation
@@ -153,7 +159,13 @@ setMethod('raster', signature(x='BasicRaster'),
 
 setMethod('raster', signature(x='RasterLayer'), 
 	function(x) {
-		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols, crs=.getSRS(x))
+		r <- raster(x@extent, nrows=x@nrows, ncols=x@ncols)
+		r@crs <- x@crs
+		if (.hasSlot(x, "srs")) {
+			r@srs <- x@srs
+		} else {
+			r@srs <- .getSRS(x@crs)
+		}
 		r@rotated <- x@rotated
 		r@rotation <- x@rotation
 		r@file@blockrows <- x@file@blockrows
@@ -222,7 +234,15 @@ setMethod('raster', signature(x='RasterBrick'),
 				# better raster(filename(x), band=dindex)  ?
 				# with zvar for ncdf files?
 				
-				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.getSRS(x))	
+				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x))
+				r@crs <- x@crs
+				if (.hasSlot(x, "srs")) {
+					r@srs <- x@srs
+				} else {
+					r@srs <- .getSRS(x@crs)
+				}
+
+				
 				r@file <- x@file
 
 				r@file@blockrows <- x@file@blockrows
