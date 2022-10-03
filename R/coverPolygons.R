@@ -29,7 +29,8 @@ setMethod('cover', signature(x='SpatialPolygons', y='SpatialPolygons'),
 	for (y in yy) {
 		x <- cover(x, vect(y), identity=identity, expand=FALSE)
 	}
-		
+	x
+	
 	# if (identity) {
 		# x <- .coverIdentity(x, yy)
 		# if (inherits(x, "Spatial")) { x@proj4string <- prj }
