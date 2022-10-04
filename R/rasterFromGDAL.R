@@ -57,6 +57,7 @@
 	r@file@blockrows <- bks[,1]
 	r@file@blockcols <- bks[,2]
 	
+	
 	if (type == 'RasterLayer') {
 		band <- as.integer(band)
 		if ( band > nlyr(x) ) {
@@ -69,7 +70,13 @@
 		r@file@nbands <- as.integer(nlyr(x))
 		r@data@min <- minv[band]
 		r@data@max <- maxv[band]
-	
+
+		if (is.factor(x)) {
+			cts <- cats(x)[[1]]
+			colnames(cts)[1] <- "ID"
+			levels(r) <- cts
+		}
+		
 	} else {
 		r@data@min <- minv
 		r@data@max <- maxv
