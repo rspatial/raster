@@ -100,24 +100,17 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		warning('all cell values are NA')
 	}
 	
-	
 	filename <- trim(filename)
-	
-	if (bylayer) {
-		
+	if (bylayer) {	
 		nl <- nlayers(x)
-		
 		if (length(filename) > 1) {
 			if (length(filename) != nlayers(x) ) {
 				stop('the number of filenames is > 1 but not equal to the number of layers')	
 			}
-			
 			filename <- .fullFilename(filename, expand=TRUE)
 			filetype <- .filetype(format, filename=filename[1])
-			filename <- sapply(filename, function(f) .getExtension(f, filetype))
-				   
+			filename <- sapply(filename, function(f) .getExtension(f, filetype))	   
 		} else {
-		
 			if (filename == '') { 
 				stop('provide a filename') 
 			}
@@ -137,20 +130,16 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 				stop('invalid "suffix" argument')
 			}
 		}
-		
-		
 		if (filetype == 'KML') {
 			layers <- lapply(1:nl, function(i) KML(x[[i]], filename=filename[i], ...))	
 			return(invisible(x))
 		}
-			
 		if (inherits(x, 'RasterBrick')) {
 			x <- stack(x)
 		}
-		layers <- lapply(1:nl, function(i) writeRaster(x[[i]], filename=filename[i], format=format, ...))	
+		layers <- lapply(1:nl, function(i) writeRaster(x[[i]], filename=filename[i], format=filetype, ...))	
 		return(invisible(stack(layers)))
 	}
-	
 
 	if (filename == '') {	
 		stop('provide a filename')	

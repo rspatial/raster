@@ -161,12 +161,16 @@ setMethod('levels<-', signature(x='Raster'),
 			return(x)
 		} 
 		
-		i <- ! sapply(value, is.null)
+		i <- sapply(value, function(x) length(x) > 0)
 		if ( any(i) ) {
 			stopifnot (length(value) == nlayers(x))
 			levs <- levels(x)
 			for (j in which(i)) {
-				value[[j]] <- .checkLevels(levs[[j]], value[[j]])
+				a <- levs[[j]]
+				b <- value[[j]]
+				if (is.list(a)) a <- a[[1]]
+				if (is.list(b)) b <- b[[1]]
+				value[[j]] <- .checkLevels(a, b)
 			}
 			x@data@attributes <- value
 			x@data@isfactor <- i
