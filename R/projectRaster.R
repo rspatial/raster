@@ -9,9 +9,13 @@
 }
 
 .rawTransform <- function(projfrom, projto, xy, wkt="") {
-	xy <- terra::vect(xy, crs=projfrom)
-    xy <- terra::project(xy, projto)
-	terra::crds(xy)
+	v <- terra::vect()
+	out <- v@ptr$project_xy(xy[,1], xy[,2], projfrom, projto)
+	matrix(out, ncol=2)
+	
+#	xy <- terra::vect(xy, crs=projfrom)
+#    xy <- terra::project(xy, projto)
+#	terra::crds(xy)
 }
 
 projectExtent <- function(object, crs) {
