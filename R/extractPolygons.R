@@ -95,8 +95,6 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 		return(res[1:npol])
 	}
 	
-
-	
 	rr <- raster(x)
 	
 	pb <- pbCreate(npol, label='extract', ...)
@@ -367,7 +365,7 @@ function(x, y, fun=NULL, na.rm=FALSE, exact=FALSE, weights=FALSE, normalizeWeigh
 		} else {
 			nms <- c('ID', names(x)[lyrs])
 		}
-		if ((weights|exact) & is.null(fun)) {
+		if ((weights) & is.null(fun)) {
 			nms <- c(nms, 'weight')
 		}
 		colnames(res) <- nms
