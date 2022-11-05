@@ -64,11 +64,10 @@
 	}
 
            ## MDSumner, NSIDC data
-        if (fileext %in% c(".BIN")) {
-            r <- .rasterFromNSIDCFile(x)
-            if (!is.null(r)) return(r)
-        }
-
+    if (fileext %in% c(".BIN")) {
+        r <- .rasterFromNSIDCFile(x)
+        if (!is.null(r)) return(r)
+    }
 
 #	if(!native) {
 #		if (! .requireRgdal(FALSE) )  {
