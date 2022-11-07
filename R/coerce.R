@@ -11,7 +11,7 @@ setAs("SpatRaster", "Raster",
 		b <- sources(from, bands=TRUE)
 		nl <- nlyr(from)
 		e <- as.vector(ext(from))
-		prj <- crs(from)
+		prj <- crs(from, proj=TRUE)
 		if (nl == 1) {
 			if (b$source == "") {
 				r <- raster::raster(ncols=ncol(from), nrows=nrow(from), crs=prj,
@@ -61,9 +61,9 @@ setAs("SpatRaster", "Raster",
 		# things that may be different than the file source
 		try(levels(r) <- cats(from), silent=TRUE)
 		try(names(r) <- names(from))
-		crs(r) <- crs(from)
+		#crs(r) <- crs(from)
 		extent(r) <- as.vector(ext(from))
-		projection(r) <- crs(from)
+		projection(r) <- crs(from, proj=TRUE)
 		if (hasValues(from)) {
 			so <- scoff(from)
 			gain(r) <- so[,1]
