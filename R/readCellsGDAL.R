@@ -1,6 +1,7 @@
 
 .readCellsGDAL <- function(x, cells, layers) {
 	x <- rast(x)
+	levels(x) <- NULL
 	x <- x[cells]
 	as.matrix(x)[,layers]
 }
