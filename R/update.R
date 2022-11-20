@@ -3,10 +3,6 @@
 # Version 0.9
 # Licence GPL v3
 	
-if (!isGeneric("update")) {
-	setGeneric("update", function(object, ...)
-		standardGeneric("update"))
-}	
 
 setMethod('update', signature(object='RasterLayer'), 
 function(object, v, cell, ...) {

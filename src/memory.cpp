@@ -30,7 +30,7 @@ double availableRAM(double ram) {
 		double ramkb;
 		int ok = fscanf(fp, "%lf", &ramkb);  // returned in kB
 		pclose(fp);
-		if (ramkb > 0) {
+		if (ok && (ramkb > 0)) {
 			return ramkb * 1000.;
 		}
 		
