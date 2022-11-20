@@ -6,6 +6,8 @@
 
 \description{
 Get geographic data for anywhere in the world. Data are read from files that are first downloaded if necessary. Function \code{ccodes} returns country names and the ISO codes
+
+See the geodata package for access to more recent versions of the data available through this function, and for many other datasets.
 }
 
 \usage{
@@ -65,7 +67,7 @@ Not all combinations are available. See www.worldclim.org for details.
 
 \url{https://gadm.org}
 
-\url{https://srtm.csi.cgiar.org/}
+https://srtm.csi.cgiar.org/
 
 \url{https://diva-gis.org/gdata}
 }
