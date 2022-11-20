@@ -9,7 +9,7 @@ status](https://www.r-pkg.org/badges/version/raster)](https://cran.r-project.org
 
 [stackoverflow](https://stackoverflow.com/) is the best place to ask questions if you get stuck. Make sure to include a [simple reproducible example](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example). If you have found a bug, you can file an [issue](https://github.com/rspatial/raster/issues).
 
-The easiest way to get the *development version* is to install it from the [R-universe](https://r-universe.dev/organizations/), like this:
+The easiest way to get the *development version* on Windows is to install it from the [R-universe](https://r-universe.dev/organizations/), like this:
 
 ```
 install.packages('raster', repos='https://rspatial.r-universe.dev')
