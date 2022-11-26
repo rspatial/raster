@@ -98,7 +98,11 @@ setAs("SpatRaster", "Raster",
 			if (is.null(prj)) {
 				prj <- from@crs@projargs
 			}
-			crs(r) <- prj
+			if (packageVersion("terra") > "1.6.41") {
+				crs(r, warn=FALSE) <- prj			
+			} else {
+				crs(r) <- prj
+			}
 			if (nbands(from) != nlayers(from)) {
 				r <- r[[bandnr(from)]]
 			}
@@ -178,7 +182,11 @@ setAs("Raster", "SpatRaster",
 				prj <- from@crs@projargs
 			}
 		}
-		crs(x) <- prj
+		if (packageVersion("terra") > "1.6.41") {
+			crs(r, warn=FALSE) <- prj			
+		} else {
+			crs(r) <- prj
+		}
 		names(x) <- names(from)
 		ext(x) <- as.vector(extent(from))
 		x

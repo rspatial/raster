@@ -138,9 +138,11 @@
 #		} else {
 #			result <- as.vector(t(bm[startrow:(startrow+nrows-1), startcol:(startcol+ncols-1)]))
 #		}
-		if (object@data@gain != 1 | object@data@offset != 0) {
-			result <- result * object@data@gain + object@data@offset
-		}
+
+## terra adjusts
+#		if (object@data@gain != 1 | object@data@offset != 0) {
+#			result <- result * object@data@gain + object@data@offset
+#		}
 		
 #use GDAL  		
 	} else { 

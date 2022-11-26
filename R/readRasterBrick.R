@@ -196,11 +196,12 @@
 		readStop(object)
 		
 	}
-	if (inherits(object, "Raster")) {
-		if (object@data@gain != 1 | object@data@offset != 0) {
-			result <- result * object@data@gain + object@data@offset
-		}
-	}
+	## terra adjusts
+	#if (inherits(object, "Raster")) {
+	#	if (object@data@gain != 1 | object@data@offset != 0) {
+	#		result <- result * object@data@gain + object@data@offset
+	#	}
+	#}
 	colnames(result) <- names(object)
 	return(result)
 }

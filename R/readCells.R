@@ -76,11 +76,12 @@
 #	vals <- vals[order(cells[,1]), 2, drop=FALSE]
 	vals <- vals[order(vals[,1]), 2:ncol(vals)]
 
-	if (adjust) {
-		if (x@data@gain != 1 | x@data@offset != 0) {
-			vals <- vals * x@data@gain + x@data@offset
-		}
-	}
+	# terra already adjusted
+	#if (adjust) {
+	#	if (x@data@gain != 1 | x@data@offset != 0) {
+	#		vals <- vals * x@data@gain + x@data@offset
+	#	}
+	#}
 
 	# if  NAvalue() has been used.....
 	if (.naChanged(x)) {
