@@ -98,7 +98,7 @@ setAs("SpatRaster", "Raster",
 			if (is.null(prj)) {
 				prj <- from@crs@projargs
 			}
-			if (packageVersion("terra") > "1.6.41") {
+			if (utils::packageVersion("terra") > "1.6.41") {
 				crs(r, warn=FALSE) <- prj			
 			} else {
 				crs(r) <- prj
@@ -182,7 +182,7 @@ setAs("Raster", "SpatRaster",
 				prj <- from@crs@projargs
 			}
 		}
-		if (packageVersion("terra") > "1.6.41") {
+		if (utils::packageVersion("terra") > "1.6.41") {
 			crs(r, warn=FALSE) <- prj			
 		} else {
 			crs(r) <- prj
