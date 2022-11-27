@@ -137,7 +137,6 @@ setAs("SpatRaster", "Raster",
 			levels(r) <- levs				
 		}
 	}
-	g <- gc()
 	r
 }
 
@@ -183,9 +182,9 @@ setAs("Raster", "SpatRaster",
 			}
 		}
 		if (utils::packageVersion("terra") > "1.6.41") {
-			crs(r, warn=FALSE) <- prj			
+			crs(x, warn=FALSE) <- prj			
 		} else {
-			crs(r) <- prj
+			crs(x) <- prj
 		}
 		names(x) <- names(from)
 		ext(x) <- as.vector(extent(from))

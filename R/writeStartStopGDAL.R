@@ -47,19 +47,19 @@
 		NAflag <- .rasterNodatavalue(datatype)
 	}
 		
-
 	if (nlayers(x) > 1) {
-		r <- brick(x, values=FALSE)
+		rr <- brick(x, values=FALSE)
 	} else {
-		r <- raster(x)
+		rr <- raster(x)
 	}
-	r <- as(r, "SpatRaster")
+	r <- as(rr, "SpatRaster")
+
 #	names(r) <- names(x)
 #	nms <- paste0(extension(basename(filename), ""), "_")
 #	names(r) <- paste0(nms, 1:nlyr(r))
 #	if (!isTRUE(setStatistics)) ops$statistics = 6
 
-	writeStart(r, filename, overwrite=overwrite, gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE) 	
+	raster::writeStart(r, filename, overwrite=overwrite, gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE) 	
 	attr(x@file, "transient") <- r
 
 	x@file@datanotation <- datatype
