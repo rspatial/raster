@@ -134,10 +134,8 @@ when writing to an ascii file or another file type that does not store the crs</
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># write to a new geotiff file</span></span></span>
 <span class="r-in"><span><span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">r</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"test.tif"</span><span class="op">)</span>, format<span class="op">=</span><span class="st">"GTiff"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in asMethod(object):</span> object 'r' not found</span>
 <span class="r-in"><span><span class="va">bf</span> <span class="op">&lt;-</span> <span class="fu">writeRaster</span><span class="op">(</span><span class="va">b</span>, filename<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"multi.tif"</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>            options<span class="op">=</span><span class="st">"INTERLEAVE=BAND"</span>, overwrite<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in asMethod(object):</span> object 'r' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span><span class="co"># write to netcdf </span></span></span>
