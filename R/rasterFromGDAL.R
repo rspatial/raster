@@ -72,7 +72,7 @@
 		r@data@min <- minv[band]
 		r@data@max <- maxv[band]
 
-		if (is.factor(x)) {
+		if (is.factor(x)[1]) {
 			cts <- cats(x)[[1]]
 			colnames(cts)[1] <- "ID"
 			levels(r) <- cts
