@@ -46,6 +46,27 @@ setClass(".Rotation",
 )
 
 
+
+setMethod("initialize", "BasicRaster",
+	function(.Object, ..., crs=NA, srs="") {
+		.Object <- callNextMethod(.Object, ...)
+		if (!is.na(crs)) {
+			if (.hasSlot(.Object, "srs")) {
+				.Object@srs <- .getSRS(crs)
+			}
+			.Object@crs <- crs
+		} else {
+			if (.hasSlot(.Object, "srs")) {
+				.Object@srs <- .getSRS(srs)
+			}
+			.Object@crs <- .makeCRS(srs)
+		}
+		.Object
+	}
+)
+
+
+
 setClass ("BasicRaster",
 	representation (
 		title = "character",
