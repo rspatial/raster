@@ -55,7 +55,7 @@ setClass ("BasicRaster",
 		ncols ="integer",
 		nrows ="integer",
 		crs = "CRS",
-	#	srs = "character",
+		srs = "character",
 		history = "list",
 		#meta = "list",
 		z = "list"

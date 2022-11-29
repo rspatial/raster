@@ -22,7 +22,6 @@
 
 	fileext <- toupper(extension(x))
 
-
 	if ((fileext == ".GRD") || (fileext == ".GRI"))  {
 		grifile <- .setFileExtensionValues(x, 'raster')
 		grdfile <- .setFileExtensionHeader(x, 'raster')
