@@ -209,7 +209,6 @@
 		}
 	}
 	
-	
 	xrange <- c(min(xx), max(xx))
 	resx <- (xrange[2] - xrange[1]) / (ncols-1)
 	rm(xx)
@@ -232,8 +231,11 @@
 	yrange <- c(min(yy), max(yy))
 	resy <- (yrange[2] - yrange[1]) / (nrows-1)
 
-	if (yy[1] > yy[length(yy)]) { toptobottom  <- FALSE
-	} else { toptobottom <- TRUE }
+	if (yy[1] > yy[length(yy)]) { 
+		toptobottom  <- FALSE
+	} else { 
+		toptobottom <- TRUE 
+	}
 
 	rm(yy)
 
