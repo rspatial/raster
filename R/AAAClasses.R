@@ -55,7 +55,7 @@ setMethod("initialize", "BasicRaster",
 				.Object@srs <- .getSRS(crs)
 			}
 			.Object@crs <- crs
-		} else {
+		} else if (srs != "") {
 			if (.hasSlot(.Object, "srs")) {
 				.Object@srs <- .getSRS(srs)
 			}
