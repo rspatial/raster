@@ -18,7 +18,7 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-15</span>
       </span>
     </div>
 
@@ -97,7 +97,7 @@ If the exact properties of the RasterLayer are known beforehand, it may be prefe
 <span class="r-in"><span><span class="va">rr</span><span class="op">[</span><span class="va">cells</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">xyz</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># multiple layers</span></span></span>
-<span class="r-in"><span><span class="va">xyzz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.math.uzh.ch/pages/spam/reference/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xyz</span>, a<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span>, b<span class="op">=</span><span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">xyzz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/spam/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">xyz</span>, a<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span>, b<span class="op">=</span><span class="fu"><a href="ncell.html">nrow</a></span><span class="op">(</span><span class="va">xyz</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">rasterFromXYZ</span><span class="op">(</span><span class="va">xyzz</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
