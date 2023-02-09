@@ -8,8 +8,8 @@
 ### from terra
 setAs("SpatRaster", "Raster", 
 	function(from) {
-		if (window(from)) {
-			stop("you must remove the 'window' from the SpatRaster before coercion")
+		if (terra::window(from)) {
+			stop("you must remove the 'window' from the SpatRaster before coercion to a Raster*")
 		}
 		b <- sources(from, bands=TRUE)
 		nl <- nlyr(from)
