@@ -36,6 +36,7 @@
 	} else {
 		r <- as(r, "RasterBrick")
 	}
+	names(r) <- names(x)
 
 	r@file@name <- filename
 	r@file@driver <- 'gdal' 

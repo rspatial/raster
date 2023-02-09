@@ -8,7 +8,7 @@
 ### from terra
 setAs("SpatRaster", "Raster", 
 	function(from) {
-		if (terra::window(from)) {
+		if (any(terra::window(from))) {
 			stop("you must remove the 'window' from the SpatRaster before coercion to a Raster*")
 		}
 		b <- sources(from, bands=TRUE)
@@ -72,7 +72,6 @@ setAs("SpatRaster", "Raster",
 			gain(r) <- so[,1]
 			offs(r) <- so[,2]
 		}
-		g <- gc()
 		r
 	}
 )
