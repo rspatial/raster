@@ -32,6 +32,7 @@ function(x, filename, format, ...) {
 	
 	verylarge <- ncell(x) > 1000000000
 	
+	
 	# to simplify we could treat all cases as !inMemory
 	if ((!inMemory(x)) | verylarge ) {
 		if ( toupper(x@file@name) == toupper(filename) ) {
@@ -40,7 +41,7 @@ function(x, filename, format, ...) {
 		tr <- blockSize(x)
 		pb <- pbCreate(tr$n, ...)			
 		# use x to keep layer name
-		r <- writeStart(x, filename=filename, format=filetype, ...)
+		r <- writeStart(x, filename=filename, format=filetype, sources=filename(x), ...)
 		for (i in 1:tr$n) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 			r <- writeValues(r, v, tr$row[i])
@@ -83,7 +84,7 @@ function(x, filename, format, ...) {
 		return( .stopWriteCDF(x) )
 		
 	} else { 
-		x <- .writeGDALall(x, filename=filename, format=filetype, ...)
+		x <- .writeGDALall(x, filename=filename, format=filetype, sources=filename(x), ...)
 	}
 	return(invisible(x))
 }	
@@ -99,6 +100,13 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 	if (!hasValues(x)) {
 		warning('all cell values are NA')
 	}
+	
+	if (inherits(x, "RasterStack")) {
+		srcs <- sapply(x@layers, filename)
+	} else {
+		srcs <- filename(x)
+	}
+	
 	
 	filename <- trim(filename)
 	if (bylayer) {	
@@ -137,7 +145,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		if (inherits(x, 'RasterBrick')) {
 			x <- stack(x)
 		}
-		layers <- lapply(1:nl, function(i) writeRaster(x[[i]], filename=filename[i], format=filetype, ...))	
+		layers <- lapply(1:nl, function(i) writeRaster(x[[i]], filename=filename[i], format=filetype, sources=srcs[i], ...))	
 		return(invisible(stack(layers)))
 	}
 
@@ -195,11 +203,11 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		if (filetype=='CDF') {
 			b <- brick(x, values=FALSE)
 			b@z  <- x@z
-			b <- .startWriteCDF(b, filename=filename,  ...)
+			b <- .startWriteCDF(b, filename=filename, ...)
 			b <- .writeValuesBrickCDF(b, values(x))	
 			x <- .stopWriteCDF(b) 
 		} else {
-			x <- .writeGDALall(x, filename=filename, format=filetype, ...) 
+			x <- .writeGDALall(x, filename=filename, format=filetype, sources=srcs, ...) 
 		}
 		
 		return(invisible(x))
@@ -217,7 +225,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		tr <- blockSize(b)
 		pb <- pbCreate(tr$n, ...)
 		x <- readStart(x, ...)
-		b <- writeStart(b, filename=filename, format=filetype, ...)
+		b <- writeStart(b, filename=filename, format=filetype, sources=srcs, ...)
 		for (i in 1:tr$n) {
 			v <- getValues(x, row=tr$row[i], nrows=tr$nrows[i])
 			b <- writeValues(b, v, tr$row[i])

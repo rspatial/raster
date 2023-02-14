@@ -16,7 +16,7 @@
 	NA
 }
 
-.startGDALwriting <- function(x, filename, gdal=NULL, setStatistics=TRUE, overwrite=FALSE, NAflag=NA, format="", datatype=NA, ...) {
+.startGDALwriting <- function(x, filename, gdal=NULL, setStatistics=TRUE, overwrite=FALSE, NAflag=NA, format="", datatype=NA, sources = "", ...) {
 
 	#temp <- .getGDALtransient(x, filename=filename, options=options, ...)
 	#attr(x@file, "transient") <- temp[[1]]
@@ -53,13 +53,17 @@
 		rr <- raster(x)
 	}
 	r <- as(rr, "SpatRaster")
-
+	
+	# raster does not write names
+	names(r) <- rep("", nlyr(r))
 #	names(r) <- names(x)
 #	nms <- paste0(extension(basename(filename), ""), "_")
 #	names(r) <- paste0(nms, 1:nlyr(r))
 #	if (!isTRUE(setStatistics)) ops$statistics = 6
 
-	raster::writeStart(r, filename, overwrite=overwrite, gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE) 	
+
+	writeStart(r, filename, overwrite=overwrite, gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE, sources=sources) 	
+	
 	attr(x@file, "transient") <- r
 
 	x@file@datanotation <- datatype
