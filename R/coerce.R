@@ -60,6 +60,12 @@ setAs("SpatRaster", "Raster",
 				r <- raster::stack(r)
 			}
 		}
+
+		if (hasValues(from)) {
+			so <- scoff(from)
+			gain(r) <- so[,1]
+			offs(r) <- so[,2]
+		}
 		
 		# things that may be different than the file source
 		try(levels(r) <- cats(from), silent=TRUE)
@@ -67,11 +73,6 @@ setAs("SpatRaster", "Raster",
 		#crs(r) <- crs(from)
 		extent(r) <- as.vector(ext(from))
 		projection(r) <- crs(from, proj=TRUE)
-		if (hasValues(from)) {
-			so <- scoff(from)
-			gain(r) <- so[,1]
-			offs(r) <- so[,2]
-		}
 		r
 	}
 )
