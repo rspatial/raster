@@ -96,11 +96,7 @@
 	cat("xmax=", as.character(xmax(x)), "\n", file = thefile, sep='')
 	cat("ymax=", as.character(ymax(x)), "\n", file = thefile, sep='')
 	cat("projection=", proj4string(x), "\n", file = thefile, sep='')
-# update to add WKT2
-        if (!is.null(comment(crs(x))))
-            cat("wkt=", gsub("\\n", "", wkt(x)), "\n",
-                file = thefile, sep='')
-
+    cat("wkt=", gsub("\\n", "", wkt(x)), "\n", file = thefile, sep='')
 	close(thefile)
 	return(TRUE)
 }

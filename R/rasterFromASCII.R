@@ -111,7 +111,7 @@
 	
 	
 	if (!is.na(crs)) {
-		projection(x) <- .CRS()
+		projection(x) <- .spCRS()
 	}
 	
 	return(x)

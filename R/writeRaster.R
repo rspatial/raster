@@ -102,7 +102,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 	}
 	
 	if (inherits(x, "RasterStack")) {
-		srcs <- sapply(x@layers, filename)
+		srcs <- sapply(x@layers, raster::filename)
 	} else {
 		srcs <- filename(x)
 	}

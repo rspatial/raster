@@ -50,7 +50,7 @@ setClass(".Rotation",
 setMethod("initialize", "BasicRaster",
 	function(.Object, ..., crs=NA, srs="") {
 		.Object <- callNextMethod(.Object, ...)
-		if (!is.na(crs)) {
+		if ((length(crs) > 0) && (!isTRUE(is.na(crs)))) {
 			if (.hasSlot(.Object, "srs")) {
 				.Object@srs <- .getSRS(crs)
 			}
@@ -83,6 +83,7 @@ setClass ("BasicRaster",
 	),
 	prototype (	
 		crs = sp::CRS(doCheckCRSArgs=FALSE),
+		srs = "",
 		rotated = FALSE,
 		ncols= as.integer(1),
 		nrows= as.integer(1),

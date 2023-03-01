@@ -209,23 +209,20 @@
 			} else if (ini[i,2] == "LAYERNAME") { layernames <- ini[i,3] 
 			} else if (ini[i,2] == "ZVALUES") { zvalues <- ini[i,3] 
 			} else if (ini[i,2] == "ZCLASS") { zclass <- ini[i,3] } 
-		}  
-		if (!is.na(prj)) {
-			if (prj == 'GEOGRAPHIC') { prj <- "+proj=longlat" 
-			} else if (prj == 'UNKNOWN' | prj == 'NA') { 
-				prj <- NA 
-			}
-		}
-	
+		}  	
 	}
 	
 
-# update to add WKT2
-        if (!is.na(wkt)) {
-            prj <- .makeCRS(prj=prj, wkt=wkt)
-        } else {
-	    prj <- .getProj(prj, crs)
-        }
+    if (!is.na(wkt) && (wkt != "")) {
+        prj <- wkt
+    } 
+	if (!is.na(prj)) {
+		if (prj == 'GEOGRAPHIC') { 
+			prj <- "+proj=longlat" 
+		} else if (prj == 'UNKNOWN' | prj == 'NA') { 
+			prj <- NA 
+		}
+	}
 	
 	if (band < 1) {
 		stop("band must be 1 or larger")

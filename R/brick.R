@@ -37,7 +37,12 @@ setMethod('brick', signature(x='RasterLayer'),
 		}
 		
 		if (!values) {
-			b <- brick(x@extent, nrows=nrow(x), ncols=ncol(x), crs=x@crs, nl=nl)
+			if (.hasSlot(x, "srs")) {
+				prj <- x@srs
+			} else {
+				prj <- x@crs
+			}
+			b <- brick(x@extent, nrows=nrow(x), ncols=ncol(x), crs=prj, nl=nl)
 			if (rotated(x)) {
 				b@rotated <- TRUE
 				b@rotation <- x@rotation
@@ -67,7 +72,13 @@ setMethod('brick', signature(x='RasterStack'),
 	function(x, values=TRUE, nl, filename='', ...){
 	
 		e <- x@extent
-		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=x@crs)
+		if (.hasSlot(x, "srs")) {
+			prj <- x@srs
+		} else {
+			prj <- x@crs
+		}
+		
+		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=prj)
 		if (rotated(x)) {
 			b@rotated <- TRUE
 			b@rotation <- x@rotation
@@ -131,9 +142,15 @@ setMethod('brick', signature(x='RasterBrick'),
 	function(x, nl, ...){
 		if (missing(nl)) { 
 			nl <- nlayers(x) 
-		}
+		}		
 		e <- x@extent
-		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=x@crs)
+		if (.hasSlot(x, "srs")) {
+			prj <- x@srs
+		} else {
+			prj <- x@crs
+		}
+		
+		b <- brick(xmn=e@xmin, xmx=e@xmax, ymn=e@ymin, ymx=e@ymax, nrows=x@nrows, ncols=x@ncols, crs=prj)
 		b@data@nlayers <- as.integer(nl)
 		b@data@min <- rep(Inf, nl)
 		b@data@max <- rep(-Inf, nl)
@@ -154,10 +171,13 @@ setMethod('brick', signature(x='Extent'),
 		if (nc < 1) { stop("ncols should be > 0") }
 		if (nr < 1) { stop("nrows should be > 0") }
 		b <- methods::new("RasterBrick", extent=x, ncols=nc, nrows=nr)
+		
+		#prj <- sp::CRS(as.character(NA), doCheckCRSArgs=FALSE)			
+		#try(prj <- .getCRS(crs))
+		#projection(b) <- prj
 
-		prj <- sp::CRS(as.character(NA), doCheckCRSArgs=FALSE)			
-		try(prj <- .getCRS(crs))
-		projection(b) <- prj
+		projection(b) <- crs
+
 		nl <- max(round(nl), 0)
 		b@data@nlayers <- as.integer(nl)
 		b@data@isfactor <- rep(FALSE, nl)

@@ -8,13 +8,20 @@
 	if (inherits(x, "Spatial")) {
 		suppressWarnings(sp::proj4string(x))
 	} else {
-		x@crs@projargs
+		# x@crs@projargs
+		terra::crs(terra::crs(x@srs), proj=TRUE)
 	}
 }
 
 
-.CRS <- function(...) {
-	suppressWarnings(sp::CRS(...))
+.spCRS <- function(...) {
+#	crs <- suppressWarnings(sp::CRS(...))
+	crs <- try(sp::CRS(...), silent=TRUE)
+	if (inherits(crs, "try-error")) {
+		sp::CRS()
+	} else {
+		crs
+	}
 }
 
 

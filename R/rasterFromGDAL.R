@@ -33,10 +33,11 @@
 	r <- as(rast(x), "Raster")
 	if (type == "RasterLayer") {
 		r <- as(r, "RasterLayer")
+		names(r) <- names(x)[1]
 	} else {
 		r <- as(r, "RasterBrick")
+		names(r) <- names(x)
 	}
-	names(r) <- names(x)
 
 	r@file@name <- filename
 	r@file@driver <- 'gdal' 
@@ -241,8 +242,8 @@
 		# }
 	# }
 	# crs <- .getProj(prj, crs)
-	# r@crs <- .CRS(crs, TRUE) 
-	# #r@crs <- .CRS(crs, FALSE) 
+	# r@crs <- .spCRS(crs, TRUE) 
+	# #r@crs <- .spCRS(crs, FALSE) 
 	# # F to avoid warnings about other than WGS84 datums or ellipsoids  
 	
 # #  	r@history[[1]] <- mdata

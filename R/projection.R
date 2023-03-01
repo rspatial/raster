@@ -5,63 +5,65 @@
 
 
 # to be removed when released sp has this for crs
-setMethod("wkt", signature(obj="ANY"), 
-	function(obj) {
-		if (!inherits(obj, "CRS")) {
-			obj <- obj@crs
-		} else if (inherits(obj, c("sf", "sfc"))) {
-			obj <- sf::st_crs(obj)
-			obj <- as(obj, "CRS") # passes on WKT comment
-		}
-		
-		w <- comment(obj)
-		if (is.null(w)) {
-			warning("no wkt comment")
-			return("")
-		} else {
-			return(w)
-		}
-	}
-)
+#setMethod("wkt", signature(obj="ANY"), 
+#	function(obj) {
+#		if (!inherits(obj, "CRS")) {
+#			obj <- obj@crs
+#		} else if (inherits(obj, c("sf", "sfc"))) {
+#			obj <- sf::st_crs(obj)
+#			obj <- as(obj, "CRS") # passes on WKT comment
+#		}
+#		
+#		w <- comment(obj)
+#		if (is.null(w)) {
+#			warning("no wkt comment")
+#			return("")
+#		} else {
+#			return(w)
+#		}
+#	}
+
+#)
+
+.CRS <- function(...) { .spCRS(...) }
 
 
 setMethod("wkt", signature(obj="Raster"), 
 	function(obj) {
-		w <- comment(obj@crs)
-		if (is.null(w)) {
-			warning("no wkt comment")
-			return("")
+		#w <- comment(obj@crs)
+		#if (is.null(w)) {
+		#	warning("no wkt comment")
+		#	return("")
+		#} else {
+		#	return(w)
+		#}
+		if (.hasSlot(obj, "srs")) {
+			terra::crs(obj@srs)
 		} else {
-			return(w)
+			.srs_from_sp(obj@crs)
 		}
 	}
 )
 
 
 
-.srs_from_sp <- function(x) {
-	crs <- x@proj4string
-	pj <- crs@projargs
-	wk <- wkt(crs)
-	return(c(pj, wk))
-}
 
 
 .makeCRS <- function(user="", prj="", wkt="") {
 	if (wkt != "") {
 		if (prj != "") {
-			.CRS(prj, SRS_string=wkt)
+			.spCRS(prj, SRS_string=wkt)
 		} else {
-			.CRS(SRS_string=wkt)		
+			.spCRS(SRS_string=wkt)		
 		}
 	} else if (user !="") {
 		if (substr(trim(user), 1 ,1) == "+") {
-			.CRS(user)
+			.spCRS(user)
 		} else {
-			.CRS(SRS_string=user)
+			.spCRS(SRS_string=user)
 		}
 	} else {
-		.CRS(prj)
+		.spCRS(prj)
 	}
 }
 
@@ -71,9 +73,9 @@ setMethod("wkt", signature(obj="Raster"),
 	if (methods::extends(class(x), "CRS")) { 
 		return(x)
 	}
-
-	if (is.null(x)) {
-		x <- .CRS()
+	
+	if ((length(x) == 0) || is.null(x)) {
+		x <- .spCRS()
 	} else if (methods::extends(class(x), "BasicRaster")) { 
 		x <- x@crs
 	} else if (methods::extends(class(x), "Spatial")) { 
@@ -88,32 +90,36 @@ setMethod("wkt", signature(obj="Raster"),
 		x <- crs(x, proj=TRUE)
 		x <- .makeCRS(x)
 	} else if (is.na(x)) {
-		x <- .CRS()
+		x <- .spCRS()
 	} else if (is.character(x)) {
 		x <- trimws(x)
 		if (x == "") {
-			x <- .CRS()
+			x <- .spCRS()
+		} else if (substr(x, 1, 4) == "EPSG") {
+			x <- .spCRS(terra::crs(x, proj=TRUE))
 		} else if (substr(x, 1, 1) == "+") {
-			x <- .CRS(x)
+			x <- .spCRS(x)
 		} else {
-			x <- .CRS(SRS_string = x)
+			x <- terra::crs(terra::crs(x), proj=TRUE)
+			x <- .spCRS(x)
 		}
 		#if (trimws(x) == "") {
 		#	x <- return(CRS())
 		#} else {
 		#	wkt <- rgdal::showSRID(x)
-		#	x <- .CRS()
+		#	x <- .spCRS()
 		#	x@projargs <- rgdal::showP4(wkt)
 		#	attr(x, "comment") <- wkt
 		#}
 	} else if (is.numeric(x)) {
 		x <- paste0("EPSG:", round(x))
-		x <- .CRS(SRS_string = x)	
+		x <- .spCRS(terra::crs(x, proj=TRUE))
 	} else {
-		x <- .CRS()
-	} # else if "is .CRS"
+		x <- .spCRS()
+	} # else if "is .spCRS"
 	x
 }
+
 
 
 setMethod("crs", signature("ANY"), 
@@ -136,11 +142,11 @@ setMethod("crs<-", signature("Spatial", "ANY"),
 
 		if (!inherits(value, "CRS")) {
 			if (is.na(value)) {
-				value <- .CRS()
+				value <- .spCRS()
 			} else if (is.character(value)) {
-				value <- .CRS(value)
+				value <- .spCRS(value)
 			} else {
-				value <- .CRS(value)
+				value <- .spCRS(value)
 			}
 		}
 	
@@ -158,20 +164,26 @@ setMethod("is.na", signature(x="CRS"),
 
 "projection<-" <- function(x, value) {
 
-	value <- .getCRS(value)
+	crsvalue <- .getCRS(value)
+	srsvalue <- .getSRS(value)
 	
 	if (inherits(x, "RasterStack")) {
 		if (nlayers(x) > 0) {
 			for (i in 1:nlayers(x)) {
-				x@layers[[i]]@crs <- value
-				#x@layers[[i]]@crs <- .CRS(value)
+				x@layers[[i]]@crs <- crsvalue
+				if (.hasSlot(x@layers[[i]], "srs")) {
+					x@layers[[i]]@srs <- srsvalue
+				}
 			}
 		}
 	} 
 	if (inherits(x, "Spatial")) {
-		x@proj4string <- value
+		x@proj4string <- crsvalue
 	} else {
-		x@crs <- value
+		x@crs <- crsvalue
+		if (.hasSlot(x, "srs")) {
+			x@srs <- srsvalue
+		}
 	}
 	return(x)
 }
@@ -195,7 +207,7 @@ projection <- function(x, asText=TRUE) {
 		if (asText) {
 			return(x)
 		} else {
-			return( .CRS(x) )
+			return( .spCRS(x) )
 		}
 	} else if (!inherits(x, "CRS")) { 
 		return(as.logical(NA))
@@ -210,7 +222,7 @@ projection <- function(x, asText=TRUE) {
 			}
 		}
 	} else if (!inherits(x, "CRS")) { 
-		x <- .CRS(x)
+		x <- .spCRS(x)
 	}
 	return(x)
 }
@@ -219,7 +231,16 @@ projection <- function(x, asText=TRUE) {
 
 setMethod("proj4string", signature("BasicRaster"), 
 	function(obj) {
-		obj@crs@projargs
+		if (.hasSlot(obj, "srs")) {
+			obj <- try(suppressWarnings(terra::crs(obj@srs, proj=TRUE)), silent=TRUE)
+			if (inherits(obj, "try-error") || (obj=="")) {
+				as.character(NA)
+			} else {
+				obj
+			}
+		} else {
+			obj@crs@projargs
+		}
 	}
 )	
 

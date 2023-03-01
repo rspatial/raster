@@ -1,11 +1,13 @@
 
 .srs_from_sp <- function(x) {
-	crs <- x@proj4string
-	pj <- crs@projargs
-	wk <- wkt(crs)
-	return(c(pj, wk))
+	crs <- x@projargs
+	wk <- attr(x, "comment")
+	if (!is.null(wk) && (!is.na(wk)) && (wk != "")) {
+		wk
+	} else {
+		crs
+	}
 }
-
 
 
 .getSRS <- function(x) {
@@ -17,7 +19,7 @@
 			a
 		}
 
-	} else if (is.null(x)) {
+	} else if (is.null(x) || (length(x)==0)) {
 		""
 	} else if (methods::extends(class(x), "BasicRaster")) { 
 		if (.hasSlot(x, "srs")) {
@@ -62,17 +64,17 @@
 		#r
 		
 #		if (x == "") {
-#			x <- .CRS()
+#			x <- .spCRS()
 #		} else if (substr(x, 1, 1) == "+") {
-#			x <- .CRS(x)
+#			x <- .spCRS(x)
 #		} else {
-#			x <- .CRS(SRS_string = x)
+#			x <- .spCRS(SRS_string = x)
 #		}
 		#if (trimws(x) == "") {
 		#	x <- return(CRS())
 		#} else {
 		#	wkt <- rgdal::showSRID(x)
-		#	x <- .CRS()
+		#	x <- .spCRS()
 		#	x@projargs <- rgdal::showP4(wkt)
 		#	attr(x, "comment") <- wkt
 		#}
@@ -80,6 +82,6 @@
 		.getSRS(paste0("EPSG:", round(x)))
 	} else {
 		""
-	} # else if "is .CRS"
+	} # else if "is .spCRS"
 }	
 
