@@ -52,11 +52,10 @@ pbStep <- function(pb, step=NULL, label='') {
 }
 
 pbClose <- function(pb, timer) {
-	pbclass <- class(pb)
-	if (inherits(pbclass, "txtProgressBar")) {
+	if (inherits(pb, "txtProgressBar")) {
 		cat("\n\r")
 		close(pb)
-	} else if (inherits(pbclass, "tkProgressBar")) {
+	} else if (inherits(pb, "tkProgressBar")) {
 		close(pb)
 	}
 	if (missing(timer)) {
