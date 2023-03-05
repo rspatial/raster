@@ -231,16 +231,14 @@ projection <- function(x, asText=TRUE) {
 
 setMethod("proj4string", signature("BasicRaster"), 
 	function(obj) {
-		if (.hasSlot(obj, "srs")) {
-			obj <- try(suppressWarnings(terra::crs(obj@srs, proj=TRUE)), silent=TRUE)
-			if (inherits(obj, "try-error") || (obj=="")) {
-				as.character(NA)
-			} else {
-				obj
-			}
-		} else {
-			obj@crs@projargs
-		}
+		p4s <- obj@crs@projargs
+		if (is.na(p4s) && .hasSlot(obj, "srs")) {
+			p4s <- try(suppressWarnings(terra::crs(obj@srs, proj=TRUE)), silent=TRUE)
+			if (inherits(obj, "try-error") || (p4s=="")) {
+				p4s <- as.character(NA)
+			} 
+		} 
+		p4s
 	}
 )	
 

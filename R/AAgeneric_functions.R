@@ -1,4 +1,7 @@
 
+#if (!isGeneric("colSums")) {setGeneric("colSums", function(x, ...) standardGeneric("colSums"))}	
+#if (!isGeneric("rowSums")) {setGeneric("rowSums", function(x, ...) standardGeneric("rowSums"))}	
+
 if (!isGeneric("update")) {setGeneric("update", function(object, ...) standardGeneric("update"))}	
 
 if (!isGeneric("stack")) { setGeneric("stack", function(x, ...)	standardGeneric("stack"))}
