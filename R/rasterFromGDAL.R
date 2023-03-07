@@ -42,7 +42,6 @@
 	r@file@name <- filename
 	r@file@driver <- 'gdal' 
  	r@data@fromdisk <- TRUE
-#	r@file@datanotation <- x@ptr$dataType[1]
 	r@file@datanotation <- datatype(x)[1]
 	if (any(hasMinMax(x))) {
 		mnmx <- minmax(x)

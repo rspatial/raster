@@ -10,7 +10,7 @@
 
 .rawTransform <- function(projfrom, projto, xy, wkt="") {
 	v <- terra::vect()
-	out <- v@ptr$project_xy(xy[,1], xy[,2], projfrom, projto)
+	out <- terra::project(xy, projfrom, projto)
 	matrix(out, ncol=2)
 	
 #	xy <- terra::vect(xy, crs=projfrom)
