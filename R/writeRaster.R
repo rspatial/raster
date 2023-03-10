@@ -145,7 +145,7 @@ function(x, filename, format, bylayer=FALSE, suffix='numbers', ...) {
 		if (inherits(x, 'RasterBrick')) {
 			x <- stack(x)
 		}
-		layers <- lapply(1:nl, function(i) writeRaster(x[[i]], filename=filename[i], format=filetype, sources=srcs[i], ...))	
+		layers <- lapply(1:nl, function(i) writeRaster(x[[i]], filename=filename[i], format=filetype, ...))	
 		return(invisible(stack(layers)))
 	}
 
