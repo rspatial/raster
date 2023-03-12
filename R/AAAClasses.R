@@ -54,12 +54,12 @@ setMethod("initialize", "BasicRaster",
 			if (.hasSlot(.Object, "srs")) {
 				.Object@srs <- .getSRS(crs)
 			}
-			.Object@crs <- crs
+			#.Object@crs <- crs
 		} else if (srs != "") {
 			if (.hasSlot(.Object, "srs")) {
 				.Object@srs <- .getSRS(srs)
 			}
-			.Object@crs <- .makeCRS(srs)
+			#.Object@crs <- .makeCRS(srs)
 		}
 		.Object
 	}

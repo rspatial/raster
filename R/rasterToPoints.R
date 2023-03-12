@@ -17,7 +17,8 @@ rasterToPoints <- function(x, fun=NULL, spatial=FALSE, ...) {
 	if (! inherits(x, 'RasterStack' )) {
 		if ( ! fromDisk(x) & ! inMemory(x) ) {
 			if (spatial) {
-				return(sp::SpatialPoints(coords=xyFromCell(x, 1:ncell(x)),  proj4string=x@crs) )
+				crs <- .getCRS(x)
+				return(sp::SpatialPoints(coords=xyFromCell(x, 1:ncell(x)),  proj4string=crs) )
 			} else {
 				return(xyFromCell(x, 1:ncell(x)))
 			}
@@ -84,12 +85,14 @@ rasterToPoints <- function(x, fun=NULL, spatial=FALSE, ...) {
 			xyv <- rbind(xyv, 0)
 			v <- data.frame(xyv[ ,-c(1:2), drop=FALSE])
 			colnames(v) <- laynam
-			s <- sp::SpatialPointsDataFrame(coords=xyv[,1:2,drop=FALSE], data=v,  proj4string=x@crs )
+			crs <- .getCRS(x)			
+			s <- sp::SpatialPointsDataFrame(coords=xyv[,1:2,drop=FALSE], data=v,  proj4string=crs )
 			return(s[0,])
 		} else {
 			v <- data.frame(xyv[ ,-c(1:2), drop=FALSE])
 			colnames(v) <- laynam
-			return( sp::SpatialPointsDataFrame(coords=xyv[,1:2,drop=FALSE], data=v,  proj4string=x@crs ) )
+			crs <- .getCRS(x)
+			return( sp::SpatialPointsDataFrame(coords=xyv[,1:2,drop=FALSE], data=v,  proj4string=crs ) )
 		}
 		
 	} else {

@@ -40,7 +40,7 @@ setMethod("wkt", signature(obj="Raster"),
 		if (.hasSlot(obj, "srs")) {
 			terra::crs(obj@srs)
 		} else {
-			.srs_from_sp(obj@crs)
+			NA @.srs_from_sp(obj@crs)
 		}
 	}
 )
@@ -50,6 +50,11 @@ setMethod("wkt", signature(obj="Raster"),
 
 
 .makeCRS <- function(user="", prj="", wkt="") {
+	if (missing(user)) user = ""
+	if (is.na(user)) user = ""
+	if (is.na(prj)) prj = ""
+	if (is.na(wkt)) wkt = ""
+	
 	if (wkt != "") {
 		if (prj != "") {
 			.spCRS(prj, SRS_string=wkt)
@@ -77,7 +82,14 @@ setMethod("wkt", signature(obj="Raster"),
 	if ((length(x) == 0) || is.null(x)) {
 		x <- .spCRS()
 	} else if (methods::extends(class(x), "BasicRaster")) { 
-		x <- x@crs
+		#x <- x@crs
+		if (!is.na(x@crs)) {
+			x <- x@crs
+		} else if (.hasSlot(x, "srs")) {
+			x <- .makeCRS(x@srs)
+		} else {
+			x <- .spCRS()
+		}
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- x@proj4string
 	} else if (inherits(x, c("sf", "sfc"))) {
@@ -85,7 +97,7 @@ setMethod("wkt", signature(obj="Raster"),
 		x <- as(x, "CRS") # passes on WKT comment
 	} else if (inherits(x, "SpatRaster")) { 
 		x <- crs(x)
-		x <- .makeCRS(x[1], x[2])
+		x <- .makeCRS(x)
 	} else if (inherits(x, "SpatVector")) { 
 		x <- crs(x, proj=TRUE)
 		x <- .makeCRS(x)
@@ -170,7 +182,7 @@ setMethod("is.na", signature(x="CRS"),
 	if (inherits(x, "RasterStack")) {
 		if (nlayers(x) > 0) {
 			for (i in 1:nlayers(x)) {
-				x@layers[[i]]@crs <- crsvalue
+			#	x@layers[[i]]@crs <- crsvalue
 				if (.hasSlot(x@layers[[i]], "srs")) {
 					x@layers[[i]]@srs <- srsvalue
 				}
@@ -193,7 +205,7 @@ setMethod("is.na", signature(x="CRS"),
 projection <- function(x, asText=TRUE) {
 
 	if (methods::extends(class(x), "BasicRaster")) { 
-		x <- x@crs 
+		x <- .getCRS(x) 
 	} else if (methods::extends(class(x), "Spatial")) { 
 		x <- x@proj4string
 	} else if (inherits(x, c("sf", "sfc"))) {
@@ -231,13 +243,14 @@ projection <- function(x, asText=TRUE) {
 
 setMethod("proj4string", signature("BasicRaster"), 
 	function(obj) {
-		p4s <- obj@crs@projargs
-		if (is.na(p4s) && .hasSlot(obj, "srs")) {
+		if (.hasSlot(obj, "srs")) {
 			p4s <- try(suppressWarnings(terra::crs(obj@srs, proj=TRUE)), silent=TRUE)
 			if (inherits(obj, "try-error") || (p4s=="")) {
 				p4s <- as.character(NA)
 			} 
-		} 
+		} else {
+			p4s <- obj@crs@projargs
+		}
 		p4s
 	}
 )	
