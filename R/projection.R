@@ -192,7 +192,8 @@ setMethod("is.na", signature(x="CRS"),
 	if (inherits(x, "Spatial")) {
 		x@proj4string <- crsvalue
 	} else {
-		x@crs <- crsvalue
+		#x@crs <- crsvalue
+		x@crs <- .spCRS()
 		if (.hasSlot(x, "srs")) {
 			x@srs <- srsvalue
 		}
