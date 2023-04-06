@@ -5,7 +5,7 @@
 
 
 
-.startWriteCDF <- function(x, filename, datatype='FLT4S', overwrite=FALSE, progress='', att, varname, varunit, varatt, longname, xname, yname, zname, zunit, zatt, NAflag, force_v4=FALSE, ...) {
+.startWriteCDF <- function(x, filename, datatype='FLT4S', overwrite=FALSE, progress='', att, varname, varunit, varatt, longname, xname, yname, zname, zunit, zatt, NAflag, force_v4=FALSE, sources, ...) {
 
 	stopifnot(requireNamespace("ncdf4"))
 		
@@ -13,6 +13,7 @@
 	if (filename == '') { 
 		stop('provide a filename') 
 	}
+	
 	extension(filename) <- .defaultExtension(format='CDF')
 	if (file.exists(filename) & !overwrite) {
 		stop('file exists, use overwrite=TRUE to overwrite it')
