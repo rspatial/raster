@@ -127,7 +127,13 @@ setAs("SpatRaster", "Raster",
 	} else {
 		prj <- .srs_from_sp(from@crs)	
 	}
-	crs(r, warn=FALSE) <- prj			
+	crs(r, warn=FALSE) <- prj	
+	
+	#z <- from@z
+	#if (length(z) == 1) {
+	#	z <- z[[1]]
+	#	try(time(r) <- z, silent=TRUE)
+	#}
 	r
 }
 

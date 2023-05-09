@@ -75,10 +75,11 @@
 
 		if (is.factor(x)[1]) {
 			cts <- cats(x)[[1]]
-			colnames(cts)[1] <- "ID"
-			levels(r) <- cts
+			if (!is.null(cts)) {
+				colnames(cts)[1] <- "ID"
+				levels(r) <- cts
+			}
 		}
-		
 	} else {
 		r@data@min <- minv
 		r@data@max <- maxv
