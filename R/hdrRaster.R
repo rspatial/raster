@@ -95,7 +95,9 @@
 	cat("ymin=", as.character(ymin(x)), "\n", file = thefile, sep='')
 	cat("xmax=", as.character(xmax(x)), "\n", file = thefile, sep='')
 	cat("ymax=", as.character(ymax(x)), "\n", file = thefile, sep='')
-	cat("projection=", proj4string(x), "\n", file = thefile, sep='')
+	prj <- proj4string(x)
+	prj[is.na(prj)] <- ""
+	cat("projection=", prj, "\n", file = thefile, sep='')
     cat("wkt=", gsub("\\n", "", wkt(x)), "\n", file = thefile, sep='')
 	close(thefile)
 	return(TRUE)
