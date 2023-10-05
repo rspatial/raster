@@ -64,8 +64,11 @@
 
 	writeStart(r, filename, overwrite=overwrite, gdal=gdal, filetype=format, datatype=datatype, progress=0, NAflag=NAflag, progressbar=FALSE, sources=sources) 	
 	
+	if (inherits(x, "RasterStack")) {
+		x <- brick(x, values=FALSE)
+	}
+	
 	attr(x@file, "transient") <- r
-
 	x@file@datanotation <- datatype
 	x@file@driver <- 'gdal'
 	x@data@fromdisk <- TRUE
