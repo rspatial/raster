@@ -47,7 +47,7 @@ TRI <- focal(x, w=f, fun=function(x, ...) sum(abs(x[-5]-x[5]))/8, pad=TRUE, padV
 
 TPI <- focal(x, w=f, fun=function(x, ...) x[5] - mean(x[-5]), pad=TRUE, padValue=NA)
 
-rough <- focal(x, w=f, fun=function(x, ...) {max(x) - min(x)}, pad=TRUE, padValue=NA, na.rm=TRUE)
+rough <- focal(x, w=f, fun=function(x, ...) max(x) - min(x), pad=TRUE, padValue=NA, na.rm=TRUE)
 }
 
 

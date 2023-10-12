@@ -25,9 +25,7 @@ When writing a file to disk, the file format is determined by the 'format=' argu
 \item{format}{Character. Output file type. See \code{\link[raster]{writeFormats}}. If this argument is not provided, it is attempted to infer it from the filename extension. If that fails, the default format is used. The default format is 'raster', but this can be changed using \code{\link{rasterOptions}}}
 \item{...}{Additional arguments: 
   		
-\code{datatype}{Character. Output data type (e.g. 'INT2S' or 'FLT4S'). 
-See \code{\link{dataType}}. If no datatype is specified, 'FLT4S' is used,
-unless this default value was changed with \code{\link{rasterOptions}}}
+\code{datatype}: Character. Output data type (e.g. 'INT2S' or 'FLT4S'). See \code{\link{dataType}}. If no datatype is specified, 'FLT4S' is used, unless this default value was changed with \code{\link{rasterOptions}}
 	
 \code{overwrite}: Logical. If TRUE, "filename" will be overwritten if it exists
 	
