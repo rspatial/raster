@@ -160,12 +160,18 @@
 }
 
 
-.stopWriteCDF <-  function(x) {
+.writeRangeCDF <- function(x) {
+
 	nc <- ncdf4::nc_open(x@file@name, write=TRUE)
 	on.exit( ncdf4::nc_close(nc) )
 	ncdf4::ncatt_put(nc, x@title, 'min', as.numeric(x@data@min))
 	ncdf4::ncatt_put(nc, x@title, 'max', as.numeric(x@data@max))
+}
 
+
+.stopWriteCDF <-  function(x) {
+
+        .writeRangeCDF(x)
 	if (inherits(x, 'RasterBrick')) {
 		r <- brick(x@file@name)
 	} else {
