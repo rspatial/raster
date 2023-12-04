@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-21</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-26</span>
       </span>
     </div>
 
@@ -104,12 +104,71 @@ For compatibility with <code>sp</code> you can use <code>proj4string</code> inst
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="raster.html">raster</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">crs</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate Reference System:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Deprecated Proj.4 representation: +proj=longlat +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Deprecated Proj.4 representation: +proj=longlat +datum=WGS84 +no_defs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WKT2 2019 representation:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GEOGCRS["unknown",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     DATUM["World Geodetic System 1984",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ELLIPSOID["WGS 84",6378137,298.257223563,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             LENGTHUNIT["metre",1]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ID["EPSG",6326]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     PRIMEM["Greenwich",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ID["EPSG",8901]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     CS[ellipsoidal,2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         AXIS["longitude",east,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ORDER[1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",9122]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         AXIS["latitude",north,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ORDER[2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",9122]]]] </span>
 <span class="r-in"><span><span class="fu">crs</span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84"</span></span></span>
 <span class="r-in"><span><span class="fu">crs</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coordinate Reference System:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Deprecated Proj.4 representation:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  +proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  +proj=lcc +lat_0=0 +lon_0=-100 +lat_1=48 +lat_2=33 +x_0=0 +y_0=0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> +datum=WGS84 +units=m +no_defs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WKT2 2019 representation:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PROJCRS["unknown",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     BASEGEOGCRS["unknown",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         DATUM["World Geodetic System 1984",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ELLIPSOID["WGS 84",6378137,298.257223563,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 LENGTHUNIT["metre",1]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",6326]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PRIMEM["Greenwich",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",8901]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     CONVERSION["unknown",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         METHOD["Lambert Conic Conformal (2SP)",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",9802]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PARAMETER["Latitude of false origin",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",8821]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PARAMETER["Longitude of false origin",-100,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",8822]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PARAMETER["Latitude of 1st standard parallel",48,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",8823]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PARAMETER["Latitude of 2nd standard parallel",33,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",8824]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PARAMETER["Easting at false origin",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             LENGTHUNIT["metre",1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",8826]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PARAMETER["Northing at false origin",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             LENGTHUNIT["metre",1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",8827]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     CS[Cartesian,2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         AXIS["(E)",east,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ORDER[1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             LENGTHUNIT["metre",1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",9001]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         AXIS["(N)",north,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ORDER[2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             LENGTHUNIT["metre",1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",9001]]]] </span>
 <span class="r-in"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu">wkt</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">w</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "PROJCRS[\"unknown\",\n    BASEGEOGCRS[\"unknown\",\n        DATUM[\"World Geodetic System 1984\",\n            ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n                LENGTHUNIT[\"metre\",1]],\n            ID[\"EPSG\",6326]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8901]]],\n    CONVERSION[\"unknown\",\n        METHOD[\"Lambert Conic Conformal (2SP)\",\n            ID[\"EPSG\",9802]],\n        PARAMETER[\"Latitude of false origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8821]],\n        PARAMETER[\"Longitude of false origin\",-100,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8822]],\n        PARAMETER[\"Latitude of 1st standard parallel\",48,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8823]],\n        PARAMETER[\"Latitude of 2nd standard parallel\",33,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8824]],\n        PARAMETER[\"Easting at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8826]],\n        PARAMETER[\"Northing at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8827]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1,\n                ID[\"EPSG\",9001]]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1,\n                ID[\"EPSG\",9001]]]]"</span>
