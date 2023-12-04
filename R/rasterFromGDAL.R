@@ -73,6 +73,11 @@
 		r@data@min <- minv[band]
 		r@data@max <- maxv[band]
 
+		sc <- scoff(x)
+		r@data@gain <- sc[band,1]
+		r@data@offset <- sc[band,2]
+
+
 		if (is.factor(x)[1]) {
 			cts <- cats(x)[[1]]
 			if (!is.null(cts)) {
@@ -83,6 +88,9 @@
 	} else {
 		r@data@min <- minv
 		r@data@max <- maxv
+		sc <- scoff(x)
+		r@data@gain <- sc[,1]
+		r@data@offset <- sc[,2]
 	}
 	
 	return(r)
