@@ -35,16 +35,5 @@ Horn, B.K.P., 1981. Hill shading and the reflectance map. Proceedings of the IEE
 }
 
 
-\examples{
-\dontrun{
-alt <- getData('alt', country='CHE')
-slope <- terrain(alt, opt='slope')
-aspect <- terrain(alt, opt='aspect')
-hill <- hillShade(slope, aspect, 40, 270)
-plot(hill, col=grey(0:100/100), legend=FALSE, main='Switzerland')
-plot(alt, col=rainbow(25, alpha=0.35), add=TRUE)
-}
-}
-
 \keyword{spatial}
 

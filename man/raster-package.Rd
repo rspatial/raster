@@ -335,7 +335,6 @@ Some of these functions are in the \code{sp} package. The name in \bold{bold} is
 
 \tabular{ll}{
     \code{\link{rasterOptions}} \tab Show, set, save or get session options \cr
-    \code{\link{getData}} \tab Download and geographic data\cr
     \code{\link{pointDistance}} \tab Distance between points \cr
     \code{\link{readIniFile}} \tab Read a (windows) 'ini' file \cr
     \code{\link{hdr}} \tab Write header file for a number of raster formats \cr

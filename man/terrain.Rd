@@ -72,22 +72,4 @@ Wilson, M.F.J., O'Connell, B., Brown, C., Guinan, J.C., Grehan, A.J., 2007. Mult
 }
 
 
-\examples{
-\dontrun{
-elevation <- getData('alt', country='CHE')
-x <- terrain(elevation, opt=c('slope', 'aspect'), unit='degrees')
-plot(x)
-
-
-# TPI for different neighborhood size:
-tpiw <- function(x, w=5) {
-	m <- matrix(1/(w^2-1), nc=w, nr=w)
-	m[ceiling(0.5 * length(m))] <- 0
-	f <- focal(x, m)
-	x - f
-}
-tpi5 <- tpiw(elevation, w=5)
-}
-}
-
 \keyword{spatial}
