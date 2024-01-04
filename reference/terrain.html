@@ -19,7 +19,7 @@ Compute slope, aspect and other terrain characteristics from a raster with eleva
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">raster</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-26</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.6-27</span>
       </span>
     </div>
 
@@ -106,25 +106,6 @@ If slope = 0, aspect is set to 0.5*pi radians (or 90 degrees if unit='degrees').
 <p>Wilson, M.F.J., O'Connell, B., Brown, C., Guinan, J.C., Grehan, A.J., 2007. Multiscale terrain analysis of multibeam bathymetry data for habitat mapping on the continental slope. Marine Geodesy 30: 3-35.</p>
     </div>
 
-    <div id="ref-examples">
-    <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="va">elevation</span> <span class="op">&lt;-</span> <span class="fu"><a href="getData.html">getData</a></span><span class="op">(</span><span class="st">'alt'</span>, country<span class="op">=</span><span class="st">'CHE'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">terrain</span><span class="op">(</span><span class="va">elevation</span>, opt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'slope'</span>, <span class="st">'aspect'</span><span class="op">)</span>, unit<span class="op">=</span><span class="st">'degrees'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="plot.html">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># TPI for different neighborhood size:</span></span></span>
-<span class="r-in"><span><span class="va">tpiw</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span><span class="op">=</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="va">w</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>, nc<span class="op">=</span><span class="va">w</span>, nr<span class="op">=</span><span class="va">w</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling</a></span><span class="op">(</span><span class="fl">0.5</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
-<span class="r-in"><span>  <span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="focal.html">focal</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">m</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">x</span> <span class="op">-</span> <span class="va">f</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="va">tpi5</span> <span class="op">&lt;-</span> <span class="fu">tpiw</span><span class="op">(</span><span class="va">elevation</span>, w<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-</code></pre></div>
-    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
