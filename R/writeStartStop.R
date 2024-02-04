@@ -31,9 +31,9 @@ function(x, filename, options=NULL, format, prj=FALSE, ...) {
 	}		
 	
 	if (prj) {
-		crs <-.getCRS(x)
-		if (crs != "") {
-			writeLines(wkt(x), extension(filename, "prj") )
+		wk <- wkt(x)
+		if (wk != "") {
+			writeLines(wk extension(filename, "prj") )
 		}
 	}
 	return(x)
