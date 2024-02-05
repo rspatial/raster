@@ -33,7 +33,7 @@ function(x, filename, options=NULL, format, prj=FALSE, ...) {
 	if (prj) {
 		wk <- wkt(x)
 		if (wk != "") {
-			writeLines(wk extension(filename, "prj") )
+			writeLines(wk, extension(filename, "prj") )
 		}
 	}
 	return(x)
