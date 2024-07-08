@@ -5,23 +5,15 @@
 \title{Get geographic data }
 
 \description{
-This function has been deprecated. See the geodata package for access to more recent versions of the data available through this function, and for many other datasets.
+This function has been deprecated and does not work anymore.
 }
 
 \usage{
-getData(name, download=TRUE, path="", ...)
+getData(...)
 ccodes()
 }
 
 \arguments{
-  \item{name}{Data set name}
-  \item{download}{logical}
-  \item{path}{character}
-  \item{...}{Additional arguments}   
+  \item{...}{arguments}   
 }
  
-\value{
-Raster* or Spatial*
-} 
-
-\keyword{ spatial }
