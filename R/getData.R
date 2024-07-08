@@ -146,7 +146,7 @@ ccodes <- function() {
 	
 	if (!file.exists(filename)) {
 		if (download) {
-			baseurl <- paste0("https://biogeo.ucdavis.edu/data/gadm", version)
+			baseurl <- paste0("https://geodata.ucdavis.edu/gadm", version)
 			if (version == 2.8) {
 				theurl <- paste(baseurl, '/rds/', country, '_adm', level, ".rds", sep="")			
 			} else {
@@ -248,7 +248,7 @@ ccodes <- function() {
 	dir.create(path, recursive=TRUE, showWarnings=FALSE)
 
 	zip <- tolower(paste(model, rcp, var, year, '.zip', sep=''))
-	theurl <- paste('https://biogeo.ucdavis.edu/data/climate/cmip5/', res, '/', zip, sep='')
+	theurl <- paste('https://geodata.ucdavis.edu/climate/cmip5/', res, '/', zip, sep='')
 
 	zipfile <- paste(path, zip, sep='')
 	if (var == 'bi') {
@@ -306,7 +306,7 @@ ccodes <- function() {
 			bilfiles <- paste(var, 1:19, '_', rc, '.bil', sep='')
 			hdrfiles <- paste(var, 1:19, '_', rc, '.hdr', sep='')		
 		}
-		theurl <- paste('https://biogeo.ucdavis.edu/data/climate/worldclim/1_4/tiles/cur/', zip, sep='')
+		theurl <- paste('https://geodata.ucdavis.edu/climate/worldclim/1_4/tiles/cur/', zip, sep='')
 	} else {
 		zip <- paste(var, '_', res, 'm_bil.zip', sep='')
 		zipfile <- paste(path, zip, sep='')
@@ -320,7 +320,7 @@ ccodes <- function() {
 			bilfiles <- paste(var, 1:19, '.bil', sep='')
 			hdrfiles <- paste(var, 1:19, '.hdr', sep='')	
 		}
-		theurl <- paste('https://biogeo.ucdavis.edu/data/climate/worldclim/1_4/grid/cur/', zip, sep='')
+		theurl <- paste('https://geodata.ucdavis.edu/climate/worldclim/1_4/grid/cur/', zip, sep='')
 	}
 	files <- c(paste(path, bilfiles, sep=''), paste(path, hdrfiles, sep=''))
 	fc <- sum(file.exists(files))
@@ -372,7 +372,7 @@ ccodes <- function() {
 		extension(zipfilename) <- '.zip'
 		if (!file.exists(zipfilename)) {
 			if (download) {
-				theurl <- paste("https://biogeo.ucdavis.edu/data/diva/", mskpath, name, "/", country, mskname, name, ".zip", sep="")
+				theurl <- paste("https://geodata.ucdavis.edu/diva/", mskpath, name, "/", country, mskname, name, ".zip", sep="")
 				.download(theurl, zipfilename)
 				if (!file.exists(zipfilename))	{ 
 					message("\nCould not download file -- perhaps it does not exist") 
