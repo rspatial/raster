@@ -30,6 +30,9 @@ setAs("SpatRaster", "Raster",
 			if ((length(usid) == 1) & (b$source[1] != "")) {
 				if ((nl == nrow(b)) && (b$bands[1] == 1) && (all(diff(b$bands) == 1))) {
 					r <- raster::brick(b$source[1])
+					if (nlayers(r) != nl) {
+						r <- r[[b$bands]]
+					}
 				} else {
 					r <- raster::stack(b$source[1], bands=b$bands)
 				}
