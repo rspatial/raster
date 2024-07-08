@@ -4,7 +4,7 @@
 # Version 0.9
 # October 2008
 
-getData <- function(name='GADM', download=TRUE, path='', ...) {
+getData <- function(...) {
 
 	stop("getData has been removed. Please use the geodata package instead.")
     
