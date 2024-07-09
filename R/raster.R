@@ -221,12 +221,12 @@ setMethod('raster', signature(x='RasterBrick'),
 				r <- raster(extent(x), nrows=nrow(x), ncols=ncol(x), crs=.getCRS(x))	
 				r@file <- x@file
 
-				r@file@blockrows <- x@file@blockrows
-				r@file@blockcols <- x@file@blockcols
+				r@file@blockrows <- x@file@blockrows[dindex]
+				r@file@blockcols <- x@file@blockcols[dindex]
 				r@file@nbands <- nlayers(x)
 				
-				r@data@offset <- x@data@offset
-				r@data@gain <- x@data@gain
+				r@data@offset <- x@data@offset[dindex]
+				r@data@gain <- x@data@gain[dindex]
 				r@data@inmemory <- FALSE
 				r@data@fromdisk <- TRUE
 				r@data@haveminmax <- x@data@haveminmax
@@ -253,8 +253,6 @@ setMethod('raster', signature(x='RasterBrick'),
 					attr(r@data, "level") <- x@data@level
 				}
 
-				r@data@offset <- x@data@offset
-				r@data@gain <- x@data@gain
 				r@file@nodatavalue <- x@file@nodatavalue
 				
 			} else {
