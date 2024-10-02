@@ -44,7 +44,7 @@ It is also possible to extract values for point locations from SpatialPolygons.
 \arguments{
 \item{x}{Raster* object}
 
-\item{y}{points represented by a two-column matrix or data.frame, or \code{\link{SpatialPoints}*}; \code{\link{SpatialPolygons}*}; \code{\link[sp]{SpatialLines}}; \code{sf} spatial vector objects; \code{\link{Extent}}; or a numeric vector representing cell numbers}
+\item{y}{points represented by a two-column matrix or data.frame, or \code{\link[sp]{SpatialPoints}*}; \code{\link[sp]{SpatialPolygons}*}; \code{\link[sp]{SpatialLines}}; \code{sf} spatial vector objects; \code{\link{Extent}}; or a numeric vector representing cell numbers}
 
 \item{method}{character. \code{'simple'} or \code{'bilinear'}. If \code{'simple'} values for the cell a point falls in are returned. If \code{'bilinear'} the returned values are interpolated from the values of the four nearest raster cells.}
 
