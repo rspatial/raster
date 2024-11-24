@@ -1,4 +1,5 @@
 import(methods, Rcpp, terra)
+import(terra, except=c(area, gridDistance))
 importFrom(sp, spplot, coordinates, wkt, plot, merge, bbox, disaggregate, proj4string)
 importFrom(grDevices, terrain.colors, heat.colors, rainbow)
 exportClasses(Extent, BasicRaster, Raster, RasterLayer, RasterBrick, RasterStack, RasterStackBrick)
