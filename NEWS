@@ -1,4 +1,7 @@
 
+This package is no longer developed and only receives minimal maintenance. 
+Please use the "terra" package instead. 
+
 --- 18-September-2022, version 3.6-3
 
 raster no longer uses rgdal

@@ -76,6 +76,11 @@ setAs("SpatRaster", "Raster",
 		#crs(r) <- crs(from)
 		extent(r) <- as.vector(ext(from))
 		projection(r) <- crs(from, proj=TRUE)
+		
+		if (has.time(from)) {
+			try(r@z <- list(time(from)))
+		}
+		
 		r
 	}
 )
@@ -132,11 +137,9 @@ setAs("SpatRaster", "Raster",
 	}
 	crs(r, warn=FALSE) <- prj	
 	
-	#z <- from@z
-	#if (length(z) == 1) {
-	#	z <- z[[1]]
-	#	try(time(r) <- z, silent=TRUE)
-	#}
+#	if (length(from@z) == 1) {
+#		try(time(r) <- from@z[[1]], silent=TRUE)
+#	}
 	r
 }
 
@@ -180,6 +183,11 @@ setAs("Raster", "SpatRaster",
 			prj <- .srs_from_sp(from@crs)	
 		}
 		crs(x, warn=FALSE) <- prj			
+
+		if (length(from@z) == 1) {
+			try(time(x) <- from@z[[1]], silent=TRUE)
+		}
+
 		x
 	}
 )
