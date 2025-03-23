@@ -1,5 +1,6 @@
 /* Robert Hijmans, October 2011 */
 
+
 #include <Rcpp.h>
 
 // [[Rcpp::export(name = ".clamp")]]

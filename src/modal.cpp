@@ -1,35 +1,36 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+
 // [[Rcpp::export(name = ".getMode")]]
 double getMode(NumericVector values, int ties) {
-	int n = values.length();
+	size_t n = values.length();
     IntegerVector counts(n);
 
 	if (ties < 2) {
 		std::sort(values.begin(), values.end());
 	}
 	
-    for (int i = 0; i < n; ++i) {
+    for (size_t i = 0; i < n; ++i) {
         counts[i] = 0;
-        int j = 0;
+        size_t j = 0;
         while ((j < i) && (values[i] != values[j])) {
             ++j;
         }
         ++(counts[j]);
     }
 	
-    int maxCount = 0;
+    size_t maxCount = 0;
 	// first (lowest due to sorting)
 	if (ties == 0) {
-		for (int i = 1; i < n; ++i) {
+		for (size_t i = 1; i < n; ++i) {
 			if (counts[i] > counts[maxCount]) {
 				maxCount = i;
 			}
 		}
 	// last	
 	} else if (ties == 1) {
-		for (int i = 1; i < n; ++i) {
+		for (size_t i = 1; i < n; ++i) {
 			if (counts[i] >= counts[maxCount]) {
 				maxCount = i;
 			}
@@ -37,7 +38,7 @@ double getMode(NumericVector values, int ties) {
 
 	// dont care (first, but not sorted)
 	} else if (ties == 2) {
-		for (int i = 1; i < n; ++i) {
+		for (size_t i = 1; i < n; ++i) {
 			if (counts[i] > counts[maxCount]) {
 				maxCount = i;
 			}
@@ -45,14 +46,15 @@ double getMode(NumericVector values, int ties) {
 
 	// random
 	} else if (ties == 3) {
-		int tieCount = 1;
-		for (int i = 1; i < n; ++i) {
+		size_t tieCount = 1;
+		for (size_t i = 1; i < n; ++i) {
 			if (counts[i] > counts[maxCount]) {
 				maxCount = i;
 				tieCount = 1;
 			} else if (counts[i] == counts[maxCount]) {
 				tieCount++;
-				if (R::runif(0,1) < (1.0 / tieCount)) {
+				double vv = (1.0 / (double)tieCount);
+				if (R::runif(0,1) < vv) {
 					maxCount = i;
 				}			
 			}
@@ -60,8 +62,8 @@ double getMode(NumericVector values, int ties) {
 		
    // NA		
 	} else {
-		int tieCount = 1;
-		for (int i = 1; i < n; ++i) {
+		size_t tieCount = 1;
+		for (size_t i = 1; i < n; ++i) {
 			if (counts[i] > counts[maxCount]) {
 				maxCount = i;
 				tieCount = 1;

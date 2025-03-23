@@ -2,11 +2,12 @@
 #include "aggregate.h"
 
 
-Rcpp::NumericMatrix std2rcp(	std::vector<std::vector<double > > x) {
-  int nr = x.size(), nc = x[0].size() ;
-  Rcpp::NumericMatrix m( nr, nc ) ;
-  for( int i=0; i<nr; i++){
-    for( int j=0; j<nc; j++) {
+
+Rcpp::NumericMatrix std2rcp( std::vector<std::vector<double>> x) {
+  size_t nr = x.size(), nc = x[0].size() ;
+  Rcpp::NumericMatrix m((int)nr, (int)nc ) ;
+  for( size_t i=0; i<nr; i++){
+    for( size_t j=0; j<nc; j++) {
       m(i,j) = x[i][j] ;
     }
   }

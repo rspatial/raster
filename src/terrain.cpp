@@ -1,4 +1,5 @@
 
+
 #include <Rcpp.h>
 #include "util.h"
 
@@ -59,7 +60,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 	std::vector<double> val(n*nopt);
 
 	size_t add=0;
-	int addn=0;
+	size_t addn=0;
 	
 	if (option[0]) {  
 	// terrain ruggedness
@@ -81,7 +82,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 	if (option[2]) {
 	// roughness 
 		addn = add * n;
-		int incol = ncol;
+		int incol = (int)ncol;
 		int a[9] = { -1-incol, -1, -1+incol, -incol, 0, incol, 1-incol, 1, 1+incol };
 		double min, max, v;
 		for (size_t i = ncol+1; i < (ncol * (nrow-1)-1); i++) {
@@ -105,7 +106,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 	// slope 4 neighbors	
 		addn = add * n;
 		if (geo) {
-			int q;
+			size_t q;
 			double xwi[2] = {-1,1};
 			double xw[2] = {0,0};
 			double yw[2] = {-1,1};
@@ -163,7 +164,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 		addn = add * n;
 
 		if (geo) {
-			int q;
+			size_t q;
 			double xwi[2] = {-1,1};
 			double xw[2] = {0,0};
 			double yw[2] = {-1,1};
@@ -223,7 +224,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 	// slope 8 neighbors	
 		addn = add * n;
 		if (geo) {
-			int q;
+			size_t q;
 			double xwi[6] = {-1,-2,-1,1,2,1};
 			double xw[6] = {0,0,0,0,0,0};
 			double yw[6] = {-1,1,-2,2,-1,1};
@@ -287,7 +288,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 		addn = add * n;
 	
 		if (geo) {
-			int q;
+			size_t q;
 			double xwi[6] = {-1,-2,-1,1,2,1};
 			double xw[6] = {0,0,0,0,0,0};
 			double yw[6] = {-1,1,-2,2,-1,1};
@@ -372,7 +373,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 				r[7] = (d[i] - d[i+1-ncol]) / dxy;
 				// using the lowest neighbor, even if it is higher than the focal cell.
 				double dmin = r[0];
-				int k = 0;
+				size_t k = 0;
 				for (size_t j=1; j<8; j++) {
 					if (r[j] > dmin) {
 						dmin = r[j];
@@ -394,7 +395,7 @@ std::vector<double> do_terrains(std::vector<double> d, std::vector<int> dim, std
 // Set edges to NA	
 // first row	
 	for (size_t j=0; j<add; j++) {
-	    int jn = j * n;
+	    size_t jn = j * n;
 		for (size_t i = 0; i < ncol; i++) {  
 			val[i+jn] = NAN;
 		}

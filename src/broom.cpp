@@ -14,8 +14,8 @@ std::vector<double> broom(std::vector<double> d, std::vector<double> f, std::vec
 	double dy = dist[1];
 	double dxy = dist[2];
 	int leftright = 2; //INTEGER(lr)[0];
-	size_t nr = dm[0];
-	size_t nc = dm[1];
+	size_t nr = (size_t)dm[0];
+	size_t nc = (size_t)dm[1];
 	size_t n = nr * nc;
 //	Rprintf ("n = %i \n", n);
 
@@ -77,7 +77,7 @@ std::vector<double> broom(std::vector<double> d, std::vector<double> f, std::vec
 			}
 			
 				// other cells
-			for (int i=(nc-2); i > -1; i--) {
+			for (long i=((long)nc-2); i > -1; i--) {
 				if (std::isnan(d[i])) {
 					dis[i] = min(min(min(dis[i], f[i] + dy), f[i+1] + dxy), dis[i+1] + dx);
 				} else {

@@ -54,7 +54,7 @@ NumericMatrix doXYFromCell(
   double yres = (ymax - ymin) / nrows;
   double xres = (xmax - xmin) / ncols;
   
-  NumericMatrix result(len, 2);
+  NumericMatrix result((int)len, 2);
   
   for (size_t i = 0; i < len; i++) {
     // double in stead of int
@@ -86,7 +86,7 @@ NumericMatrix doFourCellsFromXY(
 	double yres_inv = nrows / (ymax - ymin);
 	double xres_inv = ncols / (xmax - xmin);
 	
-	NumericMatrix result(len, 4);
+	NumericMatrix result((int)len, 4);
 	
 	for (size_t i = 0; i < len; i++) {
 		// 1-based row and col. The 0.5 is because rows/cells are addressed by their
@@ -155,10 +155,10 @@ NumericMatrix doFourCellsFromXY(
 		
 		// Fixups done--just store the results.
 
-		result(i,0) = oneBasedRowColToCellNum(ncols, roundRow, roundCol);
-		result(i,1) = oneBasedRowColToCellNum(ncols, posRow, roundCol);
-		result(i,2) = oneBasedRowColToCellNum(ncols, posRow, posCol);
-		result(i,3) = oneBasedRowColToCellNum(ncols, roundRow, posCol);
+		result(i,0) = oneBasedRowColToCellNum(ncols, (int)roundRow, (int)roundCol);
+		result(i,1) = oneBasedRowColToCellNum(ncols, (int)posRow, (int)roundCol);
+		result(i,2) = oneBasedRowColToCellNum(ncols, (int)posRow, (int)posCol);
+		result(i,3) = oneBasedRowColToCellNum(ncols, (int)roundRow, (int)posCol);
 	}
 	
 	return result;

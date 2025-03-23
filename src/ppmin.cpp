@@ -1,13 +1,14 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+
 // Simple & fast pmin & pmax with no checking for NA values!
 
 // [[Rcpp::export(name = ".doSpmin")]]
 NumericVector doSpmin(NumericVector x, NumericVector y) {
-	int n = x.length();
+	size_t n = x.length();
 	// NumericVector out = clone(x);
-	for (int i = 0; i < n; ++i) {
+	for (size_t i = 0; i < n; ++i) {
 		if (x[i] > y[i]) {
 			x[i] = y[i];
 		}
@@ -17,9 +18,9 @@ NumericVector doSpmin(NumericVector x, NumericVector y) {
 
 // [[Rcpp::export(name = ".doSpmax")]]
 NumericVector doSpmax(NumericVector x, NumericVector y) {
-	int n = x.length();
+	size_t n = x.length();
 	//NumericVector out = clone(x);
-	for (int i = 0; i < n; ++i) {
+	for (size_t i = 0; i < n; ++i) {
 		if (x[i] < y[i]) {
 			x[i] = y[i];
 		}
@@ -32,10 +33,10 @@ NumericVector doSpmax(NumericVector x, NumericVector y) {
 
 // [[Rcpp::export(name = ".ppmin")]]
 NumericVector ppmin(NumericVector x, NumericVector y, bool narm) {
-	int n = x.length();
+	size_t n = x.length();
 	//NumericVector out = clone(x);
 	if (narm) {
-		for (int i = 0; i < n; ++i) {
+		for (size_t i = 0; i < n; ++i) {
 			if (NumericVector::is_na(x[i])) {
 				x[i] = y[i];			
 			} else if (x[i] > y[i]) {
@@ -43,7 +44,7 @@ NumericVector ppmin(NumericVector x, NumericVector y, bool narm) {
 			}
 		}  
 	} else {
-		for (int i = 0; i < n; ++i) {
+		for (size_t i = 0; i < n; ++i) {
 			if (NumericVector::is_na(y[i])) {
 				x[i] = y[i];			
 			} else if (x[i] > y[i]) {
@@ -56,10 +57,10 @@ NumericVector ppmin(NumericVector x, NumericVector y, bool narm) {
 
 // [[Rcpp::export(name = ".ppmax")]]
 NumericVector ppmax(NumericVector x, NumericVector y, bool narm) {
-	int n = x.length();
+	size_t n = x.length();
 	//NumericVector out = clone(x);
 	if (narm) {
-		for (int i = 0; i < n; ++i) {
+		for (size_t i = 0; i < n; ++i) {
 			if (NumericVector::is_na(x[i])) {
 				x[i] = y[i];			
 			} else if (x[i] < y[i]) {
@@ -67,7 +68,7 @@ NumericVector ppmax(NumericVector x, NumericVector y, bool narm) {
 			}
 		}  
 	} else {
-		for (int i = 0; i < n; ++i) {
+		for (size_t i = 0; i < n; ++i) {
 			if (NumericVector::is_na(y[i])) {
 				x[i] = y[i];			
 			} else if (x[i] < y[i]) {

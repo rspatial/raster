@@ -1,6 +1,7 @@
 // Robert Hijmans with improvements by Ben Fasoli
 // https://github.com/rspatial/raster/pull/175
 
+
 #ifdef _WIN32 
 #include <windows.h>
 #elif __linux__
@@ -19,7 +20,7 @@ double availableRAM(double ram) {
 		MEMORYSTATUSEX statex;
 		statex.dwLength = sizeof(statex);
 		GlobalMemoryStatusEx(&statex);
-		ram = statex.ullAvailPhys;
+		ram = (double) statex.ullAvailPhys;
 	#elif __linux__
 		// source available memory from /proc/meminfo
 		// default to searching for MemAvailable field (kernel versions >= 3.14)

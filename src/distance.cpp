@@ -27,7 +27,7 @@ std::vector<double> distance_lonlat(std::vector<double> lon1, std::vector<double
 	double azi1, azi2;
 	struct geod_geodesic g;
 	geod_init(&g, a, f);
-	int n = lat1.size();
+	int n = (int) lat1.size();
   	for (int i=0; i < n; i++) {
 		geod_inverse(&g, lat1[i], lon1[i], lat2[i], lon2[i], &r[i], &azi1, &azi2);
 	}
@@ -37,8 +37,8 @@ std::vector<double> distance_lonlat(std::vector<double> lon1, std::vector<double
 
 std::vector<double> distanceToNearest_lonlat(std::vector<double> lon1, std::vector<double> lat1, std::vector<double> lon2, std::vector<double> lat2, double a, double f) {
 	double azi1, azi2, s12;
-	int n = lon1.size();
-	int m = lon2.size();
+	int n = (int) lon1.size();
+	int m = (int) lon2.size();
 	std::vector<double> r(n); 
 	
 	struct geod_geodesic g;
@@ -64,7 +64,7 @@ double distance_plane(double x1, double y1, double x2, double y2) {
 std::vector<double> distance_plane(std::vector<double> x1, std::vector<double> y1, std::vector<double> x2, std::vector<double> y2) {
 // xy1 and xy2 should have the same length
 	std::vector<double> r (x1.size()); 
-	int n = x1.size();
+	int n = (int) x1.size();
   	for (int i=0; i < n; i++) {
 		r[i] = sqrt(pow((x2[i]-x1[i]),2) + pow((y2[i]-y1[i]), 2));
 	}
@@ -72,8 +72,8 @@ std::vector<double> distance_plane(std::vector<double> x1, std::vector<double> y
 }
 
 std::vector<double> distanceToNearest_plane(std::vector<double> x1, std::vector<double> y1, std::vector<double> x2, std::vector<double> y2) {
-	int n = x1.size();
-	int m = x2.size();
+	int n = (int) x1.size();
+	int m = (int) x2.size();
 	std::vector<double> r(n); 
 	double d;
   	for (int i=0; i < n; i++) {
@@ -109,7 +109,7 @@ std::vector<double> direction_lonlat(std::vector<double> lon1, std::vector<doubl
 	double s12, azi2;
 	struct geod_geodesic g;
 	geod_init(&g, a, f);
-	int n = lat1.size();
+	int n = (int) lat1.size();
 	if (degrees) {
 		for (int i=0; i < n; i++) {
 			geod_inverse(&g, lat1[i], lon1[i], lat2[i], lon2[i], &s12, &azi1[i], &azi2);
@@ -126,8 +126,8 @@ std::vector<double> direction_lonlat(std::vector<double> lon1, std::vector<doubl
 
 std::vector<double> directionToNearest_lonlat(std::vector<double> lon1, std::vector<double> lat1, std::vector<double> lon2, std::vector<double> lat2, bool degrees, bool from, double a, double f) {
 	double azi1, azi2, s12, dist;
-	int n = lon1.size();
-	int m = lon2.size();
+	int n = (int)lon1.size();
+	int m = (int)lon2.size();
 	std::vector<double> azi(n); 
 	
 	struct geod_geodesic g;
@@ -181,7 +181,7 @@ std::vector<double> direction_plane(std::vector<double> x1, std::vector<double> 
 // xy1 and xy2 should have the same length
 	std::vector<double> r (x1.size()); 
 	//double a;
-	int n = x1.size();
+	int n = (int)x1.size();
   	for (int i=0; i < n; i++) {
 		r[i] = direction_plane(x1[i], y1[i], x2[i], y2[i], degrees);
 	}
@@ -191,8 +191,8 @@ std::vector<double> direction_plane(std::vector<double> x1, std::vector<double> 
 
 
 std::vector<double> directionToNearest_plane(std::vector<double> x1, std::vector<double> y1, std::vector<double> x2, std::vector<double> y2, bool degrees, bool from) {
-	int n = x1.size();
-	int m = x2.size();
+	int n = (int)x1.size();
+	int m = (int)x2.size();
 	std::vector<double> r(n); 
 	double d, mind;
 	int minj;
@@ -243,7 +243,7 @@ std::vector<double> destpoint_lonlat(double longitude, double latitude, double  
 std::vector<std::vector<double> > destpoint_lonlat(std::vector<double> longitude, std::vector<double> latitude, std::vector<double> bearing, std::vector<double> distance, double a, double f) {
 	struct geod_geodesic g;
 	geod_init(&g, a, f);
-	int n = longitude.size();
+	int n = (int)longitude.size();
 	std::vector<std::vector<double> > out;
 	double lat2, lon2, azi2;
 	for (int i=0; i < n; i++) {
@@ -264,7 +264,7 @@ std::vector<double> destpoint_plane(double x, double y, double bearing, double d
 
 
 std::vector<std::vector<double> > destpoint_plane(std::vector<double>  x, std::vector<double>  y, std::vector<double>  bearing, std::vector<double>  distance) {
-	int n = x.size();
+	int n = (int)x.size();
 	std::vector<std::vector<double> > out(n, std::vector<double>(3));
 	double xd, yd, b;
 	for (int i=0; i < n; i++) {
@@ -284,7 +284,7 @@ double area_polygon_lonlat(std::vector<double> lon, std::vector<double> lat, dou
 	struct geod_polygon p;
 	geod_init(&g, a, f);
 	geod_polygon_init(&p, 0);
-	int n = lat.size();
+	int n = (int)lat.size();
 	for (int i=0; i < n; i++) {
 		geod_polygon_addpoint(&g, &p, lat[i], lon[i]);
 	}
@@ -304,7 +304,7 @@ std::vector<double> area_polygon_lonlat(std::vector<double> lon, std::vector<dou
 	double area, P, pa, tota;
 	int pol = 1;
 	int part = 1;
-	int n = lon.size();
+	int n = (int)lon.size();
 	tota = 0;
 	for (int i=0; i < n; i++) {
 		if (parts[i] != part || pols[i] != pol) {
@@ -333,7 +333,7 @@ std::vector<double> area_polygon_lonlat(std::vector<double> lon, std::vector<dou
 
 double area_polygon_plane(std::vector<double> x, std::vector<double> y) {
 // based on http://paulbourke.net/geometry/polygonmesh/source1.c
-	int n = x.size();
+	int n = (int)x.size();
 	double area = x[n-1] * y[0];
 	area -= y[n-1] * x[0];
 	for (int i=0; i < (n-1); i++) {
@@ -383,7 +383,7 @@ std::vector<double> area_polygon_plane(std::vector<double> x, std::vector<double
 	std::vector<double> out;
 	int pol = 1;
 	int part = 1;
-	int n = x.size();
+	int n = (int)x.size();
 	double tota = 0;
 	double pa;
 	int ps = 0;

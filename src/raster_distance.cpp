@@ -100,12 +100,12 @@ Rcpp::NumericMatrix dest_point(Rcpp::NumericMatrix xybd, bool lonlat, double a, 
 	} else {
 		res = destpoint_plane(x, y, b, d);		
 	}
-	int n = res.size();
-	int m = res[0].size();
+	size_t n = res.size();
+	size_t m = res[0].size();
 	
 	Rcpp::NumericMatrix r(n, m);
-	for (int i=0; i < n; i++) {
-		for (int j=0; j < m; j++) {
+	for (size_t i=0; i < n; i++) {
+		for (size_t j=0; j < m; j++) {
 			r(i,j) = res[i][j];
 		}
 	}	

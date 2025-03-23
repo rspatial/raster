@@ -1,5 +1,6 @@
 /* Robert Hijmans, October 2011 */
 
+
 #include <Rcpp.h>
 
 // [[Rcpp::export(name = ".focal_sum")]]
@@ -7,8 +8,8 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 
 	int wrows = w.nrow();
 	int wcols = w.ncol();
-	int nrow = dim[0];
-	int ncol = dim[1];
+	int nrow = (int)dim[0];
+	int ncol = (int)dim[1];
 	int n = nrow * ncol;
 	std::vector<double> val(n);
 	
@@ -59,7 +60,7 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 						if (p==0) {
 							val[i] = NAN;
 						} else if (bemean) {
-							val[i] = val[i] / p;
+							val[i] = val[i] / (double) p;
 						}
 					}
 				}
@@ -100,7 +101,7 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 					if (p==0) {
 						val[i] = NAN;
 					} else if (bemean) {
-						val[i] = val[i] / p;
+						val[i] = val[i] / (double) p;
 					}			
 				}
 			}
@@ -153,7 +154,7 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 							}
 						}
 						if (bemean) {
-							val[i] = val[i] / q;
+							val[i] = val[i] / (double) q;
 						}			
 					}
 				}
@@ -186,7 +187,7 @@ std::vector<double> do_focal_sum(std::vector<double> d, Rcpp::NumericMatrix w, s
 					}
 					
 					if (bemean) {
-						val[i] = val[i] / q;
+						val[i] = val[i] / (double) q;
 					}			
 				}
 			}

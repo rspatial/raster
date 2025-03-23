@@ -44,7 +44,7 @@ class SpPolyPart {
 
 		SpExtent extent;
 		bool hasHoles() { return xHole.size() > 0;}
-		unsigned nHoles() { return xHole.size();}
+		size_t nHoles() { return xHole.size();}
 		bool set(std::vector<double> X, std::vector<double> Y) { 
 			x = X; y = Y;  
 			extent.xmin = *std::min_element(X.begin(), X.end());
@@ -70,7 +70,7 @@ class SpPoly {
 		std::vector<SpPolyPart> parts; 
 		SpExtent extent;
 
-		unsigned size() { return parts.size(); };
+		size_t size() { return parts.size(); };
 		SpPolyPart getPart(unsigned i) { return parts[i]; }
 		bool addPart(SpPolyPart p) { 
 			parts.push_back(p); 
@@ -96,7 +96,7 @@ class SpPolygons {
 		std::string crs;
 		std::vector<double> attr;
 
-		unsigned size() { return polys.size(); };
+		size_t size() { return polys.size(); };
 		SpPoly getPoly(unsigned i) { return polys[i]; };
 		
 		bool addPoly(SpPoly p) { 

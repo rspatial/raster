@@ -3,6 +3,7 @@
 // http://alienryderflex.com/polygon_fill/
 
 */
+
 #include <Rcpp.h>
 using namespace Rcpp;
 using namespace std;
@@ -11,12 +12,12 @@ using namespace std;
   
 std::vector<double> rasterize_polygon(std::vector<double> r, double value, std::vector<double> pX, std::vector<double> pY, unsigned nrows, unsigned ncols, double xmin, double ymax, double rx, double ry) {
 
-	unsigned n = pX.size();
+	size_t n = pX.size();
 	std::vector<unsigned> nCol(n);
   
 	for (size_t row=0; row<nrows; row++) {
  
-		double y = ymax - (row+0.5) * ry;		
+		double y = ymax - ((double)row+0.5) * ry;		
 		//  Get nodes.
 		unsigned nodes = 0; 
 		size_t j = n-1;
@@ -32,7 +33,7 @@ std::vector<double> rasterize_polygon(std::vector<double> r, double value, std::
 		}
 		
 		std::sort(nCol.begin(), nCol.begin()+nodes);
-		unsigned ncell = ncols * row;
+		size_t ncell = ncols * row;
 		
 		//  Fill the cells between node pairs.
 		for (size_t i=0; i < nodes; i+=2) {
@@ -52,7 +53,7 @@ std::vector<double> rasterize_polygon(std::vector<double> r, double value, std::
 
 std::vector<double> SpPolygons::rasterize(unsigned nrow, unsigned ncol, std::vector<double> extent, std::vector<double> values, double background) {
 
-	unsigned n = size();
+	size_t n = size();
 	
 	std::vector<double> v(nrow*ncol, background);
 	
@@ -61,11 +62,11 @@ std::vector<double> SpPolygons::rasterize(unsigned nrow, unsigned ncol, std::vec
 	
 	for (size_t j = 0; j < n; j++) {
 			
-		SpPoly poly = getPoly(j);
+		SpPoly poly = getPoly((unsigned)j);
 		double value = values[j];		
-		unsigned np = poly.size();
+		size_t np = poly.size();
 		for (size_t k = 0; k < np; k++) {
-			SpPolyPart part = poly.getPart(k);
+			SpPolyPart part = poly.getPart((unsigned)k);
 			
 			if (part.hasHoles()) {
 				std::vector<double> vv = rasterize_polygon(v, value, part.x, part.y, nrow, ncol, extent[0], extent[3], resx, resy);

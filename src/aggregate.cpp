@@ -4,12 +4,11 @@
 #include <limits>
 #include <cmath>
 
-
-std::vector<int > get_dims( std::vector<int > dim) {
+std::vector<int > get_dims( std::vector<int> dim) {
 
   dim.resize(9);
   for (int i=0; i < 3; i++) {
-    dim[i+6] = std::ceil(dim[i] / double(dim[i+3])); 
+    dim[i+6] = (int) std::ceil(dim[i] / double(dim[i+3])); 
   }
   return(dim);
  
@@ -86,7 +85,7 @@ std::vector<std::vector< double > > get_aggregates(std::vector<std::vector< doub
 
 
 
-std::vector<std::vector< double > > aggregate(std::vector<std::vector< double > > data, std::vector<int> dim, bool narm, int fun) {
+std::vector<std::vector<double>> aggregate(std::vector<std::vector< double > > data, std::vector<int> dim, bool narm, int fun) {
 
   // fun  = 'sum', 'mean', 'min', 'max'
   //           0,     1,     2,    3
@@ -109,15 +108,15 @@ std::vector<std::vector< double > > aggregate(std::vector<std::vector< double > 
 // get the aggregates	
  std::vector<std::vector< double > > a = get_aggregates(data, dim);
 
- int nblocks = a.size();
- int naggs = a[0].size();
+ int nblocks = (int) a.size();
+ int naggs = (int) a[0].size();
 // Rcout << nblocks << ", " << naggs << "\n";
  
   for (int i = 0; i < nblocks; i++) {
     int row = (i / ncol) % nrow; 
     int col = i % ncol;
     int cell = row * ncol + col;
-    int lyr = std::floor(i / (nrow * ncol));
+    int lyr = (int) std::floor(i / (nrow * ncol));
 
 //    Rcout << row << ", " << col << ", " << lyr << "\n";
     
