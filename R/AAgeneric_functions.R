@@ -14,8 +14,6 @@ if (!isGeneric("blockSize")) {setGeneric("blockSize", function(x, ...) standardG
 
 if (!isGeneric("extent")) { setGeneric("extent", function(x, ...) standardGeneric("extent")) }	
 
-if (!isGeneric("hillShade")) {setGeneric("hillShade", function(x, ...) standardGeneric("hillShade"))}	
-
 if (!isGeneric("rectify")) {setGeneric("rectify", function(x, ...) standardGeneric("rectify"))}	
 if (!isGeneric("whiches.max")) {setGeneric("whiches.max", function(x, ...)standardGeneric("whiches.max"))}	
 if (!isGeneric("whicheses.min")) {setGeneric("whiches.min", function(x, ...)standardGeneric("whiches.min"))}	
